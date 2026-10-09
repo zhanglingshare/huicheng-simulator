@@ -5,27 +5,26 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
-.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;backdrop-filter:blur(8px);overflow-x:auto}
-.nav b{font-size:14px;margin-right:6px;letter-spacing:.5px;flex:none}
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
+.nav b{font-size:14px;margin-right:6px;flex:none}
 .nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
 .nav a.on{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
-.nav .sp{margin-left:auto;font-size:11.5px;color:#64748b;flex:none}
 .wrap{max-width:800px;margin:auto;padding:16px}
-h1{font-size:20px;margin:0 0 2px;letter-spacing:.5px}
+h1{font-size:20px;margin:0 0 2px}
 .sub{color:#8fa3bf;font-size:13px;margin:0 0 16px}
 .card{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:16px;margin-bottom:12px}
 .card h2{font-size:14px;margin:0 0 12px}
 .btn{background:#1d4ed8;color:#fff;border:0;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer}
 .result{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
-@media(max-width:700px){.result{grid-template-columns:1fr}}
 .stat{background:#0a0f1a;border:1px solid #1c2739;border-radius:10px;padding:12px;text-align:center}
 .stat .v{font-size:22px;font-weight:800;color:#fbbf24}
 .stat .l{font-size:11px;color:#6b7280;margin-top:2px}
 .prob{font-size:32px;font-weight:800;text-align:center;margin:10px 0}
 .slider-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:12px}
 .slider-row label{flex:1;color:#93a4bd}
-.slider-row input[type=range]{flex:2;accent-color:#3b82f6}
-.slider-row span{width:50px;text-align:right;color:#fbbf24;font-weight:600;font-variant-numeric:tabular-nums}
+.slider-row input{flex:2;accent-color:#3b82f6}
+.slider-row span{width:50px;text-align:right;color:#fbbf24;font-weight:600}
+#err{color:#f87171;font-size:12px;padding:8px;display:none}
 </style></head><body>
 
 <div class="nav">
@@ -35,12 +34,13 @@ h1{font-size:20px;margin:0 0 2px;letter-spacing:.5px}
   <a href="who.html">③ 基本面</a>
   <a href="choices.html">④ 五条路</a>
   <a href="future.html" class="on">⑤ 未来</a>
-  <span class="sp">互动 · 拖动试试</span>
 </div>
 
 <div class="wrap">
   <h1>把未来扔一万遍</h1>
-  <p class="sub">下面的滑块可以拖，改完点"重扔"看分布怎么变。</p>
+  <p class="sub">拖动滑块，点按钮，看结果怎么变。</p>
+
+  <div id="err"></div>
 
   <div class="card">
     <h2>调一调</h2>
@@ -60,39 +60,38 @@ h1{font-size:20px;margin:0 0 2px;letter-spacing:.5px}
       <span id="v3">100</span>
     </div>
     <div style="text-align:center;margin-top:10px">
-      <button class="btn" onclick="run()">🎲 重扔一万遍</button>
+      <button class="btn" onclick="run()">🎲 扔一万遍</button>
     </div>
   </div>
 
   <div id="out" style="display:none">
     <div class="prob" id="prob"></div>
-    <div style="text-align:center;font-size:12px;color:#6b7280;margin-top:-8px;margin-bottom:10px">达到1500亿的概率</div>
+    <div style="text-align:center;font-size:12px;color:#6b7280;margin:-8px 0 10px">达到1500亿的概率</div>
     <div class="result">
       <div class="stat"><div class="v" id="p10">—</div><div class="l">最差的10种情况</div></div>
-      <div class="stat"><div class="v" id="p50">—</div><div class="l">一半一半（最可能）</div></div>
+      <div class="stat"><div class="v" id="p50">—</div><div class="l">一半一半</div></div>
       <div class="stat"><div class="v" id="p90">—</div><div class="l">最好的10种情况</div></div>
     </div>
 
     <div class="card">
-      <h2>一万次落在哪（鼠标悬停看次数）</h2>
+      <h2>一万次落在哪</h2>
       <div style="height:260px"><canvas id="chart"></canvas></div>
       <div id="chart-note" style="font-size:12px;color:#8fa3bf;margin-top:8px;text-align:center"></div>
     </div>
 
     <div class="card">
-      <h2>每一路贡献了多少</h2>
+      <h2>每一路贡献多少</h2>
       <div style="height:140px"><canvas id="contrib"></canvas></div>
     </div>
 
     <div class="card">
-      <h2>哪件事最影响结果</h2>
+      <h2>哪件事波动最大</h2>
       <div style="height:180px"><canvas id="tornado"></canvas></div>
     </div>
 
     <div class="card">
-      <h2>每条路对结果的影响系数</h2>
-      <div style="height:200px"><canvas id="pathcoef"></canvas></div>
-      <div style="font-size:11px;color:#5b6b82;margin-top:6px">系数越接近1，这条路对最终结果影响越大。最上面那条就是命门。</div>
+      <h2>哪条路真管用（影响系数）</h2>
+      <div style="height:180px"><canvas id="pathcoef"></canvas></div>
     </div>
 
     <div class="card">
@@ -101,201 +100,150 @@ h1{font-size:20px;margin:0 0 2px;letter-spacing:.5px}
         <div style="background:#0a0f1a;border:1px solid #7f1d1d;border-radius:8px;padding:10px;text-align:center">
           <div style="font-size:11px;color:#6b7280">坏情况</div>
           <div style="font-size:18px;font-weight:800;color:#f87171" id="bad">—</div>
-          <div style="font-size:10px;color:#5b6b82">项目延期+招商不顺</div>
         </div>
         <div style="background:#0a0f1a;border:1px solid #713f12;border-radius:8px;padding:10px;text-align:center">
           <div style="font-size:11px;color:#6b7280">一般情况</div>
           <div style="font-size:18px;font-weight:800;color:#fbbf24" id="mid">—</div>
-          <div style="font-size:10px;color:#5b6b82">按官方节奏走</div>
         </div>
         <div style="background:#0a0f1a;border:1px solid #14532d;border-radius:8px;padding:10px;text-align:center">
           <div style="font-size:11px;color:#6b7280">好情况</div>
           <div style="font-size:18px;font-weight:800;color:#34d399" id="good">—</div>
-          <div style="font-size:10px;color:#5b6b82">招商超预期+投产提前</div>
         </div>
       </div>
     </div>
 
-    <div id="conclusion" style="background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:16px;margin-top:12px;font-size:13px;line-height:1.8;color:#cbd5e1"></div>
+    <div id="conclusion" style="background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:16px;font-size:13px;line-height:1.8;color:#cbd5e1"></div>
   </div>
 </div>
 
 <script>
 function randn(){let u=0,v=0;while(u===0)u=Math.random();while(v===0)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
-let myChart=null;
+const charts={};
+function destroy(k){if(charts[k]){charts[k].destroy();delete charts[k];}}
 
 ['s1','s2','s3'].forEach(id=>{
   document.getElementById(id).oninput=function(){
     document.getElementById(id.replace('s','v')).textContent=this.value;
-  }
+  };
 });
 
 function run(){
-  const base=632.7;
-  const paths=[
-    {mu:+document.getElementById('s1').value, sd:100},
-    {mu:+document.getElementById('s2').value, sd:60},
-    {mu:+document.getElementById('s3').value, sd:40},
-    {mu:100, sd:40},
-    {mu:50, sd:30}
-  ];
-  const N=10000;
-  const results=[];
-  const pathContribs=[[],[],[],[],[],[]]; // 每条路的实际贡献
-  for(let i=0;i<N;i++){
-    let total=base;
-    paths.forEach((p,j)=>{
-      let v=p.mu+randn()*p.sd;
-      if(v<0)v=0;
-      total+=v;
-      pathContribs[j].push(v);
+  try{
+    var base=632.7;
+    var paths=[
+      {mu:+document.getElementById('s1').value, sd:100, name:'新投产项目', color:'#3b82f6'},
+      {mu:+document.getElementById('s2').value, sd:60, name:'三大集群', color:'#8b5cf6'},
+      {mu:+document.getElementById('s3').value, sd:40, name:'AI机器人', color:'#06b6d4'},
+      {mu:100, sd:40, name:'服务业带动', color:'#fbbf24'},
+      {mu:50, sd:30, name:'融深融湾', color:'#f87171'}
+    ];
+    var N=10000, results=[], contribs=[[],[],[],[],[]];
+    for(var i=0;i<N;i++){
+      var total=base;
+      for(var j=0;j<paths.length;j++){
+        var v=paths[j].mu+randn()*paths[j].sd;
+        if(v<0)v=0;
+        total+=v;
+        contribs[j].push(v);
+      }
+      total*=1+randn()*0.08;
+      results.push(total);
+    }
+    results.sort(function(a,b){return a-b;});
+    var p10=results[1000], p50=results[5000], p90=results[9000];
+    var hit=results.filter(function(x){return x>=1500;}).length/N*100;
+
+    // 相关系数
+    function corr(xs,ys){
+      var n=xs.length,mx=0,my=0;
+      for(var k=0;k<n;k++){mx+=xs[k];my+=ys[k];}
+      mx/=n;my/=n;
+      var num=0,dx=0,dy=0;
+      for(var k=0;k<n;k++){num+=(xs[k]-mx)*(ys[k]-my);dx+=(xs[k]-mx)*(xs[k]-mx);dy+=(ys[k]-my)*(ys[k]-my);}
+      return num/Math.sqrt(dx*dy);
+    }
+    var coefs=contribs.map(function(c){return Math.abs(corr(c,results));});
+
+    document.getElementById('prob').innerHTML='<span style="color:'+(hit>50?'#34d399':hit>20?'#fbbf24':'#f87171')+'">'+hit.toFixed(1)+'%</span>';
+    document.getElementById('p10').textContent=Math.round(p10)+'亿';
+    document.getElementById('p50').textContent=Math.round(p50)+'亿';
+    document.getElementById('p90').textContent=Math.round(p90)+'亿';
+    document.getElementById('bad').textContent=Math.round(p10)+'亿';
+    document.getElementById('mid').textContent=Math.round(p50)+'亿';
+    document.getElementById('good').textContent=Math.round(p90)+'亿';
+
+    // 直方图
+    var bins=40, min=Math.floor(p10*0.85), max=Math.ceil(p90*1.15), step=(max-min)/bins;
+    var labels=[], data=[];
+    for(var b=0;b<bins;b++){labels.push(Math.round(min+step*(b+0.5)));data.push(0);}
+    results.forEach(function(r){var bi=Math.min(bins-1,Math.max(0,Math.floor((r-min)/step)));data[bi]++;});
+    var colors=data.map(function(v,i){return labels[i]>=1500?'#f87171':'#3b82f6';});
+    destroy('hist');
+    charts.hist=new Chart(document.getElementById('chart').getContext('2d'),{
+      type:'bar',
+      data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderRadius:2}]},
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{display:false},tooltip:{callbacks:{title:function(it){return it[0].label+'亿';},label:function(it){return '出现'+it.parsed.y+'次';}}}},
+        scales:{x:{ticks:{color:'#6b7280',maxTicksLimit:8},grid:{display:false}},y:{ticks:{color:'#6b7280'},grid:{color:'#1c2739'}}}
+      }
     });
-    total*=1+randn()*0.08;
-    results.push(total);
-  }
-  results.sort((a,b)=>a-b);
-  const p10=results[1000], p50=results[5000], p90=results[9000];
-  const hit=results.filter(x=>x>=1500).length/N*100;
 
-  // 路径系数：每条路贡献和最终结果的相关系数
-  function corr(xs,ys){
-    const n=xs.length;
-    const mx=xs.reduce((a,b)=>a+b,0)/n;
-    const my=ys.reduce((a,b)=>a+b,0)/n;
-    let num=0,dx=0,dy=0;
-    for(let i=0;i<n;i++){
-      num+=(xs[i]-mx)*(ys[i]-my);
-      dx+=(xs[i]-mx)**2;
-      dy+=(ys[i]-my)**2;
-    }
-    return num/Math.sqrt(dx*dy);
-  }
-  const coefs=pathContribs.map(c=>corr(c,results));
+    document.getElementById('chart-note').innerHTML=
+      '一万次里 <b style="color:#f87171">'+hit.toFixed(0)+'次</b>过了1500亿，<b style="color:#3b82f6">'+(100-hit).toFixed(0)+'次</b>没过。最可能落在 <b style="color:#fbbf24">'+Math.round(p50)+'亿</b>。';
 
-  document.getElementById('prob').innerHTML=
-    `<span style="color:${hit>50?'#34d399':hit>20?'#fbbf24':'#f87171'}">${hit.toFixed(1)}%</span>`;
-  document.getElementById('p10').textContent=Math.round(p10)+'亿';
-  document.getElementById('p50').textContent=Math.round(p50)+'亿';
-  document.getElementById('p90').textContent=Math.round(p90)+'亿';
-
-  // 直方图
-  const bins=40;
-  const min=Math.floor(p10*0.85), max=Math.ceil(p90*1.15);
-  const step=(max-min)/bins;
-  const labels=[], data=[];
-  for(let i=0;i<bins;i++){
-    labels.push(Math.round(min+step*(i+0.5)));
-    data.push(0);
-  }
-  results.forEach(r=>{
-    const b=Math.min(bins-1,Math.max(0,Math.floor((r-min)/step)));
-    data[b]++;
-  });
-  const colors=data.map((v,i)=>labels[i]>=1500?'#f87171':'#3b82f6');
-
-  if(myChart)myChart.destroy();
-  const ctx=document.getElementById('chart').getContext('2d');
-  myChart=new Chart(ctx,{
-    type:'bar',
-    data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderRadius:2,borderSkipped:false}]},
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      plugins:{
-        legend:{display:false},
-        tooltip:{
-          callbacks:{
-            title:(items)=>items[0].label+'亿',
-            label:(item)=>'出现 '+item.parsed.y+' 次'
-          }
-        }
-      },
-      scales:{
-        x:{ticks:{color:'#6b7280',maxTicksLimit:8},grid:{display:false},title:{display:true,text:'2030年高新区产值（亿元）',color:'#6b7280'}},
-        y:{ticks:{color:'#6b7280'},grid:{color:'#1c2739'},title:{display:true,text:'出现次数',color:'#6b7280'}}
+    // 贡献堆叠
+    var cNames=['现有盘子'].concat(paths.map(function(p){return p.name;}));
+    var cColors=['#1c2739'].concat(paths.map(function(p){return p.color;}));
+    var cVals=[base].concat(paths.map(function(p){return p.mu;}));
+    destroy('contrib');
+    charts.contrib=new Chart(document.getElementById('contrib').getContext('2d'),{
+      type:'bar',
+      data:{labels:['2030年'],datasets:cNames.map(function(n,i){return {label:n,data:[cVals[i]],backgroundColor:cColors[i],stack:'s'};})},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{position:'bottom',labels:{color:'#93a4bd',font:{size:10}}}},
+        scales:{x:{stacked:true,ticks:{color:'#6b7280'},grid:{color:'#1c2739'}},y:{stacked:true,ticks:{color:'#93a4bd'},grid:{display:false}}}
       }
-    }
-  });
+    });
 
-  document.getElementById('chart-note').innerHTML=
-    `一万次里，<b style="color:#f87171">${hit.toFixed(0)}次</b>超过了1500亿，`+
-    `<b style="color:#3b82f6">${(100-hit).toFixed(0)}次</b>没到。`+
-    `最可能落在 <b style="color:#fbbf24">${Math.round(p50)}亿</b> 附近。`;
-
-  // 贡献堆叠条
-  const cNames=['现有盘子','新投产项目','三大集群','AI机器人','服务业带动','融深融湾'];
-  const cVals=[base, paths[0].mu, paths[1].mu, paths[2].mu, paths[3].mu, paths[4].mu];
-  if(window._cChart)window._cChart.destroy();
-  window._cChart=new Chart(document.getElementById('contrib').getContext('2d'),{
-    type:'bar',
-    data:{labels:['2030年总产值'],datasets:cNames.map((n,i)=>({
-      label:n,data:[cVals[i]],backgroundColor:['#1c2739','#3b82f6','#8b5cf6','#06b6d4','#fbbf24','#f87171'][i],stack:'s'
-    }))},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{position:'bottom',labels:{color:'#93a4bd',font:{size:10}}}},
-      scales:{x:{stacked:true,ticks:{color:'#6b7280'},grid:{color:'#1c2739'}},y:{stacked:true,ticks:{color:'#93a4bd',font:{size:11}},grid:{display:false}}}
-    }
-  });
-
-  // 龙卷风图（按sd排序）
-  const tData=paths.map((p,i)=>({name:cNames[i+1],sd:p.sd,mu:p.mu})).sort((a,b)=>b.sd-a.sd);
-  if(window._tChart)window._tChart.destroy();
-  window._tChart=new Chart(document.getElementById('tornado').getContext('2d'),{
-    type:'bar',
-    data:{labels:tData.map(d=>d.name),datasets:[
-      {label:'波动下限',data:tData.map(d=>-d.sd),backgroundColor:'#f87171'},
-      {label:'波动上限',data:tData.map(d=>d.sd),backgroundColor:'#3b82f6'}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},
-        tooltip:{callbacks:{label:(item)=>{
-          const d=tData[item.dataIndex];
-          return d.name+'：均值'+d.mu+'亿，上下波动±'+d.sd+'亿';
-        }}}
-      },
-      scales:{
-        x:{ticks:{color:'#6b7280',callback:v=>Math.abs(v)+'亿'},grid:{color:'#1c2739'}},
-        y:{ticks:{color:'#93a4bd',font:{size:11}},grid:{display:false}}
+    // 龙卷风
+    var tData=paths.slice().sort(function(a,b){return b.sd-a.sd;});
+    destroy('torn');
+    charts.torn=new Chart(document.getElementById('tornado').getContext('2d'),{
+      type:'bar',
+      data:{labels:tData.map(function(d){return d.name;}),datasets:[
+        {label:'下限',data:tData.map(function(d){return -d.sd;}),backgroundColor:'#f87171'},
+        {label:'上限',data:tData.map(function(d){return d.sd;}),backgroundColor:'#3b82f6'}
+      ]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+        tooltip:{callbacks:{label:function(it){var d=tData[it.dataIndex];return d.name+' 波动±'+d.sd+'亿';}}}},
+        scales:{x:{ticks:{color:'#6b7280',callback:function(v){return Math.abs(v)+'亿';}},grid:{color:'#1c2739'}},y:{ticks:{color:'#93a4bd'},grid:{display:false}}}
       }
-    }
-  });
+    });
 
-  // 三个情景
-  document.getElementById('bad').textContent=Math.round(p10)+'亿';
-  document.getElementById('mid').textContent=Math.round(p50)+'亿';
-  document.getElementById('good').textContent=Math.round(p90)+'亿';
-
-  // 路径系数图
-  const pNames=['新投产项目','三大集群','AI机器人','服务业带动','融深融湾'];
-  const pColors=['#3b82f6','#8b5cf6','#06b6d4','#fbbf24','#f87171'];
-  if(window._pChart)window._pChart.destroy();
-  window._pChart=new Chart(document.getElementById('pathcoef').getContext('2d'),{
-    type:'bar',
-    data:{labels:pNames,datasets:[{
-      data:coefs.map(c=>Math.abs(c)),
-      backgroundColor:pColors,
-      borderRadius:4
-    }]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},
-        tooltip:{callbacks:{label:(item)=>'影响系数 '+item.parsed.x.toFixed(2)}}
-      },
-      scales:{
-        x:{ticks:{color:'#6b7280',callback:v=>v.toFixed(1)},grid:{color:'#1c2739'},max:1},
-        y:{ticks:{color:'#93a4bd',font:{size:12}},grid:{display:false}}
+    // 路径系数
+    destroy('pcoef');
+    charts.pcoef=new Chart(document.getElementById('pathcoef').getContext('2d'),{
+      type:'bar',
+      data:{labels:paths.map(function(p){return p.name;}),datasets:[{data:coefs,backgroundColor:paths.map(function(p){return p.color;}),borderRadius:4}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+        tooltip:{callbacks:{label:function(it){return '影响系数 '+it.parsed.x.toFixed(3);}}}},
+        scales:{x:{ticks:{color:'#6b7280'},grid:{color:'#1c2739'},max:1},y:{ticks:{color:'#93a4bd'},grid:{display:false}}}
       }
-    }
-  });
+    });
 
-  // 一段话总结
-  const maxIdx=coefs.indexOf(Math.max(...coefs));
-  document.getElementById('conclusion').innerHTML=
-    `一万次随机跑下来，<b style="color:#fbbf24">最可能落在${Math.round(p50)}亿</b>，`+
-    `也就是<b>${hit>50?'大概率能':'大概率够不着'}</b>1500亿目标。`+
-    `路径系数排第一的是<b style="color:${pColors[maxIdx]}">${pNames[maxIdx]}</b>（系数${Math.abs(coefs[maxIdx]).toFixed(2)}），`+
-    `它对最终结果的影响远大于其他几条。`+
-    `深惠融湾虽然热，但路径系数最小，别把希望全押在上面。`;
+    var maxI=coefs.indexOf(Math.max.apply(null,coefs));
+    document.getElementById('conclusion').innerHTML=
+      '最可能落在 <b style="color:#fbbf24">'+Math.round(p50)+'亿</b>，'+
+      (hit>50?'大概率能':'大概率够不着')+'1500亿。'+
+      '绑得最紧的是 <b style="color:'+paths[maxI].color+'">'+paths[maxI].name+'</b>，系数'+coefs[maxI].toFixed(3)+'。'+
+      '其他几条路在转，但传动没那么强。';
 
-  document.getElementById('out').style.display='block';
+    document.getElementById('out').style.display='block';
+  }catch(e){
+    var el=document.getElementById('err');
+    el.style.display='block';
+    el.textContent='错误: '+e.message;
+  }
 }
 run();
 </script>
