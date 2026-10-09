@@ -19,21 +19,10 @@ h2{font-size:19px;margin:0 0 4px;letter-spacing:.5px}
 .kpi .v{font-size:20px;font-weight:700;color:#fbbf24;font-variant-numeric:tabular-nums}
 .kpi .k{font-size:11.5px;color:#8fa3bf;margin-top:2px}
 .kpi .s{font-size:10px;color:#5b6b82}
-.bar{height:6px;background:#16233a;border-radius:3px;margin-top:6px;overflow:hidden}
-.bar i{display:block;height:100%;border-radius:3px}
-.cmp{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed #1e2b40;font-size:12.5px;gap:10px}
-.cmp:last-child{border:0}
-.cmp .l{color:#93a4bd}
-.cmp .r{font-variant-numeric:tabular-nums;font-weight:600}
-.hl{color:#fbbf24;font-weight:600}
-.red{color:#f87171;font-weight:600}
-.grn{color:#34d399;font-weight:600}
-.cy{color:#22d3ee;font-weight:600}
-.nlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;font-size:12.5px}
-.ni{padding:5px 9px;background:#0c1524;border-radius:6px;border-left:3px solid #3b82f6;color:#cbd5e1}
-.ni.sp{border-left-color:#6b7280}.ni.pp{border-left-color:#f97316}
+.hl{color:#fbbf24;font-weight:600}.red{color:#f87171;font-weight:600}.cy{color:#22d3ee;font-weight:600}
 .btn{background:#1d4ed8;color:#fff;border:0;padding:9px 18px;border-radius:8px;cursor:pointer;font-size:13px;text-decoration:none;display:inline-block;margin-top:8px}
 .disc{margin-top:12px;background:#0b1220;border:1px solid #1c2739;border-left:3px solid #475569;border-radius:8px;padding:9px 11px;font-size:11.5px;color:#7d8fa8;line-height:1.7}
+svg{display:block;width:100%;height:auto}
 @media(max-width:880px){.grid2,.grid4{grid-template-columns:1fr}}
 </style></head><body>
 
@@ -49,68 +38,104 @@ h2{font-size:19px;margin:0 0 4px;letter-spacing:.5px}
 
 <div class="wrap">
   <h2>② 世界 · 惠城现在长什么样</h2>
-  <p class="lead">2025年。家底摊开，26个主体列出来，再把2030的标尺拉过来。</p>
+  <p class="lead">2025年。把家底画出来，再把2030的标尺拉过来。</p>
 
   <div class="card">
     <div class="grid4">
       <div class="kpi"><div class="v">1203亿</div><div class="k">GDP</div><div class="s">2025年</div></div>
-      <div class="kpi"><div class="v">69.0%</div><div class="k">第三产业</div><div class="s">3.4 : 27.6 : 69.0</div></div>
-      <div class="kpi"><div class="v">159.8万</div><div class="k">常住人口</div><div class="s">城镇化率85.7%</div></div>
+      <div class="kpi"><div class="v">69.0%</div><div class="k">第三产业</div><div class="s">中心城区结构</div></div>
+      <div class="kpi"><div class="v">159.8万</div><div class="k">常住人口</div><div class="s">城镇化85.7%</div></div>
       <div class="kpi"><div class="v">632.7亿</div><div class="k">高新区产值</div><div class="s">占规上67.4%</div></div>
-      <div class="kpi"><div class="v">139.5亿</div><div class="k">江北服务业</div><div class="s">占服务业近半</div></div>
-      <div class="kpi"><div class="v">72家</div><div class="k">智能家电企业</div><div class="s">5家小巨人</div></div>
-      <div class="kpi"><div class="v">30.8亿</div><div class="k">利元亨营收</div><div class="s">2025年</div></div>
-      <div class="kpi"><div class="v">1500亿</div><div class="k">2030目标</div><div class="s">高新区产值</div></div>
     </div>
   </div>
 
   <div class="grid2">
+    <!-- 三次产业结构饼图 -->
     <div class="card">
-      <b>🎯 离2030目标还有多远</b>
-      <div style="margin-top:8px">
-        <div class="cmp"><span class="l">高新区产值 → 1500亿</span><span class="r">632亿 / 42%</span></div>
-        <div class="bar"><i style="width:42%;background:#3b82f6"></i></div>
-        <div class="cmp"><span class="l">GDP → 约2000亿</span><span class="r">1203亿 / 60%</span></div>
-        <div class="bar"><i style="width:60%;background:#6b7280"></i></div>
-        <div class="cmp"><span class="l">常住人口 → 约180万</span><span class="r">159.8万 / 89%</span></div>
-        <div class="bar"><i style="width:89%;background:#6b7280"></i></div>
-        <div class="cmp"><span class="l red">深惠城际通车</span><span class="red">延期至2029 / 0%</span></div>
-        <div class="bar"><i style="width:3%;background:#f97316"></i></div>
-        <div class="cmp"><span class="l red">跨江通道容量</span><span class="red">日常拥堵</span></div>
-        <div class="bar"><i style="width:45%;background:#f97316"></i></div>
-      </div>
+      <b>📊 三次产业结构（2025年增加值占比）</b>
+      <svg viewBox="0 0 400 220" style="margin-top:8px">
+        <!-- 饼图：农业3.4% 工业27.6% 服务业69% -->
+        <!-- 用扇形近似 -->
+        <circle cx="130" cy="110" r="80" fill="none"/>
+        <!-- 服务业69% = 248.4度 -->
+        <path d="M 130 110 L 130 30 A 80 80 0 1 1 60 145 Z" fill="#3b82f6" opacity="0.85"/>
+        <!-- 工业27.6% = 99.4度 -->
+        <path d="M 130 110 L 60 145 A 80 80 0 0 1 130 30 Z" fill="#6b7280" opacity="0.85"/>
+        <!-- 农业3.4% -->
+        <path d="M 130 110 L 130 30 A 80 80 0 0 1 145 32 Z" fill="#f97316" opacity="0.85"/>
+        <text x="130" y="115" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">69%</text>
+        <text x="130" y="130" text-anchor="middle" fill="#cbd5e1" font-size="10">服务业</text>
+        <!-- 图例 -->
+        <rect x="240" y="50" width="12" height="12" fill="#3b82f6"/><text x="260" y="60" fill="#cbd5e1" font-size="12">第三产业 69.0%</text>
+        <rect x="240" y="75" width="12" height="12" fill="#6b7280"/><text x="260" y="85" fill="#cbd5e1" font-size="12">第二产业 27.6%</text>
+        <rect x="240" y="100" width="12" height="12" fill="#f97316"/><text x="260" y="110" fill="#cbd5e1" font-size="12">第一产业 3.4%</text>
+        <text x="240" y="140" fill="#8fa3bf" font-size="11">不是第二个大亚湾。</text>
+        <text x="240" y="155" fill="#8fa3bf" font-size="11">三产占近七成，是城，不是厂。</text>
+      </svg>
     </div>
+
+    <!-- 产业分布条形图 -->
     <div class="card">
-      <b>🧩 26个节点，三层</b>
-      <div style="margin-top:8px;font-size:12px">
-        <div style="color:#3b82f6;font-weight:600;margin:6px 0 4px">● 产业层（12）</div>
-        <div class="nlist">
-          <div class="ni">高新区 632亿</div><div class="ni">利元亨 30.8亿</div>
-          <div class="ni">雷士照明</div><div class="ni">电子信息</div>
-          <div class="ni">智能装备</div><div class="ni">新材料</div>
-          <div class="ni">家电72家</div><div class="ni">天宝创能</div>
-          <div class="ni">先进科技+91%</div><div class="ni">AI机器人120亿</div>
-          <div class="ni">服务业139亿</div><div class="ni">学院城</div>
-        </div>
-        <div style="color:#9ca3af;font-weight:600;margin:10px 0 4px">● 空间层（8）</div>
-        <div class="nlist">
-          <div class="ni sp">东江湾</div><div class="ni sp">江北CBD</div>
-          <div class="ni sp">三栋</div><div class="ni sp">马安</div>
-          <div class="ni sp">远郊</div><div class="ni sp">桥西</div>
-          <div class="ni sp">水口</div><div class="ni sp" style="border-left-color:#f97316">过江通道</div>
-        </div>
-        <div style="color:#f97316;font-weight:600;margin:10px 0 4px">● 人层（6）</div>
-        <div class="nlist">
-          <div class="ni pp">蓝领</div><div class="ni pp">白领</div>
-          <div class="ni pp">跨城</div><div class="ni pp">工程师</div>
-          <div class="ni pp">青年</div><div class="ni pp">家庭</div>
-        </div>
-      </div>
+      <b>📊 主要板块产值对比（亿元）</b>
+      <svg viewBox="0 0 400 220" style="margin-top:8px">
+        <!-- 横向条形图 -->
+        <text x="0" y="25" fill="#cbd5e1" font-size="11">高新区合计</text>
+        <rect x="90" y="15" width="250" height="16" fill="#3b82f6" rx="2"/>
+        <text x="345" y="27" fill="#fbbf24" font-size="11" font-weight="700">632.7</text>
+        <text x="0" y="55" fill="#cbd5e1" font-size="11">江北服务业</text>
+        <rect x="90" y="45" width="55" height="16" fill="#6b7280" rx="2"/>
+        <text x="150" y="57" fill="#fbbf24" font-size="11" font-weight="700">139.5</text>
+        <text x="0" y="85" fill="#cbd5e1" font-size="11">智能家电(72家)</text>
+        <rect x="90" y="75" width="35" height="16" fill="#6b7280" rx="2"/>
+        <text x="130" y="87" fill="#cbd5e1" font-size="11">~80</text>
+        <text x="0" y="115" fill="#cbd5e1" font-size="11">AI与机器人</text>
+        <rect x="90" y="105" width="47" height="16" fill="#6b7280" rx="2"/>
+        <text x="142" y="117" fill="#cbd5e1" font-size="11">120</text>
+        <text x="0" y="145" fill="#cbd5e1" font-size="11">利元亨</text>
+        <rect x="90" y="135" width="12" height="16" fill="#3b82f6" rx="2"/>
+        <text x="107" y="147" fill="#cbd5e1" font-size="11">30.8</text>
+        <line x1="90" y1="165" x2="350" y2="165" stroke="#22304a" stroke-width="1"/>
+        <text x="90" y="180" fill="#5b6b82" font-size="10">0</text>
+        <text x="200" y="180" fill="#5b6b82" font-size="10">250亿</text>
+        <text x="320" y="180" fill="#5b6b82" font-size="10">500亿+</text>
+        <text x="0" y="205" fill="#8fa3bf" font-size="11">高新区一家占了工业的三分之二。</text>
+      </svg>
     </div>
   </div>
 
-  <div style="text-align:center"><a class="btn" href="network.html">下一步：看谁最重要 →</a></div>
+  <!-- 目标距离 -->
+  <div class="card">
+    <b>🎯 离2030目标还有多远</b>
+    <svg viewBox="0 0 800 200" style="margin-top:8px">
+      <!-- 高新区产值 42% -->
+      <text x="0" y="25" fill="#cbd5e1" font-size="12">高新区产值 → 1500亿</text>
+      <rect x="200" y="15" width="500" height="18" fill="#16233a" rx="4"/>
+      <rect x="200" y="15" width="210" height="18" fill="#3b82f6" rx="4"/>
+      <text x="710" y="28" fill="#fbbf24" font-size="12" font-weight="700">42%</text>
+      <!-- GDP 60% -->
+      <text x="0" y="60" fill="#cbd5e1" font-size="12">GDP → 约2000亿</text>
+      <rect x="200" y="50" width="500" height="18" fill="#16233a" rx="4"/>
+      <rect x="200" y="50" width="300" height="18" fill="#6b7280" rx="4"/>
+      <text x="710" y="63" fill="#fbbf24" font-size="12" font-weight="700">60%</text>
+      <!-- 人口 89% -->
+      <text x="0" y="95" fill="#cbd5e1" font-size="12">常住人口 → 约180万</text>
+      <rect x="200" y="85" width="500" height="18" fill="#16233a" rx="4"/>
+      <rect x="200" y="85" width="445" height="18" fill="#6b7280" rx="4"/>
+      <text x="710" y="98" fill="#fbbf24" font-size="12" font-weight="700">89%</text>
+      <!-- 深惠城际 0% -->
+      <text x="0" y="130" fill="#f97316" font-size="12">深惠城际通车</text>
+      <rect x="200" y="120" width="500" height="18" fill="#16233a" rx="4"/>
+      <rect x="200" y="120" width="5" height="18" fill="#f97316" rx="4"/>
+      <text x="710" y="133" fill="#f97316" font-size="12" font-weight="700">延期2029</text>
+      <!-- 跨江通道 45% -->
+      <text x="0" y="165" fill="#f97316" font-size="12">跨江通道容量</text>
+      <rect x="200" y="155" width="500" height="18" fill="#16233a" rx="4"/>
+      <rect x="200" y="155" width="225" height="18" fill="#f97316" rx="4"/>
+      <text x="710" y="168" fill="#f97316" font-size="12" font-weight="700">拥堵中</text>
+    </svg>
+  </div>
 
-  <div class="disc">所有数字来自惠城区统计公报、2026政府工作报告、上市公司公告。这不是预测，是现状盘点。</div>
+  <div style="text-align:center"><a class="btn" href="network.html">下一步：看谁最重要 →</a></div>
+  <div class="disc">数字来自惠城区2025统计公报、2026政府工作报告、上市公司公告。不是预测，是现状。</div>
 </div>
 </body></html>

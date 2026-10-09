@@ -267,7 +267,12 @@ table td,table th{border-color:#22304a!important;color:#cbd5e1!important}
         </div>
       </div>
 
-      <div class="pane on" id="pane-run"><h2 style="margin:0 0 4px">③ 网络 · 谁连得最多，谁绕不开</h2><p style="font-size:13px;color:#64748b;margin:0 0 12px">蓝=产业，灰=空间，橙=人。橙色粗线=通勤走廊。点节点可以访谈。</p>
+      <div class="pane on" id="pane-run"><h2 style="margin:0 0 4px">③ 网络 · 谁连得最多，谁绕不开</h2><p style="font-size:13px;color:#64748b;margin:0 0 12px">蓝=产业，灰=空间，橙=人。橙色粗线=通勤走廊。
+      <div style="margin:8px 0">
+        <button class="btn" onclick="growStart()">▶ 开始重建世界</button>
+        <button class="btn gh" onclick="growN=999;render()">直接看全图</button>
+        <span class="mut" id="growCnt" style="margin-left:8px"></span>
+      </div></p>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
         <div style="padding:14px;background:#eff6ff;border-radius:8px;border-left:4px solid #2563eb">
@@ -1300,6 +1305,17 @@ function setKpi(k,v,isMood){
   bar.style.background=k==="di"?"#dc2626":k==="mo"?(v<0?"#dc2626":"#16a34a"):(k==="su"?"#0891b2":"#16a34a");
 }
 
+function growStart(){
+  growN=0;
+  const total=sim.agents.length;
+  const timer=setInterval(()=>{
+    growN++;
+    $("#growCnt").textContent=`${Math.min(growN,total)} / ${total} 个主体`;
+    render();
+    if(growN>total){clearInterval(timer);$("#growCnt").textContent=`${total} 个主体全部落下`;}
+  },180);
+}
+let growN=999; // 生长动画：显示前N个节点
 function renderNetwork(){
   const svg=$("#netsvg");
   const W=760,H=560;
@@ -1313,15 +1329,17 @@ function renderNetwork(){
     return "#94a3b8";
   };
   let html="";
-  sim.edges.forEach(e=>{
+  sim.edges.forEach((e,ei)=>{
     const p=posCache[e.a],q=posCache[e.b];if(!p||!q)return;
+    if(growN<=ei)return; // 生长动画：边也逐步出现
     const pa=sim._byName(e.a),pb=sim._byName(e.b);
     const op=((pa&&pa.alive?1:.25)*(pb&&pb.alive?1:.25)*.85).toFixed(2);
     const dash=e.layer==="hist"?"":"stroke-dasharray:4 4;";
     html+=`<line x1="${p.x.toFixed(1)}" y1="${p.y.toFixed(1)}" x2="${q.x.toFixed(1)}" y2="${q.y.toFixed(1)}"
       style="stroke:${eCol(e)};stroke-width:${e.rel==='通勤'?4:(e.rel==='连接'?2.5:(e.layer==='hist'?1.8:1))};${dash}opacity:${op}"><title>${e.rel}（${e.a}→${e.b}）</title></line>`;
   });
-  sim.agents.forEach(a=>{
+  sim.agents.forEach((a,ai)=>{
+    if(ai>=growN)return; // 生长动画
     const p=posCache[a.name];if(!p)return;
     const cfg=TYPE_CFG[a.type];
     if(a.alive){
@@ -1330,22 +1348,22 @@ function renderNetwork(){
       html+=`<g class="node" data-name="${a.name}" style="cursor:pointer">
         <circle cx="${p.x}" cy="${p.y}" r="${r}" fill="${typeColor(a.type)}" stroke="${ring}" stroke-width="3.5"></circle>
         <text x="${p.x}" y="${p.y+4}" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" paint-order="stroke" stroke="rgba(0,0,0,.28)" stroke-width="1.5">${SHORT[a.name]||a.name.slice(0,4)}</text>
-        <text x="${p.x}" y="${(p.y+Number(r)+14).toFixed(1)}" text-anchor="middle" font-size="10.5" fill="#475569" paint-order="stroke" stroke="#fcfdff" stroke-width="3">${a.name}</text>
+        <text x="${p.x}" y="${(p.y+Number(r)+14).toFixed(1)}" text-anchor="middle" font-size="10.5" fill="#8fa3bf" paint-order="stroke" stroke="#0e1523" stroke-width="3">${a.name}</text>
       </g>`;
     }else{
       html+=`<g class="node" data-name="${a.name}" style="cursor:pointer;opacity:.55">
         <circle cx="${p.x}" cy="${p.y}" r="9" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="2"></circle>
         <line x1="${p.x-4}" y1="${p.y-4}" x2="${p.x+4}" y2="${p.y+4}" stroke="#94a3b8" stroke-width="1.6"></line>
         <line x1="${p.x+4}" y1="${p.y-4}" x2="${p.x-4}" y2="${p.y+4}" stroke="#94a3b8" stroke-width="1.6"></line>
-        <text x="${p.x}" y="${p.y+18}" text-anchor="middle" font-size="9.5" fill="#94a3b8" paint-order="stroke" stroke="#fcfdff" stroke-width="3">${a.name}</text>
+        <text x="${p.x}" y="${p.y+18}" text-anchor="middle" font-size="9.5" fill="#5b6b82" paint-order="stroke" stroke="#0e1523" stroke-width="3">${a.name}</text>
       </g>`;
     }
   });
   const legend=[["anchor","产业"],["land","空间"],["talent","人"]];
-  html+=`<g opacity=".97"><rect x="556" y="4" width="120" height="60" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1"></rect>`;
+  html+=`<g opacity=".97"><rect x="556" y="4" width="120" height="60" rx="8" fill="#111a2b" stroke="#22304a" stroke-width="1"></rect>`;
   legend.forEach((g,i)=>{
     const x=556+14+(i<4?0:100),y=24+(i%4)*26;
-    html+=`<circle cx="${x+6}" cy="${y-5}" r="6" fill="${typeColor(g[0])}"></circle><text x="${x+20}" y="${y}" font-size="11" fill="#334155">${g[1]}</text>`;
+    html+=`<circle cx="${x+6}" cy="${y-5}" r="6" fill="${typeColor(g[0])}"></circle><text x="${x+20}" y="${y}" font-size="11" fill="#cbd5e1">${g[1]}</text>`;
   });
   html+=`</g>`;
   svg.innerHTML=html;
