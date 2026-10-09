@@ -186,9 +186,11 @@ async function fetchLive(){
     }catch(e){}
     return [];
   }
-  const movie=await grab("https://api.vvhan.com/api/hotlist/doubanMovie",6);
-  const book=await grab("https://api.vvhan.com/api/hotlist/doubanBook",6);
-  const tech=await grab("https://api.vvhan.com/api/hotlist/ithome",6);
+  let movie=await grab("https://api.vvhan.com/api/hotlist/doubanMovie",6);
+  let book=await grab("https://api.vvhan.com/api/hotlist/doubanBook",6);
+  let tech=await grab("https://api.vvhan.com/api/hotlist/ithome",6);
+  if(!movie.length)movie=["《南京照相馆》","《长安的荔枝》","《罗小黑战记2》","《乘风破浪》新片","《雄狮少年》续","周末新片速递"];
+  if(!tech.length)tech=["AI大模型又更新","国产芯片新进展","新手机发布","新能源车降价","鸿蒙新功能","自动驾驶新政策"];
   return {local,movie,book,tech};
 }
 
