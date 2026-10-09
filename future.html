@@ -41,8 +41,8 @@ h1{font-size:20px;margin:0 0 2px}
 </div>
 
 <div class="wrap">
-  <h1>把未来扔一万遍</h1>
-  <p class="sub">拖动滑块，点按钮，看结果怎么变。</p>
+  <h1 id="pageTitle">把未来反复扔</h1>
+  <p class="sub">选模式、调参数、点按钮，看结果怎么变。同种子必同结果。</p>
 
   <div id="err"></div>
 
@@ -99,13 +99,13 @@ h1{font-size:20px;margin:0 0 2px}
     <div class="prob" id="prob"></div>
     <div style="text-align:center;font-size:12px;color:#6b7280;margin:-8px 0 10px">达到1500亿的概率</div>
     <div class="result">
-      <div class="stat"><div class="v" id="p10">—</div><div class="l">最差的10种情况</div></div>
-      <div class="stat"><div class="v" id="p50">—</div><div class="l">一半一半</div></div>
-      <div class="stat"><div class="v" id="p90">—</div><div class="l">最好的10种情况</div></div>
+      <div class="stat"><div class="v" id="p10">—</div><div class="l">第10百分位（较差）</div></div>
+      <div class="stat"><div class="v" id="p50">—</div><div class="l">中位数</div></div>
+      <div class="stat"><div class="v" id="p90">—</div><div class="l">第90百分位（较好）</div></div>
     </div>
 
     <div class="card">
-      <h2>一万次落在哪</h2>
+      <h2 id="histTitle">模拟结果分布</h2>
       <div style="height:260px"><canvas id="chart"></canvas></div>
       <div id="chart-note" style="font-size:12px;color:#8fa3bf;margin-top:8px;text-align:center"></div>
     </div>
@@ -123,7 +123,7 @@ h1{font-size:20px;margin:0 0 2px}
     </div>
 
     <div class="card">
-      <h2>哪条路真管用（影响系数）</h2>
+      <h2>哪条路与结果关联最强（影响系数）</h2>
       <div style="height:180px"><canvas id="pathcoef"></canvas></div>
       <div id="pcoef-note" style="font-size:12px;color:#8fa3bf;margin-top:8px"></div>
     </div>
@@ -132,15 +132,15 @@ h1{font-size:20px;margin:0 0 2px}
       <h2>三个情景</h2>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
         <div style="background:#0a0f1a;border:1px solid #7f1d1d;border-radius:8px;padding:10px;text-align:center">
-          <div style="font-size:11px;color:#6b7280">坏情况</div>
+          <div style="font-size:11px;color:#6b7280">较差情景（P10）</div>
           <div style="font-size:18px;font-weight:800;color:#f87171" id="bad">—</div>
         </div>
         <div style="background:#0a0f1a;border:1px solid #713f12;border-radius:8px;padding:10px;text-align:center">
-          <div style="font-size:11px;color:#6b7280">一般情况</div>
+          <div style="font-size:11px;color:#6b7280">中位情景（P50）</div>
           <div style="font-size:18px;font-weight:800;color:#fbbf24" id="mid">—</div>
         </div>
         <div style="background:#0a0f1a;border:1px solid #14532d;border-radius:8px;padding:10px;text-align:center">
-          <div style="font-size:11px;color:#6b7280">好情况</div>
+          <div style="font-size:11px;color:#6b7280">较好情景（P90）</div>
           <div style="font-size:18px;font-weight:800;color:#34d399" id="good">—</div>
         </div>
       </div>
@@ -170,6 +170,14 @@ function makeRandn(prng){
     return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);
   };
 }
+// 统一分位数函数（线性插值，适用于任意N）
+function quantile(sorted,q){
+  if(!sorted.length)return NaN;
+  var pos=(sorted.length-1)*q;
+  var lo=Math.floor(pos),hi=Math.ceil(pos);
+  var w=pos-lo;
+  return sorted[lo]*(1-w)+sorted[hi]*w;
+}
 const charts={};
 function destroy(k){if(charts[k]){charts[k].destroy();delete charts[k];}}
 
@@ -193,7 +201,7 @@ function run(){
       {mu:100, sd:40, name:'服务业带动', color:'#fbbf24'},
       {mu:50, sd:30, name:'融深融湾', color:'#f87171'}
     ];
-    var results=[], contribs=[[],[],[],[],[]];
+    var rawResults=[], results=[], contribs=[[],[],[],[],[]];
     for(var i=0;i<N;i++){
       var total=base;
       for(var j=0;j<paths.length;j++){
@@ -203,10 +211,11 @@ function run(){
         contribs[j].push(v);
       }
       total*=1+randn()*0.08;
+      rawResults.push(total);
       results.push(total);
     }
     results.sort(function(a,b){return a-b;});
-    var p10=results[1000], p50=results[5000], p90=results[9000];
+    var p10=quantile(results,0.10), p50=quantile(results,0.50), p90=quantile(results,0.90);
     var hit=results.filter(function(x){return x>=1500;}).length/N*100;
 
     // 相关系数
@@ -218,7 +227,7 @@ function run(){
       for(var k=0;k<n;k++){num+=(xs[k]-mx)*(ys[k]-my);dx+=(xs[k]-mx)*(xs[k]-mx);dy+=(ys[k]-my)*(ys[k]-my);}
       return num/Math.sqrt(dx*dy);
     }
-    var coefs=contribs.map(function(c){return Math.abs(corr(c,results));});
+    var coefs=contribs.map(function(c){return Math.abs(corr(c,rawResults));});
 
     document.getElementById('prob').innerHTML='<span style="color:'+(hit>50?'#34d399':hit>20?'#fbbf24':'#f87171')+'">'+hit.toFixed(1)+'%</span>';
     document.getElementById('p10').textContent=Math.round(p10)+'亿';
@@ -245,7 +254,7 @@ function run(){
     });
 
     document.getElementById('chart-note').innerHTML=
-      '一万次里 <b style="color:#f87171">'+hit.toFixed(0)+'次</b>过了1500亿，<b style="color:#3b82f6">'+(100-hit).toFixed(0)+'次</b>没过。最可能落在 <b style="color:#fbbf24">'+Math.round(p50)+'亿</b>。';
+      N.toLocaleString()+'次模拟里 <b style="color:#f87171">'+hit.toFixed(0)+'次</b>过了1500亿，<b style="color:#3b82f6">'+(100-hit).toFixed(0)+'次</b>没过。中位数落在 <b style="color:#fbbf24">'+Math.round(p50)+'亿</b>。';
 
     // 贡献堆叠
     var cNames=['现有盘子'].concat(paths.map(function(p){return p.name;}));
@@ -296,25 +305,27 @@ function run(){
       '<b>这意味着：</b>高新区能不能到1500亿，主要看新投产项目这条路走不走得顺。这条路如果打折扣，其他几条加起来也补不上窟窿。';
 
     document.getElementById('torn-note').innerHTML=
-      '<b>这张图在看什么：</b>五条路每条都不是板上钉钉的数，都有"说好也可能、说坏也可能"的摆动空间。这张图把每条路的摆动幅度摆出来。<br>'+
-      '<b>怎么看：</b>横条往左右伸得越长，说明这条路的结果越说不准。比如新投产项目，说好能到'+(paths[0].mu+paths[0].sd)+'亿，说差可能只有'+(paths[0].mu-paths[0].sd)+'亿，上下差出'+paths[0].sd*2+'亿。最下面那条（融深融湾）横条最短，说明它虽然也有不确定性，但摆动幅度小。<br>'+
+      '<b>这张图在看什么：</b>五条路每条都不是板上钉钉的数，都有"说好也可能、说坏也可能"的摆动空间。这张图把每条路<b>模型设定的波动范围</b>（±1个标准差）摆出来。<br>'+
+      '<b>怎么看：</b>横条往左右伸得越长，说明这条路的结果越说不准。比如新投产项目，设定的波动范围是±'+paths[0].sd+'亿。最下面那条（融深融湾）横条最短，说明设定的摆动幅度小。<br>'+
+      '<b>注意：</b>这里的波动范围是模型设定的参数（σ），不是从历史数据估计的实测敏感性。参数是否合理，需要用现实数据校准——这正是开源可修改的意义。<br>'+
       '<b>这意味着：</b>做计划的时候，最上面那条路不能按"最好情况"排，得给它留足余量。因为它一旦往下摆，整体结果直接被拉下来一大截。';
 
     document.getElementById('pcoef-note').innerHTML=
-      '<b>这张图在看什么：</b>五条路都在转，但"在转"和"真在带动结果"是两回事。这张图回答的是：哪条路真的和最终结果绑在一起。<br>'+
-      '<b>怎么看：</b>条越长，说明这条路上下动一点，最终结果就跟着动。排第一的是<b style="color:'+paths[maxI].color+'">'+paths[maxI].name+'</b>（系数'+coefs[maxI].toFixed(3)+'），它和结果绑得最紧。排最后的那条系数最小，意思是它好不好，对最终结果影响有限——它在转，但更像是"空转"。<br>'+
-      '<b>这意味着：</b>资源和精力有限的时候，先保系数高的路，它见效最直接。系数低的路不是不做，而是别把它当成拉动结果的主力。';
+      '<b>这张图在看什么：</b>五条路都在转，但"在转"和"与最终结果关联强"是两回事。这张图回答的是：在模型内部，哪条路的波动和最终产值的波动绑得最紧。<br>'+
+      '<b>怎么看：</b>条越长，说明这条路上下动一点，最终结果就跟着动得多。排第一的是<b style="color:'+paths[maxI].color+'">'+paths[maxI].name+'</b>（系数'+coefs[maxI].toFixed(3)+'），它和结果的关联最强。排最后的那条系数最小，意思是它好不好，对最终结果影响有限——它在转，但更像是"空转"。<br>'+
+      '<b>注意：</b>这个系数是模型内部的相关系数，只说明"在这组参数下，这条路和结果同步波动的程度"，<b>不能直接证明某条产业路径在现实中具有更强的因果作用</b>。现实因果需要更严格的识别策略。<br>'+
+      '<b>这意味着：</b>资源和精力有限的时候，可以先关注关联强的路，它在模型里见效最直接。但别把模型里的关联强度当成现实中的因果定论。';
 
     document.getElementById('scen-note').innerHTML=
-      '<b>这张图在看什么：</b>把一万次结果按好坏排个队，挑出三个有代表性的位置：最差的10%长什么样、中间最可能长什么样、最好的10%长什么样。<br>'+
-      '<b>怎么看：</b>坏情况约'+Math.round(p10)+'亿，对应"项目延期+招商不顺"同时发生；一般情况约'+Math.round(p50)+'亿，对应"按官方节奏正常走"；好情况约'+Math.round(p90)+'亿，对应"招商超预期+投产提前"。坏和好之间差了大约'+Math.round(p90-p10)+'亿。<br>'+
-      '<b>这意味着：</b>坏情况和好情况的差距，差不多相当于现在高新区半年的产值。这个摆动幅度说明：结果不是"一定怎样"，而是落在一个区间里，关键看几个关键节点能不能守住。';
+      '<b>这张图在看什么：</b>把'+N.toLocaleString()+'次模拟结果从小到大排队，挑出三个统计分位：第10百分位（较差）、中位数（P50）、第90百分位（较好）。<br>'+
+      '<b>怎么看：</b>较差情景约'+Math.round(p10)+'亿，对应"项目延期+招商不顺"同时发生；中位情景约'+Math.round(p50)+'亿，对应"按节奏正常走"；较好情景约'+Math.round(p90)+'亿，对应"招商超预期+投产提前"。较差和较好之间差了大约'+Math.round(p90-p10)+'亿。<br>'+
+      '<b>这意味着：</b>较差和较好的差距，差不多相当于现在高新区半年的产值。这个摆动幅度说明：结果不是"一定怎样"，而是落在一个区间里，关键看几个关键节点能不能守住。';
 
     document.getElementById('conclusion').innerHTML=
-      '最可能落在 <b style="color:#fbbf24">'+Math.round(p50)+'亿</b>，'+
-      (hit>50?'大概率能':'大概率够不着')+'1500亿。'+
-      '绑得最紧的是 <b style="color:'+paths[maxI].color+'">'+paths[maxI].name+'</b>，系数'+coefs[maxI].toFixed(3)+'。'+
-      '其他几条路在转，但传动没那么强。';
+      '中位数落在 <b style="color:#fbbf24">'+Math.round(p50)+'亿</b>，'+
+      (hit>50?'模拟中过半数能达到':'模拟中过半数够不着')+'1500亿参考目标。'+
+      '在模型内部，与最终产值关联最强的是 <b style="color:'+paths[maxI].color+'">'+paths[maxI].name+'</b>（系数'+coefs[maxI].toFixed(3)+'）。'+
+      '注意：这是模型内部的关联强度，不代表现实中的因果作用大小。其他几条路在转，但与最终结果的关联没那么强。';
 
     // 扰动参数透明面板
     document.getElementById('paramCard').style.display='block';
