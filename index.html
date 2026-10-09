@@ -224,7 +224,14 @@ function allTopics(){return [...liveTopics, ...LOCAL, ...FOOD, ...FUN, ...WARM];
 
 function render(){
   let list=curCat==="all"?allTopics():allTopics().filter(x=>x.c===curCat);
-  list=list.map(x=>({...x,hs:x.h+Math.random()*4-2})).sort((a,b)=>b.hs-a.hs);
+  // 来源加权：官方正式口径基数高，媒体次之，实时热搜按位次
+  list=list.map(x=>{
+    let base=x.h;
+    if(x.live) base=90+Math.random()*8;  // 实时热搜
+    else if(x.src&&/报告|公报|政府|公告|年鉴/.test(x.src)) base=base+3;
+    else if(x.src&&/媒体|日报|南方|直通车/.test(x.src)) base=base+1;
+    return {...x,hs:base+Math.random()*2-1};
+  }).sort((a,b)=>b.hs-a.hs);
   const grads={ind:"linear-gradient(135deg,#1e3a8a,#0f1a2e)",life:"linear-gradient(135deg,#7c2d12,#1a0f0f)",city:"linear-gradient(135deg,#374151,#0f1a2e)",food:"linear-gradient(135deg,#7f1d1d,#1a0f0f)",fun:"linear-gradient(135deg,#064e3b,#0f1a2e)",warm:"linear-gradient(135deg,#78350f,#1a1206)"};
   const catName={ind:"产业",life:"民生",city:"城市",food:"好吃",fun:"好玩",warm:"八卦"};
   const el=document.getElementById("topicList");
