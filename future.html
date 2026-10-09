@@ -80,8 +80,36 @@ h1{font-size:20px;margin:0 0 2px;letter-spacing:.5px}
     </div>
 
     <div class="card">
-      <h2>哪件事最影响结果</h2>
-      <div id="sens" style="font-size:13px;line-height:2;color:#cbd5e1"></div>
+      <h2>每一路贡献了多少</h2>
+      <div style="height:140px"><canvas id="contrib"></canvas></div>
+      <div style="font-size:11px;color:#5b6b82;margin-top:6px">从632.7亿开始，五条路各加多少。最粗的那根就是主力。</div>
+    </div>
+
+    <div class="card">
+      <h2>哪件事最影响结果（从大到小排）</h2>
+      <div style="height:180px"><canvas id="tornado"></canvas></div>
+      <div style="font-size:11px;color:#5b6b82;margin-top:6px">横条越长，这件事对最终结果影响越大。盯住最上面那条。</div>
+    </div>
+
+    <div class="card">
+      <h2>三个情景</h2>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+        <div style="background:#0a0f1a;border:1px solid #7f1d1d;border-radius:8px;padding:10px;text-align:center">
+          <div style="font-size:11px;color:#6b7280">坏情况</div>
+          <div style="font-size:18px;font-weight:800;color:#f87171" id="bad">—</div>
+          <div style="font-size:10px;color:#5b6b82">项目延期+招商不顺</div>
+        </div>
+        <div style="background:#0a0f1a;border:1px solid #713f12;border-radius:8px;padding:10px;text-align:center">
+          <div style="font-size:11px;color:#6b7280">一般情况</div>
+          <div style="font-size:18px;font-weight:800;color:#fbbf24" id="mid">—</div>
+          <div style="font-size:10px;color:#5b6b82">按官方节奏走</div>
+        </div>
+        <div style="background:#0a0f1a;border:1px solid #14532d;border-radius:8px;padding:10px;text-align:center">
+          <div style="font-size:11px;color:#6b7280">好情况</div>
+          <div style="font-size:18px;font-weight:800;color:#34d399" id="good">—</div>
+          <div style="font-size:10px;color:#5b6b82">招商超预期+投产提前</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -171,10 +199,48 @@ function run(){
     `<b style="color:#3b82f6">${(100-hit).toFixed(0)}次</b>没到。`+
     `最可能落在 <b style="color:#fbbf24">${Math.round(p50)}亿</b> 附近。`;
 
-  document.getElementById('sens').innerHTML=
-    `🥇 <b style="color:#f87171">制造业招商能不能落地</b>——招到和招不到差60亿<br>`+
-    `🥈 <b style="color:#fbbf24">高新区项目能不能按时投产</b>——晚一年差50亿<br>`+
-    `🥉 <b style="color:#3b82f6">深圳那边接不接得住</b>——最不可控，但影响最小`;
+  // 贡献堆叠条
+  const cNames=['现有盘子','新投产项目','三大集群','AI机器人','服务业带动','融深融湾'];
+  const cVals=[base, paths[0].mu, paths[1].mu, paths[2].mu, paths[3].mu, paths[4].mu];
+  if(window._cChart)window._cChart.destroy();
+  window._cChart=new Chart(document.getElementById('contrib').getContext('2d'),{
+    type:'bar',
+    data:{labels:['2030年总产值'],datasets:cNames.map((n,i)=>({
+      label:n,data:[cVals[i]],backgroundColor:['#1c2739','#3b82f6','#8b5cf6','#06b6d4','#fbbf24','#f87171'][i],stack:'s'
+    }))},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'bottom',labels:{color:'#93a4bd',font:{size:10}}}},
+      scales:{x:{stacked:true,ticks:{color:'#6b7280'},grid:{color:'#1c2739'}},y:{stacked:true,ticks:{color:'#93a4bd',font:{size:11}},grid:{display:false}}}
+    }
+  });
+
+  // 龙卷风图（按sd排序）
+  const tData=paths.map((p,i)=>({name:cNames[i+1],sd:p.sd,mu:p.mu})).sort((a,b)=>b.sd-a.sd);
+  if(window._tChart)window._tChart.destroy();
+  window._tChart=new Chart(document.getElementById('tornado').getContext('2d'),{
+    type:'bar',
+    data:{labels:tData.map(d=>d.name),datasets:[
+      {label:'波动下限',data:tData.map(d=>-d.sd),backgroundColor:'#f87171'},
+      {label:'波动上限',data:tData.map(d=>d.sd),backgroundColor:'#3b82f6'}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},
+        tooltip:{callbacks:{label:(item)=>{
+          const d=tData[item.dataIndex];
+          return d.name+'：均值'+d.mu+'亿，上下波动±'+d.sd+'亿';
+        }}}
+      },
+      scales:{
+        x:{ticks:{color:'#6b7280',callback:v=>Math.abs(v)+'亿'},grid:{color:'#1c2739'}},
+        y:{ticks:{color:'#93a4bd',font:{size:11}},grid:{display:false}}
+      }
+    }
+  });
+
+  // 三个情景
+  document.getElementById('bad').textContent=Math.round(p10)+'亿';
+  document.getElementById('mid').textContent=Math.round(p50)+'亿';
+  document.getElementById('good').textContent=Math.round(p90)+'亿';
 
   document.getElementById('out').style.display='block';
 }
