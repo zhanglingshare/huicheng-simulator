@@ -72,9 +72,19 @@ h1{font-size:21px;margin:0}
 
   <div class="livebar" id="livebar">正在拉取实时热搜…</div>
 
-  <div id="hotBox" style="background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:12px 14px;margin-bottom:14px">
-    <div style="font-size:12px;color:#60a5fa;font-weight:700;margin-bottom:8px">📡 全网此刻在聊（电影 / 科技 / 书 / 展 / 演出）</div>
-    <div id="hotList" style="font-size:12.5px;color:#cbd5e1;line-height:2">—</div>
+  <div id="hotBox" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
+    <div style="background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:11px 13px">
+      <div style="font-size:12px;color:#f472b6;font-weight:700;margin-bottom:7px">🎬 正在热映</div>
+      <div id="movieList" style="font-size:12px;color:#cbd5e1;line-height:1.9">—</div>
+    </div>
+    <div style="background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:11px 13px">
+      <div style="font-size:12px;color:#a78bfa;font-weight:700;margin-bottom:7px">📚 在读热门</div>
+      <div id="bookList" style="font-size:12px;color:#cbd5e1;line-height:1.9">—</div>
+    </div>
+    <div style="background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:11px 13px">
+      <div style="font-size:12px;color:#34d399;font-weight:700;margin-bottom:7px">🤖 科技头条</div>
+      <div id="techList" style="font-size:12px;color:#cbd5e1;line-height:1.9">—</div>
+    </div>
   </div>
 
   <div class="tabs" id="tabs">
@@ -140,7 +150,7 @@ document.querySelectorAll("#tabs button").forEach(b=>{
 });
 
 async function fetchLive(){
-  const local=[],trend=[];
+  const local=[];
   const apis=[
     {url:"https://api.vvhan.com/api/hotlist/wbHot",name:"微博"},
     {url:"https://api.vvhan.com/api/hotlist/baiduRD",name:"百度"},
@@ -157,20 +167,29 @@ async function fetchLive(){
           const title=it.title||it.word||"";
           if(LOCAL_KW.some(k=>title.includes(k))&&local.length<4){
             local.push(`<b>${api.name}</b>·${title}`);
-          }else if(TREND_KW.some(k=>title.includes(k))&&trend.length<8){
-            trend.push(title);
           }
         });
       }
     }catch(e){}
   }
-  return {local,trend};
+  // 三个专门榜
+  async function grab(url,limit){
+    try{
+      const r=await fetch(url);const j=await r.json();
+      if(j.data&&Array.isArray(j.data))return j.data.slice(0,limit).map(x=>x.title||x.word||"");
+    }catch(e){}
+    return [];
+  }
+  const movie=await grab("https://api.vvhan.com/api/hotlist/doubanMovie",6);
+  const book=await grab("https://api.vvhan.com/api/hotlist/doubanBook",6);
+  const tech=await grab("https://api.vvhan.com/api/hotlist/ithome",6);
+  return {local,movie,book,tech};
 }
 
 async function refresh(){
   document.getElementById("btnScan").textContent="⏳ 扫描中…";
   document.getElementById("scanline").style.animation="spin .8s linear infinite";
-  const {local,trend}=await fetchLive();
+  const {local,movie,book,tech}=await fetchLive();
   const arr=[...SPOTS];
   for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
   picks=arr.slice(0,3).map(t=>t.n);
@@ -178,14 +197,19 @@ async function refresh(){
   document.getElementById("btnScan").textContent="🔄 换一换";
   document.getElementById("scanline").style.animation="";
   const now=new Date();
-  document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')} · 本地${local.length}条 · 全网热词${trend.length}条`;
+  document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')} · 本地${local.length}条`;
   const bar=document.getElementById("livebar");
   bar.innerHTML=local.length
     ?"📡 惠城此刻在热搜："+local.join("　｜　")
     :"📡 本地暂时没上热搜——但惠城的周末，不用上热搜也值得去。";
-  document.getElementById("hotList").innerHTML=trend.length
-    ? trend.map((t,i)=>`${i+1}. ${t}`).join("<br>")
-    : "正在拉取全网电影/科技/书/演出话题…";
+  const paint=(id,arr,miss)=>{
+    document.getElementById(id).innerHTML=arr.length
+      ? arr.map((t,i)=>`${i+1}. ${t}`).join("<br>")
+      : miss;
+  };
+  paint("movieList",movie,"拉取中…");
+  paint("bookList",book,"拉取中…");
+  paint("techList",tech,"拉取中…");
 }
 refresh();
 document.getElementById("btnScan").onclick=refresh;
