@@ -116,7 +116,7 @@ const TREND_KW=["电影","票房","AI","人工智能","大模型","芯片","手�
 function render(cat){
   const list=(cat==="all"?SPOTS:SPOTS.filter(x=>x.c===cat)).map(x=>({
     ...x,
-    likes:parseInt(localStorage.getItem("like_spot_"+x.n)||String(x.base+Math.floor(Math.random()*50-25)))
+    likes:x.base
   })).sort((a,b)=>b.likes-a.likes);
   const grads={cafe:"linear-gradient(135deg,#7c2d12,#1a0f0f)",shop:"linear-gradient(135deg,#1e3a8a,#0f1a2e)",night:"linear-gradient(135deg,#78350f,#1a1206)",kid:"linear-gradient(135deg,#065f46,#022c22)",sport:"linear-gradient(135deg,#155e75,#082f3a)",show:"linear-gradient(135deg,#6b21a8,#1e1033)",food:"linear-gradient(135deg,#7f1d1d,#1a0f0f)"};
   const emos={cafe:"☕",shop:"🛍️",night:"🍻",kid:"👨‍👩‍👧",sport:"🏃",show:"🎭",food:"🍜"};
@@ -133,11 +133,26 @@ function render(cat){
     </div>`;
   }).join("");
 }
-function likeSpot(el,name){
-  let n=parseInt(localStorage.getItem("like_spot_"+name)||el.querySelector("b").textContent)+1;
-  el.querySelector("b").textContent=n;
-  localStorage.setItem("like_spot_"+name,n);
+async function likeSpot(el,name){
+  const key="hc_spot_"+encodeURIComponent(name);
+  try{
+    await fetch("https://api.countapi.xyz/hit/"+key);
+    const r=await fetch("https://api.countapi.xyz/get/"+key);
+    const d=await r.json();
+    el.querySelector("b").textContent=(d.value||0)+1000;
+  }catch(e){}
   el.style.transform="scale(1.2)";setTimeout(()=>el.style.transform="",200);
+}
+// 页面加载时拉全网点赞数
+async function loadCounts(){
+  document.querySelectorAll(".likeBtn").forEach(async el=>{
+    const name=el.dataset.name;if(!name)return;
+    try{
+      const r=await fetch("https://api.countapi.xyz/get/hc_spot_"+encodeURIComponent(name));
+      const d=await r.json();
+      if(d.value) el.querySelector("b").textContent=d.value+1000;
+    }catch(e){}
+  });
 }
 render("all");
 document.querySelectorAll("#tabs button").forEach(b=>{
