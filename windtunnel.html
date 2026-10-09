@@ -179,7 +179,9 @@ function renderRO(key){
 
 function drawMini(key){
   dk(key);
-  const ctx=document.getElementById('c-'+key).getContext('2d');
+  const el=document.getElementById('c-'+key);
+  if(!el)return;
+  const ctx=el.getContext('2d');
   const L=state[key];
   if(key==='delay'){
     // 阶梯爬坡：档位越高，最终产值越矮
@@ -236,8 +238,9 @@ function drawRank(){
     '龙头扩产落空当然疼，但集群还在；可通勤路一堵，是产业招工和城市消费两个轮子一起卡。<br>通勤在规划里叫"基础设施配套"，风洞却提示它更像传动轴。好消息是——改善通勤比招大项目便宜、见效快、自己可控；风险是一堵就双向失血。这是一个被低估、性价比很高的抓手。';
 }
 
-Object.keys(state).forEach(k=>{drawMini(k);renderRO(k);});
-try{drawWaterfall();}catch(e){window.__wfErr=e.message+' || '+(e.stack||'').slice(0,220);}
-try{drawRank();}catch(e){window.__rankErr=e.message+' || '+(e.stack||'').slice(0,220);}
+['delay','invest','export','shen'].forEach(k=>{drawMini(k);renderRO(k);});
+['dragon','commute'].forEach(k=>renderRO(k));
+try{drawWaterfall();}catch(e){window.__wfErr=e.message;}
+try{drawRank();}catch(e){window.__rankErr=e.message;}
 </script>
 </body></html>
