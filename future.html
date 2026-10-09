@@ -35,34 +35,36 @@ svg{display:block;width:100%;height:auto}
 </div>
 
 <div class="wrap">
-  <h1>跑一万遍未来</h1>
-  <p class="sub">每条路有不确定性，随机扰动跑10000次，看2030年落在哪个区间。</p>
+  <h1>把未来扔一万遍</h1>
+  <p class="sub">未来不是一个数，是一堆可能。把每条路的不确定性扔进去，随机跑一万遍，看落在哪。</p>
 
   <div style="text-align:center;margin-bottom:14px">
-    <button class="btn" id="bGo">🎲 跑10000次</button>
+    <button class="btn" id="bGo">🎲 扔一万遍</button>
   </div>
 
   <div id="out" style="display:none">
     <div class="prob" id="prob"></div>
+    <div style="text-align:center;font-size:12px;color:#6b7280;margin-top:-8px;margin-bottom:10px">达到1500亿的概率</div>
     <div class="result">
-      <div class="stat"><div class="v" id="p10">—</div><div class="l">低分位 P10</div></div>
-      <div class="stat"><div class="v" id="p50">—</div><div class="l">中位 P50</div></div>
-      <div class="stat"><div class="v" id="p90">—</div><div class="l">高分位 P90</div></div>
+      <div class="stat"><div class="v" id="p10">—</div><div class="l">最差的10种情况</div></div>
+      <div class="stat"><div class="v" id="p50">—</div><div class="l">一半一半（最可能）</div></div>
+      <div class="stat"><div class="v" id="p90">—</div><div class="l">最好的10种情况</div></div>
     </div>
 
     <div class="card">
-      <h2>分布图</h2>
+      <h2>一万次里，落在哪？</h2>
       <svg viewBox="0 0 700 160" id="chart"></svg>
+      <div style="font-size:11px;color:#5b6b82;margin-top:6px">蓝柱子=没到1500亿，红柱子=到了。黄线是目标。</div>
     </div>
 
     <div class="card">
-      <h2>最敏感的变量</h2>
+      <h2>哪件事最影响结果</h2>
       <div id="sens" style="font-size:13px;line-height:2;color:#cbd5e1"></div>
     </div>
   </div>
 
   <div style="font-size:11px;color:#5b6b82;text-align:center;margin-top:10px">
-    每条路贡献均值±标准差：高新区250±50 / 集群200±60 / 服务业120±40 / 城市更新80±40 / 融深60±50。加全局冲击±8%。
+    每条路的不确定度：高新区±50亿、制造业±60亿、服务业±40亿、城市更新±40亿、融深±50亿。整体再受外部冲击±8%。
   </div>
 </div>
 
@@ -128,9 +130,9 @@ function run(){
 
   // 敏感性
   document.getElementById('sens').innerHTML=
-    `🥇 <b style="color:#f87171">制造业集群</b>（标准差60，波动最大）<br>`+
-    `🥈 <b style="color:#fbbf24">高新区扩能</b>（标准差50，投产时间最敏感）<br>`+
-    `🥉 <b style="color:#3b82f6">融深融湾</b>（标准差50，但均值最低，影响最小）`;
+    `🥇 <b style="color:#f87171">制造业集群招商能不能落地</b>——波动最大，招到和招不到差60亿<br>`+
+    `🥈 <b style="color:#fbbf24">高新区项目能不能按时投产</b>——晚一年就差50亿<br>`+
+    `🥉 <b style="color:#3b82f6">深圳那边接不接得住</b>——最不可控，但影响最小`;
 
   document.getElementById('out').style.display='block';
 }
