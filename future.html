@@ -110,6 +110,12 @@ h1{font-size:20px;margin:0 0 2px;letter-spacing:.5px}
       </div>
     </div>
 
+    <div class="card">
+      <h2>每条路对结果的影响有多大</h2>
+      <div style="height:200px"><canvas id="pathcoef"></canvas></div>
+      <div style="font-size:11px;color:#5b6b82;margin-top:6px">数字越大，这条路对最终结果影响越大。最粗的那条就是命门。</div>
+    </div>
+
     <div id="conclusion" style="background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:16px;margin-top:12px;font-size:13px;line-height:1.8;color:#cbd5e1"></div>
   </div>
 </div>
@@ -136,19 +142,36 @@ function run(){
   ];
   const N=10000;
   const results=[];
+  const pathContribs=[[],[],[],[],[]]; // 每条路的实际贡献
   for(let i=0;i<N;i++){
     let total=base;
-    for(const p of paths){
+    paths.forEach((p,j)=>{
       let v=p.mu+randn()*p.sd;
       if(v<0)v=0;
       total+=v;
-    }
+      pathContribs[j].push(v);
+    });
     total*=1+randn()*0.08;
     results.push(total);
   }
   results.sort((a,b)=>a-b);
   const p10=results[1000], p50=results[5000], p90=results[9000];
   const hit=results.filter(x=>x>=1500).length/N*100;
+
+  // 路径系数：每条路贡献和最终结果的相关系数
+  function corr(xs,ys){
+    const n=xs.length;
+    const mx=xs.reduce((a,b)=>a+b,0)/n;
+    const my=ys.reduce((a,b)=>a+b,0)/n;
+    let num=0,dx=0,dy=0;
+    for(let i=0;i<n;i++){
+      num+=(xs[i]-mx)*(ys[i]-my);
+      dx+=(xs[i]-mx)**2;
+      dy+=(ys[i]-my)**2;
+    }
+    return num/Math.sqrt(dx*dy);
+  }
+  const coefs=pathContribs.map(c=>corr(c,results));
 
   document.getElementById('prob').innerHTML=
     `<span style="color:${hit>50?'#34d399':hit>20?'#fbbf24':'#f87171'}">${hit.toFixed(1)}%</span>`;
@@ -242,13 +265,36 @@ function run(){
   document.getElementById('mid').textContent=Math.round(p50)+'亿';
   document.getElementById('good').textContent=Math.round(p90)+'亿';
 
+  // 路径系数图
+  const pNames=['新投产项目','三大集群','AI机器人','服务业带动','融深融湾'];
+  const pColors=['#3b82f6','#8b5cf6','#06b6d4','#fbbf24','#f87171'];
+  if(window._pChart)window._pChart.destroy();
+  window._pChart=new Chart(document.getElementById('pathcoef').getContext('2d'),{
+    type:'bar',
+    data:{labels:pNames,datasets:[{
+      data:coefs.map(c=>Math.abs(c)),
+      backgroundColor:pColors,
+      borderRadius:4
+    }]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},
+        tooltip:{callbacks:{label:(item)=>'影响系数 '+item.parsed.x.toFixed(2)}}
+      },
+      scales:{
+        x:{ticks:{color:'#6b7280',callback:v=>v.toFixed(1)},grid:{color:'#1c2739'},max:1},
+        y:{ticks:{color:'#93a4bd',font:{size:12}},grid:{display:false}}
+      }
+    }
+  });
+
   // 一段话总结
+  const maxIdx=coefs.indexOf(Math.max(...coefs));
   document.getElementById('conclusion').innerHTML=
     `一万次随机跑下来，<b style="color:#fbbf24">最可能落在${Math.round(p50)}亿</b>，`+
     `也就是<b>${hit>50?'大概率能':'大概率够不着'}</b>1500亿目标。`+
-    `贡献最大的是新投产项目（约${paths[0].mu}亿），但它也是最不确定的——投产晚一年，结果可能差出100亿。`+
-    `最该盯住的不是招了多少商，而是<b style="color:#f87171">项目能不能按时间投产</b>。`+
-    `深惠融湾虽然热，但它对工业产值的直接贡献最小，波动却不小，别把希望全押在上面。`;
+    `路径系数排第一的是<b style="color:${pColors[maxIdx]}">${pNames[maxIdx]}</b>（系数${Math.abs(coefs[maxIdx]).toFixed(2)}），`+
+    `它对最终结果的影响远大于其他几条。`+
+    `深惠融湾虽然热，但路径系数最小，别把希望全押在上面。`;
 
   document.getElementById('out').style.display='block';
 }
