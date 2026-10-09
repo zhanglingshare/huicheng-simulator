@@ -231,16 +231,29 @@ function render(){
   el.style.cssText="display:grid;grid-template-columns:1fr 1fr;gap:10px";
   el.innerHTML=list.map((x)=>{
     const liveBadge=x.live?'<span style="background:#dc2626;color:#fff;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:5px">实时</span>':'';
-    return `<div class="tcard" style="background:${grads[x.c]||grads.city};border-radius:12px;padding:14px;cursor:pointer">
+    const likes=(localStorage.getItem("like_"+x.t)||Math.floor(Math.random()*50+10));
+    return `<div class="tcard" data-t="${x.t}" style="background:${grads[x.c]||grads.city};border-radius:12px;padding:14px;cursor:pointer">
       <div style="font-size:11px;color:#94a3b8">${catName[x.c]||"城市"}${liveBadge}</div>
       <div style="font-size:16px;font-weight:800;color:#fff;margin:8px 0 4px;line-height:1.4">${x.t}</div>
-      <div style="font-size:26px;font-weight:900;color:${x.hs>=85?'#f87171':x.hs>=70?'#fbbf24':'#34d399'}">${Math.round(x.hs)}<span style="font-size:12px;font-weight:400">°</span></div>
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div style="font-size:26px;font-weight:900;color:${x.hs>=85?'#f87171':x.hs>=70?'#fbbf24':'#34d399'}">${Math.round(x.hs)}<span style="font-size:12px;font-weight:400">°</span></div>
+        <div style="display:flex;gap:10px;font-size:13px">
+          <span class="likeBtn" onclick="event.stopPropagation();like(this,'${x.t}')">👍 <b class="ln">${likes}</b></span>
+        </div>
+      </div>
       <div class="detail" style="font-size:11.5px;color:#cbd5e1;margin-top:8px;display:none">${x.d}<br><span style="color:#fbbf24">→ ${x.why}</span></div>
     </div>`;
   }).join("");
   document.querySelectorAll("#topicList .tcard").forEach(c=>{
     c.onclick=()=>{const d=c.querySelector(".detail");d.style.display=d.style.display==="none"?"block":"none";};
   });
+}
+function like(el,t){
+  let n=parseInt(el.querySelector(".ln").textContent)+1;
+  el.querySelector(".ln").textContent=n;
+  localStorage.setItem("like_"+t,n);
+  el.style.transform="scale(1.2)";
+  setTimeout(()=>el.style.transform="",200);
 }
 
 document.querySelectorAll(".cat").forEach(b=>{
