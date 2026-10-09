@@ -89,13 +89,6 @@ h1{font-size:22px;margin:0 0 2px;letter-spacing:.5px}
     </div>
   </div>
 
-  <div id="signBox" style="background:linear-gradient(135deg,#1a1033,#0f1a2e);border:1px solid #3b82f6;border-radius:14px;padding:18px;margin-bottom:14px">
-    <div style="font-size:11px;color:#8fa3bf;letter-spacing:2px">📚 今日一题 · 考考你眼中的惠城</div>
-    <div id="quizQ" style="margin-top:12px;font-size:15px;color:#e6edf3;line-height:1.7"></div>
-    <div id="quizOpts" style="margin-top:10px;display:grid;gap:8px"></div>
-    <div id="quizAns" style="margin-top:10px;font-size:12.5px;color:#fbbf24;line-height:1.7"></div>
-  </div>
-
   <div class="toolbar">
     <button class="cat on" data-c="all">全部</button>
     <button class="cat" data-c="ind">🔵 产业</button>
@@ -183,42 +176,6 @@ const WARM=[
 ];
 
 // 今日一题
-const QUIZ=[
-  {q:"惠城区第三产业占GDP大约多少？",opts:["约40%","约69%","约85%"],a:1,why:"三产近七成，是典型的服务业主导中心城区。"},
-  {q:"惠城高新区2025年工业总产值大约多少？",opts:["约100亿","约633亿","约1200亿"],a:1,why:"632.69亿，占全区规上工业约三分之二。"},
-  {q:"苏东坡在惠州住了多久？",opts:["约1年半","约5年","约10年"],a:0,why:"苏轼1094年贬惠州，1096年再贬海南，前后约两年。"},
-  {q:"惠城区常住人口大约多少？",opts:["约80万","约160万","约250万"],a:1,why:"约159.78万，是惠州人口最密集的区。"},
-  {q:"惠城从水口到江北的过江通道，被这台风洞看成什么？",opts:["普通市政路","结构上的关键传动轴","景观工程"],a:1,why:"抽掉它，网络从中间断成两截——比某家龙头更关键。"},
-  {q:"惠城2025年固定资产投资大概？",opts:["增长20%","下降约37%","持平"],a:1,why:"规上工业+9.6%，固投却-37.1%，产业快跑、投资在调整。"},
-  {q:"水东街是什么性质的街区？",opts:["新建商圈","千年商埠历史街区","批发市场"],a:1,why:"骑楼老街，现在是夜生活和文创聚集地。"},
-  {q:"红花湖绿道一圈大约多长？",opts:["5公里","18公里","50公里"],a:1,why:"18公里环湖，骑行一圈正好出一身汗。"}
-];
-function loadQuiz(){
-  const d=new Date();
-  const seed=d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();
-  const item=QUIZ[seed%QUIZ.length];
-  document.getElementById("quizQ").textContent=item.q;
-  document.getElementById("quizAns").textContent="";
-  const box=document.getElementById("quizOpts");
-  box.innerHTML="";
-  item.opts.forEach((o,i)=>{
-    const b=document.createElement("button");
-    b.textContent=String.fromCharCode(65+i)+". "+o;
-    b.style.cssText="background:#131c2b;color:#cbd5e1;border:1px solid #22304a;padding:9px;border-radius:8px;font-size:13px;cursor:pointer;text-align:left";
-    b.onclick=()=>{
-      if(i===item.a){
-        b.style.background="#0c2a1e";b.style.borderColor="#34d399";b.style.color="#34d399";
-        document.getElementById("quizAns").textContent="✓ 答对了！"+item.why;
-      }else{
-        b.style.background="#2a1010";b.style.borderColor="#f87171";b.style.color="#f87171";
-        document.getElementById("quizAns").textContent="✗ 正确答案是"+String.fromCharCode(65+item.a)+"。"+item.why;
-      }
-      [...box.children].forEach(x=>x.onclick=null);
-    };
-    box.appendChild(b);
-  });
-}
-loadQuiz();
 
 const KW=["惠州","惠城","仲恺","大亚湾","惠阳","博罗","惠东","龙门","东江湾","水口","马安","江北CBD","深惠","粤海","TCL","德赛","亿纬锂能","龙光","隆生"];
 
@@ -268,40 +225,22 @@ function allTopics(){return [...liveTopics, ...LOCAL, ...FOOD, ...FUN, ...WARM];
 function render(){
   let list=curCat==="all"?allTopics():allTopics().filter(x=>x.c===curCat);
   list=list.map(x=>({...x,hs:x.h+Math.random()*4-2})).sort((a,b)=>b.hs-a.hs);
+  const grads={ind:"linear-gradient(135deg,#1e3a8a,#0f1a2e)",life:"linear-gradient(135deg,#7c2d12,#1a0f0f)",city:"linear-gradient(135deg,#374151,#0f1a2e)",food:"linear-gradient(135deg,#7f1d1d,#1a0f0f)",fun:"linear-gradient(135deg,#064e3b,#0f1a2e)",warm:"linear-gradient(135deg,#78350f,#1a1206)"};
+  const catName={ind:"产业",life:"民生",city:"城市",food:"好吃",fun:"好玩",warm:"八卦"};
   const el=document.getElementById("topicList");
-  el.innerHTML=list.map((x,i)=>{
-    const catCls={ind:"cat-ind",life:"cat-life",city:"cat-city",food:"cat-food",fun:"cat-fun",warm:"cat-fun"}[x.c]||"cat-city";
-    const catName={ind:"产业",life:"民生",city:"城市",food:"好吃",fun:"好玩",warm:"八卦"}[x.c]||"城市";
-    const heatColor=x.hs>=80?"#f87171":x.hs>=60?"#fbbf24":"#34d399";
-    const tagBg={ind:"#1e3a5f",life:"#3d2817",city:"#2a2f3a",food:"#3f1414",fun:"#0c2a1e",warm:"#3a2a10"}[x.c];
-    const tagFg={ind:"#60a5fa",life:"#fb923c",city:"#9ca3af",food:"#f87171",fun:"#34d399",warm:"#fbbf24"}[x.c];
-    const liveBadge=x.live?'<span style="background:#dc2626;color:#fff;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px;vertical-align:middle">实时</span>':'';
-    if(i===0){
-      return `<div class="top1" onclick="this.classList.toggle('open')">
-        <span class="badge">🔥 今日最热</span>${liveBadge}
-        <div class="t">${x.t}</div>
-        <div style="display:flex;align-items:center;gap:12px">
-          <span class="heatnum">${Math.round(x.hs)}°</span>
-          <span style="flex:1;height:6px;background:#16233a;border-radius:3px;overflow:hidden"><i style="display:block;height:100%;width:${x.hs}%;background:linear-gradient(90deg,#f87171,#fbbf24)"></i></span>
-          <span class="src">${x.src}</span>
-        </div>
-        <div class="detail" style="font-size:12.5px;color:#cbd5e1;margin-top:8px">${x.d}<br><span style="color:#fbbf24">→ ${x.why}</span></div>
-      </div>`;
-    }
-    return `<div class="topic ${catCls}" style="animation-delay:${i*50}ms" onclick="this.classList.toggle('open')">
-      <div class="rank">${i+1}</div>
-      <div class="body">
-        <div class="t">${x.t}${liveBadge}</div>
-        <div class="meta">
-          <span class="heat"><i style="width:${Math.min(100,x.hs)}%;background:${heatColor}"></i></span>
-          <span>${Math.round(x.hs)}°</span>
-          <span class="src">${x.src}</span>
-          <span class="cat-tag" style="background:${tagBg};color:${tagFg}">${catName}</span>
-        </div>
-        <div class="detail">${x.d}<br><span style="color:#fbbf24">→ ${x.why}</span></div>
-      </div>
+  el.style.cssText="display:grid;grid-template-columns:1fr 1fr;gap:10px";
+  el.innerHTML=list.map((x)=>{
+    const liveBadge=x.live?'<span style="background:#dc2626;color:#fff;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:5px">实时</span>':'';
+    return `<div class="tcard" style="background:${grads[x.c]||grads.city};border-radius:12px;padding:14px;cursor:pointer">
+      <div style="font-size:11px;color:#94a3b8">${catName[x.c]||"城市"}${liveBadge}</div>
+      <div style="font-size:16px;font-weight:800;color:#fff;margin:8px 0 4px;line-height:1.4">${x.t}</div>
+      <div style="font-size:26px;font-weight:900;color:${x.hs>=85?'#f87171':x.hs>=70?'#fbbf24':'#34d399'}">${Math.round(x.hs)}<span style="font-size:12px;font-weight:400">°</span></div>
+      <div class="detail" style="font-size:11.5px;color:#cbd5e1;margin-top:8px;display:none">${x.d}<br><span style="color:#fbbf24">→ ${x.why}</span></div>
     </div>`;
   }).join("");
+  document.querySelectorAll("#topicList .tcard").forEach(c=>{
+    c.onclick=()=>{const d=c.querySelector(".detail");d.style.display=d.style.display==="none"?"block":"none";};
+  });
 }
 
 document.querySelectorAll(".cat").forEach(b=>{
