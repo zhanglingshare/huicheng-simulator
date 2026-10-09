@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>惠城产业风洞 · 决策模拟器</title>
+<title>惠城产业风洞 · 未来概率</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23312e81'/%3E%3Ccircle cx='20' cy='26' r='7' fill='%23818cf8'/%3E%3Ccircle cx='44' cy='20' r='7' fill='%230e7490'/%3E%3Ccircle cx='44' cy='42' r='7' fill='%23b45309'/%3E%3Cline x1='26' y1='29' x2='38' y2='22' stroke='%23e2e8f0' stroke-width='2.5'/%3E%3Cline x1='38' y1='25' x2='40' y2='36' stroke='%23e2e8f0' stroke-width='2.5'/%3E%3C/svg%3E">
 <style>
   :root{
@@ -85,9 +85,16 @@
   footer{padding:10px 20px;color:var(--sub);font-size:12px;border-top:1px solid var(--line);background:#fff}
   .hintbtn{font-size:11px;color:var(--blue);cursor:pointer;background:none;border:0;padding:0}
 
-  #pane-sense,#pane-run,#pane-gate,#pane-iv,#pane-ledger,#pane-data,#pane-upload{display:none!important}
+  #pane-sense{display:none!important}
+  #pane-run{display:none!important}
+  #pane-gate{display:none!important}
+  #pane-sens{display:none!important}
+  #pane-iv{display:none!important}
+  #pane-ledger{display:none!important}
+  #pane-data{display:none!important}
+  #pane-upload{display:none!important}
   #pane-mc{display:block!important}
-  #pane-sens{display:block!important;margin-top:20px}
+  #pane-sens{display:block!important;margin-top:24px}
 </style>
 </head>
 <body>
@@ -100,6 +107,14 @@
     <div class="b" style="border-left-color:var(--good)"><b>③ 反事实不可验证，但参数可核对。</b>“当年不引进某链主会怎样”无法重演；但每个参数都能回到统计公报核对。</div>
   </div>
 </header>
+<div style="background:#fff;border-bottom:1px solid #e2e8f0;padding:10px 20px;display:flex;gap:18px;align-items:center;font-size:13px;flex-wrap:wrap">
+  <b style="color:#0f172a">惠城产业风洞</b><span style="color:#cbd5e1">|</span>
+  <a href="index.html" style="text-decoration:none;color:#2563eb">① 感知</a>
+  <a href="world.html" style="text-decoration:none;color:#475569">② 世界</a>
+  <a href="network.html" style="text-decoration:none;color:#475569">③ 网络</a>
+  <a href="choices.html" style="text-decoration:none;color:#475569">④ 选择</a>
+  <a href="future.html" style="text-decoration:none;color:#475569">⑤ 未来</a>
+</div>
 <div style="background:#fff;border-bottom:1px solid #e2e8f0;padding:10px 20px;display:flex;gap:16px;align-items:center;font-size:14px">
   <a href="index.html" style="text-decoration:none;color:#2563eb;font-weight:600">惠城产业风洞</a>
   <span style="color:#cbd5e1">|</span>
@@ -340,7 +355,7 @@
       </div>
 
       <!-- 蒙特卡洛 -->
-      <div class="pane on" id="pane-mc"><div style="margin-bottom:12px"><a href="windtunnel.html" style="font-size:13px;color:#64748b;text-decoration:none">← 返回风洞</a></div>
+      <div class="pane on" id="pane-mc"><h2 style="margin:0 0 4px">⑤ 未来 · 概率和敏感性</h2><p style="font-size:13px;color:#64748b;margin:0 0 12px">不是预测，是压力测试。跑1000次看分布。</p><div style="margin-bottom:12px"><a href="windtunnel.html" style="font-size:13px;color:#64748b;text-decoration:none">← 返回风洞</a></div>
         <h2>🎲 批量重跑 <span class="tag">跑1次看故事，跑1000次看结构</span></h2>
         <div class="row">
           <label class="muted">局数</label>

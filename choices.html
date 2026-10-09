@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>惠城产业风洞 · 决策模拟器</title>
+<title>惠城产业风洞 · 可以怎么选</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23312e81'/%3E%3Ccircle cx='20' cy='26' r='7' fill='%23818cf8'/%3E%3Ccircle cx='44' cy='20' r='7' fill='%230e7490'/%3E%3Ccircle cx='44' cy='42' r='7' fill='%23b45309'/%3E%3Cline x1='26' y1='29' x2='38' y2='22' stroke='%23e2e8f0' stroke-width='2.5'/%3E%3Cline x1='38' y1='25' x2='40' y2='36' stroke='%23e2e8f0' stroke-width='2.5'/%3E%3C/svg%3E">
 <style>
   :root{
@@ -85,8 +85,18 @@
   footer{padding:10px 20px;color:var(--sub);font-size:12px;border-top:1px solid var(--line);background:#fff}
   .hintbtn{font-size:11px;color:var(--blue);cursor:pointer;background:none;border:0;padding:0}
 
-  #pane-run,#pane-gate,#pane-mc,#pane-sens,#pane-iv,#pane-ledger,#pane-data,#pane-upload{display:none!important}
-</style>
+  #pane-sense{display:none!important}
+  #pane-gate{display:none!important}
+  #pane-mc{display:none!important}
+  #pane-sens{display:none!important}
+  #pane-iv{display:none!important}
+  #pane-ledger{display:none!important}
+  #pane-data{display:none!important}
+  #pane-upload{display:none!important}
+  #pane-run{display:block!important}
+#netsvg{display:none!important}
+.netcard{display:none!important}
+
 </head>
 <body>
 <header class="top">
@@ -98,11 +108,19 @@
     <div class="b" style="border-left-color:var(--good)"><b>③ 反事实不可验证，但参数可核对。</b>“当年不引进某链主会怎样”无法重演；但每个参数都能回到统计公报核对。</div>
   </div>
 </header>
+<div style="background:#fff;border-bottom:1px solid #e2e8f0;padding:10px 20px;display:flex;gap:18px;align-items:center;font-size:13px;flex-wrap:wrap">
+  <b style="color:#0f172a">惠城产业风洞</b><span style="color:#cbd5e1">|</span>
+  <a href="index.html" style="text-decoration:none;color:#2563eb">① 感知</a>
+  <a href="world.html" style="text-decoration:none;color:#475569">② 世界</a>
+  <a href="network.html" style="text-decoration:none;color:#475569">③ 网络</a>
+  <a href="choices.html" style="text-decoration:none;color:#475569">④ 选择</a>
+  <a href="future.html" style="text-decoration:none;color:#475569">⑤ 未来</a>
+</div>
 <div style="background:#fff;border-bottom:1px solid #e2e8f0;padding:10px 20px;display:flex;gap:16px;align-items:center;font-size:14px">
   <a href="index.html" style="text-decoration:none;color:#2563eb;font-weight:600">惠城产业风洞</a>
   <span style="color:#cbd5e1">|</span>
   <a href="index.html" style="text-decoration:none;color:#475569">① 先看清楚</a>
-  <a href="world.html" style="text-decoration:none;color:#475569">② 跑风洞</a>
+  <a href="windtunnel.html" style="text-decoration:none;color:#475569">② 跑风洞</a>
   <a href="advanced.html" style="text-decoration:none;color:#475569">③ 概率/敏感性</a>
 </div>
 
@@ -154,20 +172,7 @@
       <!-- 感知：两张气泡图 -->
       <div class="pane on" id="pane-sense">
         <h2 style="margin:0 0 4px;font-size:20px">先看清楚，再动手</h2>
-        <p style="color:#64748b;font-size:13px;margin:0 0 18px">三件事：全网在说惠城什么、老百姓体感在哪、目标离多远。</p>
-
-        <div style="padding:16px;background:#f0f9ff;border-radius:10px;border:1px solid #bae6fd;margin-bottom:16px">
-          <b style="font-size:14px">📰 最近公开报道在说惠城什么（主题分布）</b>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
-            <span style="padding:6px 14px;background:#2563eb;color:#fff;border-radius:16px;font-size:13px">产业/高新区 32%</span>
-            <span style="padding:6px 14px;background:#3b82f6;color:#fff;border-radius:16px;font-size:13px">交通/通勤 22%</span>
-            <span style="padding:6px 14px;background:#60a5fa;color:#fff;border-radius:16px;font-size:13px">教育/学位 18%</span>
-            <span style="padding:6px 14px;background:#93c5fd;color:#0f172a;border-radius:16px;font-size:13px">城市更新/老城 12%</span>
-            <span style="padding:6px 14px;background:#bfdbfe;color:#0f172a;border-radius:16px;font-size:13px">医疗 8%</span>
-            <span style="padding:6px 14px;background:#dbeafe;color:#0f172a;border-radius:16px;font-size:13px">融深融湾 8%</span>
-          </div>
-          <div style="font-size:11px;color:#94a3b8;margin-top:6px">基于公开新闻标题主题归类，不是情感分析。</div>
-        </div>
+        <p style="color:#64748b;font-size:13px;margin:0 0 18px">两张图，都是公开数据。不评论，不建议。</p>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
           <!-- 图1：目标距离 -->
@@ -239,11 +244,10 @@
             两个轮子都在转，但连它们的不是产业协议，是<b>每天早晚的通勤车流</b>。<br>
             下面进风洞，我们只动一个东西：<span style="background:#fef08a;padding:0 4px">那条过江通道，到底有多重要。</span>
           </p>
-          <div style="margin-top:16px"><a href="world.html" style="display:inline-block;background:#2563eb;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600">下一步：跑风洞 →</a></div>
         </div>
       </div>
 
-      <div class="pane" id="pane-run">
+      <div class="pane on" id="pane-run"><h2 style="margin:0 0 4px">④ 选择 · 五条路，动一条看系统怎么变</h2><p style="font-size:13px;color:#64748b;margin:0 0 12px">路径来自2026政府工作报告。点开关，或直接注入事件。</p><div style="margin-bottom:12px"><a href="index.html" style="font-size:13px;color:#64748b;text-decoration:none">← 返回先看清楚</a>　　<a href="advanced.html" style="font-size:13px;color:#64748b;text-decoration:none">概率/敏感性 →</a></div>
         <div class="tl">
           <button class="btn" id="btn-play">▶ 播放</button>
           <button class="btn" id="btn-step">单步</button>
