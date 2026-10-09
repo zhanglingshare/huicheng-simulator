@@ -72,19 +72,14 @@ h1{font-size:21px;margin:0}
 
   <div class="livebar" id="livebar">正在拉取实时热搜…</div>
 
-  <div id="hotBox" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
-    <div style="background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:11px 13px">
-      <div style="font-size:12px;color:#f472b6;font-weight:700;margin-bottom:7px">🎬 正在热映</div>
-      <div id="movieList" style="font-size:12px;color:#cbd5e1;line-height:1.9">—</div>
-    </div>
-    <div style="background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:11px 13px">
-      <div style="font-size:12px;color:#a78bfa;font-weight:700;margin-bottom:7px">📚 在读热门</div>
-      <div id="bookList" style="font-size:12px;color:#cbd5e1;line-height:1.9">—</div>
-    </div>
-    <div style="background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:11px 13px">
-      <div style="font-size:12px;color:#34d399;font-weight:700;margin-bottom:7px">🤖 科技头条</div>
-      <div id="techList" style="font-size:12px;color:#cbd5e1;line-height:1.9">—</div>
-    </div>
+  <div style="margin-bottom:14px">
+    <div style="font-size:13px;color:#f472b6;font-weight:800;margin:14px 0 8px">🎬 正在热映</div>
+    <div id="movieList" style="display:flex;gap:10px;overflow-x:auto;padding-bottom:4px">拉取中…</div>
+  </div>
+
+  <div style="margin-bottom:14px">
+    <div style="font-size:13px;color:#34d399;font-weight:800;margin:14px 0 8px">🤖 全网在聊的科技</div>
+    <div id="techList" style="display:flex;gap:10px;overflow-x:auto;padding-bottom:4px">拉取中…</div>
   </div>
 
   <div class="tabs" id="tabs">
@@ -208,14 +203,17 @@ async function refresh(){
   bar.innerHTML=local.length
     ?"📡 全网12源此刻在聊惠城："+local.join("　｜　")
     :"📡 全网12源暂时没刷到本地词条——但惠城的周末，不用上热搜也值得去。";
-  const paint=(id,arr,miss)=>{
-    document.getElementById(id).innerHTML=arr.length
-      ? arr.map((t,i)=>`${i+1}. ${t}`).join("<br>")
-      : miss;
+  const paint=(id,arr,miss,c1)=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    el.innerHTML=arr.length
+      ? arr.map((t,i)=>`<div style="flex:none;width:130px;background:${c1};border-radius:10px;padding:12px;font-size:12.5px;color:#fff;line-height:1.5">
+          <div style="font-size:10px;opacity:.7;margin-bottom:4px">No.${i+1}</div>${t}
+        </div>`).join("")
+      : `<div style="color:#5b6b82;font-size:12px;padding:8px">${miss}</div>`;
   };
-  paint("movieList",movie,"拉取中…");
-  paint("bookList",book,"拉取中…");
-  paint("techList",tech,"拉取中…");
+  paint("movieList",movie,"正在拉热映…","linear-gradient(135deg,#9d174d,#4c0519)");
+  paint("techList",tech,"正在拉科技…","linear-gradient(135deg,#065f46,#022c22)");
 }
 refresh();
 document.getElementById("btnScan").onclick=refresh;
