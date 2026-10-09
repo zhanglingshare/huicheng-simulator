@@ -43,10 +43,17 @@ svg{display:block;width:100%;height:auto}
   <!-- 板块1：三个圈子 -->
   <div class="card">
     <h2>🧩 三个圈子</h2>
-    <svg viewBox="0 0 860 360">
+    <svg viewBox="0 0 860 380">
       <!-- 圈1：产业圈（蓝）上 -->
-      <ellipse cx="430" cy="100" rx="210" ry="80" fill="#1e3a5f" opacity="0.25" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4 3"/>
-      <text x="250" y="40" fill="#3b82f6" font-size="13" font-weight="600">产业圈</text>
+      <ellipse cx="430" cy="100" rx="210" ry="80" fill="#1e3a5f" opacity="0.2" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="250" y="35" fill="#3b82f6" font-size="13" font-weight="600">🏭 产业圈</text>
+      <!-- 产业内部强连接 -->
+      <line x1="430" y1="100" x2="350" y2="80" stroke="#3b82f6" stroke-width="2.5" opacity="0.7"/>
+      <line x1="430" y1="100" x2="500" y2="70" stroke="#3b82f6" stroke-width="2.5" opacity="0.7"/>
+      <line x1="430" y1="100" x2="540" y2="110" stroke="#3b82f6" stroke-width="2.5" opacity="0.7"/>
+      <line x1="430" y1="100" x2="380" y2="130" stroke="#3b82f6" stroke-width="2.5" opacity="0.7"/>
+      <line x1="430" y1="100" x2="480" y2="140" stroke="#3b82f6" stroke-width="2" opacity="0.6"/>
+      <line x1="430" y1="100" x2="560" y2="150" stroke="#3b82f6" stroke-width="1.5" opacity="0.4"/>
       <circle cx="430" cy="100" r="20" fill="#3b82f6"/><text x="430" y="104" text-anchor="middle" font-size="10" fill="#fff">高新区</text>
       <circle cx="350" cy="80" r="11" fill="#3b82f6"/><text x="350" y="84" text-anchor="middle" font-size="9" fill="#fff">利元亨</text>
       <circle cx="500" cy="70" r="10" fill="#3b82f6"/><text x="500" y="74" text-anchor="middle" font-size="9" fill="#fff">电子</text>
@@ -56,34 +63,45 @@ svg{display:block;width:100%;height:auto}
       <circle cx="560" cy="150" r="9" fill="#3b82f6"/><text x="560" y="154" text-anchor="middle" font-size="9" fill="#fff">AI</text>
 
       <!-- 圈2：空间圈（灰）中 -->
-      <ellipse cx="430" cy="210" rx="240" ry="65" fill="#27272a" opacity="0.3" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="4 3"/>
-      <text x="210" y="180" fill="#9ca3af" font-size="13" font-weight="600">空间圈</text>
-      <circle cx="340" cy="210" r="16" fill="#6b7280"/><text x="340" y="214" text-anchor="middle" font-size="9" fill="#fff">东江湾</text>
-      <circle cx="520" cy="210" r="14" fill="#6b7280"/><text x="520" y="214" text-anchor="middle" font-size="9" fill="#fff">江北</text>
-      <circle cx="260" cy="230" r="10" fill="#6b7280"/><text x="260" y="234" text-anchor="middle" font-size="8" fill="#fff">水口</text>
-      <circle cx="600" cy="230" r="10" fill="#6b7280"/><text x="600" y="234" text-anchor="middle" font-size="8" fill="#fff">桥西</text>
-      <circle cx="430" cy="195" r="11" fill="#f97316"/><text x="430" y="199" text-anchor="middle" font-size="8" fill="#fff">过江</text>
+      <ellipse cx="430" cy="215" rx="240" ry="60" fill="#27272a" opacity="0.25" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="210" y="185" fill="#9ca3af" font-size="13" font-weight="600">🏙️ 空间圈</text>
+      <circle cx="340" cy="215" r="16" fill="#6b7280"/><text x="340" y="219" text-anchor="middle" font-size="9" fill="#fff">东江湾</text>
+      <circle cx="520" cy="215" r="14" fill="#6b7280"/><text x="520" y="219" text-anchor="middle" font-size="9" fill="#fff">江北</text>
+      <circle cx="260" cy="235" r="10" fill="#6b7280"/><text x="260" y="239" text-anchor="middle" font-size="8" fill="#fff">水口</text>
+      <circle cx="600" cy="235" r="10" fill="#6b7280"/><text x="600" y="239" text-anchor="middle" font-size="8" fill="#fff">桥西</text>
+      <!-- 过江通道 -->
+      <circle cx="430" cy="205" r="11" fill="#f97316"/><text x="430" y="209" text-anchor="middle" font-size="8" fill="#fff">过江</text>
+      <!-- 通勤粗线 -->
+      <line x1="356" y1="215" x2="506" y2="215" stroke="#f97316" stroke-width="5" stroke-linecap="round"/>
 
       <!-- 圈3：人口圈（橙）下 -->
-      <ellipse cx="430" cy="310" rx="180" ry="55" fill="#3d2817" opacity="0.3" stroke="#f97316" stroke-width="1.5" stroke-dasharray="4 3"/>
-      <text x="280" y="280" fill="#f97316" font-size="13" font-weight="600">人口圈</text>
-      <circle cx="340" cy="310" r="11" fill="#f97316"/><text x="340" y="314" text-anchor="middle" font-size="9" fill="#fff">蓝领</text>
-      <circle cx="520" cy="310" r="11" fill="#f97316"/><text x="520" y="314" text-anchor="middle" font-size="9" fill="#fff">白领</text>
-      <circle cx="430" cy="325" r="10" fill="#f97316"/><text x="430" y="329" text-anchor="middle" font-size="9" fill="#fff">工程师</text>
-      <circle cx="480" cy="335" r="9" fill="#f97316"/><text x="480" y="339" text-anchor="middle" font-size="8" fill="#fff">家庭</text>
-      <circle cx="380" cy="335" r="9" fill="#f97316"/><text x="380" y="339" text-anchor="middle" font-size="8" fill="#fff">青年</text>
+      <ellipse cx="430" cy="320" rx="180" ry="50" fill="#3d2817" opacity="0.25" stroke="#f97316" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="280" y="290" fill="#f97316" font-size="13" font-weight="600">👥 人口圈</text>
+      <!-- 人口内部：谁住一起 -->
+      <line x1="340" y1="320" x2="380" y2="335" stroke="#f97316" stroke-width="2" opacity="0.6"/>
+      <line x1="520" y1="320" x2="480" y2="335" stroke="#f97316" stroke-width="2" opacity="0.6"/>
+      <circle cx="340" cy="320" r="11" fill="#f97316"/><text x="340" y="324" text-anchor="middle" font-size="9" fill="#fff">蓝领</text>
+      <circle cx="520" cy="320" r="11" fill="#f97316"/><text x="520" y="324" text-anchor="middle" font-size="9" fill="#fff">白领</text>
+      <circle cx="430" cy="335" r="10" fill="#f97316"/><text x="430" y="339" text-anchor="middle" font-size="9" fill="#fff">工程师</text>
+      <circle cx="380" cy="345" r="9" fill="#f97316"/><text x="380" y="349" text-anchor="middle" font-size="8" fill="#fff">青年</text>
+      <circle cx="480" cy="345" r="9" fill="#f97316"/><text x="480" y="349" text-anchor="middle" font-size="8" fill="#fff">家庭</text>
 
-      <!-- 连接线 -->
-      <line x1="430" y1="120" x2="340" y2="194" stroke="#475569" stroke-width="1.5"/>
-      <line x1="430" y1="120" x2="520" y2="196" stroke="#475569" stroke-width="1.5"/>
-      <line x1="340" y1="226" x2="340" y2="299" stroke="#f97316" stroke-width="2" opacity="0.6"/>
-      <line x1="520" y1="224" x2="520" y2="299" stroke="#f97316" stroke-width="2" opacity="0.6"/>
-      <!-- 通勤轴粗线 -->
-      <line x1="340" y1="210" x2="520" y2="210" stroke="#f97316" stroke-width="5" stroke-linecap="round"/>
+      <!-- 跨层：产业→空间（落位，强） -->
+      <line x1="430" y1="120" x2="340" y2="199" stroke="#475569" stroke-width="2.5" opacity="0.8"/>
+      <line x1="430" y1="120" x2="520" y2="201" stroke="#475569" stroke-width="1.5" opacity="0.4"/>
+      <!-- 跨层：空间→人口（居住，强） -->
+      <line x1="340" y1="231" x2="340" y2="309" stroke="#f97316" stroke-width="2" opacity="0.7"/>
+      <line x1="520" y1="229" x2="520" y2="309" stroke="#f97316" stroke-width="2" opacity="0.7"/>
+      <!-- 跨层：产业→人口（用工，弱） -->
+      <line x1="430" y1="120" x2="430" y2="325" stroke="#fbbf24" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>
+
+      <!-- 图例 -->
+      <g transform="translate(650,290)">
+        <line x1="0" y1="0" x2="20" y2="0" stroke="#3b82f6" stroke-width="2.5"/><text x="26" y="4" font-size="10" fill="#93a4bd">强配套</text>
+        <line x1="0" y1="18" x2="20" y2="18" stroke="#fbbf24" stroke-width="1" stroke-dasharray="3 3"/><text x="26" y="22" font-size="10" fill="#93a4bd">弱连接</text>
+        <line x1="0" y1="36" x2="20" y2="36" stroke="#f97316" stroke-width="4"/><text x="26" y="40" font-size="10" fill="#f97316">通勤轴</text>
+      </g>
     </svg>
-    <div style="font-size:12px;color:#8fa3bf;margin-top:6px">
-      三个圈各干各的。产业在上面造东西，空间在中间装东西，人在下面住下来。中间那根粗线——过江通道——把三个圈串成一根串。
-    </div>
   </div>
 
   <!-- 板块2：关系强弱 -->
