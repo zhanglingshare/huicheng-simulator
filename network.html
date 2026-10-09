@@ -13,12 +13,14 @@ h1{font-size:20px;margin:0 0 2px}
 .sub{color:#8fa3bf;font-size:13px;margin:0 0 12px}
 .stage{background:radial-gradient(ellipse at center,#0b1322,#080b12);border:1px solid #1c2739;border-radius:12px;position:relative;overflow:hidden}
 svg{display:block;width:100%;height:auto}
-.actbar{display:flex;gap:10px;align-items:center;margin:12px 0}
+.actbar{display:flex;gap:10px;align-items:center;margin:12px 0;flex-wrap:wrap}
 .btn{background:#1d4ed8;color:#fff;border:0;padding:9px 20px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer}
 .btn.gh{background:#16203a;border:1px solid #2b3a55;color:#b9cbe4;font-weight:400}
+.btn.sm{padding:6px 14px;font-size:12px}
+.btn.active{background:#059669;border-color:#10b981}
 .cnt{font-size:12px;color:#7d8da5;font-variant-numeric:tabular-nums}
 .acttitle{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-size:13px;font-weight:700;letter-spacing:2px;color:#cbd5e1;opacity:0;transition:opacity .5s}
-.legend{position:absolute;bottom:9px;left:12px;font-size:10.5px;color:#6b7d96;display:flex;gap:12px}
+.legend{position:absolute;bottom:9px;left:12px;font-size:10.5px;color:#6b7d96;display:flex;gap:12px;flex-wrap:wrap}
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
 .gnode{opacity:0;animation:drop .55s cubic-bezier(.2,1.3,.4,1) forwards}
 .gnode circle{filter:drop-shadow(0 0 6px currentColor)}
@@ -38,6 +40,17 @@ svg{display:block;width:100%;height:auto}
 .next{text-align:center;margin-top:16px}
 .next a{background:#1d4ed8;color:#fff;padding:11px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
 #after{display:none}
+.rank-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:12px}
+.rank-row .name{width:90px;flex:none;color:#cbd5e1;text-align:right;font-size:11px}
+.rank-row .bar-bg{flex:1;height:14px;background:#0a0f1a;border-radius:3px;overflow:hidden}
+.rank-row .bar{height:100%;border-radius:3px;transition:width .6s ease}
+.rank-row .val{width:60px;flex:none;font-size:11px;color:#93a4bd;font-variant-numeric:tabular-nums}
+.algo-note{font-size:11px;color:#5b6b82;margin-top:8px;padding:8px 10px;background:#0a0f1a;border-radius:6px;border-left:2px solid #2b3a55}
+.blood-tag{display:inline-block;font-size:9px;padding:1px 5px;border-radius:3px;font-weight:700;margin-left:4px}
+.blood-A{background:#14532d;color:#86efac}
+.blood-B{background:#1e3a5f;color:#93c5fd}
+.blood-C{background:#4a3a12;color:#fcd34d}
+.blood-D{background:#4a1a1a;color:#fca5a5}
 </style></head><body>
 
 <div class="nav">
@@ -55,10 +68,12 @@ svg{display:block;width:100%;height:auto}
 
 <div class="wrap">
   <h1>把惠城拆开，看它怎么长起来</h1>
-  <p class="sub">26个主体、37条关系，会自己一层层长出来。先不解说，看完再读。</p>
+  <p class="sub">26个主体、37条可佐证主边，会自己一层层长出来。先不解说，看完再读。</p>
 
   <div class="actbar">
     <button class="btn" id="bReplay">↻ 重新建构</button>
+    <button class="btn gh sm" id="bCsv">⬇ 导出 edges.csv</button>
+    <button class="btn gh sm" id="bNodesCsv">⬇ 导出 nodes.csv</button>
     <span class="cnt" id="cnt">准备中…</span>
   </div>
 
@@ -78,31 +93,36 @@ svg{display:block;width:100%;height:auto}
 
   <div id="after">
     <div class="k3">
-      <div class="b"><div class="l">现在的核心</div><div class="v" style="color:#60a5fa">高新区</div><div style="font-size:11px;color:#6b7d96;margin-top:3px">连得最多，产业链都挂在它下面</div></div>
-      <div class="b"><div class="l">网络密度</div><div class="v" style="color:#fbbf24">11.4%</div><div style="font-size:11px;color:#6b7d96;margin-top:3px">约88.6%的潜在连接是暗的</div></div>
-      <div class="b"><div class="l">最不能断的边</div><div class="v" style="color:#f97316">过江通道</div><div style="font-size:11px;color:#6b7d96;margin-top:3px">不是大项目，是一条通勤路</div></div>
+      <div class="b"><div class="l">现在的核心（连接数第一）</div><div class="v" id="kDegree" style="color:#60a5fa">—</div><div style="font-size:11px;color:#6b7d96;margin-top:3px" id="kDegreeDesc"></div></div>
+      <div class="b"><div class="l">网络密度</div><div class="v" style="color:#fbbf24">11.4%</div><div style="font-size:11px;color:#6b7d96;margin-top:3px">37/325，约88.6%的潜在连接是暗的</div></div>
+      <div class="b"><div class="l">最不能断的节点（介数第一）</div><div class="v" id="kBetween" style="color:#f97316">—</div><div style="font-size:11px;color:#6b7d96;margin-top:3px" id="kBetweenDesc"></div></div>
     </div>
 
     <div class="card" style="margin-top:12px">
-      <b style="font-size:12.5px;color:#8fa3bf">谁连了多少条边</b>
-      <svg viewBox="0 0 600 150" style="margin-top:8px">
-        <text x="0" y="17" font-size="11" fill="#cbd5e1">高新区</text>
-        <rect x="72" y="7" width="225" height="13" fill="#3b82f6" rx="2"/><text x="302" y="18" font-size="10.5" fill="#9fc0f0">11条</text>
-        <text x="0" y="42" font-size="11" fill="#cbd5e1">东江湾</text>
-        <rect x="72" y="32" width="185" height="13" fill="#9aa6b8" rx="2"/><text x="262" y="43" font-size="10.5" fill="#c2cbd8">9条</text>
-        <text x="0" y="67" font-size="11" fill="#cbd5e1">江北CBD</text>
-        <rect x="72" y="57" width="105" height="13" fill="#9aa6b8" rx="2"/><text x="182" y="68" font-size="10.5" fill="#c2cbd8">5条</text>
-        <text x="0" y="92" font-size="11" fill="#cbd5e1">水口老城</text>
-        <rect x="72" y="82" width="84" height="13" fill="#9aa6b8" rx="2"/><text x="161" y="93" font-size="10.5" fill="#c2cbd8">4条</text>
-        <text x="0" y="117" font-size="11" fill="#cbd5e1">生产性服务业</text>
-        <rect x="72" y="107" width="63" height="13" fill="#3b82f6" rx="2"/><text x="140" y="118" font-size="10.5" fill="#9fc0f0">3条</text>
-        <text x="0" y="142" font-size="11" fill="#f97316">过江通道</text>
-        <rect x="72" y="132" width="42" height="13" fill="#f97316" rx="2"/><text x="119" y="143" font-size="10.5" fill="#f97316">2条·最不能断</text>
-      </svg>
-      <div class="plain"><span class="lab">人话版</span>26个节点，理论上最多能有325对关系，实际只连了37条，密度约11.4%。连得最多的是高新区（11条），它是“现在的核心”；可你要问“哪根线最不能断”，答案却是只有2条边的过江通道——它一断，东边的园区和西边的城区就分开了。<b>节点大不大不决定命门，它卡在什么位置，才决定。</b></div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+        <b style="font-size:12.5px;color:#8fa3bf">谁最重要——三把尺子</b>
+        <button class="btn sm active" data-mode="degree">按连接数</button>
+        <button class="btn sm" data-mode="betweenness">按介数中心性</button>
+        <button class="btn sm" data-mode="closeness">按接近中心性</button>
+      </div>
+      <div id="rankList"></div>
+      <div class="algo-note" id="algoNote"></div>
     </div>
 
-    <div class="plain" style="margin-top:12px"><span class="lab">这张图想说的</span>惠城不是一张“企业名单”，而是一张“人—产业—城”连在一起的网。我们平时盯着谁最大、谁最有名，却容易忽略：真正让整座城转起来的，可能是那些不起眼、却卡在咽喉上的连接。接下来，就一页页把它看清楚。</div>
+    <div class="plain"><span class="lab">人话版</span>26个节点，理论上最多能有325对关系，实际只连了37条可佐证主边，密度约11.4%。连得最多的是高新区，它是"现在的核心"；可你要问"哪根线最不能断"，用介数中心性算出来的第一名往往不是最大的那个节点——<b>节点大不大不决定命门，它卡在什么位置，才决定。</b></div>
+
+    <div class="card" style="margin-top:12px">
+      <b style="font-size:12.5px;color:#8fa3bf">边的数据血统（A/B/C/D）</b>
+      <div style="margin-top:8px;font-size:12px;line-height:2;color:#93a4bd">
+        <span class="blood-tag blood-A">A</span> 实测：公开资料直接给出的关系（如明确的隔墙供应、管道连接）<br>
+        <span class="blood-tag blood-B">B</span> 推估：根据公开主体与产业逻辑可推断的供应/配套/载体关系<br>
+        <span class="blood-tag blood-C">C</span> 假设：合理推断但缺直接证据（如通勤关系，缺OD数据）<br>
+        <span class="blood-tag blood-D">D</span> 缺数：无公开数据支撑，纯模型假设（如跨城通勤量）
+      </div>
+      <div style="font-size:11px;color:#5b6b82;margin-top:8px">本页37条边中：A级 <span id="bloodA">0</span> 条，B级 <span id="bloodB">0</span> 条，C级 <span id="bloodC">0</span> 条，D级 <span id="bloodD">0</span> 条。导出的edges.csv含每条边的血统标注。</div>
+    </div>
+
+    <div class="plain" style="margin-top:12px"><span class="lab">这张图想说的</span>惠城不是一张"企业名单"，而是一张"人—产业—城"连在一起的网。我们平时盯着谁最大、谁最有名，却容易忽略：真正让整座城转起来的，可能是那些不起眼、却卡在咽喉上的连接。接下来，就一页页把它看清楚。</div>
 
     <div class="next"><a href="who.html">下一步：基本面盘点 →</a></div>
   </div>
@@ -111,59 +131,166 @@ svg{display:block;width:100%;height:auto}
 <script>
 // 26节点：产业12 / 空间8 / 人6
 const IND=[
-  {n:"高新区",x:620,y:300,r:23,c:"#3b82f6"},
-  {n:"利元亨",x:720,y:235,r:14,c:"#3b82f6"},
-  {n:"电子信息",x:755,y:305,r:13,c:"#3b82f6"},
-  {n:"智能装备",x:735,y:375,r:13,c:"#3b82f6"},
-  {n:"新能源新材料",x:675,y:435,r:13,c:"#3b82f6"},
-  {n:"智能家电",x:575,y:425,r:12,c:"#3b82f6"},
-  {n:"雷士光电",x:695,y:485,r:11,c:"#3b82f6"},
-  {n:"天宝创能",x:775,y:440,r:10,c:"#3b82f6"},
-  {n:"先进科技",x:780,y:370,r:10,c:"#3b82f6"},
-  {n:"AI机器人",x:700,y:165,r:12,c:"#3b82f6"},
-  {n:"生产性服务业",x:215,y:335,r:15,c:"#3b82f6"},
-  {n:"产业基金",x:300,y:175,r:11,c:"#3b82f6"}
+  {n:"高新区",x:620,y:300,r:23,c:"#3b82f6",layer:"产业"},
+  {n:"利元亨",x:720,y:235,r:14,c:"#3b82f6",layer:"产业"},
+  {n:"电子信息",x:755,y:305,r:13,c:"#3b82f6",layer:"产业"},
+  {n:"智能装备",x:735,y:375,r:13,c:"#3b82f6",layer:"产业"},
+  {n:"新能源新材料",x:675,y:435,r:13,c:"#3b82f6",layer:"产业"},
+  {n:"智能家电",x:575,y:425,r:12,c:"#3b82f6",layer:"产业"},
+  {n:"雷士光电",x:695,y:485,r:11,c:"#3b82f6",layer:"产业"},
+  {n:"天宝创能",x:775,y:440,r:10,c:"#3b82f6",layer:"产业"},
+  {n:"先进科技",x:780,y:370,r:10,c:"#3b82f6",layer:"产业"},
+  {n:"AI机器人",x:700,y:165,r:12,c:"#3b82f6",layer:"产业"},
+  {n:"生产性服务业",x:215,y:335,r:15,c:"#3b82f6",layer:"产业"},
+  {n:"产业基金",x:300,y:175,r:11,c:"#3b82f6",layer:"产业"}
 ];
 const SPA=[
-  {n:"东江湾",x:605,y:345,r:24,c:"#9aa6b8"},
-  {n:"江北CBD",x:180,y:250,r:21,c:"#9aa6b8"},
-  {n:"三栋南部",x:600,y:500,r:12,c:"#9aa6b8"},
-  {n:"马安北部",x:710,y:120,r:12,c:"#9aa6b8"},
-  {n:"桥西老城",x:150,y:405,r:13,c:"#9aa6b8"},
-  {n:"水口老城",x:515,y:460,r:13,c:"#9aa6b8"},
-  {n:"过江通道",x:405,y:290,r:14,c:"#d1d5db"},
-  {n:"小金口枢纽",x:400,y:85,r:12,c:"#9aa6b8"}
+  {n:"东江湾",x:605,y:345,r:24,c:"#9aa6b8",layer:"空间"},
+  {n:"江北CBD",x:180,y:250,r:21,c:"#9aa6b8",layer:"空间"},
+  {n:"三栋南部",x:600,y:500,r:12,c:"#9aa6b8",layer:"空间"},
+  {n:"马安北部",x:710,y:120,r:12,c:"#9aa6b8",layer:"空间"},
+  {n:"桥西老城",x:150,y:405,r:13,c:"#9aa6b8",layer:"空间"},
+  {n:"水口老城",x:515,y:460,r:13,c:"#9aa6b8",layer:"空间"},
+  {n:"过江通道",x:405,y:290,r:14,c:"#d1d5db",layer:"空间"},
+  {n:"小金口枢纽",x:400,y:85,r:12,c:"#9aa6b8",layer:"空间"}
 ];
 const HUM=[
-  {n:"蓝领工人",x:560,y:535,r:12,c:"#f97316"},
-  {n:"江北白领",x:135,y:200,r:11,c:"#f97316"},
-  {n:"跨城通勤",x:475,y:60,r:10,c:"#f97316"},
-  {n:"工程师",x:560,y:175,r:11,c:"#f97316"},
-  {n:"青年新市民",x:335,y:345,r:10,c:"#f97316"},
-  {n:"学龄家庭",x:115,y:475,r:11,c:"#f97316"}
+  {n:"蓝领工人",x:560,y:535,r:12,c:"#f97316",layer:"人"},
+  {n:"江北白领",x:135,y:200,r:11,c:"#f97316",layer:"人"},
+  {n:"跨城通勤",x:475,y:60,r:10,c:"#f97316",layer:"人"},
+  {n:"工程师",x:560,y:175,r:11,c:"#f97316",layer:"人"},
+  {n:"青年新市民",x:335,y:345,r:10,c:"#f97316",layer:"人"},
+  {n:"学龄家庭",x:115,y:475,r:11,c:"#f97316",layer:"人"}
 ];
 const NODES=[...IND,...SPA,...HUM];
 const byName={};NODES.forEach(n=>byName[n.n]=n);
 
-// 37条边：type: link产业线 / commute通勤线
+// 37条边：type=link产业线 / commute通勤线；weight=权重；blood=血统A/B/C/D
 const EDGES=[
-  ["利元亨","智能装备","link"],["雷士光电","智能家电","link"],["先进科技","电子信息","link"],
-  ["天宝创能","新能源新材料","link"],["智能装备","高新区","link"],["电子信息","高新区","link"],
-  ["新能源新材料","高新区","link"],["智能家电","高新区","link"],["AI机器人","高新区","link"],
-  ["利元亨","东江湾","link"],["电子信息","东江湾","link"],["智能装备","东江湾","link"],
-  ["新能源新材料","东江湾","link"],["先进科技","东江湾","link"],["高新区","东江湾","link"],
-  ["生产性服务业","高新区","link"],["生产性服务业","江北CBD","link"],["产业基金","高新区","link"],
-  ["产业基金","江北CBD","link"],["小金口枢纽","高新区","link"],["雷士光电","东江湾","link"],
-  ["智能家电","水口老城","link"],
-  ["过江通道","东江湾","commute"],["过江通道","江北CBD","commute"],
-  ["东江湾","水口老城","commute"],["江北CBD","三栋南部","commute"],
-  ["小金口枢纽","跨城通勤","commute"],["马安北部","东江湾","commute"],
-  ["桥西老城","江北CBD","commute"],
-  ["蓝领工人","高新区","commute"],["蓝领工人","东江湾","commute"],["蓝领工人","水口老城","commute"],
-  ["江北白领","生产性服务业","commute"],["江北白领","江北CBD","commute"],
-  ["工程师","高新区","commute"],["青年新市民","高新区","commute"],["学龄家庭","桥西老城","commute"]
+  {from:"利元亨",to:"智能装备",type:"link",weight:1.0,blood:"B"},
+  {from:"雷士光电",to:"智能家电",type:"link",weight:1.0,blood:"B"},
+  {from:"先进科技",to:"电子信息",type:"link",weight:1.0,blood:"B"},
+  {from:"天宝创能",to:"新能源新材料",type:"link",weight:1.0,blood:"B"},
+  {from:"智能装备",to:"高新区",type:"link",weight:1.2,blood:"B"},
+  {from:"电子信息",to:"高新区",type:"link",weight:1.2,blood:"B"},
+  {from:"新能源新材料",to:"高新区",type:"link",weight:1.2,blood:"B"},
+  {from:"智能家电",to:"高新区",type:"link",weight:1.0,blood:"B"},
+  {from:"AI机器人",to:"高新区",type:"link",weight:0.8,blood:"C"},
+  {from:"利元亨",to:"东江湾",type:"link",weight:1.0,blood:"B"},
+  {from:"电子信息",to:"东江湾",type:"link",weight:1.0,blood:"B"},
+  {from:"智能装备",to:"东江湾",type:"link",weight:1.0,blood:"B"},
+  {from:"新能源新材料",to:"东江湾",type:"link",weight:1.0,blood:"B"},
+  {from:"先进科技",to:"东江湾",type:"link",weight:1.0,blood:"B"},
+  {from:"高新区",to:"东江湾",type:"link",weight:1.5,blood:"A"},
+  {from:"生产性服务业",to:"高新区",type:"link",weight:0.8,blood:"C"},
+  {from:"生产性服务业",to:"江北CBD",type:"link",weight:1.0,blood:"B"},
+  {from:"产业基金",to:"高新区",type:"link",weight:0.8,blood:"C"},
+  {from:"产业基金",to:"江北CBD",type:"link",weight:0.8,blood:"C"},
+  {from:"小金口枢纽",to:"高新区",type:"link",weight:0.7,blood:"C"},
+  {from:"雷士光电",to:"东江湾",type:"link",weight:1.0,blood:"B"},
+  {from:"智能家电",to:"水口老城",type:"link",weight:0.6,blood:"C"},
+  {from:"过江通道",to:"东江湾",type:"commute",weight:1.5,blood:"C"},
+  {from:"过江通道",to:"江北CBD",type:"commute",weight:1.5,blood:"C"},
+  {from:"东江湾",to:"水口老城",type:"commute",weight:1.0,blood:"C"},
+  {from:"江北CBD",to:"三栋南部",type:"commute",weight:0.8,blood:"C"},
+  {from:"小金口枢纽",to:"跨城通勤",type:"commute",weight:0.6,blood:"D"},
+  {from:"马安北部",to:"东江湾",type:"commute",weight:0.8,blood:"C"},
+  {from:"桥西老城",to:"江北CBD",type:"commute",weight:1.0,blood:"C"},
+  {from:"蓝领工人",to:"高新区",type:"commute",weight:1.2,blood:"C"},
+  {from:"蓝领工人",to:"东江湾",type:"commute",weight:1.2,blood:"C"},
+  {from:"蓝领工人",to:"水口老城",type:"commute",weight:1.0,blood:"C"},
+  {from:"江北白领",to:"生产性服务业",type:"commute",weight:1.0,blood:"C"},
+  {from:"江北白领",to:"江北CBD",type:"commute",weight:1.2,blood:"C"},
+  {from:"工程师",to:"高新区",type:"commute",weight:1.0,blood:"C"},
+  {from:"青年新市民",to:"高新区",type:"commute",weight:0.8,blood:"C"},
+  {from:"学龄家庭",to:"桥西老城",type:"commute",weight:0.8,blood:"C"}
 ];
 
+// ===== 中心性计算 =====
+function buildAdj(){
+  const adj={};
+  NODES.forEach(n=>adj[n.n]=[]);
+  EDGES.forEach(e=>{
+    if(!adj[e.from])adj[e.from]=[];
+    if(!adj[e.to])adj[e.to]=[];
+    adj[e.from].push(e.to);
+    adj[e.to].push(e.from);
+  });
+  return adj;
+}
+
+// Degree 连接数
+function calcDegree(){
+  const d={};
+  NODES.forEach(n=>d[n.n]=0);
+  EDGES.forEach(e=>{d[e.from]++;d[e.to]++;});
+  return d;
+}
+
+// Betweenness 介数中心性（Brandes算法，无向图）
+function calcBetweenness(){
+  const adj=buildAdj();
+  const cb={};
+  NODES.forEach(n=>cb[n.n]=0);
+  NODES.forEach(s=>{
+    const S=[];const P={};const sigma={};const dist={};
+    NODES.forEach(n=>{P[n.n]=[];sigma[n.n]=0;dist[n.n]=-1;});
+    sigma[s.n]=1;dist[s.n]=0;
+    const Q=[s.n];
+    while(Q.length>0){
+      const v=Q.shift();
+      S.push(v);
+      (adj[v]||[]).forEach(w=>{
+        if(dist[w]<0){dist[w]=dist[v]+1;Q.push(w);}
+        if(dist[w]===dist[v]+1){sigma[w]+=sigma[v];P[w].push(v);}
+      });
+    }
+    const delta={};
+    NODES.forEach(n=>delta[n.n]=0);
+    while(S.length>0){
+      const w=S.pop();
+      (P[w]||[]).forEach(v=>{
+        delta[v]+=(sigma[v]/sigma[w])*(1+delta[w]);
+      });
+      if(w!==s.n)cb[w]+=delta[w];
+    }
+  });
+  NODES.forEach(n=>cb[n.n]/=2);
+  return cb;
+}
+
+// Closeness 接近中心性（平均最短距离的倒数）
+function calcCloseness(){
+  const adj=buildAdj();
+  const cc={};
+  NODES.forEach(s=>{
+    const dist={};
+    NODES.forEach(n=>dist[n.n]=-1);
+    dist[s.n]=0;
+    const Q=[s.n];
+    while(Q.length>0){
+      const v=Q.shift();
+      (adj[v]||[]).forEach(w=>{
+        if(dist[w]<0){dist[w]=dist[v]+1;Q.push(w);}
+      });
+    }
+    let sum=0,count=0;
+    NODES.forEach(n=>{if(dist[n.n]>0){sum+=dist[n.n];count++;}});
+    cc[s.n]=(count>0&&sum>0)?(count/sum):0;
+  });
+  return cc;
+}
+
+// 预计算
+const degVals=calcDegree();
+const betVals=calcBetweenness();
+const cloVals=calcCloseness();
+
+// 血统统计
+const bloodCount={A:0,B:0,C:0,D:0};
+EDGES.forEach(e=>bloodCount[e.blood]++);
+
+// ===== 渲染 =====
 const nodesG=document.getElementById("nodes");
 const edgesG=document.getElementById("edges");
 const cnt=document.getElementById("cnt");
@@ -181,14 +308,14 @@ function addNode(n,delay){
   nodesG.appendChild(g);
 }
 
-function addEdge(a,b,type,delay){
-  const A=byName[a],B=byName[b];if(!A||!B)return;
+function addEdge(e,delay){
+  const A=byName[e.from],B=byName[e.to];if(!A||!B)return;
   const len=Math.hypot(A.x-B.x,A.y-B.y);
   const line=document.createElementNS("http://www.w3.org/2000/svg","line");
-  const isC=type==="commute";
+  const isC=e.type==="commute";
+  const main=(e.from==="过江通道"||e.to==="过江通道");
   line.setAttribute("x1",A.x);line.setAttribute("y1",A.y);line.setAttribute("x2",B.x);line.setAttribute("y2",B.y);
   line.setAttribute("stroke",isC?"#f97316":"#5b6b86");
-  const main=(a==="过江通道"||b==="过江通道");
   line.setAttribute("stroke-width",main?4.5:(isC?1.6:1.3));
   line.setAttribute("stroke-linecap","round");
   line.setAttribute("class","eline"+(main?" flowline":""));
@@ -203,25 +330,102 @@ const wait=ms=>new Promise(r=>setTimeout(r,ms));
 async function build(){
   clearAll();
   document.getElementById("after").style.display="none";
-  // 第一幕 产业
   acttitle.textContent="产 业 落 地";acttitle.style.opacity="1";
   IND.forEach((n,i)=>{addNode(n,i*120);cnt.textContent=(i+1)+" / 26";});
   await wait(IND.length*120+500);
-  // 第二幕 空间
   acttitle.textContent="空 间 展 开";
   SPA.forEach((n,i)=>{addNode(n,i*130);cnt.textContent=(IND.length+i+1)+" / 26";});
   await wait(SPA.length*130+500);
-  // 第三幕 人
   acttitle.textContent="人 走 进 来";
   HUM.forEach((n,i)=>{addNode(n,i*150);cnt.textContent=(IND.length+SPA.length+i+1)+" / 26";});
   await wait(HUM.length*150+400);
   acttitle.style.opacity="0";
-  // 边长出来
-  EDGES.forEach((e,i)=>addEdge(e[0],e[1],e[2],i*55));
+  EDGES.forEach((e,i)=>addEdge(e,i*55));
   await wait(EDGES.length*55+700);
   cnt.textContent="建构完成 · 26主体 / 37关系";
   document.getElementById("after").style.display="block";
+  renderSummary();
+  renderRank("degree");
+  renderBlood();
 }
+
+function renderSummary(){
+  // 连接数第一
+  const degSorted=NODES.slice().sort((a,b)=>degVals[b.n]-degVals[a.n]);
+  document.getElementById("kDegree").textContent=degSorted[0].n;
+  document.getElementById("kDegreeDesc").textContent=degVals[degSorted[0].n]+"条边，产业链都挂在它下面";
+  // 介数第一
+  const betSorted=NODES.slice().sort((a,b)=>betVals[b.n]-betVals[a.n]);
+  document.getElementById("kBetween").textContent=betSorted[0].n;
+  document.getElementById("kBetweenDesc").textContent="介数"+betVals[betSorted[0].n].toFixed(2)+"，最多最短路径经过它";
+}
+
+function renderRank(mode){
+  const vals=mode==="degree"?degVals:(mode==="betweenness"?betVals:cloVals);
+  const sorted=NODES.slice().sort((a,b)=>vals[b.n]-vals[a.n]);
+  const maxVal=vals[sorted[0].n]||1;
+  const colors={"产业":"#3b82f6","空间":"#9aa6b8","人":"#f97316"};
+  let html="";
+  sorted.slice(0,10).forEach((n,i)=>{
+    const v=vals[n.n];
+    const pct=maxVal>0?(v/maxVal*100):0;
+    const display=mode==="degree"?v+"条":v.toFixed(3);
+    html+=`<div class="rank-row">
+      <span class="name">${n.n}</span>
+      <div class="bar-bg"><div class="bar" style="width:${pct}%;background:${colors[n.layer]}"></div></div>
+      <span class="val">${display}</span>
+    </div>`;
+  });
+  document.getElementById("rankList").innerHTML=html;
+
+  const notes={
+    degree:"<b>连接数（Degree）</b>：数一个节点直接连了多少条边。回答的是\"谁现在最热闹\"。算法：遍历所有边，统计每个节点的出现次数。这是最简单的中心性指标，但它只看\"认识多少人\"，不看\"认识的人有多重要\"。",
+    betweenness:"<b>介数中心性（Betweenness Centrality）</b>：算有多少条最短路径必须经过这个节点。回答的是\"谁是咽喉\"。算法：Brandes算法，对每个节点做BFS找所有最短路径，统计每个节点被经过的次数。介数高的节点，一旦被移除，网络会裂成多块——这就是\"最不能断\"的数学定义。",
+    closeness:"<b>接近中心性（Closeness Centrality）</b>：算一个节点到其他所有节点的平均距离的倒数。回答的是\"谁到哪都近\"。算法：对每个节点做BFS算到所有节点的最短距离，取平均后求倒数。接近度高的节点，信息和资源传到它那里最快。但\"近\"不等于\"必经\"。"
+  };
+  document.getElementById("algoNote").innerHTML=notes[mode];
+}
+
+function renderBlood(){
+  document.getElementById("bloodA").textContent=bloodCount.A;
+  document.getElementById("bloodB").textContent=bloodCount.B;
+  document.getElementById("bloodC").textContent=bloodCount.C;
+  document.getElementById("bloodD").textContent=bloodCount.D;
+}
+
+// 切换按钮
+document.querySelectorAll('[data-mode]').forEach(btn=>{
+  btn.onclick=function(){
+    document.querySelectorAll('[data-mode]').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    renderRank(this.dataset.mode);
+  };
+});
+
+// CSV导出
+function downloadCSV(filename,rows){
+  const csv=rows.map(r=>r.map(c=>{
+    const s=String(c);
+    return (s.includes(',')||s.includes('"')||s.includes('\n'))?'"'+s.replace(/"/g,'""')+'"':s;
+  }).join(',')).join('\n');
+  const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;a.download=filename;a.click();
+  URL.revokeObjectURL(url);
+}
+
+document.getElementById("bCsv").onclick=function(){
+  const rows=[["from","to","type","weight","blood","direction"]];
+  EDGES.forEach(e=>rows.push([e.from,e.to,e.type,e.weight,e.blood,"undirected"]));
+  downloadCSV("huicheng_edges.csv",rows);
+};
+
+document.getElementById("bNodesCsv").onclick=function(){
+  const rows=[["name","layer","x","y","radius","color"]];
+  NODES.forEach(n=>rows.push([n.n,n.layer,n.x,n.y,n.r,n.c]));
+  downloadCSV("huicheng_nodes.csv",rows);
+};
 
 document.getElementById("bReplay").onclick=build;
 window.addEventListener("load",()=>setTimeout(build,500));
