@@ -287,9 +287,14 @@ document.getElementById("btnScan").onclick=async function(){
   render();
 };
 
-// 首屏自动拉一次
+// 首屏自动拉一次；每天第一次打开自动更新
 (async()=>{
+  const today=new Date().toDateString();
+  const last=localStorage.getItem("hc_last_scan");
   await fetchLive();
+  if(last!==today){
+    localStorage.setItem("hc_last_scan",today);
+  }
   const now=new Date();
   document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} · 实时热搜${liveTopics.length}条 + 话题${LOCAL.length}条 + 好吃${FOOD.length}·好玩${FUN.length}`;
   render();
