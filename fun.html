@@ -220,6 +220,7 @@ async function refresh(){
   document.getElementById("scanline").style.animation="";
   const now=new Date();
   document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')} · 本地${local.length}条`;
+  loadCounts();
   const bar=document.getElementById("livebar");
   bar.innerHTML=local.length
     ?"📡 全网12源此刻在聊惠城："+local.join("　｜　")
@@ -292,3 +293,16 @@ var _hmt = _hmt || [];
 })();
 </script>
 </body></html>
+<script>
+// 每天自动更新一次
+(function(){
+  const today=new Date().toDateString();
+  const last=localStorage.getItem("fun_last_scan");
+  if(last!==today){
+    setTimeout(()=>refresh(),800);
+    localStorage.setItem("fun_last_scan",today);
+  }else{
+    loadCounts();
+  }
+})();
+</script>
