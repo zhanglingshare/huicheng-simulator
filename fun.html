@@ -44,15 +44,17 @@ h1{font-size:21px;margin:0}
 <div class="wrap">
   <div class="head">
     <h1>惠城今晚去哪、周末去哪</h1>
-    <p class="sub">市中心的吃喝玩乐，不用跑远。夜景、公园、老街、商圈——点下面看分类。</p>
+    <p class="sub">不是旅游攻略。是城市人下班后、周末的日常：发呆、逛街、带娃、动起来。</p>
   </div>
 
   <div class="tabs" id="tabs">
     <button class="on" data-c="all">全部</button>
-    <button data-c="night">🌆 夜景夜生活</button>
-    <button data-c="park">🌳 遛弯带娃</button>
+    <button data-c="cafe">☕ 发呆咖啡</button>
+    <button data-c="shop">🛍️ 逛街约会</button>
+    <button data-c="night">🍻 晚上去哪</button>
+    <button data-c="kid">👨‍👩‍👧 带娃</button>
+    <button data-c="sport">🏃 动起来</button>
     <button data-c="food">🍜 觅食</button>
-    <button data-c="shop">🛍️ 逛街</button>
   </div>
 
   <div class="grid" id="grid"></div>
@@ -66,21 +68,22 @@ h1{font-size:21px;margin:0}
 
 <script>
 const SPOTS=[
-  {n:"水东街",c:"night",tag:"夜景",d:"千年商埠骑楼，晚上灯光亮起，酒吧、小吃、江边散步，年轻人聚集地",why:"老街区新活力，晚上最热闹"},
-  {n:"合江楼·东江夜游",c:"night",tag:"夜景",d:"西枝江汇入东江处，灯光游船，看两江四岸",why:"坐着船看惠州夜景"},
-  {n:"桥东老街",c:"night",tag:"文艺",d:"江边老巷，咖啡馆、小馆、夜市，慢逛",why:"惠城的小厦门"},
-  {n:"惠州西湖",c:"park",tag:"5A景区",d:"就在市中心，苏堤、泗洲塔、百花洲，免费，划船散步",why:"市中心的湖，周末人最多"},
-  {n:"红花湖绿道",c:"park",tag:"骑行",d:"18公里环湖绿道，租车骑行，高榜山下，亲子首选",why:"骑行一圈，出一身汗"},
-  {n:"高榜山·挂榜阁",c:"park",tag:"登高",d:"登高看全城，挂榜阁夜景也好看",why:"爬上去，惠城全景在脚下"},
-  {n:"东江湾公园",c:"park",tag:"江景",d:"东江边，散步放风筝，看江北天际线",why:"免费的江景客厅"},
-  {n:"江北华贸/佳兆业",c:"food",tag:"商圈",d:"惠城最旺的商圈，餐厅排队，周末带娃逛街",why:"商圈活，服务业才活"},
-  {n:"南坛·下埔老街",c:"food",tag:"老味道",d:"老城小吃、客家菜、宵夜摊，本地人的饭堂",why:"要吃地道的，来老城"},
-  {n:"客家老味道",c:"food",tag:"必吃",d:"盐焗鸡、梅菜扣肉、东江酿豆腐、艾粄、阿嬷叫",why:"东江菜系，来都要试"},
-  {n:"江北CBD",c:"shop",tag:"商圈",d:"金融商业中心，写字楼+商场+酒店，惠城最现代一面",why:"下班和周末的人潮"},
-  {n:"下埔滨江",c:"shop",tag:"沿江",d:"沿江路，散步、咖啡、小店",why:"傍晚沿着江走"}
+  {n:"野岛文化生活社区",c:"cafe",tag:"发呆",d:"旧工厂改的文创园，咖啡、书店、展览、小馆子，惠城年轻人的据点",why:"下午坐一下午，比逛商场舒服"},
+  {n:"桥东江边",c:"cafe",tag:"咖啡",d:"江边老巷，一排咖啡馆小酒馆，傍晚坐外面吹风",why:"惠城的小鼓浪屿"},
+  {n:"江北华贸天地",c:"shop",tag:"逛街",d:"惠城最顶的商场，餐厅、影院、超市，周末约会标配",why:"周末不知道去哪，去华贸准没错"},
+  {n:"佳兆业中心",c:"shop",tag:"逛街",d:"江北商圈，品牌餐饮+商场，下班顺路逛",why:"白领下班的第二站"},
+  {n:"隆生广场/丽日",c:"shop",tag:"老商圈",d:"老城熟客常去，本地生活气重",why:"本地人真逛的商场"},
+  {n:"水东街",c:"night",tag:"夜生活",d:"骑楼老街晚上亮灯，清吧、小吃、夜市，年轻人聚集地",why:"要热闹，来水东街"},
+  {n:"东江夜游/江边",c:"night",tag:"散步",d:"晚饭后滨江路走一圈，吹江风",why:"不用花钱，最舒服的晚上"},
+  {n:"市博物馆/科技馆",c:"kid",tag:"带娃",d:"免费，孩子能看一天，下雨天首选",why:"遛娃不费妈"},
+  {n:"市民乐园/江北体育馆",c:"kid",tag:"遛娃",d:"大草坪放风筝、跑步、打球",why:"周末放电"},
+  {n:"红花湖骑行",c:"sport",tag:"运动",d:"18公里环湖绿道，租车一圈，周末出汗",why:"比健身房爽"},
+  {n:"滨江绿道跑步",c:"sport",tag:"运动",d:"东江边夜跑/晨跑，看江北天际线",why:"城市人最日常的运动"},
+  {n:"客家老味道",c:"food",tag:"觅食",d:"盐焗鸡、梅菜扣肉、酿豆腐、艾粄，南坛下埔老街小馆",why:"带朋友来就吃这个"}
 ];
 
 function render(cat){
+  const tabs={all:"全部",cafe:"☕ 发呆咖啡",shop:"🛍️ 逛街约会",night:"🍻 晚上去哪",kid:"👨‍👩‍👧 带娃",sport:"🏃 动起来",food:"🍜 觅食"};
   const list=cat==="all"?SPOTS:SPOTS.filter(x=>x.c===cat);
   document.getElementById("grid").innerHTML=list.map(x=>`
     <div class="card">
