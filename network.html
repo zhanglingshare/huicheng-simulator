@@ -3,247 +3,227 @@
 <title>惠城产业风洞 · 建构世界</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
-.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;backdrop-filter:blur(8px);overflow-x:auto}
-.nav b{font-size:14px;margin-right:6px;letter-spacing:.5px;flex:none}
+body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.65 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
+.nav b{font-size:14px;margin-right:6px;flex:none}
 .nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
 .nav a.on{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
-.nav .sp{margin-left:auto;font-size:11.5px;color:#64748b;flex:none}
-.wrap{max-width:900px;margin:auto;padding:16px}
-h1{font-size:20px;margin:0 0 2px;letter-spacing:.5px}
-.sub{color:#8fa3bf;font-size:13px;margin:0 0 14px}
-.stage{background:#0a0f1a;border:1px solid #1c2739;border-radius:12px;position:relative;overflow:hidden}
+.wrap{max-width:920px;margin:auto;padding:16px}
+h1{font-size:20px;margin:0 0 2px}
+.sub{color:#8fa3bf;font-size:13px;margin:0 0 12px}
+.stage{background:radial-gradient(ellipse at center,#0b1322,#080b12);border:1px solid #1c2739;border-radius:12px;position:relative;overflow:hidden}
 svg{display:block;width:100%;height:auto}
-.controls{display:flex;gap:10px;align-items:center;margin:14px 0}
-.btn{background:#1d4ed8;color:#fff;border:0;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer}
-.btn.gh{background:#1a2337;border:1px solid #2b3a55;color:#b9cbe4;font-weight:400}
-.btn:disabled{opacity:.5;cursor:not-allowed}
-.cnt{font-size:12px;color:#5b6b82;font-variant-numeric:tabular-nums}
-.note{font-size:13px;color:#8fa3bf;margin-top:14px;line-height:1.7;display:none}
-.note.show{display:block;animation:fd .8s ease-out}
-.next{text-align:center;margin-top:16px;display:none}
-.next.show{display:block}
-.next a{background:#1d4ed8;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
-.legend{position:absolute;bottom:10px;left:12px;font-size:11px;color:#5b6b82;display:flex;gap:12px}
-.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px;vertical-align:middle}
-@keyframes fd{from{opacity:0}to{opacity:1}}
-@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+.actbar{display:flex;gap:10px;align-items:center;margin:12px 0}
+.btn{background:#1d4ed8;color:#fff;border:0;padding:9px 20px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer}
+.btn.gh{background:#16203a;border:1px solid #2b3a55;color:#b9cbe4;font-weight:400}
+.cnt{font-size:12px;color:#7d8da5;font-variant-numeric:tabular-nums}
+.acttitle{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-size:13px;font-weight:700;letter-spacing:2px;color:#cbd5e1;opacity:0;transition:opacity .5s}
+.legend{position:absolute;bottom:9px;left:12px;font-size:10.5px;color:#6b7d96;display:flex;gap:12px}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.gnode{opacity:0;animation:drop .55s cubic-bezier(.2,1.3,.4,1) forwards}
+.gnode circle{filter:drop-shadow(0 0 6px currentColor)}
+.eline{stroke-dasharray:1;stroke-dashoffset:1;animation:grow .7s ease forwards}
+.flowline{stroke-dasharray:7 7;animation:flow 1.1s linear infinite}
+@keyframes drop{0%{opacity:0;transform:translateY(-40px) scale(.3)}70%{transform:translateY(4px) scale(1.12)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes grow{to{stroke-dashoffset:0}}
+@keyframes flow{to{stroke-dashoffset:-28}}
+.card{background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:14px}
+.k3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+@media(max-width:700px){.k3{grid-template-columns:1fr}}
+.k3 .b{background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:13px}
+.k3 .b .l{font-size:11px;color:#8fa3bf}
+.k3 .b .v{font-size:19px;font-weight:800;margin-top:4px}
+.plain{margin-top:9px;background:#161207;border:1px solid #4a3a12;border-left:3px solid #f59e0b;border-radius:8px;padding:10px 12px;font-size:12.5px;line-height:1.9;color:#e8dcb8}
+.plain .lab{display:block;font-size:10.5px;font-weight:800;color:#f59e0b;letter-spacing:1px;margin-bottom:3px}
+.next{text-align:center;margin-top:16px}
+.next a{background:#1d4ed8;color:#fff;padding:11px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
+#after{display:none}
 </style></head><body>
 
 <div class="nav">
   <b>惠城产业风洞</b>
   <a href="index.html">① 今日话题</a>
   <a href="network.html" class="on">② 建构世界</a>
-  <a href="who.html">③ 谁重要</a>
-  <a href="world.html">④ 基本面</a>
-  <a href="choices.html">⑤ 选择</a>
-  <a href="future.html">⑥ 未来</a>
-  <span class="sp">26个主体 · 37条关系</span>
+  <a href="who.html">③ 基本面</a>
+  <a href="choices.html">④ 五条路</a>
+  <a href="future.html">⑤ 未来</a>
+  <a href="windtunnel.html">⑥ 风洞测试</a>
+  <a href="blindspot.html">⑦ 忽略了什么</a>
+  <a href="report.html">⑧ 分析报告</a>
+  <a href="ending.html">⑨ 结语</a>
 </div>
 
 <div class="wrap">
   <h1>把惠城拆开，看它怎么长起来</h1>
-  <p class="sub">点开始，26个节点按顺序落。不解说。</p>
+  <p class="sub">26个主体、37条关系，会自己一层层长出来。先不解说，看完再读。</p>
 
-  <div class="controls">
-    <button class="btn" id="bGo">▶ 开始建构</button>
-    <button class="btn gh" id="bSkip">直接看全图</button>
-    <span class="cnt" id="cnt">— / 26</span>
+  <div class="actbar">
+    <button class="btn" id="bReplay">↻ 重新建构</button>
+    <span class="cnt" id="cnt">准备中…</span>
   </div>
 
   <div class="stage">
-    <svg id="svg" viewBox="0 0 800 560">
-      <rect width="800" height="560" fill="transparent"/>
+    <div class="acttitle" id="acttitle"></div>
+    <svg id="svg" viewBox="0 0 860 600">
       <g id="edges"></g>
       <g id="nodes"></g>
     </svg>
     <div class="legend">
       <span><i class="dot" style="background:#3b82f6"></i>产业</span>
-      <span><i class="dot" style="background:#6b7280"></i>空间</span>
+      <span><i class="dot" style="background:#9aa6b8"></i>空间</span>
       <span><i class="dot" style="background:#f97316"></i>人</span>
-      <span style="border-left:3px solid #f97316;padding-left:6px">通勤边</span>
+      <span style="color:#f97316">━━ 通勤走廊</span>
     </div>
   </div>
 
-  <div class="note" id="note">
-    26个主体，37条关系。最粗的那根线，是一条路。
-  </div>
-
-  <div id="analysis" style="display:none;margin-top:14px">
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px">
-      <div style="background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:12px">
-        <b style="font-size:12px;color:#8fa3bf">谁连得最多</b>
-        <div style="font-size:18px;font-weight:700;color:#fbbf24;margin-top:4px" id="topNode">—</div>
-        <div style="font-size:11px;color:#5b6b82;margin-top:2px" id="topNodeSub">—</div>
-      </div>
-      <div style="background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:12px">
-        <b style="font-size:12px;color:#8fa3bf">网络密度</b>
-        <div style="font-size:18px;font-weight:700;color:#fbbf24;margin-top:4px">11.4%</div>
-        <div style="font-size:11px;color:#5b6b82;margin-top:2px">88.6%的潜在连接是暗的</div>
-      </div>
-      <div style="background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:12px">
-        <b style="font-size:12px;color:#8fa3bf">最粗的边</b>
-        <div style="font-size:18px;font-weight:700;color:#f97316;margin-top:4px">过江通道</div>
-        <div style="font-size:11px;color:#5b6b82;margin-top:2px">不是产业边，是通勤边</div>
-      </div>
+  <div id="after">
+    <div class="k3">
+      <div class="b"><div class="l">现在的核心</div><div class="v" style="color:#60a5fa">高新区</div><div style="font-size:11px;color:#6b7d96;margin-top:3px">连得最多，产业链都挂在它下面</div></div>
+      <div class="b"><div class="l">网络密度</div><div class="v" style="color:#fbbf24">11.4%</div><div style="font-size:11px;color:#6b7d96;margin-top:3px">约88.6%的潜在连接是暗的</div></div>
+      <div class="b"><div class="l">最不能断的边</div><div class="v" style="color:#f97316">过江通道</div><div style="font-size:11px;color:#6b7d96;margin-top:3px">不是大项目，是一条通勤路</div></div>
     </div>
 
-    <div style="background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:12px;margin-top:12px">
-      <b style="font-size:12px;color:#8fa3bf">谁连了多少条边</b>
-      <svg viewBox="0 0 600 160" style="margin-top:6px">
-        <text x="0" y="18" font-size="11" fill="#cbd5e1">高新区</text>
-        <rect x="70" y="8" width="220" height="14" fill="#3b82f6" rx="2"/><text x="295" y="19" font-size="11" fill="#fbbf24">11条 · 现在的核心</text>
-        <text x="0" y="45" font-size="11" fill="#cbd5e1">东江湾</text>
-        <rect x="70" y="35" width="180" height="14" fill="#6b7280" rx="2"/><text x="255" y="46" font-size="11" fill="#fbbf24">9条 · 物理载体</text>
-        <text x="0" y="72" font-size="11" fill="#cbd5e1">江北</text>
-        <rect x="70" y="62" width="100" height="14" fill="#6b7280" rx="2"/><text x="175" y="73" font-size="11" fill="#fbbf24">5条</text>
-        <text x="0" y="99" font-size="11" fill="#cbd5e1">水口</text>
-        <rect x="70" y="89" width="80" height="14" fill="#6b7280" rx="2"/><text x="155" y="100" font-size="11" fill="#fbbf24">4条</text>
-        <text x="0" y="126" font-size="11" fill="#cbd5e1">服务业</text>
-        <rect x="70" y="116" width="60" height="14" fill="#3b82f6" rx="2"/><text x="135" y="127" font-size="11" fill="#fbbf24">3条</text>
-        <text x="0" y="153" font-size="11" fill="#f97316">过江通道</text>
-        <rect x="70" y="143" width="40" height="14" fill="#f97316" rx="2"/><text x="115" y="154" font-size="11" fill="#f97316">2条 · 必经度最高</text>
+    <div class="card" style="margin-top:12px">
+      <b style="font-size:12.5px;color:#8fa3bf">谁连了多少条边</b>
+      <svg viewBox="0 0 600 150" style="margin-top:8px">
+        <text x="0" y="17" font-size="11" fill="#cbd5e1">高新区</text>
+        <rect x="72" y="7" width="225" height="13" fill="#3b82f6" rx="2"/><text x="302" y="18" font-size="10.5" fill="#9fc0f0">11条</text>
+        <text x="0" y="42" font-size="11" fill="#cbd5e1">东江湾</text>
+        <rect x="72" y="32" width="185" height="13" fill="#9aa6b8" rx="2"/><text x="262" y="43" font-size="10.5" fill="#c2cbd8">9条</text>
+        <text x="0" y="67" font-size="11" fill="#cbd5e1">江北CBD</text>
+        <rect x="72" y="57" width="105" height="13" fill="#9aa6b8" rx="2"/><text x="182" y="68" font-size="10.5" fill="#c2cbd8">5条</text>
+        <text x="0" y="92" font-size="11" fill="#cbd5e1">水口老城</text>
+        <rect x="72" y="82" width="84" height="13" fill="#9aa6b8" rx="2"/><text x="161" y="93" font-size="10.5" fill="#c2cbd8">4条</text>
+        <text x="0" y="117" font-size="11" fill="#cbd5e1">生产性服务业</text>
+        <rect x="72" y="107" width="63" height="13" fill="#3b82f6" rx="2"/><text x="140" y="118" font-size="10.5" fill="#9fc0f0">3条</text>
+        <text x="0" y="142" font-size="11" fill="#f97316">过江通道</text>
+        <rect x="72" y="132" width="42" height="13" fill="#f97316" rx="2"/><text x="119" y="143" font-size="10.5" fill="#f97316">2条·最不能断</text>
       </svg>
+      <div class="plain"><span class="lab">人话版</span>26个节点，理论上最多能有325对关系，实际只连了37条，密度约11.4%。连得最多的是高新区（11条），它是“现在的核心”；可你要问“哪根线最不能断”，答案却是只有2条边的过江通道——它一断，东边的园区和西边的城区就分开了。<b>节点大不大不决定命门，它卡在什么位置，才决定。</b></div>
     </div>
 
-    <div style="background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:14px;margin-top:10px">
-      <b style="font-size:13px">📐 读数</b>
-      <div style="font-size:12.5px;color:#8fa3bf;margin-top:8px;line-height:1.8">
-        26个节点，理论上最多有 26×25÷2 = <b style="color:#cbd5e1">325</b> 对关系。<br>
-        实际只画了 <b style="color:#cbd5e1">37</b> 条。密度 <b style="color:#cbd5e1">0.114</b>。<br>
-        连得最多的是<b style="color:#3b82f6">高新区</b>（11条边），但它是"现在的核心"——所有产业链都挂在它下面。<br>
-        连第二多的是<b style="color:#6b7280">东江湾</b>（9条），它是高新区的物理载体。<br>
-        但如果抽掉<b style="color:#f97316">过江通道</b>这根节点——产业和城从中间断开。它只有2条边，却是必经度最高的那根。<br>
-        <span style="color:#fbbf24">学术说法：惠城不是"企业的网络"，是"人—产业—城"耦合网络。节点大小不决定命门，边的拓扑位置才决定。</span>
-      </div>
-    </div>
+    <div class="plain" style="margin-top:12px"><span class="lab">这张图想说的</span>惠城不是一张“企业名单”，而是一张“人—产业—城”连在一起的网。我们平时盯着谁最大、谁最有名，却容易忽略：真正让整座城转起来的，可能是那些不起眼、却卡在咽喉上的连接。接下来，就一页页把它看清楚。</div>
+
+    <div class="next"><a href="who.html">下一步：基本面盘点 →</a></div>
   </div>
-
-  <div class="next" id="nxt"><a href="who.html">下一步：谁最重要 →</a></div>
 </div>
 
 <script>
-const NODES=[
-  {n:"高新区",x:480,y:280,c:"#3b82f6",r:22},
-  {n:"利元亨",x:440,y:200,c:"#3b82f6",r:14},
-  {n:"雷士",x:420,y:380,c:"#3b82f6",r:12},
-  {n:"电子",x:540,y:250,c:"#3b82f6",r:13},
-  {n:"装备",x:520,y:330,c:"#3b82f6",r:13},
-  {n:"新材料",x:590,y:290,c:"#3b82f6",r:13},
-  {n:"家电",x:400,y:340,c:"#3b82f6",r:12},
-  {n:"天宝",x:630,y:240,c:"#3b82f6",r:10},
-  {n:"先进",x:600,y:350,c:"#3b82f6",r:10},
-  {n:"AI",x:560,y:180,c:"#3b82f6",r:11},
-  {n:"服务业",x:280,y:300,c:"#3b82f6",r:14},
-  {n:"学院城",x:200,y:420,c:"#3b82f6",r:10},
-  {n:"东江湾",x:460,y:290,c:"#6b7280",r:24},
-  {n:"江北",x:260,y:280,c:"#6b7280",r:20},
-  {n:"三栋",x:320,y:400,c:"#6b7280",r:11},
-  {n:"马安",x:380,y:220,c:"#6b7280",r:10},
-  {n:"远郊",x:150,y:150,c:"#6b7280",r:9},
-  {n:"桥西",x:200,y:350,c:"#6b7280",r:12},
-  {n:"水口",x:420,y:420,c:"#6b7280",r:12},
-  {n:"过江",x:360,y:285,c:"#f97316",r:13},
-  {n:"小金口",x:500,y:120,c:"#6b7280",r:11},
-  {n:"蓝领",x:420,y:460,c:"#f97316",r:11},
-  {n:"白领",x:260,y:240,c:"#f97316",r:11},
-  {n:"跨城",x:560,y:90,c:"#f97316",r:9},
-  {n:"工程师",x:480,y:180,c:"#f97316",r:10},
-  {n:"青年",x:380,y:170,c:"#f97316",r:9},
-  {n:"家庭",x:220,y:380,c:"#f97316",r:10}
+// 26节点：产业12 / 空间8 / 人6
+const IND=[
+  {n:"高新区",x:620,y:300,r:23,c:"#3b82f6"},
+  {n:"利元亨",x:720,y:235,r:14,c:"#3b82f6"},
+  {n:"电子信息",x:755,y:305,r:13,c:"#3b82f6"},
+  {n:"智能装备",x:735,y:375,r:13,c:"#3b82f6"},
+  {n:"新能源新材料",x:675,y:435,r:13,c:"#3b82f6"},
+  {n:"智能家电",x:575,y:425,r:12,c:"#3b82f6"},
+  {n:"雷士光电",x:695,y:485,r:11,c:"#3b82f6"},
+  {n:"天宝创能",x:775,y:440,r:10,c:"#3b82f6"},
+  {n:"先进科技",x:780,y:370,r:10,c:"#3b82f6"},
+  {n:"AI机器人",x:700,y:165,r:12,c:"#3b82f6"},
+  {n:"生产性服务业",x:215,y:335,r:15,c:"#3b82f6"},
+  {n:"产业基金",x:300,y:175,r:11,c:"#3b82f6"}
 ];
-
-const EDGES=[
-  {a:"利元亨",b:"装备",c:"#475569",w:1.5},
-  {a:"雷士",b:"家电",c:"#475569",w:1.5},
-  {a:"先进",b:"电子",c:"#475569",w:1.5},
-  {a:"天宝",b:"新材料",c:"#475569",w:1.5},
-  {a:"装备",b:"高新区",c:"#475569",w:2},
-  {a:"电子",b:"高新区",c:"#475569",w:2},
-  {a:"新材料",b:"高新区",c:"#475569",w:2},
-  {a:"家电",b:"高新区",c:"#475569",w:1.5},
-  {a:"AI",b:"高新区",c:"#475569",w:1.5},
-  {a:"高新区",b:"东江湾",c:"#475569",w:2},
-  {a:"利元亨",b:"东江湾",c:"#475569",w:1.5},
-  {a:"电子",b:"东江湾",c:"#475569",w:1.5},
-  {a:"装备",b:"东江湾",c:"#475569",w:1.5},
-  {a:"新材料",b:"东江湾",c:"#475569",w:1.5},
-  {a:"先进",b:"东江湾",c:"#475569",w:1.2},
-  {a:"家电",b:"水口",c:"#475569",w:1.2},
-  {a:"雷士",b:"水口",c:"#475569",w:1.2},
-  {a:"服务业",b:"江北",c:"#475569",w:2},
-  {a:"学院城",b:"桥西",c:"#475569",w:1.2},
-  {a:"蓝领",b:"高新区",c:"#f97316",w:1},
-  {a:"白领",b:"服务业",c:"#f97316",w:1},
-  {a:"工程师",b:"高新区",c:"#f97316",w:1},
-  {a:"青年",b:"高新区",c:"#f97316",w:1},
-  {a:"蓝领",b:"水口",c:"#f97316",w:1},
-  {a:"白领",b:"江北",c:"#f97316",w:1},
-  {a:"家庭",b:"桥西",c:"#f97316",w:1},
-  {a:"青年",b:"马安",c:"#f97316",w:1},
-  {a:"过江",b:"东江湾",c:"#f97316",w:5,commute:true},
-  {a:"过江",b:"江北",c:"#f97316",w:5,commute:true},
-  {a:"东江湾",b:"水口",c:"#f97316",w:2.5,commute:true},
-  {a:"江北",b:"三栋",c:"#f97316",w:2,commute:true},
-  {a:"小金口",b:"跨城",c:"#f97316",w:2,commute:true},
-  {a:"马安",b:"东江湾",c:"#f97316",w:2.5,commute:true},
-  {a:"桥西",b:"江北",c:"#f97316",w:2,commute:true},
-  {a:"小金口",b:"高新区",c:"#475569",w:1.5},
-  {a:"家庭",b:"学院城",c:"#f97316",w:1},
-  {a:"服务业",b:"高新区",c:"#475569",w:1.5}
+const SPA=[
+  {n:"东江湾",x:605,y:345,r:24,c:"#9aa6b8"},
+  {n:"江北CBD",x:180,y:250,r:21,c:"#9aa6b8"},
+  {n:"三栋南部",x:600,y:500,r:12,c:"#9aa6b8"},
+  {n:"马安北部",x:710,y:120,r:12,c:"#9aa6b8"},
+  {n:"桥西老城",x:150,y:405,r:13,c:"#9aa6b8"},
+  {n:"水口老城",x:515,y:460,r:13,c:"#9aa6b8"},
+  {n:"过江通道",x:405,y:290,r:14,c:"#d1d5db"},
+  {n:"小金口枢纽",x:400,y:85,r:12,c:"#9aa6b8"}
 ];
-
+const HUM=[
+  {n:"蓝领工人",x:560,y:535,r:12,c:"#f97316"},
+  {n:"江北白领",x:135,y:200,r:11,c:"#f97316"},
+  {n:"跨城通勤",x:475,y:60,r:10,c:"#f97316"},
+  {n:"工程师",x:560,y:175,r:11,c:"#f97316"},
+  {n:"青年新市民",x:335,y:345,r:10,c:"#f97316"},
+  {n:"学龄家庭",x:115,y:475,r:11,c:"#f97316"}
+];
+const NODES=[...IND,...SPA,...HUM];
 const byName={};NODES.forEach(n=>byName[n.n]=n);
-let playing=false;
 
-function el(html){document.getElementById("nodes").insertAdjacentHTML("beforeend",html);}
-function ee(html){document.getElementById("edges").insertAdjacentHTML("beforeend",html);}
+// 37条边：type: link产业线 / commute通勤线
+const EDGES=[
+  ["利元亨","智能装备","link"],["雷士光电","智能家电","link"],["先进科技","电子信息","link"],
+  ["天宝创能","新能源新材料","link"],["智能装备","高新区","link"],["电子信息","高新区","link"],
+  ["新能源新材料","高新区","link"],["智能家电","高新区","link"],["AI机器人","高新区","link"],
+  ["利元亨","东江湾","link"],["电子信息","东江湾","link"],["智能装备","东江湾","link"],
+  ["新能源新材料","东江湾","link"],["先进科技","东江湾","link"],["高新区","东江湾","link"],
+  ["生产性服务业","高新区","link"],["生产性服务业","江北CBD","link"],["产业基金","高新区","link"],
+  ["产业基金","江北CBD","link"],["小金口枢纽","高新区","link"],["雷士光电","东江湾","link"],
+  ["智能家电","水口老城","link"],
+  ["过江通道","东江湾","commute"],["过江通道","江北CBD","commute"],
+  ["东江湾","水口老城","commute"],["江北CBD","三栋南部","commute"],
+  ["小金口枢纽","跨城通勤","commute"],["马安北部","东江湾","commute"],
+  ["桥西老城","江北CBD","commute"],
+  ["蓝领工人","高新区","commute"],["蓝领工人","东江湾","commute"],["蓝领工人","水口老城","commute"],
+  ["江北白领","生产性服务业","commute"],["江北白领","江北CBD","commute"],
+  ["工程师","高新区","commute"],["青年新市民","高新区","commute"],["学龄家庭","桥西老城","commute"]
+];
 
-function drawNode(n){
-  el(`<g style="animation:pop .4s ease-out;transform-origin:${n.x}px ${n.y}px">
-    <circle cx="${n.x}" cy="${n.y}" r="${n.r}" fill="${n.c}" opacity="0.9"></circle>
-    <text x="${n.x}" y="${n.y+4}" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">${n.n}</text>
-  </g>`);
+const nodesG=document.getElementById("nodes");
+const edgesG=document.getElementById("edges");
+const cnt=document.getElementById("cnt");
+const acttitle=document.getElementById("acttitle");
+
+function clearAll(){nodesG.innerHTML="";edgesG.innerHTML="";}
+
+function addNode(n,delay){
+  const g=document.createElementNS("http://www.w3.org/2000/svg","g");
+  g.setAttribute("class","gnode");
+  g.style.animationDelay=delay+"ms";
+  g.style.color=n.c;
+  g.innerHTML=`<circle cx="${n.x}" cy="${n.y}" r="${n.r}" fill="${n.c}" opacity="0.92"></circle>
+    <text x="${n.x}" y="${n.y+4}" text-anchor="middle" font-size="10" font-weight="700" fill="#0b1018">${n.n}</text>`;
+  nodesG.appendChild(g);
 }
-function drawEdge(e){
-  const a=byName[e.a],b=byName[e.b];if(!a||!b)return;
-  ee(`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}"
-    stroke="${e.c}" stroke-width="${e.w}" opacity="0" stroke-linecap="round">
-    <animate attributeName="opacity" from="0" to="${e.commute?0.9:0.35}" dur=".5s" fill="freeze"/>
-  </line>`);
+
+function addEdge(a,b,type,delay){
+  const A=byName[a],B=byName[b];if(!A||!B)return;
+  const len=Math.hypot(A.x-B.x,A.y-B.y);
+  const line=document.createElementNS("http://www.w3.org/2000/svg","line");
+  const isC=type==="commute";
+  line.setAttribute("x1",A.x);line.setAttribute("y1",A.y);line.setAttribute("x2",B.x);line.setAttribute("y2",B.y);
+  line.setAttribute("stroke",isC?"#f97316":"#5b6b86");
+  const main=(a==="过江通道"||b==="过江通道");
+  line.setAttribute("stroke-width",main?4.5:(isC?1.6:1.3));
+  line.setAttribute("stroke-linecap","round");
+  line.setAttribute("class","eline"+(main?" flowline":""));
+  line.style.animationDelay=delay+"ms";
+  line.style.strokeDasharray=len;line.style.strokeDashoffset=len;
+  line.setAttribute("opacity",main?0.95:(isC?0.7:0.4));
+  edgesG.appendChild(line);
 }
+
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
 
 async function build(){
-  if(playing)return;playing=true;
-  document.getElementById("bGo").disabled=true;
-  document.getElementById("nodes").innerHTML="";
-  document.getElementById("edges").innerHTML="";
-  for(let i=0;i<12;i++){drawNode(NODES[i]);document.getElementById("cnt").textContent=`${i+1} / 26`;await wait(130);}
-  for(let i=12;i<21;i++){drawNode(NODES[i]);document.getElementById("cnt").textContent=`${i+1} / 26`;await wait(130);}
-  for(let i=21;i<27;i++){drawNode(NODES[i]);document.getElementById("cnt").textContent=`${i+1} / 26`;await wait(130);}
-  for(const e of EDGES){drawEdge(e);await wait(55);}
-  document.getElementById("note").classList.add("show");
-  document.getElementById("analysis").style.display="block";
-  document.getElementById("nxt").classList.add("show");
-  document.getElementById("bGo").disabled=false;
+  clearAll();
+  document.getElementById("after").style.display="none";
+  // 第一幕 产业
+  acttitle.textContent="产 业 落 地";acttitle.style.opacity="1";
+  IND.forEach((n,i)=>{addNode(n,i*120);cnt.textContent=(i+1)+" / 26";});
+  await wait(IND.length*120+500);
+  // 第二幕 空间
+  acttitle.textContent="空 间 展 开";
+  SPA.forEach((n,i)=>{addNode(n,i*130);cnt.textContent=(IND.length+i+1)+" / 26";});
+  await wait(SPA.length*130+500);
+  // 第三幕 人
+  acttitle.textContent="人 走 进 来";
+  HUM.forEach((n,i)=>{addNode(n,i*150);cnt.textContent=(IND.length+SPA.length+i+1)+" / 26";});
+  await wait(HUM.length*150+400);
+  acttitle.style.opacity="0";
+  // 边长出来
+  EDGES.forEach((e,i)=>addEdge(e[0],e[1],e[2],i*55));
+  await wait(EDGES.length*55+700);
+  cnt.textContent="建构完成 · 26主体 / 37关系";
+  document.getElementById("after").style.display="block";
 }
-function wait(ms){return new Promise(r=>setTimeout(r,ms));}
 
-function showAll(){
-  NODES.forEach(n=>el(`<g><circle cx="${n.x}" cy="${n.y}" r="${n.r}" fill="${n.c}" opacity="0.9"></circle><text x="${n.x}" y="${n.y+4}" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">${n.n}</text></g>`));
-  EDGES.forEach(e=>{const a=byName[e.a],b=byName[e.b];if(!a||!b)return;
-    ee(`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="${e.c}" stroke-width="${e.w}" opacity="${e.commute?0.9:0.35}"/>`);});
-}
-
-document.getElementById("bGo").onclick=build;
-document.getElementById("bSkip").onclick=()=>{
-  document.getElementById("nodes").innerHTML="";
-  document.getElementById("edges").innerHTML="";
-  showAll();
-  document.getElementById("cnt").textContent="26 / 26";
-  document.getElementById("note").classList.add("show");
-  document.getElementById("analysis").style.display="block";
-  document.getElementById("nxt").classList.add("show");
-};
+document.getElementById("bReplay").onclick=build;
+window.addEventListener("load",()=>setTimeout(build,500));
 </script>
 </body></html>
