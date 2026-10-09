@@ -39,6 +39,12 @@ h1{font-size:22px;margin:0 0 2px;letter-spacing:.5px}
 .cat-ind{border-left:3px solid #3b82f6}
 .cat-life{border-left:3px solid #f97316}
 .cat-city{border-left:3px solid #6b7280}
+.cat-food{border-left:3px solid #ef4444}
+.cat-fun{border-left:3px solid #10b981}
+.food-card{background:linear-gradient(135deg,#1a0e0e,#0e1523);border:1px solid #7f1d1d}
+.fun-card{background:linear-gradient(135deg,#081a14,#0e1523);border:1px solid #14532d}
+.section-tip{font-size:12px;color:#fca5a5;margin:18px 0 8px;font-weight:700;letter-spacing:.5px}
+.section-tip.fun{color:#6ee7b7}
 .next{text-align:center;margin-top:18px}
 .next a{background:#1d4ed8;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
 .disc{margin-top:14px;font-size:11px;color:#5b6b82;text-align:center}
@@ -85,6 +91,8 @@ h1{font-size:22px;margin:0 0 2px;letter-spacing:.5px}
     <button class="cat" data-c="ind">🔵 产业</button>
     <button class="cat" data-c="life">🟠 民生</button>
     <button class="cat" data-c="city">⚪ 城市</button>
+    <button class="cat" data-c="food">🍜 好吃</button>
+    <button class="cat" data-c="fun">🏞️ 好玩</button>
     <button class="refresh" id="btnScan">🔄 重新扫描</button>
   </div>
   <div class="scan-info" id="scanInfo">上次扫描：刚刚 · 覆盖15个公开来源</div>
@@ -126,6 +134,34 @@ const LOCAL=[
   {t:"惠州学院学院城建设",h:35,c:"city",src:"高校公开",d:"技能工程师供给侧",why:"工程师供给在这里。"}
 ];
 
+// 今日好吃（惠城本地味道，正能量推荐）
+const FOOD=[
+  {t:"横沥汤粉",h:94,c:"food",src:"本地招牌",d:"惠城横沥镇招牌，猪骨汤熬得鲜甜，粉滑肉香，本地人从小吃到大的早餐",why:"一碗汤粉，是惠城人一天的开始。"},
+  {t:"梅菜扣肉",h:90,c:"food",src:"惠州名菜",d:"惠州梅菜是国家地理标志产品，扣肉肥而不腻、入口即化，客家宴席头牌",why:"咸香里是惠州人待客的实在。"},
+  {t:"东江盐焗鸡",h:86,c:"food",src:"东江经典",d:"东江菜代表，皮爽肉嫩、骨都有味，用盐焗出的老广鲜香",why:"一只鸡，撑起东江菜的名头。"},
+  {t:"客家酿豆腐",h:82,c:"food",src:"客家家常",d:"肉馅酿进嫩豆腐，煎得金黄再焖，一口爆汁",why:"客家人的‘酿’，是把心意填进去。"},
+  {t:"阿嬷叫",h:78,c:"food",src:"街头老味",d:"惠州传统油炸小吃，萝卜丝裹浆现炸，外酥里嫩、香气扑鼻",why:"街角的热气，是老城的烟火记忆。"},
+  {t:"艾粄",h:70,c:"food",src:"时令小吃",d:"清明前后的客家味道，艾草入皮、花生芝麻做馅，软糯清香",why:"吃一口，就知道春天来了。"},
+  {t:"酿三宝",h:68,c:"food",src:"客家家常",d:"酿茄子、酿辣椒、酿苦瓜，一锅三味、下饭神器",why:"普通食材，也能变出满满诚意。"},
+  {t:"水东街老字号糖水",h:64,c:"food",src:"夜游必打卡",d:"逛水东街来一碗糖水、一份传统糕点，甜在嘴里、暖在心头",why:"老城的甜，要慢慢品。"},
+  {t:"敛糕·沙糕",h:55,c:"food",src:"传统糕点",d:"惠州传统手工糕点，松软香甜，老一辈的味道在传承",why:"老味道没丢，就是这座城的福气。"},
+  {t:"东坡家宴",h:52,c:"food",src:"西湖文旅",d:"以苏东坡寓惠典故入菜，吃出千年西湖的文化味",why:"一道菜，一段苏东坡与惠州的故事。"}
+];
+
+// 今日好玩（惠城好去处，正能量推荐）
+const FUN=[
+  {t:"惠州西湖",h:96,c:"fun",src:"国家5A景区",d:"“大中国西湖三十六”，苏东坡在此留下千古诗篇，泗洲塔、苏堤、丰湖书院一步一景，免费开放",why:"半城山色半城湖，是惠城人的骄傲。"},
+  {t:"红花湖绿道",h:90,c:"fun",src:"天然氧吧",d:"18公里环湖绿道，骑行、徒步、赏湖光山色，森林环抱、空气清新",why:"家门口的绿道，藏着惠城人的健康生活。"},
+  {t:"水东街",h:88,c:"fun",src:"历史文化街区",d:"千年骑楼老街，青砖黛瓦、灯火璀璨，夜游、探店、品美食，越夜越热闹",why:"老街新活力，留住了惠城的根与烟火。"},
+  {t:"祝屋巷",h:82,c:"fun",src:"文创街区",d:"西湖畔的文艺小巷，民宿、咖啡馆、文创小店错落，转角遇见惊喜",why:"老巷子里，长出了年轻的生活方式。"},
+  {t:"合江楼",h:76,c:"fun",src:"东坡寓惠地",d:"东江与西枝江交汇处，苏东坡曾在此寓居，登楼看两江汇流、城景交融",why:"一座楼，看见惠城的千年水脉。"},
+  {t:"高榜山·挂榜阁",h:72,c:"fun",src:"城市观景台",d:"登高拾级而上，挂榜阁俯瞰全城，西湖、东江、城市天际线尽收眼底",why:"爬一座山，读懂这座城的格局。"},
+  {t:"丰湖书院",h:68,c:"fun",src:"岭南名书院",d:"坐落在西湖之中，岭南著名书院，书香与湖光相映，宁静致远",why:"书声琅琅，是惠城最深的底气。"},
+  {t:"东坡祠",h:62,c:"fun",src:"文化地标",d:"纪念苏东坡寓惠的历史文化景区，古建筑群庄重典雅，感受东坡文化",why:"苏东坡把惠州当成了家。"},
+  {t:"黄沙洞温泉度假区",h:58,c:"fun",src:"横沥温泉",d:"横沥镇的温泉乡，山林环抱、泡汤养生，周末放松好去处",why:"不远行，城郊就有诗和远方。"},
+  {t:"惠州植物园",h:54,c:"fun",src:"科普乐园",d:"温室馆、专类园郁郁葱葱，是孩子认识自然、全家散步的好地方",why:"一座植物园，装下孩子的好奇心。"}
+];
+
 // 关键词过滤：哪些热搜算"惠城/惠州相关"
 const KW=["惠州","惠城","仲恺","大亚湾","惠阳","博罗","惠东","龙门","东江湾","水口","马安","江北CBD","深惠","粤海","TCL","德赛","亿纬锂能","龙光","隆生"];
 
@@ -159,16 +195,18 @@ async function fetchLive(){
   }
 }
 
-function allTopics(){return [...liveTopics, ...LOCAL];}
+function allTopics(){return [...liveTopics, ...LOCAL, ...FOOD, ...FUN];}
 
 function render(){
   let list=curCat==="all"?allTopics():allTopics().filter(x=>x.c===curCat);
   list=list.map(x=>({...x,hs:x.h+Math.random()*4-2})).sort((a,b)=>b.hs-a.hs);
   const el=document.getElementById("topicList");
   el.innerHTML=list.map((x,i)=>{
-    const catCls=x.c==="ind"?"cat-ind":x.c==="life"?"cat-life":"cat-city";
-    const catName=x.c==="ind"?"产业":x.c==="life"?"民生":"城市";
+    const catCls={ind:"cat-ind",life:"cat-life",city:"cat-city",food:"cat-food",fun:"cat-fun"}[x.c]||"cat-city";
+    const catName={ind:"产业",life:"民生",city:"城市",food:"好吃",fun:"好玩"}[x.c]||"城市";
     const heatColor=x.hs>=80?"#f87171":x.hs>=60?"#fbbf24":"#34d399";
+    const tagBg={ind:"#1e3a5f",life:"#3d2817",city:"#2a2f3a",food:"#3f1414",fun:"#0c2a1e"}[x.c];
+    const tagFg={ind:"#60a5fa",life:"#fb923c",city:"#9ca3af",food:"#f87171",fun:"#34d399"}[x.c];
     const liveBadge=x.live?'<span style="background:#dc2626;color:#fff;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px;vertical-align:middle">实时</span>':'';
     if(i===0){
       return `<div class="top1" onclick="this.classList.toggle('open')">
@@ -190,7 +228,7 @@ function render(){
           <span class="heat"><i style="width:${Math.min(100,x.hs)}%;background:${heatColor}"></i></span>
           <span>${Math.round(x.hs)}°</span>
           <span class="src">${x.src}</span>
-          <span class="cat-tag" style="background:${x.c==='ind'?'#1e3a5f':x.c==='life'?'#3d2817':'#2a2f3a'};color:${x.c==='ind'?'#60a5fa':x.c==='life'?'#fb923c':'#9ca3af'}">${catName}</span>
+          <span class="cat-tag" style="background:${tagBg};color:${tagFg}">${catName}</span>
         </div>
         <div class="detail">${x.d}<br><span style="color:#fbbf24">→ ${x.why}</span></div>
       </div>
@@ -216,7 +254,7 @@ document.getElementById("btnScan").onclick=async function(){
   document.getElementById("scanline").classList.remove("fast");
   const now=new Date();
   const liveN=liveTopics.length;
-  document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} · 实时热搜${liveN}条 + 本地话题${LOCAL.length}条`;
+  document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} · 实时热搜${liveN}条 + 话题${LOCAL.length}条 + 好吃${FOOD.length}·好玩${FUN.length}`;
   render();
 };
 
@@ -224,7 +262,7 @@ document.getElementById("btnScan").onclick=async function(){
 (async()=>{
   await fetchLive();
   const now=new Date();
-  document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} · 实时热搜${liveTopics.length}条 + 本地话题${LOCAL.length}条`;
+  document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} · 实时热搜${liveTopics.length}条 + 话题${LOCAL.length}条 + 好吃${FOOD.length}·好玩${FUN.length}`;
   render();
 })();
 
