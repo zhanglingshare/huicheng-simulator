@@ -19,7 +19,8 @@ h1{font-size:20px;margin:0 0 2px;letter-spacing:.5px}
 .path .body{flex:1}
 .path .t{font-size:15px;font-weight:700;margin-bottom:4px}
 .path .d{font-size:12px;color:#8fa3bf;line-height:1.6}
-.path .num{font-size:13px;font-weight:700;color:#fbbf24;margin-top:6px}
+.path .src{font-size:10px;color:#5b6b82;margin-top:4px}
+.path .num{font-size:14px;font-weight:700;color:#fbbf24;margin-top:6px}
 .switch{width:44px;height:24px;background:#1c2739;border-radius:12px;position:relative;flex:none;margin-top:4px;transition:.2s}
 .switch::after{content:'';position:absolute;width:20px;height:20px;background:#6b7280;border-radius:50%;top:2px;left:2px;transition:.2s}
 .path.on .switch{background:#1d4ed8}
@@ -37,19 +38,20 @@ h1{font-size:20px;margin:0 0 2px;letter-spacing:.5px}
   <a href="who.html">③ 基本面</a>
   <a href="choices.html" class="on">④ 五条路</a>
   <a href="future.html">⑤ 未来</a>
-  <span class="sp">来自2026政府工作报告</span>
+  <span class="sp">官方数据粗估</span>
 </div>
 
 <div class="wrap">
   <h1>五条路</h1>
-  <p class="sub">2030年高新区要到1500亿，现在632.7亿，差867亿。官方铺了五条路。</p>
+  <p class="sub">高新区要从632.7亿到1500亿，差867亿。官方铺了五条路。点开关，看哪条路能填多少。</p>
 
-  <div class="path on" data-v="250" onclick="this.classList.toggle('on');calc()">
+  <div class="path on" data-v="500" onclick="this.classList.toggle('on');calc()">
     <div class="icon">🏭</div>
     <div class="body">
-      <div class="t">高新区扩能</div>
-      <div class="d">2026新开工15宗、新投产18宗，每年新增产值约100亿。收储用地2019亩，建成34条道路。</div>
-      <div class="num">预计贡献 ~250亿</div>
+      <div class="t">高新区新投产项目</div>
+      <div class="d">2026年新开工15宗、新投产18宗，每年新增产值约100亿。基础设施投资28亿/年，收储用地1500亩。</div>
+      <div class="src">来源：2026政府工作报告、高新区高质量发展大会</div>
+      <div class="num">5年累计 ~500亿</div>
     </div>
     <div class="switch"></div>
   </div>
@@ -57,51 +59,55 @@ h1{font-size:20px;margin:0 0 2px;letter-spacing:.5px}
   <div class="path on" data-v="200" onclick="this.classList.toggle('on');calc()">
     <div class="icon">⚙️</div>
     <div class="body">
-      <div class="t">制造业集群</div>
-      <div class="d">电子信息、智能装备、新能源新材料三大集群冲200亿/300亿，新增规上工业企业75家，智改数转。</div>
-      <div class="num">预计贡献 ~200亿</div>
+      <div class="t">三大集群扩能</div>
+      <div class="d">电子信息、智能装备、新能源新材料冲200亿+300亿突破。新增规上工业企业75家，智改数转50家。</div>
+      <div class="src">来源：区长田胜思公开讲话</div>
+      <div class="num">5年累计 ~200亿</div>
     </div>
     <div class="switch"></div>
   </div>
 
-  <div class="path on" data-v="120" onclick="this.classList.toggle('on');calc()">
+  <div class="path on" data-v="100" onclick="this.classList.toggle('on');calc()">
+    <div class="icon">🤖</div>
+    <div class="body">
+      <div class="t">AI与机器人新赛道</div>
+      <div class="d">当前产值120亿。2026年打造一批AI+应用示范场景，招商25宗抢新赛道。</div>
+      <div class="src">来源：高新区2026工作计划</div>
+      <div class="num">5年累计 ~100亿</div>
+    </div>
+    <div class="switch"></div>
+  </div>
+
+  <div class="path" data-v="50" onclick="this.classList.toggle('on');calc()">
     <div class="icon">🏙️</div>
     <div class="body">
-      <div class="t">生产性服务业</div>
-      <div class="d">金融、商务、软件信息。2026目标400亿，现在139.5亿。理论上和制造业双轮驱动。</div>
-      <div class="num">预计贡献 ~120亿</div>
+      <div class="t">生产性服务业带动</div>
+      <div class="d">江北生产性服务业139.5亿，金融/商务/软件。和制造业"双轮驱动"，间接拉动。</div>
+      <div class="src">来源：2026政府工作报告</div>
+      <div class="num">间接 ~50亿（不确定）</div>
     </div>
     <div class="switch"></div>
   </div>
 
-  <div class="path" data-v="80" onclick="this.classList.toggle('on');calc()">
-    <div class="icon">🏗️</div>
-    <div class="body">
-      <div class="t">城市更新</div>
-      <div class="d">5个重点片区+9个城中村，24平方公里。桥东桥西、金山湖、望江、三新村。长期变量。</div>
-      <div class="num">预计贡献 ~80亿（不确定）</div>
-    </div>
-    <div class="switch"></div>
-  </div>
-
-  <div class="path" data-v="60" onclick="this.classList.toggle('on');calc()">
+  <div class="path" data-v="30" onclick="this.classList.toggle('on');calc()">
     <div class="icon">🚄</div>
     <div class="body">
       <div class="t">融深融湾</div>
       <div class="d">深惠城际延期至2029年底，小金口枢纽在建。外部变量，不完全可控。</div>
-      <div class="num">预计贡献 ~60亿（不确定）</div>
+      <div class="src">来源：惠州发改公开信息</div>
+      <div class="num">间接 ~30亿（不确定）</div>
     </div>
     <div class="switch"></div>
   </div>
 
   <div class="gap">
-    <div style="font-size:12px;color:#6b7280">五条路全开，预计覆盖缺口</div>
+    <div style="font-size:12px;color:#6b7280">五条路全开，预计填缺口</div>
     <div class="big" id="cover">0 / 867亿</div>
     <div style="font-size:11px;color:#5b6b82;margin-top:4px" id="pct">—</div>
   </div>
 
   <div style="font-size:11px;color:#5b6b82;text-align:center;margin-top:10px">
-    贡献值为公开目标粗估，非精确测算。城市更新和融深两项打开才有贡献。
+    数字为官方公开目标按年粗估，非精确测算。城市更新和生产性服务业是间接贡献，打开才有。
   </div>
 
   <div class="next"><a href="future.html">下一步：跑一遍未来 →</a></div>

@@ -45,19 +45,19 @@ h1{font-size:20px;margin:0 0 2px;letter-spacing:.5px}
   <div class="card">
     <h2>调一调</h2>
     <div class="slider-row">
-      <label>高新区投产进度</label>
-      <input type="range" id="s1" min="150" max="350" value="250">
-      <span id="v1">250</span>
+      <label>新投产项目节奏</label>
+      <input type="range" id="s1" min="300" max="700" value="500">
+      <span id="v1">500</span>
     </div>
     <div class="slider-row">
-      <label>制造业招商好坏</label>
+      <label>三大集群扩能</label>
       <input type="range" id="s2" min="100" max="300" value="200">
       <span id="v2">200</span>
     </div>
     <div class="slider-row">
-      <label>服务业带动</label>
-      <input type="range" id="s3" min="60" max="200" value="120">
-      <span id="v3">120</span>
+      <label>AI机器人新赛道</label>
+      <input type="range" id="s3" min="50" max="150" value="100">
+      <span id="v3">100</span>
     </div>
     <div style="text-align:center;margin-top:10px">
       <button class="btn" onclick="run()">🎲 重扔一万遍</button>
@@ -99,11 +99,12 @@ let myChart=null;
 function run(){
   const base=632.7;
   const paths=[
-    {mu:+document.getElementById('s1').value, sd:50},
+    {mu:+document.getElementById('s1').value, sd:100},
     {mu:+document.getElementById('s2').value, sd:60},
     {mu:+document.getElementById('s3').value, sd:40},
-    {mu:80, sd:40},
-    {mu:60, sd:50}
+    {mu:100, sd:40},
+    {mu:50, sd:30},
+    {mu:30, sd:30}
   ];
   const N=10000;
   const results=[];
