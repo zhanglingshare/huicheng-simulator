@@ -85,7 +85,7 @@ h1{font-size:22px;margin:0 0 2px;letter-spacing:.5px}
     </svg>
     <div>
       <h1>今日惠城区话题</h1>
-      <p class="sub">扫一遍公开渠道，按热度排。点卡片看详情。<br><span style="font-size:11px;color:#5b6b82">数据来源：统计公报/政府工作报告/上市公司公告/直通车工单/南方+/微博抖音头条实时热搜。统计区间：2025年快报 · 2026-2030规划 · 实时截至今日。阅读量为按来源热度合理估算。</span></p>
+      <p class="sub">扫一遍公开渠道，按热度排。点卡片看详情。<br><span style="font-size:11px;color:#5b6b82">数据来源：统计公报/政府工作报告/上市公司公告/直通车工单/南方+/微博抖音头条实时热搜。统计区间：2025年快报 · 2026-2030规划 · 实时截至今日。👁️阅读量按来源热度合理估算（官方口径低、热搜高），🔁转发按阅读量约1%推算，非真实后台统计。</span></p>
     </div>
   </div>
 
@@ -245,6 +245,8 @@ function render(){
       <div style="display:flex;align-items:center;justify-content:space-between">
         <div style="font-size:26px;font-weight:900;color:${x.hs>=85?'#f87171':x.hs>=70?'#fbbf24':'#34d399'}">${Math.round(x.hs)}<span style="font-size:12px;font-weight:400">°</span></div>
         <div style="display:flex;gap:10px;font-size:12px;color:#94a3b8">
+          <span>👁️ ${(x.hs*0.7).toFixed(1)}万</span>
+          <span>🔁 ${Math.round(x.hs*10)}</span>
           <span class="likeBtn" onclick="event.stopPropagation();like(this,'${x.t}')">👍 <b class="ln">${likes}</b></span>
         </div>
       </div>
