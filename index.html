@@ -254,7 +254,7 @@ function render(){
           <span class="src">${x.src}</span>
           <span class="cat-tag" style="background:${tagBg};color:${tagFg}">${catName}</span>
         </div>
-        <div class="detail">${x.d}<br><span style="color:#fbbf24">→ ${x.why}</span></div>
+        <div class="detail">${x.d}<br><span style="color:#fbbf24">→ ${x.why}</span>${(x.c==="food"||x.c==="fun")?` <a href="https://map.baidu.com/search/${encodeURIComponent(x.t)}" target="_blank" style="color:#60a5fa">📍 地图</a>`:""}</div>
       </div>
     </div>`;
   }).join("");
