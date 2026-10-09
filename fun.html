@@ -25,6 +25,17 @@ h1{font-size:21px;margin:0}
 .disc{font-size:11px;color:#5b6b82;margin-top:16px;line-height:1.8}
 .next{text-align:center;margin-top:18px}
 .next a{background:#1d4ed8;color:#fff;padding:11px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
+.scan{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.radar{width:56px;height:56px;flex:none}
+.refresh{background:#f59e0b;color:#1a1206;border:0;padding:7px 16px;border-radius:18px;font-size:12.5px;font-weight:700;cursor:pointer;flex:none}
+.refresh:active{transform:scale(.96)}
+.scan-info{font-size:11px;color:#5b6b82;margin-top:3px}
+.livebar{background:#1a1206;border:1px solid #7c4a12;border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:12.5px;color:#fcd34d}
+.livebar b{color:#fbbf24}
+.card.pick{border-color:#3b82f6;box-shadow:0 0 0 1px #3b82f6 inset}
+.card .pick-tag{position:absolute;top:10px;right:10px;background:#3b82f6;color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:10px}
+.card{position:relative}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style></head><body>
 
 <div class="nav">
@@ -42,10 +53,24 @@ h1{font-size:21px;margin:0}
 </div>
 
 <div class="wrap">
-  <div class="head">
-    <h1>惠城今晚去哪、周末去哪</h1>
-    <p class="sub">不是旅游攻略。是城市人下班后、周末的日常：发呆、逛街、带娃、动起来。</p>
+  <div class="head" style="padding:0;background:none;border:none">
+    <div class="scan">
+      <svg class="radar" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="28" fill="none" stroke="#1c2739"/>
+        <circle cx="32" cy="32" r="18" fill="none" stroke="#1c2739"/>
+        <circle cx="32" cy="32" r="8" fill="none" stroke="#1c2739"/>
+        <g id="scanline" style="transform-origin:32px 32px"><line x1="32" y1="32" x2="32" y2="4" stroke="#3b82f6" stroke-width="1.5"/></g>
+      </svg>
+      <div style="flex:1">
+        <h1 style="font-size:19px">惠城今晚去哪、周末去哪</h1>
+        <p class="sub">不是旅游攻略。是城市人下班后、周末的日常。</p>
+        <div class="scan-info" id="scanInfo">雷达待命…</div>
+      </div>
+      <button class="refresh" id="btnScan">🔄 换一换</button>
+    </div>
   </div>
+
+  <div class="livebar" id="livebar">正在拉取微博/百度/知乎/抖音等实时热搜…</div>
 
   <div class="tabs" id="tabs">
     <button class="on" data-c="all">全部</button>
@@ -82,15 +107,20 @@ const SPOTS=[
   {n:"客家老味道",c:"food",tag:"觅食",d:"盐焗鸡、梅菜扣肉、酿豆腐、艾粄，南坛下埔老街小馆",why:"带朋友来就吃这个"}
 ];
 
+let picks=[];
+const KW=["惠州","惠城","西湖","水东街","华贸","桥东","江北","滨江","红花湖","罗浮山","东莞","深圳","广东","咖啡","露营","夜市","演唱会","演出"];
+
 function render(cat){
-  const tabs={all:"全部",cafe:"☕ 发呆咖啡",shop:"🛍️ 逛街约会",night:"🍻 晚上去哪",kid:"👨‍👩‍👧 带娃",sport:"🏃 动起来",food:"🍜 觅食"};
   const list=cat==="all"?SPOTS:SPOTS.filter(x=>x.c===cat);
-  document.getElementById("grid").innerHTML=list.map(x=>`
-    <div class="card">
+  document.getElementById("grid").innerHTML=list.map(x=>{
+    const isPick=picks.includes(x.n);
+    return `<div class="card${isPick?' pick':''}">
+      ${isPick?'<span class="pick-tag">✨ 今日推荐</span>':''}
       <span class="n">${x.n}</span><span class="tag">${x.tag}</span>
       <div class="d">${x.d}</div>
       <div class="why">→ ${x.why}</div>
-    </div>`).join("");
+    </div>`;
+  }).join("");
 }
 render("all");
 document.querySelectorAll("#tabs button").forEach(b=>{
@@ -100,5 +130,51 @@ document.querySelectorAll("#tabs button").forEach(b=>{
     render(b.dataset.c);
   };
 });
+
+async function fetchLive(){
+  const found=[];
+  const apis=[
+    {url:"https://api.vvhan.com/api/hotlist/wbHot",name:"微博"},
+    {url:"https://api.vvhan.com/api/hotlist/baiduRD",name:"百度"},
+    {url:"https://api.vvhan.com/api/hotlist/zhihuHot",name:"知乎"},
+    {url:"https://api.vvhan.com/api/hotlist/douyinHot",name:"抖音"},
+    {url:"https://api.vvhan.com/api/hotlist/toutiao",name:"头条"},
+    {url:"https://api.vvhan.com/api/hotlist/bili",name:"B站"}
+  ];
+  for(const api of apis){
+    try{
+      const r=await fetch(api.url);const j=await r.json();
+      if(j.data&&Array.isArray(j.data)){
+        j.data.forEach((it,i)=>{
+          const title=it.title||it.word||"";
+          if(KW.some(k=>title.includes(k))&&found.length<4){
+            found.push(`<b>${api.name}</b>·${title}`);
+          }
+        });
+      }
+    }catch(e){}
+  }
+  return found;
+}
+
+async function refresh(){
+  document.getElementById("btnScan").textContent="⏳ 扫描中…";
+  document.getElementById("scanline").style.animation="spin .8s linear infinite";
+  const live=await fetchLive();
+  const arr=[...SPOTS];
+  for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
+  picks=arr.slice(0,3).map(t=>t.n);
+  render(document.querySelector("#tabs button.on").dataset.c);
+  document.getElementById("btnScan").textContent="🔄 换一换";
+  document.getElementById("scanline").style.animation="";
+  const now=new Date();
+  document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')} · 命中实时${live.length}条 · ${SPOTS.length}个去处`;
+  const bar=document.getElementById("livebar");
+  bar.innerHTML=live.length
+    ?"📡 此刻在热搜里："+live.join("　｜　")
+    :"📡 实时榜里暂时没有惠州本地词条——但惠城的周末，不用上热搜也值得去。";
+}
+refresh();
+document.getElementById("btnScan").onclick=refresh;
 </script>
 </body></html>
