@@ -1,14 +1,43 @@
-# 惠城产业决策风洞（Huicheng Industrial Decision Wind Tunnel）
+<div align="center">
 
-> 把一座城区拆成节点、关系、变量与时间，在重大决策拍板之前，先把未来"跑一遍"。
+<img src="./assets/banner.png" alt="惠城产业决策风洞" width="100%">
+
+# 惠城产业决策风洞
+
+**Huicheng Industrial Decision Wind Tunnel**
+
+*把一座城区拆成节点、关系、变量与时间，在重大决策拍板之前，先把未来"跑一遍"。*
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](./LICENSE)
+[![Type](https://img.shields.io/badge/Type-Demo%20%E6%BC%94%E7%A4%BA-blue.svg)](#)
+[![Online](https://img.shields.io/badge/在线体验-GitHub%20Pages-1d4ed8.svg)](https://zhanglingshare.github.io/huicheng-simulator/)
+[![Data](https://img.shields.io/badge/数据-公开来源-green.svg)](#四数据来源与分级)
+[![Cost](https://img.shields.io/badge/费用-免费-success.svg)](#八如何使用)
+
+</div>
 
 这是一个面向区域与城市治理的**开源决策模拟演示项目（Demo）**。它以广东省惠州市**惠城区**为样本，把真实公开数据组织成一张"人—产业—城"耦合网络，通过感知、建构、盘点、推演、压测与反思，尝试回答一个朴素的问题：
 
 **如果我们真的要经营这样一个地方，到底应该先看什么？如果某个变量变了，又会发生什么？**
 
 - 在线体验（GitHub Pages）：<https://zhanglingshare.github.io/huicheng-simulator/>
-- 类型：单页可直接运行的网页（HTML + CSS + JavaScript）
+- 类型：可直接在浏览器运行的网页（HTML + CSS + JavaScript）
 - 费用：完全免费，无需注册、无需安装、无需联网授权
+
+---
+
+## 📑 目录
+
+1. [它是什么，不是什么](#一它是什么不是什么)
+2. [九个页面，一页只做一件事](#二九个页面一页只做一件事)
+3. [核心观点](#三核心观点demo-版的几点提示)
+4. [数据来源与分级](#四数据来源与分级)
+5. [模型边界](#五模型边界请务必阅读)
+6. [为什么做这件事](#六为什么做这件事)
+7. [关于作者与项目独立性](#七关于作者与本项目的独立性)
+8. [如何使用](#八如何使用)
+9. [版权声明与开源许可](#九版权声明与开源许可)
+10. [反馈与免责](#十反馈与免责)
 
 ---
 
