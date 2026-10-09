@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠城产业风洞 · 今晚去哪吃去哪玩</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.65 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
+.nav b{font-size:14px;margin-right:6px;flex:none}
+.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
+.nav a.on{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
+.wrap{max-width:960px;margin:auto;padding:16px}
+.head{background:radial-gradient(ellipse at center,#0b1a2e,#080b12);border:1px solid #1c2739;border-radius:14px;padding:18px;margin-bottom:14px}
+h1{font-size:21px;margin:0}
+.sub{color:#8fa3bf;font-size:13px;margin:4px 0 0}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:8px 16px;border-radius:20px;font-size:13px;cursor:pointer}
+.tabs button.on{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(max-width:680px){.grid{grid-template-columns:1fr}}
+.card{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:15px;border-top:3px solid #3b82f6}
+.card .n{font-size:16px;font-weight:800}
+.card .tag{display:inline-block;font-size:10.5px;color:#60a5fa;background:#0f1a2e;border:1px solid #1e3a5f;padding:2px 8px;border-radius:10px;margin-left:6px;vertical-align:middle}
+.card .d{font-size:12.5px;color:#cbd5e1;margin-top:7px;line-height:1.7}
+.card .why{margin-top:9px;padding-top:8px;border-top:1px dashed #1c2739;font-size:12px;color:#8fa3bf;font-style:italic}
+.disc{font-size:11px;color:#5b6b82;margin-top:16px;line-height:1.8}
+.next{text-align:center;margin-top:18px}
+.next a{background:#1d4ed8;color:#fff;padding:11px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
+</style></head><body>
+
+<div class="nav">
+  <b>惠城产业风洞</b>
+  <a href="index.html">① 今日话题</a>
+  <a href="fun.html" class="on">🍜 今晚去哪</a>
+  <a href="network.html">② 建构世界</a>
+  <a href="who.html">③ 基本面</a>
+  <a href="choices.html">④ 五条路</a>
+  <a href="future.html">⑤ 未来</a>
+  <a href="windtunnel.html">⑥ 风洞测试</a>
+  <a href="blindspot.html">⑦ 忽略了什么</a>
+  <a href="report.html">⑧ 分析报告</a>
+  <a href="ending.html">⑨ 结语</a>
+</div>
+
+<div class="wrap">
+  <div class="head">
+    <h1>惠城今晚去哪、周末去哪</h1>
+    <p class="sub">市中心的吃喝玩乐，不用跑远。夜景、公园、老街、商圈——点下面看分类。</p>
+  </div>
+
+  <div class="tabs" id="tabs">
+    <button class="on" data-c="all">全部</button>
+    <button data-c="night">🌆 夜景夜生活</button>
+    <button data-c="park">🌳 遛弯带娃</button>
+    <button data-c="food">🍜 觅食</button>
+    <button data-c="shop">🛍️ 逛街</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="disc">
+    内容来自惠州市/惠城区公开文旅资源与本地口碑。江北服务业占全区近半——晚上水东街亮不亮、华贸周末排不排队，就是这台风洞最关心的"人层活力"。具体营业与门票以现场为准。
+  </div>
+
+  <div class="next"><a href="network.html">下一步：看惠城怎么长出来 →</a></div>
+</div>
+
+<script>
+const SPOTS=[
+  {n:"水东街",c:"night",tag:"夜景",d:"千年商埠骑楼，晚上灯光亮起，酒吧、小吃、江边散步，年轻人聚集地",why:"老街区新活力，晚上最热闹"},
+  {n:"合江楼·东江夜游",c:"night",tag:"夜景",d:"西枝江汇入东江处，灯光游船，看两江四岸",why:"坐着船看惠州夜景"},
+  {n:"桥东老街",c:"night",tag:"文艺",d:"江边老巷，咖啡馆、小馆、夜市，慢逛",why:"惠城的小厦门"},
+  {n:"惠州西湖",c:"park",tag:"5A景区",d:"就在市中心，苏堤、泗洲塔、百花洲，免费，划船散步",why:"市中心的湖，周末人最多"},
+  {n:"红花湖绿道",c:"park",tag:"骑行",d:"18公里环湖绿道，租车骑行，高榜山下，亲子首选",why:"骑行一圈，出一身汗"},
+  {n:"高榜山·挂榜阁",c:"park",tag:"登高",d:"登高看全城，挂榜阁夜景也好看",why:"爬上去，惠城全景在脚下"},
+  {n:"东江湾公园",c:"park",tag:"江景",d:"东江边，散步放风筝，看江北天际线",why:"免费的江景客厅"},
+  {n:"江北华贸/佳兆业",c:"food",tag:"商圈",d:"惠城最旺的商圈，餐厅排队，周末带娃逛街",why:"商圈活，服务业才活"},
+  {n:"南坛·下埔老街",c:"food",tag:"老味道",d:"老城小吃、客家菜、宵夜摊，本地人的饭堂",why:"要吃地道的，来老城"},
+  {n:"客家老味道",c:"food",tag:"必吃",d:"盐焗鸡、梅菜扣肉、东江酿豆腐、艾粄、阿嬷叫",why:"东江菜系，来都要试"},
+  {n:"江北CBD",c:"shop",tag:"商圈",d:"金融商业中心，写字楼+商场+酒店，惠城最现代一面",why:"下班和周末的人潮"},
+  {n:"下埔滨江",c:"shop",tag:"沿江",d:"沿江路，散步、咖啡、小店",why:"傍晚沿着江走"}
+];
+
+function render(cat){
+  const list=cat==="all"?SPOTS:SPOTS.filter(x=>x.c===cat);
+  document.getElementById("grid").innerHTML=list.map(x=>`
+    <div class="card">
+      <span class="n">${x.n}</span><span class="tag">${x.tag}</span>
+      <div class="d">${x.d}</div>
+      <div class="why">→ ${x.why}</div>
+    </div>`).join("");
+}
+render("all");
+document.querySelectorAll("#tabs button").forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll("#tabs button").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");
+    render(b.dataset.c);
+  };
+});
+</script>
+</body></html>
