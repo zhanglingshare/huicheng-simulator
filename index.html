@@ -100,30 +100,6 @@
 <div class="wrap">
   <!-- 左：网络 + 全局KPI -->
   <div>
-    <div class="card" style="margin-bottom:12px;background:#fefce8;border:1px solid #fde047">
-      <h3 style="margin:0 0 8px;font-size:14px">📊 感知舱 · 惠城老百姓体感（公开数据估算）</h3>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;font-size:12px">
-        <div style="flex:1;min-width:180px;padding:8px;background:#fff;border-radius:6px">
-          <b style="color:#2563eb">教育</b>　重要度 0.65（最高）<br>
-          <span style="color:#64748b">供给：2026新增学位8000个（文昌1740/明达2520）</span><br>
-          <div style="height:6px;background:#e2e8f0;border-radius:3px;margin-top:4px"><div style="width:55%;height:100%;background:#3b82f6;border-radius:3px"></div></div>
-          <span style="color:#64748b">满意度约 0.45（学位仍紧）</span>
-        </div>
-        <div style="flex:1;min-width:180px;padding:8px;background:#fff;border-radius:6px">
-          <b style="color:#0891b2">医疗</b>　重要度 0.55<br>
-          <span style="color:#64748b">供给：床位3782张，千人口2.37；二妇幼新院500床已开</span><br>
-          <div style="height:6px;background:#e2e8f0;border-radius:3px;margin-top:4px"><div style="width:65%;height:100%;background:#06b6d4;border-radius:3px"></div></div>
-          <span style="color:#64748b">满意度约 0.62（相对宽裕）</span>
-        </div>
-        <div style="flex:1;min-width:180px;padding:8px;background:#fff;border-radius:6px">
-          <b style="color:#ea580c">通勤</b>　重要度 0.41（最低）<br>
-          <span style="color:#64748b">供给：跨江通道拥堵；深惠城际延期至2029</span><br>
-          <div style="height:6px;background:#e2e8f0;border-radius:3px;margin-top:4px"><div style="width:35%;height:100%;background:#f97316;border-radius:3px"></div></div>
-          <span style="color:#64748b">满意度约 0.38（投诉集中）</span>
-        </div>
-      </div>
-      <div style="font-size:11px;color:#94a3b8;margin-top:6px">体感=供给−k×压力，k=0.4（假设值）。以上为公开数据估算，非问卷实测。</div>
-    </div>
     <div class="card netcard">
       <h2>🕸 区域产业协同活网络 <span class="tag">点节点 = 主体访谈</span><span id="world-lbl" style="float:right;font-size:12px;font-weight:400;color:#64748b"></span></h2>
       <svg id="netsvg" viewBox="0 0 760 560" preserveAspectRatio="xMidYMid meet"></svg>
@@ -157,7 +133,8 @@
   <div>
     <div class="card">
       <div class="tabs">
-        <button data-tab="run" class="on">① 推演</button>
+        <button data-tab="sense" class="on">⓪ 感知</button>
+        <button data-tab="run">① 推演</button>
         <button data-tab="gate">② 验模三门</button>
         <button data-tab="mc">③ 蒙特卡洛</button>
         <button data-tab="sens">④ 敏感性</button>
@@ -167,8 +144,58 @@
         <button data-tab="upload">⑧ 导入世界</button>
       </div>
 
+      <!-- 感知 -->
+      <div class="pane on" id="pane-sense">
+        <h3 style="margin:0 0 12px">👀 感知 · 惠城现在被什么撑着、被什么卡着</h3>
+        <p style="color:#64748b;font-size:13px;margin-bottom:16px">不评论、不建议，只把公开数据摊开。三张图自己说话。</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+          <div style="padding:14px;background:#eff6ff;border-radius:8px;border-left:4px solid #2563eb">
+            <b style="font-size:15px">📐 基本盘</b>
+            <table style="width:100%;font-size:13px;margin-top:8px;border-collapse:collapse">
+              <tr><td style="padding:4px 0;color:#64748b">2025 GDP</td><td style="text-align:right;font-weight:600">1203.33 亿</td></tr>
+              <tr><td style="padding:4px 0;color:#64748b">三次产业</td><td style="text-align:right;font-weight:600">3.4 : 27.6 : 69.0</td></tr>
+              <tr><td style="padding:4px 0;color:#64748b">常住人口</td><td style="text-align:right;font-weight:600">159.78 万</td></tr>
+              <tr><td style="padding:4px 0;color:#64748b">高新区产值</td><td style="text-align:right;font-weight:600">632.7 亿（占67.4%）</td></tr>
+              <tr><td style="padding:4px 0;color:#64748b">江北服务业</td><td style="text-align:right;font-weight:600">139.5 亿（占服务业近半）</td></tr>
+              <tr><td style="padding:4px 0;color:#64748b">2030 目标</td><td style="text-align:right;font-weight:600;color:#2563eb">1500 亿产值</td></tr>
+            </table>
+          </div>
+          <div style="padding:14px;background:#fff7ed;border-radius:8px;border-left:4px solid #ea580c">
+            <b style="font-size:15px">👥 老百姓体感（公开数据估算）</b>
+            <div style="margin-top:10px;font-size:13px">
+              <div style="margin-bottom:10px">
+                <div style="display:flex;justify-content:space-between"><span>教育（学位/托育）</span><span style="color:#2563eb">重要度0.65 · 满意度0.45</span></div>
+                <div style="height:5px;background:#e2e8f0;border-radius:3px;margin-top:3px"><div style="width:45%;height:100%;background:#3b82f6;border-radius:3px"></div></div>
+              </div>
+              <div style="margin-bottom:10px">
+                <div style="display:flex;justify-content:space-between"><span>医疗（床位/医生）</span><span style="color:#0891b2">重要度0.55 · 满意度0.62</span></div>
+                <div style="height:5px;background:#e2e8f0;border-radius:3px;margin-top:3px"><div style="width:62%;height:100%;background:#06b6d4;border-radius:3px"></div></div>
+              </div>
+              <div style="margin-bottom:10px">
+                <div style="display:flex;justify-content:space-between"><span>通勤（过江/跨区）</span><span style="color:#ea580c">重要度0.41 · 满意度0.38</span></div>
+                <div style="height:5px;background:#e2e8f0;border-radius:3px;margin-top:3px"><div style="width:35%;height:100%;background:#f97316;border-radius:3px"></div></div>
+              </div>
+            </div>
+            <div style="font-size:11px;color:#94a3b8;margin-top:6px">体感=供给−0.4×压力。公开数据估算，非问卷。</div>
+          </div>
+        </div>
+
+        <div style="padding:14px;background:#fefce8;border-radius:8px;border:1px solid #fde047;margin-bottom:12px">
+          <b style="font-size:14px">🔍 一个被低估的结构</b>
+          <p style="font-size:13px;color:#475569;margin:8px 0 0">
+            惠城三产占 69%，高新区 632 亿，江北服务业 139 亿——两个轮子都在转。<br>
+            但它们之间隔着 <b>东江</b>，靠 <b>过江通道</b> 连。<br>
+            官方说"双轮驱动"，跑起来才发现：<span style="background:#fef08a;padding:0 3px">真正传动的不是服务业↔制造业的产业关联，是那条通勤路。</span><br>
+            产业皮带在打滑，通勤轴在真转——但后者在规划里只是"基础设施配套"。
+          </p>
+        </div>
+
+        <p style="font-size:12px;color:#94a3b8">看完这页，去「① 推演」点 ▶ 播放，或者直接在左边网络图上点节点访谈。</p>
+      </div>
+
       <!-- 推演 -->
-      <div class="pane on" id="pane-run">
+      <div class="pane" id="pane-run">
         <div class="tl">
           <button class="btn" id="btn-play">▶ 播放</button>
           <button class="btn" id="btn-step">单步</button>
@@ -1201,8 +1228,8 @@ function renderNetwork(){
       </g>`;
     }
   });
-  const legend=[["anchor","链主"],["oem","整机"],["supplier","配套"],["service","服务"],["talent","人才"],["capital","资本"],["land","载体"],["infra","设施"]];
-  html+=`<g opacity=".97"><rect x="556" y="4" width="200" height="130" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1"></rect>`;
+  const legend=[["anchor","产业"],["land","空间"],["talent","人"]];
+  html+=`<g opacity=".97"><rect x="556" y="4" width="120" height="60" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1"></rect>`;
   legend.forEach((g,i)=>{
     const x=556+14+(i<4?0:100),y=24+(i%4)*26;
     html+=`<circle cx="${x+6}" cy="${y-5}" r="6" fill="${typeColor(g[0])}"></circle><text x="${x+20}" y="${y}" font-size="11" fill="#334155">${g[1]}</text>`;
