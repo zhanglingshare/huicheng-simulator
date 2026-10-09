@@ -96,6 +96,7 @@ h1{font-size:22px;margin:0 0 2px;letter-spacing:.5px}
     <button class="cat" data-c="city">⚪ 城市</button>
     <button class="cat" data-c="food">🍜 好吃</button>
     <button class="cat" data-c="fun">🏞️ 好玩</button>
+    <button class="cat" data-c="warm">🌟 八卦暖闻</button>
     <button class="refresh" id="btnScan">🔄 重新扫描</button>
   </div>
   <div class="scan-info" id="scanInfo">上次扫描：刚刚 · 覆盖15个公开来源</div>
@@ -165,6 +166,15 @@ const FUN=[
   {t:"惠州植物园",h:54,c:"fun",src:"科普乐园",d:"温室馆、专类园郁郁葱葱，是孩子认识自然、全家散步的好地方",why:"一座植物园，装下孩子的好奇心。"}
 ];
 
+const WARM=[
+  {t:"东江两岸的晨跑身影",h:86,c:"warm",src:"城市温度",d:"清晨滨江绿道，跑步的、遛弯的、打太极的，这座城慢慢醒过来",why:"最暖的八卦，是身边认真生活的人。"},
+  {t:"水东街又一家新店开张",h:80,c:"warm",src:"烟火气",d:"骑楼老街上，咖啡馆、小馆子一家接一家，年轻人把老街盘活了",why:"有人愿意开店，就有人愿意来。"},
+  {t:"西湖边的读书角",h:74,c:"warm",src:"书香惠城",d:"周末湖边、书院里，带孩子读书的家庭，安静又热闹",why:"最好的学区房，是家里的书房。"},
+  {t:"志愿者红马甲",h:70,c:"warm",src:"好人好事",d:"路口、景区、社区，穿着红马甲帮忙的人，让这座城多了温度",why:"陌生人的善意，是城市最暖的八卦。"},
+  {t:"放学路上的接娃大军",h:66,c:"warm",src:"日常",d:"下午五点，学校门口接孩子的家长，提着菜、等着娃",why:"普通日子里，藏着最实在的幸福。"},
+  {t:"江边钓鱼的大叔",h:60,c:"warm",src:"慢生活",d:"东江边上，一杆一凳一下午，不急不躁",why:"惠城人的慢，是大城市学不来的。"}
+];
+
 // 关键词过滤：哪些热搜算"惠城/惠州相关"
 const KW=["惠州","惠城","仲恺","大亚湾","惠阳","博罗","惠东","龙门","东江湾","水口","马安","江北CBD","深惠","粤海","TCL","德赛","亿纬锂能","龙光","隆生"];
 
@@ -208,18 +218,18 @@ async function fetchLive(){
   }
 }
 
-function allTopics(){return [...liveTopics, ...LOCAL, ...FOOD, ...FUN];}
+function allTopics(){return [...liveTopics, ...LOCAL, ...FOOD, ...FUN, ...WARM];}
 
 function render(){
   let list=curCat==="all"?allTopics():allTopics().filter(x=>x.c===curCat);
   list=list.map(x=>({...x,hs:x.h+Math.random()*4-2})).sort((a,b)=>b.hs-a.hs);
   const el=document.getElementById("topicList");
   el.innerHTML=list.map((x,i)=>{
-    const catCls={ind:"cat-ind",life:"cat-life",city:"cat-city",food:"cat-food",fun:"cat-fun"}[x.c]||"cat-city";
-    const catName={ind:"产业",life:"民生",city:"城市",food:"好吃",fun:"好玩"}[x.c]||"城市";
+    const catCls={ind:"cat-ind",life:"cat-life",city:"cat-city",food:"cat-food",fun:"cat-fun",warm:"cat-fun"}[x.c]||"cat-city";
+    const catName={ind:"产业",life:"民生",city:"城市",food:"好吃",fun:"好玩",warm:"八卦"}[x.c]||"城市";
     const heatColor=x.hs>=80?"#f87171":x.hs>=60?"#fbbf24":"#34d399";
-    const tagBg={ind:"#1e3a5f",life:"#3d2817",city:"#2a2f3a",food:"#3f1414",fun:"#0c2a1e"}[x.c];
-    const tagFg={ind:"#60a5fa",life:"#fb923c",city:"#9ca3af",food:"#f87171",fun:"#34d399"}[x.c];
+    const tagBg={ind:"#1e3a5f",life:"#3d2817",city:"#2a2f3a",food:"#3f1414",fun:"#0c2a1e",warm:"#3a2a10"}[x.c];
+    const tagFg={ind:"#60a5fa",life:"#fb923c",city:"#9ca3af",food:"#f87171",fun:"#34d399",warm:"#fbbf24"}[x.c];
     const liveBadge=x.live?'<span style="background:#dc2626;color:#fff;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px;vertical-align:middle">实时</span>':'';
     if(i===0){
       return `<div class="top1" onclick="this.classList.toggle('open')">
@@ -267,7 +277,7 @@ document.getElementById("btnScan").onclick=async function(){
   document.getElementById("scanline").classList.remove("fast");
   const now=new Date();
   const liveN=liveTopics.length;
-  document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} · 实时热搜${liveN}条 + 话题${LOCAL.length}条 + 好吃${FOOD.length}·好玩${FUN.length}`;
+  document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} · 实时热搜${liveN}条 + 话题${LOCAL.length}条 + 好吃${FOOD.length}·好玩${FUN.length}·八卦${WARM.length}`;
   render();
 };
 
