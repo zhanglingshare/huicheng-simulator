@@ -133,68 +133,93 @@
   <div>
     <div class="card">
       <div class="tabs">
-        <button data-tab="sense" class="on">⓪ 感知</button>
-        <button data-tab="run">① 推演</button>
-        <button data-tab="gate">② 验模三门</button>
-        <button data-tab="mc">③ 蒙特卡洛</button>
-        <button data-tab="sens">④ 敏感性</button>
-        <button data-tab="iv">⑤ 访谈</button>
-        <button data-tab="ledger">⑥ 决策档案</button>
-        <button data-tab="data">⑦ 数据血统</button>
-        <button data-tab="upload">⑧ 导入世界</button>
+        <button data-tab="sense" class="on">⓪ 先看清楚</button>
+        <button data-tab="run">① 跑一遍风洞</button>
+        <button data-tab="mc">高级：概率/敏感性</button>
+      </div>
+      <div style="display:none">
+        <button data-tab="gate"></button><button data-tab="mc"></button><button data-tab="sens"></button>
+        <button data-tab="iv"></button><button data-tab="ledger"></button><button data-tab="data"></button><button data-tab="upload"></button>
       </div>
 
-      <!-- 感知 -->
+      <!-- 感知：两张气泡图 -->
       <div class="pane on" id="pane-sense">
-        <h3 style="margin:0 0 12px">👀 感知 · 惠城现在被什么撑着、被什么卡着</h3>
-        <p style="color:#64748b;font-size:13px;margin-bottom:16px">不评论、不建议，只把公开数据摊开。三张图自己说话。</p>
+        <h2 style="margin:0 0 4px;font-size:20px">先看清楚，再动手</h2>
+        <p style="color:#64748b;font-size:13px;margin:0 0 18px">两张图，都是公开数据。不评论，不建议。</p>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
-          <div style="padding:14px;background:#eff6ff;border-radius:8px;border-left:4px solid #2563eb">
-            <b style="font-size:15px">📐 基本盘</b>
-            <table style="width:100%;font-size:13px;margin-top:8px;border-collapse:collapse">
-              <tr><td style="padding:4px 0;color:#64748b">2025 GDP</td><td style="text-align:right;font-weight:600">1203.33 亿</td></tr>
-              <tr><td style="padding:4px 0;color:#64748b">三次产业</td><td style="text-align:right;font-weight:600">3.4 : 27.6 : 69.0</td></tr>
-              <tr><td style="padding:4px 0;color:#64748b">常住人口</td><td style="text-align:right;font-weight:600">159.78 万</td></tr>
-              <tr><td style="padding:4px 0;color:#64748b">高新区产值</td><td style="text-align:right;font-weight:600">632.7 亿（占67.4%）</td></tr>
-              <tr><td style="padding:4px 0;color:#64748b">江北服务业</td><td style="text-align:right;font-weight:600">139.5 亿（占服务业近半）</td></tr>
-              <tr><td style="padding:4px 0;color:#64748b">2030 目标</td><td style="text-align:right;font-weight:600;color:#2563eb">1500 亿产值</td></tr>
-            </table>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <!-- 图1：目标距离 -->
+          <div style="padding:16px;background:#f8fafc;border-radius:10px;border:1px solid #e2e8f0">
+            <b style="font-size:14px">🎯 离2030目标还有多远</b>
+            <div style="font-size:11px;color:#94a3b8;margin-bottom:12px">横=完成度，竖=指标</div>
+            <svg viewBox="0 0 340 220" style="width:100%">
+              <line x1="60" y1="10" x2="60" y2="200" stroke="#cbd5e1" stroke-width="1"/>
+              <line x1="60" y1="200" x2="320" y2="200" stroke="#cbd5e1" stroke-width="1"/>
+              <line x1="60" y1="200" x2="320" y2="200" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2 3"/>
+              <!-- 进度条 -->
+              <!-- 高新区产值 632.7/1500 = 42% -->
+              <text x="55" y="35" text-anchor="end" font-size="11" fill="#475569">高新区产值</text>
+              <rect x="60" y="25" width="109" height="14" rx="3" fill="#2563eb"/>
+              <text x="175" y="36" font-size="10" fill="#2563eb">632/1500亿</text>
+              <!-- GDP 1203 vs 预估2000 = 60% -->
+              <text x="55" y="70" text-anchor="end" font-size="11" fill="#475569">GDP</text>
+              <rect x="60" y="60" width="156" height="14" rx="3" fill="#6b7280"/>
+              <text x="221" y="71" font-size="10" fill="#6b7280">1203/约2000亿</text>
+              <!-- 常住人口 159.78万 目标约180万 = 89% -->
+              <text x="55" y="105" text-anchor="end" font-size="11" fill="#475569">常住人口</text>
+              <rect x="60" y="95" width="232" height="14" rx="3" fill="#6b7280"/>
+              <text x="297" y="106" font-size="10" fill="#6b7280">159.8/约180万</text>
+              <!-- 深惠城际 0% 延期到2029 -->
+              <text x="55" y="140" text-anchor="end" font-size="11" fill="#ea580c">深惠城际通车</text>
+              <rect x="60" y="130" width="0" height="14" rx="3" fill="#ea580c"/>
+              <text x="65" y="141" font-size="10" fill="#ea580c">延期至2029年底</text>
+              <!-- 过江通道容量 50% -->
+              <text x="55" y="175" text-anchor="end" font-size="11" fill="#ea580c">跨江通道容量</text>
+              <rect x="60" y="165" width="78" height="14" rx="3" fill="#ea580c"/>
+              <text x="143" y="176" font-size="10" fill="#ea580c">拥堵中</text>
+              <text x="190" y="215" font-size="10" fill="#94a3b8">0% → 50% → 100%</text>
+            </svg>
           </div>
-          <div style="padding:14px;background:#fff7ed;border-radius:8px;border-left:4px solid #ea580c">
-            <b style="font-size:15px">👥 老百姓体感（公开数据估算）</b>
-            <div style="margin-top:10px;font-size:13px">
-              <div style="margin-bottom:10px">
-                <div style="display:flex;justify-content:space-between"><span>教育（学位/托育）</span><span style="color:#2563eb">重要度0.65 · 满意度0.45</span></div>
-                <div style="height:5px;background:#e2e8f0;border-radius:3px;margin-top:3px"><div style="width:45%;height:100%;background:#3b82f6;border-radius:3px"></div></div>
-              </div>
-              <div style="margin-bottom:10px">
-                <div style="display:flex;justify-content:space-between"><span>医疗（床位/医生）</span><span style="color:#0891b2">重要度0.55 · 满意度0.62</span></div>
-                <div style="height:5px;background:#e2e8f0;border-radius:3px;margin-top:3px"><div style="width:62%;height:100%;background:#06b6d4;border-radius:3px"></div></div>
-              </div>
-              <div style="margin-bottom:10px">
-                <div style="display:flex;justify-content:space-between"><span>通勤（过江/跨区）</span><span style="color:#ea580c">重要度0.41 · 满意度0.38</span></div>
-                <div style="height:5px;background:#e2e8f0;border-radius:3px;margin-top:3px"><div style="width:35%;height:100%;background:#f97316;border-radius:3px"></div></div>
-              </div>
-            </div>
-            <div style="font-size:11px;color:#94a3b8;margin-top:6px">体感=供给−0.4×压力。公开数据估算，非问卷。</div>
+
+          <!-- 图2：老百姓体感气泡图 -->
+          <div style="padding:16px;background:#f8fafc;border-radius:10px;border:1px solid #e2e8f0">
+            <b style="font-size:14px">👥 老百姓体感在哪一块</b>
+            <div style="font-size:11px;color:#94a3b8;margin-bottom:12px">横=顺不顺心，竖=在不在乎，泡=提到的人多不多</div>
+            <svg viewBox="0 0 340 220" style="width:100%">
+              <line x1="40" y1="10" x2="40" y2="190" stroke="#cbd5e1" stroke-width="1"/>
+              <line x1="40" y1="190" x2="320" y2="190" stroke="#cbd5e1" stroke-width="1"/>
+              <!-- 中线 -->
+              <line x1="40" y1="100" x2="320" y2="100" stroke="#e2e8f0" stroke-dasharray="3 3"/>
+              <line x1="180" y1="10" x2="180" y2="190" stroke="#e2e8f0" stroke-dasharray="3 3"/>
+              <!-- 轴标签 -->
+              <text x="180" y="210" text-anchor="middle" font-size="10" fill="#94a3b8">不满意 ← 满意度 → 满意</text>
+              <text x="15" y="100" text-anchor="middle" font-size="10" fill="#94a3b8" transform="rotate(-90 15 100)">重要</text>
+              <!-- 气泡：教育(重要0.65,满意0.45,密度大) -->
+              <circle cx="121" cy="55" r="22" fill="#3b82f6" opacity="0.7"/>
+              <text x="121" y="59" text-anchor="middle" font-size="11" fill="#fff">教育</text>
+              <!-- 医疗(重要0.55,满意0.62,密度中) -->
+              <circle cx="167" cy="73" r="15" fill="#06b6d4" opacity="0.7"/>
+              <text x="167" y="77" text-anchor="middle" font-size="10" fill="#fff">医疗</text>
+              <!-- 通勤(重要0.41,满意0.38,密度中) -->
+              <circle cx="108" cy="96" r="16" fill="#f97316" opacity="0.7"/>
+              <text x="108" y="100" text-anchor="middle" font-size="10" fill="#fff">通勤</text>
+              <!-- 标注：教育在左上(重要但不满意) -->
+              <text x="60" y="30" font-size="10" fill="#dc2626">↑ 最该先看的</text>
+            </svg>
+            <div style="font-size:11px;color:#94a3b8;margin-top:4px">公开数据估算，非问卷实测。</div>
           </div>
         </div>
 
-        <div style="padding:14px;background:#fefce8;border-radius:8px;border:1px solid #fde047;margin-bottom:12px">
-          <b style="font-size:14px">🔍 一个被低估的结构</b>
-          <p style="font-size:13px;color:#475569;margin:8px 0 0">
-            惠城三产占 69%，高新区 632 亿，江北服务业 139 亿——两个轮子都在转。<br>
-            但它们之间隔着 <b>东江</b>，靠 <b>过江通道</b> 连。<br>
-            官方说"双轮驱动"，跑起来才发现：<span style="background:#fef08a;padding:0 3px">真正传动的不是服务业↔制造业的产业关联，是那条通勤路。</span><br>
-            产业皮带在打滑，通勤轴在真转——但后者在规划里只是"基础设施配套"。
+        <div style="margin-top:16px;padding:16px;background:#fffbeb;border-radius:10px;border-left:4px solid #f59e0b">
+          <b style="font-size:14px">👀 看完两张图，先记住一件事</b>
+          <p style="font-size:14px;color:#334155;margin:8px 0 0;line-height:1.7">
+            高新区 632 亿在东（东江湾），江北服务业 139 亿在西——中间隔一条江。<br>
+            两个轮子都在转，但连它们的不是产业协议，是<b>每天早晚的通勤车流</b>。<br>
+            下面进风洞，我们只动一个东西：<span style="background:#fef08a;padding:0 4px">那条过江通道，到底有多重要。</span>
           </p>
         </div>
-
-        <p style="font-size:12px;color:#94a3b8">看完这页，去「① 推演」点 ▶ 播放，或者直接在左边网络图上点节点访谈。</p>
       </div>
 
-      <!-- 推演 -->
       <div class="pane" id="pane-run">
         <div class="tl">
           <button class="btn" id="btn-play">▶ 播放</button>
@@ -204,14 +229,14 @@
           <span class="mono">t=<b id="tick-lbl">0</b>/20</span>
         </div>
 
-        <h2 style="margin-top:14px">🎛 上帝视角（排进下一时刻，时间轴打金标）</h2>
+        <h3 style="margin-top:16px;font-size:15px">🧪 动手压一下</h3><p style="font-size:12px;color:#94a3b8;margin:4px 0 10px">选一个事件，看系统怎么反应。</p>
         <div class="row">
           <select id="shock-sel">
-            <option value="链主外迁">链主外迁</option><option value="芯片断供">芯片断供</option>
-            <option value="订单外流">订单外流</option><option value="产能过剩">产能过剩</option>
-            <option value="政策收紧">政策收紧</option><option value="用地收紧">用地收紧</option>
-            <option value="限电">限电</option><option value="融资难">融资难</option>
-            <option value="关税摩擦">关税摩擦</option><option value="供应链中断">供应链中断</option>
+            <option value="链主外迁">龙头企业外迁</option><option value="芯片断供">供应链卡壳</option>
+            <option value="订单外流">订单外流</option><option value="用地收紧">用地紧张</option>
+            <option value="政策收紧">政策变化</option><option value="用地收紧">用地紧张</option>
+            <option value="融资难">融资变难</option><option value="订单爆发">订单突然变好</option>
+            <option value="政策利好">政策利好</option><option value="技术突破">技术突破</option>
             <option value="人才流失">人才流失</option><option value="订单爆发">订单爆发</option>
             <option value="政策利好">政策利好</option><option value="技术突破">技术突破</option>
           </select>
@@ -230,9 +255,9 @@
           <button class="btn" id="btn-pert">干扰参数</button>
         </div>
 
-        <h2 style="margin-top:12px">🗣 自然语言注入（解析 · 零API · 离线）</h2>
+        <h3 style="margin-top:16px;font-size:15px">💬 直接说一句话</h3>
         <div class="row">
-          <input type="text" id="nl-input" style="flex:1;min-width:200px" placeholder='例：TCL华星外迁｜芯片断供｜链主外迁｜增长动能 -0.2｜移除亿纬锂能'>
+          <input type="text" id="nl-input" style="flex:1;min-width:200px" placeholder='例：过江通道瘫痪｜利元亨外迁｜深惠城际通车｜增长 -0.2'>
           <button class="btn primary" id="btn-nl">解析并执行</button>
         </div>
         <div id="nl-result" class="muted"></div>
@@ -241,7 +266,7 @@
           &nbsp;|&nbsp; 区分：解析（规则，离线）≠ 生成（需模型，可选）
         </div>
 
-        <h2 style="margin-top:14px">🕰 时间线（史料事件优先于随机决策）</h2>
+        <h3 style="margin-top:16px;font-size:15px">📜 发生了什么</h3>
         <div class="timeline-log" id="tl-log"></div>
       </div>
 
