@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>惠城产业风洞 · 基本面</title>
+<title>惠城产业风洞 · 基本面与目标距离</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
@@ -15,8 +15,6 @@ h1{font-size:20px;margin:0 0 2px;letter-spacing:.5px}
 .card{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:16px;margin-bottom:12px}
 .card h2{font-size:14px;margin:0 0 12px}
 svg{display:block;width:100%;height:auto}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:700px){.row{grid-template-columns:1fr}}
 .next{text-align:center;margin-top:18px}
 .next a{background:#1d4ed8;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
 .bignum{font-size:28px;font-weight:800;color:#fbbf24;font-variant-numeric:tabular-nums}
@@ -27,102 +25,113 @@ svg{display:block;width:100%;height:auto}
   <b>惠城产业风洞</b>
   <a href="index.html">① 今日话题</a>
   <a href="network.html">② 建构世界</a>
-  <a href="who.html" class="on">③ 基本面</a>
-  <a href="world.html">④ 目标距离</a>
-  <a href="choices.html">⑤ 选择</a>
-  <a href="future.html">⑥ 未来</a>
-  <span class="sp">描述性统计 · 2025</span>
+  <a href="who.html" class="on">③ 基本面与目标</a>
+  <a href="choices.html">④ 选择</a>
+  <a href="future.html">⑤ 未来</a>
+  <span class="sp">2025现状 vs 十五五目标</span>
 </div>
 
 <div class="wrap">
-  <h1>惠城现在长什么样</h1>
-  <p class="sub">只摆数据，不做判断。和自己比，和目标比。</p>
+  <h1>现在在哪，目标在哪</h1>
+  <p class="sub">只摆数。当前值→目标值，中间差多少自己看。</p>
 
-  <!-- 大数字 -->
-  <div class="row">
-    <div class="card" style="text-align:center">
+  <!-- 两个大数字 -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+    <div class="card" style="text-align:center;margin:0">
       <div class="bignum">1203亿</div>
-      <div class="label">地区生产总值（GDP）</div>
+      <div class="label">GDP（2025）</div>
     </div>
-    <div class="card" style="text-align:center">
+    <div class="card" style="text-align:center;margin:0">
       <div class="bignum">159.78万</div>
       <div class="label">常住人口</div>
     </div>
   </div>
 
+  <!-- 高新区爬坡 -->
+  <div class="card">
+    <h2>高新区规上工业产值：爬到哪了</h2>
+    <svg viewBox="0 0 700 200">
+      <!-- 时间轴 -->
+      <line x1="80" y1="160" x2="650" y2="160" stroke="#1c2739" stroke-width="2"/>
+      <!-- 2025 -->
+      <circle cx="120" cy="160" r="6" fill="#3b82f6"/>
+      <rect x="90" y="80" width="60" height="80" fill="#3b82f6" opacity="0.7" rx="3"/>
+      <text x="120" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="#3b82f6">632.7亿</text>
+      <text x="120" y="180" text-anchor="middle" font-size="11" fill="#8fa3bf">2025</text>
+      <!-- 2026 -->
+      <circle cx="260" cy="160" r="6" fill="#3b82f6"/>
+      <rect x="230" y="60" width="60" height="100" fill="#3b82f6" opacity="0.7" rx="3"/>
+      <text x="260" y="50" text-anchor="middle" font-size="13" font-weight="700" fill="#3b82f6">820亿</text>
+      <text x="260" y="180" text-anchor="middle" font-size="11" fill="#8fa3bf">2026目标</text>
+      <!-- 2027 -->
+      <circle cx="400" cy="160" r="6" fill="#fbbf24"/>
+      <rect x="370" y="40" width="60" height="120" fill="#fbbf24" opacity="0.5" rx="3"/>
+      <text x="400" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="#fbbf24">破千亿</text>
+      <text x="400" y="180" text-anchor="middle" font-size="11" fill="#8fa3bf">2027</text>
+      <!-- 2030 -->
+      <circle cx="580" cy="160" r="6" fill="#f87171"/>
+      <rect x="550" y="10" width="60" height="150" fill="#f87171" opacity="0.4" rx="3"/>
+      <text x="580" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="#f87171">1500亿</text>
+      <text x="580" y="180" text-anchor="middle" font-size="11" fill="#8fa3bf">2030目标</text>
+      <!-- 差距标注 -->
+      <text x="260" y="110" text-anchor="middle" font-size="10" fill="#fbbf24">还差187亿</text>
+      <text x="580" y="85" text-anchor="middle" font-size="10" fill="#f87171">还差867亿</text>
+    </svg>
+  </div>
+
   <!-- 三产结构 -->
   <div class="card">
     <h2>三产结构</h2>
-    <svg viewBox="0 0 400 180">
-      <!-- 饼图三段：3.4 / 27.6 / 69.0 -->
-      <!-- 第一产业3.4% -->
-      <path d="M200,90 L200,10 A80,80 0 0,1 216.7,12.3 Z" fill="#34d399"/>
-      <!-- 第二产业27.6% -->
-      <path d="M200,90 L216.7,12.3 A80,80 0 0,1 263.8,158.9 Z" fill="#3b82f6"/>
-      <!-- 第三产业69.0% -->
-      <path d="M200,90 L263.8,158.9 A80,80 0 1,1 200,10 Z" fill="#f97316"/>
-      <text x="200" y="95" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">69%</text>
-
-      <rect x="310" y="40" width="10" height="10" fill="#34d399"/><text x="325" y="49" font-size="11" fill="#cbd5e1">第一产业 3.4%</text>
-      <rect x="310" y="65" width="10" height="10" fill="#3b82f6"/><text x="325" y="74" font-size="11" fill="#cbd5e1">第二产业 27.6%</text>
-      <rect x="310" y="90" width="10" height="10" fill="#f97316"/><text x="325" y="99" font-size="11" fill="#cbd5e1">第三产业 69.0%</text>
+    <svg viewBox="0 0 400 160">
+      <path d="M200,80 L200,10 A70,70 0 0,1 215,15 Z" fill="#34d399"/>
+      <path d="M200,80 L215,15 A70,70 0 0,1 255,145 Z" fill="#3b82f6"/>
+      <path d="M200,80 L255,145 A70,70 0 1,1 200,10 Z" fill="#f97316"/>
+      <text x="200" y="85" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">69%</text>
+      <rect x="290" y="30" width="10" height="10" fill="#34d399"/><text x="305" y="39" font-size="11" fill="#cbd5e1">一产 3.4%</text>
+      <rect x="290" y="55" width="10" height="10" fill="#3b82f6"/><text x="305" y="64" font-size="11" fill="#cbd5e1">二产 27.6%</text>
+      <rect x="290" y="80" width="10" height="10" fill="#f97316"/><text x="305" y="89" font-size="11" fill="#cbd5e1">三产 69.0%</text>
     </svg>
   </div>
 
-  <!-- 工业内部 -->
+  <!-- 目标差距条 -->
   <div class="card">
-    <h2>工业产值都在哪</h2>
-    <svg viewBox="0 0 600 160">
-      <text x="0" y="25" font-size="11" fill="#cbd5e1">高新区</text>
-      <rect x="90" y="15" width="380" height="16" fill="#3b82f6" rx="2"/>
-      <text x="480" y="27" font-size="11" fill="#fbbf24">632.7亿（占67.4%）</text>
+    <h2>几个关键差距</h2>
+    <svg viewBox="0 0 700 220">
+      <!-- 规上工业总产值 -->
+      <text x="0" y="25" font-size="11" fill="#cbd5e1">规上工业总产值</text>
+      <rect x="150" y="15" width="200" height="16" fill="#3b82f6" rx="2" opacity="0.6"/>
+      <rect x="350" y="15" width="250" height="16" fill="#3b82f6" rx="2"/>
+      <text x="160" y="27" font-size="10" fill="#fff">现状约750亿</text>
+      <text x="610" y="27" font-size="11" fill="#fbbf24">2026目标破1000亿</text>
 
-      <text x="0" y="55" font-size="11" fill="#cbd5e1">其他工业</text>
-      <rect x="90" y="45" width="180" height="16" fill="#475569" rx="2"/>
-      <text x="280" y="57" font-size="11" fill="#8fa3bf">约306亿（占32.6%）</text>
+      <!-- 生产性服务业 -->
+      <text x="0" y="65" font-size="11" fill="#cbd5e1">生产性服务业</text>
+      <rect x="150" y="55" width="40" height="16" fill="#f97316" rx="2" opacity="0.6"/>
+      <rect x="190" y="55" width="160" height="16" fill="#f97316" rx="2"/>
+      <text x="160" y="67" font-size="10" fill="#fff">139.5亿</text>
+      <text x="360" y="67" font-size="11" fill="#fbbf24">2026目标400亿</text>
 
-      <text x="0" y="85" font-size="11" fill="#cbd5e1">江北生产性服务业</text>
-      <rect x="90" y="75" width="84" height="16" fill="#f97316" rx="2"/>
-      <text x="180" y="87" font-size="11" fill="#8fa3bf">139.5亿</text>
+      <!-- 城镇新增就业 -->
+      <text x="0" y="105" font-size="11" fill="#cbd5e1">城镇新增就业</text>
+      <rect x="150" y="95" width="150" height="16" fill="#34d399" rx="2" opacity="0.6"/>
+      <rect x="300" y="95" width="140" height="16" fill="#34d399" rx="2"/>
+      <text x="160" y="107" font-size="10" fill="#fff">2025实际16221人</text>
+      <text x="450" y="107" font-size="11" fill="#34d399">2026目标15000人以上</text>
 
-      <text x="0" y="120" font-size="10" fill="#5b6b82">数据来源：惠城区2025统计公报、高新区管委会公开数据</text>
+      <!-- 床位 -->
+      <text x="0" y="145" font-size="11" fill="#cbd5e1">医院床位</text>
+      <rect x="150" y="135" width="120" height="16" fill="#6b7280" rx="2" opacity="0.6"/>
+      <text x="280" y="147" font-size="11" fill="#8fa3bf">3782张（千人口2.37）</text>
+
+      <!-- 学位 -->
+      <text x="0" y="185" font-size="11" fill="#cbd5e1">2026新增学位</text>
+      <rect x="150" y="175" width="100" height="16" fill="#6b7280" rx="2" opacity="0.6"/>
+      <text x="260" y="187" font-size="11" fill="#8fa3bf">8000个（文昌1740+明达2520等）</text>
+
+      <text x="0" y="212" font-size="10" fill="#5b6b82">数据来源：2026惠城区政府工作报告、高新区管委会、统计公报</text>
     </svg>
   </div>
 
-  <!-- 就业 -->
-  <div class="card">
-    <h2>就业</h2>
-    <svg viewBox="0 0 600 140">
-      <text x="0" y="25" font-size="11" fill="#cbd5e1">2025城镇新增就业</text>
-      <rect x="160" y="15" width="200" height="16" fill="#3b82f6" rx="2"/>
-      <text x="365" y="27" font-size="11" fill="#fbbf24">16221人</text>
-
-      <text x="0" y="55" font-size="11" fill="#cbd5e1">2026年目标</text>
-      <rect x="160" y="45" width="185" height="16" fill="#475569" rx="2"/>
-      <text x="350" y="57" font-size="11" fill="#8fa3bf">15000人以上</text>
-
-      <text x="0" y="85" font-size="11" fill="#cbd5e1">水口外来务工</text>
-      <rect x="160" y="75" width="120" height="16" fill="#f97316" rx="2"/>
-      <text x="285" y="87" font-size="11" fill="#fbbf24">近10万人</text>
-
-      <text x="0" y="120" font-size="10" fill="#5b6b82">数据来源：2026年惠城区政府工作报告、水口街道公开资料</text>
-    </svg>
-  </div>
-
-  <!-- 公共服务 -->
-  <div class="row">
-    <div class="card" style="text-align:center">
-      <div class="bignum" style="font-size:22px">3782张</div>
-      <div class="label">医院床位</div>
-      <div style="font-size:11px;color:#6b7280;margin-top:4px">千人口床位约2.37张</div>
-    </div>
-    <div class="card" style="text-align:center">
-      <div class="bignum" style="font-size:22px">8000个</div>
-      <div class="label">2026新增学位</div>
-      <div style="font-size:11px;color:#6b7280;margin-top:4px">文昌1740 + 明达2520等</div>
-    </div>
-  </div>
-
-  <div class="next"><a href="world.html">下一步：和目标的距离 →</a></div>
+  <div class="next"><a href="choices.html">下一步：有哪些选择 →</a></div>
 </div>
 </body></html>
