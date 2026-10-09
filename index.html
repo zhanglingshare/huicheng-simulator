@@ -176,7 +176,13 @@ async function fetchLive(){
     {url:"https://api.vvhan.com/api/hotlist/zhihuHot",name:"知乎热榜"},
     {url:"https://api.vvhan.com/api/hotlist/douyinHot",name:"抖音热点"},
     {url:"https://api.vvhan.com/api/hotlist/toutiao",name:"今日头条"},
-    {url:"https://api.vvhan.com/api/hotlist/bili",name:"B站热门"}
+    {url:"https://api.vvhan.com/api/hotlist/bili",name:"B站热门"},
+    {url:"https://api.vvhan.com/api/hotlist/weixin",name:"微信热搜"},
+    {url:"https://api.vvhan.com/api/hotlist/thepaper",name:"澎湃"},
+    {url:"https://api.vvhan.com/api/hotlist/people",name:"人民日报"},
+    {url:"https://api.vvhan.com/api/hotlist/wangyi",name:"网易新闻"},
+    {url:"https://api.vvhan.com/api/hotlist/sina",name:"新浪"},
+    {url:"https://api.vvhan.com/api/hotlist/huanqiu",name:"环球网"}
   ];
   for(const api of apis){
     try{
@@ -254,7 +260,7 @@ document.querySelectorAll(".cat").forEach(b=>{
 
 document.getElementById("btnScan").onclick=async function(){
   this.innerHTML='<span class="pulse">⏳</span> 扫描中…';
-  document.getElementById("scanInfo").textContent="雷达旋转中，正在拉取微博/百度实时热搜…";
+  document.getElementById("scanInfo").textContent="雷达旋转中，正在拉取12个公开渠道…";
   document.getElementById("scanline").classList.add("fast");
   await fetchLive();
   this.innerHTML="🔄 重新扫描";
