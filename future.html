@@ -137,12 +137,11 @@ function run(){
     {mu:+document.getElementById('s2').value, sd:60},
     {mu:+document.getElementById('s3').value, sd:40},
     {mu:100, sd:40},
-    {mu:50, sd:30},
-    {mu:30, sd:30}
+    {mu:50, sd:30}
   ];
   const N=10000;
   const results=[];
-  const pathContribs=[[],[],[],[],[]]; // 每条路的实际贡献
+  const pathContribs=[[],[],[],[],[],[]]; // 每条路的实际贡献
   for(let i=0;i<N;i++){
     let total=base;
     paths.forEach((p,j)=>{
