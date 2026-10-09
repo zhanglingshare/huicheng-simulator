@@ -100,16 +100,48 @@
 <div class="wrap">
   <!-- 左：网络 + 全局KPI -->
   <div>
+    <div class="card" style="margin-bottom:12px;background:#fefce8;border:1px solid #fde047">
+      <h3 style="margin:0 0 8px;font-size:14px">📊 感知舱 · 惠城老百姓体感（公开数据估算）</h3>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;font-size:12px">
+        <div style="flex:1;min-width:180px;padding:8px;background:#fff;border-radius:6px">
+          <b style="color:#2563eb">教育</b>　重要度 0.65（最高）<br>
+          <span style="color:#64748b">供给：2026新增学位8000个（文昌1740/明达2520）</span><br>
+          <div style="height:6px;background:#e2e8f0;border-radius:3px;margin-top:4px"><div style="width:55%;height:100%;background:#3b82f6;border-radius:3px"></div></div>
+          <span style="color:#64748b">满意度约 0.45（学位仍紧）</span>
+        </div>
+        <div style="flex:1;min-width:180px;padding:8px;background:#fff;border-radius:6px">
+          <b style="color:#0891b2">医疗</b>　重要度 0.55<br>
+          <span style="color:#64748b">供给：床位3782张，千人口2.37；二妇幼新院500床已开</span><br>
+          <div style="height:6px;background:#e2e8f0;border-radius:3px;margin-top:4px"><div style="width:65%;height:100%;background:#06b6d4;border-radius:3px"></div></div>
+          <span style="color:#64748b">满意度约 0.62（相对宽裕）</span>
+        </div>
+        <div style="flex:1;min-width:180px;padding:8px;background:#fff;border-radius:6px">
+          <b style="color:#ea580c">通勤</b>　重要度 0.41（最低）<br>
+          <span style="color:#64748b">供给：跨江通道拥堵；深惠城际延期至2029</span><br>
+          <div style="height:6px;background:#e2e8f0;border-radius:3px;margin-top:4px"><div style="width:35%;height:100%;background:#f97316;border-radius:3px"></div></div>
+          <span style="color:#64748b">满意度约 0.38（投诉集中）</span>
+        </div>
+      </div>
+      <div style="font-size:11px;color:#94a3b8;margin-top:6px">体感=供给−k×压力，k=0.4（假设值）。以上为公开数据估算，非问卷实测。</div>
+    </div>
     <div class="card netcard">
       <h2>🕸 区域产业协同活网络 <span class="tag">点节点 = 主体访谈</span><span id="world-lbl" style="float:right;font-size:12px;font-weight:400;color:#64748b"></span></h2>
       <svg id="netsvg" viewBox="0 0 760 560" preserveAspectRatio="xMidYMid meet"></svg>
       <div class="legend">
-        <span><i style="border-color:#2563eb"></i>供给/协作层(产业链关系)</span>
-        <span><i class="dash" style="border-color:#b7c0cd"></i>同类亲和</span>
-        <span><i class="dash" style="border-color:#d8b487"></i>同园/同域接触</span>
-        <span><span class="dotq" style="background:#16a34a"></span>景气/信心</span>
-        <span><span class="dotq" style="background:#dc2626"></span>风险/恐慌</span>
-        <span><span class="dotq" style="background:#94a3b8"></span>外迁/消亡</span>
+        <span><span class="dotq" style="background:#2563eb"></span>产业</span>
+        <span><span class="dotq" style="background:#6b7280"></span>空间</span>
+        <span><span class="dotq" style="background:#ea580c"></span>人</span>
+        <span style="border-left:4px solid #ea580c;padding-left:6px">通勤走廊</span>
+        <span><span class="dotq" style="background:#16a34a"></span>景气</span>
+        <span><span class="dotq" style="background:#dc2626"></span>风险</span>
+      </div>
+      <div style="margin:8px 0;padding:8px;background:#f8fafc;border-radius:6px;font-size:12px">
+        <b>五条路径开关</b>（点掉一条看系统怎么变）：<br>
+        <button class="btn path-toggle" data-path="A" style="font-size:11px;margin:2px" onclick="togglePath(this)">A 制造业</button>
+        <button class="btn path-toggle" data-path="B" style="font-size:11px;margin:2px" onclick="togglePath(this)">B 服务业</button>
+        <button class="btn path-toggle" data-path="C" style="font-size:11px;margin:2px" onclick="togglePath(this)">C 融深</button>
+        <button class="btn path-toggle" data-path="D" style="font-size:11px;margin:2px" onclick="togglePath(this)">D 留人配套</button>
+        <button class="btn path-toggle" data-path="E" style="font-size:11px;margin:2px" onclick="togglePath(this)">E 招商</button>
       </div>
       <div class="kpis">
         <div class="kpi"><div class="v" id="k-ab">–</div><div class="l">景气</div><div class="bar"><span id="b-ab"></span></div></div>
@@ -1081,6 +1113,20 @@ const INDICATOR_TABLE=[
 let sim=new Sim(7);
 let gatesPassed={g1:false,g2:false,g3:false};
 let anchored=false;
+// 五条路径开关
+const pathState={A:true,B:true,C:true,D:true,E:true};
+function togglePath(btn){
+  const p=btn.dataset.path;
+  pathState[p]=!pathState[p];
+  btn.style.opacity=pathState[p]?1:0.3;
+  // 简单扰动对应参数
+  if(p==="A") sim.perturb("invest", pathState[p]?0.05:-0.15);
+  if(p==="B") sim.perturb("service", pathState[p]?0.05:-0.1);
+  if(p==="D") sim.perturb("land", pathState[p]?0.05:-0.1);
+  if(p==="C") sim.perturb("external", pathState[p]?0.03:-0.08);
+  if(p==="E") sim.perturb("invest", pathState[p]?0.02:-0.05);
+  posCache=null; render();
+}
 let playing=false, playTimer=null;
 let posCache=null;
 
@@ -1120,7 +1166,12 @@ function renderNetwork(){
   if(!posCache||posCache.__seed!==sim.seed||posCache.__n!==sim.agents.length){
     posCache=layoutForce(sim.agents,sim.edges,W,H);posCache.__seed=sim.seed;posCache.__n=sim.agents.length;
   }
-  const eCol=e=>e.layer==="hist"?"#818cf8":(e.layer==="affinity"?"#cbd5e1":"#c9b8a3");
+  const eCol=e=>{
+    if(e.rel==="通勤") return "#ea580c";
+    if(e.rel==="连接") return "#f97316";
+    if(e.layer==="hist") return "#818cf8";
+    return "#94a3b8";
+  };
   let html="";
   sim.edges.forEach(e=>{
     const p=posCache[e.a],q=posCache[e.b];if(!p||!q)return;
@@ -1128,7 +1179,7 @@ function renderNetwork(){
     const op=((pa&&pa.alive?1:.25)*(pb&&pb.alive?1:.25)*.85).toFixed(2);
     const dash=e.layer==="hist"?"":"stroke-dasharray:4 4;";
     html+=`<line x1="${p.x.toFixed(1)}" y1="${p.y.toFixed(1)}" x2="${q.x.toFixed(1)}" y2="${q.y.toFixed(1)}"
-      style="stroke:${eCol(e)};stroke-width:${e.layer==="hist"?1.8:1};${dash}opacity:${op}"><title>${e.rel}（${e.a}→${e.b}）</title></line>`;
+      style="stroke:${eCol(e)};stroke-width:${e.rel==='通勤'?4:(e.rel==='连接'?2.5:(e.layer==='hist'?1.8:1))};${dash}opacity:${op}"><title>${e.rel}（${e.a}→${e.b}）</title></line>`;
   });
   sim.agents.forEach(a=>{
     const p=posCache[a.name];if(!p)return;
@@ -1162,8 +1213,13 @@ function renderNetwork(){
     currentIv=n.dataset.name; switchTab("iv"); renderInterview(currentIv);
   }));
 }
-function typeColor(t){return {anchor:"#312e81",oem:"#4f46e5",supplier:"#0e7490",service:"#b45309",
-  talent:"#ca8a04",capital:"#065f46",land:"#4d7c0f",infra:"#64748b"}[t];}
+function typeColor(t){
+  // 三层配色：产业蓝/空间灰/人橙
+  if(["anchor","oem","supplier","service","capital"].includes(t)) return "#2563eb";
+  if(["land","infra"].includes(t)) return "#6b7280";
+  if(t==="talent") return "#ea580c";
+  return "#999";
+}
 
 function renderTimeline(){
   const box=$("#tl-log");
