@@ -10,31 +10,32 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
 .nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
 .nav a.on{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
 .wrap{max-width:840px;margin:auto;padding:18px}
-.hero{text-align:center;padding:40px 22px;background:radial-gradient(ellipse at top,#10234a 0%,#0a0f1a 70%);border:1px solid #1c2739;border-radius:16px;margin-bottom:14px}
+.hero{text-align:center;padding:42px 22px;background:radial-gradient(ellipse at top,#10234a 0%,#0a0f1a 70%);border:1px solid #1c2739;border-radius:16px;margin-bottom:14px}
 .hero .kick{font-size:12px;letter-spacing:3px;color:#60a5fa;margin-bottom:14px}
 .hero h1{font-size:25px;line-height:1.5;margin:0}
 .hero p{font-size:13px;color:#9aa9bd;margin:14px 0 0}
 .card{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:18px;margin-bottom:14px}
 .card h2{font-size:16px;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid #1c2739}
+.policy{background:linear-gradient(160deg,#0a1428,#0e1523);border-color:#1e3a5f}
+.policy .quote{border-left:3px solid #60a5fa;background:#0a0f1a;border-radius:0 8px 8px 0;padding:9px 12px;margin:9px 0;font-size:12.5px;color:#dbe7f5;line-height:1.85}
+.policy .quote b{color:#93c5fd}
+.policy .src{font-size:11px;color:#6b7280;margin-top:6px}
 .why{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:700px){.why{grid-template-columns:1fr}}
 .why .step{background:#0a0f1a;border:1px solid #1c2739;border-radius:10px;padding:14px}
-.why .step .n{font-size:11px;font-weight:800;color:#60a5fa;letter-spacing:1px}
+.why .step .n{font-size:11px;font-weight:800;color:#fb923c;letter-spacing:1px}
 .why .step h3{font-size:13.5px;margin:6px 0;color:#fbbf24}
-.why .step p{font-size:12px;color:#a9b6c9;margin:0;line-height:1.8}
-.flow{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:6px 0 2px}
-.flow .b{background:#0a0f1a;border:1px solid #22304a;border-radius:20px;padding:8px 16px;font-size:12.5px;color:#cbd5e1}
-.flow .b.hot{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:700}
-.flow .ar{color:#475569;font-size:16px}
+.why .step p{font-size:12px;color:#a9b6c9;margin:0;line-height:1.85}
 .grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
 @media(max-width:700px){.grid6{grid-template-columns:1fr 1fr}}
 .feat{background:#0a0f1a;border:1px solid #1c2739;border-radius:10px;padding:13px}
 .feat .ic{font-size:20px;margin-bottom:5px}
 .feat b{font-size:12.8px;color:#e6edf3;display:block;margin-bottom:3px}
 .feat span{font-size:11px;color:#8fa3bf;line-height:1.7}
-.closing{text-align:center;padding:30px 22px;background:linear-gradient(160deg,#0e1a30,#0a0f1a);border:1px solid #1c2739;border-radius:14px;margin-bottom:14px}
-.closing .big{font-size:17px;line-height:2;color:#e6edf3}
-.sign{font-size:12px;color:#8fa3bf;margin-top:16px}
+.closing{text-align:center;padding:34px 24px;background:linear-gradient(160deg,#150e08,#0a0f1a);border:1px solid #7c2d12;border-radius:14px;margin-bottom:14px}
+.closing .big{font-size:15px;line-height:2.1;color:#e6edf3}
+.closing .big b{color:#fbbf24}
+.sign{font-size:12px;color:#8fa3bf;margin-top:18px}
 .sign b{color:#fbbf24}
 .btn{background:#1d4ed8;color:#fff;border:0;padding:11px 24px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
 .btn.ghost{background:transparent;border:1px solid #2b3c5a;color:#cbd5e1}
@@ -58,66 +59,72 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
   <div class="hero">
     <div class="kick">结 语</div>
     <h1>让每一个重大决策，先跑一遍</h1>
-    <p>风洞不替人做决定，它只把"看不见的未来"，提前跑给你看。</p>
+    <p>我们不替任何人做决定，只想在拍板之前，多帮着看一步路。</p>
+  </div>
+
+  <!-- 数字中国依据 -->
+  <div class="card policy">
+    <h2>这件事，在“数字中国”的蓝图里</h2>
+    <p style="font-size:12.5px;color:#cbd5e1;margin:0">城市决策的科学化，不是一个人、一个地方的心血来潮，而是国家早已指明的方向。</p>
+    <div class="quote">《中华人民共和国国民经济和社会发展第十四个五年规划和2035年远景目标纲要》提出：<b>“加快构建数字技术辅助政府决策机制，提高基于高频大数据精准动态监测预测预警水平”</b>，并要求<b>“探索建设数字孪生城市”</b>、<b>“不断提高决策科学性”</b>。</div>
+    <div class="quote">2023年中共中央、国务院印发的《数字中国建设整体布局规划》，按照“2522”整体框架布局，要求数字技术与经济、政治、社会等“五位一体”深度融合，<b>“发展高效协同的数字政务”</b>。</div>
+    <p style="font-size:12.5px;color:#cbd5e1;margin:10px 0 0">这台小小的产业风洞，正是把“数字技术辅助决策”落到一个城区的具体尝试——它不宏大，却是数字中国这座大厦里，一块<b style="color:#93c5fd">看得见、摸得着、可核对</b>的砖。</p>
+    <div class="src">依据来源：中国政府网（gov.cn）公开发布的“十四五”规划纲要、《数字中国建设整体布局规划》。</div>
   </div>
 
   <!-- 为什么 -->
   <div class="card">
-    <h2>为什么城市决策，值得更郑重</h2>
+    <h2>我们为什么想做这件事</h2>
     <div class="why">
       <div class="step">
-        <div class="n">第一 · 决策之重</div>
-        <h3>每个决定，连着千家万户</h3>
-        <p>一座城的重大决策，背后是普通人的饭碗、孩子的学位、家人的就医、一家老小的住处。投进去的是真金白银，一旦走偏，代价很大，也很难回头。</p>
+        <div class="n">第一 · 数字背后是人</div>
+        <h3>每个决策，都连着具体的人</h3>
+        <p>一个早高峰赶班车的工人、一位为孩子学位操心的母亲、一个犹豫留不留的年轻人、一对守着小店的夫妻——城市的每个重大决定，最终都落在这样的人身上，走偏了，代价由他们承担。</p>
       </div>
       <div class="step">
-        <div class="n">第二 · 系统之复杂</div>
-        <h3>城市，是咬合的齿轮</h3>
-        <p>产业、人、空间、外部环境早已紧紧咬合，一个变量变了，会牵出一连串反应。这样的系统，单凭经验和"差不多"，人脑很难算清"如果变了会怎样"。</p>
+        <div class="n">第二 · 城市是个整体</div>
+        <h3>牵一发，往往动全身</h3>
+        <p>产业、人、空间早已咬合在一起，一个项目晚了、一条路堵了，会牵出一连串反应。只盯着眼前一个数字，很容易看不见整片森林，凭经验“拍脑袋”也越来越不够用。</p>
       </div>
       <div class="step">
-        <div class="n">第三 · 决策之方式</div>
-        <h3>拍板前，先跑一遍</h3>
-        <p>科学决策不是用数字取代人的判断，而是在动手前先看清：哪里可能断、哪里最脆弱、哪条路更稳。让决策从"拍脑袋"，走向看得见、可核对、能复盘。</p>
+        <div class="n">第三 · 我们的态度</div>
+        <h3>不炫技，只想帮上忙</h3>
+        <p>一台模拟器替代不了一线的脚步、群众的智慧和决策者的担当。它能做的，只是在动手前多提供一种“先看一看”的可能，让选择更透明、可核对、能复盘。</p>
       </div>
-    </div>
-    <div class="flow" style="margin-top:16px">
-      <span class="b">凭经验 · 拍脑袋</span><span class="ar">→</span>
-      <span class="b">看数据 · 看报表</span><span class="ar">→</span>
-      <span class="b hot">先推演 · 再决策</span>
     </div>
   </div>
 
   <!-- Demo vs 正式版 -->
   <div class="card">
-    <h2>这只是Demo：正式版会更强</h2>
+    <h2>这只是一个开始：正式版要更扎实</h2>
     <div style="height:280px"><canvas id="radar"></canvas></div>
-    <p style="font-size:12px;color:#8fa3bf;text-align:center;margin:8px 0 0">蓝线是当前Demo已做到的，橙线是正式版将达到的——五个维度全面加强。</p>
+    <p style="font-size:12px;color:#8fa3bf;text-align:center;margin:8px 0 0">蓝线是当前Demo已做到的，橙线是正式版努力的方向——为了让结论真正可靠，还有很多功课要做。</p>
   </div>
 
-  <!-- 正式版将接受 -->
+  <!-- 正式版要补的功课 -->
   <div class="card">
-    <h2>正式版，将接受更严格的检验</h2>
+    <h2>正式版，还要接受更严格的检验</h2>
     <div class="grid6">
       <div class="feat"><div class="ic">🌬️</div><b>更多压力测试</b><span>不只通勤，还包括极端天气、产业链断点、外部冲击、政策变化等多重压力同时发生的组合情景。</span></div>
-      <div class="feat"><div class="ic">🎯</div><b>更细敏感性分析</b><span>把每个项目、每条关系、每个参数逐一扰动，精确找出"最不能出错"的那个位置。</span></div>
+      <div class="feat"><div class="ic">🎯</div><b>更细的找“命门”</b><span>把每个项目、每条关系、每个参数逐一扰动，精确找出“最不能出错”的那个位置。</span></div>
       <div class="feat"><div class="ic">🎲</div><b>成千上万次推演</b><span>让未来在不同条件下反复演化，给出更稳健的可能性分布，而不是只给一个数字。</span></div>
-      <div class="feat"><div class="ic">📡</div><b>更真实的数据接入</b><span>对接统计、交通、就业、教育等更多真实数据源，逐步减少假设成分，让结论更扎实。</span></div>
-      <div class="feat"><div class="ic">🛠️</div><b>可交互 · 可复现</b><span>决策者可以自己改参数、提问题、现场推演，每一步都能回到公开资料核对。</span></div>
-      <div class="feat"><div class="ic">🧭</div><b>从看见问题到行动路径</b><span>不止于指出哪里脆弱，更进一步推演具体行动怎么走、先后顺序如何排。</span></div>
+      <div class="feat"><div class="ic">📡</div><b>更真实的数据</b><span>对接统计、交通、就业、教育等更多真实数据源，逐步减少假设成分，让结论更扎实。</span></div>
+      <div class="feat"><div class="ic">🛠️</div><b>可交互 · 可核对</b><span>决策者可以自己改参数、提问题、现场推演，每一步都能回到公开资料核对。</span></div>
+      <div class="feat"><div class="ic">🧭</div><b>从看见到怎么走</b><span>不止于指出哪里脆弱，更进一步和一线一起，推演具体行动怎么走、先后如何排。</span></div>
     </div>
   </div>
 
-  <!-- 收尾 -->
+  <!-- 走心收尾 -->
   <div class="closing">
     <div class="big">
-      一座城的未来，值得被认真推演。<br>
-      因为数字的背后，<b style="color:#fbbf24">是一个个具体的人，和他们的下一个五年。</b><br>
-      让决策更科学，城，才走得更稳、更远。
+      一座城市的现代化，<br>
+      不只是楼高了、路宽了、数字大了，<br>
+      更是每一个决策都更<b>郑重、透明、经得起追问</b>。<br>
+      多一个“先看一看”，或许就能让一座城少走一些弯路，<br>
+      让生活在这里的人，多一分安心。
     </div>
     <div class="sign">
-      惠城产业决策风洞 · Demo版<br>
-      <b>张凌 博士</b> · 决策模拟推演
+      惠城产业决策风洞 · Demo版 &nbsp;|&nbsp; <b>张凌 博士</b> · 决策模拟推演
     </div>
     <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
       <a class="btn" href="index.html">重新看一遍</a>
@@ -131,7 +138,7 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
 Chart.defaults.font.family='-apple-system,"PingFang SC",sans-serif';
 new Chart(document.getElementById('radar').getContext('2d'),{
   type:'radar',
-  data:{labels:['压力测试广度','敏感性分析精度','数据真实程度','未来情景丰富度','决策交互深度'],datasets:[
+  data:{labels:['压力测试广度','找命门的精度','数据真实程度','未来情景丰富度','决策交互深度'],datasets:[
     {label:'当前Demo',data:[55,50,60,55,60],borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.18)',pointBackgroundColor:'#3b82f6',borderWidth:2},
     {label:'正式版',data:[92,90,88,90,93],borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,.16)',pointBackgroundColor:'#f59e0b',borderWidth:2}
   ]},
