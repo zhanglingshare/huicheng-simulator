@@ -21,6 +21,8 @@ h1{font-size:20px;margin:0 0 2px}
 .tag{font-size:10px;fill:#5b6b82}
 .pop{background:#0a0f1a;border:1px solid #22304a;border-radius:8px;padding:12px;font-size:12.5px;color:#cbd5e1;display:none;line-height:1.7}
 .pop b{color:#fbbf24}
+.cursor{display:inline-block;width:2px;height:1.1em;background:#fbbf24;margin-left:1px;vertical-align:text-bottom;animation:blink .8s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
 </style></head><body>
 
 <div class="nav">
@@ -104,12 +106,7 @@ h1{font-size:20px;margin:0 0 2px}
 
   <!-- 冲击文字 -->
   <div class="card" style="border-color:#7f1d1d;background:#120c14">
-    <div style="font-size:14.5px;line-height:2.1;color:#e6edf3">
-      我们习惯为大项目、大数字、大平台激动——几十亿的投资、千亿的目标，写在最显眼的地方。<br>
-      但一座城真正的较量，藏在那些被叫做"配套""民生""小事"的地方：<b style="color:#f97316">一条每天要走的路、一个孩子的学位、一家楼下的小店、一个年轻人的去留。</b><br>
-      大项目能给一座城一个<b>高度</b>，但只有这些小地基，能决定它站不站得<b>稳</b>。<br>
-      我们总在为结果焦虑，却常常忘了——<b style="color:#fbbf24">结果，是地基长出来的。</b>
-    </div>
+    <div id="type1" style="font-size:14.5px;line-height:2.1;color:#e6edf3;min-height:120px"></div>
   </div>
 
   <!-- 地基支撑图 -->
@@ -161,13 +158,7 @@ h1{font-size:20px;margin:0 0 2px}
 
   <!-- 收尾 -->
   <div class="card" style="margin-top:12px;text-align:center">
-    <div style="font-size:15px;line-height:2.1;color:#cbd5e1">
-      看一个地方，别只抬头看它有多高。<br>
-      低头看看——走在里面的人，路顺不顺、孩子有没有学上、日子有没有奔头。<br>
-      大数字会被记住一时，<br>
-      但只有<b style="color:#fbbf24">人愿意把下一个五年留在这里</b>，这座城才有真正的未来。<br>
-      <b style="color:#f97316;font-size:17px">人对了，数字，自然会跟上。</b>
-    </div>
+    <div id="type2" style="font-size:15px;line-height:2.1;color:#cbd5e1;min-height:150px"></div>
     <div style="font-size:11px;color:#5b6b82;margin-top:12px;line-height:1.7">
       数字均来自惠城区统计公报、政府工作报告、民生实事等公开渠道；只说"关联/连着"，不说"导致"。通勤流向缺真实OD数据，为D级假设。
     </div>
@@ -270,5 +261,44 @@ new Chart(document.getElementById('commChart').getContext('2d'),{
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
     scales:{x:{ticks:{color:'#6b7280',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#6b7280',font:{size:9}},grid:{color:'#1c2739'}},title:{display:true,text:'园区扩能，通勤人数跟着涨',color:'#6b7280',font:{size:9}}}}
 });
+
+// 打字机（支持HTML标签整体跳过）
+function typeWriter(el, html, speed, cb){
+  let i=0, out='';
+  const cur='<span class="cursor"></span>';
+  function tick(){
+    if(i>=html.length){el.innerHTML=out;if(cb)cb();return;}
+    if(html[i]==='<'){
+      const end=html.indexOf('>',i);
+      out+=html.slice(i,end+1);i=end+1;
+    }else{out+=html[i];i++;}
+    el.innerHTML=out+cur;
+    setTimeout(tick,speed);
+  }
+  tick();
+}
+
+const t1='我们习惯为大项目、大数字、大平台激动——几十亿的投资、千亿的目标，写在最显眼的地方。<br>'+
+  '但一座城真正的较量，藏在那些被叫做“配套”“民生”“小事”的地方：<b style="color:#f97316">一条每天要走的路、一个孩子的学位、一家楼下的小店、一个年轻人的去留。</b><br>'+
+  '大项目能给一座城一个<b>高度</b>，但只有这些小地基，能决定它站不站得<b>稳</b>。<br>'+
+  '我们总在为结果焦虑，却常常忘了——<b style="color:#fbbf24">结果，是地基长出来的。</b>';
+
+const t2='看一个地方，别只抬头看它有多高。<br>'+
+  '低头看看——走在里面的人，路顺不顺、孩子有没有学上、日子有没有奔头。<br>'+
+  '大数字会被记住一时，<br>'+
+  '但只有<b style="color:#fbbf24">人愿意把下一个五年留在这里</b>，这座城才有真正的未来。<br>'+
+  '<b style="color:#f97316;font-size:17px">人对了，数字，自然会跟上。</b>';
+
+const fired=new Set();
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting && !fired.has(e.target.id)){
+      fired.add(e.target.id);
+      typeWriter(e.target, e.target.id==='type1'?t1:t2, 45);
+    }
+  });
+},{threshold:0.3});
+io.observe(document.getElementById('type1'));
+io.observe(document.getElementById('type2'));
 </script>
 </body></html>
