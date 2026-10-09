@@ -35,6 +35,7 @@ h1{font-size:20px;margin:0 0 2px;letter-spacing:.5px}
   <a href="who.html">③ 基本面</a>
   <a href="choices.html">④ 五条路</a>
   <a href="future.html" class="on">⑤ 未来</a>
+  <a href="path.html">⑥ 路径系数</a>
   <span class="sp">互动 · 拖动试试</span>
 </div>
 
@@ -108,12 +109,6 @@ h1{font-size:20px;margin:0 0 2px;letter-spacing:.5px}
           <div style="font-size:10px;color:#5b6b82">招商超预期+投产提前</div>
         </div>
       </div>
-    </div>
-
-    <div class="card">
-      <h2>每条路对结果的影响有多大</h2>
-      <div style="height:200px"><canvas id="pathcoef"></canvas></div>
-      <div style="font-size:11px;color:#5b6b82;margin-top:6px">数字越大，这条路对最终结果影响越大。最粗的那条就是命门。</div>
     </div>
 
     <div id="conclusion" style="background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:16px;margin-top:12px;font-size:13px;line-height:1.8;color:#cbd5e1"></div>
@@ -264,28 +259,6 @@ function run(){
   document.getElementById('bad').textContent=Math.round(p10)+'亿';
   document.getElementById('mid').textContent=Math.round(p50)+'亿';
   document.getElementById('good').textContent=Math.round(p90)+'亿';
-
-  // 路径系数图
-  const pNames=['新投产项目','三大集群','AI机器人','服务业带动','融深融湾'];
-  const pColors=['#3b82f6','#8b5cf6','#06b6d4','#fbbf24','#f87171'];
-  if(window._pChart)window._pChart.destroy();
-  window._pChart=new Chart(document.getElementById('pathcoef').getContext('2d'),{
-    type:'bar',
-    data:{labels:pNames,datasets:[{
-      data:coefs.map(c=>Math.abs(c)),
-      backgroundColor:pColors,
-      borderRadius:4
-    }]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},
-        tooltip:{callbacks:{label:(item)=>'影响系数 '+item.parsed.x.toFixed(2)}}
-      },
-      scales:{
-        x:{ticks:{color:'#6b7280',callback:v=>v.toFixed(1)},grid:{color:'#1c2739'},max:1},
-        y:{ticks:{color:'#93a4bd',font:{size:12}},grid:{display:false}}
-      }
-    }
-  });
 
   // 一段话总结
   const maxIdx=coefs.indexOf(Math.max(...coefs));
