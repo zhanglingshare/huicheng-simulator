@@ -237,6 +237,7 @@ function drawRank(){
 }
 
 Object.keys(state).forEach(k=>{drawMini(k);renderRO(k);});
-drawWaterfall();drawRank();
+try{drawWaterfall();}catch(e){window.__wfErr=e.message+' || '+(e.stack||'').slice(0,220);}
+try{drawRank();}catch(e){window.__rankErr=e.message+' || '+(e.stack||'').slice(0,220);}
 </script>
 </body></html>
