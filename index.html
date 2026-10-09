@@ -207,8 +207,9 @@ async function fetchLive(){
               h:Math.max(60, 95-i*1.5),
               c:"city",
               src:api.name+"·实时",
+              url:it.url||it.mobileUrl||"",
               d:`来自${api.name}实时榜第${i+1}位`,
-              why:"热搜在榜——这是正在被讨论的事。",
+              why:"热搜在榜——这是正在被讨论的事。点标题看原文。",
               live:true
             });
           }
@@ -240,7 +241,7 @@ function render(){
           <span style="flex:1;height:6px;background:#16233a;border-radius:3px;overflow:hidden"><i style="display:block;height:100%;width:${x.hs}%;background:linear-gradient(90deg,#f87171,#fbbf24)"></i></span>
           <span class="src">${x.src}</span>
         </div>
-        <div class="detail" style="font-size:12.5px;color:#cbd5e1;margin-top:8px">${x.d}<br><span style="color:#fbbf24">→ ${x.why}</span></div>
+        <div class="detail" style="font-size:12.5px;color:#cbd5e1;margin-top:8px">${x.d}<br><span style="color:#fbbf24">→ ${x.why}</span>${x.url?` <a href="${x.url}" target="_blank" style="color:#60a5fa">📰 看原文</a>`:""}</div>
       </div>`;
     }
     return `<div class="topic ${catCls}" style="animation-delay:${i*50}ms" onclick="this.classList.toggle('open')">
@@ -253,7 +254,7 @@ function render(){
           <span class="src">${x.src}</span>
           <span class="cat-tag" style="background:${tagBg};color:${tagFg}">${catName}</span>
         </div>
-        <div class="detail">${x.d}<br><span style="color:#fbbf24">→ ${x.why}</span></div>
+        <div class="detail">${x.d}<br><span style="color:#fbbf24">→ ${x.why}</span>${x.url?` <a href="${x.url}" target="_blank" style="color:#60a5fa">📰 看原文</a>`:""}</div>
       </div>
     </div>`;
   }).join("");
