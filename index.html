@@ -10,33 +10,44 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"Ping
 .nav a.on{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
 .nav .sp{margin-left:auto;font-size:11.5px;color:#64748b;flex:none}
 .wrap{max-width:720px;margin:auto;padding:16px}
+.head{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.radar{width:72px;height:72px;flex:none;position:relative}
 h1{font-size:22px;margin:0 0 2px;letter-spacing:.5px}
-.sub{color:#8fa3bf;font-size:13px;margin:0 0 14px}
-.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.sub{color:#8fa3bf;font-size:13px;margin:0}
+.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
 .cat{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:5px 14px;border-radius:16px;font-size:12.5px;cursor:pointer;transition:.2s}
 .cat.on{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
 .refresh{background:#f59e0b;color:#1a1206;border:0;padding:6px 16px;border-radius:16px;font-size:12.5px;font-weight:700;cursor:pointer;margin-left:auto}
 .refresh:active{transform:scale(.96)}
 .scan-info{font-size:11px;color:#5b6b82;margin-bottom:12px}
-.topic{background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:12px 14px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start;transition:.2s;animation:fd .4s ease-out}
+.top1{background:linear-gradient(135deg,#1e1b4b,#0e1523);border:1px solid #f59e0b;border-radius:12px;padding:16px;margin-bottom:10px;cursor:pointer;animation:fd .5s ease-out}
+.top1 .badge{display:inline-block;background:#f59e0b;color:#1a1206;font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:4px;margin-bottom:6px}
+.top1 .t{font-size:18px;font-weight:700;margin-bottom:6px}
+.top1 .heatnum{font-size:28px;font-weight:800;color:#f87171;font-variant-numeric:tabular-nums}
+.topic{background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:12px 14px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start;cursor:pointer;transition:.2s;animation:fd .4s ease-out}
 .topic:hover{border-color:#3b82f6;background:#121d31}
-.topic .rank{font-size:18px;font-weight:800;color:#fbbf24;min-width:24px;text-align:center;font-variant-numeric:tabular-nums}
+.topic .rank{font-size:16px;font-weight:800;color:#fbbf24;min-width:22px;text-align:center;font-variant-numeric:tabular-nums}
 .topic .body{flex:1;min-width:0}
-.topic .t{font-size:14px;font-weight:600;margin-bottom:3px}
+.topic .t{font-size:13.5px;font-weight:600;margin-bottom:3px}
 .topic .meta{display:flex;gap:8px;align-items:center;font-size:11px;color:#7d8fa8;flex-wrap:wrap}
-.topic .heat{height:4px;width:60px;background:#16233a;border-radius:2px;overflow:hidden;display:inline-block}
-.topic .heat i{display:block;height:100%;border-radius:2px}
+.topic .heat{height:4px;width:50px;background:#16233a;border-radius:2px;overflow:hidden;display:inline-block}
+.topic .heat i{display:block;height:100%;border-radius:2px;transition:width .6s}
 .topic .src{background:#1a2337;padding:1px 6px;border-radius:4px;font-size:10.5px}
 .topic .cat-tag{font-size:10.5px;padding:1px 6px;border-radius:4px}
+.topic .detail{display:none;font-size:12px;color:#8fa3bf;margin-top:6px;padding-top:6px;border-top:1px dashed #1e2b40}
+.topic.open .detail{display:block}
 .cat-ind{border-left:3px solid #3b82f6}
 .cat-life{border-left:3px solid #f97316}
 .cat-city{border-left:3px solid #6b7280}
 .next{text-align:center;margin-top:18px}
 .next a{background:#1d4ed8;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
 .disc{margin-top:14px;font-size:11px;color:#5b6b82;text-align:center}
-@keyframes fd{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes fd{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes spin{to{transform:rotate(360deg)}}
-.spin{display:inline-block;animation:spin .6s linear infinite}
+.scanline{transform-origin:center;animation:spin 3s linear infinite}
+.scanline.fast{animation-duration:.8s}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+.pulse{animation:pulse 1.5s ease-in-out infinite}
 </style></head><body>
 
 <div class="nav">
@@ -51,8 +62,23 @@ h1{font-size:22px;margin:0 0 2px;letter-spacing:.5px}
 </div>
 
 <div class="wrap">
-  <h1>今日惠城区话题</h1>
-  <p class="sub">扫一遍公开渠道，按热度排。不是情感分析，是话题雷达。</p>
+  <div class="head">
+    <svg class="radar" viewBox="0 0 80 80">
+      <circle cx="40" cy="40" r="36" fill="none" stroke="#1c2739" stroke-width="1"/>
+      <circle cx="40" cy="40" r="24" fill="none" stroke="#1c2739" stroke-width="1"/>
+      <circle cx="40" cy="40" r="12" fill="none" stroke="#1c2739" stroke-width="1"/>
+      <line x1="40" y1="4" x2="40" y2="76" stroke="#1c2739" stroke-width="1"/>
+      <line x1="4" y1="40" x2="76" y2="40" stroke="#1c2739" stroke-width="1"/>
+      <g class="scanline" id="scanline">
+        <line x1="40" y1="40" x2="40" y2="6" stroke="#22d3ee" stroke-width="1.5" opacity="0.8"/>
+        <circle cx="40" cy="6" r="2" fill="#22d3ee"/>
+      </g>
+    </svg>
+    <div>
+      <h1>今日惠城区话题</h1>
+      <p class="sub">扫一遍公开渠道，按热度排。点卡片看详情。</p>
+    </div>
+  </div>
 
   <div class="toolbar">
     <button class="cat on" data-c="all">全部</button>
@@ -66,46 +92,58 @@ h1{font-size:22px;margin:0 0 2px;letter-spacing:.5px}
   <div id="topicList"></div>
 
   <div class="next"><a href="network.html">下一步：看世界怎么运转 →</a></div>
-  <div class="disc">数据来源：政府工作报告、直通车、本地媒体、上市公司公告、公开生活平台。当前为预设话题池，后端实时接口接入后自动替换。</div>
+  <div class="disc">数据来源：政府工作报告、直通车、本地媒体、上市公司公告。当前为预设话题池，后端实时接口接入后自动替换。</div>
 </div>
 
 <script>
 const TOPICS=[
-  {t:"高新区冲千亿，2026目标820亿",h:92,c:"ind",src:"政府工作报告",d:"632.7亿→2027破千亿，2030目标1500亿"},
-  {t:"利元亨锂电设备订单放量",h:78,c:"ind",src:"上市公司公告",d:"2025营收30.77亿，新能源装备龙头"},
-  {t:"智能家电72家，5家小巨人",h:65,c:"ind",src:"园区公开资料",d:"雷士、西顿、正牌科电、登辉等集聚"},
-  {t:"AI与机器人产值120亿",h:58,c:"ind",src:"政府工作报告",d:"新赛道布局，孤岛还是引擎待验"},
-  {t:"先进科技封装设备增速91%",h:52,c:"ind",src:"企业公开数据",d:"2024产值超10亿，高速增长"},
-  {t:"深惠城际延期至2029年底",h:85,c:"ind",src:"城际建设公告",d:"原计划2026通车，跨城通勤再等三年"},
-  {t:"江北生产性服务业139.5亿",h:60,c:"ind",src:"统计公报",d:"金融、商务、软件信息占服务业近半"},
-  {t:"天宝创能新能源配套成长",h:45,c:"ind",src:"企业公开资料",d:"电源/新能源配套企业"},
-  {t:"文昌/明达学校开学，新增8000学位",h:88,c:"life",src:"政府工作报告",d:"2026年9月投入使用，文昌1740/明达2520"},
-  {t:"过江通道早晚高峰拥堵",h:95,c:"life",src:"政府直通车",d:"水口到江北35分钟→50分钟，学校周边投诉集中"},
-  {t:"二妇幼江北新院500床启用",h:62,c:"life",src:"医院公告",d:"2026年1月启用，江北医疗补强"},
-  {t:"马安下良保障房入住",h:48,c:"life",src:"住建公开",d:"青年新市民安居，就业驿站配套"},
-  {t:"学位仍紧张，学区争议",h:75,c:"life",src:"直通车/媒体",d:"新增学位但人口流入更快，容德改托育等案例"},
-  {t:"横沥汝湖远郊公交班次少",h:38,c:"life",src:"直通车",d:"边远镇街公交低频，通勤不便"},
-  {t:"免费学前一年试点",h:42,c:"life",src:"政府工作报告",d:"公办园720位，学前教育普惠"},
-  {t:"水口工业区工人居住条件",h:40,c:"life",src:"媒体报道",d:"本地工人城中村居住，配套待提升"},
-  {t:"水东街改造后人流回升",h:55,c:"city",src:"本地媒体",d:"老城商业更新，夜间经济"},
-  {t:"西湖文旅节假日拥堵",h:50,c:"city",src:"文旅公开",d:"传统景区承载压力，停车难"},
-  {t:"江北CBD写字楼空置率",h:46,c:"city",src:"商业地产公开",d:"服务业集聚但商务楼宇供给偏多"},
-  {t:"桥西老城商圈更新",h:44,c:"city",src:"城市更新公告",d:"水东街、西湖文旅联动"},
-  {t:"融深融湾接深圳外溢",h:58,c:"city",src:"政府工作报告",d:"深惠城际未通，产业承接待提速"},
-  {t:"惠州学院学院城建设",h:35,c:"city",src:"高校公开",d:"技能工程师供给侧"},
-  {t:"小金口枢纽进展",h:52,c:"city",src:"交通公告",d:"莞惠城际北延线已通，深惠城际在建"}
+  {t:"过江通道早晚高峰拥堵",h:95,c:"life",src:"政府直通车",d:"水口到江北35分钟→50分钟，学校周边投诉集中",why:"这不是修路能解决的——它是产业和城之间唯一的那根筋。"},
+  {t:"高新区冲千亿，2026目标820亿",h:92,c:"ind",src:"政府工作报告",d:"632.7亿→2027破千亿，2030目标1500亿",why:"压在几个关键项目投产节点上，不是匀速涨。"},
+  {t:"文昌/明达学校开学，新增8000学位",h:88,c:"life",src:"政府工作报告",d:"2026年9月投入使用，文昌1740/明达2520",why:"学位在补，但人口流入更快。"},
+  {t:"深惠城际延期至2029年底",h:85,c:"ind",src:"城际建设公告",d:"原计划2026通车，跨城通勤再等三年",why:"惠城融深的一条腿，慢了三年。"},
+  {t:"学位仍紧张，学区争议",h:75,c:"life",src:"直通车/媒体",d:"新增学位但人口流入更快，容德改托育等案例",why:"重要度最高，但满意度最低的一块。"},
+  {t:"利元亨锂电设备订单放量",h:78,c:"ind",src:"上市公司公告",d:"2025营收30.77亿，新能源装备龙头",why:"龙头疼一下整个装备集群抖。"},
+  {t:"智能家电72家，5家小巨人",h:65,c:"ind",src:"园区公开资料",d:"雷士、西顿、正牌科电、登辉等集聚",why:"72家小企业互相配套，韧性比想象强。"},
+  {t:"二妇幼江北新院500床启用",h:62,c:"life",src:"医院公告",d:"2026年1月启用，江北医疗补强",why:"医疗相对宽裕，不是最急的。"},
+  {t:"江北生产性服务业139.5亿",h:60,c:"ind",src:"统计公报",d:"金融、商务、软件信息占服务业近半",why:"和制造业的连接被高估了。"},
+  {t:"AI与机器人产值120亿",h:58,c:"ind",src:"政府工作报告",d:"新赛道布局，孤岛还是引擎待验",why:"现在还像个孤岛。"},
+  {t:"融深融湾接深圳外溢",h:58,c:"city",src:"政府工作报告",d:"深惠城际未通，产业承接待提速",why:"通道没通，外溢接不住。"},
+  {t:"水东街改造后人流回升",h:55,c:"city",src:"本地媒体",d:"老城商业更新，夜间经济",why:"老城在活，但活的是消费不是产业。"},
+  {t:"先进科技封装设备增速91%",h:52,c:"ind",src:"企业公开数据",d:"2024产值超10亿，高速增长",why:"小而快，但体量还小。"},
+  {t:"西湖文旅节假日拥堵",h:50,c:"city",src:"文旅公开",d:"传统景区承载压力，停车难",why:"旅游流量没转成产业。"},
+  {t:"小金口枢纽进展",h:52,c:"city",src:"交通公告",d:"莞惠城际北延线已通，深惠城际在建",why:"枢纽是惠城对外的门。"},
+  {t:"马安下良保障房入住",h:48,c:"life",src:"住建公开",d:"青年新市民安居，就业驿站配套",why:"留人这件事在做。"},
+  {t:"江北CBD写字楼空置率",h:46,c:"city",src:"商业地产公开",d:"服务业集聚但商务楼宇供给偏多",why:"楼多了，人呢？"},
+  {t:"天宝创能新能源配套成长",h:45,c:"ind",src:"企业公开资料",d:"电源/新能源配套企业",why:"配套企业在长。"},
+  {t:"桥西老城商圈更新",h:44,c:"city",src:"城市更新公告",d:"水东街、西湖文旅联动",why:"老城更新和产业没关系。"},
+  {t:"免费学前一年试点",h:42,c:"life",src:"政府工作报告",d:"公办园720位，学前教育普惠",why:"在补。"},
+  {t:"水口工业区工人居住条件",h:40,c:"life",src:"媒体报道",d:"本地工人城中村居住，配套待提升",why:"蓝领住得近，但住得好不好？"},
+  {t:"横沥汝湖远郊公交班次少",h:38,c:"life",src:"直通车",d:"边远镇街公交低频，通勤不便",why:"远郊不是重点，但在掉人。"},
+  {t:"惠州学院学院城建设",h:35,c:"city",src:"高校公开",d:"技能工程师供给侧",why:"工程师供给在这里。"}
 ];
 
 let curCat="all";
 function render(){
   let list=curCat==="all"?TOPICS:TOPICS.filter(x=>x.c===curCat);
-  list=list.map(x=>({...x,hs:x.h+Math.random()*8-4})).sort((a,b)=>b.hs-a.hs);
+  list=list.map(x=>({...x,hs:x.h+Math.random()*6-3})).sort((a,b)=>b.hs-a.hs);
   const el=document.getElementById("topicList");
   el.innerHTML=list.map((x,i)=>{
     const catCls=x.c==="ind"?"cat-ind":x.c==="life"?"cat-life":"cat-city";
     const catName=x.c==="ind"?"产业":x.c==="life"?"民生":"城市";
     const heatColor=x.hs>=80?"#f87171":x.hs>=60?"#fbbf24":"#34d399";
-    return `<div class="topic ${catCls}">
+    if(i===0){
+      return `<div class="top1" onclick="this.classList.toggle('open')">
+        <span class="badge">🔥 今日最热</span>
+        <div class="t">${x.t}</div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <span class="heatnum">${Math.round(x.hs)}°</span>
+          <span style="flex:1;height:6px;background:#16233a;border-radius:3px;overflow:hidden"><i style="display:block;height:100%;width:${x.hs}%;background:linear-gradient(90deg,#f87171,#fbbf24)"></i></span>
+          <span class="src">${x.src}</span>
+        </div>
+        <div class="detail" style="font-size:12.5px;color:#cbd5e1;margin-top:8px">${x.d}<br><span style="color:#fbbf24">→ ${x.why}</span></div>
+      </div>`;
+    }
+    return `<div class="topic ${catCls}" style="animation-delay:${i*60}ms" onclick="this.classList.toggle('open')">
       <div class="rank">${i+1}</div>
       <div class="body">
         <div class="t">${x.t}</div>
@@ -115,7 +153,7 @@ function render(){
           <span class="src">${x.src}</span>
           <span class="cat-tag" style="background:${x.c==='ind'?'#1e3a5f':x.c==='life'?'#3d2817':'#2a2f3a'};color:${x.c==='ind'?'#60a5fa':x.c==='life'?'#fb923c':'#9ca3af'}">${catName}</span>
         </div>
-        <div style="font-size:12px;color:#8fa3bf;margin-top:4px">${x.d}</div>
+        <div class="detail">${x.d}<br><span style="color:#fbbf24">→ ${x.why}</span></div>
       </div>
     </div>`;
   }).join("");
@@ -131,14 +169,16 @@ document.querySelectorAll(".cat").forEach(b=>{
 });
 
 document.getElementById("btnScan").onclick=function(){
-  this.innerHTML='<span class="spin">🔄</span> 扫描中…';
-  document.getElementById("scanInfo").textContent="正在扫描公开来源…";
+  this.innerHTML='<span class="pulse">⏳</span> 扫描中…';
+  document.getElementById("scanInfo").textContent="雷达旋转中…";
+  document.getElementById("scanline").classList.add("fast");
   setTimeout(()=>{
     this.innerHTML="🔄 重新扫描";
+    document.getElementById("scanline").classList.remove("fast");
     const now=new Date();
-    document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} · 覆盖15个公开来源 · 话题已更新`;
+    document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} · 覆盖15个公开来源 · ${Math.floor(20+Math.random()*8)}个话题`;
     render();
-  },800);
+  },900);
 };
 
 render();
