@@ -133,6 +133,12 @@ function render(cat){
     </div>`;
   }).join("");
 }
+function likeSpot(el,name){
+  let n=parseInt(localStorage.getItem("like_spot_"+name)||el.querySelector("b").textContent)+1;
+  el.querySelector("b").textContent=n;
+  localStorage.setItem("like_spot_"+name,n);
+  el.style.transform="scale(1.2)";setTimeout(()=>el.style.transform="",200);
+}
 render("all");
 document.querySelectorAll("#tabs button").forEach(b=>{
   b.onclick=()=>{
