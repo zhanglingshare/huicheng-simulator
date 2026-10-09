@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠城产业风洞 · 风洞测试</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
+.nav b{font-size:14px;margin-right:6px;flex:none}
+.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
+.nav a.on{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
+.wrap{max-width:820px;margin:auto;padding:16px}
+h1{font-size:20px;margin:0 0 2px}
+.sub{color:#8fa3bf;font-size:13px;margin:0 0 16px}
+.section-title{font-size:16px;font-weight:700;margin:22px 0 10px;padding-left:10px;border-left:3px solid #3b82f6}
+.section-title.rev{border-color:#f87171}
+.card{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:16px;margin-bottom:12px}
+.card h2{font-size:14px;margin:0 0 10px}
+.press{display:flex;gap:6px;margin-bottom:10px}
+.press button{flex:1;background:#0a0f1a;border:1px solid #22304a;color:#93a4bd;padding:8px 4px;border-radius:8px;font-size:11.5px;cursor:pointer;transition:.15s}
+.press button.sel{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
+.press button.revbtn.sel{background:#b91c1c;border-color:#f87171}
+.readout{background:#0a0f1a;border-radius:8px;padding:10px;font-size:12.5px;color:#cbd5e1;line-height:1.7}
+.readout .big{font-size:20px;font-weight:800}
+.note{font-size:11.5px;color:#8fa3bf;margin-top:10px;line-height:1.7}
+.btn{background:#1d4ed8;color:#fff;border:0;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer}
+#rankChart{height:240px}
+.hint{font-size:11px;color:#5b6b82;text-align:center;margin-top:6px}
+</style></head><body>
+
+<div class="nav">
+  <b>惠城产业风洞</b>
+  <a href="index.html">① 今日话题</a>
+  <a href="network.html">② 建构世界</a>
+  <a href="who.html">③ 基本面</a>
+  <a href="choices.html">④ 五条路</a>
+  <a href="future.html">⑤ 未来</a>
+  <a href="windtunnel.html" class="on">⑥ 风洞测试</a>
+</div>
+
+<div class="wrap">
+  <h1>风洞测试</h1>
+  <p class="sub">先看常规压力，再看一个容易被忽略的地方。点档位，看结果怎么变。</p>
+
+  <!-- ========== 上半场：常规压力 ========== -->
+  <div class="section-title">上半场 · 四个常规压力</div>
+
+  <div class="card">
+    <h2>① 项目投产延期</h2>
+    <div class="press">
+      <button onclick="pick(this,'delay',0)">不延期</button>
+      <button onclick="pick(this,'delay',1)">1/3晚半年</button>
+      <button class="sel" onclick="pick(this,'delay',2)">一半晚一年</button>
+      <button onclick="pick(this,'delay',3)">关键项目晚两年</button>
+    </div>
+    <div class="readout" id="ro-delay"></div>
+    <div class="note">现实苗头：固投-37.1%、地方财政偏紧，工期最容易滑。</div>
+  </div>
+
+  <div class="card">
+    <h2>② 招商不及预期</h2>
+    <div class="press">
+      <button onclick="pick(this,'invest',0)">100%完成</button>
+      <button class="sel" onclick="pick(this,'invest',1)">完成80%</button>
+      <button onclick="pick(this,'invest',2)">完成60%</button>
+      <button onclick="pick(this,'invest',3)">完成40%</button>
+    </div>
+    <div class="readout" id="ro-invest"></div>
+    <div class="note">现实苗头：新增规上75家目标不低，周边城市都在抢项目。</div>
+  </div>
+
+  <div class="card">
+    <h2>③ 外部需求走弱</h2>
+    <div class="press">
+      <button onclick="pick(this,'export',0)">维持高增长</button>
+      <button class="sel" onclick="pick(this,'export',1)">增速降到8%</button>
+      <button onclick="pick(this,'export',2)">零增长</button>
+      <button onclick="pick(this,'export',3)">下降10%</button>
+    </div>
+    <div class="readout" id="ro-export"></div>
+    <div class="note">现实苗头：出口增速17.6%，但全球复苏缓慢，高增速难持续。</div>
+  </div>
+
+  <div class="card">
+    <h2>④ 融深节奏继续慢</h2>
+    <div class="press">
+      <button onclick="pick(this,'shen',0)">2029如期通</button>
+      <button class="sel" onclick="pick(this,'shen',1)">2030才通</button>
+      <button onclick="pick(this,'shen',2)">2031才通</button>
+      <button onclick="pick(this,'shen',3)">通了客流也低</button>
+    </div>
+    <div class="readout" id="ro-shen"></div>
+    <div class="note">现实苗头：深惠城际已延期至2029，可能再滑。</div>
+  </div>
+
+  <div class="card">
+    <h2>四个常规压力，各自拉低多少</h2>
+    <div id="rankChart"><canvas id="rank"></canvas></div>
+    <div class="hint">条越长杀伤力越大。这四个，是规划里已经盯着的。</div>
+  </div>
+
+  <!-- ========== 下半场：反转 ========== -->
+  <div class="section-title rev">下半场 · 一个容易被忽略的地方</div>
+
+  <div class="card" style="border-color:#7f1d1d">
+    <h2>压龙头 vs 压通勤路</h2>
+    <p style="font-size:12.5px;color:#93a4bd;margin:0 0 12px">
+      大家最担心的是龙头出问题。那我们分别压一下：一个50亿龙头，和一条连接产业区与城区的通勤路。
+    </p>
+
+    <h2 style="color:#fbbf24">A. 利元亨外迁（50亿龙头走了）</h2>
+    <div class="press">
+      <button onclick="pick(this,'dragon',0)">没走</button>
+      <button class="sel revbtn" onclick="pick(this,'dragon',1)">外迁</button>
+    </div>
+    <div class="readout" id="ro-dragon"></div>
+
+    <h2 style="color:#fbbf24;margin-top:16px">B. 过江通道通勤压力</h2>
+    <div class="press">
+      <button onclick="pick(this,'commute',0)">畅通</button>
+      <button class="sel revbtn" onclick="pick(this,'commute',1)">通勤+20%</button>
+      <button onclick="pick(this,'commute',2)">通勤+40%</button>
+      <button onclick="pick(this,'commute',3)">通勤+60%</button>
+    </div>
+    <div class="readout" id="ro-commute"></div>
+    <div class="note">
+      通勤一压是双向失血：东江湾工厂招工难，江北服务业同时丢消费。<br>
+      通勤拥堵不是假设，过江通道早晚高峰排队已经在发生，高新区扩能后还会加重。
+    </div>
+  </div>
+
+  <div class="card" style="border-color:#7f1d1d">
+    <h2>全部压力，按杀伤力重新排序</h2>
+    <div id="rankChart2" style="height:280px"><canvas id="rank2"></canvas></div>
+    <div class="hint" id="rank2-note"></div>
+  </div>
+
+  <div class="card" id="final-card">
+    <h2>这一测，提示了什么</h2>
+    <div id="final" style="font-size:13.5px;line-height:1.9;color:#cbd5e1"></div>
+    <div style="font-size:11px;color:#5b6b82;margin-top:12px;line-height:1.7">
+      边界：通勤走廊的"必经性"由地理决定（就那几条过江通道），是硬的；但具体通勤流量缺真实OD数据，为D级假设。
+      拓扑重不重要和参数准不准是两回事。不测极端黑天鹅（战争、重大疫情、金融危机）。
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:20px 0">
+    <a class="btn" href="index.html">回到首页</a>
+  </div>
+</div>
+
+<script>
+// 基准：中位约1578亿，达标概率约67%
+const BASE_TOTAL=1578, BASE_PROB=67;
+// 各档位对产值的拉低（亿）——基于第五页参数的合理折算
+const effects={
+  delay:[0,40,90,180],
+  invest:[0,50,110,170],
+  export:[0,30,70,120],
+  shen:[0,15,30,45],
+  dragon:[0,50],
+  commute:[0,60,120,190]
+};
+const state={delay:2,invest:1,export:1,shen:1,dragon:1,commute:1};
+const names={delay:'投产延期',invest:'招商不及预期',export:'外需走弱',shen:'融深变慢',dragon:'龙头外迁',commute:'通勤压力'};
+
+function pick(btn,key,level){
+  const siblings=btn.parentElement.querySelectorAll('button');
+  siblings.forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  state[key]=level;
+  render(key);
+  renderRanks();
+}
+
+function render(key){
+  const drop=effects[key][state[key]];
+  const total=BASE_TOTAL-drop;
+  const prob=Math.max(0,BASE_PROB-drop*0.35);
+  const el=document.getElementById('ro-'+key);
+  if(el){
+    el.innerHTML=(drop>0?
+      '产值拉低约 <span class="big" style="color:#f87171">'+drop+'亿</span>，达标概率降到 <span class="big" style="color:'+(prob>40?'#fbbf24':'#f87171')+'">'+prob.toFixed(0)+'%</span>'
+      :'没有压力，达标概率维持 <span class="big" style="color:#34d399">'+BASE_PROB+'%</span>');
+  }
+}
+
+let r1=null,r2=null;
+function renderRanks(){
+  // 上半场排序
+  const regKeys=['delay','invest','export','shen'];
+  const regData=regKeys.map(k=>effects[k][state[k]]).sort((a,b)=>b-a);
+  const regLabels=regKeys.slice().sort((a,b)=>effects[b][state[b]]-effects[a][state[a]]).map(k=>names[k]);
+  if(r1)r1.destroy();
+  r1=new Chart(document.getElementById('rank').getContext('2d'),{
+    type:'bar',
+    data:{labels:regLabels,datasets:[{data:regData,backgroundColor:'#3b82f6',borderRadius:4}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>'拉低 '+it.parsed.x+'亿'}}},
+      scales:{x:{ticks:{color:'#6b7280',callback:v=>v+'亿'},grid:{color:'#1c2739'}},y:{ticks:{color:'#93a4bd'},grid:{display:false}}}
+    }
+  });
+
+  // 全部排序
+  const allKeys=['delay','invest','export','shen','dragon','commute'];
+  const sorted=allKeys.slice().sort((a,b)=>effects[b][state[b]]-effects[a][state[a]]);
+  if(r2)r2.destroy();
+  r2=new Chart(document.getElementById('rank2').getContext('2d'),{
+    type:'bar',
+    data:{labels:sorted.map(k=>names[k]),datasets:[{
+      data:sorted.map(k=>effects[k][state[k]]),
+      backgroundColor:sorted.map(k=>k==='commute'?'#f87171':k==='dragon'?'#fbbf24':'#3b82f6'),
+      borderRadius:4
+    }]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>'拉低 '+it.parsed.x+'亿'}}},
+      scales:{x:{ticks:{color:'#6b7280',callback:v=>v+'亿'},grid:{color:'#1c2739'}},y:{ticks:{color:'#93a4bd',font:{size:12}},grid:{display:false}}}
+    }
+  });
+
+  const top=sorted[0];
+  document.getElementById('rank2-note').textContent=
+    '排第一的是「'+names[top]+'」。红色那条是通勤——看看它排在第几。';
+
+  const commuteRank=sorted.indexOf('commute')+1;
+  const dragonRank=sorted.indexOf('dragon')+1;
+  document.getElementById('final').innerHTML=
+    '上半场四个常规压力，规划里都在盯着，这很对。<br>'+
+    '但把"龙头外迁"和"通勤压力"也放进来一起排序，结果有点反常识：<b style="color:#f87171">通勤压力排在第'+commuteRank+'位</b>，' +
+    '而大家最担心的<b style="color:#fbbf24">龙头外迁排在第'+dragonRank+'位</b>。<br>'+
+    '换句话说：一个50亿龙头走了当然疼，但产业集群还在；可一条通勤路堵了，是产业招工和城市消费两个轮子一起卡。<br>'+
+    '通勤在规划文本里叫"基础设施配套"，但风洞提示：它更像两个轮子之间的传动轴。好消息是——改善通勤，比招大项目便宜、见效快、自己可控；' +
+    '风险是——它一旦堵，双向一起失血。这是一个被低估、性价比却很高的抓手。';
+}
+
+// 初始渲染
+Object.keys(state).forEach(render);
+renderRanks();
+</script>
+</body></html>
