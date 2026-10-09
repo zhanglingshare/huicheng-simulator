@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠城区产业分析报告（Demo版）· 张凌</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
+.nav b{font-size:14px;margin-right:6px;flex:none}
+.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
+.nav a.on{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
+.wrap{max-width:840px;margin:auto;padding:18px}
+.cover{text-align:center;padding:36px 20px;background:linear-gradient(160deg,#0e1a30,#0a0f1a);border:1px solid #1c2739;border-radius:16px;margin-bottom:16px}
+.cover .kick{font-size:12px;letter-spacing:3px;color:#60a5fa;margin-bottom:12px}
+.cover h1{font-size:26px;line-height:1.4;margin:0 0 10px}
+.cover .meta{font-size:12.5px;color:#8fa3bf;margin-top:16px}
+.card{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:18px;margin-bottom:14px}
+.card h2{font-size:16px;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid #1c2739}
+.card h3{font-size:13.5px;color:#60a5fa;margin:16px 0 6px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
+@media(max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:#0a0f1a;border:1px solid #1c2739;border-radius:10px;padding:12px;text-align:center}
+.kpi .v{font-size:19px;font-weight:800;color:#fbbf24}
+.kpi .l{font-size:10.5px;color:#6b7280;margin-top:3px}
+ol.find{margin:0;padding-left:20px}
+ol.find li{margin-bottom:10px;line-height:1.75}
+.src-list{font-size:12.5px;color:#cbd5e1;line-height:2}
+.src-list .grade{display:inline-block;width:22px;height:22px;line-height:22px;text-align:center;border-radius:50%;font-size:10px;font-weight:700;margin-right:6px}
+.bound{font-size:12.5px;line-height:1.9;color:#cbd5e1}
+.author{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.author .badge{width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#1d4ed8,#0e7490);display:flex;align-items:center;justify-content:center;font-size:30px;flex:none}
+.author .roles{font-size:12.5px;line-height:2;color:#cbd5e1}
+.tagline{font-size:12px;color:#8fa3bf;font-style:italic;margin-top:8px}
+.disc{font-size:11.5px;color:#6b7280;line-height:1.8;text-align:center}
+.btn{background:#1d4ed8;color:#fff;border:0;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
+</style></head><body>
+
+<div class="nav">
+  <b>惠城产业风洞</b>
+  <a href="index.html">① 今日话题</a>
+  <a href="network.html">② 建构世界</a>
+  <a href="who.html">③ 基本面</a>
+  <a href="choices.html">④ 五条路</a>
+  <a href="future.html">⑤ 未来</a>
+  <a href="windtunnel.html">⑥ 风洞测试</a>
+  <a href="blindspot.html">⑦ 忽略了什么</a>
+  <a href="report.html" class="on">⑧ 分析报告</a>
+</div>
+
+<div class="wrap">
+
+  <!-- 封面 -->
+  <div class="cover">
+    <div class="kick">区域产业决策风洞 · 第三类样本</div>
+    <h1>惠城区产业决策<br>模拟推演分析报告</h1>
+    <div style="font-size:13px;color:#cbd5e1">——人、产业与城市耦合网络的一次压力测试（Demo版）</div>
+    <div class="meta">
+      作者：<b style="color:#fbbf24">张凌 博士</b><br>
+      2026年10月 · 广东惠州
+    </div>
+  </div>
+
+  <!-- 执行摘要 -->
+  <div class="card">
+    <h2>一、执行摘要</h2>
+    <ol class="find">
+      <li><b>惠城是一座三产占69%的中心城区</b>，2025年GDP 1203.33亿元、增长4.3%；规上工业总产值973.9亿元，惠城高新区以632.7亿元、占全区规上工业约三分之二，是绝对主引擎。</li>
+      <li><b>增长结构存在"一条腿快、一条腿慢"</b>：工业与高新区增长较快，但固定资产投资下降37.1%，常住人口目标完成不足一半，城市承载没有完全跟上产业节奏。</li>
+      <li><b>最被低估的不是某个大项目，而是连接产业与城市的"通勤走廊"</b>。模拟提示：通勤边的影响系数高于单个龙头企业扩产落空，它一旦承压，产业招工与城市消费双向失血。</li>
+      <li><b>时间是被忽视的关键变量</b>：项目名称、投资、产能相同，投产时点不同，放进整个系统后结果显著不同；"晚一点"在有明确投产节点的系统里是敏感参数。</li>
+      <li><b>改善通勤、学位、留人环境等"小地基"</b>，相比招大项目更便宜、见效快、自己可控，是性价比高、却常被当成"配套"的抓手。</li>
+    </ol>
+  </div>
+
+  <!-- 基本面快照 -->
+  <div class="card">
+    <h2>二、基本面快照（2025）</h2>
+    <div class="kpis">
+      <div class="kpi"><div class="v">1203亿</div><div class="l">GDP · +4.3%</div></div>
+      <div class="kpi"><div class="v">973.9亿</div><div class="l">规上工业 · +9.6%</div></div>
+      <div class="kpi"><div class="v">632.7亿</div><div class="l">高新区 · +13.9%</div></div>
+      <div class="kpi"><div class="v">159.78万</div><div class="l">常住人口</div></div>
+      <div class="kpi"><div class="v" style="color:#f87171">-37.1%</div><div class="l">固定资产投资</div></div>
+      <div class="kpi"><div class="v">805亿</div><div class="l">社消零 · +3.7%</div></div>
+      <div class="kpi"><div class="v">64.6亿</div><div class="l">一般公共预算收入</div></div>
+      <div class="kpi"><div class="v">383.6亿</div><div class="l">外贸 · +7.1%</div></div>
+    </div>
+    <h3>高新区产值爬坡与目标</h3>
+    <div style="height:180px"><canvas id="climb"></canvas></div>
+  </div>
+
+  <!-- 核心判断 -->
+  <div class="card">
+    <h2>三、核心判断</h2>
+    <h3>1. 最大的，不一定是最关键的</h3>
+    <p style="font-size:13px;color:#cbd5e1;margin:0">连接最多、体量最大的节点代表"现在的核心"；而未来多条路径都绕不过的节点，代表"结构咽喉"。两者不是一回事。只按"谁最大"排优先级，可能把力气用在并非咽喉的位置。</p>
+    <h3>2. 通勤走廊：惠城的"传动轴"</h3>
+    <p style="font-size:13px;color:#cbd5e1;margin:0">产业在东江湾、人居在江北老城，过江通道是双向潮汐的纽带。它在规划文本里是"基础设施配套"，但模拟显示它更像两个轮子之间的传动轴——堵则产业招工与城市消费同时受损。</p>
+    <h3>3. 路径是齿轮，不是独立的腿</h3>
+    <p style="font-size:13px;color:#cbd5e1;margin:0">龙头扩能、南北一体、港口贸易、城市承载并非互相独立，更像互相咬合的齿轮：一个动，另一个跟着动；一个卡住，另一个可能一起卡。最危险的不是某条路不够强，而是它们之间不独立。</p>
+    <div style="height:180px;margin-top:12px"><canvas id="coef"></canvas></div>
+    <div style="font-size:11px;color:#5b6b82;text-align:center;margin-top:4px">各因素对结果的影响系数（模拟值，越接近1影响越大）</div>
+  </div>
+
+  <!-- 数据来源 -->
+  <div class="card">
+    <h2>四、数据来源与分级</h2>
+    <p style="font-size:12.5px;color:#8fa3bf;margin:0 0 10px">本报告数据全部来自公开渠道，并按可信度分级：</p>
+    <div class="src-list">
+      <div><span class="grade" style="background:#14532d;color:#fff">A</span><b>实测</b>：惠城区统计公报、政府工作报告、国民经济和社会发展计划执行报告、民生实事项目（直接给出的数字）</div>
+      <div><span class="grade" style="background:#1e40af;color:#fff">B</span><b>推估</b>：部分历史序列按公开增速回推</div>
+      <div><span class="grade" style="background:#713f12;color:#fff">C</span><b>代理</b>：镇街级供给代理（人口密度、是否点名、项目位置），非逐镇街实查</div>
+      <div><span class="grade" style="background:#7f1d1d;color:#fff">D</span><b>假设</b>：网络边权重、路径贡献区间、通勤强度（缺真实通勤OD数据）</div>
+    </div>
+    <h3>主要公开来源</h3>
+    <div style="font-size:12px;color:#cbd5e1;line-height:2">
+      · 惠州市人民政府门户网站、惠城区人民政府门户网站<br>
+      · 惠城区2025年国民经济和社会发展统计公报<br>
+      · 2026年惠城区政府工作报告、计划草案报告<br>
+      · 惠城高新区高质量发展大会公开信息<br>
+      · 惠州港绩效自评报告、上市公司公告及其他公开披露资料
+    </div>
+  </div>
+
+  <!-- 模型边界 -->
+  <div class="card">
+    <h2>五、模型边界与免责声明</h2>
+    <div class="bound">
+      1. <b>这不是预测器</b>：不预测具体产值或招商成败，只在一组公开数据与明确假设下，给出叙事分布与结构提示。<br>
+      2. <b>不做因果断言</b>：单一地区、有限时间序列的汇总数据，不足以支撑严格因果结论。报告统一使用"关联、同步、结构提示"，不使用"因为A所以B"。<br>
+      3. <b>反事实不可验证，但参数可核对</b>："项目晚两年会怎样"无法在现实重演，但每个参数都能回到公开资料核对。<br>
+      4. <b>不是真涌现</b>：网络主体为可复现的弱涌现模拟，未达真实经济的涌现量级。<br>
+      5. <b>本报告不构成投资建议</b>，亦不替代任何官方决策；结论随假设改变而改变。
+    </div>
+  </div>
+
+  <!-- 作者介绍 -->
+  <div class="card">
+    <h2>六、作者介绍</h2>
+    <div class="author">
+      <div class="badge">张凌</div>
+      <div style="flex:1;min-width:240px">
+        <div style="font-size:16px;font-weight:700;color:#fbbf24">张凌 博士</div>
+        <div class="roles">
+          · 高校副教授<br>
+          · 南粤优秀教师<br>
+          · 国际SCI期刊审稿人<br>
+          · 广东省乡村振兴驻镇工作队成员<br>
+          · 曾任驻村第一书记
+        </div>
+        <div class="tagline">"把不确定性，变成可拍板的结构。"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="disc">
+      本报告为Demo演示版本，数据截至公开资料最新一期。模拟结果仅代表当前数据、参数与规则下的压力测试，<br>
+      不代表对未来的精确预测，亦不构成投资建议。如对参数或假设有不同意见，可调整后重新推演。
+    </p>
+  </div>
+
+  <div style="text-align:center;margin:22px 0"><a class="btn" href="index.html">回到首页</a></div>
+</div>
+
+<script>
+const gc='#1c2739', tc='#6b7280';
+// 爬坡
+new Chart(document.getElementById('climb').getContext('2d'),{
+  type:'bar',
+  data:{labels:['2025','2026','2027','2030'],datasets:[{data:[632.7,820,1000,1500],
+    backgroundColor:['#3b82f6','#3b82f6','#fbbf24','#f87171'],borderRadius:5}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+    tooltip:{callbacks:{label:it=>it.parsed.y+'亿'}}},
+    scales:{x:{ticks:{color:'#93a4bd'},grid:{display:false}},y:{ticks:{color:tc,callback:v=>v+'亿'},grid:{color:gc}}}}
+});
+// 影响系数
+new Chart(document.getElementById('coef').getContext('2d'),{
+  type:'bar',
+  data:{labels:['投产/工期','通勤走廊','三大集群','AI机器人','服务业','融深'],datasets:[{
+    data:[0.82,0.78,0.55,0.4,0.3,0.2],
+    backgroundColor:['#3b82f6','#f87171','#8b5cf6','#06b6d4','#fbbf24','#94a3b8'],borderRadius:4}]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+    tooltip:{callbacks:{label:it=>'系数 '+it.parsed.x}}},
+    scales:{x:{ticks:{color:tc},grid:{color:gc},max:1},y:{ticks:{color:'#93a4bd'},grid:{display:false}}}}
+});
+</script>
+</body></html>
