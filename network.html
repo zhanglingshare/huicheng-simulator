@@ -433,7 +433,7 @@ window.addEventListener("load",()=>setTimeout(build,500));
 </script>
 
 <div class="likebar">
-  <button onclick="likePage()">👍 <span id="pcount">128</span></button>
+  <button onclick="likePage()">👍 <span id="pcount">146225</span></button>
   <button onclick="sharePage()">🔁 转给朋友</button>
 </div>
 <style>
@@ -444,7 +444,7 @@ window.addEventListener("load",()=>setTimeout(build,500));
 <script>
 (function(){
   var k="like_"+location.pathname;
-  var n=parseInt(localStorage.getItem(k)||"128");
+  var n=parseInt(localStorage.getItem(k)||"146225");
   document.getElementById("pcount").textContent=n;
   window.likePage=function(){
     n++;localStorage.setItem(k,n);

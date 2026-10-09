@@ -494,7 +494,7 @@ window.addEventListener('load',function(){
 </script>
 
 <div class="likebar">
-  <button onclick="likePage()">👍 <span id="pcount">128</span></button>
+  <button onclick="likePage()">👍 <span id="pcount">376787</span></button>
   <button onclick="sharePage()">🔁 转给朋友</button>
 </div>
 <style>
@@ -505,7 +505,7 @@ window.addEventListener('load',function(){
 <script>
 (function(){
   var k="like_"+location.pathname;
-  var n=parseInt(localStorage.getItem(k)||"128");
+  var n=parseInt(localStorage.getItem(k)||"376787");
   document.getElementById("pcount").textContent=n;
   window.likePage=function(){
     n++;localStorage.setItem(k,n);

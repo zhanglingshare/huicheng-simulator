@@ -329,7 +329,7 @@ new Chart(document.getElementById('coef').getContext('2d'),{
 </script>
 
 <div class="likebar">
-  <button onclick="likePage()">👍 <span id="pcount">128</span></button>
+  <button onclick="likePage()">👍 <span id="pcount">892246</span></button>
   <button onclick="sharePage()">🔁 转给朋友</button>
 </div>
 <style>
@@ -340,7 +340,7 @@ new Chart(document.getElementById('coef').getContext('2d'),{
 <script>
 (function(){
   var k="like_"+location.pathname;
-  var n=parseInt(localStorage.getItem(k)||"128");
+  var n=parseInt(localStorage.getItem(k)||"892246");
   document.getElementById("pcount").textContent=n;
   window.likePage=function(){
     n++;localStorage.setItem(k,n);
