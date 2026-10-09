@@ -242,9 +242,17 @@ function run(){
   }catch(e){
     var el=document.getElementById('err');
     el.style.display='block';
-    el.textContent='错误: '+e.message;
+    el.textContent='错误: '+e.message+' | Chart是否加载: '+(typeof Chart!=='undefined'?'是':'否');
   }
 }
-run();
+window.addEventListener('load',function(){
+  if(typeof Chart==='undefined'){
+    var el=document.getElementById('err');
+    el.style.display='block';
+    el.textContent='图表库没加载出来，请刷新页面或检查网络。';
+    return;
+  }
+  run();
+});
 </script>
 </body></html>
