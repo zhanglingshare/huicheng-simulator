@@ -285,7 +285,7 @@ new Chart(document.getElementById('scen').getContext('2d'),{
     data:[3305,4150,4737],backgroundColor:['#f87171','#fbbf24','#22c55e'],borderRadius:5},
     {type:'line',label:'目标线',data:[4000,4000,4000],borderColor:'#60a5fa',borderDash:[6,4],pointRadius:0,borderWidth:2}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>it.parsed.y+'亿'}}},
-    scales:{x:{ticks:{color:axc},grid:{display:false}},y:{ticks:{color:tc,callback:v=>v+'亿'},grid:{color:gc},min:3000}}
+    scales:{x:{ticks:{color:axc},grid:{display:false}},y:{ticks:{color:tc,callback:v=>v+'亿'},grid:{color:gc},min:3000}}}
 });
 // 优先级矩阵
 new Chart(document.getElementById('matrix').getContext('2d'),{
