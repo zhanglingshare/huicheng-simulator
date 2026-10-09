@@ -128,6 +128,27 @@ h1{font-size:20px;margin:0 0 2px}
       <div id="pcoef-note" style="font-size:12px;color:#8fa3bf;margin-top:8px"></div>
     </div>
 
+    <div class="card" style="border-color:#2b3a55">
+      <h2>参数敏感性分析（逐个参数 ±20% 扰动）</h2>
+      <div style="font-size:12px;color:#8fa3bf;margin-bottom:10px;line-height:1.7">
+        <b style="color:#fbbf24">这是参数微分，不是场景压测。</b>
+        保持其他参数不变，只把某一条路的均值单独调高或调低 20%，用<b>同一个随机种子</b>重新跑模拟，看达标概率和中位产值变多少。
+        与⑥风洞页的"事件注入"（投产延期、通勤堵塞等具体事件）是两本账，不可混排。
+      </div>
+      <div style="text-align:center;margin:10px 0">
+        <button class="btn" onclick="runSensitivity()" style="background:#059669">⚡ 跑参数敏感性分析</button>
+        <span id="sens-status" style="font-size:11px;color:#6b7280;margin-left:10px"></span>
+      </div>
+      <div id="sens-out" style="display:none">
+        <div style="height:220px"><canvas id="sens-chart"></canvas></div>
+        <div id="sens-note" style="font-size:12px;color:#8fa3bf;margin-top:10px;line-height:1.8"></div>
+        <div style="margin-top:12px">
+          <div style="font-size:12px;font-weight:600;color:#93a4bd;margin-bottom:6px">中位产值变化（±20%扰动）</div>
+          <div id="sens-table" style="font-size:11.5px;color:#93a4bd"></div>
+        </div>
+      </div>
+    </div>
+
     <div class="card">
       <h2>三个情景</h2>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
@@ -177,6 +198,28 @@ function quantile(sorted,q){
   var lo=Math.floor(pos),hi=Math.ceil(pos);
   var w=pos-lo;
   return sorted[lo]*(1-w)+sorted[hi]*w;
+}
+// 可复用蒙特卡洛模拟：给定种子、次数、路径参数，返回分位数和达标率
+function simulate(seed,N,paths){
+  var prng=mulberry32(seed),randn=makeRandn(prng),base=632.7;
+  var results=[];
+  for(var i=0;i<N;i++){
+    var total=base;
+    for(var j=0;j<paths.length;j++){
+      var v=paths[j].mu+randn()*paths[j].sd;
+      if(v<0)v=0;
+      total+=v;
+    }
+    total*=1+randn()*0.08;
+    results.push(total);
+  }
+  results.sort(function(a,b){return a-b;});
+  return {
+    p10:quantile(results,0.10),
+    p50:quantile(results,0.50),
+    p90:quantile(results,0.90),
+    hit:results.filter(function(x){return x>=1500;}).length/N*100
+  };
 }
 const charts={};
 function destroy(k){if(charts[k]){charts[k].destroy();delete charts[k];}}
@@ -342,6 +385,102 @@ function run(){
     el.textContent='错误: '+e.message+' | Chart是否加载: '+(typeof Chart!=='undefined'?'是':'否');
   }
 }
+
+// 参数敏感性分析：逐个参数±20%扰动，同种子控制变量
+function runSensitivity(){
+  try{
+    var seed=+document.getElementById('seed').value||42;
+    var N=+document.querySelector('input[name="mode"]:checked').value;
+    document.getElementById('sens-status').textContent='正在跑 11 次模拟（基准 + 5参数×2方向）…';
+    document.getElementById('sens-out').style.display='none';
+
+    // 基准参数
+    var basePaths=[
+      {mu:+document.getElementById('s1').value,sd:100,name:'新投产项目',color:'#3b82f6'},
+      {mu:+document.getElementById('s2').value,sd:60,name:'三大集群',color:'#8b5cf6'},
+      {mu:+document.getElementById('s3').value,sd:40,name:'AI机器人',color:'#06b6d4'},
+      {mu:100,sd:40,name:'服务业带动',color:'#fbbf24'},
+      {mu:50,sd:30,name:'融深融湾',color:'#f87171'}
+    ];
+
+    // 基准结果（同种子）
+    var base=simulate(seed,N,basePaths);
+
+    // 逐个参数±20%
+    var results=[];
+    for(var i=0;i<basePaths.length;i++){
+      // +20%
+      var pathsPlus=JSON.parse(JSON.stringify(basePaths));
+      pathsPlus[i].mu=Math.round(pathsPlus[i].mu*1.2);
+      var rPlus=simulate(seed,N,pathsPlus);
+      // -20%
+      var pathsMinus=JSON.parse(JSON.stringify(basePaths));
+      pathsMinus[i].mu=Math.round(pathsMinus[i].mu*0.8);
+      var rMinus=simulate(seed,N,pathsMinus);
+
+      results.push({
+        name:basePaths[i].name,
+        color:basePaths[i].color,
+        plusProb:rPlus.hit-base.hit,
+        minusProb:rMinus.hit-base.hit,
+        plusP50:rPlus.p50-base.p50,
+        minusP50:rMinus.p50-base.p50
+      });
+    }
+
+    // 按达标概率变化绝对值排序
+    results.sort(function(a,b){
+      return (Math.abs(b.plusProb)+Math.abs(b.minusProb))-(Math.abs(a.plusProb)+Math.abs(a.minusProb));
+    });
+
+    // 画龙卷风图（达标概率变化）
+    destroy('sens');
+    charts.sens=new Chart(document.getElementById('sens-chart').getContext('2d'),{
+      type:'bar',
+      data:{
+        labels:results.map(function(r){return r.name;}),
+        datasets:[
+          {label:'参数+20%',data:results.map(function(r){return r.plusProb.toFixed(1);}),backgroundColor:'#3b82f6'},
+          {label:'参数-20%',data:results.map(function(r){return r.minusProb.toFixed(1);}),backgroundColor:'#f87171'}
+        ]
+      },
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{position:'top',labels:{color:'#93a4bd',font:{size:11}}},
+          tooltip:{callbacks:{label:function(it){return it.dataset.label+': 达标率'+(it.parsed.x>=0?'+':'')+it.parsed.x.toFixed(1)+'%';}}}},
+        scales:{x:{ticks:{color:'#6b7280',callback:function(v){return v+'%';}},grid:{color:'#1c2739'}},
+          y:{ticks:{color:'#93a4bd',font:{size:11}},grid:{display:false}}}}
+    });
+
+    // 解读
+    var mostSensitive=results[0];
+    var leastSensitive=results[results.length-1];
+    document.getElementById('sens-note').innerHTML=
+      '<b>这张图在看什么：</b>保持其他四条路不变，只把某一条路的均值单独调高或调低20%，用同一个随机种子重新跑。蓝色是+20%后达标率的变化，红色是-20%后的变化。横条越长，说明这条路越敏感。<br>'+
+      '<b>怎么看：</b>最敏感的是<b style="color:'+mostSensitive.color+'">'+mostSensitive.name+'</b>——+20%达标率'+(mostSensitive.plusProb>=0?'+':'')+mostSensitive.plusProb.toFixed(1)+'%，-20%达标率'+(mostSensitive.minusProb>=0?'+':'')+mostSensitive.minusProb.toFixed(1)+'%，上下差'+(Math.abs(mostSensitive.plusProb)+Math.abs(mostSensitive.minusProb)).toFixed(1)+'个百分点。最不敏感的是<b style="color:'+leastSensitive.color+'">'+leastSensitive.name+'</b>，±20%对达标率影响有限。<br>'+
+      '<b>注意：</b>这是模型内部的参数敏感性，用同一个种子控制了随机扰动，差异纯粹来自参数变化。但参数±20%是否对应现实中的合理波动范围，需要用现实数据校准。<br>'+
+      '<b>这意味着：</b>资源有限时，先盯最敏感的那条路——它动一点，整体达标概率就动得多。但"敏感"不等于"重要"，敏感只说明"在模型里这个参数和结果绑得紧"，现实中哪条路该优先，还要结合可控性、成本和见效速度综合判断。';
+
+    // 中位产值变化表
+    var tableHtml='<table style="width:100%;border-collapse:collapse;font-size:11px">';
+    tableHtml+='<tr style="color:#6b7280;border-bottom:1px solid #1c2739"><td style="padding:4px 8px;text-align:left">参数</td><td style="padding:4px 8px;text-align:right">-20%中位产值</td><td style="padding:4px 8px;text-align:right">基准</td><td style="padding:4px 8px;text-align:right">+20%中位产值</td><td style="padding:4px 8px;text-align:right">波动幅度</td></tr>';
+    results.forEach(function(r){
+      var range=Math.abs(r.plusP50)+Math.abs(r.minusP50);
+      tableHtml+='<tr style="border-bottom:1px solid #152033"><td style="padding:4px 8px;color:'+r.color+'">'+r.name+'</td>'+
+        '<td style="padding:4px 8px;text-align:right;color:#f87171">'+Math.round(base.p50+r.minusP50)+'亿</td>'+
+        '<td style="padding:4px 8px;text-align:right;color:#fbbf24">'+Math.round(base.p50)+'亿</td>'+
+        '<td style="padding:4px 8px;text-align:right;color:#34d399">'+Math.round(base.p50+r.plusP50)+'亿</td>'+
+        '<td style="padding:4px 8px;text-align:right;color:#93a4bd">±'+Math.round(range/2)+'亿</td></tr>';
+    });
+    tableHtml+='</table>';
+    document.getElementById('sens-table').innerHTML=tableHtml;
+
+    document.getElementById('sens-status').textContent='完成（基准达标率'+base.hit.toFixed(1)+'%，中位'+Math.round(base.p50)+'亿）';
+    document.getElementById('sens-out').style.display='block';
+  }catch(e){
+    document.getElementById('sens-status').innerHTML='<span style="color:#f87171">错误: '+e.message+'</span>';
+  }
+}
+
 window.addEventListener('load',function(){
   if(typeof Chart==='undefined'){
     var el=document.getElementById('err');
