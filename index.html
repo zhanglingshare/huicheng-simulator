@@ -237,7 +237,9 @@ function render(){
       <div style="font-size:16px;font-weight:800;color:#fff;margin:8px 0 4px;line-height:1.4">${x.t}</div>
       <div style="display:flex;align-items:center;justify-content:space-between">
         <div style="font-size:26px;font-weight:900;color:${x.hs>=85?'#f87171':x.hs>=70?'#fbbf24':'#34d399'}">${Math.round(x.hs)}<span style="font-size:12px;font-weight:400">°</span></div>
-        <div style="display:flex;gap:10px;font-size:13px">
+        <div style="display:flex;gap:10px;font-size:12px;color:#94a3b8">
+          <span>👁️ ${(Math.random()*9+1).toFixed(1)}万</span>
+          <span>🔁 ${Math.floor(Math.random()*800+50)}</span>
           <span class="likeBtn" onclick="event.stopPropagation();like(this,'${x.t}')">👍 <b class="ln">${likes}</b></span>
         </div>
       </div>
