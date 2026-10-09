@@ -9,30 +9,48 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
 .nav b{font-size:14px;margin-right:6px;flex:none}
 .nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
 .nav a.on{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
-.wrap{max-width:840px;margin:auto;padding:18px}
-.cover{text-align:center;padding:36px 20px;background:linear-gradient(160deg,#0e1a30,#0a0f1a);border:1px solid #1c2739;border-radius:16px;margin-bottom:16px}
+.wrap{max-width:860px;margin:auto;padding:18px}
+.cover{text-align:center;padding:40px 20px;background:linear-gradient(160deg,#0e1a30,#0a0f1a);border:1px solid #1c2739;border-radius:16px;margin-bottom:16px}
 .cover .kick{font-size:12px;letter-spacing:3px;color:#60a5fa;margin-bottom:12px}
-.cover h1{font-size:26px;line-height:1.4;margin:0 0 10px}
+.cover h1{font-size:27px;line-height:1.4;margin:0 0 10px}
 .cover .meta{font-size:12.5px;color:#8fa3bf;margin-top:16px}
 .card{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:18px;margin-bottom:14px}
 .card h2{font-size:16px;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid #1c2739}
-.card h3{font-size:13.5px;color:#60a5fa;margin:16px 0 6px}
+.card h3{font-size:13.5px;color:#60a5fa;margin:18px 0 6px}
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
 @media(max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
 .kpi{background:#0a0f1a;border:1px solid #1c2739;border-radius:10px;padding:12px;text-align:center}
 .kpi .v{font-size:19px;font-weight:800;color:#fbbf24}
 .kpi .l{font-size:10.5px;color:#6b7280;margin-top:3px}
+.lights{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+@media(max-width:700px){.lights{grid-template-columns:1fr 1fr}}
+.light{border-radius:10px;padding:11px 12px;font-size:12px;border:1px solid}
+.light .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.g{background:#0a1a12;border-color:#14532d}.g .dot{background:#22c55e}
+.y{background:#1a1808;border-color:#713f12}.y .dot{background:#eab308}
+.r{background:#1a0c0c;border-color:#7f1d1d}.r .dot{background:#ef4444}
 ol.find{margin:0;padding-left:20px}
 ol.find li{margin-bottom:10px;line-height:1.75}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.two{grid-template-columns:1fr}}
+.people{background:linear-gradient(160deg,#1a0e08,#0e1523);border:1px solid #7c2d12}
+.people .q{font-size:14px;font-weight:700;color:#fb923c;margin-bottom:8px}
+.people .a{font-size:12.5px;color:#cbd5e1;line-height:1.85}
+.action{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start}
+.action .pri{flex:none;width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
+.action .body{flex:1}
+.action .body b{font-size:13.5px}
+.action .body p{font-size:12px;color:#9aa9bd;margin:3px 0 0}
 .src-list{font-size:12.5px;color:#cbd5e1;line-height:2}
 .src-list .grade{display:inline-block;width:22px;height:22px;line-height:22px;text-align:center;border-radius:50%;font-size:10px;font-weight:700;margin-right:6px}
 .bound{font-size:12.5px;line-height:1.9;color:#cbd5e1}
 .author{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
-.author .badge{width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#1d4ed8,#0e7490);display:flex;align-items:center;justify-content:center;font-size:30px;flex:none}
+.author .badge{width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#1d4ed8,#0e7490);display:flex;align-items:center;justify-content:center;font-size:28px;flex:none;color:#fff;font-weight:700}
 .author .roles{font-size:12.5px;line-height:2;color:#cbd5e1}
 .tagline{font-size:12px;color:#8fa3bf;font-style:italic;margin-top:8px}
 .disc{font-size:11.5px;color:#6b7280;line-height:1.8;text-align:center}
 .btn{background:#1d4ed8;color:#fff;border:0;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
+.bigquote{font-size:15px;line-height:2;text-align:center;color:#e6edf3}
 </style></head><body>
 
 <div class="nav">
@@ -54,27 +72,40 @@ ol.find li{margin-bottom:10px;line-height:1.75}
     <div class="kick">区域产业决策风洞 · 第三类样本</div>
     <h1>惠城区产业决策<br>模拟推演分析报告</h1>
     <div style="font-size:13px;color:#cbd5e1">——人、产业与城市耦合网络的一次压力测试（Demo版）</div>
-    <div class="meta">
-      作者：<b style="color:#fbbf24">张凌 博士</b><br>
-      2026年10月 · 广东惠州
+    <div class="meta">作者：<b style="color:#fbbf24">张凌 博士</b> &nbsp;|&nbsp; 2026年10月 · 广东惠州</div>
+  </div>
+
+  <!-- 一页看懂 -->
+  <div class="card">
+    <h2>一、一页看懂：现在什么状态</h2>
+    <div class="lights">
+      <div class="light g"><span class="dot"></span>工业跑得快：规上工业+9.6%</div>
+      <div class="light g"><span class="dot"></span>高新区强：632.7亿、+13.9%</div>
+      <div class="light g"><span class="dot"></span>就业稳：新增1.62万人</div>
+      <div class="light y"><span class="dot"></span>GDP增速4.3%，低于年初6%目标</div>
+      <div class="light y"><span class="dot"></span>消费+3.7%，低于6%目标</div>
+      <div class="light r"><span class="dot"></span>固定资产投资-37.1%（唯一红区）</div>
+      <div class="light r"><span class="dot"></span>人口目标完成不足一半</div>
+      <div class="light r"><span class="dot"></span>人均GDP低于全国、全省</div>
     </div>
+    <p style="font-size:13px;color:#cbd5e1;margin:8px 0 0">一句话：<b style="color:#fbbf24">产业这条腿在快跑，但投资、人口、城市承载没有跟上。</b>跑得越快，越要看脚下的路稳不稳。</p>
   </div>
 
   <!-- 执行摘要 -->
   <div class="card">
-    <h2>一、执行摘要</h2>
+    <h2>二、五条核心发现</h2>
     <ol class="find">
-      <li><b>惠城是一座三产占69%的中心城区</b>，2025年GDP 1203.33亿元、增长4.3%；规上工业总产值973.9亿元，惠城高新区以632.7亿元、占全区规上工业约三分之二，是绝对主引擎。</li>
-      <li><b>增长结构存在"一条腿快、一条腿慢"</b>：工业与高新区增长较快，但固定资产投资下降37.1%，常住人口目标完成不足一半，城市承载没有完全跟上产业节奏。</li>
-      <li><b>最被低估的不是某个大项目，而是连接产业与城市的"通勤走廊"</b>。模拟提示：通勤边的影响系数高于单个龙头企业扩产落空，它一旦承压，产业招工与城市消费双向失血。</li>
-      <li><b>时间是被忽视的关键变量</b>：项目名称、投资、产能相同，投产时点不同，放进整个系统后结果显著不同；"晚一点"在有明确投产节点的系统里是敏感参数。</li>
-      <li><b>改善通勤、学位、留人环境等"小地基"</b>，相比招大项目更便宜、见效快、自己可控，是性价比高、却常被当成"配套"的抓手。</li>
+      <li><b>惠城是三产占69%的中心城区</b>，2025年GDP 1203.33亿元；规上工业973.9亿元，高新区以632.7亿元、约占全区规上工业三分之二，是绝对主引擎。</li>
+      <li><b>增长靠"一个园区"扛着</b>：高新区占比约67.4%，一旦它的项目投产节奏或招工出问题，全区增长就会明显承压——鸡蛋集中在一个篮子里。</li>
+      <li><b>最被低估的不是大项目，是"通勤走廊"</b>：模拟提示通勤边影响系数高于单个龙头扩产落空；它一堵，产业招工和城市消费双向失血。</li>
+      <li><b>时间是被忽视的变量</b>：同样的项目，2028年投产和2030年投产，放进系统结果大不一样；"晚一点"在有明确节点的系统里是敏感参数。</li>
+      <li><b>改善通勤、学位、留人是性价比高的抓手</b>：比招大项目便宜、见效快、自己可控，却常被当成"配套"。</li>
     </ol>
   </div>
 
-  <!-- 基本面快照 -->
+  <!-- 基本面 -->
   <div class="card">
-    <h2>二、基本面快照（2025）</h2>
+    <h2>三、我们站在哪：基本面快照</h2>
     <div class="kpis">
       <div class="kpi"><div class="v">1203亿</div><div class="l">GDP · +4.3%</div></div>
       <div class="kpi"><div class="v">973.9亿</div><div class="l">规上工业 · +9.6%</div></div>
@@ -85,36 +116,94 @@ ol.find li{margin-bottom:10px;line-height:1.75}
       <div class="kpi"><div class="v">64.6亿</div><div class="l">一般公共预算收入</div></div>
       <div class="kpi"><div class="v">383.6亿</div><div class="l">外贸 · +7.1%</div></div>
     </div>
-    <h3>高新区产值爬坡与目标</h3>
-    <div style="height:180px"><canvas id="climb"></canvas></div>
+    <div class="two">
+      <div>
+        <h3 style="margin-top:6px">三次产业结构</h3>
+        <div style="height:170px"><canvas id="struct"></canvas></div>
+      </div>
+      <div>
+        <h3 style="margin-top:6px">主要指标实际 vs 目标</h3>
+        <div style="height:170px"><canvas id="vstarget"></canvas></div>
+      </div>
+    </div>
   </div>
 
-  <!-- 核心判断 -->
+  <!-- 离目标多远 -->
   <div class="card">
-    <h2>三、核心判断</h2>
-    <h3>1. 最大的，不一定是最关键的</h3>
-    <p style="font-size:13px;color:#cbd5e1;margin:0">连接最多、体量最大的节点代表"现在的核心"；而未来多条路径都绕不过的节点，代表"结构咽喉"。两者不是一回事。只按"谁最大"排优先级，可能把力气用在并非咽喉的位置。</p>
-    <h3>2. 通勤走廊：惠城的"传动轴"</h3>
-    <p style="font-size:13px;color:#cbd5e1;margin:0">产业在东江湾、人居在江北老城，过江通道是双向潮汐的纽带。它在规划文本里是"基础设施配套"，但模拟显示它更像两个轮子之间的传动轴——堵则产业招工与城市消费同时受损。</p>
-    <h3>3. 路径是齿轮，不是独立的腿</h3>
-    <p style="font-size:13px;color:#cbd5e1;margin:0">龙头扩能、南北一体、港口贸易、城市承载并非互相独立，更像互相咬合的齿轮：一个动，另一个跟着动；一个卡住，另一个可能一起卡。最危险的不是某条路不够强，而是它们之间不独立。</p>
-    <div style="height:180px;margin-top:12px"><canvas id="coef"></canvas></div>
-    <div style="font-size:11px;color:#5b6b82;text-align:center;margin-top:4px">各因素对结果的影响系数（模拟值，越接近1影响越大）</div>
+    <h2>四、离目标还有多远</h2>
+    <h3>高新区产值爬坡：缺口压在几个投产节点上</h3>
+    <div style="height:190px"><canvas id="climb"></canvas></div>
+    <p style="font-size:12.5px;color:#9aa9bd;margin:6px 0 0">大项目不是匀速增长，是"建设几年—投产跳一档"。632.7亿到1500亿的约867亿缺口，压在几个关键投产节点上，任何一个延期，爬坡就会放缓。</p>
+    <h3>2030年三种可能情景</h3>
+    <div style="height:180px"><canvas id="scen"></canvas></div>
+    <p style="font-size:12.5px;color:#9aa9bd;margin:6px 0 0">模拟显示：顺利时明显超过目标，一半一半的情景只是刚刚踩线，偏差大时则回到目标以下。<b style="color:#fbbf24">中位情景离目标并不远，意味着容错空间不大。</b></p>
+  </div>
+
+  <!-- 决策者最该知道 -->
+  <div class="card" style="border-color:#7f1d1d">
+    <h2>五、决策者最该重视的三件事</h2>
+    <h3>1. 命门可能不在"招不到商"，在"投产与通勤"</h3>
+    <p style="font-size:13px;color:#cbd5e1;margin:0">模拟的敏感性排序里，投产/工期与通勤走廊排在最前。项目招到了但没按时投产、或人因通勤难招不满，比"招不到商"更现实、影响更直接。</p>
+    <h3>2. 抓手优先级：先做"影响大、自己可控"的</h3>
+    <div style="height:210px"><canvas id="matrix"></canvas></div>
+    <p style="font-size:12px;color:#9aa9bd;margin:4px 0 0">越靠右上越该优先：通勤改善、学位供给、留人环境影响大且自己可控；外需、全球航运增长好看但关键变量不在自己手里。</p>
+    <h3>3. 时间窗口不等人</h3>
+    <p style="font-size:13px;color:#cbd5e1;margin:0">"再等等、稳一点、明年再做"听起来轻，但在有明确投产节点的系统里，晚一点会显著拉低达标可能。<b style="color:#f87171">该上的项目、该通的路、该供的地，窗口就这几年。</b></p>
+  </div>
+
+  <!-- 各因素影响 -->
+  <div class="card">
+    <h2>六、哪些因素最牵动结果</h2>
+    <div style="height:200px"><canvas id="coef"></canvas></div>
+    <p style="font-size:12.5px;color:#9aa9bd;margin:6px 0 0">投产工期、通勤走廊排在最前，其次是三大集群；服务业、融深相对靠后。这不是说后者不重要，而是在当前结构下，前两者一旦出问题，系统晃得最厉害。</p>
+  </div>
+
+  <!-- 老百姓 -->
+  <div class="card people">
+    <h2 style="border-color:#7c2d12">七、这和普通老百姓有什么关系</h2>
+    <div class="two">
+      <div>
+        <div class="q">我每天上班的路，为什么重要？</div>
+        <div class="a">过江通道堵不堵，连着你会不会迟到、扣不扣全勤，也连着企业能不能招到人。路顺了，上班顺心，园区也旺。</div>
+      </div>
+      <div>
+        <div class="q">孩子的学位，和产业有啥关系？</div>
+        <div class="a">一个家庭留不留，往往看孩子有没有学上。2026年新增8000个学位，学位松一松，人才和家庭就留一留。</div>
+      </div>
+      <div>
+        <div class="q">楼下小店旺不旺，跟我有关吗？</div>
+        <div class="a">产业转起来，工资在这发、消费在这花，早餐店、商铺才旺。本地循环转得好，家门口的工作和生意才多。</div>
+      </div>
+      <div>
+        <div class="q">年轻人留不留，为什么是大事？</div>
+        <div class="a">一座城的未来在年轻人身上。有好工作、好学校、有奔头，年轻人才愿意把下一个五年留在这里，城才有活力。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 行动建议 -->
+  <div class="card">
+    <h2>八、行动建议（按轻重缓急）</h2>
+    <div class="action"><div class="pri" style="background:#b91c1c">优先</div><div class="body"><b>盯紧关键项目投产节点</b><p>把影响高新区爬坡的重大项目列清单、节点到人，尽量避免延期；投产节奏稳，增长底盘才稳。</p></div></div>
+    <div class="action"><div class="pri" style="background:#b91c1c">优先</div><div class="body"><b>疏通通勤走廊</b><p>优化过江通道、公交运力与园区接驳，缩短东江湾到江北的通勤时间；通勤顺，招工和消费两头受益。</p></div></div>
+    <div class="action"><div class="pri" style="background:#c2410c">重要</div><div class="body"><b>保障学位与公共服务</b><p>落实新增8000学位和学校改扩建，配套医疗、托育、保障性住房，提升家庭和年轻人留存意愿。</p></div></div>
+    <div class="action"><div class="pri" style="background:#c2410c">重要</div><div class="body"><b>做强本地产业循环</b><p>推动隔墙供应、生产性服务业与制造业对接，让工资、就业、消费更多在本地发生，稳住805亿消费基本盘。</p></div></div>
+    <div class="action"><div class="pri" style="background:#1d4ed8">持续</div><div class="body"><b>培育新动能与开放通道</b><p>培育AI与机器人等新产业，用好外贸增长和深惠通道；同时认清外需变量不在自己手里，作为长期布局而非短期依靠。</p></div></div>
+    <p style="font-size:11px;color:#5b6b82;margin:10px 0 0">建议方向均对应官方"高新区引领、产业协同、城市承载、民生保障、开放融深"等战略表述，为模拟推演的优先级提示，非替代官方决策。</p>
   </div>
 
   <!-- 数据来源 -->
   <div class="card">
-    <h2>四、数据来源与分级</h2>
-    <p style="font-size:12.5px;color:#8fa3bf;margin:0 0 10px">本报告数据全部来自公开渠道，并按可信度分级：</p>
+    <h2>九、数据来源与分级</h2>
     <div class="src-list">
-      <div><span class="grade" style="background:#14532d;color:#fff">A</span><b>实测</b>：惠城区统计公报、政府工作报告、国民经济和社会发展计划执行报告、民生实事项目（直接给出的数字）</div>
+      <div><span class="grade" style="background:#14532d;color:#fff">A</span><b>实测</b>：统计公报、政府工作报告、计划执行报告、民生实事中直接给出的数字</div>
       <div><span class="grade" style="background:#1e40af;color:#fff">B</span><b>推估</b>：部分历史序列按公开增速回推</div>
       <div><span class="grade" style="background:#713f12;color:#fff">C</span><b>代理</b>：镇街级供给代理（人口密度、是否点名、项目位置），非逐镇街实查</div>
       <div><span class="grade" style="background:#7f1d1d;color:#fff">D</span><b>假设</b>：网络边权重、路径贡献区间、通勤强度（缺真实通勤OD数据）</div>
     </div>
     <h3>主要公开来源</h3>
     <div style="font-size:12px;color:#cbd5e1;line-height:2">
-      · 惠州市人民政府门户网站、惠城区人民政府门户网站<br>
+      · 惠州市、惠城区人民政府门户网站<br>
       · 惠城区2025年国民经济和社会发展统计公报<br>
       · 2026年惠城区政府工作报告、计划草案报告<br>
       · 惠城高新区高质量发展大会公开信息<br>
@@ -124,19 +213,19 @@ ol.find li{margin-bottom:10px;line-height:1.75}
 
   <!-- 模型边界 -->
   <div class="card">
-    <h2>五、模型边界与免责声明</h2>
+    <h2>十、模型边界与免责声明</h2>
     <div class="bound">
-      1. <b>这不是预测器</b>：不预测具体产值或招商成败，只在一组公开数据与明确假设下，给出叙事分布与结构提示。<br>
-      2. <b>不做因果断言</b>：单一地区、有限时间序列的汇总数据，不足以支撑严格因果结论。报告统一使用"关联、同步、结构提示"，不使用"因为A所以B"。<br>
-      3. <b>反事实不可验证，但参数可核对</b>："项目晚两年会怎样"无法在现实重演，但每个参数都能回到公开资料核对。<br>
-      4. <b>不是真涌现</b>：网络主体为可复现的弱涌现模拟，未达真实经济的涌现量级。<br>
-      5. <b>本报告不构成投资建议</b>，亦不替代任何官方决策；结论随假设改变而改变。
+      1. <b>不是预测器</b>：不预测具体产值或招商成败，只在公开数据与明确假设下给出叙事分布与结构提示。<br>
+      2. <b>不做因果断言</b>：统一使用"关联、同步、结构提示"，不使用"因为A所以B"。<br>
+      3. <b>反事实不可验证，但参数可核对</b>：每个参数都能回到公开资料核对。<br>
+      4. <b>不是真涌现</b>：为可复现的弱涌现模拟，未达真实经济涌现量级。<br>
+      5. <b>不构成投资建议</b>，亦不替代官方决策；结论随假设改变而改变。
     </div>
   </div>
 
-  <!-- 作者介绍 -->
+  <!-- 作者 -->
   <div class="card">
-    <h2>六、作者介绍</h2>
+    <h2>十一、作者介绍</h2>
     <div class="author">
       <div class="badge">张凌</div>
       <div style="flex:1;min-width:240px">
@@ -154,35 +243,71 @@ ol.find li{margin-bottom:10px;line-height:1.75}
   </div>
 
   <div class="card">
-    <p class="disc">
-      本报告为Demo演示版本，数据截至公开资料最新一期。模拟结果仅代表当前数据、参数与规则下的压力测试，<br>
-      不代表对未来的精确预测，亦不构成投资建议。如对参数或假设有不同意见，可调整后重新推演。
-    </p>
+    <p class="bigquote" style="margin:4px 0">大数字会被记住一时，<br>但只有<b style="color:#fbbf24">人愿意把下一个五年留在这里</b>，这座城才有未来。</p>
+    <p class="disc" style="margin-top:14px">本报告为Demo演示版本，数据截至公开资料最新一期。模拟结果仅代表当前数据、参数与规则下的压力测试，<br>不代表对未来的精确预测，亦不构成投资建议。</p>
   </div>
 
   <div style="text-align:center;margin:22px 0"><a class="btn" href="index.html">回到首页</a></div>
 </div>
 
 <script>
-const gc='#1c2739', tc='#6b7280';
+const gc='#1c2739', tc='#6b7280', axc='#93a4bd';
+Chart.defaults.font.family='-apple-system,"PingFang SC",sans-serif';
+
+// 结构
+new Chart(document.getElementById('struct').getContext('2d'),{
+  type:'doughnut',
+  data:{labels:['一产3.4%','二产27.6%','三产69.0%'],datasets:[{data:[3.4,27.6,69],
+    backgroundColor:['#94a3b8','#3b82f6','#fbbf24'],borderColor:'#0e1523',borderWidth:2}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:axc,font:{size:10},padding:8}}}}
+});
+// 实际vs目标
+new Chart(document.getElementById('vstarget').getContext('2d'),{
+  type:'bar',
+  data:{labels:['GDP','工业','消费','投资'],datasets:[
+    {label:'实际',data:[4.3,10.8,3.7,-37.1],backgroundColor:'#3b82f6',borderRadius:3},
+    {label:'目标',data:[6,9,6,1],backgroundColor:'#f87171',borderRadius:3}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:axc,font:{size:10}}}},
+    scales:{x:{ticks:{color:tc,font:{size:10}},grid:{display:false}},y:{ticks:{color:tc,callback:v=>v+'%'},grid:{color:gc}}}}
+});
 // 爬坡
 new Chart(document.getElementById('climb').getContext('2d'),{
   type:'bar',
   data:{labels:['2025','2026','2027','2030'],datasets:[{data:[632.7,820,1000,1500],
     backgroundColor:['#3b82f6','#3b82f6','#fbbf24','#f87171'],borderRadius:5}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>it.parsed.y+'亿'}}},
+    scales:{x:{ticks:{color:axc},grid:{display:false}},y:{ticks:{color:tc,callback:v=>v+'亿'},grid:{color:gc}}}}
+});
+// 三情景
+new Chart(document.getElementById('scen').getContext('2d'),{
+  type:'bar',
+  data:{labels:['偏差大','一半一半','顺利'],datasets:[{
+    data:[3305,4150,4737],backgroundColor:['#f87171','#fbbf24','#22c55e'],borderRadius:5},
+    {type:'line',label:'目标线',data:[4000,4000,4000],borderColor:'#60a5fa',borderDash:[6,4],pointRadius:0,borderWidth:2}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>it.parsed.y+'亿'}}},
+    scales:{x:{ticks:{color:axc},grid:{display:false}},y:{ticks:{color:tc,callback:v=>v+'亿'},grid:{color:gc},min:3000}}
+});
+// 优先级矩阵
+new Chart(document.getElementById('matrix').getContext('2d'),{
+  type:'scatter',
+  data:{datasets:[{data:[
+    {x:8.5,y:8.5,l:'通勤改善'},{x:7.5,y:8,l:'学位供给'},{x:7,y:7.5,l:'留人环境'},
+    {x:8,y:6,l:'投产盯节点'},{x:6,y:5,l:'本地循环'},{x:5,y:3.5,l:'AI新动能'},
+    {x:4,y:2.5,l:'外需贸易'},{x:3,y:2,l:'全球航运'}],
+    backgroundColor:'#fb923c',pointRadius:9,pointHoverRadius:11}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
-    tooltip:{callbacks:{label:it=>it.parsed.y+'亿'}}},
-    scales:{x:{ticks:{color:'#93a4bd'},grid:{display:false}},y:{ticks:{color:tc,callback:v=>v+'亿'},grid:{color:gc}}}}
+    tooltip:{callbacks:{label:c=>c.raw.l}}},
+    scales:{x:{title:{display:true,text:'自己可控程度 →',color:tc},min:0,max:10,ticks:{color:tc},grid:{color:gc}},
+      y:{title:{display:true,text:'影响程度 →',color:tc},min:0,max:10,ticks:{color:tc},grid:{color:gc}}}}
 });
 // 影响系数
 new Chart(document.getElementById('coef').getContext('2d'),{
   type:'bar',
-  data:{labels:['投产/工期','通勤走廊','三大集群','AI机器人','服务业','融深'],datasets:[{
+  data:{labels:['投产工期','通勤走廊','三大集群','AI机器人','服务业','融深'],datasets:[{
     data:[0.82,0.78,0.55,0.4,0.3,0.2],
     backgroundColor:['#3b82f6','#f87171','#8b5cf6','#06b6d4','#fbbf24','#94a3b8'],borderRadius:4}]},
-  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
-    tooltip:{callbacks:{label:it=>'系数 '+it.parsed.x}}},
-    scales:{x:{ticks:{color:tc},grid:{color:gc},max:1},y:{ticks:{color:'#93a4bd'},grid:{display:false}}}}
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>'系数 '+it.parsed.x}}},
+    scales:{x:{ticks:{color:tc},grid:{color:gc},max:1},y:{ticks:{color:axc},grid:{display:false}}}}
 });
 </script>
 </body></html>
