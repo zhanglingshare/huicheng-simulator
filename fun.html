@@ -157,7 +157,13 @@ async function fetchLive(){
     {url:"https://api.vvhan.com/api/hotlist/zhihuHot",name:"知乎"},
     {url:"https://api.vvhan.com/api/hotlist/douyinHot",name:"抖音"},
     {url:"https://api.vvhan.com/api/hotlist/toutiao",name:"头条"},
-    {url:"https://api.vvhan.com/api/hotlist/bili",name:"B站"}
+    {url:"https://api.vvhan.com/api/hotlist/bili",name:"B站"},
+    {url:"https://api.vvhan.com/api/hotlist/weixin",name:"微信"},
+    {url:"https://api.vvhan.com/api/hotlist/thepaper",name:"澎湃"},
+    {url:"https://api.vvhan.com/api/hotlist/people",name:"人民"},
+    {url:"https://api.vvhan.com/api/hotlist/wangyi",name:"网易"},
+    {url:"https://api.vvhan.com/api/hotlist/sina",name:"新浪"},
+    {url:"https://api.vvhan.com/api/hotlist/huanqiu",name:"环球"}
   ];
   for(const api of apis){
     try{
@@ -165,7 +171,7 @@ async function fetchLive(){
       if(j.data&&Array.isArray(j.data)){
         j.data.forEach((it)=>{
           const title=it.title||it.word||"";
-          if(LOCAL_KW.some(k=>title.includes(k))&&local.length<4){
+          if(LOCAL_KW.some(k=>title.includes(k))&&local.length<6){
             local.push(`<b>${api.name}</b>·${title}`);
           }
         });
@@ -200,8 +206,8 @@ async function refresh(){
   document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')} · 本地${local.length}条`;
   const bar=document.getElementById("livebar");
   bar.innerHTML=local.length
-    ?"📡 惠城此刻在热搜："+local.join("　｜　")
-    :"📡 本地暂时没上热搜——但惠城的周末，不用上热搜也值得去。";
+    ?"📡 全网12源此刻在聊惠城："+local.join("　｜　")
+    :"📡 全网12源暂时没刷到本地词条——但惠城的周末，不用上热搜也值得去。";
   const paint=(id,arr,miss)=>{
     document.getElementById(id).innerHTML=arr.length
       ? arr.map((t,i)=>`${i+1}. ${t}`).join("<br>")
