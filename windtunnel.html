@@ -85,7 +85,8 @@
   footer{padding:10px 20px;color:var(--sub);font-size:12px;border-top:1px solid var(--line);background:#fff}
   .hintbtn{font-size:11px;color:var(--blue);cursor:pointer;background:none;border:0;padding:0}
 
-  #pane-run,#pane-gate,#pane-mc,#pane-sens,#pane-iv,#pane-ledger,#pane-data,#pane-upload{display:none!important}
+  #pane-sense,#pane-gate,#pane-mc,#pane-sens,#pane-iv,#pane-ledger,#pane-data,#pane-upload{display:none!important}
+  #pane-run{display:block!important}
 </style>
 </head>
 <body>
@@ -226,11 +227,10 @@
             两个轮子都在转，但连它们的不是产业协议，是<b>每天早晚的通勤车流</b>。<br>
             下面进风洞，我们只动一个东西：<span style="background:#fef08a;padding:0 4px">那条过江通道，到底有多重要。</span>
           </p>
-          <div style="margin-top:16px"><a href="windtunnel.html" style="display:inline-block;background:#2563eb;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600">下一步：跑风洞 →</a></div>
         </div>
       </div>
 
-      <div class="pane" id="pane-run">
+      <div class="pane on" id="pane-run"><div style="margin-bottom:12px"><a href="index.html" style="font-size:13px;color:#64748b;text-decoration:none">← 返回先看清楚</a>　　<a href="advanced.html" style="font-size:13px;color:#64748b;text-decoration:none">概率/敏感性 →</a></div>
         <div class="tl">
           <button class="btn" id="btn-play">▶ 播放</button>
           <button class="btn" id="btn-step">单步</button>

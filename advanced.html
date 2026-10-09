@@ -85,7 +85,9 @@
   footer{padding:10px 20px;color:var(--sub);font-size:12px;border-top:1px solid var(--line);background:#fff}
   .hintbtn{font-size:11px;color:var(--blue);cursor:pointer;background:none;border:0;padding:0}
 
-  #pane-run,#pane-gate,#pane-mc,#pane-sens,#pane-iv,#pane-ledger,#pane-data,#pane-upload{display:none!important}
+  #pane-sense,#pane-run,#pane-gate,#pane-iv,#pane-ledger,#pane-data,#pane-upload{display:none!important}
+  #pane-mc{display:block!important}
+  #pane-sens{display:block!important;margin-top:20px}
 </style>
 </head>
 <body>
@@ -226,7 +228,6 @@
             两个轮子都在转，但连它们的不是产业协议，是<b>每天早晚的通勤车流</b>。<br>
             下面进风洞，我们只动一个东西：<span style="background:#fef08a;padding:0 4px">那条过江通道，到底有多重要。</span>
           </p>
-          <div style="margin-top:16px"><a href="windtunnel.html" style="display:inline-block;background:#2563eb;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600">下一步：跑风洞 →</a></div>
         </div>
       </div>
 
@@ -339,7 +340,7 @@
       </div>
 
       <!-- 蒙特卡洛 -->
-      <div class="pane" id="pane-mc">
+      <div class="pane on" id="pane-mc"><div style="margin-bottom:12px"><a href="windtunnel.html" style="font-size:13px;color:#64748b;text-decoration:none">← 返回风洞</a></div>
         <h2>🎲 批量重跑 <span class="tag">跑1次看故事，跑1000次看结构</span></h2>
         <div class="row">
           <label class="muted">局数</label>
