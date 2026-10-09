@@ -129,13 +129,23 @@ function render(cat){
   const emos={cafe:"☕",shop:"🛍️",night:"🍻",kid:"👨‍👩‍👧",sport:"🏃",show:"🎭",food:"🍜"};
   document.getElementById("grid").style.cssText="display:grid;grid-template-columns:1fr 1fr;gap:10px";
   document.getElementById("grid").innerHTML=list.map(x=>{
+    const likes=(localStorage.getItem("like_spot_"+x.n)||Math.floor(Math.random()*800+100));
     return `<div style="background:${grads[x.c]};border-radius:12px;padding:14px;cursor:pointer" onclick="this.querySelector('.d').style.display=this.querySelector('.d').style.display==='none'?'block':'none'">
-      <div style="font-size:22px">${emos[x.c]||"📍"}</div>
+      <div style="display:flex;justify-content:space-between;align-items:start">
+        <div style="font-size:22px">${emos[x.c]||"📍"}</div>
+        <span onclick="event.stopPropagation();likeSpot(this,'${x.n}')" style="font-size:12px;color:#fff;opacity:.8">👍 <b>${likes}</b></span>
+      </div>
       <div style="font-size:15px;font-weight:800;color:#fff;margin:6px 0 4px">${x.n}</div>
       <div style="font-size:11px;color:#94a3b8">${x.tag}</div>
       <div class="d" style="font-size:11.5px;color:#cbd5e1;margin-top:8px;display:none">${x.d}<br><span style="color:#fbbf24">→ ${x.why}</span><br><span style="color:#60a5fa">📊 风洞看：${x.watch}</span></div>
     </div>`;
   }).join("");
+}
+function likeSpot(el,t){
+  let n=parseInt(el.querySelector("b").textContent)+1;
+  el.querySelector("b").textContent=n;
+  localStorage.setItem("like_spot_"+t,n);
+  el.style.transform="scale(1.2)";setTimeout(()=>el.style.transform="",200);
 }
 render("all");
 document.querySelectorAll("#tabs button").forEach(b=>{
