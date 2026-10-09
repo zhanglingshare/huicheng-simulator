@@ -1307,7 +1307,7 @@ function renderNetwork(){
       const ring=a.sentiment>.12?"#16a34a":a.sentiment<-.12?"#dc2626":"#94a3b8";
       html+=`<g class="node" data-name="${a.name}" style="cursor:pointer">
         <circle cx="${p.x}" cy="${p.y}" r="${r}" fill="${typeColor(a.type)}" stroke="${ring}" stroke-width="3.5"></circle>
-        <text x="${p.x}" y="${p.y+4}" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" paint-order="stroke" stroke="rgba(0,0,0,.28)" stroke-width="1.5">${cfg.cn}</text>
+        <text x="${p.x}" y="${p.y+4}" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" paint-order="stroke" stroke="rgba(0,0,0,.28)" stroke-width="1.5">${SHORT[a.name]||a.name.slice(0,4)}</text>
         <text x="${p.x}" y="${(p.y+Number(r)+14).toFixed(1)}" text-anchor="middle" font-size="10.5" fill="#475569" paint-order="stroke" stroke="#fcfdff" stroke-width="3">${a.name}</text>
       </g>`;
     }else{
@@ -1331,6 +1331,7 @@ function renderNetwork(){
     currentIv=n.dataset.name; switchTab("iv"); renderInterview(currentIv);
   }));
 }
+const SHORT={"惠城高新区": "高新区", "利元亨": "利元亨", "雷士照明": "雷士", "电子信息集群": "电子", "智能装备集群": "装备", "新能源新材料集群": "新材料", "智能家电集群": "家电", "天宝创能": "天宝", "先进科技": "先进", "AI与机器人": "AI", "江北生产性服务业": "服务业", "学院城": "学院城", "东江湾产业园": "东江湾", "江北CBD": "江北", "三栋南部组团": "三栋", "马安": "马安", "横沥汝湖远郊": "远郊", "桥西老城商圈": "桥西", "水口老城居住区": "水口", "过江通道": "过江", "小金口枢纽": "小金口", "东江湾蓝领": "蓝领", "江北白领": "白领", "深惠通勤族": "跨城", "技能工程师": "工程师", "青年新市民": "青年", "学龄家庭": "家庭"};
 function typeColor(t){
   // 三层配色：产业蓝/空间灰/人橙
   if(["anchor","oem","supplier","service","capital"].includes(t)) return "#2563eb";
