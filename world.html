@@ -1,121 +1,116 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>惠城产业风洞 · 世界长什么样</title>
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠城产业风洞 · 世界</title>
 <style>
-body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;margin:0;background:#f1f5f9;color:#0f172a;line-height:1.6}
-.wrap{max-width:900px;margin:0 auto;padding:20px}
-.card{background:#fff;border-radius:12px;padding:20px;margin-bottom:16px;border:1px solid #e2e8f0}
-h1{font-size:22px;margin:0 0 4px}
-h2{font-size:16px;margin:20px 0 10px}
-.muted{color:#64748b;font-size:13px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,min-width(180px,1fr));gap:12px}
-.stat{padding:14px;background:#f8fafc;border-radius:8px}
-.stat .v{font-size:22px;font-weight:700;color:#2563eb}
-.stat .l{font-size:12px;color:#64748b;margin-top:2px}
-.bar{height:8px;background:#e2e8f0;border-radius:4px;margin-top:6px;overflow:hidden}
-.bar>div{height:100%;border-radius:4px}
-.node-list{display:grid;grid-template-columns:repeat(auto-fit,min-width(200px,1fr));gap:8px;font-size:13px}
-.node-item{padding:6px 10px;border-radius:6px;background:#f8fafc;border-left:3px solid #2563eb}
-.node-item.space{border-left-color:#6b7280}
-.node-item.people{border-left-color:#ea580c}
-a{color:#2563eb;text-decoration:none}
-.nav{background:#fff;border-bottom:1px solid #e2e8f0;padding:10px 20px;display:flex;gap:18px;align-items:center;font-size:13px;flex-wrap:wrap}
-.next{display:inline-block;background:#2563eb;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;margin-top:8px}
-</style>
-</head>
-<body>
+*{box-sizing:border-box}
+body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;backdrop-filter:blur(8px);overflow-x:auto}
+.nav b{font-size:14px;margin-right:6px;letter-spacing:.5px;flex:none}
+.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
+.nav a.on{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
+.nav .sp{margin-left:auto;font-size:11.5px;color:#64748b;flex:none}
+.wrap{max-width:1240px;margin:auto;padding:16px}
+h2{font-size:19px;margin:0 0 4px;letter-spacing:.5px}
+.lead{color:#8fa3bf;font-size:13px;margin:0 0 13px}
+.card{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:14px;margin-bottom:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.kpi{background:#111a2b;border:1px solid #22304a;border-radius:9px;padding:11px}
+.kpi .v{font-size:20px;font-weight:700;color:#fbbf24;font-variant-numeric:tabular-nums}
+.kpi .k{font-size:11.5px;color:#8fa3bf;margin-top:2px}
+.kpi .s{font-size:10px;color:#5b6b82}
+.bar{height:6px;background:#16233a;border-radius:3px;margin-top:6px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:3px}
+.cmp{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed #1e2b40;font-size:12.5px;gap:10px}
+.cmp:last-child{border:0}
+.cmp .l{color:#93a4bd}
+.cmp .r{font-variant-numeric:tabular-nums;font-weight:600}
+.hl{color:#fbbf24;font-weight:600}
+.red{color:#f87171;font-weight:600}
+.grn{color:#34d399;font-weight:600}
+.cy{color:#22d3ee;font-weight:600}
+.nlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;font-size:12.5px}
+.ni{padding:5px 9px;background:#0c1524;border-radius:6px;border-left:3px solid #3b82f6;color:#cbd5e1}
+.ni.sp{border-left-color:#6b7280}.ni.pp{border-left-color:#f97316}
+.btn{background:#1d4ed8;color:#fff;border:0;padding:9px 18px;border-radius:8px;cursor:pointer;font-size:13px;text-decoration:none;display:inline-block;margin-top:8px}
+.disc{margin-top:12px;background:#0b1220;border:1px solid #1c2739;border-left:3px solid #475569;border-radius:8px;padding:9px 11px;font-size:11.5px;color:#7d8fa8;line-height:1.7}
+@media(max-width:880px){.grid2,.grid4{grid-template-columns:1fr}}
+</style></head><body>
+
 <div class="nav">
-  <b>惠城产业风洞</b><span style="color:#cbd5e1">|</span>
+  <b>惠城产业风洞</b>
   <a href="index.html">① 感知</a>
-  <a href="world.html" style="color:#2563eb">② 世界</a>
+  <a href="world.html" class="on">② 世界</a>
   <a href="network.html">③ 网络</a>
   <a href="choices.html">④ 选择</a>
   <a href="future.html">⑤ 未来</a>
+  <span class="sp">公开数据 · 压力测试 · 不预测</span>
 </div>
+
 <div class="wrap">
-  <h1>② 世界 · 惠城现在长什么样</h1>
-  <p class="muted">所有数字来自统计公报和政府工作报告。不是预测，是现状。</p>
+  <h2>② 世界 · 惠城现在长什么样</h2>
+  <p class="lead">2025年。家底摊开，26个主体列出来，再把2030的标尺拉过来。</p>
 
   <div class="card">
-    <h2>📐 基本盘（2025）</h2>
-    <div class="grid">
-      <div class="stat"><div class="v">1203亿</div><div class="l">GDP</div></div>
-      <div class="stat"><div class="v">69%</div><div class="l">第三产业占比</div></div>
-      <div class="stat"><div class="v">159.8万</div><div class="l">常住人口</div></div>
-      <div class="stat"><div class="v">85.7%</div><div class="l">城镇化率</div></div>
-      <div class="stat"><div class="v">632.7亿</div><div class="l">高新区产值（占规上67%）</div></div>
-      <div class="stat"><div class="v">139.5亿</div><div class="l">江北生产性服务业</div></div>
+    <div class="grid4">
+      <div class="kpi"><div class="v">1203亿</div><div class="k">GDP</div><div class="s">2025年</div></div>
+      <div class="kpi"><div class="v">69.0%</div><div class="k">第三产业</div><div class="s">3.4 : 27.6 : 69.0</div></div>
+      <div class="kpi"><div class="v">159.8万</div><div class="k">常住人口</div><div class="s">城镇化率85.7%</div></div>
+      <div class="kpi"><div class="v">632.7亿</div><div class="k">高新区产值</div><div class="s">占规上67.4%</div></div>
+      <div class="kpi"><div class="v">139.5亿</div><div class="k">江北服务业</div><div class="s">占服务业近半</div></div>
+      <div class="kpi"><div class="v">72家</div><div class="k">智能家电企业</div><div class="s">5家小巨人</div></div>
+      <div class="kpi"><div class="v">30.8亿</div><div class="k">利元亨营收</div><div class="s">2025年</div></div>
+      <div class="kpi"><div class="v">1500亿</div><div class="k">2030目标</div><div class="s">高新区产值</div></div>
     </div>
   </div>
 
-  <div class="card">
-    <h2>🎯 离2030目标还有多远</h2>
-    <div style="font-size:14px;line-height:2.2">
-      <div style="display:flex;justify-content:space-between"><span>高新区产值 → 1500亿</span><span>632亿 / 42%</span></div>
-      <div class="bar"><div style="width:42%;background:#2563eb"></div></div>
-      <div style="display:flex;justify-content:space-between"><span>GDP → 约2000亿</span><span>1203亿 / 60%</span></div>
-      <div class="bar"><div style="width:60%;background:#6b7280"></div></div>
-      <div style="display:flex;justify-content:space-between"><span>常住人口 → 约180万</span><span>159.8万 / 89%</span></div>
-      <div class="bar"><div style="width:89%;background:#6b7280"></div></div>
-      <div style="display:flex;justify-content:space-between;color:#ea580c"><span>深惠城际通车</span><span>延期至2029年底 / 0%</span></div>
-      <div class="bar"><div style="width:2%;background:#ea580c"></div></div>
-      <div style="display:flex;justify-content:space-between;color:#ea580c"><span>跨江通道容量</span><span>日常拥堵中</span></div>
-      <div class="bar"><div style="width:45%;background:#ea580c"></div></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>🧩 26个节点，三层</h2>
-    <p class="muted">不是随便列的——产业12个、空间8个、人6个。三层不是并列，是一张图三种颜色。</p>
-    <div style="margin-top:12px">
-      <b style="color:#2563eb">● 产业层（12个）</b>
-      <div class="node-list" style="margin-top:6px">
-        <div class="node-item">惠城高新区（632亿）</div>
-        <div class="node-item">利元亨（30.8亿）</div>
-        <div class="node-item">雷士照明</div>
-        <div class="node-item">电子信息集群</div>
-        <div class="node-item">智能装备集群</div>
-        <div class="node-item">新能源新材料集群</div>
-        <div class="node-item">智能家电集群（72家）</div>
-        <div class="node-item">天宝创能</div>
-        <div class="node-item">先进科技（增速91%）</div>
-        <div class="node-item">AI与机器人（120亿）</div>
-        <div class="node-item">江北生产性服务业（139.5亿）</div>
-        <div class="node-item">学院城</div>
+  <div class="grid2">
+    <div class="card">
+      <b>🎯 离2030目标还有多远</b>
+      <div style="margin-top:8px">
+        <div class="cmp"><span class="l">高新区产值 → 1500亿</span><span class="r">632亿 / 42%</span></div>
+        <div class="bar"><i style="width:42%;background:#3b82f6"></i></div>
+        <div class="cmp"><span class="l">GDP → 约2000亿</span><span class="r">1203亿 / 60%</span></div>
+        <div class="bar"><i style="width:60%;background:#6b7280"></i></div>
+        <div class="cmp"><span class="l">常住人口 → 约180万</span><span class="r">159.8万 / 89%</span></div>
+        <div class="bar"><i style="width:89%;background:#6b7280"></i></div>
+        <div class="cmp"><span class="l red">深惠城际通车</span><span class="red">延期至2029 / 0%</span></div>
+        <div class="bar"><i style="width:3%;background:#f97316"></i></div>
+        <div class="cmp"><span class="l red">跨江通道容量</span><span class="red">日常拥堵</span></div>
+        <div class="bar"><i style="width:45%;background:#f97316"></i></div>
       </div>
     </div>
-    <div style="margin-top:16px">
-      <b style="color:#6b7280">● 空间层（8个）</b>
-      <div class="node-list" style="margin-top:6px">
-        <div class="node-item space">东江湾产业园</div>
-        <div class="node-item space">江北CBD</div>
-        <div class="node-item space">三栋南部组团</div>
-        <div class="node-item space">马安</div>
-        <div class="node-item space">横沥汝湖远郊</div>
-        <div class="node-item space">桥西老城商圈</div>
-        <div class="node-item space">水口老城居住区</div>
-        <div class="node-item space">过江通道（通勤咽喉）</div>
-      </div>
-    </div>
-    <div style="margin-top:16px">
-      <b style="color:#ea580c">● 人层（6个）</b>
-      <div class="node-list" style="margin-top:6px">
-        <div class="node-item people">东江湾蓝领</div>
-        <div class="node-item people">江北白领</div>
-        <div class="node-item people">深惠跨城通勤族</div>
-        <div class="node-item people">技能工程师</div>
-        <div class="node-item people">青年新市民</div>
-        <div class="node-item people">学龄家庭</div>
+    <div class="card">
+      <b>🧩 26个节点，三层</b>
+      <div style="margin-top:8px;font-size:12px">
+        <div style="color:#3b82f6;font-weight:600;margin:6px 0 4px">● 产业层（12）</div>
+        <div class="nlist">
+          <div class="ni">高新区 632亿</div><div class="ni">利元亨 30.8亿</div>
+          <div class="ni">雷士照明</div><div class="ni">电子信息</div>
+          <div class="ni">智能装备</div><div class="ni">新材料</div>
+          <div class="ni">家电72家</div><div class="ni">天宝创能</div>
+          <div class="ni">先进科技+91%</div><div class="ni">AI机器人120亿</div>
+          <div class="ni">服务业139亿</div><div class="ni">学院城</div>
+        </div>
+        <div style="color:#9ca3af;font-weight:600;margin:10px 0 4px">● 空间层（8）</div>
+        <div class="nlist">
+          <div class="ni sp">东江湾</div><div class="ni sp">江北CBD</div>
+          <div class="ni sp">三栋</div><div class="ni sp">马安</div>
+          <div class="ni sp">远郊</div><div class="ni sp">桥西</div>
+          <div class="ni sp">水口</div><div class="ni sp" style="border-left-color:#f97316">过江通道</div>
+        </div>
+        <div style="color:#f97316;font-weight:600;margin:10px 0 4px">● 人层（6）</div>
+        <div class="nlist">
+          <div class="ni pp">蓝领</div><div class="ni pp">白领</div>
+          <div class="ni pp">跨城</div><div class="ni pp">工程师</div>
+          <div class="ni pp">青年</div><div class="ni pp">家庭</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div style="text-align:center;margin:20px 0">
-    <a class="next" href="network.html">下一步：看谁最重要 →</a>
-  </div>
+  <div style="text-align:center"><a class="btn" href="network.html">下一步：看谁最重要 →</a></div>
+
+  <div class="disc">所有数字来自惠城区统计公报、2026政府工作报告、上市公司公告。这不是预测，是现状盘点。</div>
 </div>
-</body>
-</html>
+</body></html>
