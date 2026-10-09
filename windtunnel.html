@@ -272,9 +272,17 @@ try{drawRank();}catch(e){window.__rankErr=e.message;}
     document.getElementById("pcount").textContent=n;
   };
   window.sharePage=function(){
-    if(navigator.share){navigator.share({title:document.title,url:location.href}).catch(()=>{});}
-    else{navigator.clipboard.writeText(location.href).then(()=>alert("链接已复制，发给朋友吧"));}
-  };
+  var m=document.getElementById("shareModal");
+  if(!m){
+    m=document.createElement("div");
+    m.id="shareModal";
+    m.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px";
+    m.onclick=function(){m.remove();};
+    m.innerHTML='<div style="background:#0f172a;padding:20px;border-radius:14px;text-align:center" onclick="event.stopPropagation()"><div style="color:#fff;font-size:14px;margin-bottom:12px">截图二维码，发给朋友/群</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(location.href)+'" style="width:200px;height:200px;background:#fff;padding:8px;border-radius:8px"><div style="color:#94a3b8;font-size:12px;margin-top:12px">扫码打开</div></div>';
+    document.body.appendChild(m);
+  }
+  navigator.clipboard && navigator.clipboard.writeText(location.href);
+};
 })();
 </script>
 </body></html>
