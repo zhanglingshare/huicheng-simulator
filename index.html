@@ -92,11 +92,15 @@ h1{font-size:22px;margin:0 0 2px;letter-spacing:.5px}
   <div id="topicList"></div>
 
   <div class="next"><a href="network.html">下一步：看世界怎么运转 →</a></div>
-  <div class="disc">数据来源：政府工作报告、直通车、本地媒体、上市公司公告。当前为预设话题池，后端实时接口接入后自动替换。</div>
+  <div class="disc">数据来源：政府工作报告、直通车、本地媒体、上市公司公告；实时部分来自微博/百度公开热搜接口。</div>
 </div>
 
 <script>
-const TOPICS=[
+let curCat="all";
+let liveTopics=[];  // 实时拉到的
+
+// 本地惠城话题池
+const LOCAL=[
   {t:"过江通道早晚高峰拥堵",h:95,c:"life",src:"政府直通车",d:"水口到江北35分钟→50分钟，学校周边投诉集中",why:"这不是修路能解决的——它是产业和城之间唯一的那根筋。"},
   {t:"高新区冲千亿，2026目标820亿",h:92,c:"ind",src:"政府工作报告",d:"632.7亿→2027破千亿，2030目标1500亿",why:"压在几个关键项目投产节点上，不是匀速涨。"},
   {t:"文昌/明达学校开学，新增8000学位",h:88,c:"life",src:"政府工作报告",d:"2026年9月投入使用，文昌1740/明达2520",why:"学位在补，但人口流入更快。"},
@@ -122,18 +126,53 @@ const TOPICS=[
   {t:"惠州学院学院城建设",h:35,c:"city",src:"高校公开",d:"技能工程师供给侧",why:"工程师供给在这里。"}
 ];
 
-let curCat="all";
+// 关键词过滤：哪些热搜算"惠城/惠州相关"
+const KW=["惠州","惠城","仲恺","大亚湾","惠阳","博罗","惠东","龙门","东江湾","水口","马安","江北CBD","深惠","粤海","TCL","德赛","亿纬锂能","龙光","隆生"];
+
+async function fetchLive(){
+  liveTopics=[];
+  const apis=[
+    {url:"https://api.vvhan.com/api/hotlist/wbHot",name:"微博热搜"},
+    {url:"https://api.vvhan.com/api/hotlist/baiduRD",name:"百度热搜"}
+  ];
+  for(const api of apis){
+    try{
+      const r=await fetch(api.url);
+      const j=await r.json();
+      if(j.data&&Array.isArray(j.data)){
+        j.data.forEach((it,i)=>{
+          const title=it.title||it.word||"";
+          if(KW.some(k=>title.includes(k))){
+            liveTopics.push({
+              t:title,
+              h:Math.max(60, 95-i*1.5),
+              c:"city",
+              src:api.name+"·实时",
+              d:`来自${api.name}实时榜第${i+1}位`,
+              why:"热搜在榜——这是正在被讨论的事。",
+              live:true
+            });
+          }
+        });
+      }
+    }catch(e){/* 静默失败，用本地池 */}
+  }
+}
+
+function allTopics(){return [...liveTopics, ...LOCAL];}
+
 function render(){
-  let list=curCat==="all"?TOPICS:TOPICS.filter(x=>x.c===curCat);
-  list=list.map(x=>({...x,hs:x.h+Math.random()*6-3})).sort((a,b)=>b.hs-a.hs);
+  let list=curCat==="all"?allTopics():allTopics().filter(x=>x.c===curCat);
+  list=list.map(x=>({...x,hs:x.h+Math.random()*4-2})).sort((a,b)=>b.hs-a.hs);
   const el=document.getElementById("topicList");
   el.innerHTML=list.map((x,i)=>{
     const catCls=x.c==="ind"?"cat-ind":x.c==="life"?"cat-life":"cat-city";
     const catName=x.c==="ind"?"产业":x.c==="life"?"民生":"城市";
     const heatColor=x.hs>=80?"#f87171":x.hs>=60?"#fbbf24":"#34d399";
+    const liveBadge=x.live?'<span style="background:#dc2626;color:#fff;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px;vertical-align:middle">实时</span>':'';
     if(i===0){
       return `<div class="top1" onclick="this.classList.toggle('open')">
-        <span class="badge">🔥 今日最热</span>
+        <span class="badge">🔥 今日最热</span>${liveBadge}
         <div class="t">${x.t}</div>
         <div style="display:flex;align-items:center;gap:12px">
           <span class="heatnum">${Math.round(x.hs)}°</span>
@@ -143,10 +182,10 @@ function render(){
         <div class="detail" style="font-size:12.5px;color:#cbd5e1;margin-top:8px">${x.d}<br><span style="color:#fbbf24">→ ${x.why}</span></div>
       </div>`;
     }
-    return `<div class="topic ${catCls}" style="animation-delay:${i*60}ms" onclick="this.classList.toggle('open')">
+    return `<div class="topic ${catCls}" style="animation-delay:${i*50}ms" onclick="this.classList.toggle('open')">
       <div class="rank">${i+1}</div>
       <div class="body">
-        <div class="t">${x.t}</div>
+        <div class="t">${x.t}${liveBadge}</div>
         <div class="meta">
           <span class="heat"><i style="width:${Math.min(100,x.hs)}%;background:${heatColor}"></i></span>
           <span>${Math.round(x.hs)}°</span>
@@ -168,19 +207,26 @@ document.querySelectorAll(".cat").forEach(b=>{
   };
 });
 
-document.getElementById("btnScan").onclick=function(){
+document.getElementById("btnScan").onclick=async function(){
   this.innerHTML='<span class="pulse">⏳</span> 扫描中…';
-  document.getElementById("scanInfo").textContent="雷达旋转中…";
+  document.getElementById("scanInfo").textContent="雷达旋转中，正在拉取微博/百度实时热搜…";
   document.getElementById("scanline").classList.add("fast");
-  setTimeout(()=>{
-    this.innerHTML="🔄 重新扫描";
-    document.getElementById("scanline").classList.remove("fast");
-    const now=new Date();
-    document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} · 覆盖15个公开来源 · ${Math.floor(20+Math.random()*8)}个话题`;
-    render();
-  },900);
+  await fetchLive();
+  this.innerHTML="🔄 重新扫描";
+  document.getElementById("scanline").classList.remove("fast");
+  const now=new Date();
+  const liveN=liveTopics.length;
+  document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} · 实时热搜${liveN}条 + 本地话题${LOCAL.length}条`;
+  render();
 };
 
-render();
+// 首屏自动拉一次
+(async()=>{
+  await fetchLive();
+  const now=new Date();
+  document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} · 实时热搜${liveTopics.length}条 + 本地话题${LOCAL.length}条`;
+  render();
+})();
+
 </script>
 </body></html>
