@@ -89,6 +89,13 @@ h1{font-size:22px;margin:0 0 2px;letter-spacing:.5px}
     </div>
   </div>
 
+  <div id="signBox" style="background:linear-gradient(135deg,#1a1033,#0f1a2e);border:1px solid #3b82f6;border-radius:14px;padding:18px;margin-bottom:14px;text-align:center;cursor:pointer" onclick="drawSign()">
+    <div style="font-size:11px;color:#8fa3bf;letter-spacing:2px">🪭 今日惠城签 · 点我抽一签</div>
+    <div id="signBody" style="margin-top:12px;font-size:15px;color:#e6edf3;line-height:1.8;min-height:60px">
+      今天，你的惠城是什么运势？
+    </div>
+  </div>
+
   <div class="toolbar">
     <button class="cat on" data-c="all">全部</button>
     <button class="cat" data-c="ind">🔵 产业</button>
@@ -175,7 +182,32 @@ const WARM=[
   {t:"江边钓鱼的大叔",h:60,c:"warm",src:"慢生活",d:"东江边上，一杆一凳一下午，不急不躁",why:"惠城人的慢，是大城市学不来的。"}
 ];
 
-// 关键词过滤：哪些热搜算"惠城/惠州相关"
+// 今日一签
+const SIGNS=[
+  {e:"🚗",t:"通勤大吉",d:"今天过江通道比平时顺10分钟。别得意，是因为有人比你早起了半小时。"},
+  {e:"☕",t:"摸鱼宜咖啡",d:"宜在华贸买杯咖啡坐半小时，江北的下午值得慢下来。"},
+  {e:"🍜",t:"宜横沥汤粉",d:"今天中午别点外卖了，去老街来一碗横沥汤粉，猪骨汤是老火的。"},
+  {e:"🏭",t:"开工顺利",d:"今天东江湾的项目进度条比预想快。记得喝水，别把投产又往后拖。"},
+  {e:"🌆",t:"傍晚去江边",d:"今天日落好看。下班后沿滨江走一圈，比刷手机解压。"},
+  {e:"🎒",t:"接娃早出门",d:"学校周边今天拥堵指数偏高，接娃早出门5分钟，少焦虑。"},
+  {e:"📚",t:"宜带娃去图书馆",d:"周末别安排太远，西湖边的书院就够孩子待一下午。"},
+  {e:"🌧️",t:"通勤小堵",d:"今天过江可能小堵。把歌单提前下载好，在路上不急。"},
+  {e:"🛍️",t:"宜逛华贸",d:"周末华贸人不少，但那家新开的馆子值得排20分钟。"},
+  {e:"🚴",t:"宜骑行红花湖",d:"今天天气适合绕绿道一圈，18公里，出一身汗。"},
+  {e:"💼",t:"宜开会拍板",d:"今天脑子清楚，适合把拖了两周的决策先跑一遍再定。"},
+  {e:"🌙",t:"宜水东街夜逛",d:"晚上水东街灯亮起来，去走走，老城比朋友圈有意思。"},
+  {e:"💰",t:"搞钱小吉",d:"今天适合算账，不适合冲动消费。看看固投数据，稳住。"},
+  {e:"👨‍👩‍👧",t:"宜陪家人",d:"今天别加班。学龄家庭的留存，就靠你这顿饭。"},
+  {e:"🧭",t:"风洞提示",d:"今天适合做一次小测试：把你今天的计划往后拖两天，会怎样？"},
+];
+function drawSign(){
+  const d=new Date();
+  const seed=d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();
+  const s=SIGNS[seed%SIGNS.length];
+  document.getElementById("signBody").innerHTML=`<div style="font-size:32px">${s.e}</div><b style="color:#60a5fa">${s.t}</b><div style="font-size:13px;color:#cbd5e1;margin-top:6px">${s.d}</div>`;
+}
+drawSign();
+
 const KW=["惠州","惠城","仲恺","大亚湾","惠阳","博罗","惠东","龙门","东江湾","水口","马安","江北CBD","深惠","粤海","TCL","德赛","亿纬锂能","龙光","隆生"];
 
 async function fetchLive(){
