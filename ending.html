@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>让每一个重大决策，先跑一遍 · 惠城产业风洞</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
+.nav b{font-size:14px;margin-right:6px;flex:none}
+.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
+.nav a.on{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
+.wrap{max-width:840px;margin:auto;padding:18px}
+.hero{text-align:center;padding:40px 22px;background:radial-gradient(ellipse at top,#10234a 0%,#0a0f1a 70%);border:1px solid #1c2739;border-radius:16px;margin-bottom:14px}
+.hero .kick{font-size:12px;letter-spacing:3px;color:#60a5fa;margin-bottom:14px}
+.hero h1{font-size:25px;line-height:1.5;margin:0}
+.hero p{font-size:13px;color:#9aa9bd;margin:14px 0 0}
+.card{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:18px;margin-bottom:14px}
+.card h2{font-size:16px;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid #1c2739}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:700px){.why{grid-template-columns:1fr}}
+.why .step{background:#0a0f1a;border:1px solid #1c2739;border-radius:10px;padding:14px}
+.why .step .n{font-size:11px;font-weight:800;color:#60a5fa;letter-spacing:1px}
+.why .step h3{font-size:13.5px;margin:6px 0;color:#fbbf24}
+.why .step p{font-size:12px;color:#a9b6c9;margin:0;line-height:1.8}
+.flow{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:6px 0 2px}
+.flow .b{background:#0a0f1a;border:1px solid #22304a;border-radius:20px;padding:8px 16px;font-size:12.5px;color:#cbd5e1}
+.flow .b.hot{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:700}
+.flow .ar{color:#475569;font-size:16px}
+.grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+@media(max-width:700px){.grid6{grid-template-columns:1fr 1fr}}
+.feat{background:#0a0f1a;border:1px solid #1c2739;border-radius:10px;padding:13px}
+.feat .ic{font-size:20px;margin-bottom:5px}
+.feat b{font-size:12.8px;color:#e6edf3;display:block;margin-bottom:3px}
+.feat span{font-size:11px;color:#8fa3bf;line-height:1.7}
+.closing{text-align:center;padding:30px 22px;background:linear-gradient(160deg,#0e1a30,#0a0f1a);border:1px solid #1c2739;border-radius:14px;margin-bottom:14px}
+.closing .big{font-size:17px;line-height:2;color:#e6edf3}
+.sign{font-size:12px;color:#8fa3bf;margin-top:16px}
+.sign b{color:#fbbf24}
+.btn{background:#1d4ed8;color:#fff;border:0;padding:11px 24px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.ghost{background:transparent;border:1px solid #2b3c5a;color:#cbd5e1}
+</style></head><body>
+
+<div class="nav">
+  <b>惠城产业风洞</b>
+  <a href="index.html">① 今日话题</a>
+  <a href="network.html">② 建构世界</a>
+  <a href="who.html">③ 基本面</a>
+  <a href="choices.html">④ 五条路</a>
+  <a href="future.html">⑤ 未来</a>
+  <a href="windtunnel.html">⑥ 风洞测试</a>
+  <a href="blindspot.html">⑦ 忽略了什么</a>
+  <a href="report.html">⑧ 分析报告</a>
+  <a href="ending.html" class="on">⑨ 结语</a>
+</div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kick">结 语</div>
+    <h1>让每一个重大决策，先跑一遍</h1>
+    <p>风洞不替人做决定，它只把"看不见的未来"，提前跑给你看。</p>
+  </div>
+
+  <!-- 为什么 -->
+  <div class="card">
+    <h2>为什么城市决策，值得更郑重</h2>
+    <div class="why">
+      <div class="step">
+        <div class="n">第一 · 决策之重</div>
+        <h3>每个决定，连着千家万户</h3>
+        <p>一座城的重大决策，背后是普通人的饭碗、孩子的学位、家人的就医、一家老小的住处。投进去的是真金白银，一旦走偏，代价很大，也很难回头。</p>
+      </div>
+      <div class="step">
+        <div class="n">第二 · 系统之复杂</div>
+        <h3>城市，是咬合的齿轮</h3>
+        <p>产业、人、空间、外部环境早已紧紧咬合，一个变量变了，会牵出一连串反应。这样的系统，单凭经验和"差不多"，人脑很难算清"如果变了会怎样"。</p>
+      </div>
+      <div class="step">
+        <div class="n">第三 · 决策之方式</div>
+        <h3>拍板前，先跑一遍</h3>
+        <p>科学决策不是用数字取代人的判断，而是在动手前先看清：哪里可能断、哪里最脆弱、哪条路更稳。让决策从"拍脑袋"，走向看得见、可核对、能复盘。</p>
+      </div>
+    </div>
+    <div class="flow" style="margin-top:16px">
+      <span class="b">凭经验 · 拍脑袋</span><span class="ar">→</span>
+      <span class="b">看数据 · 看报表</span><span class="ar">→</span>
+      <span class="b hot">先推演 · 再决策</span>
+    </div>
+  </div>
+
+  <!-- Demo vs 正式版 -->
+  <div class="card">
+    <h2>这只是Demo：正式版会更强</h2>
+    <div style="height:280px"><canvas id="radar"></canvas></div>
+    <p style="font-size:12px;color:#8fa3bf;text-align:center;margin:8px 0 0">蓝线是当前Demo已做到的，橙线是正式版将达到的——五个维度全面加强。</p>
+  </div>
+
+  <!-- 正式版将接受 -->
+  <div class="card">
+    <h2>正式版，将接受更严格的检验</h2>
+    <div class="grid6">
+      <div class="feat"><div class="ic">🌬️</div><b>更多压力测试</b><span>不只通勤，还包括极端天气、产业链断点、外部冲击、政策变化等多重压力同时发生的组合情景。</span></div>
+      <div class="feat"><div class="ic">🎯</div><b>更细敏感性分析</b><span>把每个项目、每条关系、每个参数逐一扰动，精确找出"最不能出错"的那个位置。</span></div>
+      <div class="feat"><div class="ic">🎲</div><b>成千上万次推演</b><span>让未来在不同条件下反复演化，给出更稳健的可能性分布，而不是只给一个数字。</span></div>
+      <div class="feat"><div class="ic">📡</div><b>更真实的数据接入</b><span>对接统计、交通、就业、教育等更多真实数据源，逐步减少假设成分，让结论更扎实。</span></div>
+      <div class="feat"><div class="ic">🛠️</div><b>可交互 · 可复现</b><span>决策者可以自己改参数、提问题、现场推演，每一步都能回到公开资料核对。</span></div>
+      <div class="feat"><div class="ic">🧭</div><b>从看见问题到行动路径</b><span>不止于指出哪里脆弱，更进一步推演具体行动怎么走、先后顺序如何排。</span></div>
+    </div>
+  </div>
+
+  <!-- 收尾 -->
+  <div class="closing">
+    <div class="big">
+      一座城的未来，值得被认真推演。<br>
+      因为数字的背后，<b style="color:#fbbf24">是一个个具体的人，和他们的下一个五年。</b><br>
+      让决策更科学，城，才走得更稳、更远。
+    </div>
+    <div class="sign">
+      惠城产业决策风洞 · Demo版<br>
+      <b>张凌 博士</b> · 决策模拟推演
+    </div>
+    <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <a class="btn" href="index.html">重新看一遍</a>
+      <a class="btn ghost" href="report.html">查看分析报告</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+Chart.defaults.font.family='-apple-system,"PingFang SC",sans-serif';
+new Chart(document.getElementById('radar').getContext('2d'),{
+  type:'radar',
+  data:{labels:['压力测试广度','敏感性分析精度','数据真实程度','未来情景丰富度','决策交互深度'],datasets:[
+    {label:'当前Demo',data:[55,50,60,55,60],borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.18)',pointBackgroundColor:'#3b82f6',borderWidth:2},
+    {label:'正式版',data:[92,90,88,90,93],borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,.16)',pointBackgroundColor:'#f59e0b',borderWidth:2}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'bottom',labels:{color:'#93a4bd',font:{size:12},padding:14}}},
+    scales:{r:{min:0,max:100,ticks:{display:false,stepSize:20},
+      grid:{color:'#1c2739'},angleLines:{color:'#1c2739'},
+      pointLabels:{color:'#cbd5e1',font:{size:11}}}}}
+});
+</script>
+</body></html>
