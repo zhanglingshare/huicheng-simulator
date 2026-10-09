@@ -62,24 +62,29 @@ h1{font-size:21px;margin:0}
         <g id="scanline" style="transform-origin:32px 32px"><line x1="32" y1="32" x2="32" y2="4" stroke="#3b82f6" stroke-width="1.5"/></g>
       </svg>
       <div style="flex:1">
-        <h1 style="font-size:19px">惠城今晚去哪、周末去哪</h1>
-        <p class="sub">不是旅游攻略。是城市人下班后、周末的日常。</p>
+        <h1 style="font-size:19px">惠城生活风向标</h1>
+        <p class="sub">近期大家去哪、看什么电影、读什么书、在八卦什么科技新闻。</p>
         <div class="scan-info" id="scanInfo">雷达待命…</div>
       </div>
       <button class="refresh" id="btnScan">🔄 换一换</button>
     </div>
   </div>
 
-  <div class="livebar" id="livebar">正在拉取微博/百度/知乎/抖音等实时热搜…</div>
+  <div class="livebar" id="livebar">正在拉取实时热搜…</div>
+
+  <div id="hotBox" style="background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:12px 14px;margin-bottom:14px">
+    <div style="font-size:12px;color:#60a5fa;font-weight:700;margin-bottom:8px">📡 全网此刻在聊（电影 / 科技 / 书 / 展 / 演出）</div>
+    <div id="hotList" style="font-size:12.5px;color:#cbd5e1;line-height:2">—</div>
+  </div>
 
   <div class="tabs" id="tabs">
     <button class="on" data-c="all">全部</button>
-    <button data-c="cafe">☕ 发呆咖啡</button>
+    <button data-c="cafe">☕ 发呆书店</button>
     <button data-c="shop">🛍️ 逛街约会</button>
     <button data-c="night">🍻 晚上去哪</button>
     <button data-c="kid">👨‍👩‍👧 带娃</button>
     <button data-c="sport">🏃 动起来</button>
-    <button data-c="food">🍜 觅食</button>
+    <button data-c="show">🎬 演出看展</button>
   </div>
 
   <div class="grid" id="grid"></div>
@@ -102,13 +107,16 @@ const SPOTS=[
   {n:"东江夜游/江边",c:"night",tag:"散步",d:"晚饭后滨江路走一圈，吹江风",why:"不用花钱，最舒服的晚上"},
   {n:"市博物馆/科技馆",c:"kid",tag:"带娃",d:"免费，孩子能看一天，下雨天首选",why:"遛娃不费妈"},
   {n:"市民乐园/江北体育馆",c:"kid",tag:"遛娃",d:"大草坪放风筝、跑步、打球",why:"周末放电"},
+  {n:"惠州文化艺术中心",c:"show",tag:"演出",d:"音乐会、话剧、小型演出，江北",why:"周末看一场，比吃饭洋气"},
+  {n:"野岛文创展",c:"show",tag:"看展",d:"旧工厂文创园轮换展览，咖啡+看展半天",why:"免费的文化生活"},
   {n:"红花湖骑行",c:"sport",tag:"运动",d:"18公里环湖绿道，租车一圈，周末出汗",why:"比健身房爽"},
   {n:"滨江绿道跑步",c:"sport",tag:"运动",d:"东江边夜跑/晨跑，看江北天际线",why:"城市人最日常的运动"},
   {n:"客家老味道",c:"food",tag:"觅食",d:"盐焗鸡、梅菜扣肉、酿豆腐、艾粄，南坛下埔老街小馆",why:"带朋友来就吃这个"}
 ];
 
 let picks=[];
-const KW=["惠州","惠城","西湖","水东街","华贸","桥东","江北","滨江","红花湖","罗浮山","东莞","深圳","广东","咖啡","露营","夜市","演唱会","演出"];
+const LOCAL_KW=["惠州","惠城","西湖","水东街","华贸","桥东","江北","滨江","红花湖","罗浮山","东莞","深圳"];
+const TREND_KW=["电影","票房","AI","人工智能","大模型","芯片","手机","新能源汽车","书","小说","诺贝尔","演唱会","展览","话剧","音乐会","世界杯","奥运","科技"];
 
 function render(cat){
   const list=cat==="all"?SPOTS:SPOTS.filter(x=>x.c===cat);
@@ -132,7 +140,7 @@ document.querySelectorAll("#tabs button").forEach(b=>{
 });
 
 async function fetchLive(){
-  const found=[];
+  const local=[],trend=[];
   const apis=[
     {url:"https://api.vvhan.com/api/hotlist/wbHot",name:"微博"},
     {url:"https://api.vvhan.com/api/hotlist/baiduRD",name:"百度"},
@@ -145,22 +153,24 @@ async function fetchLive(){
     try{
       const r=await fetch(api.url);const j=await r.json();
       if(j.data&&Array.isArray(j.data)){
-        j.data.forEach((it,i)=>{
+        j.data.forEach((it)=>{
           const title=it.title||it.word||"";
-          if(KW.some(k=>title.includes(k))&&found.length<4){
-            found.push(`<b>${api.name}</b>·${title}`);
+          if(LOCAL_KW.some(k=>title.includes(k))&&local.length<4){
+            local.push(`<b>${api.name}</b>·${title}`);
+          }else if(TREND_KW.some(k=>title.includes(k))&&trend.length<8){
+            trend.push(title);
           }
         });
       }
     }catch(e){}
   }
-  return found;
+  return {local,trend};
 }
 
 async function refresh(){
   document.getElementById("btnScan").textContent="⏳ 扫描中…";
   document.getElementById("scanline").style.animation="spin .8s linear infinite";
-  const live=await fetchLive();
+  const {local,trend}=await fetchLive();
   const arr=[...SPOTS];
   for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
   picks=arr.slice(0,3).map(t=>t.n);
@@ -168,11 +178,14 @@ async function refresh(){
   document.getElementById("btnScan").textContent="🔄 换一换";
   document.getElementById("scanline").style.animation="";
   const now=new Date();
-  document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')} · 命中实时${live.length}条 · ${SPOTS.length}个去处`;
+  document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')} · 本地${local.length}条 · 全网热词${trend.length}条`;
   const bar=document.getElementById("livebar");
-  bar.innerHTML=live.length
-    ?"📡 此刻在热搜里："+live.join("　｜　")
-    :"📡 实时榜里暂时没有惠州本地词条——但惠城的周末，不用上热搜也值得去。";
+  bar.innerHTML=local.length
+    ?"📡 惠城此刻在热搜："+local.join("　｜　")
+    :"📡 本地暂时没上热搜——但惠城的周末，不用上热搜也值得去。";
+  document.getElementById("hotList").innerHTML=trend.length
+    ? trend.map((t,i)=>`${i+1}. ${t}`).join("<br>")
+    : "正在拉取全网电影/科技/书/演出话题…";
 }
 refresh();
 document.getElementById("btnScan").onclick=refresh;
