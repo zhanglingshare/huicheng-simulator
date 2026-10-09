@@ -177,14 +177,6 @@ h1{font-size:20px;margin:0 0 2px}
 </div>
 
 <script>
-// 连线生长
-window.addEventListener('load',function(){
-  const lines=document.querySelectorAll('#lines line');
-  lines.forEach((l,i)=>{
-    setTimeout(()=>{l.style.transition='stroke-dashoffset 1s ease';l.style.strokeDashoffset='0';},400+i*500);
-  });
-});
-
 // 弹窗数据（加强版）
 const pops=[
   '<b style="font-size:13px">通勤 ↔ 高新区招工</b><br>'+
@@ -205,11 +197,59 @@ const pops=[
   '<span class="tag">来源：2025统计公报</span>'
 ];
 let cur=-1;
-function showPop(i){
-  const el=document.getElementById('pop');
-  if(cur===i){el.style.display='none';cur=-1;return;}
-  el.innerHTML=pops[i];el.style.display='block';cur=i;
+const allLines=document.querySelectorAll('#lines line');
+const leftNodes=document.querySelectorAll('.nodeL');
+const rightNodes=document.querySelectorAll('.nodeR');
+
+function clearHL(){
+  allLines.forEach(l=>{l.setAttribute('stroke-width','2');l.style.opacity='0.5';});
+  leftNodes.forEach(n=>n.querySelector('circle').setAttribute('stroke-width','2'));
+  rightNodes.forEach(n=>n.querySelector('circle').setAttribute('stroke-width','2'));
 }
+function showPop(i){
+  clearHL();
+  const el=document.getElementById('pop');
+  el.innerHTML=pops[i];el.style.display='block';cur=i;
+  // 高亮当前组
+  allLines[i].setAttribute('stroke-width','4');
+  allLines[i].style.opacity='1';
+  leftNodes[i].querySelector('circle').setAttribute('stroke-width','4');
+  rightNodes[i].querySelector('circle').setAttribute('stroke-width','4');
+}
+
+// 自动播放
+let autoIdx=0, timer=null, paused=false;
+function startAuto(){
+  stopAuto();
+  timer=setInterval(()=>{
+    if(!paused){showPop(autoIdx);autoIdx=(autoIdx+1)%4;}
+  },3200);
+}
+function stopAuto(){if(timer){clearInterval(timer);timer=null;}}
+
+// 线长完后开始自动播放
+window.addEventListener('load',function(){
+  allLines.forEach(l=>l.style.opacity='0.5');
+  const lines=allLines;
+  let done=0;
+  lines.forEach((l,i)=>{
+    setTimeout(()=>{
+      l.style.transition='stroke-dashoffset 1s ease';
+      l.style.strokeDashoffset='0';
+      done++;
+      if(done===lines.length){setTimeout(startAuto,600);}
+    },400+i*500);
+  });
+});
+
+// 用户交互：暂停/恢复
+function userTakesOver(){
+  paused=true;stopAuto();
+  setTimeout(()=>{paused=false;startAuto();},12000); // 12秒无操作恢复
+}
+[leftNodes,rightNodes].forEach(group=>group.forEach(n=>{
+  n.addEventListener('click',userTakesOver);
+}));
 
 // 学位图
 new Chart(document.getElementById('eduChart').getContext('2d'),{
