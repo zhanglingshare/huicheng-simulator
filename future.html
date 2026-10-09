@@ -82,13 +82,11 @@ h1{font-size:20px;margin:0 0 2px;letter-spacing:.5px}
     <div class="card">
       <h2>每一路贡献了多少</h2>
       <div style="height:140px"><canvas id="contrib"></canvas></div>
-      <div style="font-size:11px;color:#5b6b82;margin-top:6px">从632.7亿开始，五条路各加多少。最粗的那根就是主力。</div>
     </div>
 
     <div class="card">
-      <h2>哪件事最影响结果（从大到小排）</h2>
+      <h2>哪件事最影响结果</h2>
       <div style="height:180px"><canvas id="tornado"></canvas></div>
-      <div style="font-size:11px;color:#5b6b82;margin-top:6px">横条越长，这件事对最终结果影响越大。盯住最上面那条。</div>
     </div>
 
     <div class="card">
@@ -111,6 +109,8 @@ h1{font-size:20px;margin:0 0 2px;letter-spacing:.5px}
         </div>
       </div>
     </div>
+
+    <div id="conclusion" style="background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:16px;margin-top:12px;font-size:13px;line-height:1.8;color:#cbd5e1"></div>
   </div>
 </div>
 
@@ -241,6 +241,14 @@ function run(){
   document.getElementById('bad').textContent=Math.round(p10)+'亿';
   document.getElementById('mid').textContent=Math.round(p50)+'亿';
   document.getElementById('good').textContent=Math.round(p90)+'亿';
+
+  // 一段话总结
+  document.getElementById('conclusion').innerHTML=
+    `一万次随机跑下来，<b style="color:#fbbf24">最可能落在${Math.round(p50)}亿</b>，`+
+    `也就是<b>${hit>50?'大概率能':'大概率够不着'}</b>1500亿目标。`+
+    `贡献最大的是新投产项目（约${paths[0].mu}亿），但它也是最不确定的——投产晚一年，结果可能差出100亿。`+
+    `最该盯住的不是招了多少商，而是<b style="color:#f87171">项目能不能按时间投产</b>。`+
+    `深惠融湾虽然热，但它对工业产值的直接贡献最小，波动却不小，别把希望全押在上面。`;
 
   document.getElementById('out').style.display='block';
 }
