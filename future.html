@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>惠城产业风洞 · 未来</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
@@ -14,7 +15,6 @@ h1{font-size:20px;margin:0 0 2px;letter-spacing:.5px}
 .sub{color:#8fa3bf;font-size:13px;margin:0 0 16px}
 .card{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:16px;margin-bottom:12px}
 .card h2{font-size:14px;margin:0 0 12px}
-svg{display:block;width:100%;height:auto}
 .btn{background:#1d4ed8;color:#fff;border:0;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer}
 .result{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
 @media(max-width:700px){.result{grid-template-columns:1fr}}
@@ -22,6 +22,10 @@ svg{display:block;width:100%;height:auto}
 .stat .v{font-size:22px;font-weight:800;color:#fbbf24}
 .stat .l{font-size:11px;color:#6b7280;margin-top:2px}
 .prob{font-size:32px;font-weight:800;text-align:center;margin:10px 0}
+.slider-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:12px}
+.slider-row label{flex:1;color:#93a4bd}
+.slider-row input[type=range]{flex:2;accent-color:#3b82f6}
+.slider-row span{width:50px;text-align:right;color:#fbbf24;font-weight:600;font-variant-numeric:tabular-nums}
 </style></head><body>
 
 <div class="nav">
@@ -31,15 +35,33 @@ svg{display:block;width:100%;height:auto}
   <a href="who.html">③ 基本面</a>
   <a href="choices.html">④ 五条路</a>
   <a href="future.html" class="on">⑤ 未来</a>
-  <span class="sp">蒙特卡洛 · 10000次</span>
+  <span class="sp">互动 · 拖动试试</span>
 </div>
 
 <div class="wrap">
   <h1>把未来扔一万遍</h1>
-  <p class="sub">未来不是一个数，是一堆可能。把每条路的不确定性扔进去，随机跑一万遍，看落在哪。</p>
+  <p class="sub">下面的滑块可以拖，改完点"重扔"看分布怎么变。</p>
 
-  <div style="text-align:center;margin-bottom:14px">
-    <button class="btn" id="bGo">🎲 扔一万遍</button>
+  <div class="card">
+    <h2>调一调</h2>
+    <div class="slider-row">
+      <label>高新区投产进度</label>
+      <input type="range" id="s1" min="150" max="350" value="250">
+      <span id="v1">250</span>
+    </div>
+    <div class="slider-row">
+      <label>制造业招商好坏</label>
+      <input type="range" id="s2" min="100" max="300" value="200">
+      <span id="v2">200</span>
+    </div>
+    <div class="slider-row">
+      <label>服务业带动</label>
+      <input type="range" id="s3" min="60" max="200" value="120">
+      <span id="v3">120</span>
+    </div>
+    <div style="text-align:center;margin-top:10px">
+      <button class="btn" onclick="run()">🎲 重扔一万遍</button>
+    </div>
   </div>
 
   <div id="out" style="display:none">
@@ -52,8 +74,8 @@ svg{display:block;width:100%;height:auto}
     </div>
 
     <div class="card">
-      <h2>一万次里，落在哪？</h2>
-      <svg viewBox="0 0 700 180" id="chart"></svg>
+      <h2>一万次落在哪（鼠标悬停看次数）</h2>
+      <div style="height:260px"><canvas id="chart"></canvas></div>
       <div id="chart-note" style="font-size:12px;color:#8fa3bf;margin-top:8px;text-align:center"></div>
     </div>
 
@@ -62,24 +84,26 @@ svg{display:block;width:100%;height:auto}
       <div id="sens" style="font-size:13px;line-height:2;color:#cbd5e1"></div>
     </div>
   </div>
-
-  <div style="font-size:11px;color:#5b6b82;text-align:center;margin-top:10px">
-    每条路的不确定度：高新区±50亿、制造业±60亿、服务业±40亿、城市更新±40亿、融深±50亿。整体再受外部冲击±8%。
-  </div>
 </div>
 
 <script>
-// 简单正态分布（Box-Muller）
 function randn(){let u=0,v=0;while(u===0)u=Math.random();while(v===0)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+let myChart=null;
+
+['s1','s2','s3'].forEach(id=>{
+  document.getElementById(id).oninput=function(){
+    document.getElementById(id.replace('s','v')).textContent=this.value;
+  }
+});
 
 function run(){
   const base=632.7;
   const paths=[
-    {mu:250,sd:50},
-    {mu:200,sd:60},
-    {mu:120,sd:40},
-    {mu:80,sd:40},
-    {mu:60,sd:50}
+    {mu:+document.getElementById('s1').value, sd:50},
+    {mu:+document.getElementById('s2').value, sd:60},
+    {mu:+document.getElementById('s3').value, sd:40},
+    {mu:80, sd:40},
+    {mu:60, sd:50}
   ];
   const N=10000;
   const results=[];
@@ -98,87 +122,61 @@ function run(){
   const hit=results.filter(x=>x>=1500).length/N*100;
 
   document.getElementById('prob').innerHTML=
-    `<span style="color:#f87171">${hit.toFixed(1)}%</span> <span style="font-size:14px;color:#8fa3bf">概率达到1500亿</span>`;
+    `<span style="color:${hit>50?'#34d399':hit>20?'#fbbf24':'#f87171'}">${hit.toFixed(1)}%</span>`;
   document.getElementById('p10').textContent=Math.round(p10)+'亿';
   document.getElementById('p50').textContent=Math.round(p50)+'亿';
   document.getElementById('p90').textContent=Math.round(p90)+'亿';
 
-  // 画直方图（增强版）
+  // 直方图
   const bins=40;
   const min=Math.floor(p10*0.85), max=Math.ceil(p90*1.15);
-  const counts=new Array(bins).fill(0);
-  results.forEach(r=>{
-    const b=Math.min(bins-1,Math.max(0,Math.floor((r-min)/(max-min)*bins)));
-    counts[b]++;
-  });
-  const maxC=Math.max(...counts);
-  const W=660, H=120, left=10, bottom=140;
-  let svg='';
-
-  // 背景网格线
-  for(let g=0;g<=4;g++){
-    const y=bottom-H/4*g;
-    svg+=`<line x1="${left}" y1="${y}" x2="${left+W}" y2="${y}" stroke="#1c2739" stroke-width="0.5"/>`;
-  }
-
-  // 超目标区域红色阴影
-  const tx=(1500-min)/(max-min)*W+left;
-  if(tx<left+W){
-    svg+=`<rect x="${tx}" y="20" width="${left+W-tx}" height="${H}" fill="#f87171" opacity="0.08"/>`;
-  }
-
-  // 柱子
+  const step=(max-min)/bins;
+  const labels=[], data=[];
   for(let i=0;i<bins;i++){
-    const h=counts[i]/maxC*H;
-    const x=left+i*W/bins;
-    const v=min+(max-min)*(i+0.5)/bins;
-    const color=v>=1500?'#f87171':'#3b82f6';
-    svg+=`<rect x="${x+1}" y="${bottom-h}" width="${W/bins-2}" height="${h}" fill="${color}" opacity="0.75" rx="1"/>`;
+    labels.push(Math.round(min+step*(i+0.5)));
+    data.push(0);
   }
+  results.forEach(r=>{
+    const b=Math.min(bins-1,Math.max(0,Math.floor((r-min)/step)));
+    data[b]++;
+  });
+  const colors=data.map((v,i)=>labels[i]>=1500?'#f87171':'#3b82f6');
 
-  // 目标线
-  svg+=`<line x1="${tx}" y1="15" x2="${tx}" y2="${bottom}" stroke="#fbbf24" stroke-width="2" stroke-dasharray="5 3"/>`;
-  svg+=`<text x="${tx}" y="12" text-anchor="middle" font-size="11" font-weight="700" fill="#fbbf24">目标 1500亿</text>`;
-
-  // P10/P50/P90 竖线+标注
-  const marks=[
-    {v:p10,label:'最差10%',c:'#6b7280'},
-    {v:p50,label:'一半一半',c:'#3b82f6'},
-    {v:p90,label:'最好10%',c:'#34d399'}
-  ];
-  marks.forEach(m=>{
-    const mx=(m.v-min)/(max-min)*W+left;
-    svg+=`<line x1="${mx}" y1="${bottom-H-5}" x2="${mx}" y2="${bottom}" stroke="${m.c}" stroke-width="1.5"/>`;
-    svg+=`<text x="${mx}" y="${bottom-H-10}" text-anchor="middle" font-size="10" fill="${m.c}" font-weight="600">${Math.round(m.v)}亿</text>`;
-    svg+=`<text x="${mx}" y="${bottom-H-22}" text-anchor="middle" font-size="9" fill="${m.c}">${m.label}</text>`;
+  if(myChart)myChart.destroy();
+  const ctx=document.getElementById('chart').getContext('2d');
+  myChart=new Chart(ctx,{
+    type:'bar',
+    data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderRadius:2,borderSkipped:false}]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          callbacks:{
+            title:(items)=>items[0].label+'亿',
+            label:(item)=>'出现 '+item.parsed.y+' 次'
+          }
+        }
+      },
+      scales:{
+        x:{ticks:{color:'#6b7280',maxTicksLimit:8},grid:{display:false},title:{display:true,text:'2030年高新区产值（亿元）',color:'#6b7280'}},
+        y:{ticks:{color:'#6b7280'},grid:{color:'#1c2739'},title:{display:true,text:'出现次数',color:'#6b7280'}}
+      }
+    }
   });
 
-  // 横轴
-  svg+=`<line x1="${left}" y1="${bottom}" x2="${left+W}" y2="${bottom}" stroke="#1c2739" stroke-width="2"/>`;
-  // 横轴刻度
-  for(let t=Math.ceil(min/200)*200;t<=max;t+=200){
-    const tx2=(t-min)/(max-min)*W+left;
-    svg+=`<text x="${tx2}" y="${bottom+16}" text-anchor="middle" font-size="10" fill="#5b6b82">${t}</text>`;
-  }
-  svg+=`<text x="${left+W/2}" y="${bottom+32}" text-anchor="middle" font-size="10" fill="#6b7280">2030年高新区产值（亿元）</text>`;
-
-  document.getElementById('chart').innerHTML=svg;
-
-  // 图下结论
   document.getElementById('chart-note').innerHTML=
     `一万次里，<b style="color:#f87171">${hit.toFixed(0)}次</b>超过了1500亿，`+
     `<b style="color:#3b82f6">${(100-hit).toFixed(0)}次</b>没到。`+
     `最可能落在 <b style="color:#fbbf24">${Math.round(p50)}亿</b> 附近。`;
 
-  // 敏感性
   document.getElementById('sens').innerHTML=
-    `🥇 <b style="color:#f87171">制造业集群招商能不能落地</b>——波动最大，招到和招不到差60亿<br>`+
-    `🥈 <b style="color:#fbbf24">高新区项目能不能按时投产</b>——晚一年就差50亿<br>`+
+    `🥇 <b style="color:#f87171">制造业招商能不能落地</b>——招到和招不到差60亿<br>`+
+    `🥈 <b style="color:#fbbf24">高新区项目能不能按时投产</b>——晚一年差50亿<br>`+
     `🥉 <b style="color:#3b82f6">深圳那边接不接得住</b>——最不可控，但影响最小`;
 
   document.getElementById('out').style.display='block';
 }
-
-document.getElementById('bGo').onclick=run;
+run();
 </script>
 </body></html>
