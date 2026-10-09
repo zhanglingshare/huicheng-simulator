@@ -82,16 +82,19 @@ h1{font-size:20px;margin:0 0 2px}
     <div class="card">
       <h2>每一路贡献多少</h2>
       <div style="height:140px"><canvas id="contrib"></canvas></div>
+      <div id="contrib-note" style="font-size:12px;color:#8fa3bf;margin-top:8px"></div>
     </div>
 
     <div class="card">
       <h2>哪件事波动最大</h2>
       <div style="height:180px"><canvas id="tornado"></canvas></div>
+      <div id="torn-note" style="font-size:12px;color:#8fa3bf;margin-top:8px"></div>
     </div>
 
     <div class="card">
       <h2>哪条路真管用（影响系数）</h2>
       <div style="height:180px"><canvas id="pathcoef"></canvas></div>
+      <div id="pcoef-note" style="font-size:12px;color:#8fa3bf;margin-top:8px"></div>
     </div>
 
     <div class="card">
@@ -110,6 +113,7 @@ h1{font-size:20px;margin:0 0 2px}
           <div style="font-size:18px;font-weight:800;color:#34d399" id="good">—</div>
         </div>
       </div>
+      <div id="scen-note" style="font-size:12px;color:#8fa3bf;margin-top:8px"></div>
     </div>
 
     <div id="conclusion" style="background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:16px;font-size:13px;line-height:1.8;color:#cbd5e1"></div>
@@ -232,6 +236,17 @@ function run(){
     });
 
     var maxI=coefs.indexOf(Math.max.apply(null,coefs));
+
+    // 人话解读
+    document.getElementById('contrib-note').innerHTML=
+      '这根条从632亿开始往上堆，每段颜色是一条路。最粗的那段（新投产项目）占了将近一半，说明主要靠它；其他几段都比较细。';
+    document.getElementById('torn-note').innerHTML=
+      '横条越长，说明这件事越说不准——可能很好，也可能很差。最上面那条最该留余量，因为它上下摆动幅度最大。';
+    document.getElementById('pcoef-note').innerHTML=
+      '这个图回答"哪条路真在拉动结果"。条越长，这条路一动、结果就跟着动。排第一的是 <b style="color:'+paths[maxI].color+'">'+paths[maxI].name+'</b>，最短的那条基本是"在转但没怎么传动"。';
+    document.getElementById('scen-note').innerHTML=
+      '坏情况=项目延期+招商不顺；一般情况=按官方节奏走；好情况=招商超预期+投产提前。坏和好之间差了大约'+Math.round(p90-p10)+'亿，这个差距不小。';
+
     document.getElementById('conclusion').innerHTML=
       '最可能落在 <b style="color:#fbbf24">'+Math.round(p50)+'亿</b>，'+
       (hit>50?'大概率能':'大概率够不着')+'1500亿。'+
