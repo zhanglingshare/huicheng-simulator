@@ -179,78 +179,46 @@ const WARM=[
 
 const KW=["惠州","惠城","仲恺","大亚湾","惠阳","博罗","惠东","龙门","东江湾","水口","马安","江北CBD","深惠","粤海","TCL","德赛","亿纬锂能","龙光","隆生"];
 
-async function fetchLive(){
-  liveTopics=[];
-  const apis=[
-    {url:"https://api.vvhan.com/api/hotlist/wbHot",name:"微博热搜"},
-    {url:"https://api.vvhan.com/api/hotlist/baiduRD",name:"百度热搜"},
-    {url:"https://api.vvhan.com/api/hotlist/zhihuHot",name:"知乎热榜"},
-    {url:"https://api.vvhan.com/api/hotlist/douyinHot",name:"抖音热点"},
-    {url:"https://api.vvhan.com/api/hotlist/toutiao",name:"今日头条"},
-    {url:"https://api.vvhan.com/api/hotlist/bili",name:"B站热门"},
-    {url:"https://api.vvhan.com/api/hotlist/weixin",name:"微信热搜"},
-    {url:"https://api.vvhan.com/api/hotlist/thepaper",name:"澎湃"},
-    {url:"https://api.vvhan.com/api/hotlist/people",name:"人民日报"},
-    {url:"https://api.vvhan.com/api/hotlist/wangyi",name:"网易新闻"},
-    {url:"https://api.vvhan.com/api/hotlist/sina",name:"新浪"},
-    {url:"https://api.vvhan.com/api/hotlist/huanqiu",name:"环球网"}
-  ];
-  for(const api of apis){
-    try{
-      const r=await fetch(api.url);
-      const j=await r.json();
-      if(j.data&&Array.isArray(j.data)){
-        j.data.forEach((it,i)=>{
-          const title=it.title||it.word||"";
-          if(KW.some(k=>title.includes(k))){
-            liveTopics.push({
-              t:title,
-              h:Math.max(60, 95-i*1.5),
-              c:"city",
-              src:api.name+"·实时",
-              url:it.url||it.mobileUrl||"",
-              d:`来自${api.name}实时榜第${i+1}位`,
-              why:"热搜在榜——这是正在被讨论的事。",
-              live:true
-            });
-          }
-        });
-      }
-    }catch(e){/* 静默失败，用本地池 */}
-  }
+const catMap={industry:"ind",livelihood:"life",city:"city",food:"food",fun:"fun",gossip:"warm"};
+let allData=[];
+let hotMeta={};
+
+// 读取当日话题快照（由数据雷达每日生成、推送）
+async function loadHot(){
+  const r=await fetch("hot.json?ts="+Date.now());
+  const j=await r.json();
+  hotMeta=j;
+  allData=j.items.map(it=>({
+    t:it.title, h:it.hot, c:catMap[it.cat]||"city",
+    src:it.source, url:it.url, d:it.summary, live:it.live,
+    vw:it.views_wan, sh:it.shares, lk:it.likes
+  }));
 }
 
-function allTopics(){return [...liveTopics, ...LOCAL, ...FOOD, ...FUN, ...WARM];}
+function allTopics(){return allData;}
 
 function render(){
   let list=curCat==="all"?allTopics():allTopics().filter(x=>x.c===curCat);
-  // 来源加权：官方正式口径基数高，媒体次之，实时热搜按位次
-  list=list.map(x=>{
-    let base=x.h;
-    if(x.live) base=90+Math.random()*8;  // 实时热搜
-    else if(x.src&&/报告|公报|政府|公告|年鉴/.test(x.src)) base=base+3;
-    else if(x.src&&/媒体|日报|南方|直通车/.test(x.src)) base=base+1;
-    return {...x,hs:base+Math.random()*2-1};
-  }).sort((a,b)=>b.hs-a.hs);
+  list=list.slice().sort((a,b)=>b.h-a.h);
   const grads={ind:"linear-gradient(135deg,#1e3a8a,#0f1a2e)",life:"linear-gradient(135deg,#7c2d12,#1a0f0f)",city:"linear-gradient(135deg,#374151,#0f1a2e)",food:"linear-gradient(135deg,#7f1d1d,#1a0f0f)",fun:"linear-gradient(135deg,#064e3b,#0f1a2e)",warm:"linear-gradient(135deg,#78350f,#1a1206)"};
   const catName={ind:"产业",life:"民生",city:"城市",food:"好吃",fun:"好玩",warm:"八卦"};
   const el=document.getElementById("topicList");
   el.style.cssText="display:grid;grid-template-columns:1fr 1fr;gap:10px";
   el.innerHTML=list.map((x)=>{
     const liveBadge=x.live?'<span style="background:#dc2626;color:#fff;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:5px">实时</span>':'';
-    const likes=(localStorage.getItem("like_"+x.t)||Math.floor(Math.random()*50+10));
+    const likes=(localStorage.getItem("like_"+x.t)??x.lk);
     return `<div class="tcard" data-t="${x.t}" style="background:${grads[x.c]||grads.city};border-radius:12px;padding:14px;cursor:pointer">
       <div style="font-size:11px;color:#94a3b8">${catName[x.c]||"城市"}${liveBadge} · ${x.src||""}</div>
       <div style="font-size:16px;font-weight:800;color:#fff;margin:8px 0 4px;line-height:1.4">${x.t}</div>
       <div style="display:flex;align-items:center;justify-content:space-between">
-        <div style="font-size:26px;font-weight:900;color:${x.hs>=85?'#f87171':x.hs>=70?'#fbbf24':'#34d399'}">${Math.round(x.hs)}<span style="font-size:12px;font-weight:400">°</span></div>
+        <div style="font-size:26px;font-weight:900;color:${x.h>=85?'#f87171':x.h>=70?'#fbbf24':'#34d399'}">${Math.round(x.h)}<span style="font-size:12px;font-weight:400">°</span></div>
         <div style="display:flex;gap:10px;font-size:12px;color:#94a3b8">
-          <span>👁️ ${(x.hs*0.7).toFixed(1)}万</span>
-          <span>🔁 ${Math.round(x.hs*10)}</span>
+          <span>👁️ ${x.vw}万</span>
+          <span>🔁 ${x.sh}</span>
           <span class="likeBtn" onclick="event.stopPropagation();like(this,'${x.t}')">👍 <b class="ln">${likes}</b></span>
         </div>
       </div>
-      <div class="detail" style="font-size:11.5px;color:#cbd5e1;margin-top:8px;display:none">${x.d}<br><span style="color:#fbbf24">→ ${x.why}</span></div>
+      <div class="detail" style="font-size:11.5px;color:#cbd5e1;margin-top:8px;display:none">${x.d||""}${x.why?`<br><span style="color:#fbbf24">→ ${x.why}</span>`:""}</div>
     </div>`;
   }).join("");
   document.querySelectorAll("#topicList .tcard").forEach(c=>{
@@ -274,29 +242,25 @@ document.querySelectorAll(".cat").forEach(b=>{
   };
 });
 
+function scanText(){
+  return `数据每日自动更新一次 · 上次更新 ${hotMeta.updated||"—"} · 近1天 · 共${allData.length}个话题`;
+}
+
 document.getElementById("btnScan").onclick=async function(){
   this.innerHTML='<span class="pulse">⏳</span> 扫描中…';
-  document.getElementById("scanInfo").textContent="雷达旋转中，正在拉取12个公开渠道…";
+  document.getElementById("scanInfo").textContent="雷达旋转中，正在读取当日话题快照…";
   document.getElementById("scanline").classList.add("fast");
-  await fetchLive();
+  await loadHot();
   this.innerHTML="🔄 重新扫描";
   document.getElementById("scanline").classList.remove("fast");
-  const now=new Date();
-  const liveN=liveTopics.length;
-  document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} · 实时热搜${liveN}条 + 话题${LOCAL.length}条 + 好吃${FOOD.length}·好玩${FUN.length}·八卦${WARM.length}`;
+  document.getElementById("scanInfo").textContent=scanText();
   render();
 };
 
-// 首屏自动拉一次；每天第一次打开自动更新
+// 首屏读取当日快照
 (async()=>{
-  const today=new Date().toDateString();
-  const last=localStorage.getItem("hc_last_scan");
-  await fetchLive();
-  if(last!==today){
-    localStorage.setItem("hc_last_scan",today);
-  }
-  const now=new Date();
-  document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} · 实时热搜${liveTopics.length}条 + 话题${LOCAL.length}条 + 好吃${FOOD.length}·好玩${FUN.length}`;
+  await loadHot();
+  document.getElementById("scanInfo").textContent=scanText();
   render();
 })();
 
