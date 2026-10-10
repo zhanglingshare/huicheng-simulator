@@ -70,7 +70,7 @@ h1{font-size:21px;margin:0}
     </div>
   </div>
 
-  <div class="livebar" id="livebar">正在拉取实时热搜…</div>
+  <div class="livebar" id="livebar">正在读今日去处…</div>
 
   <div class="tabs" id="tabs">
     <button class="on" data-c="all">全部</button>
@@ -92,22 +92,7 @@ h1{font-size:21px;margin:0}
 </div>
 
 <script>
-const SPOTS=[
-  {n:"野岛文化生活社区",base:850,c:"cafe",tag:"发呆",d:"旧工厂改的文创园，咖啡、书店、展览、小馆子，惠城年轻人的据点",why:"下午坐一下午，比逛商场舒服",watch:"年轻人愿不愿意留下来"},
-  {n:"桥东江边",base:600,c:"cafe",tag:"咖啡",d:"江边老巷，一排咖啡馆小酒馆，傍晚坐外面吹风",why:"惠城的小鼓浪屿",watch:"老城有没有活过来"},
-  {n:"江北华贸天地",base:920,c:"shop",tag:"逛街",d:"惠城最顶的商场，餐厅、影院、超市，周末约会标配",why:"周末不知道去哪，去华贸准没错",watch:"江北服务业客流旺不旺"},
-  {n:"佳兆业中心",base:580,c:"shop",tag:"逛街",d:"江北商圈，品牌餐饮+商场，下班顺路逛",why:"白领下班的第二站",watch:"CBD下班有没有留得住人"},
-  {n:"隆生广场/丽日",base:450,c:"shop",tag:"老商圈",d:"老城熟客常去，本地生活气重",why:"本地人真逛的商场",watch:"老城商业有没有空心化"},
-  {n:"水东街",base:880,c:"night",tag:"夜生活",d:"骑楼老街晚上亮灯，清吧、小吃、夜市，年轻人聚集地",why:"要热闹，来水东街",watch:"夜经济和年轻人流"},
-  {n:"东江夜游/江边",base:500,c:"night",tag:"散步",d:"晚饭后滨江路走一圈，吹江风",why:"不用花钱，最舒服的晚上",watch:"免费公共空间的人气"},
-  {n:"市博物馆/科技馆",base:420,c:"kid",tag:"带娃",d:"免费，孩子能看一天，下雨天首选",why:"遛娃不费妈",watch:"家庭留存的公共配套"},
-  {n:"市民乐园/江北体育馆",base:380,c:"kid",tag:"遛娃",d:"大草坪放风筝、跑步、打球",why:"周末放电",watch:"学龄家庭周末活跃度"},
-  {n:"惠州文化艺术中心",base:450,c:"show",tag:"演出",d:"音乐会、话剧、小型演出，江北",why:"周末看一场，比吃饭洋气",watch:"中产文化消费浓度"},
-  {n:"野岛文创展",base:400,c:"show",tag:"看展",d:"旧工厂文创园轮换展览，咖啡+看展半天",why:"免费的文化生活",watch:"年轻人口袋愿不愿为文化买单"},
-  {n:"红花湖骑行",base:780,c:"sport",tag:"运动",d:"18公里环湖绿道，租车一圈，周末出汗",why:"比健身房爽",watch:"城市周末活力和生态承载力"},
-  {n:"滨江绿道跑步",base:843,c:"sport",tag:"运动",d:"东江边夜跑/晨跑，看江北天际线",why:"城市人最日常的运动",watch:"通勤之外的居住吸引力"},
-  {n:"客家老味道",base:752,c:"food",tag:"觅食",d:"盐焗鸡、梅菜扣肉、酿豆腐、艾粄，南坛下埔老街小馆",why:"带朋友来就吃这个",watch:"本地消费是不是在本地循环"}
-];
+let SPOTS=[],PULSE=[],UPDATED='';
 
 let picks=[];
 const LOCAL_KW=["惠州","惠城区","惠州市","西湖","水东街","华贸","桥东","江北","滨江","红花湖","东江湾","水口","马安","三栋","龙丰","江南","河南岸","桥西","东平","小金口","汝湖","芦洲"];
@@ -116,7 +101,7 @@ const TREND_KW=["电影","票房","AI","人工智能","大模型","芯片","手�
 function render(cat){
   const list=(cat==="all"?SPOTS:SPOTS.filter(x=>x.c===cat)).map(x=>({
     ...x,
-    likes:x.base
+    likes:x.likes
   })).sort((a,b)=>b.likes-a.likes);
   const grads={cafe:"linear-gradient(135deg,#7c2d12,#1a0f0f)",shop:"linear-gradient(135deg,#1e3a8a,#0f1a2e)",night:"linear-gradient(135deg,#78350f,#1a1206)",kid:"linear-gradient(135deg,#065f46,#022c22)",sport:"linear-gradient(135deg,#155e75,#082f3a)",show:"linear-gradient(135deg,#6b21a8,#1e1033)",food:"linear-gradient(135deg,#7f1d1d,#1a0f0f)"};
   const emos={cafe:"☕",shop:"🛍️",night:"🍻",kid:"👨‍👩‍👧",sport:"🏃",show:"🎭",food:"🍜"};
@@ -154,7 +139,18 @@ async function loadCounts(){
     }catch(e){}
   });
 }
-render("all");
+async function loadLife(){
+  try{
+    const r=await fetch("life.json");const d=await r.json();
+    SPOTS=d.spots||[];PULSE=d.pulse||[];UPDATED=d.updated||"";
+  }catch(e){}
+  render("all");
+  const bar=document.getElementById("livebar");
+  bar.innerHTML=PULSE.length
+    ?"📡 最近大家在聊："+PULSE.join("　｜　")
+    :"📡 惠城的周末，不用上热搜也值得去。";
+  document.getElementById("scanInfo").textContent=`数据每日更新一次 · 上次更新 ${UPDATED} · 近1天 · 共${SPOTS.length}个去处`;
+}
 document.querySelectorAll("#tabs button").forEach(b=>{
   b.onclick=()=>{
     document.querySelectorAll("#tabs button").forEach(x=>x.classList.remove("on"));
@@ -162,92 +158,18 @@ document.querySelectorAll("#tabs button").forEach(b=>{
     render(b.dataset.c);
   };
 });
-
-async function fetchLive(){
-  const local=[];
-  const apis=[
-    {url:"https://api.vvhan.com/api/hotlist/wbHot",name:"微博"},
-    {url:"https://api.vvhan.com/api/hotlist/baiduRD",name:"百度"},
-    {url:"https://api.vvhan.com/api/hotlist/zhihuHot",name:"知乎"},
-    {url:"https://api.vvhan.com/api/hotlist/douyinHot",name:"抖音"},
-    {url:"https://api.vvhan.com/api/hotlist/toutiao",name:"头条"},
-    {url:"https://api.vvhan.com/api/hotlist/bili",name:"B站"},
-    {url:"https://api.vvhan.com/api/hotlist/weixin",name:"微信"},
-    {url:"https://api.vvhan.com/api/hotlist/thepaper",name:"澎湃"},
-    {url:"https://api.vvhan.com/api/hotlist/people",name:"人民"},
-    {url:"https://api.vvhan.com/api/hotlist/wangyi",name:"网易"},
-    {url:"https://api.vvhan.com/api/hotlist/sina",name:"新浪"},
-    {url:"https://api.vvhan.com/api/hotlist/huanqiu",name:"环球"}
-  ];
-  for(const api of apis){
-    try{
-      const r=await fetch(api.url);const j=await r.json();
-      if(j.data&&Array.isArray(j.data)){
-        j.data.forEach((it)=>{
-          const title=it.title||it.word||"";
-          if(LOCAL_KW.some(k=>title.includes(k))&&local.length<6){
-            local.push(`<b>${api.name}</b>·${title}`);
-          }
-        });
-      }
-    }catch(e){}
-  }
-  // 三个专门榜
-  async function grab(url,limit){
-    try{
-      const r=await fetch(url);const j=await r.json();
-      if(j.data&&Array.isArray(j.data))return j.data.slice(0,limit).map(x=>x.title||x.word||"");
-    }catch(e){}
-    return [];
-  }
-  let movie=await grab("https://api.vvhan.com/api/hotlist/doubanMovie",6);
-  let book=await grab("https://api.vvhan.com/api/hotlist/doubanBook",6);
-  let tech=await grab("https://api.vvhan.com/api/hotlist/ithome",6);
-  if(!movie.length)movie=["《南京照相馆》","《长安的荔枝》","《罗小黑战记2》","《乘风破浪》新片","《雄狮少年》续","周末新片速递"];
-  if(!tech.length)tech=["AI大模型又更新","国产芯片新进展","新手机发布","新能源车降价","鸿蒙新功能","自动驾驶新政策"];
-  return {local,movie,book,tech};
-}
-
-async function refresh(){
-  document.getElementById("btnScan").textContent="⏳ 扫描中…";
-  document.getElementById("scanline").style.animation="spin .8s linear infinite";
-  const {local,movie,book,tech}=await fetchLive();
+function refresh(){
   const arr=[...SPOTS];
   for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
   picks=arr.slice(0,3).map(t=>t.n);
   render(document.querySelector("#tabs button.on").dataset.c);
-  document.getElementById("btnScan").textContent="🔄 换一换";
-  document.getElementById("scanline").style.animation="";
-  const now=new Date();
-  document.getElementById("scanInfo").textContent=`上次扫描：${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')} · 本地${local.length}条`;
-  loadCounts();
-  const bar=document.getElementById("livebar");
-  bar.innerHTML=local.length
-    ?"📡 全网12源此刻在聊惠城："+local.join("　｜　")
-    :"📡 全网12源暂时没刷到本地词条——但惠城的周末，不用上热搜也值得去。";
-  const paint=(id,arr,miss,c1)=>{
-    const el=document.getElementById(id);
-    if(!el)return;
-    el.innerHTML=arr.length
-      ? arr.map((t,i)=>`<div style="flex:none;width:130px;background:${c1};border-radius:10px;padding:12px;font-size:12.5px;color:#fff;line-height:1.5">
-          <div style="font-size:10px;opacity:.7;margin-bottom:4px">No.${i+1}</div>${t}
-        </div>`).join("")
-      : `<div style="color:#5b6b82;font-size:12px;padding:8px">${miss}</div>`;
-  };
-  paint("movieList",movie,"正在拉热映…","linear-gradient(135deg,#9d174d,#4c0519)");
-  paint("techList",tech,"正在拉科技…","linear-gradient(135deg,#065f46,#022c22)");
 }
-function lucky(){
-  const x=SPOTS[Math.floor(Math.random()*SPOTS.length)];
-  const emos={cafe:"☕",shop:"🛍️",night:"🍻",kid:"👨‍👩‍👧",sport:"🏃",show:"🎭",food:"🍜"};
-  document.getElementById("luckyResult").innerHTML=`<div style="font-size:28px">${emos[x.c]||"📍"}</div><b style="color:#fdba74">${x.n}</b><div style="font-size:12.5px;color:#cbd5e1;margin-top:6px">${x.why}</div>`;
-}
-refresh();
+loadLife();
 document.getElementById("btnScan").onclick=refresh;
 </script>
 
 <div style="font-size:11px;color:#5b6b82;line-height:1.8;margin:16px 0;padding:12px;background:#0a0f1a;border-radius:8px">
-  📌 数据说明：去处热度基于大众点评/小红书/抖音公开打卡量合理排序，反映最近7日本地人和游客最常去的地方。华贸天地/水东街/红花湖/滨江绿道等为惠城人气地标，隆生广场/丽日为老城熟客区。非实时后台统计。
+  📌 数据说明：去处来自惠城区/惠州市公开文旅资源，热度按大众点评/小红书/抖音近期公开打卡量合理估算，反映最近24小时大家最常去的地方，非平台后台真实统计。江北服务业占全区近半——水东街亮不亮、华贸排不排队，就是这台风洞最关心的"人层活力"。具体营业与门票以现场为准。
 </div>
 
 <div class="likebar">
@@ -294,15 +216,5 @@ var _hmt = _hmt || [];
 </script>
 </body></html>
 <script>
-// 每天自动更新一次
-(function(){
-  const today=new Date().toDateString();
-  const last=localStorage.getItem("fun_last_scan");
-  if(last!==today){
-    setTimeout(()=>refresh(),800);
-    localStorage.setItem("fun_last_scan",today);
-  }else{
-    loadCounts();
-  }
-})();
+// 去处数据已随每日 life.json 更新；点“换一换”本地随机推荐
 </script>
