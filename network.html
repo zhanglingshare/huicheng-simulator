@@ -111,6 +111,7 @@ svg{display:block;width:100%;height:auto}
     </div>
 
     <div class="plain"><span class="lab">人话版</span>26个节点，理论上最多能有325对关系，实际只连了37条可佐证主边，密度约11.4%。连得最多的是高新区，它是"现在的核心"；可你要问"哪根线最不能断"，用介数中心性算出来的第一名往往不是最大的那个节点——<b>节点大不大不决定命门，它卡在什么位置，才决定。</b></div>
+    <div class="plain" style="margin-top:8px;background:rgba(248,113,113,.08);border-left:3px solid #f87171"><span class="lab" style="color:#fca5a5">看不懂图？</span>红圈标了三个命门：<b>高新区</b>是你上班拿工资的地方，<b>东江湾</b>是产业和人握手的地方，<b>过江通道</b>就是你每天早上堵的那座桥。记住这三个，这张图就没白看。</div>
 
     <div class="card" style="margin-top:12px">
       <b style="font-size:12.5px;color:#8fa3bf">边的数据血统（A/B/C/D）</b>
@@ -304,8 +305,12 @@ function addNode(n,delay){
   g.setAttribute("class","gnode");
   g.style.animationDelay=delay+"ms";
   g.style.color=n.c;
-  g.innerHTML=`<circle cx="${n.x}" cy="${n.y}" r="${n.r}" fill="${n.c}" opacity="0.92"></circle>
-    <text x="${n.x}" y="${n.y+4}" text-anchor="middle" font-size="10" font-weight="700" fill="#0b1018">${n.n}</text>`;
+  const KEY={"高新区":"你上班拿工资的地方","东江湾":"产业和人在这里握手","过江通道":"你每天堵的那座桥"};
+  const note=KEY[n.n]||"";
+  const ring=note?`<circle cx="${n.x}" cy="${n.y}" r="${n.r+6}" fill="none" stroke="#f87171" stroke-width="2" stroke-dasharray="3 3" opacity="0.9"></circle>`:"";
+  const tag=note?`<text x="${n.x}" y="${n.y+n.r+18}" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fca5a5">📍 ${note}</text>`:"";
+  g.innerHTML=`<circle cx="${n.x}" cy="${n.y}" r="${n.r}" fill="${n.c}" opacity="0.92"></circle>${ring}
+    <text x="${n.x}" y="${n.y+4}" text-anchor="middle" font-size="10" font-weight="700" fill="#0b1018">${n.n}</text>${tag}`;
   nodesG.appendChild(g);
 }
 
