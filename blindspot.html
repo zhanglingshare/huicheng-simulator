@@ -164,6 +164,14 @@ h1{font-size:20px;margin:0 0 2px}
     </div>
   </div>
 
+  <!-- 体感投票 -->
+  <div class="card" style="margin-top:12px">
+    <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:4px">🗳️ 惠城人体感小调查</div>
+    <div style="font-size:12.5px;color:#94a3b8;margin-bottom:12px">你早上从家到单位，路上大概要多久？（本地累计，非全网统计）</div>
+    <div id="voteOpts" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+    <div id="voteResult" style="margin-top:12px;font-size:12.5px;color:#cbd5e1"></div>
+  </div>
+
   <!-- 收尾 -->
   <div class="card" style="margin-top:12px;text-align:center">
     <div style="font-size:15px;line-height:2.1;color:#cbd5e1">
@@ -317,6 +325,31 @@ var _hmt = _hmt || [];
   hm.src = "https://hm.baidu.com/hm.js?YOUR_ID";
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+// 体感投票：本地累计
+(function(){
+  const KEY="vote_commute_v1";
+  const opts=[{k:"lt20",label:"20分钟以内",c:"#34d399"},{k:"mid",label:"20-40分钟",c:"#fbbf24"},{k:"gt40",label:"40分钟以上",c:"#f87171"}];
+  let data=JSON.parse(localStorage.getItem(KEY)||'{"lt20":0,"mid":0,"gt40":0}');
+  function render(voted){
+    const total=opts.reduce((s,o)=>s+data[o.k],0);
+    document.getElementById("voteOpts").innerHTML=opts.map(o=>{
+      const pct=total?Math.round(data[o.k]/total*100):0;
+      const dis=voted?'pointer-events:none':'';
+      return `<button onclick="vote('${o.k}')" style="${dis};flex:1;min-width:90px;background:${o.c}22;border:1px solid ${o.c};color:${o.c};border-radius:10px;padding:10px 8px;cursor:pointer;font-size:13px;font-weight:700">${o.label}${voted?' '+pct+'%':''}</button>`;
+    }).join("");
+    if(total>0){
+      document.getElementById("voteResult").innerHTML=`已有 <b style="color:#fbbf24">${total}</b> 位惠城人参与。<br>超过40分钟的占 <b style="color:#f87171">${Math.round(data.gt40/total*100)}%</b>——你堵在路上的每一分钟，都和高新区能不能招到人有关。`;
+    }
+  }
+  window.vote=function(k){
+    if(localStorage.getItem(KEY+"_done"))return;
+    data[k]++;localStorage.setItem(KEY,JSON.stringify(data));localStorage.setItem(KEY+"_done","1");
+    render(true);
+  };
+  render(localStorage.getItem(KEY+"_done")?true:false);
 })();
 </script>
 </body></html>
