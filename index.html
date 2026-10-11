@@ -86,6 +86,7 @@ h1{font-size:22px;margin:0 0 2px;letter-spacing:.5px}
     <div>
       <h1>今日惠城区话题</h1>
       <p class="sub">扫一遍公开渠道，按热度排。点卡片看详情。<br><span style="font-size:11px;color:#5b6b82">数据来源：政府工作报告、统计公报与官方发布、南方+/惠州日报等媒体，以及微博/抖音/头条等公开热榜。统计区间：最近24小时（近1天）· 每日自动更新一次。👁️阅读、🔁转发、👍点赞按公开来源热度合理估算，非平台后台真实统计。</span></p>
+      <div id="topHook" style="margin-top:12px;font-size:17px;font-weight:800;color:#fbbf24;line-height:1.5;background:rgba(251,191,36,.08);border-left:3px solid #fbbf24;padding:10px 12px;border-radius:0 10px 10px 0"></div>
     </div>
   </div>
 
@@ -204,9 +205,22 @@ async function loadHot(){
 function allTopics(){return allData;}
 
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+const relMap={
+  ind:"高新区又落地新项目——未来几年你周边的就业、房租可能跟着动",
+  life:"家门口的医疗/教育资源在加码，和你家有关",
+  city:"你常走的这条路/这个片区，正在悄悄升级",
+  food:"本地人排队、外地人专门来吃——你多久没去了？",
+  fun:"周末又多一个可以去晃的地方",
+  warm:"邻里间的这点小事，就是惠城的烟火气"
+};
 function render(){
   let list=curCat==="all"?allTopics():allTopics().filter(x=>x.c===curCat);
   list=list.slice().sort((a,b)=>b.h-a.h);
+  // 顶部一句话：从当天最热话题提炼
+  if(allTopics().length){
+    const top=allTopics().slice().sort((a,b)=>b.h-a.h)[0];
+    document.getElementById("topHook").innerHTML="📌 今天惠城最热的不是统计公报，是<b>「"+esc(top.t)+"」</b>";
+  }
   const grads={ind:"linear-gradient(135deg,#1e3a8a,#0f1a2e)",life:"linear-gradient(135deg,#7c2d12,#1a0f0f)",city:"linear-gradient(135deg,#374151,#0f1a2e)",food:"linear-gradient(135deg,#7f1d1d,#1a0f0f)",fun:"linear-gradient(135deg,#064e3b,#0f1a2e)",warm:"linear-gradient(135deg,#78350f,#1a1206)"};
   const catName={ind:"产业",life:"民生",city:"城市",food:"好吃",fun:"好玩",warm:"八卦"};
   const el=document.getElementById("topicList");
@@ -215,9 +229,11 @@ function render(){
     const liveBadge=x.live?'<span style="background:#dc2626;color:#fff;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:5px">实时</span>':'';
     const likes=(localStorage.getItem("like_"+x.t)??x.lk);
     const whyHtml=x.why?`<br><span style="color:#fbbf24">→ ${esc(x.why)}</span>`:"";
+    const rel=relMap[x.c]||relMap.city;
     return `<div class="tcard" data-t="${esc(x.t)}" style="background:${grads[x.c]||grads.city};border-radius:12px;padding:14px;cursor:pointer">
       <div style="font-size:11px;color:#94a3b8">${catName[x.c]||"城市"}${liveBadge} · ${esc(x.src||"")}</div>
       <div style="font-size:16px;font-weight:800;color:#fff;margin:8px 0 4px;line-height:1.4">${esc(x.t)}</div>
+      <div style="font-size:11px;color:#7dd3fc;margin:2px 0 6px;line-height:1.4">💡 ${esc(rel)}</div>
       <div style="display:flex;align-items:center;justify-content:space-between">
         <div style="font-size:26px;font-weight:900;color:${x.h>=85?'#f87171':x.h>=70?'#fbbf24':'#34d399'}">${Math.round(x.h)}<span style="font-size:12px;font-weight:400">°</span></div>
         <div style="display:flex;gap:10px;font-size:12px;color:#94a3b8">
