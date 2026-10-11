@@ -191,6 +191,7 @@ h1{font-size:20px;margin:0 0 2px}
 // 同目录 model.js 的 HT 对象，future / windtunnel / report 三页共用。
 // 这里只保留一个简短别名，供本页敏感性分析调用，行为与 HT.run 完全一致。
 function simulate(seed,N,paths){ return HT.run(seed,N,paths); }
+let lastRun=null;
 const charts={};
 function destroy(k){if(charts[k]){charts[k].destroy();delete charts[k];}}
 
@@ -322,6 +323,7 @@ function run(){
     }).join('');
 
     document.getElementById('out').style.display='block';
+    lastRun={p10:p10,p50:p50,p90:p90,hit:hit,N:N};
   }catch(e){
     var el=document.getElementById('err');
     el.style.display='block';
@@ -478,15 +480,18 @@ var _hmt = _hmt || [];
 })();
 </script>
 <script>
-// 先猜后揭
+// 先猜后揭：揭晓内容读本次真实 run 的中位数/概率/次数，不写死
 function guess(n){
-  const msgs={
-    1:"你偏谨慎。模型跑出来中位数约1580亿——比你猜的要乐观。",
-    2:"你猜在中间。模型中位数约1580亿，正好落在你这个区间。",
-    3:"你偏乐观。模型跑出来只有约66%的概率过1500亿——比你想的要难。"
-  };
-  document.getElementById("guessOut").innerHTML="揭晓："+msgs[n]+"<br>下面这张分布，就是它跑了一万遍的结果。";
-  document.getElementById("guessBox").style.borderColor="#34d399";
+  if(!lastRun){document.getElementById('guessOut').textContent='模型还在跑，稍等一下再点。';return;}
+  const p50=lastRun.p50, hit=lastRun.hit, N=lastRun.N;
+  const actualBucket=p50<1300?1:(p50<=1600?2:3);
+  const rangeName={1:'1300亿以下',2:'1300–1600亿',3:'1600亿以上'};
+  const verdict=(n===actualBucket)
+    ? '你选的「'+rangeName[n]+'」，正是模型中位数 '+Math.round(p50)+'亿 落的位置——猜中了。'
+    : '你选了「'+rangeName[n]+'」，模型中位数 '+Math.round(p50)+'亿 实际落在「'+rangeName[actualBucket]+'」。';
+  document.getElementById('guessOut').innerHTML=
+    '揭晓：'+verdict+'<br>过1500亿的概率约 '+hit.toFixed(0)+'%，下面这张分布，是它跑了 '+N.toLocaleString()+' 遍的结果。';
+  document.getElementById('guessBox').style.borderColor='#34d399';
 }
 </script>
 </body></html>

@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>惠城产业风洞 · 今日话题</title>
+<script src="model.js"></script>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
@@ -85,7 +86,7 @@ h1{font-size:22px;margin:0 0 2px;letter-spacing:.5px}
     </svg>
     <div>
       <h1>今日惠城区话题</h1>
-      <p class="sub">扫一遍公开渠道，按热度排。点卡片看详情。<br><span style="font-size:11px;color:#5b6b82">数据来源：政府工作报告、统计公报与官方发布、南方+/惠州日报等媒体，以及微博/抖音/头条等公开热榜。统计区间：最近24小时（近1天）· 每日自动更新一次。👁️阅读、🔁转发、👍点赞按公开来源热度合理估算，非平台后台真实统计。</span></p>
+      <p class="sub">扫一遍公开渠道，按关注程度排。点卡片看详情。<br><span style="font-size:11px;color:#5b6b82">数据来源：政府工作报告、统计公报与官方发布、南方+/惠州日报等媒体，以及抖音等公开平台。统计区间：近期公开信息，每日自动刷新（优先最近1天）。本页不展示平台后台真实阅读、转发、点赞，改用关注档（高/较高/中）标注。</span></p>
       <div id="topHook" style="margin-top:12px;font-size:17px;font-weight:800;color:#fbbf24;line-height:1.5;background:rgba(251,191,36,.08);border-left:3px solid #fbbf24;padding:10px 12px;border-radius:0 10px 10px 0"></div>
     </div>
   </div>
@@ -93,7 +94,7 @@ h1{font-size:22px;margin:0 0 2px;letter-spacing:.5px}
   <!-- 你的判断 -->
   <div style="margin:12px 0;padding:14px;background:linear-gradient(135deg,#1e293b,#0f172a);border:1px solid #3b82f6;border-radius:14px">
     <div style="font-size:14px;font-weight:800;color:#fff;margin-bottom:4px">🔮 2030年惠城能到1500亿吗？说说你的判断</div>
-    <div style="font-size:12px;color:#94a3b8;margin-bottom:10px">模型跑了一万遍，说概率是 <b style="color:#fbbf24">66%</b>。你比它乐观还是悲观？</div>
+    <div style="font-size:12px;color:#94a3b8;margin-bottom:10px">同一套模型跑了很多遍，过1500亿概率约 <b id="baseHit" style="color:#fbbf24">…</b>，中位数约 <b id="baseP50" style="color:#fbbf24">…</b>亿。你比它乐观还是悲观？</div>
     <div id="voteBar" style="display:flex;gap:8px"></div>
     <div id="voteOut" style="margin-top:10px;font-size:12px;color:#cbd5e1;line-height:1.6"></div>
   </div>
@@ -108,7 +109,7 @@ h1{font-size:22px;margin:0 0 2px;letter-spacing:.5px}
     <button class="cat" data-c="warm">🌟 八卦暖闻</button>
     <button class="refresh" id="btnScan">🔄 重新扫描</button>
   </div>
-  <div class="scan-info" id="scanInfo">上次扫描：刚刚 · 最近7天 · 覆盖15个公开来源</div>
+  <div class="scan-info" id="scanInfo">正在读取今日话题…</div>
 
   <div id="topicList"></div>
 
@@ -204,9 +205,9 @@ async function loadHot(){
   }
   hotMeta=j;
   allData=j.items.map(it=>({
-    t:it.title, h:it.hot, c:catMap[it.cat]||"city",
+    t:it.title, c:catMap[it.cat]||"city",
     src:it.source, url:it.url, d:it.summary, live:it.live,
-    vw:it.views_wan, sh:it.shares, lk:it.likes
+    tier:it.tier, srcLevel:it.srcLevel
   }));
 }
 
@@ -223,34 +224,30 @@ const relMap={
 };
 function render(){
   let list=curCat==="all"?allTopics():allTopics().filter(x=>x.c===curCat);
-  list=list.slice().sort((a,b)=>b.h-a.h);
-  // 顶部一句话：从当天最热话题提炼
+  // hot.json 已按编辑关注程度排好序，直接采用数组顺序，不再本地排序
   if(allTopics().length){
-    const top=allTopics().slice().sort((a,b)=>b.h-a.h)[0];
-    document.getElementById("topHook").innerHTML="📌 今天惠城最热的不是统计公报，是<b>「"+esc(top.t)+"」</b>";
+    const top=allTopics()[0];
+    document.getElementById("topHook").innerHTML="📌 今天大家在看的，是<b>「"+esc(top.t)+"」</b>";
   }
   const grads={ind:"linear-gradient(135deg,#1e3a8a,#0f1a2e)",life:"linear-gradient(135deg,#7c2d12,#1a0f0f)",city:"linear-gradient(135deg,#374151,#0f1a2e)",food:"linear-gradient(135deg,#7f1d1d,#1a0f0f)",fun:"linear-gradient(135deg,#064e3b,#0f1a2e)",warm:"linear-gradient(135deg,#78350f,#1a1206)"};
   const catName={ind:"产业",life:"民生",city:"城市",food:"好吃",fun:"好玩",warm:"八卦"};
+  const tierColor={"高":"#f87171","较高":"#fbbf24","中":"#34d399"};
   const el=document.getElementById("topicList");
   el.style.cssText="display:grid;grid-template-columns:1fr 1fr;gap:10px";
   el.innerHTML=list.map((x)=>{
     const liveBadge=x.live?'<span style="background:#dc2626;color:#fff;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:5px">实时</span>':'';
-    const likes=(localStorage.getItem("like_"+x.t)??x.lk);
-    const whyHtml=x.why?`<br><span style="color:#fbbf24">→ ${esc(x.why)}</span>`:"";
+    const likes=(localStorage.getItem("like_"+x.t)??0);
+    const tc=tierColor[x.tier]||"#34d399";
     const rel=relMap[x.c]||relMap.city;
     return `<div class="tcard" data-t="${esc(x.t)}" style="background:${grads[x.c]||grads.city};border-radius:12px;padding:14px;cursor:pointer">
-      <div style="font-size:11px;color:#94a3b8">${catName[x.c]||"城市"}${liveBadge} · ${esc(x.src||"")}</div>
+      <div style="font-size:11px;color:#94a3b8">${catName[x.c]||"城市"}${liveBadge} · ${esc(x.srcLevel||"")} · ${esc(x.src||"")}</div>
       <div style="font-size:16px;font-weight:800;color:#fff;margin:8px 0 4px;line-height:1.4">${esc(x.t)}</div>
-      <div style="font-size:11px;color:#7dd3fc;margin:2px 0 6px;line-height:1.4">💡 ${esc(rel)}</div>
+      <div style="font-size:11px;color:#7dd3fc;margin:2px 0 8px;line-height:1.4">💡 ${esc(rel)}</div>
       <div style="display:flex;align-items:center;justify-content:space-between">
-        <div style="font-size:26px;font-weight:900;color:${x.h>=85?'#f87171':x.h>=70?'#fbbf24':'#34d399'}">${Math.round(x.h)}<span style="font-size:12px;font-weight:400">°</span></div>
-        <div style="display:flex;gap:10px;font-size:12px;color:#94a3b8">
-          <span>👁️ ${x.vw}万</span>
-          <span>🔁 ${x.sh}</span>
-          <span class="likeBtn" onclick="event.stopPropagation();like(this)">👍 <b class="ln">${likes}</b></span>
-        </div>
+        <div style="font-size:12px;font-weight:800;color:${tc};border:1px solid ${tc};border-radius:8px;padding:3px 10px">关注 · ${esc(x.tier)}</div>
+        <span class="likeBtn" style="font-size:12px;color:#94a3b8" onclick="event.stopPropagation();like(this)">👍 <b class="ln">${likes}</b></span>
       </div>
-      <div class="detail" style="font-size:11.5px;color:#cbd5e1;margin-top:8px;display:none">${esc(x.d||"")}${whyHtml}</div>
+      <div class="detail" style="font-size:11.5px;color:#cbd5e1;margin-top:8px;display:none">${esc(x.d||"")}</div>
     </div>`;
   }).join("");
   document.querySelectorAll("#topicList .tcard").forEach(c=>{
@@ -274,7 +271,7 @@ document.querySelectorAll(".cat").forEach(b=>{
 });
 
 function scanText(){
-  return `数据每日自动更新一次 · 上次更新 ${hotMeta.updated||"—"} · 近1天 · 共${allData.length}个话题`;
+  return `数据每日自动刷新一次 · 上次更新 ${hotMeta.updated||"—"} · 共${allData.length}个话题 · 关注档排序`;
 }
 
 document.getElementById("btnScan").onclick=async function(){
@@ -293,6 +290,9 @@ document.getElementById("btnScan").onclick=async function(){
   await loadHot();
   document.getElementById("scanInfo").textContent=scanText();
   render();
+  const b=HT.run(42,4000,HT.DEFAULT_PATHS);
+  document.getElementById("baseHit").textContent=b.hit.toFixed(0)+"%";
+  document.getElementById("baseP50").textContent=Math.round(b.p50);
 })();
 
 </script>
@@ -351,13 +351,13 @@ var _hmt = _hmt || [];
     document.getElementById("voteBar").innerHTML=opts.map(o=>{
       const pct=total?Math.round(d[o.k]/total*100):0;
       const dis=voted?'pointer-events:none;opacity:.7':'';
-      return `<button onclick="judge('${o.k}')" style="${dis};flex:1;background:${o.c}22;border:1px solid ${o.c};color:${o.c};border-radius:10px;padding:10px 6px;cursor:pointer;font-size:13px;font-weight:700">${o.label}${voted?' '+pct+'%':''}</button>`;
+      return `<button onclick="judge('${o.k}')" style="${dis};flex:1;background:${o.c}22;border:1px solid ${o.c};color:${o.c};border-radius:10px;padding:10px 6px;cursor:pointer;font-size:13px;font-weight:700">${o.label}</button>`;
     }).join("");
-    if(total>0){
-      const sure=Math.round(d.sure/total*100);
-      document.getElementById("voteOut").innerHTML=`已有 <b style="color:#fbbf24">${total}</b> 位惠城人表态：${sure}% 看稳，${100-sure}% 看悬。<br>2026年我们在这。一年后回来，看看谁的判断更接近现实。`;
+    if(voted){
+      const my=opts.find(o=>d[o.k]>0);
+      document.getElementById("voteOut").innerHTML=`你这一票投给了「<b style="color:${my.c}">${my.label}</b>」——${my.mood}。<br>这是你本机的记录。2026年我们在这，一年后回来，看看自己的判断准不准。`;
     } else {
-      document.getElementById("voteOut").innerHTML="你是第一个表态的。";
+      document.getElementById("voteOut").innerHTML="还没表态，选一个。";
     }
   }
   window.judge=function(k){

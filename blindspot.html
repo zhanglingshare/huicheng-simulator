@@ -132,7 +132,7 @@ h1{font-size:20px;margin:0 0 2px}
 
       <rect x="210" y="150" width="130" height="70" fill="#0a0f1a" stroke="#f97316" stroke-width="1.5" rx="6"/>
       <text x="275" y="180" text-anchor="middle" font-size="12" fill="#f97316">学位</text>
-      <text x="275" y="198" text-anchor="middle" font-size="9" fill="#8fa3bf">新增8000个</text>
+      <text x="275" y="198" text-anchor="middle" font-size="9" fill="#8fa3bf">十五五5万</text>
 
       <rect x="360" y="150" width="130" height="70" fill="#0a0f1a" stroke="#f97316" stroke-width="1.5" rx="6"/>
       <text x="425" y="180" text-anchor="middle" font-size="12" fill="#f97316">小店/消费</text>
@@ -155,11 +155,11 @@ h1{font-size:20px;margin:0 0 2px}
   <!-- 佐证小图 -->
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
     <div class="card" style="margin-bottom:0">
-      <h2>学位：供给在追需求</h2>
+      <h2>学位：供给在追需求（示意）</h2>
       <div style="height:150px"><canvas id="eduChart"></canvas></div>
     </div>
     <div class="card" style="margin-bottom:0">
-      <h2>通勤压力随扩能上升</h2>
+      <h2>通勤压力随扩能上升（示意）</h2>
       <div style="height:150px"><canvas id="commChart"></canvas></div>
     </div>
   </div>
@@ -206,7 +206,7 @@ const pops=[
   '<span class="tag">来源：直通车投诉、高新区目标</span>',
   '<b style="font-size:13px">学位 ↔ 家庭留存</b><br>'+
   '一个家庭决定留在哪座城，往往不是看工资单，是看孩子能不能进一所好学校。<br>'+
-  '2026年新增8000个学位、多所学校改扩建，追的正是这件事。<b>学位不只是教育问题，它是一座城能不能留住一个家庭的钥匙。</b>学位松一松，人就留一留。<br>'+
+  '十五五规划新增5万个公办学位、37所学校新建改扩建，追的正是这件事。<b>学位不只是教育问题，它是一座城能不能留住一个家庭的钥匙。</b>学位松一松，人就留一留。<br>'+
   '<span class="tag">来源：2026民生实事</span>',
   '<b style="font-size:13px">小店 ↔ 消费循环</b><br>'+
   '楼下的早餐店、街角的五金铺、水东街的灯火——看着小，它们是一座城的烟火气，也是钱在本地转一圈的方式。<br>'+
@@ -346,10 +346,11 @@ var _hmt = _hmt || [];
     document.getElementById("voteOpts").innerHTML=opts.map(o=>{
       const pct=total?Math.round(data[o.k]/total*100):0;
       const dis=voted?'pointer-events:none':'';
-      return `<button onclick="vote('${o.k}')" style="${dis};flex:1;min-width:90px;background:${o.c}22;border:1px solid ${o.c};color:${o.c};border-radius:10px;padding:10px 8px;cursor:pointer;font-size:13px;font-weight:700">${o.label}${voted?' '+pct+'%':''}</button>`;
+      return `<button onclick="vote('${o.k}')" style="${dis};flex:1;min-width:90px;background:${o.c}22;border:1px solid ${o.c};color:${o.c};border-radius:10px;padding:10px 8px;cursor:pointer;font-size:13px;font-weight:700">${o.label}</button>`;
     }).join("");
     if(total>0){
-      document.getElementById("voteResult").innerHTML=`已有 <b style="color:#fbbf24">${total}</b> 位惠城人参与。<br>超过40分钟的占 <b style="color:#f87171">${Math.round(data.gt40/total*100)}%</b>——你堵在路上的每一分钟，都和高新区能不能招到人有关。`;
+      const my=opts.find(o=>data[o.k]>0);
+      document.getElementById("voteResult").innerHTML=`你这一票：早上通勤「<b style="color:${my.c}">${my.label}</b>」。<br>这是你本机的记录。你堵在路上的每一分钟，都和高新区能不能招到人有关。`;
     }
   }
   window.vote=function(k){
@@ -372,11 +373,11 @@ var _hmt = _hmt || [];
     document.getElementById("wantOpts").innerHTML=opts.map(o=>{
       const pct=total?Math.round(d[o.k]/total*100):0;
       const dis=voted?'pointer-events:none;opacity:.7':'';
-      return `<button onclick="want('${o.k}')" style="${dis};flex:1;min-width:80px;background:${o.c}22;border:1px solid ${o.c};color:${o.c};border-radius:10px;padding:10px 6px;cursor:pointer;font-size:12.5px;font-weight:700">${o.label}${voted?' '+pct+'%':''}</button>`;
+      return `<button onclick="want('${o.k}')" style="${dis};flex:1;min-width:80px;background:${o.c}22;border:1px solid ${o.c};color:${o.c};border-radius:10px;padding:10px 6px;cursor:pointer;font-size:12.5px;font-weight:700">${o.label}</button>`;
     }).join("");
     if(total>0){
-      const top=opts.slice().sort((a,b)=>d[b.k]-d[a.k])[0];
-      document.getElementById("wantResult").innerHTML=`已有 <b style="color:#fbbf24">${total}</b> 位惠城人表态。<br>大家最想先办的是 <b style="color:${top.c}">${top.label}</b>——这，就是这座城最该先补的那块板。`;
+      const my=opts.find(o=>d[o.k]>0);
+      document.getElementById("wantResult").innerHTML=`你这一票投给了「<b style="color:${my.c}">${my.label}</b>」。<br>这是你本机的记录。你最想先办好的，就是值得这座城先补上的一块。`;
     }
   }
   window.want=function(k){

@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>惠城产业风洞 · 五条路</title>
+<script src="model.js"></script>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
@@ -20,13 +21,16 @@ h1{font-size:20px;margin:0 0 2px;letter-spacing:.5px}
 .path .t{font-size:15px;font-weight:700;margin-bottom:4px}
 .path .d{font-size:12px;color:#8fa3bf;line-height:1.6}
 .path .src{font-size:10px;color:#5b6b82;margin-top:4px}
-.path .num{font-size:14px;font-weight:700;color:#fbbf24;margin-top:6px}
+.path .num{font-size:13px;font-weight:700;color:#fbbf24;margin-top:6px}
+.path .num small{font-weight:400;color:#5b6b82;font-size:10px}
 .switch{width:44px;height:24px;background:#1c2739;border-radius:12px;position:relative;flex:none;margin-top:4px;transition:.2s}
 .switch::after{content:'';position:absolute;width:20px;height:20px;background:#6b7280;border-radius:50%;top:2px;left:2px;transition:.2s}
 .path.on .switch{background:#1d4ed8}
 .path.on .switch::after{left:22px;background:#fff}
-.gap{background:#0a0f1a;border:1px solid #1c2739;border-radius:12px;padding:16px;margin-top:14px;text-align:center}
-.gap .big{font-size:28px;font-weight:800;color:#fbbf24}
+.gap{background:#0a0f1a;border:1px solid #1c2739;border-radius:12px;padding:18px;margin-top:14px;text-align:center}
+.gap .big{font-size:30px;font-weight:800;color:#fbbf24}
+.gap .row2{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:12px;font-size:13px;color:#cbd5e1}
+.gap .row2 b{color:#7dd3fc}
 .next{text-align:center;margin-top:18px}
 .next a{background:#1d4ed8;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
 </style></head><body>
@@ -43,90 +47,121 @@ h1{font-size:20px;margin:0 0 2px;letter-spacing:.5px}
   <a href="blindspot.html">⑦ 忽略了什么</a>
   <a href="report.html">⑧ 分析报告</a>
   <a href="ending.html">⑨ 结语</a>
-  <span class="sp">官方数据粗估</span>
+  <span class="sp">统一模型 · 边际影响</span>
 </div>
 
 <div class="wrap">
   <h1>五条路</h1>
-  <p class="sub">高新区要从632.7亿到1500亿，差867亿。官方铺了五条路。点开关，看哪条路能填多少。</p>
+  <p class="sub">高新区要从632.7亿走向1500亿。下面五条路与未来页、风洞页共用同一套模型。点开关，系统会重新跑一遍，看每条路真实的边际分量。</p>
 
-  <div class="path on" data-v="500" onclick="this.classList.toggle('on');calc()">
+  <div class="path on" data-idx="0">
     <div class="icon">🏭</div>
     <div class="body">
-      <div class="t">高新区新投产项目</div>
-      <div class="d">2026年新开工15宗、新投产18宗，每年新增产值约100亿。基础设施投资28亿/年，收储用地1500亩。<br><span style="color:#7dd3fc">→ 走通了你会感到：家门口多出几个新工地、几家新工厂</span></div>
+      <div class="t">新投产项目</div>
+      <div class="d">2026年新开工15宗、新投产18宗，基础设施投资28亿/年，收储用地1500亩。<br><span style="color:#7dd3fc">→ 走通了你会感到：家门口多出几个新工地、几家新工厂</span></div>
       <div class="src">来源：2026政府工作报告、高新区高质量发展大会</div>
-      <div class="num">5年累计 ~500亿</div>
+      <div class="num">边际中位数 ≈ +<span id="dN0">—</span> 亿 &nbsp;<small>（全开 vs 关掉它，同模型对照）</small></div>
     </div>
     <div class="switch"></div>
   </div>
 
-  <div class="path on" data-v="200" onclick="this.classList.toggle('on');calc()">
+  <div class="path on" data-idx="1">
     <div class="icon">⚙️</div>
     <div class="body">
       <div class="t">三大集群扩能</div>
-      <div class="d">电子信息、智能装备、新能源新材料冲200亿+300亿突破。新增规上工业企业75家，智改数转50家。<br><span style="color:#7dd3fc">→ 走通了你会感到：朋友圈多几个回来找工作的朋友</span></div>
-      <div class="src">来源：区长田胜思公开讲话</div>
-      <div class="num">5年累计 ~200亿</div>
+      <div class="d">电子信息、智能装备、新能源新材料扩能，新增规上工业企业、智改数转。<br><span style="color:#7dd3fc">→ 走通了你会感到：朋友圈多几个回来找工作的朋友</span></div>
+      <div class="src">来源：政府公开部署、高新区工作计划</div>
+      <div class="num">边际中位数 ≈ +<span id="dN1">—</span> 亿 &nbsp;<small>（同模型对照）</small></div>
     </div>
     <div class="switch"></div>
   </div>
 
-  <div class="path on" data-v="100" onclick="this.classList.toggle('on');calc()">
+  <div class="path on" data-idx="2">
     <div class="icon">🤖</div>
     <div class="body">
       <div class="t">AI与机器人新赛道</div>
-      <div class="d">当前产值120亿。2026年打造一批AI+应用示范场景，招商25宗抢新赛道。<br><span style="color:#7dd3fc">→ 走通了你会感到：办事、看病、取快递慢慢有AI帮忙</span></div>
+      <div class="d">布局AI+应用示范场景，招引新赛道项目。<br><span style="color:#7dd3fc">→ 走通了你会感到：办事、看病、取快递慢慢有AI帮忙</span></div>
       <div class="src">来源：高新区2026工作计划</div>
-      <div class="num">5年累计 ~100亿</div>
+      <div class="num">边际中位数 ≈ +<span id="dN2">—</span> 亿 &nbsp;<small>（同模型对照）</small></div>
     </div>
     <div class="switch"></div>
   </div>
 
-  <div class="path" data-v="50" onclick="this.classList.toggle('on');calc()">
+  <div class="path on" data-idx="3">
     <div class="icon">🏙️</div>
     <div class="body">
-      <div class="t">生产性服务业带动</div>
-      <div class="d">江北生产性服务业139.5亿，金融/商务/软件。和制造业"双轮驱动"，间接拉动。<br><span style="color:#7dd3fc">→ 走通了你会感到：楼下多几家咖啡馆、新店</span></div>
+      <div class="t">服务业带动</div>
+      <div class="d">江北金融、商务、软件信息等生产性服务业集聚，与制造业"双轮驱动"，间接拉动。<br><span style="color:#7dd3fc">→ 走通了你会感到：楼下多几家咖啡馆、新店</span></div>
       <div class="src">来源：2026政府工作报告</div>
-      <div class="num">间接 ~50亿（不确定）</div>
+      <div class="num">边际中位数 ≈ +<span id="dN3">—</span> 亿 &nbsp;<small>（间接带动，同模型对照）</small></div>
     </div>
     <div class="switch"></div>
   </div>
 
-  <div class="path" data-v="30" onclick="this.classList.toggle('on');calc()">
+  <div class="path on" data-idx="4">
     <div class="icon">🚄</div>
     <div class="body">
       <div class="t">融深融湾</div>
-      <div class="d">深惠城际延期至2029年底，小金口枢纽在建。外部变量，不完全可控。<br><span style="color:#7dd3fc">→ 走通了你会感到：去深圳、去大湾区其他城市更快更顺</span></div>
+      <div class="d">依托深惠通道与小金口枢纽承接大湾区外溢，外部变量、不完全可控。<br><span style="color:#7dd3fc">→ 走通了你会感到：去深圳、去大湾区其他城市更快更顺</span></div>
       <div class="src">来源：惠州发改公开信息</div>
-      <div class="num">间接 ~30亿（不确定）</div>
+      <div class="num">边际中位数 ≈ +<span id="dN4">—</span> 亿 &nbsp;<small>（间接带动，同模型对照）</small></div>
     </div>
     <div class="switch"></div>
   </div>
 
   <div class="gap">
-    <div style="font-size:12px;color:#6b7280">五条路全开，预计填缺口</div>
-    <div class="big" id="cover">0 / 867亿</div>
-    <div style="font-size:11px;color:#5b6b82;margin-top:4px" id="pct">—</div>
+    <div style="font-size:12px;color:#6b7280">当前所选路径下，2030年产值中位数</div>
+    <div class="big"><span id="curP50">—</span> 亿</div>
+    <div class="row2">
+      <div>过1500亿概率 <b id="curHit">—</b></div>
+      <div>较632.7亿基线 <b id="curUp">—</b></div>
+      <div>距1500亿 <b id="curGap">—</b></div>
+    </div>
   </div>
 
-  <div style="font-size:11px;color:#5b6b82;text-align:center;margin-top:10px">
-    数字为官方公开目标按年粗估，非精确测算。城市更新和生产性服务业是间接贡献，打开才有。
+  <div style="font-size:11px;color:#5b6b82;text-align:center;margin-top:10px;line-height:1.7">
+    边际分量与底部结果均由统一模型在固定随机种子、重复跑很多遍后给出，非平台统计、非精确预测；五条路之间存在联动，单项边际差不直接相加。具体以官方规划与统计为准。
   </div>
 
   <div class="next"><a href="future.html">下一步：跑一遍未来 →</a></div>
 </div>
 
 <script>
-function calc(){
-  let sum=0;
-  document.querySelectorAll('.path.on').forEach(p=>sum+=parseInt(p.dataset.v));
-  document.getElementById('cover').textContent=sum+' / 867亿';
-  const pct=Math.round(sum/867*100);
-  document.getElementById('pct').textContent='覆盖 '+pct+'%'+(pct>=100?' — 够了。':pct>=80?' — 还差一点。':' — 缺口还大。');
+const SEED=42, N=4000, ALL=[0,1,2,3,4];
+const state=[true,true,true,true,true];
+function cloneP(p){return JSON.parse(JSON.stringify(p));}
+function runSet(active){
+  const paths=HT.DEFAULT_PATHS.map((x,i)=>
+    active.includes(i) ? cloneP(x) : {mu:0,sd:0,name:x.name,color:x.color});
+  return HT.run(SEED,N,paths);
 }
-calc();
+// 预计算：全开基线 + 逐条关闭的边际中位数差（同种子成对对照）
+const baseAll=runSet(ALL);
+for(let i=0;i<5;i++){
+  const r=runSet(ALL.filter(x=>x!==i));
+  document.getElementById('dN'+i).textContent=Math.round(baseAll.p50-r.p50);
+}
+function refresh(){
+  const active=ALL.filter(i=>state[i]);
+  const r=runSet(active);
+  document.getElementById('curP50').textContent=Math.round(r.p50);
+  document.getElementById('curHit').textContent=r.hit.toFixed(0)+'%';
+  document.getElementById('curUp').textContent='+'+Math.round(r.p50-HT.BASE)+'亿';
+  const diff=r.p50-HT.TARGET;
+  const gapEl=document.getElementById('curGap');
+  gapEl.textContent=(diff>=0?'+':'')+Math.round(diff)+'亿';
+}
+document.querySelectorAll('.path').forEach(card=>{
+  card.onclick=function(e){
+    if(e.target.closest('.switch')===null && e.target.closest('a'))return;
+    const i=+this.dataset.idx;
+    state[i]=!state[i];
+    this.classList.toggle('on',state[i]);
+    this.classList.toggle('off',!state[i]);
+    refresh();
+  };
+});
+refresh();
 </script>
 
 <div class="likebar">
