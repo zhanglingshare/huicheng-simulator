@@ -122,7 +122,7 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
   <div class="card">
     <h2>这只是一个开始：正式版要更扎实</h2>
     <div style="height:280px"><canvas id="radar"></canvas></div>
-    <p style="font-size:12px;color:#8fa3bf;text-align:center;margin:8px 0 0">蓝线是当前Demo已做到的，橙线是正式版努力的方向——为了让结论真正可靠，还有很多功课要做。</p>
+    <p style="font-size:12px;color:#8fa3bf;text-align:center;margin:8px 0 0">蓝线是当前Demo已做到的，橙线是正式版努力的方向。<br><b style="color:#fbbf24">注：这些分值是作者主观示意，没有客观评分标准，不代表任何机构测评，只用来表达差距和方向。</b></p>
   </div>
 
   <!-- 首页数据怎么来的 -->
@@ -176,8 +176,8 @@ Chart.defaults.font.family='-apple-system,"PingFang SC",sans-serif';
 new Chart(document.getElementById('radar').getContext('2d'),{
   type:'radar',
   data:{labels:['压力测试广度','找命门的精度','数据真实程度','未来情景丰富度','决策交互深度'],datasets:[
-    {label:'当前Demo',data:[55,50,60,55,60],borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.18)',pointBackgroundColor:'#3b82f6',borderWidth:2},
-    {label:'正式版',data:[92,90,88,90,93],borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,.16)',pointBackgroundColor:'#f59e0b',borderWidth:2}
+    {label:'当前Demo（作者主观自评）',data:[55,50,60,55,60],borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.18)',pointBackgroundColor:'#3b82f6',borderWidth:2},
+    {label:'正式版目标（作者主观期望）',data:[92,90,88,90,93],borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,.16)',pointBackgroundColor:'#f59e0b',borderWidth:2}
   ]},
   options:{responsive:true,maintainAspectRatio:false,
     plugins:{legend:{position:'bottom',labels:{color:'#93a4bd',font:{size:12},padding:14}}},
@@ -188,7 +188,7 @@ new Chart(document.getElementById('radar').getContext('2d'),{
 </script>
 
 <div class="likebar">
-  <button onclick="likePage()">👍 <span id="pcount">227473</span></button>
+  <button onclick="likePage()">👍 <span id="pcount">0</span></button>
   <button onclick="sharePage()">🔁 转给朋友</button>
 </div>
 <style>
@@ -199,7 +199,7 @@ new Chart(document.getElementById('radar').getContext('2d'),{
 <script>
 (function(){
   var k="like_"+location.pathname;
-  var n=parseInt(localStorage.getItem(k)||"227473");
+  var n=parseInt(localStorage.getItem(k)||"0");
   document.getElementById("pcount").textContent=n;
   window.likePage=function(){
     n++;localStorage.setItem(k,n);

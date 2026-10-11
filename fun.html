@@ -66,7 +66,7 @@ h1{font-size:21px;margin:0}
         <p class="sub">近期大家去哪、看什么电影、读什么书、在八卦什么科技新闻。</p>
         <div class="scan-info" id="scanInfo">雷达待命…</div>
       </div>
-      <button class="refresh" id="btnScan">🔄 换一换</button>
+      <button class="refresh" id="btnScan">🎲 摇个周末去处</button>
     </div>
   </div>
 
@@ -98,6 +98,7 @@ let picks=[];
 const LOCAL_KW=["惠州","惠城区","惠州市","西湖","水东街","华贸","桥东","江北","滨江","红花湖","东江湾","水口","马安","三栋","龙丰","江南","河南岸","桥西","东平","小金口","汝湖","芦洲"];
 const TREND_KW=["电影","票房","AI","人工智能","大模型","芯片","手机","新能源汽车","书","小说","诺贝尔","演唱会","展览","话剧","音乐会","世界杯","奥运","科技"];
 
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function render(cat){
   const list=(cat==="all"?SPOTS:SPOTS.filter(x=>x.c===cat)).map(x=>({
     ...x,
@@ -110,35 +111,17 @@ function render(cat){
     return `<div style="background:${grads[x.c]};border-radius:12px;padding:14px;cursor:pointer" onclick="this.querySelector('.d').style.display=this.querySelector('.d').style.display==='none'?'block':'none'">
       <div style="display:flex;justify-content:space-between;align-items:start">
         <div style="font-size:22px">${emos[x.c]||"📍"}</div>
-        <span onclick="event.stopPropagation();likeSpot(this,'${x.n}')" style="font-size:12px;color:#fff;opacity:.8">👍 <b>${x.likes}</b></span>
+        <span onclick="event.stopPropagation();likeSpot(this)" style="font-size:12px;color:#fff;opacity:.8;cursor:pointer">👍 <b>${x.likes}</b>想去</span>
       </div>
-      <div style="font-size:15px;font-weight:800;color:#fff;margin:6px 0 4px">${x.n}</div>
-      <div style="font-size:11px;color:#94a3b8">${x.tag} · ${x.likes}人想去</div>
-      <div style="font-size:9.5px;color:#5b6b82;margin-top:3px;line-height:1.4">📎 来源：${SRC}<br>近24小时公开热度 · 合理估算</div>
-      <div class="d" style="font-size:11.5px;color:#cbd5e1;margin-top:8px;display:none">${x.d}<br><span style="color:#fbbf24">→ ${x.why}</span><br><span style="color:#60a5fa">📊 风洞看：${x.watch}</span></div>
+      <div style="font-size:15px;font-weight:800;color:#fff;margin:6px 0 4px">${esc(x.n)}</div>
+      <div style="font-size:11px;color:#94a3b8">${esc(x.tag)} · 合理估算</div>
+      <div style="font-size:9.5px;color:#5b6b82;margin-top:3px;line-height:1.4">📎 来源：${esc(SRC)}<br>近24小时公开热度 · 合理估算</div>
+      <div class="d" style="font-size:11.5px;color:#cbd5e1;margin-top:8px;display:none">${esc(x.d)}<br><span style="color:#fbbf24">→ ${esc(x.why)}</span><br><span style="color:#60a5fa">📊 风洞看：${esc(x.watch)}</span></div>
     </div>`;
   }).join("");
 }
-async function likeSpot(el,name){
-  const key="hc_spot_"+encodeURIComponent(name);
-  try{
-    await fetch("https://api.countapi.xyz/hit/"+key);
-    const r=await fetch("https://api.countapi.xyz/get/"+key);
-    const d=await r.json();
-    el.querySelector("b").textContent=(d.value||0)+1000;
-  }catch(e){}
+function likeSpot(el){
   el.style.transform="scale(1.2)";setTimeout(()=>el.style.transform="",200);
-}
-// 页面加载时拉全网点赞数
-async function loadCounts(){
-  document.querySelectorAll(".likeBtn").forEach(async el=>{
-    const name=el.dataset.name;if(!name)return;
-    try{
-      const r=await fetch("https://api.countapi.xyz/get/hc_spot_"+encodeURIComponent(name));
-      const d=await r.json();
-      if(d.value) el.querySelector("b").textContent=d.value+1000;
-    }catch(e){}
-  });
 }
 async function loadLife(){
   try{
@@ -160,10 +143,10 @@ document.querySelectorAll("#tabs button").forEach(b=>{
   };
 });
 function refresh(){
-  const arr=[...SPOTS];
+  const arr=SPOTS.slice();
   for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
-  picks=arr.slice(0,3).map(t=>t.n);
-  render(document.querySelector("#tabs button.on").dataset.c);
+  const p=arr.slice(0,3);
+  document.getElementById("livebar").innerHTML="🎲 随机摇到这三个：<b style='color:#fbbf24'>"+p.map(x=>esc(x.n)).join("</b>　·　<b style='color:#fbbf24'>")+"</b>　（本地随机推荐，数据仍以每日更新的去处清单为准）";
 }
 loadLife();
 document.getElementById("btnScan").onclick=refresh;
@@ -174,7 +157,7 @@ document.getElementById("btnScan").onclick=refresh;
 </div>
 
 <div class="likebar">
-  <button onclick="likePage()">👍 <span id="pcount">236739</span></button>
+  <button onclick="likePage()">👍 <span id="pcount">0</span> <span style="font-size:11px;color:#6b7280">觉得有用(本地记录)</span></button>
   <button onclick="sharePage()">🔁 转给朋友</button>
 </div>
 <style>
@@ -185,7 +168,7 @@ document.getElementById("btnScan").onclick=refresh;
 <script>
 (function(){
   var k="like_"+location.pathname;
-  var n=parseInt(localStorage.getItem(k)||"236739");
+  var n=parseInt(localStorage.getItem(k)||"0");
   document.getElementById("pcount").textContent=n;
   window.likePage=function(){
     n++;localStorage.setItem(k,n);
