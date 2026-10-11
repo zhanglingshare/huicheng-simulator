@@ -90,6 +90,14 @@ h1{font-size:22px;margin:0 0 2px;letter-spacing:.5px}
     </div>
   </div>
 
+  <!-- 你的判断 -->
+  <div style="margin:12px 0;padding:14px;background:linear-gradient(135deg,#1e293b,#0f172a);border:1px solid #3b82f6;border-radius:14px">
+    <div style="font-size:14px;font-weight:800;color:#fff;margin-bottom:4px">🔮 2030年惠城能到1500亿吗？说说你的判断</div>
+    <div style="font-size:12px;color:#94a3b8;margin-bottom:10px">模型跑了一万遍，说概率是 <b style="color:#fbbf24">66%</b>。你比它乐观还是悲观？</div>
+    <div id="voteBar" style="display:flex;gap:8px"></div>
+    <div id="voteOut" style="margin-top:10px;font-size:12px;color:#cbd5e1;line-height:1.6"></div>
+  </div>
+
   <div class="toolbar">
     <button class="cat on" data-c="all">全部</button>
     <button class="cat" data-c="ind">🔵 产业</button>
@@ -329,6 +337,35 @@ var _hmt = _hmt || [];
   hm.src = "https://hm.baidu.com/hm.js?YOUR_ID";
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+// 你的判断：本地累计表态
+(function(){
+  const KEY="huicheng_judge_v1";
+  const opts=[{k:"sure",label:"我看稳了",c:"#34d399",mood:"你比模型乐观"},{k:"risky",label:"有点悬",c:"#f87171",mood:"你比模型悲观"},{k:"wait",label:"不好说",c:"#94a3b8",mood:"你和模型一样谨慎"}];
+  let d=JSON.parse(localStorage.getItem(KEY)||'{"sure":0,"risky":0,"wait":0}');
+  function render(){
+    const total=opts.reduce((s,o)=>s+d[o.k],0);
+    const voted=localStorage.getItem(KEY+"_done");
+    document.getElementById("voteBar").innerHTML=opts.map(o=>{
+      const pct=total?Math.round(d[o.k]/total*100):0;
+      const dis=voted?'pointer-events:none;opacity:.7':'';
+      return `<button onclick="judge('${o.k}')" style="${dis};flex:1;background:${o.c}22;border:1px solid ${o.c};color:${o.c};border-radius:10px;padding:10px 6px;cursor:pointer;font-size:13px;font-weight:700">${o.label}${voted?' '+pct+'%':''}</button>`;
+    }).join("");
+    if(total>0){
+      const sure=Math.round(d.sure/total*100);
+      document.getElementById("voteOut").innerHTML=`已有 <b style="color:#fbbf24">${total}</b> 位惠城人表态：${sure}% 看稳，${100-sure}% 看悬。<br>2026年我们在这。一年后回来，看看谁的判断更接近现实。`;
+    } else {
+      document.getElementById("voteOut").innerHTML="你是第一个表态的。";
+    }
+  }
+  window.judge=function(k){
+    if(localStorage.getItem(KEY+"_done"))return;
+    d[k]++;localStorage.setItem(KEY,JSON.stringify(d));localStorage.setItem(KEY+"_done","1");
+    render();
+  };
+  render();
 })();
 </script>
 </body></html>
