@@ -2,6 +2,7 @@
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>惠城区产业分析报告（Demo版）· 张凌</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="model.js"></script>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
@@ -318,13 +319,25 @@ new Chart(document.getElementById('matrix').getContext('2d'),{
     scales:{x:{title:{display:true,text:'自己可控程度 →',color:tc},min:0,max:10,ticks:{color:tc},grid:{color:gc}},
       y:{title:{display:true,text:'影响程度 →',color:tc},min:0,max:10,ticks:{color:tc},grid:{color:gc}}}}
 });
-// 影响系数
+// 影响系数：直接读 model.js 同一内核的真实输出，不再写死
+// m.coefs 顺序 = [新投产项目, 三大集群, AI机器人, 服务业带动, 融深融湾]
+const _m = HT.run(42, 10000, HT.DEFAULT_PATHS);
+// 通勤走廊：用风洞压测中"单独施加通勤"相对"单独施加投产延期"的达标率降幅比
+function _hitAfter(over){
+  const p = JSON.parse(JSON.stringify(HT.DEFAULT_PATHS)); over(p);
+  return HT.run(42, 10000, p).hit;
+}
+const _baseHit = _hitAfter(()=>{});
+const _commuteHit = _hitAfter(p=>{p[3].mu=Math.max(0,p[3].mu-60); p[0].mu=Math.max(0,p[0].mu-18);});
+const _delayHit   = _hitAfter(p=>{p[0].mu=Math.max(0,p[0].mu-90);});
+const _commuteRel  = (_baseHit-_commuteHit)/Math.max(1e-6,(_baseHit-_delayHit));
+const coefData = [_m.coefs[0], _commuteRel, _m.coefs[1], _m.coefs[2], _m.coefs[3], _m.coefs[4]];
 new Chart(document.getElementById('coef').getContext('2d'),{
   type:'bar',
   data:{labels:['投产工期','通勤走廊','三大集群','AI机器人','服务业','融深'],datasets:[{
-    data:[0.82,0.78,0.55,0.4,0.3,0.2],
+    data:coefData.map(v=>+v.toFixed(2)),
     backgroundColor:['#3b82f6','#f87171','#8b5cf6','#06b6d4','#fbbf24','#94a3b8'],borderRadius:4}]},
-  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>'系数 '+it.parsed.x}}},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>'相对强度 '+it.parsed.x.toFixed(2)+'（模型输出，非实测相关系数）'}}},
     scales:{x:{ticks:{color:tc},grid:{color:gc},max:1},y:{ticks:{color:axc},grid:{display:false}}}}
 });
 </script>

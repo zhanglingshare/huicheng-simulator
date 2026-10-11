@@ -2,6 +2,7 @@
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>惠城产业风洞 · 风洞测试</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="model.js"></script>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
@@ -163,13 +164,35 @@ h1{font-size:20px;margin:0 0 2px}
 </div>
 
 <script>
-const BASE_TOTAL=1578, BASE_PROB=67;
+// 压力事件的"损失量"是模型设定（亿），不再单独扣百分比；
+// 每个压力都翻译成对五条路径 μ 的削减，再交给同一个 model.js 内核重跑。
 const effects={delay:[0,40,90,180],invest:[0,50,110,170],export:[0,30,70,120],shen:[0,15,30,45],dragon:[0,50],commute:[0,60,120,190]};
 const state={delay:2,invest:1,export:1,shen:1,dragon:1,commute:1};
 const names={delay:'投产延期',invest:'招商不及预期',export:'外需走弱',shen:'融深变慢',dragon:'龙头扩产落空',commute:'通勤压力'};
 const charts={};
 function dk(k){if(charts[k]){charts[k].destroy();delete charts[k];}}
 const gridColor='#1c2739',tickColor='#6b7280';
+const SEED=42, N=10000;
+
+// 把某压力事件的损失量分配到对应路径（这个映射是模型设定，非实测）
+function applyDrop(p,key,drop){
+  if(drop<=0)return;
+  if(key==='delay'){p[0].mu=Math.max(0,p[0].mu-drop);}
+  else if(key==='invest'){p[1].mu=Math.max(0,p[1].mu-drop);}
+  else if(key==='dragon'){p[1].mu=Math.max(0,p[1].mu-drop);}
+  else if(key==='export'){p[4].mu=Math.max(0,p[4].mu-drop);}
+  else if(key==='shen'){p[4].mu=Math.max(0,p[4].mu-drop);}
+  else if(key==='commute'){p[3].mu=Math.max(0,p[3].mu-drop);p[0].mu=Math.max(0,p[0].mu-drop*0.3);}
+}
+// 跑模型：可选只施加某个 key 的压力，或施加当前全部 state
+function runTunnel(onlyKey){
+  const p=JSON.parse(JSON.stringify(HT.DEFAULT_PATHS));
+  if(onlyKey){applyDrop(p,onlyKey,effects[onlyKey][state[onlyKey]]);}
+  else{Object.keys(state).forEach(k=>applyDrop(p,k,effects[k][state[k]]));}
+  return HT.run(SEED,N,p);
+}
+const BASE_HIT=runTunnel().hit;   // 基准达标率（与未来页同内核同种子）
+const BASE_P50=runTunnel().p50;
 
 function pick(btn,key,level){
   btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('sel'));
@@ -179,11 +202,13 @@ function pick(btn,key,level){
 }
 
 function renderRO(key){
-  const drop=effects[key][state[key]], prob=Math.max(0,BASE_PROB-drop*0.35);
+  const drop=effects[key][state[key]];
   const el=document.getElementById('ro-'+key);
-  if(el)el.innerHTML=drop>0?
-    '拉低约 <b style="color:#f87171">'+drop+'亿</b>，达标率降到 <b style="color:'+(prob>40?'#fbbf24':'#f87171')+'">'+prob.toFixed(0)+'%</b>'
-    :'无压力，达标率 <b style="color:#34d399">'+BASE_PROB+'%</b>';
+  if(!el)return;
+  if(drop<=0){el.innerHTML='无压力，达标率 <b style="color:#34d399">'+BASE_HIT.toFixed(0)+'%</b>';return;}
+  const m=runTunnel(key);
+  const color=m.hit>40?'#fbbf24':'#f87171';
+  el.innerHTML='基准中位 <b>'+Math.round(BASE_P50)+'亿</b> → 施加该压力后中位 <b style="color:'+color+'">'+Math.round(m.p50)+'亿</b>，达标率 <b style="color:'+color+'">'+m.hit.toFixed(0)+'%</b>（同一模型内核重跑）';
 }
 
 function drawMini(key){
@@ -193,7 +218,6 @@ function drawMini(key){
   const ctx=el.getContext('2d');
   const L=state[key];
   if(key==='delay'){
-    // 阶梯爬坡：档位越高，最终产值越矮
     const final=1500-effects.delay[L];
     charts[key]=new Chart(ctx,{type:'bar',data:{labels:['2026','2027','2028','2029','2030'],
       datasets:[{data:[820-effects.delay[L]*0.2,1000-effects.delay[L]*0.4,1200-effects.delay[L]*0.6,1350-effects.delay[L]*0.8,final],backgroundColor:'#3b82f6',borderRadius:3}]},
@@ -215,36 +239,45 @@ function drawMini(key){
   }
 }
 
-let wf=null,rank=null;
 function drawWaterfall(){
   const keys=['delay','invest','export','shen'];
-  const labels=['基准'].concat(keys.map(k=>names[k]),['剩余']);
-  let cum=BASE_PROB; const data=[];
-  data.push(BASE_PROB);
-  keys.forEach(k=>{const d=effects[k][state[k]]*0.35;data.push(-d);cum-=d;});
-  data.push(cum);
+  const labels=['基准'].concat(keys.map(k=>names[k]),['全部叠加后']);
+  const seq=[BASE_HIT];
+  let cum=BASE_HIT;
+  keys.forEach(k=>{
+    const p=JSON.parse(JSON.stringify(HT.DEFAULT_PATHS));
+    // 逐档叠加
+    for(let i=0;i<=keys.indexOf(k);i++){applyDrop(p,keys[i],effects[keys[i]][state[keys[i]]]);}
+    cum=HT.run(SEED,N,p).hit;
+    seq.push(cum-BASE_HIT);
+  });
+  seq.push(cum);
+  const data=[BASE_HIT].concat(seq.slice(1));
   const bg=labels.map((l,i)=>i===0?'#34d399':i===labels.length-1?(cum>40?'#fbbf24':'#f87171'):'#f87171');
   dk('wf');
   charts.wf=new Chart(document.getElementById('waterfall').getContext('2d'),{type:'bar',
     data:{labels:labels,datasets:[{data:data.map(v=>Math.round(v)),backgroundColor:bg,borderRadius:4}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>(it.parsed.y>=0?'':'扣')+Math.abs(it.parsed.y)+'%'}}},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>it.parsed.y+'%'}}},
       scales:{x:{ticks:{color:'#93a4bd',font:{size:10}},grid:{display:false}},y:{ticks:{color:tickColor,callback:v=>v+'%'},grid:{color:gridColor}}}}});
 }
 
 function drawRank(){
   const allKeys=['delay','invest','export','shen','dragon','commute'];
-  const sorted=allKeys.slice().sort((a,b)=>effects[b][state[b]]-effects[a][state[a]]);
+  // 每个压力单独施加后，达标率比基准下降多少
+  const rows=allKeys.map(k=>({k,drop:BASE_HIT-runTunnel(k).hit}));
+  rows.sort((a,b)=>b.drop-a.drop);
   dk('rank');
   charts.rank=new Chart(document.getElementById('rank2').getContext('2d'),{type:'bar',
-    data:{labels:sorted.map(k=>names[k]),datasets:[{data:sorted.map(k=>effects[k][state[k]]),
-      backgroundColor:sorted.map(k=>k==='commute'?'#f87171':k==='dragon'?'#fbbf24':'#3b82f6'),borderRadius:4}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>'拉低'+it.parsed.x+'亿'}}},
-      scales:{x:{ticks:{color:tickColor,callback:v=>v+'亿'},grid:{color:gridColor}},y:{ticks:{color:'#93a4bd',font:{size:12}},grid:{display:false}}}}});
-  const cr=sorted.indexOf('commute')+1, dr=sorted.indexOf('dragon')+1;
-  document.getElementById('rank2-note').textContent='通勤排第'+cr+'，龙头扩产落空排第'+dr+'。';
+    data:{labels:rows.map(r=>names[r.k]),datasets:[{data:rows.map(r=>r.drop),
+      backgroundColor:rows.map(r=>r.k==='commute'?'#f87171':r.k==='dragon'?'#fbbf24':'#3b82f6'),borderRadius:4}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>'达标率下降约'+it.parsed.x.toFixed(1)+'个百分点'}}},
+      scales:{x:{ticks:{color:tickColor,callback:v=>v+'%'},grid:{color:gridColor}},y:{ticks:{color:'#93a4bd',font:{size:12}},grid:{display:false}}}}});
+  const cr=rows.findIndex(r=>r.k==='commute')+1, dr=rows.findIndex(r=>r.k==='dragon')+1;
+  document.getElementById('rank2-note').textContent='通勤压力单独施加时排第'+cr+'，龙头扩产落空排第'+dr+'（按达标率下降幅度）。';
   document.getElementById('final').innerHTML=
     '上半场四个常规压力，规划里都在盯着，这很对。<br>但把"龙头扩产落空"和"通勤压力"也放进来排序，结果有点反常识：<b style="color:#f87171">通勤压力排第'+cr+'</b>，<b style="color:#fbbf24">龙头扩产落空排第'+dr+'</b>。<br>'+
-    '龙头扩产落空当然疼，但集群还在；可通勤路一堵，是产业招工和城市消费两个轮子一起卡。<br>通勤在规划里叫"基础设施配套"，风洞却提示它更像传动轴。好消息是——改善通勤比招大项目便宜、见效快、自己可控；风险是一堵就双向失血。这是一个被低估、性价比很高的抓手。';
+    '龙头扩产落空当然疼，但集群还在；可通勤路一堵，是产业招工和城市消费两个轮子一起卡。<br>通勤在规划里叫"基础设施配套"，风洞却提示它更像传动轴。好消息是——改善通勤比招大项目便宜、见效快、自己可控；风险是一堵就双向失血。这是一个被低估、性价比很高的抓手。<br>'+
+    '<span style="color:#6b7280;font-size:11px">注：以上达标率均由 model.js 同一内核（基准632.7亿、种子42）重跑得出，与"未来"页同一口径；压力损失量为模型设定。</span>';
 }
 
 ['delay','invest','export','shen'].forEach(k=>{drawMini(k);renderRO(k);});
