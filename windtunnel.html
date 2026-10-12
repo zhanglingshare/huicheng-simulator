@@ -191,8 +191,10 @@ function runTunnel(onlyKey){
   else{Object.keys(state).forEach(k=>applyDrop(p,k,effects[k][state[k]]));}
   return HT.run(SEED,N,p);
 }
-const BASE_HIT=runTunnel().hit;   // 基准达标率（与未来页同内核同种子）
-const BASE_P50=runTunnel().p50;
+// 无冲击基准：六项压力全部为 0（修复前误把"六压力全叠加"当基准，导致排行全为负值、页面把最坏结局当起点）
+const NO_SHOCK=HT.run(SEED,N,HT.DEFAULT_PATHS);
+const BASE_HIT=NO_SHOCK.hit;
+const BASE_P50=NO_SHOCK.p50;
 
 function pick(btn,key,level){
   btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('sel'));
@@ -240,24 +242,27 @@ function drawMini(key){
 }
 
 function drawWaterfall(){
-  const keys=['delay','invest','export','shen'];
-  const labels=['基准'].concat(keys.map(k=>names[k]),['全部叠加后']);
-  const seq=[BASE_HIT];
-  let cum=BASE_HIT;
-  keys.forEach(k=>{
-    const p=JSON.parse(JSON.stringify(HT.DEFAULT_PATHS));
-    // 逐档叠加
-    for(let i=0;i<=keys.indexOf(k);i++){applyDrop(p,keys[i],effects[keys[i]][state[keys[i]]]);}
-    cum=HT.run(SEED,N,p).hit;
-    seq.push(cum-BASE_HIT);
+  // 修复：六项压力全纳入，按相邻档算边际下降；柱子显示逐档累计达标率
+  const order=['delay','invest','export','shen','dragon','commute'];
+  const labels=['基准'].concat(order.map(k=>names[k]));
+  const p=JSON.parse(JSON.stringify(HT.DEFAULT_PATHS));
+  const cumulative=[BASE_HIT];   // 逐档累计达标率
+  const marginal=[0];            // 相邻档边际下降（百分点）
+  let prev=BASE_HIT;
+  order.forEach(k=>{
+    applyDrop(p,k,effects[k][state[k]]);
+    const cur=HT.run(SEED,N,p).hit;
+    marginal.push(prev-cur);
+    cumulative.push(cur);
+    prev=cur;
   });
-  seq.push(cum);
-  const data=[BASE_HIT].concat(seq.slice(1));
-  const bg=labels.map((l,i)=>i===0?'#34d399':i===labels.length-1?(cum>40?'#fbbf24':'#f87171'):'#f87171');
   dk('wf');
   charts.wf=new Chart(document.getElementById('waterfall').getContext('2d'),{type:'bar',
-    data:{labels:labels,datasets:[{data:data.map(v=>Math.round(v)),backgroundColor:bg,borderRadius:4}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>it.parsed.y+'%'}}},
+    data:{labels:labels,datasets:[{data:cumulative.map(v=>Math.round(v*10)/10),backgroundColor:cumulative.map((v,i)=>i===0?'#34d399':'#f87171'),borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>{
+      const i=it.dataIndex;
+      return (i===0?'无冲击基准达标率 ':'累计达标率 ')+cumulative[i].toFixed(1)+'%'+(i>0?'（本档较上一档下降 '+marginal[i].toFixed(1)+' 个百分点）':'');
+    }}}},
       scales:{x:{ticks:{color:'#93a4bd',font:{size:10}},grid:{display:false}},y:{ticks:{color:tickColor,callback:v=>v+'%'},grid:{color:gridColor}}}}});
 }
 
@@ -277,7 +282,7 @@ function drawRank(){
   document.getElementById('final').innerHTML=
     '上半场四个常规压力，规划里都在盯着，这很对。<br>但把"龙头扩产落空"和"通勤压力"也放进来排序，结果有点反常识：<b style="color:#f87171">通勤压力排第'+cr+'</b>，<b style="color:#fbbf24">龙头扩产落空排第'+dr+'</b>。<br>'+
     '龙头扩产落空当然疼，但集群还在；可通勤路一堵，是产业招工和城市消费两个轮子一起卡。<br>通勤在规划里叫"基础设施配套"，风洞却提示它更像传动轴。好消息是——改善通勤比招大项目便宜、见效快、自己可控；风险是一堵就双向失血。这是一个被低估、性价比很高的抓手。<br>'+
-    '<span style="color:#6b7280;font-size:11px">注：以上达标率均由 model.js 同一内核（基准632.7亿、种子42）重跑得出，与"未来"页同一口径；压力损失量为模型设定。</span>';
+    '<span style="color:#6b7280;font-size:11px">注：达标率由 model.js 同一内核（基准632.7亿、种子42）重跑；"基准"为六项压力全为0的无冲击基准。压力损失量为模型设定，非实测。</span>';
 }
 
 ['delay','invest','export','shen'].forEach(k=>{drawMini(k);renderRO(k);});

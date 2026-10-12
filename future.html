@@ -240,8 +240,9 @@ function run(){
       }
     });
 
+    var hitCount=Math.round(N*hit/100), missCount=N-hitCount;
     document.getElementById('chart-note').innerHTML=
-      N.toLocaleString()+'次模拟里 <b style="color:#f87171">'+hit.toFixed(0)+'次</b>过了1500亿，<b style="color:#3b82f6">'+(100-hit).toFixed(0)+'次</b>没过。中位数落在 <b style="color:#fbbf24">'+Math.round(p50)+'亿</b>。';
+      N.toLocaleString()+'次模拟里约 <b style="color:#f87171">'+hitCount.toLocaleString()+'次</b>过了1500亿（达标率 '+hit.toFixed(1)+'%），<b style="color:#3b82f6">'+missCount.toLocaleString()+'次</b>没过。中位数落在 <b style="color:#fbbf24">'+Math.round(p50)+'亿</b>。';
 
     // 贡献堆叠
     var cNames=['现有盘子'].concat(paths.map(function(p){return p.name;}));

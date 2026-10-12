@@ -250,6 +250,7 @@ function render(){
       <div class="detail" style="font-size:11.5px;color:#cbd5e1;margin-top:8px;display:none">${esc(x.d||"")}</div>
     </div>`;
   }).join("");
+  if(!list.length){el.innerHTML='<div style="grid-column:1/-1;color:#5b6b82;text-align:center;padding:26px 0">今日话题快照暂不可用（读取失败），可点「重新扫描」重试；下方仿真结果不受影响。</div>';}
   document.querySelectorAll("#topicList .tcard").forEach(c=>{
     c.onclick=()=>{const d=c.querySelector(".detail");d.style.display=d.style.display==="none"?"block":"none";};
   });
@@ -278,17 +279,25 @@ document.getElementById("btnScan").onclick=async function(){
   this.innerHTML='<span class="pulse">⏳</span> 扫描中…';
   document.getElementById("scanInfo").textContent="雷达旋转中，正在读取当日话题快照…";
   document.getElementById("scanline").classList.add("fast");
-  await loadHot();
-  this.innerHTML="🔄 重新扫描";
-  document.getElementById("scanline").classList.remove("fast");
-  document.getElementById("scanInfo").textContent=scanText();
+  try{
+    await loadHot();
+    this.innerHTML="🔄 重新扫描";
+    document.getElementById("scanline").classList.remove("fast");
+    document.getElementById("scanInfo").textContent=scanText();
+  }catch(e){
+    this.innerHTML="🔄 重新扫描";
+    document.getElementById("scanline").classList.remove("fast");
+    document.getElementById("scanInfo").textContent="扫描失败：快照暂不可用（请检查网络后重试）；仿真结果不受影响。";
+  }
   render();
 };
 
-// 首屏读取当日快照
+// 首屏读取当日快照（情报与仿真解耦：快照失败不影响仿真结果）
 (async()=>{
-  await loadHot();
-  document.getElementById("scanInfo").textContent=scanText();
+  let hotOk=true;
+  try{ await loadHot(); }
+  catch(e){ hotOk=false; hotMeta={}; allData=[]; }
+  document.getElementById("scanInfo").textContent=hotOk?scanText():"今日话题快照暂不可用（读取失败），可点「重新扫描」重试；仿真结果不受影响。";
   render();
   const b=HT.run(42,4000,HT.DEFAULT_PATHS);
   document.getElementById("baseHit").textContent=b.hit.toFixed(0)+"%";

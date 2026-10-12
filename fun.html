@@ -131,7 +131,7 @@ async function loadLife(){
   render("all");
   const bar=document.getElementById("livebar");
   bar.innerHTML=PULSE.length
-    ?"📡 最近大家在聊："+PULSE.join("　｜　")
+    ?"📡 最近大家在聊："+esc(PULSE.join("　｜　"))
     :"📡 惠城的周末，不用上热搜也值得去。";
   document.getElementById("scanInfo").textContent=`数据每日自动刷新 · 上次更新 ${UPDATED} · 共${SPOTS.length}个去处 · 人气档排序`;
 }
