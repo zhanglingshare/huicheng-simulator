@@ -157,6 +157,31 @@
 
 ---
 
+## 五·再补、验证与数据治理（v0.9 修复后新增）
+
+### 发布前质量门
+
+`tests/verify_all.js` 是仓库的发布前质量门，四类断言全过才允许合入：
+
+1. **语法**：全部 10 个页面的内联 `<script>` 块做解析检查；
+2. **口径**：与 `model.js` 同源复算——无冲击基准（66.24% / P50 1577 亿）、压力排行顺序、瀑布六档相邻边际、`future` 达标次数（6,624/10,000）；
+3. **数据**：`hot.json` / `life.json` 可解析、关键字段齐全、每条话题有 `url` 与 `source`；
+4. **证据**：`evidence/events/*.json` 字段完整、`event_id` 唯一、approved 必须有 `parameter_change` 且经人工签名。
+
+GitHub Actions（`.github/workflows/verify.yml`）在每次 push / PR 时自动运行，失败即阻断合入。
+
+### 事件证据库（"信号 → 参数"人工审核闸）
+
+每日雷达（豆包 Skills）只采集**事实与候选信号**，**不直接改模型参数**。候选事件写入 `evidence/events/`（`parameter_change` 初始为 `null`、`status=pending`）；经人工对照原始来源审核、填入影响量并签名后，运行：
+
+```bash
+node tests/release_params.js   # 把 approved 事件发布为 params.json（版本化，含变更记录）
+```
+
+未审核事件永远不进入参数版本。详见 [`evidence/README.md`](evidence/README.md)。下一步将让页面加载 `params.json` 覆盖内置默认路径参数（接入前先人工核对 diff）。
+
+---
+
 ## 六、为什么做这件事
 
 城市的每一个重大决策，最终都落在具体的人身上——一个赶班车的工人、一位为孩子学位操心的母亲、一个犹豫留不留的年轻人。投进去的是真金白银，一旦走偏，代价很大，也很难回头。
