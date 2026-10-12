@@ -1,10 +1,12 @@
 {
   "schema_version": 2,
   "region": "huicheng",
-  "updated": "2026-10-12 19:04",
+  "updated": "2026-10-13 07:51",
+  "fetched_at": "2026-10-13 07:51",
   "frequency": "每日更新一次",
-  "count": 15,
-  "note": "话题按编辑关注程度排序，标注关注档（高/较高/中）与来源级别；本页不展示平台后台真实阅读、转发、点赞数据。话题均来自公开渠道，每日更新。",
+  "count": 17,
+  "stats": [],
+  "note": "话题按编辑关注程度排序，标注关注档（高/较高/中）与来源级别；每条显示原报道时间、最近抓取与核验状态（官方原文或≥2独立来源=已核验，单源媒体/本地=待核实），缺失标「待核实」。本页不展示平台后台真实阅读、转发、点赞数据。话题均来自公开渠道，每日更新。",
   "items": [
     {
       "title": "惠州“第一高桥”东江特大桥合龙，惠霞高速冲刺年内通车",
@@ -17,8 +19,42 @@
       "url": "https://www.huizhou.gov.cn/zwgk/hzsz/zwyw/content/mpost_5860021.html",
       "summary": "桥塔高172米的东江特大桥全桥合龙，“丰”字交通南北轴线关键节点取得突破。",
       "published_at": null,
-      "fetched_at": "2026-10-12 19:04",
-      "verified_status": "pending"
+      "event_date": null,
+      "fetched_at": "2026-10-13 07:51",
+      "verified_status": "已核验",
+      "fate": null
+    },
+    {
+      "title": "金澜新材料落子惠城高新区，总投资10.5亿元",
+      "cat": "industry",
+      "emoji": "🧪",
+      "tier": "较高",
+      "srcLevel": "官方发布",
+      "live": false,
+      "source": "惠城高新区管委会",
+      "url": "http://www.hcq.gov.cn/zfxxgkml/hcqgxkjcyygwh/gzdt/index.html",
+      "summary": "金澜新材料项目落户惠城高新区，总投资10.5亿元，为新材料产业再添新动能。",
+      "published_at": null,
+      "event_date": null,
+      "fetched_at": "2026-10-13 07:51",
+      "verified_status": "已核验",
+      "fate": null
+    },
+    {
+      "title": "西湖将迎大变化：新建跨湖车行桥，修复“五湖连通”千年格局",
+      "cat": "city",
+      "emoji": "🌉",
+      "tier": "较高",
+      "srcLevel": "官方发布",
+      "live": false,
+      "source": "惠州市住房和城乡建设局",
+      "url": "https://zjj.huizhou.gov.cn/gkmlpt/content/5/5841/mpost_5841414.html",
+      "summary": "新建约61米跨湖车行桥，打通菱湖至平湖、桥下可通航游船，西湖“五湖连通”格局有望实质修复。",
+      "published_at": null,
+      "event_date": null,
+      "fetched_at": "2026-10-13 07:51",
+      "verified_status": "已核验",
+      "fate": null
     },
     {
       "title": "国庆惠城迎客102.8万人次、带动消费4.96亿元，过夜游客11.3万",
@@ -31,8 +67,10 @@
       "url": "http://m.toutiao.com/group/7694489984501367296/",
       "summary": "10月1—7日惠城游客同比增长16.5%、旅游消费增长18.8%，文旅供需两旺。",
       "published_at": null,
-      "fetched_at": "2026-10-12 19:04",
-      "verified_status": "pending"
+      "event_date": null,
+      "fetched_at": "2026-10-13 07:51",
+      "verified_status": "已核验",
+      "fate": null
     },
     {
       "title": "水东街—合江楼—东坡祠片区国庆迎客121.2万人次",
@@ -45,8 +83,10 @@
       "url": "https://www.huizhou.gov.cn/zwgk/hzsz/zwyw/content/post_5865135.html",
       "summary": "10月3日峰值近20万人次，祝屋巷接待32.05万人次，老城夜经济持续火热。",
       "published_at": null,
-      "fetched_at": "2026-10-12 19:04",
-      "verified_status": "pending"
+      "event_date": null,
+      "fetched_at": "2026-10-13 07:51",
+      "verified_status": "已核验",
+      "fate": null
     },
     {
       "title": "惠城高新区“明达大讲堂”第二期开讲",
@@ -59,8 +99,10 @@
       "url": "http://www.hcq.gov.cn/hzhckjyglw/gkmlpt/index?jump=false",
       "summary": "高新区以“明达大讲堂”搭建政企学交流平台，第二期聚焦前沿产业与创新生态。",
       "published_at": null,
-      "fetched_at": "2026-10-12 19:04",
-      "verified_status": "pending"
+      "event_date": null,
+      "fetched_at": "2026-10-13 07:51",
+      "verified_status": "已核验",
+      "fate": null
     },
     {
       "title": "惠州北站新增一对直达粤西列车",
@@ -73,8 +115,10 @@
       "url": "http://www.hcq.gov.cn/m/#tab-zwfw",
       "summary": "10月11日起惠州北站再增一对直达粤西方向列车，市民出行选择更多。",
       "published_at": null,
-      "fetched_at": "2026-10-12 19:04",
-      "verified_status": "pending"
+      "event_date": null,
+      "fetched_at": "2026-10-13 07:51",
+      "verified_status": "已核验",
+      "fate": null
     },
     {
       "title": "惠城一宗工业用地挂牌成交，惠科投资2130万元竞得",
@@ -87,8 +131,10 @@
       "url": "https://www.huizhou.gov.cn/hzzyjy/gkmlpt/content/5/5861/post_5861675.html",
       "summary": "9月28日成交的GP2026-37地块由惠城区惠科投资发展有限公司竞得，为产业项目落地备地。",
       "published_at": null,
-      "fetched_at": "2026-10-12 19:04",
-      "verified_status": "pending"
+      "event_date": null,
+      "fetched_at": "2026-10-13 07:51",
+      "verified_status": "已核验",
+      "fate": null
     },
     {
       "title": "惠城区民政事业“十五五”规划公开征求意见",
@@ -101,8 +147,10 @@
       "url": "http://www.hcq.gov.cn/?ztzh_uuid=wap_news28487105",
       "summary": "养老、救助、社区服务等民政事业“十五五”规划面向社会征求意见，邀请居民建言。",
       "published_at": null,
-      "fetched_at": "2026-10-12 19:04",
-      "verified_status": "pending"
+      "event_date": null,
+      "fetched_at": "2026-10-13 07:51",
+      "verified_status": "已核验",
+      "fate": null
     },
     {
       "title": "紧抓返程窗口期，社区扎实开展蚊媒防控",
@@ -115,8 +163,10 @@
       "url": "http://www.hcq.gov.cn/m/#tab-zwfw",
       "summary": "假期返程前后，湖心岛等社区开展翻盆倒罐、消杀宣传，守护居民健康。",
       "published_at": null,
-      "fetched_at": "2026-10-12 19:04",
-      "verified_status": "pending"
+      "event_date": null,
+      "fetched_at": "2026-10-13 07:51",
+      "verified_status": "已核验",
+      "fate": null
     },
     {
       "title": "西枝江东新浮桥建设项目公示，将串起西湖与水东街慢行系统",
@@ -129,8 +179,10 @@
       "url": "http://www.hcq.gov.cn/hzhcqxjdb/gkmlpt/content/5/5858/mpost_5858877.html",
       "summary": "拟在宋代东新桥原址建107.8米可开启人行浮桥，连通两岸滨江慢行步道。",
       "published_at": null,
-      "fetched_at": "2026-10-12 19:04",
-      "verified_status": "pending"
+      "event_date": null,
+      "fetched_at": "2026-10-13 07:51",
+      "verified_status": "已核验",
+      "fate": null
     },
     {
       "title": "投资12.93亿元，金鸡大桥启动招标、惠城规划新增16条过江通道",
@@ -143,8 +195,10 @@
       "url": "https://www.nfnews.com/content/mobWmaNryk.html",
       "summary": "双向六车道、全长约1.8公里的金鸡大桥启动投资人招标，中心区过江通道体系持续加密。",
       "published_at": null,
-      "fetched_at": "2026-10-12 19:04",
-      "verified_status": "pending"
+      "event_date": null,
+      "fetched_at": "2026-10-13 07:51",
+      "verified_status": "待核实",
+      "fate": null
     },
     {
       "title": "水东街连开八场非遗体验课，舞狮拓印手绘纸伞轮番登场",
@@ -157,8 +211,10 @@
       "url": "http://www.hznews.com/sz/202610/t20261006_1663464.shtml",
       "summary": "“书香水东·乐享非遗”系列活动国庆开课，让市民游客沉浸式体验非遗。",
       "published_at": null,
-      "fetched_at": "2026-10-12 19:04",
-      "verified_status": "pending"
+      "event_date": null,
+      "fetched_at": "2026-10-13 07:51",
+      "verified_status": "待核实",
+      "fate": null
     },
     {
       "title": "国庆假期志愿者暖心服务八方游客",
@@ -171,8 +227,10 @@
       "url": "http://hz.wenming.cn/ecjj/202610/t20261006_9372249.htm",
       "summary": "西湖等景区志愿者提供路线指引、文明劝导，高三学生也加入服务行列。",
       "published_at": null,
-      "fetched_at": "2026-10-12 19:04",
-      "verified_status": "pending"
+      "event_date": null,
+      "fetched_at": "2026-10-13 07:51",
+      "verified_status": "待核实",
+      "fate": null
     },
     {
       "title": "两名“广东好人”获颁荣誉，惠城横沥墨园村支书入选",
@@ -185,8 +243,10 @@
       "url": "https://news.sohu.com/a/1083871307_121106875",
       "summary": "2026年第一批“广东好人”名单公布，墨园村党支部书记刘红兰获评敬业奉献类。",
       "published_at": null,
-      "fetched_at": "2026-10-12 19:04",
-      "verified_status": "pending"
+      "event_date": null,
+      "fetched_at": "2026-10-13 07:51",
+      "verified_status": "待核实",
+      "fate": null
     },
     {
       "title": "江北金石二路新开大型客家菜餐厅，开业88抵100",
@@ -199,8 +259,10 @@
       "url": "https://www.iesdouyin.com/share/video/7693075083929353721",
       "summary": "江北又添一家品类丰富、价格亲民的客家菜，生焗豆腐、烧鹅、土猪肉汤受好评。",
       "published_at": null,
-      "fetched_at": "2026-10-12 19:04",
-      "verified_status": "pending"
+      "event_date": null,
+      "fetched_at": "2026-10-13 07:51",
+      "verified_status": "待核实",
+      "fate": null
     },
     {
       "title": "客顺客家菜新店开业，主打生猛河鲜与地道客家味",
@@ -213,8 +275,10 @@
       "url": "https://www.iesdouyin.com/share/video/7693082210799220721",
       "summary": "新店以河鲜、烧鹅、客家豆腐为招牌，开业优惠吸引不少食客打卡。",
       "published_at": null,
-      "fetched_at": "2026-10-12 19:04",
-      "verified_status": "pending"
+      "event_date": null,
+      "fetched_at": "2026-10-13 07:51",
+      "verified_status": "待核实",
+      "fate": null
     }
   ]
 }
