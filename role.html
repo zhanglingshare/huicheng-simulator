@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠城产业风洞 · 你在网里哪个位置</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
+.nav b{font-size:14px;margin-right:6px;flex:none}
+.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
+.nav a.on{background:#15803d;border-color:#22c55e;color:#fff;font-weight:600}
+.wrap{max-width:1200px;margin:auto;padding:20px 16px}
+h1{font-size:22px;margin-bottom:4px}.sub{color:#8fa3bf;font-size:13px;margin-bottom:16px}
+.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:16px}
+.rc{background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:14px;cursor:pointer;text-align:center;transition:.2s}
+.rc:hover{border-color:#22c55e}.rc.on{border-color:#22c55e;background:#0f1f18}
+.rc .i{font-size:28px}.rc .t{font-size:14px;font-weight:700;margin-top:4px}.rc .s{font-size:11px;color:#7d8fa8;margin-top:2px}
+.grid2{display:grid;grid-template-columns:1.2fr 1fr;gap:14px}
+@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+.card{background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:14px;margin-bottom:10px}
+.card b{font-size:13px;color:#cbd5e1}.mut{color:#64748b;font-size:12px}
+.worry{background:#1a1015;border-left:3px solid #f87171;padding:8px 10px;margin:6px 0;border-radius:4px;font-size:12.5px;color:#fca5a5}
+.chk{display:flex;gap:8px;align-items:flex-start;padding:8px;border:1px solid #1c2739;border-radius:6px;margin:6px 0;cursor:pointer}
+.chk:hover{border-color:#22c55e}.chk.on{border-color:#22c55e;background:#0f1f18}
+.chk input{margin-top:3px}.chk .t{font-size:13px;font-weight:600}.chk .d{font-size:12px;color:#8fa3bf;margin:2px 0}.chk .g{font-size:11px;color:#4ade80}
+.cmp{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #1c2739;font-size:12.5px}
+.cmp .l{color:#8fa3bf}.cmp .r.cy{color:#fbbf24;font-weight:600}
+.met{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1c2739;font-size:12.5px}
+.met .n{color:#8fa3bf}.met .a{color:#94a3b8}.met .b{color:#4ade80;font-weight:700}
+svg{width:100%;height:auto;background:radial-gradient(ellipse at 50% 45%,#0a1626,#060910);border-radius:10px}
+.disc{margin-top:16px;font-size:11px;color:#5b6b8b;padding:10px;background:#0a0f1a;border-radius:8px;line-height:1.6}
+</style></head><body>
+<div class="nav"><b>惠城产业风洞</b>
+<a href="index.html">① 今日话题</a><a href="fun.html">生活风向标</a><a href="network.html">② 世界怎么长</a>
+<a href="role.html" class="on">🎭 你在网里</a><a href="who.html">③ 基本面</a><a href="choices.html">④ 五条路</a>
+<a href="future.html">⑤ 未来</a><a href="windtunnel.html">⑥ 风洞</a><a href="blindspot.html">⑦ 忽略了什么</a>
+<a href="report.html">⑧ 报告</a><a href="ending.html">⑨ 结语</a></div>
+<div class="wrap">
+<h1>🏙️ 你在惠城这张网里，是哪个点？</h1>
+<p class="sub">高新区上班 / 江北CBD白领 / 西湖边过日子——你在哪一层？</p>
+<div class="roles" id="roleBox"></div>
+<div class="grid2">
+<div class="card"><b>你的局部网络</b> <span class="mut" id="egoTip">先选一种活法</span><svg id="svg" viewBox="0 0 900 600"></svg></div>
+<div>
+<div class="card"><b>我的处境</b><div id="posBox"></div></div>
+<div class="card"><b>我可能在担心什么</b><div id="worBox"></div></div>
+<div class="card"><b>可能存在哪些机会</b><div id="chBox"></div></div>
+<div class="card"><b>结构指标 · 前→后</b><div id="metBox"></div></div>
+</div></div>
+<div class="disc">边界：静态结构估算，不推演时间、不估算产值。数据来源：惠城区统计公报、管委会公开报告。</div>
+</div>
+<script>
+const NODES=[
+{n:"高新区",x:620,y:300,t:"ind"},{n:"利元亨",x:720,y:235,t:"ind"},{n:"电子信息",x:755,y:305,t:"ind"},
+{n:"智能装备",x:735,y:375,t:"ind"},{n:"新能源新材料",x:675,y:435,t:"ind"},{n:"智能家电",x:575,y:425,t:"ind"},
+{n:"AI机器人",x:700,y:165,t:"ind"},{n:"生产性服务业",x:215,y:335,t:"ind"},{n:"产业基金",x:300,y:175,t:"ind"},
+{n:"东江湾",x:605,y:345,t:"space"},{n:"江北CBD",x:180,y:250,t:"space"},{n:"三栋南部",x:600,y:500,t:"space"},
+{n:"桥西老城",x:150,y:405,t:"space"},{n:"水口老城",x:515,y:460,t:"space"},{n:"过江通道",x:405,y:290,t:"space"},
+{n:"蓝领工人",x:560,y:535,t:"people"},{n:"江北白领",x:135,y:200,t:"people"},{n:"跨城通勤",x:475,y:60,t:"people"},
+{n:"工程师",x:560,y:175,t:"people"},{n:"青年新市民",x:335,y:345,t:"people"},{n:"学龄家庭",x:115,y:475,t:"people"},
+];
+const EDGES=[["利元亨","智能装备"],["智能装备","高新区"],["电子信息","高新区"],["新能源新材料","高新区"],
+["智能家电","高新区"],["AI机器人","高新区"],["高新区","东江湾"],["生产性服务业","江北CBD"],
+["产业基金","江北CBD"],["过江通道","江北CBD"],["过江通道","高新区"],["蓝领工人","三栋南部"],
+["蓝领工人","水口老城"],["江北白领","江北CBD"],["跨城通勤","江北CBD"],["跨城通勤","高新区"],
+["工程师","高新区"],["工程师","AI机器人"],["青年新市民","生产性服务业"],["学龄家庭","桥西老城"]];
+const NM={};NODES.forEach((n,i)=>NM[n.n]=i);
+const EI=EDGES.map(e=>[NM[e[0]],NM[e[1]]]).filter(e=>e[0]!=null&&e[1]!=null);
+const COLORS={ind:"#3b82f6",space:"#9aa6b8",people:"#f97316"};
+const ROLES=[
+{k:"engineer",i:"🤖",t:"高新区工程师",s:"利元亨/AI机器人这一层",
+ nodes:["高新区","利元亨","AI机器人","智能装备","电子信息","工程师"],
+ worry:["高新区企业多，但高端人才还是往深圳跑。","AI机器人是新赛道，配套还在培育。","过江通道早晚高峰堵。"],
+ opp:[{t:"深惠人才互通",d:"深圳人来惠城上班",g:"人才+1"},{t:"AI机器人产业集群",d:"形成链条",g:"产业厚度+1"},{t:"过江通道扩容",d:"通勤不堵",g:"效率+1"}]},
+{k:"white",i:"💼",t:"江北CBD白领",s:"江北写字楼这一层",
+ nodes:["江北CBD","江北白领","生产性服务业","产业基金"],
+ worry:["江北写字楼多，但商业配套还不够成熟。","下班后晚上没地方去。","生产性服务业还不够厚。"],
+ opp:[{t:"江北商圈升级",d:"下班有地方逛",g:"消费+1"},{t:"生产性服务业集聚",d:"做企业的后台",g:"产业厚度+1"},{t:"夜经济",d:"晚上也热闹",g:"活力+1"}]},
+{k:"worker",i:"🏭",t:"蓝领工人",s:"三栋水口这一层",
+ nodes:["三栋南部","水口老城","蓝领工人","智能家电","新能源新材料"],
+ worry:["工厂在郊区，进城不方便。","流水线重复，技能提升空间有限。","孩子上学要进城。"],
+ opp:[{t:"技能培训",d:"涨工资的底气",g:"收入+1"},{t:"园区生活配套",d:"下班有地方去",g:"留人+1"},{t:"厂区分发班车",d:"进城方便",g:"生活质量+1"}]},
+{k:"family",i:"🏘️",t:"桥西老城区家庭",s:"西湖边过日子的人",
+ nodes:["桥西老城","学龄家庭"],
+ worry:["老城区停车难。","好学校学位紧张。","西湖是名片，但周边商业老旧。"],
+ opp:[{t:"老城微改造",d:"住得舒服",g:"环境+1"},{t:"学位供给",d:"上学不发愁",g:"民生+1"},{t:"西湖商圈升级",d:"游客愿意留下来",g:"消费+1"}]},
+{k:"commute",i:"🚄",t:"跨城通勤族",s:"每天来回深圳的人",
+ nodes:["跨城通勤","高新区","江北CBD"],
+ worry:["每天跨城通勤时间长。","深圳房价高，惠城这边在涨。","万一深圳产业外迁，我怎么办？"],
+ opp:[{t:"深惠一体化提速",d:"通勤更快",g:"时间+1"},{t:"惠城就业机会增多",d:"不用跑深圳",g:"成本-1"},{t:"通勤沿线配套",d:"路上方便",g:"体验+1"}]},
+];
+let picked={};
+function nIdx(rk){return ROLES.find(r=>r.k===rk).nodes.map(n=>NM[n]).filter(i=>i!=null)}
+function ego(i){const rs=ROLES[i];const idx=new Set(nIdx(rs.k));
+  const hotE=new Set(EI.map((e,k)=>k).filter(k=>idx.has(EI[k][0])||idx.has(EI[k][1])));
+  let h="";EI.forEach((e,k)=>{const a=NODES[e[0]],b=NODES[e[1]];const hot=hotE.has(k);
+    h+=`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="${hot?COLORS[rs.k==='engineer'?'ind':rs.k==='white'?'space':rs.k==='family'?'space':'people']:'#1e2b40'}" stroke-width="${hot?1.8:.7}" opacity="${hot?.9:.3}"/>`;});
+  NODES.forEach((n,j)=>{const on=idx.has(j);const r=on?10:5;
+    h+=`<circle cx="${n.x}" cy="${n.y}" r="${r}" fill="${on?COLORS[n.t]:'#2a3a52'}" opacity="${on?1:.35}"/>`;
+    if(on)h+=`<text x="${n.x}" y="${n.y+r+12}" text-anchor="middle" font-size="10" fill="#cbd5e1">${n.n}</text>`;});
+  document.getElementById("svg").innerHTML=h;
+  document.getElementById("egoTip").textContent=rs.t+" · "+idx.size+" 个主体，"+hotE.size+" 条关系";}
+function pos(i){const idx=nIdx(ROLES[i].k);const deg=idx.map(j=>EI.filter(e=>e[0]===j||e[1]===j).length);
+  const avg=deg.reduce((a,b)=>a+b,0)/Math.max(deg.length,1);const allAvg=(2*EI.length)/NODES.length;
+  document.getElementById("posBox").innerHTML=[["主体数",idx.length],["平均连接",avg.toFixed(1)],["全网均值",allAvg.toFixed(1)],["倍数",(avg/allAvg).toFixed(1)]].map(r=>`<div class="cmp"><span class="l">${r[0]}</span><span class="r cy">${r[1]}</span></div>`).join("");}
+function worry(i){document.getElementById("worBox").innerHTML=ROLES[i].worry.map(w=>`<div class="worry">${w}</div>`).join("");}
+function opp(i){const b=document.getElementById("chBox");b.innerHTML="";
+  ROLES[i].opp.forEach((o,oi)=>{const d=document.createElement("div");d.className="chk"+(picked[i+"_"+oi]?" on":"");
+    d.innerHTML=`<input type="checkbox" ${picked[i+"_"+oi]?"checked":""}><div><div class="t">${o.t}</div><div class="d">${o.d}</div><div class="g">${o.g}</div></div>`;
+    const inp=d.querySelector("input");d.onclick=ev=>{if(ev.target!==inp)inp.checked=!inp.checked;picked[i+"_"+oi]=inp.checked;d.classList.toggle("on",inp.checked);metric(i)};
+    b.appendChild(d);});}
+function metric(i){const n=Object.keys(picked).filter(k=>k.startsWith(i+"_")&&picked[k]).length;
+  document.getElementById("metBox").innerHTML=[["跨板块连接","基线",`+${n}`],["链条密度","基线",n>=2?"明显":n>=1?"一点":"无"],["替代链路","—",`+${n}`]].map(r=>`<div class="met"><span class="n">${r[0]}</span><span><span class="a">${r[1]}</span> → <span class="b">${r[2]}</span></span></div>`).join("");}
+function pick(i){ego(i);pos(i);worry(i);opp(i);metric(i);
+  document.querySelectorAll("#roleBox .rc").forEach((el,k)=>el.classList.toggle("on",k===i));}
+const rb=document.getElementById("roleBox");
+ROLES.forEach((r,i)=>{const d=document.createElement("div");d.className="rc";
+  d.innerHTML=`<div class="i">${r.i}</div><div class="t">${r.t}</div><div class="s">${r.s}</div>`;
+  d.onclick=()=>pick(i);rb.appendChild(d);});pick(0);
+</script></body></html>
