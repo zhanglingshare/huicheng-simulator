@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
   "region": "huicheng",
-  "updated": "2026-10-14 07:26",
-  "fetched_at": "2026-10-14 07:26",
+  "updated": "2026-10-15 07:51",
+  "fetched_at": "2026-10-15 07:51",
   "frequency": "每日更新一次",
   "count": 8,
   "stats": [],
@@ -12,20 +12,100 @@
       "title": "金澜新材料落子惠城高新区，总投资不低于10.5亿元",
       "cat": "industry",
       "emoji": "🧪",
-      "tier": "中",
-      "srcLevel": "媒体报道",
+      "tier": "较高",
+      "srcLevel": "官方发布",
       "live": false,
-      "source": "南方+",
-      "url": "http://m.toutiao.com/group/7695737080881709602/",
-      "summary": "项目将建全球研发中心、智能制造中心等四大板块，重点生产电池高分子材料，预计年产值突破15亿元。",
+      "source": "惠城区人民政府",
+      "url": "http://www.hcq.gov.cn/hzhckjyglw/gkmlpt/content/5/5868/post_5868211.html",
+      "summary": "项目竞得水口街道新民洛塘片区约115.2亩地块，建全球研发中心、智能制造中心等四大板块，重点生产电池高分子材料，预计年产值突破15亿元。",
       "published_at": "2026-10-12",
-      "event_date": null,
-      "fetched_at": "2026-10-14 07:26",
-      "verified_status": "待核实",
+      "event_date": "2026-10-10",
+      "fetched_at": "2026-10-15 07:51",
+      "verified_status": "已核验",
       "fate": {
         "kind": "info",
         "direction": "利好",
         "note": "新材料产业项目落地，为高新区再添动能"
+      }
+    },
+    {
+      "title": "国庆复盘：水东街—东坡祠片区迎客121.2万人次，祝屋巷32.05万人次",
+      "cat": "fun",
+      "emoji": "🌃",
+      "tier": "较高",
+      "srcLevel": "官方发布",
+      "live": false,
+      "source": "惠州市人民政府",
+      "url": "https://www.huizhou.gov.cn/zdlyxxgk/whjgxxgk/tsg/fdbd/content/post_5868841.html",
+      "summary": "惠州国庆全市接待378万人次、旅游收入35.2亿元；惠城“寻找东坡之旅”串起西湖、水东街、祝屋巷、华贸天地，老街夜经济持续火热，华贸市集转入“周更”。",
+      "published_at": "2026-10-10",
+      "event_date": "2026-10-08",
+      "fetched_at": "2026-10-15 07:51",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "life",
+        "direction": "利好",
+        "note": "老城商圈与夜经济人气"
+      }
+    },
+    {
+      "title": "桥西数码街社区“九九话重阳 歌舞展风采”文艺演出，邻里共庆重阳",
+      "cat": "gossip",
+      "emoji": "👵",
+      "tier": "较高",
+      "srcLevel": "官方发布",
+      "live": false,
+      "source": "惠城区桥西街道办事处",
+      "url": "https://www.hcq.gov.cn/bmzj/qxjdbsc/",
+      "summary": "重阳节临近，桥西街道数码街社区开展“九九话重阳、歌舞展风采”文艺表演，社区居民自编自演，敬老氛围浓厚。",
+      "published_at": "2026-10-14",
+      "event_date": "2026-10-14",
+      "fetched_at": "2026-10-15 07:51",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "life",
+        "direction": "利好",
+        "note": "社区敬老文艺活动暖闻"
+      }
+    },
+    {
+      "title": "红花湖高榜山重阳节登山实行临时管控，机关周边停车场免费开放",
+      "cat": "fun",
+      "emoji": "⛰️",
+      "tier": "中",
+      "srcLevel": "媒体报道",
+      "live": false,
+      "source": "澎湃新闻·东江传媒",
+      "url": "https://m.thepaper.cn/newsDetail_forward_34240135",
+      "summary": "10月17日18时至18日24时高榜山按承载量人流管控、挂榜阁临时封闭至19日，惠城区政府及周边停车场供登山市民免费使用，建议乘公交、错峰前往。",
+      "published_at": "2026-10-13",
+      "event_date": "2026-10-17",
+      "fetched_at": "2026-10-15 07:51",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "life",
+        "direction": "中性",
+        "note": "重阳登高出行安全提示"
+      }
+    },
+    {
+      "title": "惠州新建住宅10月15日起推行“先验房再收楼”，业主预看房制度化",
+      "cat": "livelihood",
+      "emoji": "🏠",
+      "tier": "中",
+      "srcLevel": "媒体报道",
+      "live": false,
+      "source": "澎湃新闻",
+      "url": "https://m.thepaper.cn/newsDetail_forward_34087337",
+      "summary": "全市新建住宅在分户验收后、竣工验收前须组织业主预看房，提前化解渗漏、开裂、堵塞等质量纠纷，今日起正式落地。",
+      "published_at": "2026-09-17",
+      "event_date": "2026-10-15",
+      "fetched_at": "2026-10-15 07:51",
+      "verified_status": "待核实",
+      "fate": {
+        "kind": "info",
+        "direction": "利好",
+        "note": "住房质量保障新政10月15日落地"
       }
     },
     {
@@ -40,92 +120,12 @@
       "summary": "正牌科电“TTC”与雷士照明入选首批广东消费名品资源库“时代优品”方向，雷士照明同时标注为中国消费名品品牌。",
       "published_at": "2026-10-13",
       "event_date": null,
-      "fetched_at": "2026-10-14 07:26",
+      "fetched_at": "2026-10-15 07:51",
       "verified_status": "待核实",
       "fate": {
         "kind": "info",
         "direction": "利好",
         "note": "惠城制造品牌跻身省级消费名品矩阵"
-      }
-    },
-    {
-      "title": "红花湖高榜山重阳节登山实行临时管控，机关周边停车场免费开放",
-      "cat": "fun",
-      "emoji": "⛰️",
-      "tier": "中",
-      "srcLevel": "媒体报道",
-      "live": false,
-      "source": "澎湃新闻·东江传媒",
-      "url": "https://m.thepaper.cn/newsDetail_forward_34240135",
-      "summary": "10月17日18时至18日24时高榜山按承载量人流管控、挂榜阁临时封闭至19日，惠城区政府及周边停车场供登山市民免费使用。",
-      "published_at": "2026-10-13",
-      "event_date": "2026-10-17",
-      "fetched_at": "2026-10-14 07:26",
-      "verified_status": "待核实",
-      "fate": {
-        "kind": "life",
-        "direction": "中性",
-        "note": "重阳登山出行安全提示"
-      }
-    },
-    {
-      "title": "“乐享惠城·艺助乡旅”鹅城舞台秀第十二季总决赛收官",
-      "cat": "fun",
-      "emoji": "🎭",
-      "tier": "中",
-      "srcLevel": "媒体报道",
-      "live": false,
-      "source": "南方日报",
-      "url": "http://m.toutiao.com/group/7695941585514611243/",
-      "summary": "本季首次以农文旅融合为主轴，百姓选手从田间地头走上商圈舞台，用才艺为家乡好物与乡村文旅“打call”。",
-      "published_at": "2026-10-13",
-      "event_date": null,
-      "fetched_at": "2026-10-14 07:26",
-      "verified_status": "待核实",
-      "fate": {
-        "kind": "life",
-        "direction": "利好",
-        "note": "百姓舞台与乡村文旅活动资讯"
-      }
-    },
-    {
-      "title": "惠州新建住宅10月15日起推行“先验房再收楼”，业主预看房制度化",
-      "cat": "livelihood",
-      "emoji": "🏠",
-      "tier": "中",
-      "srcLevel": "媒体报道",
-      "live": false,
-      "source": "澎湃新闻",
-      "url": "https://m.thepaper.cn/newsDetail_forward_34087337",
-      "summary": "全市新建住宅在分户验收后、竣工验收前须组织业主预看房，提前化解渗漏、开裂、堵塞等质量纠纷。",
-      "published_at": "2026-09-17",
-      "event_date": "2026-10-15",
-      "fetched_at": "2026-10-14 07:26",
-      "verified_status": "待核实",
-      "fate": {
-        "kind": "info",
-        "direction": "利好",
-        "note": "住房质量保障新政10月15日落地"
-      }
-    },
-    {
-      "title": "惠城“鹅城之恋·金秋觅爱”青年交友联谊10月24日举办，免费200名额",
-      "cat": "gossip",
-      "emoji": "💘",
-      "tier": "中",
-      "srcLevel": "媒体报道",
-      "live": false,
-      "source": "南方+",
-      "url": "http://m.toutiao.com/group/7694966711191224841/",
-      "summary": "惠城区民政局主办，采用线上精准匹配加线下趣味联谊模式，全程免费、先报先得，帮助单身青年拓宽社交圈。",
-      "published_at": "2026-10-10",
-      "event_date": "2026-10-24",
-      "fetched_at": "2026-10-14 07:26",
-      "verified_status": "待核实",
-      "fate": {
-        "kind": "life",
-        "direction": "利好",
-        "note": "青年社交活动报名资讯"
       }
     },
     {
@@ -140,7 +140,7 @@
       "summary": "124.8公里环线围绕“三环两带”打通景点间堵点断点，5条骑行线路各具特色，把城市散落美景串珠成链。",
       "published_at": "2026-10-01",
       "event_date": null,
-      "fetched_at": "2026-10-14 07:26",
+      "fetched_at": "2026-10-15 07:51",
       "verified_status": "待核实",
       "fate": {
         "kind": "info",
@@ -149,23 +149,23 @@
       }
     },
     {
-      "title": "赵敏任惠城区人民政府副区长",
-      "cat": "city",
-      "emoji": "🏛️",
+      "title": "惠城“鹅城之恋·金秋觅爱”青年交友联谊10月24日举办，免费200名额",
+      "cat": "gossip",
+      "emoji": "💘",
       "tier": "中",
       "srcLevel": "媒体报道",
       "live": false,
       "source": "南方+",
-      "url": "http://m.toutiao.com/group/7694995383419666959/",
-      "summary": "惠城区九届人大常委会第六十一次会议表决通过，决定任命赵敏为副区长，相关人事任免同步公布。",
+      "url": "http://m.toutiao.com/group/7694966711191224841/",
+      "summary": "惠城区民政局主办，采用线上精准匹配加线下趣味联谊模式，全程免费、先报先得，帮助单身青年拓宽社交圈。",
       "published_at": "2026-10-10",
-      "event_date": null,
-      "fetched_at": "2026-10-14 07:26",
+      "event_date": "2026-10-24",
+      "fetched_at": "2026-10-15 07:51",
       "verified_status": "待核实",
       "fate": {
-        "kind": "info",
-        "direction": "中性",
-        "note": "区政府人事任免公告"
+        "kind": "life",
+        "direction": "利好",
+        "note": "青年社交活动报名资讯"
       }
     }
   ]
