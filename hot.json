@@ -1,135 +1,135 @@
 {
   "schema_version": 2,
   "region": "huicheng",
-  "updated": "2026-10-19 07:31",
-  "fetched_at": "2026-10-19 07:31",
+  "updated": "2026-10-20 07:26",
+  "fetched_at": "2026-10-20 07:26",
   "frequency": "每日更新一次",
-  "count": 10,
+  "count": 12,
   "stats": [],
   "note": "话题按编辑关注程度排序，标注关注档（高/较高/中）与来源级别；每条显示原报道时间、最近抓取与核验状态（官方原文或≥2独立来源=已核验，单源媒体/本地=待核实），缺失标「待核实」。本页不展示平台后台真实阅读、转发、点赞数据。话题均来自公开渠道，每日更新。",
   "items": [
     {
-      "title": "金澜新材料落子惠城高新区，总投资不低于10.5亿元建新能源高分子材料项目",
+      "title": "金澜新材料落子惠城高新区，总投资不低于10.5亿元",
       "cat": "industry",
       "emoji": "🧪",
       "tier": "较高",
       "srcLevel": "官方发布",
       "live": false,
       "source": "惠城区人民政府",
-      "url": "http://www.hcq.gov.cn/zfxxgkml/hcqgxkjcyygwh/gzdt/content/post_5868210.html",
-      "summary": "广东金澜新材料竞得水口街道新民洛塘片区约115.2亩地块，建设金澜新能源高分子材料项目，重点生产电池高分子材料，将建设全球研发中心、智能制造中心与供应链结算中心，预计年产值突破15亿元，是惠城高新区东江湾产业园招商的又一成果。",
+      "url": "http://www.hcq.gov.cn/hzhckjyglw/gkmlpt/content/5/5868/post_5868211.html",
+      "summary": "广东金澜新材料竞得水口街道新民洛塘片区约115.2亩地块，建设新能源高分子材料项目，布局全球研发、智能制造、供应链结算与销售服务四大中心，重点生产电池绝缘膜、半导体封装膜、柔性光伏膜材等，预计年产值突破15亿元、用工628人。",
       "published_at": "2026-10-13",
       "event_date": "2026-10-10",
-      "fetched_at": "2026-10-19 07:31",
+      "fetched_at": "2026-10-20 07:26",
       "verified_status": "已核验",
       "fate": {
         "kind": "info",
         "direction": "利好",
-        "note": "新材料项目落地水口片区；拿地≠投产，产值目标为企业规划口径，不直接当作产值参数"
+        "note": "新材料项目落地水口片区；拿地不等于投产，产值目标为企业规划口径"
       }
     },
     {
-      "title": "惠城高新区数智一体化服务中心揭牌，把数字化转型“政策与技术”送到企业门口",
-      "cat": "industry",
-      "emoji": "💻",
-      "tier": "较高",
-      "srcLevel": "官方发布",
-      "live": false,
-      "source": "惠城区人民政府",
-      "url": "http://www.hcq.gov.cn/hzhckjyglw/gkmlpt/content/5/5858/post_5858755.html",
-      "summary": "“数赋制造 粤见未来”惠城高新区数智一体化服务中心在高新区综合服务中心揭牌，园区企业、联通惠州市分公司与省产业园区高质量发展专家等80余人参加，面向转型缺技术、供需对接不畅、政策获取不及时的园区企业，提供数字化转型一站式服务。",
-      "published_at": "2026-09-24",
-      "event_date": "2026-09-23",
-      "fetched_at": "2026-10-19 07:31",
-      "verified_status": "已核验",
-      "fate": {
-        "kind": "info",
-        "direction": "利好",
-        "note": "园区数字化转型公共服务平台落地，服务效能以实际运行为准"
-      }
-    },
-    {
-      "title": "“这个国庆，惠城处处遇见东坡”：西湖、水东街六大点位打卡热潮延续",
-      "cat": "fun",
-      "emoji": "🌃",
-      "tier": "较高",
-      "srcLevel": "官方发布",
-      "live": false,
-      "source": "南方+",
-      "url": "https://www.nfnews.com/content/834p0OQ53d.html",
-      "summary": "国庆假期“我与东坡合个影”在西湖、水东街、祝屋巷、千花洲、华贸天地、港惠新天地六大点位同步展开，东坡NPC巡游、诗词墙、古风布景、东坡茶体验与“打卡+消费”闭环持续走红，东坡祠诗词闯关、书院读书会接待游客超5万人次，宋韵老城文旅人气延续。",
-      "published_at": "2026-10-18",
-      "event_date": "2026-10-01至2026-10-07",
-      "fetched_at": "2026-10-19 07:31",
-      "verified_status": "已核验",
-      "fate": {
-        "kind": "life",
-        "direction": "利好",
-        "note": "东坡文化沉浸式体验带火老城文旅与消费"
-      }
-    },
-    {
-      "title": "多段非机动车道新添“骑行红”，惠州城市慢行系统再升级",
+      "title": "青荔四路建成通车，青荔一路预计今年通车，高新区路网再加密",
       "cat": "city",
-      "emoji": "🚲",
-      "tier": "较高",
-      "srcLevel": "官方发布",
-      "live": false,
-      "source": "惠州市人民政府",
-      "url": "https://www.huizhou.gov.cn/wsfw/ggfw/jt/mindex.html",
-      "summary": "惠州市区多段非机动车道完成彩色沥青铺装、新添醒目的“骑行红”，进一步明确机非路权、提升骑行与通勤安全，红花湖、滨江绿道等沿线慢行体验持续改善，绿美出行环境更友好。",
-      "published_at": "2026-10-16",
-      "event_date": "2026-10-16",
-      "fetched_at": "2026-10-19 07:31",
-      "verified_status": "已核验",
-      "fate": {
-        "kind": "info",
-        "direction": "利好",
-        "note": "城市慢行交通与道路安全设施提升"
-      }
-    },
-    {
-      "title": "桥东街道东湖社区“九九传敬老、欢歌聚东湖”重阳文艺联欢热闹开演",
-      "cat": "gossip",
-      "emoji": "🎤",
+      "emoji": "🛣️",
       "tier": "较高",
       "srcLevel": "官方发布",
       "live": false,
       "source": "惠城区人民政府",
-      "url": "https://www.hcq.gov.cn/gkmlpt/mindex",
-      "summary": "重阳节期间，桥东街道东湖社区开展“九九传敬老，欢歌聚东湖”重阳文艺联欢活动，社区长者与居民欢聚一堂，用歌舞、互动与节日祝福传递敬老爱老温情，邻里氛围其乐融融。",
-      "published_at": "2026-10-16",
-      "event_date": "2026-10-16",
-      "fetched_at": "2026-10-19 07:31",
-      "verified_status": "已核验",
-      "fate": {
-        "kind": "life",
-        "direction": "利好",
-        "note": "社区重阳敬老文艺活动暖闻"
-      }
-    },
-    {
-      "title": "惠城高新区开展赠送安全头盔公益活动，把骑行安全送到一线",
-      "cat": "gossip",
-      "emoji": "🪖",
-      "tier": "较高",
-      "srcLevel": "官方发布",
-      "live": false,
-      "source": "惠城高新区管委会",
-      "url": "http://www.hcq.gov.cn/zfxxgkml/hcqgxkjcyygwh/gzdt/index.html",
-      "summary": "惠城高新区开展赠送安全头盔公益活动，向园区职工、摩托车与电动自行车骑行者免费发放安全头盔，宣讲交通安全与文明出行知识，引导市民养成“骑乘必戴盔”的习惯，守护通勤出行安全。",
+      "url": "http://www.hcq.gov.cn/hzhckjyglw/gkmlpt/content/5/5871/post_5871218.html",
+      "summary": "对区政协提案的答复透露，青荔四路已建成通车，有效疏解青荔二路、三路交通压力；青荔一路预计今年通车，将构建多通道园区路网，同步升级东江湾大道天宝段。",
       "published_at": "2026-10-14",
       "event_date": "2026-10-14",
-      "fetched_at": "2026-10-19 07:31",
+      "fetched_at": "2026-10-20 07:26",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "info",
+        "direction": "利好",
+        "note": "园区内部路网互联互通提速"
+      }
+    },
+    {
+      "title": "国家级平台落地惠城高新区，填补植保领域空白",
+      "cat": "industry",
+      "emoji": "🌱",
+      "tier": "较高",
+      "srcLevel": "官方发布",
+      "live": false,
+      "source": "惠城区人民政府",
+      "url": "http://www.hcq.gov.cn/zfxxgkml/hcqgxkjcyygwh/gzdt/index.html",
+      "summary": "国家级植保领域平台落地惠城高新区，填补区域植保服务空白；高新区管委会同步会同粤东工业设计城团队走访辖区企业，推动平台与本地产业协同。",
+      "published_at": "2026-10-14",
+      "event_date": "2026-10-14",
+      "fetched_at": "2026-10-20 07:26",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "info",
+        "direction": "利好",
+        "note": "创新平台补位，服务本地产业"
+      }
+    },
+    {
+      "title": "西枝江将建慢行浮桥，连通水东街与桥西、桥东片区",
+      "cat": "city",
+      "emoji": "🌉",
+      "tier": "较高",
+      "srcLevel": "官方发布",
+      "live": false,
+      "source": "惠城区人民政府",
+      "url": "http://www.hcq.gov.cn/zfxxgkml/hcqqxjdbsc/bmwj/content/post_5858876.html",
+      "summary": "西枝江东新浮桥建设项目社会稳定风险评估公示：拟在东新桥至水门桥段建设浮桥，北端接西湖景区南侧滨江步道、南端连通水东街历史街区，缓解水门桥、东新桥机非混行压力。",
+      "published_at": "2026-09-24",
+      "event_date": "2026-09-24",
+      "fetched_at": "2026-10-20 07:26",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "info",
+        "direction": "利好",
+        "note": "慢行系统连接老街与滨江，公示不等于建成"
+      }
+    },
+    {
+      "title": "西湖下角南路快速化改造推进，隧道下穿丰山+跨湖桥打通瓶颈",
+      "cat": "city",
+      "emoji": "🚗",
+      "tier": "较高",
+      "srcLevel": "官方发布",
+      "live": false,
+      "source": "惠州市住建局",
+      "url": "https://zjj.huizhou.gov.cn/gkmlpt/content/5/5841/mpost_5841414.html",
+      "summary": "下角南路全长680米路段拟按城市主干路双向6车道改造，采用“隧道下穿丰山+跨湖车行桥+人行地道”组合模式，打通西湖景区周边交通瓶颈并恢复丰山公园景观。",
+      "published_at": "2026-08-28",
+      "event_date": "2026-08-28",
+      "fetched_at": "2026-10-20 07:26",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "info",
+        "direction": "利好",
+        "note": "景区周边交通优化，方案公示阶段"
+      }
+    },
+    {
+      "title": "龙丰街道邻里烟火市集开市，特色小吃与文创齐聚暖民心",
+      "cat": "gossip",
+      "emoji": "🏮",
+      "tier": "较高",
+      "srcLevel": "官方发布",
+      "live": false,
+      "source": "惠城区人民政府",
+      "url": "http://www.hcq.gov.cn/zfxxgkml/hzshcqwhgdlytyj/gzdt/content/post_5860916.html",
+      "summary": "龙丰街道举办文化惠民暖心市集，优选辖区商户集中入驻，汇集秘制窑鸡、东江盐焗鸡、鲜榨果汁、特色文创等业态，居民在烟火气中感受邻里温情。",
+      "published_at": "2026-09-29",
+      "event_date": "2026-09-29",
+      "fetched_at": "2026-10-20 07:26",
       "verified_status": "已核验",
       "fate": {
         "kind": "life",
         "direction": "利好",
-        "note": "园区交通安全公益宣传"
+        "note": "街道文化惠民的社区暖闻"
       }
     },
     {
-      "title": "市中心人民医院金山院区申请增设执业地点，金山湖片区优质医疗资源将扩容",
+      "title": "市中心人民医院金山院区申请增设执业地点，金山湖优质医疗资源将扩容",
       "cat": "livelihood",
       "emoji": "🏥",
       "tier": "中",
@@ -137,19 +137,19 @@
       "live": false,
       "source": "南方+",
       "url": "http://m.toutiao.com/group/7697207710634263050/",
-      "summary": "10月15日惠州市卫生健康局公示，市中心人民医院申请增设位于惠城区四环南路5号的金山院区为执业地点，该院区作为省级区域医疗中心，启用后将进一步扩容金山湖片区优质三甲医疗资源，便利周边群众就近就医。",
+      "summary": "10月15日惠州市卫生健康局公示，市中心人民医院申请增设位于惠城区四环南路5号的金山院区为执业地点，该院区作为省级区域医疗中心，启用后将进一步扩容金山湖片区优质三甲医疗资源。",
       "published_at": "2026-10-16",
       "event_date": "2026-10-15",
-      "fetched_at": "2026-10-19 07:31",
+      "fetched_at": "2026-10-20 07:26",
       "verified_status": "待核实",
       "fate": {
         "kind": "info",
         "direction": "利好",
-        "note": "三甲优质医疗资源扩容；申请公示阶段，启用时间以官方为准"
+        "note": "三甲医疗资源扩容；申请公示阶段，启用时间以官方为准"
       }
     },
     {
-      "title": "“鹅城之恋·金秋觅爱”第二场10月24日举行，惠城200个免费名额面向单身青年",
+      "title": "“鹅城之恋·金秋觅爱”第二场10月24日举行，200个免费名额面向单身青年",
       "cat": "livelihood",
       "emoji": "💞",
       "tier": "中",
@@ -157,15 +157,35 @@
       "live": false,
       "source": "南方+",
       "url": "http://m.toutiao.com/group/7694966711191224841/",
-      "summary": "由惠城区民政局主办的2026年“鹅城之恋·金秋觅爱”青年交友联谊活动（第二场）将于10月24日上午举行，全程免费、仅200个名额，采用“线上精准匹配+线下趣味联谊”模式，设置趣味互动、组队小游戏等沉浸式环节，帮助单身青年拓宽社交圈。",
+      "summary": "惠城区民政局主办的“鹅城之恋·金秋觅爱”青年交友联谊第二场将于10月24日上午举行，全程免费、仅200个名额，采用“线上精准匹配+线下趣味联谊”模式，帮助单身青年拓宽社交圈。",
       "published_at": "2026-10-10",
       "event_date": "2026-10-24",
-      "fetched_at": "2026-10-19 07:31",
+      "fetched_at": "2026-10-20 07:26",
       "verified_status": "待核实",
       "fate": {
         "kind": "life",
         "direction": "中性",
-        "note": "本周惠民青年社交活动，名额有限、先报先得"
+        "note": "本周惠民青年社交活动，名额有限"
+      }
+    },
+    {
+      "title": "国庆复盘：惠城7天迎客约102.8万人次，带动旅游消费约4.96亿元",
+      "cat": "fun",
+      "emoji": "🌃",
+      "tier": "中",
+      "srcLevel": "媒体报道",
+      "live": false,
+      "source": "惠城发布",
+      "url": "http://m.toutiao.com/group/7694489984501367296/",
+      "summary": "据不完全统计，10月1—7日惠城区接待游客约102.8万人次、同比增长16.5%，带动旅游消费约4.96亿元、增长18.8%，过夜游客11.3万人次；水东街、西湖、祝屋巷等片区人气旺盛。",
+      "published_at": "2026-10-09",
+      "event_date": "2026-10-01至2026-10-07",
+      "fetched_at": "2026-10-20 07:26",
+      "verified_status": "待核实",
+      "fate": {
+        "kind": "life",
+        "direction": "利好",
+        "note": "老城文旅与夜经济人气数据"
       }
     },
     {
@@ -177,35 +197,55 @@
       "live": false,
       "source": "南方都市报",
       "url": "https://epaper.oeeee.com/ipaper/J/html/2026-04/24/content_3398.htm",
-      "summary": "惠城区马安镇新乐食光城由曾经杂草丛生的闲置空地蝶变为约2.6万平方米的智慧疏导区，150余户流动摊贩告别“马路市场”、在规范有序的环境里经营，傍晚后学生、工人、周边居民络绎不绝，特色小吃香气四溢，成为夜间烟火气新地标。",
+      "summary": "马安镇新乐食光城由闲置空地蝶变为约2.6万平方米的智慧疏导区，150余户流动摊贩告别“马路市场”、规范经营，傍晚后学生、工人、居民络绎不绝，成为夜间烟火气新地标。",
       "published_at": "2026-10-05",
-      "event_date": null,
-      "fetched_at": "2026-10-19 07:31",
+      "event_date": "2026-10-05",
+      "fetched_at": "2026-10-20 07:26",
       "verified_status": "待核实",
       "fate": {
         "kind": "life",
         "direction": "利好",
-        "note": "流动摊贩疏导点规范经营，城市夜经济与便民消费结合"
+        "note": "摊贩疏导点规范经营，夜经济与便民结合"
       }
     },
     {
-      "title": "“3·15金秋购物节”惠民福利持续至11月，华贸、港惠、丽日等商圈齐推消费券",
-      "cat": "city",
-      "emoji": "🛍️",
+      "title": "水东街非遗馆连开八场体验课，舞狮、李家拳、拓印轮番登场",
+      "cat": "fun",
+      "emoji": "🦁",
       "tier": "中",
       "srcLevel": "媒体报道",
       "live": false,
-      "source": "南方都市报",
-      "url": "http://m.toutiao.com/group/7689034206688641570/",
-      "summary": "活动自9月23日在惠城区华贸天地启动，华贸天地、港惠购物中心、丽日商业、惠州天虹等重点商业企业推出折扣直降、消费券投放、以旧换新、分期免息与免费试吃品鉴等惠民福利，持续至11月，金秋消费热度延续。",
-      "published_at": "2026-09-24",
-      "event_date": "2026-09-23至2026-11",
-      "fetched_at": "2026-10-19 07:31",
+      "source": "惠州发布",
+      "url": "http://m.toutiao.com/group/7693360074877616649/",
+      "summary": "国家级旅游休闲街区、国家级夜间文旅消费集聚区水东街，国庆期间惠城非遗展示馆推出“书香水东·乐享非遗”，10月1日至6日连开八场非遗体验课，舞狮、李家拳、刻章、拓印、手绘纸伞轮番登场。",
+      "published_at": "2026-10-06",
+      "event_date": "2026-10-01至2026-10-06",
+      "fetched_at": "2026-10-20 07:26",
       "verified_status": "待核实",
       "fate": {
-        "kind": "info",
+        "kind": "life",
         "direction": "利好",
-        "note": "金秋商圈消费惠民福利持续至11月"
+        "note": "非遗体验聚老街人气"
+      }
+    },
+    {
+      "title": "水口人民路夜市傍晚人气旺，本地食客的深夜食堂",
+      "cat": "food",
+      "emoji": "🍡",
+      "tier": "中",
+      "srcLevel": "市民讨论",
+      "live": false,
+      "source": "携程公开打卡",
+      "url": "https://m.ctrip.com/webapp/you/community/detail?articleId=384363680",
+      "summary": "人民路夜市位于水口街道龙湖大道与人民路交叉口一带，16:00营业至凌晨，傍晚18点后人气最高，是本地市民推荐的平价夜宵聚集地。",
+      "published_at": "2026-10-03",
+      "event_date": "2026-10-03",
+      "fetched_at": "2026-10-20 07:26",
+      "verified_status": "待核实",
+      "fate": {
+        "kind": "life",
+        "direction": "中性",
+        "note": "本地夜市生活资讯"
       }
     }
   ]
