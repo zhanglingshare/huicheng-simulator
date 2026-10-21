@@ -57,15 +57,13 @@ body::before{content:'';position:fixed;top:-10%;left:50%;transform:translateX(-5
 @keyframes fadeIn{to{opacity:1}}
 .headline h2{font-size:clamp(36px,5.5vw,64px);font-weight:900;line-height:1.05;letter-spacing:-1.5px;margin-bottom:20px}
 .headline h2 .line1,.headline h2 .line2{display:block}
-.crack{background:linear-gradient(90deg,var(--red) 0%,var(--red) 35%,rgba(239,68,68,.35) 65%,transparent 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  position:relative;animation:crackFade 3s ease 1.5s both}
-@keyframes crackFade{0%{background-position:200% 0;opacity:1}100%{background-position:-200% 0;opacity:.85}}
-.crack::after{content:'';position:absolute;left:0;right:0;top:52%;height:2.5px;
-  background:linear-gradient(90deg,var(--red),transparent);transform:rotate(-1.2deg);
-  opacity:.65;animation:slashIn .6s ease 1.2s both;transform:scaleX(0);transform-origin:left}
+.crack{color:var(--red);position:relative;text-shadow:0 0 30px rgba(239,68,68,.4)}
+.crack::after{content:'';position:absolute;left:0;right:0;top:52%;height:3px;
+  background:var(--red);transform:rotate(-1.2deg);
+  box-shadow:0 0 12px rgba(239,68,68,.6);
+  animation:slashIn .6s ease 1.2s both;transform:scaleX(0);transform-origin:left}
 @keyframes slashIn{to{transform:rotate(-1.2deg) scaleX(1)}}
-.headline p{font-size:clamp(14px,1.2vw,16px);color:var(--ink2);line-height:1.75;max-width:440px;
+.headline p{font-size:clamp(14px,1.2vw,16px);color:var(--ink2);line-height:1.75;max-width:520px;
   opacity:0;animation:fadeIn .5s ease 1s both}
 .headline p b{color:var(--ink);font-weight:700}
 .headline p .hl{color:var(--orange);font-weight:700;animation:blink 1.5s ease 2.5s infinite}
@@ -131,7 +129,7 @@ body::before{content:'';position:fixed;top:-10%;left:50%;transform:translateX(-5
 .cta .sub{display:block;font-size:11px;font-weight:400;color:var(--ink2);margin-top:3px}
 .foot{animation:fadeIn .5s ease 3.5s both;display:flex;justify-content:space-between;align-items:center;
   margin-top:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,.04)}
-.foot .disc{font-size:10px;color:var(--muted)}
+.foot .disc{font-size:11px;color:var(--ink2)}
 .foot .links{display:flex;gap:16px;font-size:11px;color:var(--ink2)}
 .foot .links a{cursor:pointer;color:var(--ink2);text-decoration:none}
 .foot .links a:hover{color:var(--cyan)}
