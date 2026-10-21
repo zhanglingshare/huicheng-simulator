@@ -31,7 +31,8 @@ body{background:var(--sky1);color:var(--ink);font:14px/1.6 -apple-system,"PingFa
   background:radial-gradient(circle,rgba(56,189,248,.10),transparent 65%);pointer-events:none}
 
 /* ===== HUD ===== */
-.hud{position:relative;z-index:10;height:100vh;display:flex;flex-direction:column;padding:10px 12px}
+.hud{position:relative;z-index:10;height:100vh;display:flex;flex-direction:column;padding:10px 12px;
+  width:100%;max-width:100vw;overflow-x:hidden}
 .top{display:flex;align-items:center;gap:10px;flex:none}
 .round{width:36px;height:36px;border-radius:10px;background:var(--glass);border:1px solid var(--glass-b);
   display:flex;align-items:center;justify-content:center;color:var(--ink2);text-decoration:none;font-size:18px;flex:none}
@@ -43,7 +44,7 @@ body{background:var(--sky1);color:var(--ink);font:14px/1.6 -apple-system,"PingFa
 .lab-btn:hover{background:var(--glass-b);color:#fff}
 
 /* ===== 主区域 ===== */
-.main{flex:1;min-height:0;display:flex;flex-direction:column;gap:8px;margin-top:9px}
+.main{flex:1;min-height:0;min-width:0;width:100%;max-width:100vw;overflow:hidden;display:flex;flex-direction:column;gap:8px;margin-top:9px}
 .filters{display:flex;gap:6px;flex:none;justify-content:center;flex-wrap:wrap}
 .f{background:var(--glass);border:1px solid var(--glass-b);color:var(--ink2);
   padding:6px 13px;border-radius:18px;font-size:12px;font-weight:600;cursor:pointer;transition:.2s}
@@ -61,6 +62,16 @@ body{background:var(--sky1);color:var(--ink);font:14px/1.6 -apple-system,"PingFa
   white-space:nowrap;max-width:92%;overflow:hidden;text-overflow:ellipsis}
 .legend{position:absolute;left:10px;bottom:8px;display:flex;gap:11px;font-size:10px;color:var(--muted);flex-wrap:wrap}
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+
+/* ===== 解读卡：事实→现状→抛问题（不下定论） ===== */
+.readcard{flex:none;background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-b);
+  border-radius:12px;padding:8px 11px;display:flex;flex-direction:column;gap:4px;margin-top:8px;
+  width:100%;max-width:100%;overflow:hidden;box-sizing:border-box}
+.rc-row{font-size:11.5px;line-height:1.5;color:var(--ink2);margin-bottom:3px;overflow-wrap:anywhere;word-break:break-word}
+.rc-row:last-child{margin-bottom:0}
+.rc-tag{display:inline-block;font-style:normal;font-size:9.5px;font-weight:800;padding:1px 6px;border-radius:5px;letter-spacing:.5px;white-space:nowrap;margin-right:6px;vertical-align:1px}
+.rc-row.rc-q{color:var(--ink)}
+.rc-row.rc-q .rc-qtext{color:#fde68a;font-weight:600}
 
 /* ===== 底部时间轴控制 ===== */
 .controls{flex:none;background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-b);
@@ -144,6 +155,9 @@ body{background:var(--sky1);color:var(--ink);font:14px/1.6 -apple-system,"PingFa
   .f{padding:5px 10px;font-size:11px}
   .legend{display:none}
   .stepnav a{font-size:11px;padding:7px}
+  .readcard{padding:6px 9px;gap:3px;margin-top:6px}
+  .rc-row{font-size:10.5px;line-height:1.4}
+  .rc-tag{font-size:9px}
 }
 @media(max-height:620px){
   .ttl span{display:none}
@@ -186,6 +200,11 @@ body{background:var(--sky1);color:var(--ink);font:14px/1.6 -apple-system,"PingFa
         <span style="color:var(--hum)">— 通勤走廊</span>
       </div>
     </div>
+  </div>
+  <div class="readcard" id="readCard">
+    <div class="rc-row"><i class="rc-tag" style="background:rgba(249,115,22,.22);color:#fbbf24">跟你</i><span id="rcYou"></span></div>
+    <div class="rc-row"><i class="rc-tag" style="background:rgba(56,189,248,.18);color:#38bdf8">现状</i><span id="rcNow"></span></div>
+    <div class="rc-row rc-q"><i class="rc-tag" style="background:rgba(251,113,133,.18);color:#fb7185">抛给你</i><span class="rc-qtext" id="rcQ"></span></div>
   </div>
 
   <!-- 底部时间轴 -->
@@ -436,6 +455,31 @@ function updateCap(p){
   else txt="建构完成 · 26主体 / 37关系";
   cap.textContent=txt;
 }
+// ===== 解读卡：每段 事实(跟你)→现状(数据)→抛问题(不下定论) =====
+const READS=[
+  {max:0.18,you:"你熟悉的桥东、桥西老城是根，江北CBD是后来从江边长出来的。",
+   now:"最先出现的4个空间主体——老城和江北CBD，是整座城的地基。",
+   q:"如果重来，你会先把钱投给老城更新，还是先把江北垫出来？"},
+  {max:0.48,you:"你的饭碗（或父母的）多半挂在东边那团蓝色里——利元亨、雷士光电、AI机器人。",
+   now:"12个产业主体几乎全挤在高新区，西边江北只有一个生产性服务业。",
+   q:"产业全压一头，你觉得是“聚得好”，还是“东边太重”？"},
+  {max:0.66,you:"过江通道、小金口枢纽、三栋南部——你每天上下班走的就是这些路。",
+   now:"4个空间节点长出来，把老城、高新区、枢纽缝在一起；过江通道到江北CBD和东江湾的连线最粗。",
+   q:"城要继续往外长，下一座桥或枢纽，你会放在哪？"},
+  {max:0.86,you:"你是这6种人之一——蓝领、工程师、江北白领、青年新市民、跨城通勤、学龄家庭。",
+   now:"人最后才到，而且各去各的：蓝领往高新区/水口，工程师往东，家庭住桥西老城。",
+   q:"青年新市民来了，可它直接连着的只有高新区——它住哪、玩在哪，图上有答案吗？"},
+  {max:1.01,you:"你大概率在三条线里：在江北上班、在东江湾住、每天走过那条橙色过江通道。",
+   now:"26个主体、37条关系，三核成形；产业最密的高新区与居住的东江湾，只靠一条通道相连。",
+   q:"下一个五年，你押哪边——再修一条过江通道，还是先让高新区自己长出学校和夜市？"}
+];
+function updateRead(p){
+  let r=READS[0];
+  for(const x of READS){ if(p<=x.max){ r=x; break; } }
+  document.getElementById("rcYou").textContent=r.you;
+  document.getElementById("rcNow").textContent=r.now;
+  document.getElementById("rcQ").textContent=r.q;
+}
 function setProgress(p){
   progress=p;
   NODES.forEach((nd,i)=>{
@@ -447,6 +491,7 @@ function setProgress(p){
   seek.value=Math.round(p*1000);
   seek.style.setProperty("--p",(p*100)+"%");
   updateCap(p);
+  updateRead(p);
 }
 function tick(ts){
   if(!playing)return;
