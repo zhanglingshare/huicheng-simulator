@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEWHC · 惠城服务世界</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#060914;
+  --ink:#F0F4FF;
+  --ink2:#7B8DB0;
+  --muted:#3D4A66;
+  --cyan:#22D3EE;
+  --blue:#3B82F6;
+  --purple:#8B5CF6;
+  --green:#10B981;
+  --amber:#F59E0B;
+  --red:#EF4444;
+  --orange:#F97316;
+  --glass:rgba(255,255,255,.03);
+  --glass-b:rgba(255,255,255,.06);
+}
+html,body{background:var(--bg);color:var(--ink);
+  font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-10%;left:50%;transform:translateX(-50%);
+  width:800px;height:500px;
+  background:radial-gradient(ellipse,rgba(34,211,238,.07) 0%,transparent 70%);
+  pointer-events:none;z-index:0}
+@keyframes pageIn{from{opacity:0}to{opacity:1}}
+.shell{position:relative;z-index:1;min-height:100vh;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);
+  gap:40px;max-width:1280px;margin:0 auto;padding:32px 40px;animation:pageIn .4s ease both}
+.col-text{display:flex;flex-direction:column;justify-content:center}
+.col-visual{display:flex;flex-direction:column;justify-content:center}
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+.top{animation:slideDown .5s ease .2s both;display:flex;align-items:center;gap:10px;margin-bottom:40px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--cyan);
+  box-shadow:0 0 12px var(--cyan);flex:none;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 12px var(--cyan)}50%{opacity:.4;box-shadow:0 0 4px var(--cyan)}}
+.brand h1{font-size:16px;font-weight:800;letter-spacing:.3px}
+.brand h1 span{color:var(--cyan)}
+.brand .en{font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.mode{margin-left:auto;font-size:10.5px;color:var(--cyan);
+  border:1px solid rgba(34,211,238,.25);padding:4px 11px;border-radius:4px;
+  background:rgba(34,211,238,.05);letter-spacing:.5px}
+@keyframes dropIn{
+  0%{opacity:0;transform:translateY(-60px) scale(1.1)}
+  60%{opacity:1;transform:translateY(8px) scale(.98)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+.headline{animation:dropIn .7s cubic-bezier(.2,.8,.3,1.2) .4s both;margin-bottom:32px}
+.kicker{display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;color:var(--amber);letter-spacing:2.5px;font-weight:700;
+  text-transform:uppercase;margin-bottom:18px;opacity:0;animation:fadeIn .4s ease .6s both}
+@keyframes fadeIn{to{opacity:1}}
+.headline h2{font-size:clamp(36px,5.5vw,64px);font-weight:900;line-height:1.05;letter-spacing:-1.5px;margin-bottom:20px}
+.headline h2 .line1,.headline h2 .line2{display:block}
+.crack{background:linear-gradient(90deg,var(--red) 0%,var(--red) 35%,rgba(239,68,68,.35) 65%,transparent 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  position:relative;animation:crackFade 3s ease 1.5s both}
+@keyframes crackFade{0%{background-position:200% 0;opacity:1}100%{background-position:-200% 0;opacity:.85}}
+.crack::after{content:'';position:absolute;left:0;right:0;top:52%;height:2.5px;
+  background:linear-gradient(90deg,var(--red),transparent);transform:rotate(-1.2deg);
+  opacity:.65;animation:slashIn .6s ease 1.2s both;transform:scaleX(0);transform-origin:left}
+@keyframes slashIn{to{transform:rotate(-1.2deg) scaleX(1)}}
+.headline p{font-size:clamp(14px,1.2vw,16px);color:var(--ink2);line-height:1.75;max-width:440px;
+  opacity:0;animation:fadeIn .5s ease 1s both}
+.headline p b{color:var(--ink);font-weight:700}
+.headline p .hl{color:var(--orange);font-weight:700;animation:blink 1.5s ease 2.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes stageIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+.relbox{animation:stageIn .8s ease .8s both;margin-bottom:24px}
+.rel-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px;
+  opacity:0;animation:fadeIn .4s ease 1s both}
+.rel-head .t{font-size:11px;font-weight:700;color:var(--ink2);letter-spacing:1.5px}
+.rel-head .d{font-size:10px;color:var(--muted)}
+.rel-svg{width:100%;height:auto;display:block;aspect-ratio:4/3;
+  background:linear-gradient(180deg,rgba(34,211,238,.025),rgba(239,68,68,.035));
+  border-radius:16px;border:1px solid rgba(255,255,255,.05);overflow:visible}
+.nd .lb{font-weight:700;fill:#fff;paint-order:stroke;stroke:rgba(6,9,20,.95);stroke-width:3.5px}
+.nd .sub{fill:var(--ink2);paint-order:stroke;stroke:rgba(6,9,20,.9);stroke-width:3px}
+.local-line{fill:none;stroke:var(--cyan);stroke-width:1.2;stroke-dasharray:3 5;opacity:.22;
+  stroke-dashoffset:200;animation:drawLine 1s ease 1.5s both,tremble .3s ease 2.5s infinite}
+@keyframes drawLine{to{stroke-dashoffset:0}}
+@keyframes tremble{0%,100%{opacity:.22}50%{opacity:.1}}
+.leak-line{fill:none;stroke-linecap:round;filter:drop-shadow(0 0 5px currentColor);
+  stroke-dasharray:600;stroke-dashoffset:600;
+  animation:shootLine .8s cubic-bezier(.4,0,.8,1) 1.8s both,flowDash 1.5s linear 2.6s infinite}
+@keyframes shootLine{to{stroke-dashoffset:0}}
+@keyframes flowDash{to{stroke-dashoffset:-20}}
+.particle{opacity:0;animation:particleIn .4s ease 2s both}
+@keyframes particleIn{to{opacity:1}}
+.leak-target{opacity:0;animation:targetPop .5s cubic-bezier(.2,1.4,.4,1) both}
+.leak-target.sz{animation-delay:2.2s}
+.leak-target.dg{animation-delay:2.4s}
+.leak-target.ec{animation-delay:2.6s}
+@keyframes targetPop{0%{opacity:0;transform:scale(.5)}100%{opacity:1;transform:scale(1)}}
+.leak-target .ring{animation:targetPulse 2s ease-in-out infinite}
+@keyframes targetPulse{0%,100%{opacity:.4}50%{opacity:.8;stroke-width:2}}
+.nd{opacity:0;animation:nodeFade .4s ease both}
+.nd.jb{animation-delay:1.6s}.nd.jsh{animation-delay:1.7s}
+.nd.sdj{animation-delay:1.8s}.nd.hm{animation-delay:1.9s}
+@keyframes nodeFade{to{opacity:1}}
+.annot{opacity:0;animation:fadeIn .5s ease 2.8s both}
+.annot.warn{animation:fadeIn .5s ease 2.8s both,blink 1.5s ease 3s infinite}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.insights{animation:slideUp .6s ease 2.8s both;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
+.insight{position:relative;padding:18px 16px 16px;border-radius:12px;
+  background:var(--glass);border:1px solid var(--glass-b);overflow:hidden}
+.insight::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+.insight.brk::before{background:var(--red)}
+.insight.rvs::before{background:var(--amber)}
+.insight .num{font-size:26px;font-weight:900;line-height:1;margin-bottom:8px;font-variant-numeric:tabular-nums;opacity:.9}
+.insight.brk .num{color:var(--red)}
+.insight.rvs .num{color:var(--amber)}
+.insight .t{font-size:14px;font-weight:800;line-height:1.35;margin-bottom:6px}
+.insight .d{font-size:11.5px;color:var(--ink2);line-height:1.55}
+.cta{animation:slideUp .6s ease 3.2s both;display:flex;align-items:center;justify-content:space-between;
+  width:100%;padding:18px 22px;
+  background:linear-gradient(135deg,rgba(34,211,238,.1),rgba(139,92,246,.1));
+  border:1px solid rgba(34,211,238,.25);border-radius:14px;
+  color:var(--ink);font-size:15px;font-weight:800;cursor:pointer;
+  transition:.2s;text-align:left;text-decoration:none}
+.cta:hover{border-color:rgba(34,211,238,.5);
+  background:linear-gradient(135deg,rgba(34,211,238,.16),rgba(139,92,246,.16))}
+.cta .arrow{font-size:20px;color:var(--cyan);transition:.2s;animation:arrowNudge 2s ease 4s infinite}
+@keyframes arrowNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+.cta:hover .arrow{transform:translateX(5px)}
+.cta .sub{display:block;font-size:11px;font-weight:400;color:var(--ink2);margin-top:3px}
+.foot{animation:fadeIn .5s ease 3.5s both;display:flex;justify-content:space-between;align-items:center;
+  margin-top:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,.04)}
+.foot .disc{font-size:10px;color:var(--muted)}
+.foot .links{display:flex;gap:16px;font-size:11px;color:var(--ink2)}
+.foot .links a{cursor:pointer;color:var(--ink2);text-decoration:none}
+.foot .links a:hover{color:var(--cyan)}
+@media(max-width:1100px){
+  .shell{grid-template-columns:1fr;gap:24px;padding:24px 28px}
+  .headline{margin-bottom:20px}
+  .headline h2{font-size:clamp(36px,7vw,52px)}
+  .rel-svg{aspect-ratio:16/9}
+}
+@media(max-width:640px){
+  .shell{padding:18px 16px 40px;gap:20px}
+  .top{margin-bottom:24px}
+  .headline h2{font-size:clamp(32px,11vw,44px);letter-spacing:-1px}
+  .headline p{max-width:100%}
+  .insights{grid-template-columns:1fr;gap:10px}
+  .insight .num{font-size:22px}
+  .rel-svg{aspect-ratio:1/1;border-radius:12px}
+  .cta{padding:15px 18px;font-size:14px}
+  .foot{flex-direction:column;gap:8px;align-items:flex-start}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01s!important;animation-delay:0s!important}
+  .particle{display:none}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="col-text">
+    <div class="top">
+      <div class="dot"></div>
+      <div class="brand">
+        <h1>NEWHC <span>/</span> 惠城服务世界</h1>
+        <div class="en">Regional Service Simulation</div>
+      </div>
+      <div class="mode">实验模式</div>
+    </div>
+    <div class="headline">
+      <div class="kicker">惠城 · 中心城区</div>
+      <h2>
+        <span class="line1">关系很密，</span>
+        <span class="line2"><span class="crack">消费留不住</span></span>
+      </h2>
+      <p>楼宇总部群在惠城，商圈在惠城，文旅在惠城——但<span class="hl">钱流向了城区外</span>。不是缺关系，是关系断在了最关键的地方。</p>
+    </div>
+    <div class="foot">
+      <span class="disc">基于公开数据的关系可视化 · 非预测值</span>
+      <div class="links">
+        <a href="index.html">今日</a><a href="network.html">产业</a><a href="fun.html">风向标</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-visual">
+    <div class="relbox">
+      <div class="rel-head">
+        <span class="t">最断裂 · 最反转的关系</span>
+        <span class="d">7个关键节点</span>
+      </div>
+      <svg class="rel-svg" viewBox="0 0 600 450" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="glowStrong"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="#EF4444"/>
+          </marker>
+          <marker id="arrowOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="#F97316"/>
+          </marker>
+          <radialGradient id="coreG" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#67E8F9"/>
+            <stop offset="70%" stop-color="#06B6D4"/>
+            <stop offset="100%" stop-color="#0E7490"/>
+          </radialGradient>
+          <linearGradient id="leakRed" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#EF4444" stop-opacity=".9"/>
+            <stop offset="100%" stop-color="#F97316" stop-opacity=".9"/>
+          </linearGradient>
+          <linearGradient id="leakAmber" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#F59E0B" stop-opacity=".8"/>
+            <stop offset="100%" stop-color="#F97316" stop-opacity=".8"/>
+          </linearGradient>
+        </defs>
+        <path class="local-line" d="M260,220 Q200,140 130,100"/>
+        <path class="local-line" d="M260,220 Q330,130 420,95"/>
+        <path class="local-line" d="M260,220 Q180,310 120,350"/>
+        <path class="local-line" d="M260,220 Q350,310 440,355"/>
+        <path class="leak-line" d="M290,200 Q430,150 540,130" stroke="url(#leakRed)" stroke-width="3" marker-end="url(#arrowRed)" style="color:#EF4444"/>
+        <path class="leak-line" d="M290,230 Q430,235 540,235" stroke="url(#leakRed)" stroke-width="2.5" marker-end="url(#arrowRed)" style="color:#EF4444;opacity:.7"/>
+        <path class="leak-line" d="M280,250 Q390,330 500,365" stroke="url(#leakAmber)" stroke-width="2.5" marker-end="url(#arrowOrange)" style="color:#F97316;opacity:.8"/>
+        <circle class="particle" r="3">
+          <animateMotion dur="2s" repeatCount="indefinite" begin="2.4s" path="M290,200 Q430,150 540,130"/>
+        </circle>
+        <circle class="particle" r="2.5" style="fill:#F59E0B;filter:drop-shadow(0 0 4px #F59E0B)">
+          <animateMotion dur="2.5s" repeatCount="indefinite" begin="2.8s" path="M290,230 Q430,235 540,235"/>
+        </circle>
+        <circle class="particle" r="2.5" style="fill:#FBBF24;filter:drop-shadow(0 0 4px #FBBF24)">
+          <animateMotion dur="3s" repeatCount="indefinite" begin="3.2s" path="M280,250 Q390,330 500,365"/>
+        </circle>
+        <circle class="particle" r="2" style="fill:#F87171;filter:drop-shadow(0 0 3px #F87171)">
+          <animateMotion dur="1.8s" repeatCount="indefinite" begin="3s" path="M290,200 Q430,150 540,130"/>
+        </circle>
+        <g id="coreNode" class="nd">
+          <circle id="coreRing1" cx="260" cy="220" r="46" fill="none" stroke="#22D3EE" stroke-width="1" opacity=".2"/>
+          <circle id="coreRing2" cx="260" cy="220" r="60" fill="none" stroke="#22D3EE" stroke-width=".5" opacity=".1"/>
+          <circle id="coreCircle" cx="260" cy="220" r="32" fill="url(#coreG)" filter="url(#glowStrong)"/>
+          <text class="lb" x="260" y="178" text-anchor="middle" font-size="14">惠城核心</text>
+          <text class="sub" x="260" y="262" text-anchor="middle" font-size="11">楼宇总部群</text>
+        </g>
+        <g class="nd jb">
+          <circle cx="130" cy="100" r="9" fill="#22D3EE" opacity=".4"/>
+          <text class="lb" x="130" y="82" text-anchor="middle" font-size="11" opacity=".7">江北CBD</text>
+        </g>
+        <g class="nd jsh">
+          <circle cx="420" cy="95" r="9" fill="#8B5CF6" opacity=".4"/>
+          <text class="lb" x="420" y="77" text-anchor="middle" font-size="11" opacity=".7">金山湖</text>
+        </g>
+        <g class="nd sdj">
+          <circle cx="120" cy="350" r="8" fill="#10B981" opacity=".4"/>
+          <text class="lb" x="120" y="372" text-anchor="middle" font-size="11" opacity=".7">水东街</text>
+        </g>
+        <g class="nd hm">
+          <circle cx="440" cy="355" r="8" fill="#3B82F6" opacity=".4"/>
+          <text class="lb" x="440" y="377" text-anchor="middle" font-size="11" opacity=".7">华贸天地</text>
+        </g>
+        <g class="leak-target sz">
+          <circle class="ring" cx="540" cy="130" r="26" stroke="#EF4444"/>
+          <circle cx="540" cy="130" r="9" fill="#EF4444" filter="url(#glow)"/>
+          <text class="lb" x="540" y="102" text-anchor="middle" font-size="12" fill="#F87171">深圳</text>
+        </g>
+        <g class="leak-target dg">
+          <circle class="ring" cx="540" cy="235" r="20" stroke="#EF4444"/>
+          <circle cx="540" cy="235" r="7" fill="#EF4444" opacity=".7" filter="url(#glow)"/>
+          <text class="lb" x="540" y="265" text-anchor="middle" font-size="10" fill="#F87171">东莞</text>
+        </g>
+        <g class="leak-target ec">
+          <circle class="ring" cx="500" cy="365" r="18" stroke="#F59E0B"/>
+          <circle cx="500" cy="365" r="6" fill="#F59E0B" opacity=".75" filter="url(#glow)"/>
+          <text class="lb" x="500" y="392" text-anchor="middle" font-size="10" fill="#FBBF24">电商</text>
+        </g>
+        <text class="annot warn" x="400" y="175" font-size="11" fill="#F87171">钱在往外流 →</text>
+        <text class="annot" x="140" y="230" font-size="10" fill="#3D4A66">本地关系断裂</text>
+      </svg>
+    </div>
+    <div class="insights">
+      <div class="insight brk">
+        <div class="num">01</div>
+        <div class="t">总部在惠城，<br>消费不在惠城</div>
+        <div class="d">楼宇总部群贡献税收和就业，但员工高端消费流向深圳东莞。</div>
+      </div>
+      <div class="insight rvs">
+        <div class="num">02</div>
+        <div class="t">服务业越密，<br>外溢越严重</div>
+        <div class="d">中心城区商圈密集，本地留存率反而低于周边。</div>
+      </div>
+    </div>
+    <a href="windtunnel.html" class="cta">
+      <div>
+        进入实验，亲手改变条件
+        <span class="sub">拖动滑块 · 制造冲击 · 比较两种未来</span>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</div>
+</body>
+</html>
