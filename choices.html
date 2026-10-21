@@ -125,16 +125,18 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
 </div>
 
 <script>
-// 6块积木：来自 model.js DEFAULT_PATHS，但用真实路名
+// 6块积木：按mu值定大小和颜色
 var BLOCKS=[
-  {mu:500,name:'新投产项目',desc:'15宗开工/18宗投产'},
-  {mu:200,name:'三大集群',desc:'电子/装备/新能源'},
-  {mu:100,name:'AI机器人',desc:'新赛道'},
-  {mu:100,name:'生产性服务业',desc:'双轮驱动'},
-  {mu:50, name:'融深融湾',desc:'外部变量'}
+  {mu:500,name:'新投产项目',desc:'15宗开工/18宗投产',color:'#fbbf24',icon:'🏭'},
+  {mu:200,name:'三大集群',desc:'电子/装备/新能源',color:'#60a5fa',icon:'⚙️'},
+  {mu:100,name:'AI机器人',desc:'新赛道',color:'#a78bfa',icon:'🤖'},
+  {mu:100,name:'生产性服务业',desc:'双轮驱动',color:'#34d399',icon:'☕'},
+  {mu:50, name:'融深融湾',desc:'外部变量',color:'#f87171',icon:'🚄'},
+  {mu:30, name:'跨江深惠',desc:'半小时通勤圈',color:'#94a3b8',icon:'🌉'}
 ];
-// 第6块：跨江通道（新增，mu=30）
-BLOCKS.push({mu:30,name:'跨江深惠',desc:'半小时通勤圈'});
+
+// mu=500 → 220px宽，mu=30 → 120px宽
+function blockWidth(mu){return Math.round(120 + (mu-30)/(500-30)*(220-120));}
 
 var BASE=632.7, TARGET=1500;
 var placed=[]; // 已放的索引
@@ -148,9 +150,13 @@ function render(){
   // 从下到上：已放的按放入顺序
   placed.forEach(function(idx){
     var b=BLOCKS[idx];
+    var w=blockWidth(b.mu);
     var d=document.createElement('div');
     d.className='block placed';
-    d.innerHTML='<div class="b-name">'+b.name+'</div><div class="b-val">+'+b.mu+'亿</div>';
+    d.style.width=w+'px';
+    d.style.background='linear-gradient(145deg,'+b.color+'44 0%,'+b.color+'22 100%)';
+    d.style.borderColor=b.color+'88';
+    d.innerHTML='<div class="b-name">'+b.icon+' '+b.name+'</div><div class="b-val">+'+b.mu+'亿</div>';
     d.onclick=function(){removeBlock(idx);};
     tw.appendChild(d);
   });
@@ -166,9 +172,12 @@ function render(){
   pool.innerHTML='';
   BLOCKS.forEach(function(b,i){
     if(placed.indexOf(i)>=0)return;
+    var w=Math.max(90,blockWidth(b.mu)*0.7);
     var d=document.createElement('div');
     d.className='pool-block';
-    d.innerHTML='<div class="pb-name">'+b.name+'</div><div class="pb-val">+'+b.mu+'亿 · '+b.desc+'</div>';
+    d.style.width=w+'px';
+    d.style.borderColor=b.color+'55';
+    d.innerHTML='<div class="pb-name">'+b.icon+' '+b.name+'</div><div class="pb-val">+'+b.mu+'亿</div>';
     d.onclick=function(){placeBlock(i);};
     pool.appendChild(d);
   });
