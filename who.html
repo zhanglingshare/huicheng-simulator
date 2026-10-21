@@ -16,18 +16,25 @@
 html,body{margin:0;height:100%;overflow:hidden}
 body{background:var(--sky1);color:var(--ink);font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased;position:relative}
 
-/* ===== 背景：俯瞰城市生命体 ===== */
-.scene{position:fixed;inset:0;z-index:0;background:
-  radial-gradient(ellipse at 50% 30%, #1a2148 0%, #0d1330 55%, #070a18 100%);}
-.scene::before{content:"";position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(148,163,184,.05) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(148,163,184,.05) 1px,transparent 1px);
-  background-size:38px 38px;
-  mask-image:radial-gradient(ellipse at 50% 40%,#000 30%,transparent 85%);}
-.scene::after{content:"";position:absolute;left:50%;top:40%;width:560px;height:560px;
-  transform:translate(-50%,-50%);border-radius:50%;
-  background:radial-gradient(circle,rgba(56,189,248,.09),transparent 65%);pointer-events:none}
+/* ===== 背景：黄昏城市生命体 ===== */
+.scene{position:fixed;inset:0;z-index:0}
+.sky{position:absolute;inset:0;background:linear-gradient(180deg,#070b1c 0%,#14103a 32%,#3b1d6e 52%,#6d28d9 68%,#9a3412 82%,#c2410c 92%,#f59e0b 100%);opacity:.95}
+.sun{position:absolute;left:57%;top:3%;width:185px;height:185px;border-radius:50%;background:radial-gradient(circle,#fde68a,#f59e0b 55%,transparent 70%);filter:blur(16px);opacity:.62}
+.stars{position:absolute;inset:0 0 42% 0}
+.stars i{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:tw 3s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.15}50%{opacity:.9}}
+.mt{position:absolute;left:0;right:0;bottom:18%;height:100px;background:linear-gradient(180deg,transparent,#191a4d);clip-path:polygon(0 100%,8% 50%,18% 74%,28% 36%,40% 68%,52% 28%,64% 62%,76% 40%,88% 66%,100% 46%,100% 100%)}
+.skyline{position:absolute;left:0;right:0;bottom:14%;height:150px;display:flex;align-items:flex-end;gap:3px;padding:0 18px}
+.skyline .b{flex:1;background:linear-gradient(180deg,#26214f,#101024);border-radius:2px 2px 0 0;position:relative}
+.skyline .b::after{content:"";position:absolute;inset:6px 3px 3px;background-image:radial-gradient(circle,#f59e0b 1px,transparent 1.5px);background-size:9px 12px;opacity:.55}
+.road{position:absolute;left:0;right:0;bottom:0;height:14%;background:linear-gradient(180deg,#141039,#050510);border-top:1px solid rgba(255,255,255,.07)}
+.road::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:repeating-linear-gradient(90deg,#f59e0b 0 30px,transparent 30px 62px);opacity:.4}
+.car{position:absolute;top:40%;width:9px;height:4px;border-radius:2px;background:var(--neon);box-shadow:0 0 8px var(--neon);animation:drive 7s linear infinite}
+.car.r{background:var(--pink);box-shadow:0 0 8px var(--pink);animation-duration:9s;animation-delay:-3s;top:58%}
+.car.g{background:var(--ok);box-shadow:0 0 8px var(--ok);animation-duration:6s;animation-delay:-5s;top:30%}
+@keyframes drive{from{left:-5%}to{left:105%}}
+/* 压暗遮罩，保证前景可读 */
+.veil{position:fixed;inset:0;z-index:1;background:linear-gradient(180deg,rgba(7,10,24,.1) 0%,rgba(7,10,24,.34) 42%,rgba(7,10,24,.62) 100%);pointer-events:none}
 
 /* ===== HUD ===== */
 .hud{position:relative;z-index:10;height:100vh;display:flex;flex-direction:column;padding:10px 12px}
@@ -48,7 +55,7 @@ body{background:var(--sky1);color:var(--ink);font:14px/1.6 -apple-system,"PingFa
 /* 生命体征总览：心脏 + 心电图 + 结论 */
 .vitals{display:flex;gap:11px;flex:none}
 .heart-box{flex:none;width:128px;border:1px solid var(--glass-b);border-radius:14px;
-  background:radial-gradient(circle at 50% 45%,rgba(251,113,133,.16),rgba(8,12,28,.5));
+  background:radial-gradient(circle at 50% 45%,rgba(251,113,133,.18),rgba(8,12,28,.32));
   display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px}
 .heart{width:64px;height:64px;color:#fb7185;filter:drop-shadow(0 0 14px rgba(251,113,133,.6));
   transform-origin:center;animation:beat 1.25s ease-in-out infinite}
@@ -56,7 +63,7 @@ body{background:var(--sky1);color:var(--ink);font:14px/1.6 -apple-system,"PingFa
 .heart-box .hb{font-size:10.5px;color:var(--muted);margin-top:6px;font-variant-numeric:tabular-nums}
 .heart-box .hb b{color:#fb7185;font-size:13px}
 .ecg-box{flex:1;min-width:0;border:1px solid var(--glass-b);border-radius:14px;
-  background:rgba(8,12,28,.5);padding:10px 12px;display:flex;flex-direction:column;justify-content:center}
+  background:rgba(8,12,28,.32);padding:10px 12px;display:flex;flex-direction:column;justify-content:center}
 .ecg-box .et{font-size:10.5px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:4px}
 .ecg-box .et b{color:var(--neon)}
 .ecg{width:100%;height:52px}
@@ -175,7 +182,15 @@ body{background:var(--sky1);color:var(--ink);font:14px/1.6 -apple-system,"PingFa
 </style></head>
 <body>
 
-<div class="scene"></div>
+<div class="scene">
+  <div class="sky"></div>
+  <div class="stars" id="stars"></div>
+  <div class="sun"></div>
+  <div class="mt"></div>
+  <div class="skyline" id="skyline"></div>
+  <div class="road"><div class="car"></div><div class="car r"></div><div class="car g"></div></div>
+</div>
+<div class="veil"></div>
 
 <div class="hud">
   <div class="top">
@@ -249,6 +264,13 @@ body{background:var(--sky1);color:var(--ink);font:14px/1.6 -apple-system,"PingFa
 </aside>
 
 <script>
+// ===== 生成黄昏城市：星星与天际线 =====
+(function(){
+  var st=document.getElementById("stars");
+  for(var i=0;i<42;i++){var s=document.createElement("i");s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.animationDelay=(Math.random()*3)+"s";st.appendChild(s)}
+  var sk=document.getElementById("skyline"),hs=[70,110,88,140,100,155,85,125,145,92,130,110,150,88,120,140,100,150,120,85];
+  hs.forEach(function(h){var b=document.createElement("div");b.className="b";b.style.height=h+"px";sk.appendChild(b)});
+})();
 // ===== 器官图标（stroke 风格） =====
 var ICONS={
   heart:'<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>',
