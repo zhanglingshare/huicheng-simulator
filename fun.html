@@ -175,12 +175,12 @@ body{background:var(--sky1);color:var(--ink);font:14px/1.6 -apple-system,"PingFa
   <div class="topbar">
     <div class="brand"><span class="logo"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="white"/></svg></span>惠城产业风洞</div>
     <div class="res">
-      <div class="r"><span class="v blue">1203亿</span><span class="l">GDP · 2025</span></div>
-      <div class="r"><span class="v">157.8万</span><span class="l">常住人口</span></div>
-      <div class="r"><span class="v green">4.3%</span><span class="l">2025增速</span></div>
-      <div class="r"><span class="v">67%</span><span class="l">2030达标概率</span></div>
+      <div class="r"><span class="v blue" id="rTotal">14</span><span class="l">今夜去处</span></div>
+      <div class="r"><span class="v" id="rHot">4</span><span class="l">个高热</span></div>
+      <div class="r"><span class="v green" id="rPulse">3</span><span class="l">条市民广播</span></div>
+      <div class="r"><span class="v" id="rSeason">秋</span><span class="l">当前季节</span></div>
     </div>
-    <div class="clock"><b>人气档</b><br>每日 07:27 刷新</div>
+    <div class="clock"><b>夜生活档</b><br>每日 07:27 刷新</div>
   </div>
 
   <div class="mid">
@@ -369,6 +369,12 @@ async function load(){
     tk.innerHTML=txt+"　　　"+txt;
   }else{tk.innerHTML="📡 惠城的周末，不用上热搜也值得去。";}
   var lv=document.getElementById("funLive");if(lv)lv.textContent=UPDATED?("更新于 "+UPDATED.slice(5,10)):"每日更新";
+  // 顶部人气指标（现算，不抄门户经济指标）
+  function setR(id,t){var e=document.getElementById(id);if(e)e.textContent=t;}
+  setR("rTotal",SPOTS.length);
+  setR("rHot",SPOTS.filter(function(x){return x.level==="高";}).length);
+  setR("rPulse",PULSE.length);
+  setR("rSeason",d.season||"秋");
   renderCats();renderSpots();
   var top=SPOTS.slice().sort(function(a,b){return b.hot-a.hot;})[0];
   if(top){renderCard(top);}
