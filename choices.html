@@ -3,207 +3,237 @@
 <title>惠城产业风洞 · 五条路</title>
 <script src="model.js"></script>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
-.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;backdrop-filter:blur(8px);overflow-x:auto}
-.nav b{font-size:14px;margin-right:6px;letter-spacing:.5px;flex:none}
-.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
-.nav a.on{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
-.nav .sp{margin-left:auto;font-size:11.5px;color:#64748b;flex:none}
-.wrap{max-width:800px;margin:auto;padding:16px}
-h1{font-size:20px;margin:0 0 2px;letter-spacing:.5px}
-.sub{color:#8fa3bf;font-size:13px;margin:0 0 16px}
-.path{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:16px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start;cursor:pointer;transition:.2s}
-.path:hover{border-color:#3b82f6}
-.path.off{opacity:.4}
-.path .icon{font-size:28px;flex:none}
-.path .body{flex:1}
-.path .t{font-size:15px;font-weight:700;margin-bottom:4px}
-.path .d{font-size:12px;color:#8fa3bf;line-height:1.6}
-.path .src{font-size:10px;color:#5b6b82;margin-top:4px}
-.path .num{font-size:13px;font-weight:700;color:#fbbf24;margin-top:6px}
-.path .num small{font-weight:400;color:#5b6b82;font-size:10px}
-.switch{width:44px;height:24px;background:#1c2739;border-radius:12px;position:relative;flex:none;margin-top:4px;transition:.2s}
-.switch::after{content:'';position:absolute;width:20px;height:20px;background:#6b7280;border-radius:50%;top:2px;left:2px;transition:.2s}
-.path.on .switch{background:#1d4ed8}
-.path.on .switch::after{left:22px;background:#fff}
-.gap{background:#0a0f1a;border:1px solid #1c2739;border-radius:12px;padding:18px;margin-top:14px;text-align:center}
-.gap .big{font-size:30px;font-weight:800;color:#fbbf24}
-.gap .row2{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:12px;font-size:13px;color:#cbd5e1}
-.gap .row2 b{color:#7dd3fc}
-.next{text-align:center;margin-top:18px}
-.next a{background:#1d4ed8;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden}
+body{background:linear-gradient(180deg,#0a1830 0%,#14294d 45%,#0c1e38 100%);
+  color:#f0f4fa;font:15px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;position:relative}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(800px 400px at 50% 0%,rgba(59,130,246,.18),transparent 60%),
+             radial-gradient(600px 300px at 50% 100%,rgba(240,199,94,.06),transparent 60%)}
+
+.hud{position:relative;z-index:10;height:100vh;display:flex;flex-direction:column;padding:16px 18px;max-width:640px;margin:0 auto}
+
+.top{display:flex;align-items:center;gap:12px;flex:none}
+.back{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;
+  color:#b8c5d9;text-decoration:none;font-size:18px;flex:none;backdrop-filter:blur(10px)}
+.ttl{flex:1;min-width:0}
+.ttl h1{font-size:20px;margin:0;font-weight:800;letter-spacing:.3px}
+.ttl span{font-size:12.5px;color:#7a8ba3;display:block;line-height:1.4;margin-top:2px}
+
+/* 塔身区 */
+.stage{flex:1;min-height:0;position:relative;display:flex;align-items:flex-end;justify-content:center;margin:20px 0}
+.tower-wrap{position:relative;display:flex;align-items:flex-end;gap:20px;height:100%}
+.tower{display:flex;flex-direction:column-reverse;gap:6px;align-items:center;justify-content:flex-end}
+.block{width:180px;max-width:40vw;padding:16px 12px;border-radius:16px;
+  background:linear-gradient(145deg,rgba(255,255,255,.18) 0%,rgba(125,211,252,.08) 100%);
+  border:1px solid rgba(255,255,255,.25);
+  box-shadow:0 4px 20px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.3);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  text-align:center;cursor:pointer;transition:all .4s cubic-bezier(.34,1.56,.64,1);
+  position:relative;overflow:hidden}
+.block::before{content:"";position:absolute;top:0;left:0;right:0;height:40%;
+  background:linear-gradient(180deg,rgba(255,255,255,.15),transparent)}
+.block .b-name{font-size:13.5px;font-weight:700;color:#fff;line-height:1.3;position:relative}
+.block .b-val{font-size:11px;color:#7dd3fc;margin-top:4px;font-variant-numeric:tabular-nums;position:relative}
+.block.placed{background:linear-gradient(145deg,rgba(125,211,252,.25) 0%,rgba(59,130,246,.15) 100%);
+  border-color:rgba(125,211,252,.5);
+  box-shadow:0 4px 24px rgba(125,211,252,.2),inset 0 1px 0 rgba(255,255,255,.3)}
+.block:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.4)}
+.block.shake{animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+/* 刻度线 */
+.scale{position:relative;width:3px;height:100%;background:linear-gradient(180deg,rgba(240,199,94,.4),rgba(255,255,255,.15));flex:none;border-radius:2px}
+.scale .mark{position:absolute;left:12px;transform:translateY(-50%);font-size:11.5px;color:#b8c5d9;white-space:nowrap;font-weight:600}
+.scale .mark.target{color:#f0c75e;font-weight:700}
+.scale .mark.base{color:#7a8ba3;font-weight:400}
+.scale .target-line{position:absolute;left:-8px;right:-8px;height:2px;background:linear-gradient(90deg,transparent,rgba(240,199,94,.7),transparent);box-shadow:0 0 12px rgba(240,199,94,.4)}
+.scale .cur-line{position:absolute;left:-14px;right:-14px;height:3px;background:#7dd3fc;border-radius:2px;
+  box-shadow:0 0 16px rgba(125,211,252,.8),0 0 4px #fff;transition:bottom .6s cubic-bezier(.34,1.56,.64,1)}
+.scale .cur-line::after{content:"";position:absolute;right:-8px;top:50%;transform:translateY(-50%);
+  width:8px;height:8px;border-radius:50%;background:#7dd3fc;box-shadow:0 0 8px rgba(125,211,252,.8)}
+
+/* 底部未放积木 */
+.pool{flex:none;padding:10px 0 16px}
+.pool-label{font-size:11.5px;color:#7a8ba3;text-align:center;margin-bottom:10px}
+.pool-blocks{display:flex;gap:8px;overflow-x:auto;padding:4px;scrollbar-width:none}
+.pool-blocks::-webkit-scrollbar{display:none}
+.pool-block{flex:none;width:120px;padding:12px;border-radius:14px;
+  background:linear-gradient(145deg,rgba(255,255,255,.1) 0%,rgba(255,255,255,.04) 100%);
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
+  text-align:center;cursor:pointer;transition:.25s;backdrop-filter:blur(10px)}
+.pool-block:hover{background:linear-gradient(145deg,rgba(125,211,252,.2) 0%,rgba(125,211,252,.08) 100%);
+  border-color:rgba(125,211,252,.4);transform:translateY(-2px)}
+.pool-block .pb-name{font-size:11.5px;font-weight:600;color:#e2e8f0;line-height:1.3}
+.pool-block .pb-val{font-size:10px;color:#7dd3fc;margin-top:2px}
+
+/* 底部结果 */
+.result-bar{flex:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  border-radius:18px;padding:14px 18px;backdrop-filter:blur(12px);margin-bottom:12px}
+.result-bar .r-top{display:flex;justify-content:space-between;align-items:baseline}
+.result-bar .r-label{font-size:12px;color:#7a8ba3}
+.result-bar .r-val{font-size:26px;font-weight:800;color:#f0f4fa;font-variant-numeric:tabular-nums}
+.result-bar .r-val small{font-size:14px;color:#7a8ba3;font-weight:400}
+.result-bar .r-gap{font-size:12.5px;margin-top:6px;color:#f0c75e;font-weight:600}
+.result-bar .r-gap.over{color:#34d399}
+
+.next-btn{flex:none;width:100%;padding:15px;border:none;border-radius:16px;
+  background:linear-gradient(135deg,#f0c75e,#d4a843);color:#1a1a2e;
+  font-size:15px;font-weight:800;cursor:pointer;transition:.2s;font-family:inherit}
+.next-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(240,199,94,.3)}
+.next-btn:disabled{opacity:.4;cursor:default;transform:none;box-shadow:none}
 </style></head><body>
 
-<div class="nav">
-  <b>惠城产业风洞</b>
-  <a href="index.html">① 今日话题</a>
-  <a href="fun.html">🍜 风向标</a>
-  <a href="network.html">② 建构世界</a>
-  <a href="who.html">③ 基本面</a>
-  <a href="choices.html" class="on">④ 五条路</a>
-  <a href="future.html">⑤ 未来</a>
-  <a href="windtunnel.html">⑥ 风洞测试</a>
-  <a href="blindspot.html">⑦ 忽略了什么</a>
-  <a href="report.html">⑧ 分析报告</a>
-  <a href="ending.html">⑨ 结语</a>
-  <span class="sp">统一模型 · 边际影响</span>
-</div>
-
-<div class="wrap">
-  <h1>五条路</h1>
-  <p class="sub">高新区要从632.7亿走向1500亿。下面五条路与未来页、风洞页共用同一套模型。点开关，系统会重新跑一遍，看每条路真实的边际分量。</p>
-
-  <div class="path on" data-idx="0">
-    <div class="icon">🏭</div>
-    <div class="body">
-      <div class="t">新投产项目</div>
-      <div class="d">2026年新开工15宗、新投产18宗，基础设施投资28亿/年，收储用地1500亩。<br><span style="color:#7dd3fc">→ 走通了你会感到：家门口多出几个新工地、几家新工厂</span></div>
-      <div class="src">来源：2026政府工作报告、高新区高质量发展大会</div>
-      <div class="num">边际中位数 ≈ +<span id="dN0">—</span> 亿 &nbsp;<small>（全开 vs 关掉它，同模型对照）</small></div>
-    </div>
-    <div class="switch"></div>
-  </div>
-
-  <div class="path on" data-idx="1">
-    <div class="icon">⚙️</div>
-    <div class="body">
-      <div class="t">三大集群扩能</div>
-      <div class="d">电子信息、智能装备、新能源新材料扩能，新增规上工业企业、智改数转。<br><span style="color:#7dd3fc">→ 走通了你会感到：朋友圈多几个回来找工作的朋友</span></div>
-      <div class="src">来源：政府公开部署、高新区工作计划</div>
-      <div class="num">边际中位数 ≈ +<span id="dN1">—</span> 亿 &nbsp;<small>（同模型对照）</small></div>
-    </div>
-    <div class="switch"></div>
-  </div>
-
-  <div class="path on" data-idx="2">
-    <div class="icon">🤖</div>
-    <div class="body">
-      <div class="t">AI与机器人新赛道</div>
-      <div class="d">布局AI+应用示范场景，招引新赛道项目。<br><span style="color:#7dd3fc">→ 走通了你会感到：办事、看病、取快递慢慢有AI帮忙</span></div>
-      <div class="src">来源：高新区2026工作计划</div>
-      <div class="num">边际中位数 ≈ +<span id="dN2">—</span> 亿 &nbsp;<small>（同模型对照）</small></div>
-    </div>
-    <div class="switch"></div>
-  </div>
-
-  <div class="path on" data-idx="3">
-    <div class="icon">🏙️</div>
-    <div class="body">
-      <div class="t">服务业带动</div>
-      <div class="d">江北金融、商务、软件信息等生产性服务业集聚，与制造业"双轮驱动"，间接拉动。<br><span style="color:#7dd3fc">→ 走通了你会感到：楼下多几家咖啡馆、新店</span></div>
-      <div class="src">来源：2026政府工作报告</div>
-      <div class="num">边际中位数 ≈ +<span id="dN3">—</span> 亿 &nbsp;<small>（间接带动，同模型对照）</small></div>
-    </div>
-    <div class="switch"></div>
-  </div>
-
-  <div class="path on" data-idx="4">
-    <div class="icon">🚄</div>
-    <div class="body">
-      <div class="t">融深融湾</div>
-      <div class="d">依托深惠通道与小金口枢纽承接大湾区外溢，外部变量、不完全可控。<br><span style="color:#7dd3fc">→ 走通了你会感到：去深圳、去大湾区其他城市更快更顺</span></div>
-      <div class="src">来源：惠州发改公开信息</div>
-      <div class="num">边际中位数 ≈ +<span id="dN4">—</span> 亿 &nbsp;<small>（间接带动，同模型对照）</small></div>
-    </div>
-    <div class="switch"></div>
-  </div>
-
-  <div class="gap">
-    <div style="font-size:12px;color:#6b7280">当前所选路径下，2030年产值中位数</div>
-    <div class="big"><span id="curP50">—</span> 亿</div>
-    <div class="row2">
-      <div>过1500亿概率 <b id="curHit">—</b></div>
-      <div>较632.7亿基线 <b id="curUp">—</b></div>
-      <div>距1500亿 <b id="curGap">—</b></div>
+<div class="hud">
+  <div class="top">
+    <a class="back" href="network.html">←</a>
+    <div class="ttl">
+      <h1>搭你的惠城 2030</h1>
+      <span>6 块积木，搭到 1500 亿</span>
     </div>
   </div>
 
-  <div style="font-size:11px;color:#5b6b82;text-align:center;margin-top:10px;line-height:1.7">
-    边际分量与底部结果均由统一模型在固定随机种子、重复跑很多遍后给出，非平台统计、非精确预测；五条路之间存在联动，单项边际差不直接相加。具体以官方规划与统计为准。
+  <div class="stage">
+    <div class="tower-wrap">
+      <div class="tower" id="tower"></div>
+      <div class="scale" id="scale">
+        <div class="target-line" style="top:0"></div>
+        <div class="mark target" style="top:0">1500亿 目标</div>
+        <div class="mark base" style="bottom:0">632.7亿 现在</div>
+        <div class="cur-line" id="curLine" style="bottom:0"></div>
+      </div>
+    </div>
   </div>
 
-  <div class="next"><a href="future.html">下一步：跑一遍未来 →</a></div>
+  <div class="pool">
+    <div class="pool-label">点一块积木放到塔上 · 点塔上的积木拿掉</div>
+    <div class="pool-blocks" id="pool"></div>
+  </div>
+
+  <div class="result-bar">
+    <div class="r-top">
+      <span class="r-label">你的塔高</span>
+      <span class="r-val"><span id="curVal">632.7</span><small> 亿</small></span>
+    </div>
+    <div class="r-gap" id="gap">离 1500 亿还差 867.3 亿</div>
+  </div>
+
+  <button class="next-btn" id="nextBtn" onclick="goNext()">就这么着，跑模型 →</button>
 </div>
 
 <script>
-const SEED=42, N=4000, ALL=[0,1,2,3,4];
-const state=[true,true,true,true,true];
-function cloneP(p){return JSON.parse(JSON.stringify(p));}
-function runSet(active){
-  const paths=HT.DEFAULT_PATHS.map((x,i)=>
-    active.includes(i) ? cloneP(x) : {mu:0,sd:0,name:x.name,color:x.color});
-  return HT.run(SEED,N,paths);
-}
-// 预计算：全开基线 + 逐条关闭的边际中位数差（同种子成对对照）
-const baseAll=runSet(ALL);
-for(let i=0;i<5;i++){
-  const r=runSet(ALL.filter(x=>x!==i));
-  document.getElementById('dN'+i).textContent=Math.round(baseAll.p50-r.p50);
-}
-function refresh(){
-  const active=ALL.filter(i=>state[i]);
-  const r=runSet(active);
-  document.getElementById('curP50').textContent=Math.round(r.p50);
-  document.getElementById('curHit').textContent=r.hit.toFixed(0)+'%';
-  document.getElementById('curUp').textContent='+'+Math.round(r.p50-HT.BASE)+'亿';
-  const diff=r.p50-HT.TARGET;
-  const gapEl=document.getElementById('curGap');
-  gapEl.textContent=(diff>=0?'+':'')+Math.round(diff)+'亿';
-}
-document.querySelectorAll('.path').forEach(card=>{
-  card.onclick=function(e){
-    if(e.target.closest('.switch')===null && e.target.closest('a'))return;
-    const i=+this.dataset.idx;
-    state[i]=!state[i];
-    this.classList.toggle('on',state[i]);
-    this.classList.toggle('off',!state[i]);
-    refresh();
-  };
-});
-refresh();
-</script>
+// 6块积木：按mu值定大小和颜色
+var BLOCKS=[
+  {mu:500,name:'新投产项目',desc:'15宗开工/18宗投产',color:'#fbbf24',icon:'🏭'},
+  {mu:200,name:'三大集群',desc:'电子/装备/新能源',color:'#60a5fa',icon:'⚙️'},
+  {mu:100,name:'AI机器人',desc:'新赛道',color:'#a78bfa',icon:'🤖'},
+  {mu:100,name:'生产性服务业',desc:'双轮驱动',color:'#34d399',icon:'☕'},
+  {mu:50, name:'融深融湾',desc:'外部变量',color:'#f87171',icon:'🚄'},
+  {mu:30, name:'跨江深惠',desc:'半小时通勤圈',color:'#94a3b8',icon:'🌉'}
+];
 
-<div class="likebar">
-  <button onclick="likePage()">👍 <span id="pcount">0</span></button>
-  <button onclick="sharePage()">🔁 转给朋友</button>
-</div>
-<style>
-.likebar{position:relative;bottom:auto;left:auto;transform:none;display:flex;justify-content:center;margin:20px 0;background:rgba(15,23,42,.96);border:1px solid #3b82f6;border-radius:24px;padding:9px 20px;display:flex;gap:22px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.6)}
-.likebar button{background:none;border:none;color:#e2e8f0;font-size:14px;cursor:pointer}
-.likebar button:active{transform:scale(1.15)}
-</style>
-<script>
-(function(){
-  var k="like_"+location.pathname;
-  var n=parseInt(localStorage.getItem(k)||"0");
-  document.getElementById("pcount").textContent=n;
-  window.likePage=function(){
-    n++;localStorage.setItem(k,n);
-    document.getElementById("pcount").textContent=n;
-  };
-  window.sharePage=function(){
-  var m=document.getElementById("shareModal");
-  if(!m){
-    m=document.createElement("div");
-    m.id="shareModal";
-    m.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px";
-    m.onclick=function(){m.remove();};
-    m.innerHTML='<div style="background:#0f172a;padding:20px;border-radius:14px;text-align:center" onclick="event.stopPropagation()"><div style="color:#fff;font-size:14px;margin-bottom:12px">截图二维码，发给朋友/群</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(location.href)+'" style="width:200px;height:200px;background:#fff;padding:8px;border-radius:8px"><div style="color:#94a3b8;font-size:12px;margin-top:12px">扫码打开</div></div>';
-    document.body.appendChild(m);
+// mu=500 → 220px宽，mu=30 → 120px宽
+function blockWidth(mu){return Math.round(120 + (mu-30)/(500-30)*(220-120));}
+
+var BASE=632.7, TARGET=1500;
+var placed=[]; // 已放的索引
+
+function total(){return BASE + placed.reduce(function(s,i){return s+BLOCKS[i].mu;},0);}
+
+function render(){
+  // 塔
+  var tw=document.getElementById('tower');
+  tw.innerHTML='';
+  // 从下到上：已放的按放入顺序
+  placed.forEach(function(idx){
+    var b=BLOCKS[idx];
+    var w=blockWidth(b.mu);
+    var d=document.createElement('div');
+    d.className='block placed';
+    d.style.width=w+'px';
+    d.style.background='linear-gradient(145deg,'+b.color+'44 0%,'+b.color+'22 100%)';
+    d.style.borderColor=b.color+'88';
+    d.innerHTML='<div class="b-name">'+b.icon+' '+b.name+'</div><div class="b-val">+'+b.mu+'亿</div>';
+    d.onclick=function(){removeBlock(idx);};
+    tw.appendChild(d);
+  });
+  // 底部地基
+  var base=document.createElement('div');
+  base.style.cssText='width:210px;max-width:52vw;height:14px;border-radius:7px;'+
+    'background:linear-gradient(180deg,rgba(255,255,255,.25),rgba(255,255,255,.08));'+
+    'box-shadow:0 4px 16px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.3)';
+  tw.appendChild(base);
+
+  // 池
+  var pool=document.getElementById('pool');
+  pool.innerHTML='';
+  BLOCKS.forEach(function(b,i){
+    if(placed.indexOf(i)>=0)return;
+    var w=Math.max(90,blockWidth(b.mu)*0.7);
+    var d=document.createElement('div');
+    d.className='pool-block';
+    d.style.width=w+'px';
+    d.style.borderColor=b.color+'55';
+    d.innerHTML='<div class="pb-name">'+b.icon+' '+b.name+'</div><div class="pb-val">+'+b.mu+'亿</div>';
+    d.onclick=function(){placeBlock(i);};
+    pool.appendChild(d);
+  });
+
+  // 数字
+  var t=total();
+  animateVal(t);
+
+  // 刻度线位置：塔高对应在 0~100%（target在0%，base在100%）
+  var pct=Math.max(0,Math.min(100,(t-TARGET)/(BASE-TARGET)*100));
+  document.getElementById('curLine').style.bottom=pct+'%';
+
+  // gap
+  var gapEl=document.getElementById('gap');
+  var diff=TARGET-t;
+  if(diff>0){
+    gapEl.textContent='离 1500 亿还差 '+diff.toFixed(0)+' 亿';
+    gapEl.className='r-gap';
+  }else{
+    gapEl.textContent='已过 1500 亿 '+( -diff).toFixed(0)+' 亿';
+    gapEl.className='r-gap over';
   }
-  navigator.clipboard && navigator.clipboard.writeText(location.href);
-};
-})();
-</script>
-<!-- 百度统计：去 mtj.baidu.com 注册后替换 YOUR_ID -->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?YOUR_ID";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
+}
+
+function placeBlock(i){
+  if(placed.indexOf(i)>=0)return;
+  placed.push(i);
+  render();
+}
+function removeBlock(i){
+  placed=placed.filter(function(x){return x!==i;});
+  render();
+}
+
+// 数字滚动
+function animateVal(target){
+  var el=document.getElementById('curVal');
+  var start=parseFloat(el.textContent)||BASE;
+  var dur=600,t0=null;
+  function step(ts){
+    if(!t0)t0=ts;
+    var p=Math.min(1,(ts-t0)/dur);
+    var e=1-Math.pow(1-p,3);
+    el.textContent=(start+(target-start)*e).toFixed(1);
+    if(p<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function goNext(){
+  // 把选择存下来，传给 future.html
+  var active=placed.map(function(i){return i;});
+  localStorage.setItem('hcChoices',JSON.stringify(active));
+  location.href='future.html?from=choices';
+}
+
+render();
 </script>
 </body></html>

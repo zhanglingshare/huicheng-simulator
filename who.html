@@ -3,360 +3,665 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='slateblue'/><circle cx='16' cy='16' r='6' fill='none' stroke='white' stroke-width='2.5'/><circle cx='16' cy='16' r='2' fill='white'/></svg>">
-<title>惠城产业风洞 · 城市体检</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%233b82f6'/><circle cx='16' cy='16' r='6' fill='none' stroke='white' stroke-width='2.5'/></svg>">
+<title>惠城产业风洞 · 掂量</title>
 <style>
 :root{
-  --sky1:#0b1026; --sky2:#1e1b4b; --sky3:#141a35;
-  --glass:rgba(255,255,255,.07); --glass-b:rgba(255,255,255,.14);
-  --ink:#f1f5f9; --ink2:#cbd5e1; --muted:#94a3b8;
-  --neon:#38bdf8; --warm:#fbbf24; --ok:#34d399; --bad:#fb7185; --pink:#f472b6;
+  --bg:#0b1a2e;
+  --bg2:#13294a;
+  --card:rgba(255,255,255,.06);
+  --card2:rgba(255,255,255,.1);
+  --line:rgba(255,255,255,.12);
+  --line2:rgba(255,255,255,.2);
+  --ink:#f0f4fa;
+  --ink2:#b8c5d9;
+  --muted:#7a8ba3;
+  --green:#22c55e;
+  --red:#ef4444;
+  --gold:#f0c75e;
+  --blue:#3b82f6;
+  --cit:#f59e0b;
+  --ind:#60a5fa;
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%;overflow:hidden}
-body{background:var(--sky1);color:var(--ink);font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased;position:relative}
+body{background:linear-gradient(180deg,#0a1830 0%,#14294d 45%,#0c1e38 100%);color:var(--ink);
+  font:15px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;position:relative}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(800px 400px at 50% 0%,rgba(59,130,246,.18),transparent 60%),
+             radial-gradient(600px 300px at 50% 100%,rgba(240,199,94,.06),transparent 60%)}
 
-/* ===== 背景：黄昏城市生命体 ===== */
-.scene{position:fixed;inset:0;z-index:0}
-.sky{position:absolute;inset:0;background:linear-gradient(180deg,#070b1c 0%,#14103a 32%,#3b1d6e 52%,#6d28d9 68%,#9a3412 82%,#c2410c 92%,#f59e0b 100%);opacity:.95}
-.sun{position:absolute;left:57%;top:3%;width:185px;height:185px;border-radius:50%;background:radial-gradient(circle,#fde68a,#f59e0b 55%,transparent 70%);filter:blur(16px);opacity:.62}
-.stars{position:absolute;inset:0 0 42% 0}
-.stars i{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:tw 3s ease-in-out infinite}
-@keyframes tw{0%,100%{opacity:.15}50%{opacity:.9}}
-.mt{position:absolute;left:0;right:0;bottom:18%;height:100px;background:linear-gradient(180deg,transparent,#191a4d);clip-path:polygon(0 100%,8% 50%,18% 74%,28% 36%,40% 68%,52% 28%,64% 62%,76% 40%,88% 66%,100% 46%,100% 100%)}
-.skyline{position:absolute;left:0;right:0;bottom:14%;height:150px;display:flex;align-items:flex-end;gap:3px;padding:0 18px}
-.skyline .b{flex:1;background:linear-gradient(180deg,#26214f,#101024);border-radius:2px 2px 0 0;position:relative}
-.skyline .b::after{content:"";position:absolute;inset:6px 3px 3px;background-image:radial-gradient(circle,#f59e0b 1px,transparent 1.5px);background-size:9px 12px;opacity:.55}
-.road{position:absolute;left:0;right:0;bottom:0;height:14%;background:linear-gradient(180deg,#141039,#050510);border-top:1px solid rgba(255,255,255,.07)}
-.road::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:repeating-linear-gradient(90deg,#f59e0b 0 30px,transparent 30px 62px);opacity:.4}
-.car{position:absolute;top:40%;width:9px;height:4px;border-radius:2px;background:var(--neon);box-shadow:0 0 8px var(--neon);animation:drive 7s linear infinite}
-.car.r{background:var(--pink);box-shadow:0 0 8px var(--pink);animation-duration:9s;animation-delay:-3s;top:58%}
-.car.g{background:var(--ok);box-shadow:0 0 8px var(--ok);animation-duration:6s;animation-delay:-5s;top:30%}
-@keyframes drive{from{left:-5%}to{left:105%}}
-/* 压暗遮罩，保证前景可读 */
-.veil{position:fixed;inset:0;z-index:1;background:linear-gradient(180deg,rgba(7,10,24,.1) 0%,rgba(7,10,24,.34) 42%,rgba(7,10,24,.62) 100%);pointer-events:none}
-
-/* ===== HUD ===== */
-.hud{position:relative;z-index:10;height:100vh;display:flex;flex-direction:column;padding:10px 12px}
-.top{display:flex;align-items:center;gap:10px;flex:none}
-.round{width:36px;height:36px;border-radius:10px;background:var(--glass);border:1px solid var(--glass-b);
+/* ===== 布局 ===== */
+.hud{position:relative;z-index:10;height:100vh;display:flex;flex-direction:column;padding:14px 18px;max-width:100vw;overflow-x:hidden}
+.top{display:flex;align-items:center;gap:12px;flex:none}
+.round{width:38px;height:38px;border-radius:12px;background:var(--card);border:1px solid var(--line);
   display:flex;align-items:center;justify-content:center;color:var(--ink2);text-decoration:none;font-size:18px;flex:none}
 .ttl{flex:1;min-width:0}
-.ttl h1{font-size:16px;margin:0;font-weight:800;letter-spacing:.3px}
-.ttl span{font-size:11px;color:var(--muted);display:block;line-height:1.3}
-.lab-btn{background:var(--glass);border:1px solid var(--glass-b);color:var(--ink2);
-  padding:8px 14px;border-radius:10px;font-size:12.5px;font-weight:600;cursor:pointer;flex:none;white-space:nowrap}
-.lab-btn:hover{background:var(--glass-b);color:#fff}
+.ttl h1{font-size:19px;margin:0;font-weight:800;letter-spacing:.3px}
+.ttl span{font-size:12px;color:var(--muted);display:block;line-height:1.4;margin-top:2px}
+.lab-btn{background:var(--card);border:1px solid var(--line);color:var(--ink2);
+  padding:9px 16px;border-radius:12px;font-size:12.5px;font-weight:600;cursor:pointer;flex:none}
+.lab-btn:hover{background:var(--card2);color:#fff}
 
-/* ===== 主区域（可滚动） ===== */
-.main{flex:1;min-height:0;display:flex;flex-direction:column;gap:10px;margin-top:9px;overflow-y:auto;padding-right:2px}
-.main::-webkit-scrollbar{width:4px}.main::-webkit-scrollbar-thumb{background:rgba(148,163,184,.25);border-radius:2px}
+.main{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;margin-top:18px}
+.main::-webkit-scrollbar{width:4px}.main::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
 
-/* 生命体征总览：心脏 + 心电图 + 结论 */
-.vitals{display:flex;gap:11px;flex:none}
-.heart-box{flex:none;width:128px;border:1px solid var(--glass-b);border-radius:14px;
-  background:radial-gradient(circle at 50% 45%,rgba(251,113,133,.18),rgba(8,12,28,.32));
-  display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px}
-.heart{width:64px;height:64px;color:#fb7185;filter:drop-shadow(0 0 14px rgba(251,113,133,.6));
-  transform-origin:center;animation:beat 1.25s ease-in-out infinite}
-@keyframes beat{0%,100%{transform:scale(1)}14%{transform:scale(1.14)}28%{transform:scale(1)}42%{transform:scale(1.08)}70%{transform:scale(1)}}
-.heart-box .hb{font-size:10.5px;color:var(--muted);margin-top:6px;font-variant-numeric:tabular-nums}
-.heart-box .hb b{color:#fb7185;font-size:13px}
-.ecg-box{flex:1;min-width:0;border:1px solid var(--glass-b);border-radius:14px;
-  background:rgba(8,12,28,.32);padding:10px 12px;display:flex;flex-direction:column;justify-content:center}
-.ecg-box .et{font-size:10.5px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:4px}
-.ecg-box .et b{color:var(--neon)}
-.ecg{width:100%;height:52px}
-.ecg path{fill:none;stroke:var(--neon);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
-  filter:drop-shadow(0 0 5px rgba(56,189,248,.7))}
-.ecg .glow{fill:none;stroke:var(--neon);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;
-  filter:drop-shadow(0 0 5px rgba(56,189,248,.7));
-  stroke-dasharray:72 720;animation:ecg 2.8s linear infinite}
-@keyframes ecg{to{stroke-dashoffset:-792}}
-.ecg .grid{stroke:rgba(148,163,184,.12);stroke-width:1}
-.ecg .base{fill:none;stroke:rgba(56,189,248,.32);stroke-width:1.6}
+/* ===== 两本账切换 ===== */
+.seg{display:inline-flex;gap:4px;background:var(--card);border:1px solid var(--line);
+  border-radius:14px;padding:4px;margin-bottom:20px}
+.seg button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:600;
+  padding:9px 18px;border-radius:11px;cursor:pointer;transition:.2s;white-space:nowrap}
+.seg button.on{background:var(--card2);color:#fff}
 
-/* 体检结论 */
-.verdict{flex:none;border:1px solid var(--glass-b);border-radius:13px;padding:10px 14px;
-  background:linear-gradient(135deg,rgba(251,191,36,.09),rgba(8,12,28,.4));font-size:12.5px;line-height:1.7;color:var(--ink2)}
-.verdict b{color:var(--warm)}
-.verdict .bad{color:var(--bad);font-weight:700}
+.qgroup-label{display:flex;align-items:center;gap:8px;margin:2px 2px 14px;font-size:12px;font-weight:600;color:var(--muted)}
+.qgroup-label i{width:6px;height:6px;border-radius:50%}
+.qgroup-label .who{font-weight:400}
 
-/* ===== 器官系统卡片 ===== */
-.organs{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:1fr;gap:9px;flex:1;min-height:290px}
-.organ{border:1px solid var(--glass-b);border-radius:13px;background:var(--glass);
-  padding:11px;cursor:pointer;transition:.2s;position:relative;overflow:hidden;
-  display:flex;flex-direction:column}
-.organ:hover{background:var(--glass-b)}
-.organ .otop{display:flex;align-items:center;gap:7px;margin-bottom:7px}
-.organ .ico{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex:none}
-.organ .ico svg{width:18px;height:18px}
-.organ .nm{font-size:12px;font-weight:700;color:var(--ink2);line-height:1.2}
-.organ .sys{font-size:9.5px;color:var(--muted)}
-.organ .v{font-size:19px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
-.organ .tg{font-size:9.5px;color:var(--muted);margin-top:2px}
-.bar-wrap{height:5px;background:rgba(148,163,184,.15);border-radius:3px;margin-top:auto;margin-bottom:8px;overflow:hidden}
-.bar-fill{height:100%;border-radius:3px}
-.stat{position:absolute;top:9px;right:9px;width:9px;height:9px;border-radius:50%}
-.stat.green{background:var(--ok);box-shadow:0 0 8px var(--ok)}
-.stat.yellow{background:var(--warm);box-shadow:0 0 8px var(--warm);animation:breathe 2s ease-in-out infinite}
-.stat.red{background:var(--bad);box-shadow:0 0 9px var(--bad);animation:alarm 1s ease-in-out infinite}
-@keyframes breathe{0%,100%{opacity:.5}50%{opacity:1}}
-@keyframes alarm{0%,100%{opacity:.4;transform:scale(.85)}50%{opacity:1;transform:scale(1.15)}}
-.organ.focus{border-color:var(--neon);box-shadow:0 0 16px rgba(56,189,248,.35);background:rgba(56,189,248,.1)}
+/* ===== 问题卡（玻璃拟态） ===== */
+.qlist{display:flex;flex-direction:column;gap:10px;padding-bottom:10px}
+.qcard{position:relative;width:100%;box-sizing:border-box;text-align:left;
+  border:1px solid var(--line);background:rgba(255,255,255,.06);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  padding:16px 18px;cursor:pointer;transition:.25s;color:var(--ink);
+  display:flex;align-items:center;gap:14px;font-family:inherit;border-radius:20px}
+.qcard:hover{background:rgba(255,255,255,.1);transform:translateY(-1px)}
+.qcard .qico{position:relative;flex:none;width:42px;height:42px;border-radius:13px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.08);border:1px solid var(--line)}
+.qcard .qico svg{width:20px;height:20px}
+.qcard .qbody{flex:1;min-width:0;overflow:hidden}
+.qcard .qtxt{font-size:16px;font-weight:700;line-height:1.35}
+.qcard .qhint{font-size:11.5px;color:var(--muted);margin-top:4px;display:flex;align-items:center;gap:6px}
+.qcard .qarrow{flex:none;color:var(--muted);font-size:18px}
+.qcard.done{opacity:.75}
+.qcard .done-dot{position:absolute;top:-2px;right:-2px;width:10px;height:10px;border-radius:50%;
+  background:var(--green);border:2px solid var(--bg)}
+.qcard .mystance{font-size:10.5px;font-weight:600;margin-left:6px}
+.qcard .mystance.up{color:var(--green)}
+.qcard .mystance.down{color:var(--red)}
 
-/* ===== 器官详情浮层 ===== */
-.detail{position:fixed;left:8px;right:8px;bottom:0;z-index:44;max-height:62vh;
-  background:linear-gradient(180deg,#141a38,#0b1026);border:1px solid var(--glass-b);border-bottom:0;
-  border-radius:18px 18px 0 0;transform:translateY(104%);transition:transform .32s cubic-bezier(.2,.8,.3,1);
-  padding:13px 16px 20px;overflow-y:auto}
-.detail.open{transform:translateY(0)}
-.dmask{position:fixed;inset:0;background:rgba(2,6,16,.5);z-index:43;opacity:0;pointer-events:none;transition:.3s}
-.dmask.open{opacity:1;pointer-events:auto}
-.detail h2{font-size:15px;margin:0;display:flex;align-items:center;gap:8px}
-.detail .dx{margin-left:auto;background:var(--glass);border:1px solid var(--glass-b);color:var(--ink2);
-  width:28px;height:28px;border-radius:8px;cursor:pointer;font-size:14px}
-.drow{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid rgba(148,163,184,.1);font-size:12.5px}
-.drow .k{color:var(--muted)}
-.drow .z{font-weight:700;font-variant-numeric:tabular-nums}
-.dnote{font-size:11.5px;color:var(--ink2);line-height:1.8;margin-top:10px}
+.scroll-note{margin-top:18px;padding:16px;border:1px dashed var(--line2);border-radius:16px;
+  font-size:12px;color:var(--muted);line-height:1.8;text-align:center}
+.scroll-note b{color:var(--ink2);font-weight:600}
 
-/* ===== 底部步骤 ===== */
-.stepnav{display:flex;gap:8px;flex:none;margin-top:2px}
-.stepnav a{flex:1;text-align:center;padding:9px;border-radius:10px;text-decoration:none;font-size:12px;font-weight:600;
-  background:var(--glass);border:1px solid var(--glass-b);color:var(--ink2)}
-.stepnav a.primary{background:linear-gradient(135deg,#38bdf8,#6366f1);border-color:transparent;color:#fff}
+/* ===== 玩牌浮层 ===== */
+.play{position:fixed;inset:0;z-index:40;display:flex;flex-direction:column;
+  background:var(--bg);padding:14px 18px;transform:translateY(102%);transition:transform .4s cubic-bezier(.2,.85,.3,1);
+  max-width:100vw;overflow:hidden}
+.play.open{transform:translateY(0)}
+.play-head{flex:none;display:flex;align-items:center;gap:12px}
+.play-head .pback{width:38px;height:38px;border-radius:12px;background:var(--card);border:1px solid var(--line);
+  color:var(--ink2);font-size:18px;cursor:pointer;flex:none}
+.play-head .ptag{font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;flex:none;
+  background:var(--card);color:var(--ink2);border:1px solid var(--line)}
+.play-head .ptitle{flex:1;min-width:0;font-size:15px;font-weight:700;line-height:1.4;color:var(--muted)}
+.play-body{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:20px 0 10px}
+.play-body::-webkit-scrollbar{width:4px}.play-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1)}
+
+/* 上次判断回顾 */
+.recall{display:none;margin-bottom:18px;padding:12px 16px;border-radius:14px;
+  background:var(--card);border:1px solid var(--line);font-size:12.5px;color:var(--ink2)}
+.recall.show{display:block}
+.recall b{color:var(--ink)}
+
+/* 押注 */
+.bet-step{padding:10px 0 20px}
+.bet-step .qbig{font-size:30px;font-weight:800;line-height:1.25;letter-spacing:-.3px;margin-bottom:8px}
+.bet-step .lead{font-size:13px;color:var(--muted);margin-bottom:24px}
+.bet-opts{display:flex;gap:12px}
+.bet-btn{flex:1;border:1px solid var(--line2);background:rgba(255,255,255,.06);border-radius:18px;
+  padding:20px 12px;cursor:pointer;color:var(--ink);font-family:inherit;transition:.2s;
+  display:flex;flex-direction:column;align-items:center;gap:6px;backdrop-filter:blur(10px)}
+.bet-btn .lb{font-size:18px;font-weight:800}
+.bet-btn .ds{font-size:11px;color:var(--muted)}
+.bet-btn:hover{background:rgba(255,255,255,.12);transform:translateY(-2px)}
+.bet-btn.b-up:hover{border-color:var(--green);box-shadow:0 4px 20px rgba(34,197,94,.2)}
+.bet-btn.b-down:hover{border-color:var(--red);box-shadow:0 4px 20px rgba(239,68,68,.2)}
+
+/* 天平（玻璃容器 + 金属质感） */
+.scale-wrap{margin:6px 0 24px;background:rgba(255,255,255,.05);
+  border:1px solid var(--line);border-radius:20px;padding:16px 14px 10px;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.scale-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:8px}
+.scale-meta .l{color:var(--green);font-weight:600}
+.scale-meta .r{color:var(--red);font-weight:600}
+.scale-meta .mid{color:var(--gold);font-weight:600}
+.scale-svg{display:block;margin:0 auto;width:200px;height:130px;overflow:visible}
+.scale-svg .beam{transform-origin:100px 35px;transition:transform .9s cubic-bezier(.34,1.56,.64,1)}
+
+/* 现实牌 */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.fcard{perspective:1200px;cursor:pointer;min-height:150px}
+.fcard .f-inner{position:relative;width:100%;height:150px;transform-style:preserve-3d;
+  transition:transform .6s cubic-bezier(.4,.9,.3,1.2)}
+.fcard.open .f-inner{transform:rotateY(180deg)}
+.f-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border-radius:16px;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:14px;text-align:center}
+/* 未翻牌：深蓝底 + 金问号 */
+.f-back{background:linear-gradient(145deg,#1e3a66,#152a4d);
+  border:1.5px solid rgba(240,199,94,.35);
+  color:var(--gold);animation:breathe 2.4s ease-in-out infinite}
+.f-back .qmark{font-size:32px;color:var(--gold);font-weight:300;opacity:.85}
+.f-back .tap{font-size:11.5px;color:var(--muted);margin-top:6px}
+@keyframes breathe{
+  0%,100%{transform:translateY(0);box-shadow:0 0 0 rgba(240,199,94,0)}
+  50%{transform:translateY(-3px);box-shadow:0 6px 24px rgba(240,199,94,.12)}
+}
+/* 已翻牌：白底 + 彩边 + 卷角 */
+.f-front{transform:rotateY(180deg);background:#f8fafc;color:#1a2332;
+  border:1.5px solid var(--line)}
+.f-front.g{border-color:#22c55e;box-shadow:0 4px 20px rgba(34,197,94,.15)}
+.f-front.b{border-color:#ef4444;box-shadow:0 4px 20px rgba(239,68,68,.15)}
+.f-front.n{border-color:#94a3b8}
+.f-front::after{content:"";position:absolute;left:0;bottom:0;width:22px;height:22px;
+  background:linear-gradient(135deg,transparent 50%,rgba(0,0,0,.1) 50%);
+  border-bottom-left-radius:14px}
+.f-front.g::after{background:linear-gradient(135deg,transparent 50%,rgba(34,197,94,.3) 50%)}
+.f-front.b::after{background:linear-gradient(135deg,transparent 50%,rgba(239,68,68,.3) 50%)}
+.f-front .fk{font-size:11px;color:#64748b;margin-bottom:6px;font-weight:600}
+.f-front .fv{font-size:24px;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums;letter-spacing:-.5px;color:#0f172a}
+.f-front.g .fv{color:#15803d}
+.f-front.b .fv{color:#dc2626}
+.f-front .fd{font-size:12px;font-weight:700;margin-top:4px}
+.f-front.g .fd{color:#15803d}
+.f-front.b .fd{color:#dc2626}
+/* 红牌翻出时震动 */
+.fcard.open.shake .f-inner{animation:shake .5s}
+@keyframes shake{
+  0%,100%{transform:rotateY(180deg)}
+  25%{transform:rotateY(180deg) translateX(-4px)}
+  50%{transform:rotateY(180deg) translateX(4px)}
+  75%{transform:rotateY(180deg) translateX(-2px)}
+}
+/* 绿牌翻出时弹出 */
+.fcard.open.pop .f-inner{animation:pop .5s}
+@keyframes pop{
+  0%{transform:rotateY(180deg) scale(1)}
+  50%{transform:rotateY(180deg) scale(1.05)}
+  100%{transform:rotateY(180deg) scale(1)}
+}
+
+/* 蓝图牌（深灰底 + 细金边） */
+.bp-wrap{margin-top:14px;display:none}
+.bp-wrap.show{display:block;animation:fade .5s}
+.bp-divider{display:flex;align-items:center;gap:10px;margin:18px 0 12px;
+  font-size:11.5px;color:var(--gold)}
+.bp-divider::before,.bp-divider::after{content:"";flex:1;height:1px;background:rgba(229,192,106,.25)}
+.bp-card{cursor:pointer}
+.bp-card .f-face{border-color:rgba(229,192,106,.45)}
+.bp-card .f-back .qmark{color:var(--gold)}
+.bp-front{background:var(--card)}
+.bp-front .fk{color:var(--gold)}
+.bp-front .fv{color:var(--gold);font-size:24px;font-weight:700;line-height:1.4}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* 结果区（玻璃） */
+.result{margin-top:16px;border:1px solid var(--line);border-radius:20px;padding:18px 20px;
+  background:rgba(255,255,255,.06);backdrop-filter:blur(12px);display:none}
+.result.show{display:block;animation:fade .5s}
+.result .rline{display:flex;gap:10px;font-size:13.5px;line-height:1.65;margin-bottom:10px}
+.result .rline:last-child{margin-bottom:0}
+.result .rdot{flex:none;width:8px;height:8px;border-radius:50%;margin-top:8px}
+.result .ask{color:var(--ink);font-weight:600}
+.result .actions{display:flex;gap:10px;margin-top:16px}
+.result .actions button{flex:1;border-radius:14px;padding:14px;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+.btn-ghost{background:transparent;border:1px solid var(--line2);color:var(--ink)}
+.btn-primary{background:var(--blue);border:1px solid var(--blue);color:#fff}
+.btn-primary:hover{background:#2563eb}
+
+/* 底部步骤 */
+.stepnav{display:flex;gap:10px;flex:none;margin-top:14px}
+.stepnav a{flex:1;text-align:center;padding:13px;border-radius:14px;text-decoration:none;
+  font-size:13.5px;font-weight:600;background:var(--card);border:1px solid var(--line);color:var(--ink2)}
+.stepnav a.primary{background:var(--blue);border-color:var(--blue);color:#fff}
 
 /* ===== 实验室抽屉 ===== */
-.mask{position:fixed;inset:0;background:rgba(2,6,16,.62);z-index:40;opacity:0;pointer-events:none;transition:.3s}
+.mask{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:50;opacity:0;pointer-events:none;transition:.3s}
 .mask.open{opacity:1;pointer-events:auto}
-.drawer{position:fixed;left:8px;right:8px;bottom:0;z-index:41;
-  background:linear-gradient(180deg,#141a38,#0b1026);border:1px solid var(--glass-b);border-bottom:0;
-  border-radius:18px 18px 0 0;max-height:84vh;transform:translateY(102%);transition:transform .35s cubic-bezier(.2,.8,.3,1);
-  padding:14px 16px 22px;overflow-y:auto}
+.drawer{position:fixed;left:12px;right:12px;bottom:0;z-index:51;
+  background:var(--card);border:1px solid var(--line);border-bottom:0;
+  border-radius:20px 20px 0 0;max-height:84vh;transform:translateY(102%);transition:transform .35s;
+  padding:16px 20px 28px;overflow-y:auto}
 .drawer.open{transform:translateY(0)}
-.drag-bar{width:40px;height:4px;border-radius:2px;background:var(--glass-b);margin:0 auto 12px}
-.dh{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.drag-bar{width:40px;height:4px;border-radius:2px;background:var(--line2);margin:0 auto 14px}
+.dh{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .dh b{font-size:15px;font-weight:800}
-.dh .dx{background:var(--glass);border:1px solid var(--glass-b);color:var(--ink2);width:30px;height:30px;
-  border-radius:8px;cursor:pointer;font-size:15px}
-.dsec{background:var(--glass);border:1px solid var(--glass-b);border-radius:12px;padding:12px;margin-bottom:11px}
-.dsec h3{margin:0 0 9px;font-size:12.5px;color:var(--muted);font-weight:700}
+.dh .dx{background:var(--card2);border:1px solid var(--line);color:var(--ink2);width:32px;height:32px;
+  border-radius:10px;cursor:pointer;font-size:16px}
+.dsec{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+.dsec h3{margin:0 0 10px;font-size:13px;color:var(--ink2);font-weight:600}
 .growth{width:100%;height:auto}
-.growth .bar{rx:3}
-.dtip{font-size:10.5px;color:var(--muted);line-height:1.7;margin-top:8px}
+.dtip{font-size:11.5px;color:var(--muted);line-height:1.8;margin-top:10px}
 
 /* ===== 响应式 ===== */
-@media(max-width:600px){
-  .hud{padding:8px 10px}
-  .ttl h1{font-size:15px}.ttl span{font-size:10.5px}
-  .lab-btn{padding:7px 11px;font-size:11.5px}
-  .heart-box{width:104px}
-  .heart{width:52px;height:52px}
-  .organs{grid-template-columns:repeat(2,1fr);min-height:250px}
-  .organ .v{font-size:17px}
-}
-@media(min-width:601px) and (max-width:767px){
-  .heart-box{width:140px}
-  .heart{width:68px;height:68px}
-  .organ{padding:13px}
-  .organ .v{font-size:20px}
-}
 @media(min-width:768px){
-  .main{flex-direction:row;gap:13px}
-  .left-col{flex:none;width:33%;display:flex;flex-direction:column;gap:10px;min-width:0}
-  .vitals{flex:1;flex-direction:column;min-height:0}
-  .heart-box{width:100%;flex:1}
-  .heart{width:70px;height:70px}
-  .ecg-box{flex:1.3;min-height:0}
-  .ecg{flex:1;height:auto;min-height:64px}
-  .organs{flex:1;grid-template-columns:repeat(2,1fr);min-height:0}
-  .organ{padding:13px}
-  .organ .v{font-size:20px}
-  .organ .ico{width:32px;height:32px}
-  .organ .ico svg{width:20px;height:20px}
-  .organ .nm{font-size:12.5px}
+  .hud{padding:20px 28px}
+  .main{max-width:820px;width:100%;margin:24px auto 0}
+  .qlist{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .play-body{max-width:600px;width:100%;margin:0 auto}
+  .bet-step .qbig{font-size:36px}
+  .f-front .fv{font-size:40px}
 }
-@media(max-width:380px){.organs{grid-template-columns:1fr}}
-@media(max-height:640px){.ttl span{display:none}}
+@media(max-width:600px){
+  .hud{padding:12px 14px}
+  .ttl h1{font-size:17px}
+  .lab-btn{padding:8px 12px;font-size:11.5px}
+  .bet-step .qbig{font-size:26px}
+  .f-front .fv{font-size:30px}
+}
 </style></head>
 <body>
 
-<div class="scene">
-  <div class="sky"></div>
-  <div class="stars" id="stars"></div>
-  <div class="sun"></div>
-  <div class="mt"></div>
-  <div class="skyline" id="skyline"></div>
-  <div class="road"><div class="car"></div><div class="car r"></div><div class="car g"></div></div>
-</div>
-<div class="veil"></div>
-
 <div class="hud">
   <div class="top">
-    <a class="round" href="index.html" aria-label="返回沙盘">←</a>
+    <a class="round" href="network.html">←</a>
     <div class="ttl">
-      <h1>城市体检</h1>
-      <span>给惠城做一次全身检查，看哪里健康、哪里要注意</span>
+      <h1>掂量</h1>
+      <span>你心里的问题，账本里有答案吗</span>
     </div>
     <button class="lab-btn" onclick="openLab()">实验室</button>
   </div>
 
   <div class="main">
-    <div class="left-col">
-      <!-- 生命体征总览 -->
-      <div class="vitals">
-        <div class="heart-box">
-          <svg class="heart" viewBox="0 0 32 32" fill="currentColor">
-            <path d="M16 28.5C5.5 20.5 2 15 4.5 9.5 6.5 5 11.5 5 16 10.5 20.5 5 25.5 5 27.5 9.5 30 15 26.5 20.5 16 28.5Z"/>
-          </svg>
-          <div class="hb">产业心脏 <b id="hbBpm">72</b> 次/分</div>
-        </div>
-        <div class="ecg-box">
-          <div class="et"><span>城市生命体征 · 实时</span><b>窦性节律</b></div>
-          <svg class="ecg" viewBox="0 0 300 52" preserveAspectRatio="none">
-            <line class="grid" x1="0" y1="13" x2="300" y2="13"/>
-            <line class="grid" x1="0" y1="39" x2="300" y2="39"/>
-            <path class="base" d="M0 26 L20 26 L24 10 L32 42 L38 18 L44 26 L70 26 L74 10 L82 42 L88 18 L94 26 L120 26 L124 10 L132 42 L138 18 L144 26 L170 26 L174 10 L182 42 L188 18 L194 26 L220 26 L224 10 L232 42 L238 18 L244 26 L270 26 L274 10 L282 42 L288 18 L294 26 L300 26"/>
-            <path class="glow" d="M0 26 L20 26 L24 10 L32 42 L38 18 L44 26 L70 26 L74 10 L82 42 L88 18 L94 26 L120 26 L124 10 L132 42 L138 18 L144 26 L170 26 L174 10 L182 42 L188 18 L194 26 L220 26 L224 10 L232 42 L238 18 L244 26 L270 26 L274 10 L282 42 L288 18 L294 26 L300 26"/>
-          </svg>
-        </div>
-      </div>
-
-      <!-- 体检结论 -->
-      <div class="verdict" id="verdict"></div>
+    <div class="seg">
+      <button id="segCit" onclick="switchTab('cit')">市民账</button>
+      <button id="segInd" onclick="switchTab('ind')">产业人账</button>
     </div>
 
-    <!-- 器官系统 -->
-    <div class="organs" id="organs"></div>
+    <div class="qgroup-label">
+      <i id="grpDot"></i>
+      <span id="grpTitle"></span>
+      <span class="who" id="grpWho"></span>
+    </div>
+    <div class="qlist" id="qlist"></div>
+
+    <div class="scroll-note">
+      先押一句你的直觉，再把事实一张张翻开。<br>
+      <b>账本只摆事实——最后坚持还是改主意，是你自己的事。</b>
+    </div>
   </div>
 
   <div class="stepnav">
     <a href="network.html">← 建构世界</a>
-    <a class="primary" href="choices.html">下一步：有哪些选择 →</a>
+    <a class="primary" href="choices.html">五条路 →</a>
   </div>
 </div>
 
-<!-- 器官详情 -->
-<div class="dmask" id="dmask" onclick="closeDetail()"></div>
-<div class="detail" id="detail"></div>
+<!-- ===== 玩牌浮层 ===== -->
+<div class="play" id="play">
+  <div class="play-head">
+    <button class="pback" onclick="closePlay()">‹</button>
+    <span class="ptag" id="ptag"></span>
+    <div class="ptitle" id="ptitle"></div>
+  </div>
+  <div class="play-body" id="playBody"></div>
+</div>
 
-<!-- 实验室抽屉 -->
+<!-- ===== 实验室抽屉 ===== -->
 <div class="mask" id="mask" onclick="closeLab()"></div>
 <aside class="drawer" id="drawer">
   <div class="drag-bar"></div>
   <div class="dh"><b>实验室</b><button class="dx" onclick="closeLab()">×</button></div>
-
   <div class="dsec">
-    <h3>园区工业产值 · 生长曲线</h3>
+    <h3>高新区园区工业产值 · 生长曲线</h3>
     <svg class="growth" viewBox="0 0 700 180" id="growth"></svg>
     <div class="dtip">高新区园区口径；2026 及以后为规划目标值，非统计定数。</div>
   </div>
-
   <div class="dsec">
-    <h3>数据来源与口径</h3>
+    <h3>数据来源</h3>
     <div class="dtip" style="line-height:1.9">
-      数据来源：惠城区2025年国民经济和社会发展统计公报、2025年计划执行情况与2026年计划草案报告。<br>
-      GDP、增加值、增速等为初步核算（快报）数，2026年统计公报发布后部分数字可能微调。<br>
-      本页为「2025年实际」对照「2026年目标」。
+      惠城区2025年统计公报、2026年政府工作报告、2026上半年经济运行简况、高新区十五五节点（均为政府官网公开数据）。<br>
+      本页只摆事实与目标，不替你下结论。
     </div>
   </div>
 </aside>
 
 <script>
-// ===== 生成黄昏城市：星星与天际线 =====
-(function(){
-  var st=document.getElementById("stars");
-  for(var i=0;i<42;i++){var s=document.createElement("i");s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.animationDelay=(Math.random()*3)+"s";st.appendChild(s)}
-  var sk=document.getElementById("skyline"),hs=[70,110,88,140,100,155,85,125,145,92,130,110,150,88,120,140,100,150,120,85];
-  hs.forEach(function(h){var b=document.createElement("div");b.className="b";b.style.height=h+"px";sk.appendChild(b)});
-})();
-// ===== 器官图标（stroke 风格） =====
+// ========== 图标 ==========
 var ICONS={
-  heart:'<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>',
-  lungs:'<path d="M12 2v10"/><path d="M12 12c0-3-2-5-5-5S3 9 3 13s2 6 4 6 4-1 4-3"/><path d="M12 12c0-3 2-5 5-5s4 2 4 6-2 6-4 6-4-1-4-3"/>',
-  droplet:'<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7Z"/>',
-  activity:'<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>',
-  thermometer:'<path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/>',
-  globe:'<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>'
+  job:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  wage:'<path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
+  shop:'<path d="M3 9l1.5-5h15L21 9"/><path d="M3 9v11h18V9"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/>',
+  home:'<path d="M3 9.5 12 3l9 6.5"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
+  chart:'<path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/>',
+  factory:'<path d="M2 20h20"/><path d="M4 20V9l5 3V9l5 3V9l5 3v8"/><path d="M8 20v-3M12 20v-3M16 20v-3"/>',
+  invest:'<path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
+  park:'<path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/>',
+  globe:'<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>'
 };
-function iconSvg(n){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+ICONS[n]+'</svg>';}
+function iconSvg(n){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+ICONS[n]+'</svg>';}
 
-// ===== 器官系统（2025 实际 vs 2026 目标） =====
-var ORGANS=[
-  {id:"ind",name:"产业心脏",sub:"工业生产",ico:"heart",ic:"#fb7185",v:"+10.8%",tg:"2026目标 +9%",status:"green",ratio:1,
-    rows:[["规上工业增加值","+10.8%"],["规上工业总产值","937.92亿"],["规上工业企业","563家"],["利润总额","42.51亿 (+49.7%)"],["先进制造业占比","50.3%"]],
-    note:"产业心脏跳得有力，工业增加值、利润都在涨，是这座城目前最强的引擎。"},
-  {id:"consume",name:"消费与人口",sub:"市场呼吸",ico:"lungs",ic:"#38bdf8",v:"+3.7%",tg:"2026目标 +6%",status:"yellow",ratio:.62,
-    rows:[["社消零增速","+3.7%"],["社消零总量","805.68亿"],["常住人口","159.78万"],["城镇化率","85.74%"],["人均可支配收入","63776元 (+4.5%)"]],
-    note:"消费在稳步呼吸，但增速低于目标，还有提升空间。"},
-  {id:"invest",name:"投资血管",sub:"固定资产投资",ico:"droplet",ic:"#fb7185",v:"-37.1%",tg:"2026目标 +1%",status:"red",ratio:.08,
-    rows:[["固定资产投资","-37.1%"],["工业投资","-34.4%"],["基础设施投资","-20.0%"],["房地产开发投资","-47.3%"],["重点项目完成投资","162.2亿 (115.4%)"]],
-    note:"投资血管收缩明显，是体检中最需要关注的一项；好在重点项目投资超额完成。"},
-  {id:"job",name:"就业神经",sub:"就业与民生",ico:"activity",ic:"#34d399",v:"1.5万+",tg:"2026目标 1.5万",status:"green",ratio:1,
-    rows:[["城镇新增就业","1.5万人以上"],["就业驿站","8个"],["城镇人均可支配收入","68547元"],["农村人均可支配收入","35998元 (+6.5%)"]],
-    note:"就业神经平稳，新增就业达到目标，城乡收入都在增长。"},
-  {id:"gdp",name:"整体体温",sub:"地区生产总值",ico:"thermometer",ic:"#fbbf24",v:"+4.3%",tg:"2026目标 +6%",status:"yellow",ratio:.72,
-    rows:[["GDP增速","+4.3%"],["GDP总量","1203.33亿"],["人均GDP","75309元"],["三次产业结构","3.4 : 27.6 : 69.0"],["第三产业增加值","829.89亿 (+5.2%)"]],
-    note:"整体体温平稳但偏低，GDP增速没达到目标，需要进一步提振。"},
-  {id:"trade",name:"外贸财政循环",sub:"对外经济与财政",ico:"globe",ic:"#34d399",v:"+7.1%",tg:"2026目标 +3%",status:"green",ratio:1,
-    rows:[["外贸进出口","383.6亿 (+7.1%)"],["出口","239.0亿 (+17.6%)"],["进口","144.6亿 (-6.8%)"],["实际利用外资","13.84亿 (+27.3%)"],["区本级一般公共预算","64.60亿 (+3.5%)"]],
-    note:"外贸财政循环良好，出口增长较快，财政收入稳健。"}
-];
+// ========== 账本（c: g=利好 b=偏弱 n=中性；fd=涨跌小字） ==========
+var QUESTIONS={
+  cit:[
+    {id:"c1",ico:"job",q:"在惠城找工作，悬不悬？",
+      facts:[
+        {k:"2025 新增就业",v:"1.7万+",c:"g",fd:"超预期"},
+        {k:"农村人均收入",v:"35998",c:"g",fd:"+6.5%"},
+        {k:"城镇人均收入",v:"68547",c:"n",fd:"元"}
+      ],
+      bp:{k:"十五五蓝图",v:"五年累计新增就业 7.5 万人以上"},
+      ask:"岗位还在招。但「有岗位」和「有你看得上的岗位」，是两回事——你还坚持吗？"},
+    {id:"c2",ico:"wage",q:"在惠城的工资，涨得动吗？",
+      facts:[
+        {k:"全体人均可支配收入",v:"63776",c:"g",fd:"+4.5%"},
+        {k:"与GDP增速",v:"同步",c:"n",fd:"基本同步"}
+      ],
+      bp:{k:"十五五蓝图",v:"居民收入与经济增长同步"},
+      ask:"平均数在涨。但你踩在线上，还是被平均了？"},
+    {id:"c3",ico:"shop",q:"以后逛的、买的，热得起来吗？",
+      facts:[
+        {k:"社消零",v:"805.7",c:"b",fd:"+3.7%（目标6%）"},
+        {k:"全年游客",v:"1200万",c:"n",fd:"人次"},
+        {k:"年底单月",v:"+8.8%",c:"g",fd:"回暖"}
+      ],
+      bp:{k:"十五五蓝图",v:"培育消费商圈 · 激活夜经济"},
+      ask:"年度没达标，但年底在回暖。是真回来了，还是一时热闹？"},
+    {id:"c4",ico:"home",q:"买房、上学，往哪个片区走？",
+      facts:[
+        {k:"常住人口",v:"159.78",c:"n",fd:"万"},
+        {k:"城镇化率",v:"85.7%",c:"n",fd:""},
+        {k:"年轻人去向",v:"高新区·东江湾",c:"g",fd:""}
+      ],
+      bp:{k:"十五五蓝图",v:"新建学校10所 · 新增公办学位5万"},
+      ask:"人在往高新区、东江湾走。那是不是你想要的生活半径？"}
+  ],
+  ind:[
+    {id:"i1",ico:"chart",q:"这盘经济，今年悬不悬？",
+      facts:[
+        {k:"2025 GDP",v:"1203亿",c:"n",fd:"+4.3%"},
+        {k:"2026上半年GDP",v:"564亿",c:"b",fd:"仅 +0.2%"},
+        {k:"上半年第二产业",v:"-4.1%",c:"b",fd:""}
+      ],
+      bp:{k:"十五五蓝图",v:"为惠州迈向万亿GDP 挑大梁作支撑"},
+      ask:"上半年只跑了 0.2%，五年要撑万亿的一角。后半程追得上，还是真悬？"},
+    {id:"i2",ico:"factory",q:"工业，还能冲吗？",
+      facts:[
+        {k:"2025 规上工业产值",v:"973.9亿",c:"g",fd:"+9.6%"},
+        {k:"2026上半年工业增加值",v:"+0.2%",c:"b",fd:""},
+        {k:"上半年工业用电",v:"+19.7%",c:"g",fd:"暗火"}
+      ],
+      bp:{k:"十五五蓝图",v:"2026破千亿 · 高新区2030达1500亿"},
+      ask:"去年冲得猛，今年上半年几乎停在 0，可电用得更狠了。是蓄力还是熄火？"},
+    {id:"i3",ico:"invest",q:"投资，止得住跌吗？",
+      facts:[
+        {k:"2025 固定资产投资",v:"-37.1%",c:"b",fd:""},
+        {k:"136宗重点项目",v:"115%",c:"g",fd:"完成率"},
+        {k:"招商落地",v:"247宗",c:"g",fd:"160.6亿"}
+      ],
+      bp:{k:"十五五蓝图",v:"精准扩大有效投资"},
+      ask:"一年跌了三成七，可项目还在落地。是触底反弹，还是还在下行？"},
+    {id:"i4",ico:"park",q:"高新区千亿，还远吗？",
+      facts:[
+        {k:"2025 园区产值",v:"632.7亿",c:"g",fd:"+13.9%"},
+        {k:"占全区工业",v:"67.4%",c:"n",fd:""},
+        {k:"园区规上企业",v:"356家",c:"n",fd:""}
+      ],
+      bp:{k:"十五五蓝图",v:"2026冲820 · 2027破千亿 · 2030达1500"},
+      ask:"632 到 1500，五年要翻一倍多、还要创国家级。这张蓝图，你信几分？"},
+    {id:"i5",ico:"globe",q:"外贸，这口气受得住吗？",
+      facts:[
+        {k:"2025 外贸",v:"+6%",c:"g",fd:""},
+        {k:"2026上半年出口",v:"+15.2%",c:"g",fd:""},
+        {k:"同期进口",v:"-17.6%",c:"b",fd:""}
+      ],
+      bp:{k:"十五五蓝图",v:"培育外贸主体 · 融深融湾"},
+      ask:"出口很猛、进口在缩。外面的风向，你这口气握得牢吗？"}
+  ]
+};
 
-// ===== 体检结论 =====
-document.getElementById("verdict").innerHTML=
-  '整体<b>健康平稳</b>：产业心脏、外贸财政、就业神经状态良好；需要注意的是<span class="bad">投资血管收缩（-37.1%）</span>，整体体温（GDP +4.3%）和消费呼吸（+3.7%）略低于目标。';
+var ROLE={
+  cit:{name:"市民在问",who:"过日子的人",color:"var(--cit)",hex:"#f59e0b",tag:"市民账"},
+  ind:{name:"产业人在问",who:"办厂·投资·做生意",color:"var(--ind)",hex:"#60a5fa",tag:"产业人账"}
+};
+var curTab="cit";
+var cur=null, opened=0, net=0, bet=null;
+// 押注记忆：{ "i1": {bet:"down", final:"flip", date:"10-22"} }
+var stances=JSON.parse(localStorage.getItem("hcStances")||"{}");
+var done=Object.keys(stances).reduce(function(o,k){o[k]=true;return o;},{});
 
-// ===== 渲染器官 =====
-var organsEl=document.getElementById("organs");
-function renderOrgans(){
-  var h="";
-  ORGANS.forEach(function(o){
-    h+='<div class="organ" data-id="'+o.id+'"><span class="stat '+o.status+'"></span>'
-      +'<div class="otop"><span class="ico" style="background:'+o.ic+'22;color:'+o.ic+'">'+iconSvg(o.ico)+'</span>'
-      +'<div><div class="nm">'+o.name+'</div><div class="sys">'+o.sub+'</div></div></div>'
-      +'<div class="bar-wrap"><div class="bar-fill" style="width:'+Math.round(o.ratio*100)+'%;background:'+o.ic+'"></div></div>'
-      +'<div class="v" style="color:'+o.ic+'">'+o.v+'</div><div class="tg">'+o.tg+'</div></div>';
+// ========== 列表 ==========
+function renderList(){
+  var list=QUESTIONS[curTab], r=ROLE[curTab], h="";
+  document.getElementById("segCit").className=curTab==="cit"?"on":"";
+  document.getElementById("segInd").className=curTab==="ind"?"on":"";
+  document.getElementById("grpDot").style.background=r.color;
+  document.getElementById("grpTitle").style.color=r.hex;
+  document.getElementById("grpTitle").textContent=r.name;
+  document.getElementById("grpWho").textContent="· "+r.who;
+  list.forEach(function(q){
+    var key=curTab+"_"+q.id;
+    var st=stances[key];
+    var myMarkup="";
+    if(st){
+      myMarkup='<span class="mystance '+(st.final==="flip"?"down":"up")+'">'
+        +(st.final==="flip"?"改了主意":"坚持"+(st.bet==="up"?"靠谱":"悬"))+'</span>';
+    }
+    h+='<button class="qcard'+(st?" done":"")+'" onclick="openQ(\''+q.id+'\')">'
+      +'<span class="qico" style="color:'+r.hex+'">'+iconSvg(q.ico)+(st?'<i class="done-dot"></i>':'')+'</span>'
+      +'<span class="qbody"><span class="qtxt">'+q.q+'</span>'
+      +'<span class="qhint">'+q.facts.length+' 张事实牌 · 先押再翻'+myMarkup+'</span></span>'
+      +'<span class="qarrow">›</span></button>';
   });
-  organsEl.innerHTML=h;
-  organsEl.querySelectorAll(".organ").forEach(function(el){
-    el.onclick=function(){openDetail(el.getAttribute("data-id"));};
-  });
+  document.getElementById("qlist").innerHTML=h;
 }
-renderOrgans();
+function switchTab(t){curTab=t;renderList();}
 
-// ===== 器官详情 =====
-var detailEl=document.getElementById("detail"),dmaskEl=document.getElementById("dmask");
-function openDetail(id){
-  var o=ORGANS.find(function(x){return x.id===id;});
-  var rows=o.rows.map(function(r){return '<div class="drow"><span class="k">'+r[0]+'</span><span class="z">'+r[1]+'</span></div>';}).join("");
-  detailEl.innerHTML='<h2><span style="background:'+o.ic+'22;color:'+o.ic+';width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center">'+iconSvg(o.ico)+'</span>'
-    +o.name+'<button class="dx" onclick="closeDetail()">×</button></h2>'+rows+'<div class="dnote">'+o.note+'</div>';
-  detailEl.classList.add("open");dmaskEl.classList.add("open");
+// ========== 天平 SVG（金属质感） ==========
+function scaleSVG(){
+  return '<svg class="scale-svg" viewBox="0 0 200 130" fill="none">'
+    +'<defs>'
+    +'<linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">'
+    +'<stop offset="0" stop-color="#e8eef5"/><stop offset=".5" stop-color="#b8c5d9"/>'
+    +'<stop offset="1" stop-color="#8a9bb5"/></linearGradient>'
+    +'<linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">'
+    +'<stop offset="0" stop-color="#f5d67a"/><stop offset="1" stop-color="#c9a24a"/></linearGradient>'
+    +'</defs>'
+    // 底座
+    +'<ellipse cx="100" cy="118" rx="50" ry="5" fill="rgba(0,0,0,.3)"/>'
+    +'<rect x="85" y="100" width="30" height="18" rx="3" fill="url(#metal)"/>'
+    +'<rect x="60" y="115" width="80" height="6" rx="3" fill="url(#metal)"/>'
+    // 支柱
+    +'<rect x="97" y="40" width="6" height="62" rx="2" fill="url(#metal)"/>'
+    // 中轴
+    +'<circle cx="100" cy="40" r="6" fill="url(#gold)"/>'
+    // 横梁（可转动）
+    +'<g class="beam" id="beamG">'
+    +'<rect x="25" y="37" width="150" height="6" rx="3" fill="url(#metal)"/>'
+    // 左吊线+托盘
+    +'<line x1="40" y1="43" x2="40" y2="70" stroke="#b8c5d9" stroke-width="1.5"/>'
+    +'<ellipse cx="40" cy="74" rx="18" ry="4" fill="url(#metal)"/>'
+    // 右吊线+托盘
+    +'<line x1="160" y1="43" x2="160" y2="70" stroke="#b8c5d9" stroke-width="1.5"/>'
+    +'<ellipse cx="160" cy="74" rx="18" ry="4" fill="url(#metal)"/>'
+    +'</g>'
+    +'</svg>';
 }
-function closeDetail(){detailEl.classList.remove("open");dmaskEl.classList.remove("open");}
 
-// ===== 园区产值生长曲线 =====
+// ========== 打开问题 ==========
+function openQ(id){
+  cur=QUESTIONS[curTab].find(function(x){return x.id===id;});
+  opened=0;net=0;bet=null;
+  var r=ROLE[curTab];
+  document.getElementById("ptag").textContent=r.tag;
+  document.getElementById("ptitle").textContent=r.who;
+
+  var key=curTab+"_"+cur.id;
+  var st=stances[key];
+  var recallHtml="";
+  if(st){
+    recallHtml='<div class="recall show">你上次押了「'+(st.bet==="up"?"靠谱":"悬")+'」，'
+      +(st.final==="flip"?"最后<b>改了主意</b>":"最后<b>坚持了</b>")+'。这次再翻一次账。</div>';
+  }
+
+  document.getElementById("playBody").innerHTML=recallHtml
+    +'<div class="bet-step">'
+    +'<div class="qbig">'+cur.q+'</div>'
+    +'<div class="lead">先表个态——别想数据，凭直觉</div>'
+    +'<div class="bet-opts">'
+    +'<button class="bet-btn b-up" onclick="placeBet(\'up\')"><span class="lb">靠谱</span><span class="ds">我觉得行</span></button>'
+    +'<button class="bet-btn b-down" onclick="placeBet(\'down\')"><span class="lb">悬</span><span class="ds">有点担心</span></button>'
+    +'</div></div>';
+  document.getElementById("play").classList.add("open");
+  document.getElementById("playBody").scrollTop=0;
+}
+function closePlay(){document.getElementById("play").classList.remove("open");}
+
+function placeBet(b){
+  bet=b;
+  var cardsHtml=cur.facts.map(function(f,i){
+    return '<div class="fcard" id="fc'+i+'" onclick="flip('+i+')"><div class="f-inner">'
+      +'<div class="f-face f-back"><span class="qmark">?</span></div>'
+      +'<div class="f-face f-front '+f.c+'"><div class="fk">'+f.k+'</div><div class="fv">'+f.v+'</div>'
+      +(f.fd?'<span class="fd">'+f.fd+'</span>':'')+'</div>'
+      +'</div></div>';
+  }).join("");
+  document.getElementById("playBody").innerHTML=
+    '<div class="scale-wrap">'
+    +'<div class="scale-meta"><span class="l">靠谱</span><span class="mid" id="progress">已翻 0 / '+cur.facts.length+' 张</span><span class="r">悬</span></div>'
+    +scaleSVG()+'</div>'
+    +'<div class="cards-grid">'+cardsHtml+'</div>'
+    +'<div class="bp-wrap" id="bpWrap">'
+    +'<div class="bp-divider">现实看完了，再对一张蓝图</div>'
+    +'<div class="fcard bp-card" id="bpCard" onclick="flipBP()"><div class="f-inner">'
+    +'<div class="f-face f-back"><span class="qmark">✦</span></div>'
+    +'<div class="f-face f-front"><div class="fk">'+cur.bp.k+'</div><div class="fv">'+cur.bp.v+'</div></div>'
+    +'</div></div></div>'
+    +'<div class="result" id="result"></div>';
+  updateBeam();
+}
+
+function flip(i){
+  var card=document.getElementById("fc"+i);
+  if(card.classList.contains("open"))return;
+  card.classList.add("open");
+  var f=cur.facts[i];
+  if(f.c==="g")net++; else if(f.c==="b")net--;
+  opened++;
+  // 红牌震动、绿牌弹出
+  if(f.c==="b")card.classList.add("shake");
+  if(f.c==="g")card.classList.add("pop");
+  // 进度
+  var pg=document.getElementById("progress");
+  if(pg)pg.textContent="已翻 "+opened+" / "+cur.facts.length+" 张";
+  // 数字滚动
+  animateCountUp(card.querySelector(".fv"), f.v);
+  setTimeout(updateBeam,260);
+  if(opened===cur.facts.length){
+    setTimeout(function(){
+      var bw=document.getElementById("bpWrap");
+      bw.classList.add("show");
+      bw.scrollIntoView({behavior:"smooth",block:"center"});
+    },650);
+  }
+}
+// 数字从0滚动到目标值
+function animateCountUp(el, raw){
+  if(!el)return;
+  // 解析数字和后缀
+  var m=String(raw).match(/^([+\-]?[\d.]+)(.*)$/);
+  if(!m){el.textContent=raw;return;}
+  var target=parseFloat(m[1]), suffix=m[2]||"";
+  var isInt=Number.isInteger(target);
+  var start=0, dur=700, t0=null;
+  function step(ts){
+    if(!t0)t0=ts;
+    var p=Math.min(1,(ts-t0)/dur);
+    var eased=1-Math.pow(1-p,3); // easeOutCubic
+    var val=start+(target-start)*eased;
+    el.textContent=(isInt?Math.round(val):val.toFixed(1))+suffix;
+    if(p<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+function updateBeam(){
+  var deg=Math.max(-14,Math.min(14,net*6));
+  var beam=document.getElementById("beamG");
+  if(beam)beam.style.transform="rotate("+deg+"deg)";
+}
+function flipBP(){
+  var card=document.getElementById("bpCard");
+  if(card.classList.contains("open"))return;
+  card.classList.add("open");
+  setTimeout(showResult,700);
+}
+
+// ========== 结果 ==========
+function leanWord(){
+  if(net>0)return "账面上的事实，整体偏「靠谱」";
+  if(net<0)return "账面上的事实，整体偏「悬」";
+  return "账面上的事实，好坏各半";
+}
+function showResult(){
+  var r=document.getElementById("result");
+  var betWord=bet==="up"?"靠谱":"悬";
+  r.innerHTML='<div class="rline"><span class="rdot" style="background:var(--green)"></span><span>'+leanWord()+'（你押的「'+betWord+'」）</span></div>'
+    +'<div class="rline"><span class="rdot" style="background:var(--gold)"></span><span>'+cur.bp.k+'：<b style="color:var(--gold)">'+cur.bp.v+'</b></span></div>'
+    +'<div class="rline"><span class="rdot" style="background:var(--red)"></span><span class="ask">'+cur.ask+'</span></div>'
+    +'<div class="rline" style="margin-top:4px"><span class="ask" style="font-size:15px">看完现实和蓝图，你还坚持吗？</span></div>'
+    +'<div class="actions">'
+    +'<button class="btn-ghost" onclick="commit(\'hold\')">坚持原来的</button>'
+    +'<button class="btn-primary" onclick="commit(\'flip\')">改主意了</button></div>';
+  r.classList.add("show");
+  document.getElementById("playBody").scrollTop=99999;
+}
+function commit(final){
+  var key=curTab+"_"+cur.id;
+  stances[key]={bet:bet,final:final,date:new Date().toISOString().slice(5,10)};
+  localStorage.setItem("hcStances",JSON.stringify(stances));
+  // 心流连续：自动滑到下一个问题，不回列表
+  var list=QUESTIONS[curTab];
+  var idx=list.findIndex(function(x){return x.id===cur.id;});
+  var next=list[idx+1];
+  if(next){
+    // 简短反馈后自动开下一个
+    var r=document.getElementById("result");
+    r.innerHTML='<div class="rline"><span class="rdot" style="background:var(--blue)"></span><span>已记下你「'+(final==="flip"?"改了主意":"坚持")+'」的判断。</span></div>'
+      +'<div class="rline"><span class="ask">下一个问题来了——</span></div>';
+    setTimeout(function(){openQ(next.id);},900);
+  }else{
+    closePlay();
+    setTimeout(renderList,420);
+  }
+}
+
+renderList();
+
+// ========== 高新区生长曲线 ==========
 function renderGrowth(){
-  var data=[{y:632.7,l:"2025",c:"#3b82f6"},{y:820,l:"2026目标",c:"#38bdf8"},{y:1000,l:"2027",c:"#fbbf24"},{y:1500,l:"2030目标",c:"#fb7185"}];
-  var max=1500,base=140,xs=[120,280,440,600],h0='<line x1="80" y1="140" x2="650" y2="140" stroke="rgba(148,163,184,.2)" stroke-width="2"/>';
+  var data=[{y:632.7,l:"2025"},{y:820,l:"2026目标"},{y:1000,l:"2027"},{y:1500,l:"2030目标"}];
+  var max=1500,base=140,xs=[120,280,440,600],h0='<line x1="80" y1="140" x2="650" y2="140" stroke="rgba(255,255,255,.15)" stroke-width="1"/>';
   data.forEach(function(d,i){
     var h=d.y/max*120;
-    h0+='<rect x="'+(xs[i]-25)+'" y="'+(base-h)+'" width="50" height="'+h+'" fill="'+d.c+'" opacity=".85" rx="3"/>'
-      +'<text x="'+xs[i]+'" y="'+(base-h-8)+'" text-anchor="middle" font-size="12" font-weight="700" fill="'+d.c+'">'+d.y+'亿</text>'
-      +'<text x="'+xs[i]+'" y="158" text-anchor="middle" font-size="10" fill="#94a3b8">'+d.l+'</text>';
+    h0+='<rect x="'+(xs[i]-25)+'" y="'+(base-h)+'" width="50" height="'+h+'" fill="rgba(96,165,250,.6)" rx="3"/>'
+      +'<text x="'+xs[i]+'" y="'+(base-h-8)+'" text-anchor="middle" font-size="12" font-weight="700" fill="#f5f5f7">'+d.y+'亿</text>'
+      +'<text x="'+xs[i]+'" y="158" text-anchor="middle" font-size="10" fill="#6b6b76">'+d.l+'</text>';
   });
   document.getElementById("growth").innerHTML=h0;
 }
 renderGrowth();
 
-// ===== 实验室抽屉 =====
 var drawerEl=document.getElementById("drawer"),maskEl=document.getElementById("mask");
 function openLab(){drawerEl.classList.add("open");maskEl.classList.add("open");}
 function closeLab(){drawerEl.classList.remove("open");maskEl.classList.remove("open");}
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape"){closeLab();closePlay();}
+});
 
-// ESC 关闭
-document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeDetail();closeLab();}});
+// 自动预览（#play 用于截图）
+if(location.hash==="#play"){
+  switchTab('ind');
+  setTimeout(function(){openQ('i1');
+    setTimeout(function(){placeBet('down');
+      setTimeout(function(){flip(0);
+        setTimeout(function(){flip(1);},700);
+        setTimeout(function(){flip(2);},1400);
+        setTimeout(function(){flipBP();},2400);
+      },500);
+    },300);
+  },300);
+}
 </script>
 </body></html>
