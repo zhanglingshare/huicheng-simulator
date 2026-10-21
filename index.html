@@ -1,112 +1,251 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>惠城产业风洞 · 今日话题</title>
+<title>惠城服务世界 · 今日话题</title>
 <script src="model.js"></script>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
-.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;backdrop-filter:blur(8px);overflow-x:auto}
-.nav b{font-size:14px;margin-right:6px;letter-spacing:.5px;flex:none}
-.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
-.nav a.on{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
-.nav .sp{margin-left:auto;font-size:11.5px;color:#64748b;flex:none}
-.wrap{max-width:720px;margin:auto;padding:64px 16px 16px}
-.head{display:flex;align-items:center;gap:16px;margin-bottom:14px}
-.radar{width:72px;height:72px;flex:none;position:relative}
-h1{font-size:22px;margin:0 0 2px;letter-spacing:.5px}
-.sub{color:#8fa3bf;font-size:13px;margin:0}
-.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
-.cat{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:5px 14px;border-radius:16px;font-size:12.5px;cursor:pointer;transition:.2s}
-.cat.on{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
-.refresh{background:#f59e0b;color:#1a1206;border:0;padding:6px 16px;border-radius:16px;font-size:12.5px;font-weight:700;cursor:pointer;margin-left:auto}
-.refresh:active{transform:scale(.96)}
+html,body{margin:0;padding:0}
+body{
+  background:#060914;color:#e6edf3;
+  font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  min-height:100vh;
+  position:relative;
+}
+/* === 背景：点阵网格 + 青蓝光晕 + 底部紫光晕 === */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-3;
+  background-image:radial-gradient(circle,rgba(34,211,238,.10) 1px,transparent 1.2px);
+  background-size:26px 26px;
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(900px 500px at 50% -8%, rgba(34,211,238,.18), transparent 65%),
+    radial-gradient(800px 500px at 50% 110%, rgba(139,92,246,.12), transparent 60%);
+}
+/* 顶部导航 */
+.nav{
+  position:sticky;top:0;z-index:50;
+  display:flex;gap:6px;align-items:center;
+  padding:10px 14px;
+  background:rgba(6,9,20,.72);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(34,211,238,.12);
+  overflow-x:auto;
+}
+.nav b{font-size:13px;margin-right:8px;letter-spacing:1px;flex:none;color:#22d3ee;font-weight:800}
+.nav a{
+  background:rgba(255,255,255,.04);color:#93a4bd;
+  border:1px solid rgba(255,255,255,.08);
+  padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none;
+  transition:.2s;
+}
+.nav a.on{background:rgba(34,211,238,.15);border-color:#22d3ee;color:#22d3ee;font-weight:700}
+.nav .sp{margin-left:auto;font-size:11px;color:#64748b;flex:none}
+
+.wrap{max-width:760px;margin:auto;padding:20px 16px 40px}
+
+/* 品牌行 + 日期 */
+.brand-row{
+  display:flex;align-items:baseline;justify-content:space-between;
+  margin:8px 2px 16px;
+}
+.brand-row .b{font-size:13px;font-weight:800;letter-spacing:2px;color:#22d3ee}
+.brand-row .b small{color:#93a4bd;font-weight:500;letter-spacing:0;margin-left:6px;font-size:12px}
+.brand-row .date{font-size:12px;color:#7d8fa8;font-variant-numeric:tabular-nums}
+
+/* 通用玻璃卡 */
+.glass{
+  background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.015));
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  box-shadow:0 8px 30px rgba(0,0,0,.35);
+}
+
+/* 今日头条 */
+.top1{
+  padding:18px 18px 16px;margin-bottom:14px;
+  border-left:3px solid #ef4444;
+  position:relative;overflow:hidden;
+  cursor:pointer;
+}
+.top1 .badge{
+  display:inline-block;background:#ef4444;color:#fff;
+  font-size:10.5px;font-weight:800;padding:2px 9px;border-radius:4px;
+  letter-spacing:1px;margin-bottom:10px;
+}
+.top1 .t{font-size:19px;font-weight:800;line-height:1.45;margin-bottom:8px;color:#fff}
+.top1 .meta{font-size:12px;color:#8fa3bf;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.top1 .meta .src{background:rgba(255,255,255,.06);padding:1px 8px;border-radius:4px}
+
+/* 时间胶囊预测卡 */
+.capsule{padding:18px;margin-bottom:14px}
+.capsule-head{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.gauge{flex:none;width:104px;height:104px;position:relative}
+.gauge svg{width:100%;height:100%;transform:rotate(-90deg)}
+.gauge .pct{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.gauge .pct b{font-size:22px;font-weight:800;color:#22d3ee;line-height:1;font-variant-numeric:tabular-nums}
+.gauge .pct span{font-size:9.5px;color:#7d8fa8;margin-top:3px;letter-spacing:.5px}
+.capsule-info{flex:1;min-width:0}
+.capsule-info .q{font-size:15px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:4px}
+.capsule-info .sub{font-size:12px;color:#94a3b8;line-height:1.5}
+.capsule-info .sub b{color:#fbbf24;font-variant-numeric:tabular-nums}
+.vote-btns{display:flex;gap:8px}
+.vote-btns button{
+  flex:1;background:rgba(255,255,255,.04);border:1px solid;
+  border-radius:10px;padding:10px 6px;cursor:pointer;font-size:13px;font-weight:700;
+  transition:.15s;color:inherit;
+}
+.vote-btns button:active{transform:scale(.97)}
+.vote-btns button:disabled{cursor:default;opacity:.6}
+.vote-sure{color:#34d399;border-color:#34d399!important;background:rgba(52,211,153,.1)!important}
+.vote-risky{color:#f87171;border-color:#f87171!important;background:rgba(248,113,113,.1)!important}
+.vote-wait{color:#94a3b8;border-color:#94a3b8!important;background:rgba(148,163,184,.08)!important}
+.vote-out{margin-top:12px;font-size:12.5px;color:#cbd5e1;line-height:1.7}
+.seal{
+  display:none;margin-top:12px;padding:10px 12px;border-radius:10px;
+  background:linear-gradient(90deg,rgba(251,191,36,.12),rgba(251,191,36,.04));
+  border:1px solid rgba(251,191,36,.45);
+  font-size:12px;color:#fde68a;line-height:1.6;
+}
+.seal.on{display:block}
+.seal b{color:#fff}
+.dist-bar{display:flex;height:8px;border-radius:4px;overflow:hidden;margin:8px 0 4px;background:rgba(255,255,255,.06)}
+.dist-bar i{display:block;height:100%}
+.dist-label{display:flex;justify-content:space-between;font-size:10.5px;color:#7d8fa8;gap:8px;flex-wrap:wrap}
+
+/* 分类工具栏 */
+.toolbar{display:flex;gap:8px;align-items:center;margin:6px 0 10px;flex-wrap:wrap}
+.cat{
+  background:rgba(255,255,255,.04);color:#93a4bd;
+  border:1px solid rgba(255,255,255,.08);
+  padding:6px 14px;border-radius:16px;font-size:12.5px;cursor:pointer;transition:.2s;
+}
+.cat.on{background:rgba(34,211,238,.15);border-color:#22d3ee;color:#22d3ee;font-weight:700}
+.refresh{
+  background:rgba(34,211,238,.12);color:#22d3ee;border:1px solid rgba(34,211,238,.4);
+  padding:6px 14px;border-radius:16px;font-size:12.5px;font-weight:700;cursor:pointer;margin-left:auto;
+}
 .scan-info{font-size:11px;color:#5b6b82;margin-bottom:12px}
-.top1{background:linear-gradient(135deg,#1e1b4b,#0e1523);border:1px solid #f59e0b;border-radius:12px;padding:16px;margin-bottom:10px;cursor:pointer;animation:fd .5s ease-out}
-.top1 .badge{display:inline-block;background:#f59e0b;color:#1a1206;font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:4px;margin-bottom:6px}
-.top1 .t{font-size:18px;font-weight:700;margin-bottom:6px}
-.top1 .heatnum{font-size:28px;font-weight:800;color:#f87171;font-variant-numeric:tabular-nums}
-.topic{background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:12px 14px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start;cursor:pointer;transition:.2s;animation:fd .4s ease-out}
-.topic:hover{border-color:#3b82f6;background:#121d31}
-.topic .rank{font-size:16px;font-weight:800;color:#fbbf24;min-width:22px;text-align:center;font-variant-numeric:tabular-nums}
-.topic .body{flex:1;min-width:0}
-.topic .t{font-size:13.5px;font-weight:600;margin-bottom:3px}
-.topic .meta{display:flex;gap:8px;align-items:center;font-size:11px;color:#7d8fa8;flex-wrap:wrap}
-.topic .heat{height:4px;width:50px;background:#16233a;border-radius:2px;overflow:hidden;display:inline-block}
-.topic .heat i{display:block;height:100%;border-radius:2px;transition:width .6s}
-.topic .src{background:#1a2337;padding:1px 6px;border-radius:4px;font-size:10.5px}
-.topic .cat-tag{font-size:10.5px;padding:1px 6px;border-radius:4px}
-.topic .detail{display:none;font-size:12px;color:#8fa3bf;margin-top:6px;padding-top:6px;border-top:1px dashed #1e2b40}
-.topic.open .detail{display:block}
-.cat-ind{border-left:3px solid #3b82f6}
-.cat-life{border-left:3px solid #f97316}
-.cat-city{border-left:3px solid #6b7280}
-.cat-food{border-left:3px solid #ef4444}
-.cat-fun{border-left:3px solid #10b981}
-.food-card{background:linear-gradient(135deg,#1a0e0e,#0e1523);border:1px solid #7f1d1d}
-.fun-card{background:linear-gradient(135deg,#081a14,#0e1523);border:1px solid #14532d}
-.section-tip{font-size:12px;color:#fca5a5;margin:18px 0 8px;font-weight:700;letter-spacing:.5px}
-.section-tip.fun{color:#6ee7b7}
-.next{text-align:center;margin-top:18px}
-.next a{background:#1d4ed8;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
-.disc{margin-top:14px;font-size:11px;color:#5b6b82;text-align:center}
+
+/* 话题流 */
+#topicList{display:flex;flex-direction:column;gap:10px}
+.tcard{
+  padding:14px 16px;cursor:pointer;
+  display:flex;gap:12px;align-items:flex-start;
+  transition:.2s;
+  animation:fd .4s ease-out;
+}
+.tcard:hover{border-color:rgba(34,211,238,.35)}
+.tcard .bar{width:3px;align-self:stretch;border-radius:2px;flex:none}
+.tcard .body{flex:1;min-width:0}
+.tcard .tags{display:flex;gap:6px;align-items:center;font-size:10.5px;color:#7d8fa8;margin-bottom:6px;flex-wrap:wrap}
+.tcard .tags .cn{color:#94a3b8}
+.tcard .tags .live{background:#dc2626;color:#fff;padding:1px 5px;border-radius:3px;font-size:9px}
+.tcard .t{font-size:15px;font-weight:700;color:#fff;line-height:1.4;margin-bottom:4px}
+.tcard .rel{font-size:12px;color:#67e8f9;line-height:1.5;margin-bottom:8px}
+.tcard .foot{display:flex;align-items:center;justify-content:space-between}
+.tier{font-size:11px;font-weight:700;border-radius:6px;padding:2px 9px;border:1px solid}
+.likeBtn{font-size:12px;color:#7d8fa8;cursor:pointer;background:none;border:none}
+.detail{display:none;font-size:12px;color:#cbd5e1;margin-top:10px;padding-top:10px;border-top:1px dashed rgba(255,255,255,.1)}
+.tcard.open .detail{display:block}
+.detail a{color:#67e8f9;text-decoration:underline}
+
+/* 下一步 & 底部 */
+.next{text-align:center;margin-top:22px}
+.next a{
+  background:linear-gradient(135deg,#22d3ee,#0ea5e9);color:#060914;
+  padding:11px 26px;border-radius:10px;text-decoration:none;font-weight:800;display:inline-block;
+}
+.disc{margin-top:16px;font-size:11px;color:#5b6b82;text-align:center;line-height:1.6}
+
+/* 点赞/分享 */
+.likebar{
+  display:flex;justify-content:center;gap:24px;
+  margin:22px auto 0;padding:10px 20px;max-width:340px;
+  background:rgba(15,23,42,.8);border:1px solid rgba(34,211,238,.25);border-radius:24px;
+}
+.likebar button{background:none;border:none;color:#e2e8f0;font-size:13.5px;cursor:pointer}
+.likebar button:active{transform:scale(1.1)}
+
 @keyframes fd{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-@keyframes spin{to{transform:rotate(360deg)}}
-.scanline{transform-origin:center;animation:spin 3s linear infinite}
-.scanline.fast{animation-duration:.8s}
 @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
 .pulse{animation:pulse 1.5s ease-in-out infinite}
+
+@media (min-width:640px){
+  .wrap{padding-top:28px}
+  .top1 .t{font-size:21px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
 </style></head><body>
 
 <div class="nav">
-  <b>惠城产业风洞</b>
+  <b>NEWHC</b>
+  <a href="home.html">⌂ 门户</a>
   <a href="index.html" class="on">① 今日话题</a>
-  <a href="fun.html">🍜 风向标</a>
-  <a href="network.html">② 建构世界</a>
-  <a href="who.html">③ 基本面</a>
-  <a href="choices.html">④ 五条路</a>
-  <a href="future.html">⑤ 未来</a>
-  <a href="windtunnel.html">⑥ 风洞测试</a>
-  <a href="blindspot.html">⑦ 忽略了什么</a>
-  <a href="report.html">⑧ 分析报告</a>
-  <a href="ending.html">⑨ 结语</a>
+  <a href="fun.html">风向标</a>
+  <a href="network.html">建构世界</a>
+  <a href="who.html">基本面</a>
+  <a href="choices.html">五条路</a>
+  <a href="future.html">未来</a>
+  <a href="windtunnel.html">风洞测试</a>
+  <a href="blindspot.html">盲区</a>
+  <a href="report.html">报告</a>
+  <a href="ending.html">结语</a>
 </div>
 
 <div class="wrap">
-  <div class="head">
-    <svg class="radar" viewBox="0 0 80 80">
-      <circle cx="40" cy="40" r="36" fill="none" stroke="#1c2739" stroke-width="1"/>
-      <circle cx="40" cy="40" r="24" fill="none" stroke="#1c2739" stroke-width="1"/>
-      <circle cx="40" cy="40" r="12" fill="none" stroke="#1c2739" stroke-width="1"/>
-      <line x1="40" y1="4" x2="40" y2="76" stroke="#1c2739" stroke-width="1"/>
-      <line x1="4" y1="40" x2="76" y2="40" stroke="#1c2739" stroke-width="1"/>
-      <g class="scanline" id="scanline">
-        <line x1="40" y1="40" x2="40" y2="6" stroke="#22d3ee" stroke-width="1.5" opacity="0.8"/>
-        <circle cx="40" cy="6" r="2" fill="#22d3ee"/>
-      </g>
-    </svg>
-    <div>
-      <h1>今日惠城区话题</h1>
-      <p class="sub">扫一遍公开渠道，按关注程度排。点卡片看详情。<br><span style="font-size:11px;color:#5b6b82">数据来源：政府工作报告、统计公报与官方发布、南方+/惠州日报等媒体，以及抖音等公开平台。统计区间：近期公开信息，每日自动刷新（优先最近1天）。本页不展示平台后台真实阅读、转发、点赞，改用关注档（高/较高/中）标注。</span></p>
-      <div id="topHook" style="margin-top:12px;font-size:17px;font-weight:800;color:#fbbf24;line-height:1.5;background:rgba(251,191,36,.08);border-left:3px solid #fbbf24;padding:10px 12px;border-radius:0 10px 10px 0"></div>
+  <div class="brand-row">
+    <div class="b">NEWHC <small>惠城服务世界 · 今日话题</small></div>
+    <div class="date" id="today"></div>
+  </div>
+
+  <!-- 今日头条 -->
+  <div class="top1 glass" id="top1">
+    <span class="badge">今日头条</span>
+    <div class="t" id="topTitle">正在读取今日话题…</div>
+    <div class="meta" id="topMeta"></div>
+  </div>
+
+  <!-- 时间胶囊预测卡 -->
+  <div class="capsule glass">
+    <div class="capsule-head">
+      <div class="gauge">
+        <svg viewBox="0 0 104 104">
+          <circle cx="52" cy="52" r="44" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="8"/>
+          <circle id="gaugeArc" cx="52" cy="52" r="44" fill="none" stroke="#22d3ee" stroke-width="8"
+            stroke-linecap="round" stroke-dasharray="276.5" stroke-dashoffset="276.5"/>
+        </svg>
+        <div class="pct"><b id="baseHit">…</b><span>过1500亿概率</span></div>
+      </div>
+      <div class="capsule-info">
+        <div class="q">🔮 2030年，惠城能到1500亿吗？</div>
+        <div class="sub">同一套模型跑了4000遍，中位数约 <b id="baseP50">…</b> 亿。你比它乐观还是悲观？</div>
+      </div>
+    </div>
+    <div class="vote-btns" id="voteBar"></div>
+    <div id="voteOut" class="vote-out" style="font-size:12px;color:#94a3b8;margin-top:10px">还没表态，选一个——这一票将封存到2030年。</div>
+    <div class="seal" id="seal">
+      <div id="sealText"></div>
+      <div class="dist-bar" id="distBar"></div>
+      <div class="dist-label" id="distLabel"></div>
     </div>
   </div>
 
-  <!-- 你的判断 -->
-  <div style="margin:12px 0;padding:14px;background:linear-gradient(135deg,#1e293b,#0f172a);border:1px solid #3b82f6;border-radius:14px">
-    <div style="font-size:14px;font-weight:800;color:#fff;margin-bottom:4px">🔮 2030年惠城能到1500亿吗？说说你的判断</div>
-    <div style="font-size:12px;color:#94a3b8;margin-bottom:10px">同一套模型跑了很多遍，过1500亿概率约 <b id="baseHit" style="color:#fbbf24">…</b>，中位数约 <b id="baseP50" style="color:#fbbf24">…</b>亿。你比它乐观还是悲观？</div>
-    <div id="voteBar" style="display:flex;gap:8px"></div>
-    <div id="voteOut" style="margin-top:10px;font-size:12px;color:#cbd5e1;line-height:1.6"></div>
-  </div>
-
+  <!-- 分类 -->
   <div class="toolbar">
     <button class="cat on" data-c="all">全部</button>
-    <button class="cat" data-c="ind">🔵 产业</button>
-    <button class="cat" data-c="life">🟠 民生</button>
-    <button class="cat" data-c="city">⚪ 城市</button>
-    <button class="cat" data-c="food">🍜 好吃</button>
-    <button class="cat" data-c="fun">🏞️ 好玩</button>
-    <button class="cat" data-c="warm">🌟 八卦暖闻</button>
+    <button class="cat" data-c="ind">产业</button>
+    <button class="cat" data-c="life">民生</button>
+    <button class="cat" data-c="city">城市</button>
+    <button class="cat" data-c="food">好吃</button>
+    <button class="cat" data-c="fun">好玩</button>
+    <button class="cat" data-c="warm">暖闻</button>
     <button class="refresh" id="btnScan">🔄 重新扫描</button>
   </div>
   <div class="scan-info" id="scanInfo">正在读取今日话题…</div>
@@ -114,86 +253,56 @@ h1{font-size:22px;margin:0 0 2px;letter-spacing:.5px}
   <div id="topicList"></div>
 
   <div class="next"><a href="network.html">下一步：看世界怎么运转 →</a></div>
-  <div class="disc">数据来源：政府工作报告、直通车、本地媒体、上市公司公告；实时部分来自微博/百度公开热搜接口。</div>
+  <div class="disc">
+    数据来源：政府工作报告、统计公报与官方发布、南方+/惠州日报等媒体，以及抖音等公开平台；实时部分来自公开热搜接口。本页不展示后台真实阅读/转发/点赞，改用关注档（高/较高/中）标注。
+  </div>
+</div>
+
+<div class="likebar">
+  <button onclick="likePage()">👍 <span id="pcount">0</span> 有用</button>
+  <button onclick="sharePage()">🔁 转给朋友</button>
 </div>
 
 <script>
+// 日期
+(function(){
+  const d=new Date();
+  const wk=['周日','周一','周二','周三','周四','周五','周六'][d.getDay()];
+  document.getElementById("today").textContent=`${d.getMonth()+1}月${d.getDate()}日 · ${wk}`;
+})();
+
 let curCat="all";
-let liveTopics=[];  // 实时拉到的
-
-// 本地惠城话题池
-const LOCAL=[
-  {t:"过江通道早晚高峰拥堵",h:95,c:"life",src:"政府直通车",d:"水口到江北35分钟→50分钟，学校周边投诉集中",why:"这不是修路能解决的——它是产业和城之间唯一的那根筋。"},
-  {t:"高新区冲千亿，2026目标820亿",h:92,c:"ind",src:"政府工作报告",d:"632.7亿→2027破千亿，2030目标1500亿",why:"压在几个关键项目投产节点上，不是匀速涨。"},
-  {t:"文昌/明达学校开学，新增8000学位",h:88,c:"life",src:"政府工作报告",d:"2026年9月投入使用，文昌1740/明达2520",why:"学位在补，但人口流入更快。"},
-  {t:"深惠城际延期至2029年底",h:85,c:"ind",src:"城际建设公告",d:"原计划2026通车，跨城通勤再等三年",why:"惠城融深的一条腿，慢了三年。"},
-  {t:"学位仍紧张，学区争议",h:75,c:"life",src:"直通车/媒体",d:"新增学位但人口流入更快，容德改托育等案例",why:"重要度最高，但满意度最低的一块。"},
-  {t:"利元亨锂电设备订单放量",h:78,c:"ind",src:"上市公司公告",d:"2025营收30.77亿，新能源装备龙头",why:"龙头疼一下整个装备集群抖。"},
-  {t:"智能家电72家，5家小巨人",h:65,c:"ind",src:"园区公开资料",d:"雷士、西顿、正牌科电、登辉等集聚",why:"72家小企业互相配套，韧性比想象强。"},
-  {t:"二妇幼江北新院500床启用",h:62,c:"life",src:"医院公告",d:"2026年1月启用，江北医疗补强",why:"医疗相对宽裕，不是最急的。"},
-  {t:"江北生产性服务业139.5亿",h:60,c:"ind",src:"统计公报",d:"金融、商务、软件信息占服务业近半",why:"和制造业的连接被高估了。"},
-  {t:"AI与机器人产值120亿",h:58,c:"ind",src:"政府工作报告",d:"新赛道布局，孤岛还是引擎待验",why:"现在还像个孤岛。"},
-  {t:"融深融湾接深圳外溢",h:58,c:"city",src:"政府工作报告",d:"深惠城际未通，产业承接待提速",why:"通道没通，外溢接不住。"},
-  {t:"水东街改造后人流回升",h:55,c:"city",src:"本地媒体",d:"老城商业更新，夜间经济",why:"老城在活，但活的是消费不是产业。"},
-  {t:"先进科技封装设备增速91%",h:52,c:"ind",src:"企业公开数据",d:"2024产值超10亿，高速增长",why:"小而快，但体量还小。"},
-  {t:"西湖文旅节假日拥堵",h:50,c:"city",src:"文旅公开",d:"传统景区承载压力，停车难",why:"旅游流量没转成产业。"},
-  {t:"小金口枢纽进展",h:52,c:"city",src:"交通公告",d:"莞惠城际北延线已通，深惠城际在建",why:"枢纽是惠城对外的门。"},
-  {t:"马安下良保障房入住",h:48,c:"life",src:"住建公开",d:"青年新市民安居，就业驿站配套",why:"留人这件事在做。"},
-  {t:"江北CBD写字楼空置率",h:46,c:"city",src:"商业地产公开",d:"服务业集聚但商务楼宇供给偏多",why:"楼多了，人呢？"},
-  {t:"天宝创能新能源配套成长",h:45,c:"ind",src:"企业公开资料",d:"电源/新能源配套企业",why:"配套企业在长。"},
-  {t:"桥西老城商圈更新",h:44,c:"city",src:"城市更新公告",d:"水东街、西湖文旅联动",why:"老城更新和产业没关系。"},
-  {t:"免费学前一年试点",h:42,c:"life",src:"政府工作报告",d:"公办园720位，学前教育普惠",why:"在补。"},
-  {t:"水口工业区工人居住条件",h:40,c:"life",src:"媒体报道",d:"本地工人城中村居住，配套待提升",why:"蓝领住得近，但住得好不好？"},
-  {t:"横沥汝湖远郊公交班次少",h:38,c:"life",src:"直通车",d:"边远镇街公交低频，通勤不便",why:"远郊不是重点，但在掉人。"},
-  {t:"惠州学院学院城建设",h:35,c:"city",src:"高校公开",d:"技能工程师供给侧",why:"工程师供给在这里。"}
-];
-
-// 今日好吃（惠城本地味道，正能量推荐）
-const FOOD=[
-  {t:"横沥汤粉",h:94,c:"food",src:"本地招牌",d:"惠城横沥镇招牌，猪骨汤熬得鲜甜，粉滑肉香，本地人从小吃到大的早餐",why:"一碗汤粉，是惠城人一天的开始。"},
-  {t:"梅菜扣肉",h:90,c:"food",src:"惠州名菜",d:"惠州梅菜是国家地理标志产品，扣肉肥而不腻、入口即化，客家宴席头牌",why:"咸香里是惠州人待客的实在。"},
-  {t:"东江盐焗鸡",h:86,c:"food",src:"东江经典",d:"东江菜代表，皮爽肉嫩、骨都有味，用盐焗出的老广鲜香",why:"一只鸡，撑起东江菜的名头。"},
-  {t:"客家酿豆腐",h:82,c:"food",src:"客家家常",d:"肉馅酿进嫩豆腐，煎得金黄再焖，一口爆汁",why:"客家人的‘酿’，是把心意填进去。"},
-  {t:"阿嬷叫",h:78,c:"food",src:"街头老味",d:"惠州传统油炸小吃，萝卜丝裹浆现炸，外酥里嫩、香气扑鼻",why:"街角的热气，是老城的烟火记忆。"},
-  {t:"艾粄",h:70,c:"food",src:"时令小吃",d:"清明前后的客家味道，艾草入皮、花生芝麻做馅，软糯清香",why:"吃一口，就知道春天来了。"},
-  {t:"酿三宝",h:68,c:"food",src:"客家家常",d:"酿茄子、酿辣椒、酿苦瓜，一锅三味、下饭神器",why:"普通食材，也能变出满满诚意。"},
-  {t:"水东街老字号糖水",h:64,c:"food",src:"夜游必打卡",d:"逛水东街来一碗糖水、一份传统糕点，甜在嘴里、暖在心头",why:"老城的甜，要慢慢品。"},
-  {t:"敛糕·沙糕",h:55,c:"food",src:"传统糕点",d:"惠州传统手工糕点，松软香甜，老一辈的味道在传承",why:"老味道没丢，就是这座城的福气。"},
-  {t:"东坡家宴",h:52,c:"food",src:"西湖文旅",d:"以苏东坡寓惠典故入菜，吃出千年西湖的文化味",why:"一道菜，一段苏东坡与惠州的故事。"}
-];
-
-// 今日好玩（惠城好去处，正能量推荐）
-const FUN=[
-  {t:"惠州西湖",h:96,c:"fun",src:"国家5A景区",d:"“大中国西湖三十六”，苏东坡在此留下千古诗篇，泗洲塔、苏堤、丰湖书院一步一景，免费开放",why:"半城山色半城湖，是惠城人的骄傲。"},
-  {t:"红花湖绿道",h:90,c:"fun",src:"天然氧吧",d:"18公里环湖绿道，骑行、徒步、赏湖光山色，森林环抱、空气清新",why:"家门口的绿道，藏着惠城人的健康生活。"},
-  {t:"水东街",h:88,c:"fun",src:"历史文化街区",d:"千年骑楼老街，青砖黛瓦、灯火璀璨，夜游、探店、品美食，越夜越热闹",why:"老街新活力，留住了惠城的根与烟火。"},
-  {t:"祝屋巷",h:82,c:"fun",src:"文创街区",d:"西湖畔的文艺小巷，民宿、咖啡馆、文创小店错落，转角遇见惊喜",why:"老巷子里，长出了年轻的生活方式。"},
-  {t:"合江楼",h:76,c:"fun",src:"东坡寓惠地",d:"东江与西枝江交汇处，苏东坡曾在此寓居，登楼看两江汇流、城景交融",why:"一座楼，看见惠城的千年水脉。"},
-  {t:"高榜山·挂榜阁",h:72,c:"fun",src:"城市观景台",d:"登高拾级而上，挂榜阁俯瞰全城，西湖、东江、城市天际线尽收眼底",why:"爬一座山，读懂这座城的格局。"},
-  {t:"丰湖书院",h:68,c:"fun",src:"岭南名书院",d:"坐落在西湖之中，岭南著名书院，书香与湖光相映，宁静致远",why:"书声琅琅，是惠城最深的底气。"},
-  {t:"东坡祠",h:62,c:"fun",src:"文化地标",d:"纪念苏东坡寓惠的历史文化景区，古建筑群庄重典雅，感受东坡文化",why:"苏东坡把惠州当成了家。"},
-  {t:"黄沙洞温泉度假区",h:58,c:"fun",src:"横沥温泉",d:"横沥镇的温泉乡，山林环抱、泡汤养生，周末放松好去处",why:"不远行，城郊就有诗和远方。"},
-  {t:"惠州植物园",h:54,c:"fun",src:"科普乐园",d:"温室馆、专类园郁郁葱葱，是孩子认识自然、全家散步的好地方",why:"一座植物园，装下孩子的好奇心。"}
-];
-
-const WARM=[
-  {t:"东江两岸的晨跑身影",h:86,c:"warm",src:"城市温度",d:"清晨滨江绿道，跑步的、遛弯的、打太极的，这座城慢慢醒过来",why:"最暖的八卦，是身边认真生活的人。"},
-  {t:"水东街又一家新店开张",h:80,c:"warm",src:"烟火气",d:"骑楼老街上，咖啡馆、小馆子一家接一家，年轻人把老街盘活了",why:"有人愿意开店，就有人愿意来。"},
-  {t:"西湖边的读书角",h:74,c:"warm",src:"书香惠城",d:"周末湖边、书院里，带孩子读书的家庭，安静又热闹",why:"最好的学区房，是家里的书房。"},
-  {t:"志愿者红马甲",h:70,c:"warm",src:"好人好事",d:"路口、景区、社区，穿着红马甲帮忙的人，让这座城多了温度",why:"陌生人的善意，是城市最暖的八卦。"},
-  {t:"放学路上的接娃大军",h:66,c:"warm",src:"日常",d:"下午五点，学校门口接孩子的家长，提着菜、等着娃",why:"普通日子里，藏着最实在的幸福。"},
-  {t:"江边钓鱼的大叔",h:60,c:"warm",src:"慢生活",d:"东江边上，一杆一凳一下午，不急不躁",why:"惠城人的慢，是大城市学不来的。"}
-];
-
-// 今日一题
-
-const KW=["惠州","惠城","仲恺","大亚湾","惠阳","博罗","惠东","龙门","东江湾","水口","马安","江北CBD","深惠","粤海","TCL","德赛","亿纬锂能","龙光","隆生"];
-
-const catMap={industry:"ind",livelihood:"life",city:"city",food:"food",fun:"fun",gossip:"warm"};
 let allData=[];
 let hotMeta={};
 
-// 读取当日话题快照（由数据雷达每日生成、推送）
+// 本地话题池（兜底）
+const LOCAL=[
+  {t:"过江通道早晚高峰拥堵",h:95,c:"life",src:"政府直通车",d:"水口到江北35分钟→50分钟",why:"这不是修路能解决的——它是产业和城之间唯一的那根筋。"},
+  {t:"高新区冲千亿，2026目标820亿",h:92,c:"ind",src:"政府工作报告",d:"632.7亿→2027破千亿，2030目标1500亿",why:"压在几个关键项目投产节点上，不是匀速涨。"},
+  {t:"深惠城际延期至2029年底",h:85,c:"ind",src:"城际建设公告",d:"原计划2026通车，跨城通勤再等三年",why:"惠城融深的一条腿，慢了三年。"},
+  {t:"文昌/明达学校开学，新增8000学位",h:88,c:"life",src:"政府工作报告",d:"2026年9月投入使用",why:"学位在补，但人口流入更快。"},
+  {t:"利元亨锂电设备订单放量",h:78,c:"ind",src:"上市公司公告",d:"2025营收30.77亿",why:"龙头疼一下整个装备集群抖。"},
+  {t:"江北生产性服务业139.5亿",h:60,c:"ind",src:"统计公报",d:"金融、商务、软件信息占服务业近半",why:"和制造业的连接被高估了。"},
+  {t:"水东街改造后人流回升",h:55,c:"city",src:"本地媒体",d:"老城商业更新，夜间经济",why:"老城在活，但活的是消费不是产业。"},
+  {t:"江北CBD写字楼空置率",h:46,c:"city",src:"商业地产公开",d:"服务业集聚但商务楼宇供给偏多",why:"楼多了，人呢？"},
+  {t:"AI与机器人产值120亿",h:58,c:"ind",src:"政府工作报告",d:"新赛道布局，孤岛还是引擎待验",why:"现在还像个孤岛。"}
+];
+const FOOD=[
+  {t:"横沥汤粉",h:94,c:"food",src:"本地招牌",d:"猪骨汤熬得鲜甜，粉滑肉香",why:"一碗汤粉，是惠城人一天的开始。"},
+  {t:"梅菜扣肉",h:90,c:"food",src:"惠州名菜",d:"国家地理标志，肥而不腻",why:"咸香里是惠州人待客的实在。"},
+  {t:"东江盐焗鸡",h:86,c:"food",src:"东江经典",d:"皮爽肉嫩、骨都有味",why:"一只鸡，撑起东江菜的名头。"}
+];
+const FUN=[
+  {t:"惠州西湖",h:96,c:"fun",src:"国家5A景区",d:"苏东坡寓惠，免费开放",why:"半城山色半城湖，是惠城人的骄傲。"},
+  {t:"红花湖绿道",h:90,c:"fun",src:"天然氧吧",d:"18公里环湖绿道",why:"家门口的绿道，藏着健康生活。"},
+  {t:"水东街",h:88,c:"fun",src:"历史文化街区",d:"千年骑楼老街，越夜越热闹",why:"老街新活力，留住了惠城的根。"}
+];
+const WARM=[
+  {t:"东江两岸的晨跑身影",h:86,c:"warm",src:"城市温度",d:"清晨滨江绿道，跑步的、遛弯的",why:"最暖的八卦，是身边认真生活的人。"},
+  {t:"水东街又一家新店开张",h:80,c:"warm",src:"烟火气",d:"咖啡馆、小馆子一家接一家",why:"有人愿意开店，就有人愿意来。"}
+];
+
+const catMap={industry:"ind",livelihood:"life",city:"city",food:"food",fun:"fun",gossip:"warm"};
 async function loadHot(){
   let j;
   for(let a=0;a<3;a++){
@@ -210,8 +319,7 @@ async function loadHot(){
     tier:it.tier, srcLevel:it.srcLevel
   }));
 }
-
-function allTopics(){return allData;}
+function allTopics(){return allData.length?allData:LOCAL.concat(FOOD,FUN,WARM);}
 
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 const relMap={
@@ -222,37 +330,49 @@ const relMap={
   fun:"周末又多一个可以去晃的地方",
   warm:"邻里间的这点小事，就是惠城的烟火气"
 };
+const catName={ind:"产业",life:"民生",city:"城市",food:"好吃",fun:"好玩",warm:"暖闻"};
+const tierColor={"高":"#f87171","较高":"#fbbf24","中":"#34d399"};
+const barColor={ind:"#3b82f6",life:"#f97316",city:"#94a3b8",food:"#ef4444",fun:"#10b981",warm:"#fbbf24"};
+
 function render(){
-  let list=curCat==="all"?allTopics():allTopics().filter(x=>x.c===curCat);
-  // hot.json 已按编辑关注程度排好序，直接采用数组顺序，不再本地排序
+  const list=curCat==="all"?allTopics():allTopics().filter(x=>x.c===curCat);
+  // 头条
   if(allTopics().length){
     const top=allTopics()[0];
-    document.getElementById("topHook").innerHTML="📌 今天大家在看的，是<b>「"+esc(top.t)+"」</b>";
+    document.getElementById("topTitle").textContent=top.t;
+    document.getElementById("topMeta").innerHTML=
+      `<span class="src">${esc(top.srcLevel||"")}</span><span>${esc(top.src||"")}</span><span>关注·${esc(top.tier||"高")}</span>`;
   }
-  const grads={ind:"linear-gradient(135deg,#1e3a8a,#0f1a2e)",life:"linear-gradient(135deg,#7c2d12,#1a0f0f)",city:"linear-gradient(135deg,#374151,#0f1a2e)",food:"linear-gradient(135deg,#7f1d1d,#1a0f0f)",fun:"linear-gradient(135deg,#064e3b,#0f1a2e)",warm:"linear-gradient(135deg,#78350f,#1a1206)"};
-  const catName={ind:"产业",life:"民生",city:"城市",food:"好吃",fun:"好玩",warm:"八卦"};
-  const tierColor={"高":"#f87171","较高":"#fbbf24","中":"#34d399"};
+  // 列表
   const el=document.getElementById("topicList");
-  el.style.cssText="display:grid;grid-template-columns:1fr 1fr;gap:10px";
-  el.innerHTML=list.map((x)=>{
-    const liveBadge=x.live?'<span style="background:#dc2626;color:#fff;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:5px">实时</span>':'';
-    const likes=(localStorage.getItem("like_"+x.t)??0);
+  el.innerHTML=list.map(x=>{
+    const liveBadge=x.live?'<span class="live">实时</span>':'';
+    const likes=localStorage.getItem("like_"+x.t)??0;
     const tc=tierColor[x.tier]||"#34d399";
+    const bc=barColor[x.c]||"#94a3b8";
     const rel=relMap[x.c]||relMap.city;
-    return `<div class="tcard" data-t="${esc(x.t)}" style="background:${grads[x.c]||grads.city};border-radius:12px;padding:14px;cursor:pointer">
-      <div style="font-size:11px;color:#94a3b8">${catName[x.c]||"城市"}${liveBadge} · ${esc(x.srcLevel||"")} · ${esc(x.src||"")}</div>
-      <div style="font-size:16px;font-weight:800;color:#fff;margin:8px 0 4px;line-height:1.4">${esc(x.t)}</div>
-      <div style="font-size:11px;color:#7dd3fc;margin:2px 0 8px;line-height:1.4">💡 ${esc(rel)}</div>
-      <div style="display:flex;align-items:center;justify-content:space-between">
-        <div style="font-size:12px;font-weight:800;color:${tc};border:1px solid ${tc};border-radius:8px;padding:3px 10px">关注 · ${esc(x.tier)}</div>
-        <span class="likeBtn" style="font-size:12px;color:#94a3b8" onclick="event.stopPropagation();like(this)">👍 <b class="ln">${likes}</b></span>
+    return `<div class="tcard glass" data-t="${esc(x.t)}">
+      <div class="bar" style="background:${bc}"></div>
+      <div class="body">
+        <div class="tags"><span class="cn">${catName[x.c]||"城市"}</span>${liveBadge}<span>· ${esc(x.src||"")}</span></div>
+        <div class="t">${esc(x.t)}</div>
+        <div class="rel">💡 ${esc(rel)}</div>
+        <div class="foot">
+          <span class="tier" style="color:${tc};border-color:${tc}44;background:${tc}11">关注 · ${esc(x.tier||"中")}</span>
+          <button class="likeBtn" onclick="event.stopPropagation();like(this)">👍 <b class="ln">${likes}</b></button>
+        </div>
+        <div class="detail">${esc(x.d||"")}${x.url?`<div style="margin-top:8px"><a href="${esc(x.url)}" target="_blank" rel="noopener nofollow">查看原始报道 ↗</a></div>`:""}</div>
       </div>
-      <div class="detail" style="font-size:11.5px;color:#cbd5e1;margin-top:8px;display:none">${esc(x.d||"")}${x.url?'<div style="margin-top:8px"><a href="'+esc(x.url)+'" target="_blank" rel="noopener nofollow" style="color:#7dd3fc;text-decoration:underline" onclick="event.stopPropagation()">查看原始报道 ↗</a></div>':''}</div>
     </div>`;
   }).join("");
-  if(!list.length){el.innerHTML='<div style="grid-column:1/-1;color:#5b6b82;text-align:center;padding:26px 0">今日话题快照暂不可用（读取失败），可点「重新扫描」重试；下方仿真结果不受影响。</div>';}
+  if(!list.length){
+    el.innerHTML='<div class="glass" style="padding:26px;text-align:center;color:#5b6b82">今日话题快照暂不可用，可点「重新扫描」重试。</div>';
+  }
   document.querySelectorAll("#topicList .tcard").forEach(c=>{
-    c.onclick=()=>{const d=c.querySelector(".detail");d.style.display=d.style.display==="none"?"block":"none";};
+    c.onclick=()=>{
+      const d=c.querySelector(".detail");
+      d.style.display=d.style.display==="none"?"block":"none";
+    };
   });
 }
 function like(el){
@@ -261,7 +381,6 @@ function like(el){
   el.style.transform="scale(1.2)";
   setTimeout(()=>el.style.transform="",200);
 }
-
 document.querySelectorAll(".cat").forEach(b=>{
   b.onclick=()=>{
     document.querySelectorAll(".cat").forEach(x=>x.classList.remove("on"));
@@ -270,103 +389,58 @@ document.querySelectorAll(".cat").forEach(b=>{
     render();
   };
 });
-
 function scanText(){
-  return `数据每日自动刷新一次 · 上次更新 ${hotMeta.updated||"—"} · 共${allData.length}个话题 · 关注档排序`;
+  return `每日自动刷新 · 上次更新 ${hotMeta.updated||"—"} · 共${allTopics().length}个话题 · 按关注档排序`;
 }
-
 document.getElementById("btnScan").onclick=async function(){
   this.innerHTML='<span class="pulse">⏳</span> 扫描中…';
   document.getElementById("scanInfo").textContent="雷达旋转中，正在读取当日话题快照…";
-  document.getElementById("scanline").classList.add("fast");
   try{
     await loadHot();
     this.innerHTML="🔄 重新扫描";
-    document.getElementById("scanline").classList.remove("fast");
     document.getElementById("scanInfo").textContent=scanText();
   }catch(e){
     this.innerHTML="🔄 重新扫描";
-    document.getElementById("scanline").classList.remove("fast");
-    document.getElementById("scanInfo").textContent="扫描失败：快照暂不可用（请检查网络后重试）；仿真结果不受影响。";
+    document.getElementById("scanInfo").textContent="扫描失败：快照暂不可用；下方兜底话题不受影响。";
   }
   render();
 };
 
-// 首屏读取当日快照（情报与仿真解耦：快照失败不影响仿真结果）
-(async()=>{
-  let hotOk=true;
-  try{ await loadHot(); }
-  catch(e){ hotOk=false; hotMeta={}; allData=[]; }
-  document.getElementById("scanInfo").textContent=hotOk?scanText():"今日话题快照暂不可用（读取失败），可点「重新扫描」重试；仿真结果不受影响。";
-  render();
-  const b=HT.run(42,4000,HT.DEFAULT_PATHS);
-  document.getElementById("baseHit").textContent=b.hit.toFixed(0)+"%";
-  document.getElementById("baseP50").textContent=Math.round(b.p50);
-})();
-
-</script>
-
-<div class="likebar">
-  <button onclick="likePage()">👍 <span id="pcount">0</span> <span style="font-size:11px;color:#6b7280">有用(本地记录)</span></button>
-  <button onclick="sharePage()">🔁 转给朋友</button>
-</div>
-<style>
-.likebar{position:relative;bottom:auto;left:auto;transform:none;display:flex;justify-content:center;margin:20px 0;background:rgba(15,23,42,.96);border:1px solid #3b82f6;border-radius:24px;padding:9px 20px;display:flex;gap:22px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.6)}
-.likebar button{background:none;border:none;color:#e2e8f0;font-size:14px;cursor:pointer}
-.likebar button:active{transform:scale(1.15)}
-</style>
-<script>
-(function(){
-  var k="like_"+location.pathname;
-  var n=parseInt(localStorage.getItem(k)||"0");
-  document.getElementById("pcount").textContent=n;
-  window.likePage=function(){n++;localStorage.setItem(k,n);document.getElementById("pcount").textContent=n;};
-  window.sharePage=function(){
-  var m=document.getElementById("shareModal");
-  if(!m){
-    m=document.createElement("div");
-    m.id="shareModal";
-    m.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;padding:20px";
-    m.onclick=function(){m.remove();};
-    m.innerHTML='<div style="background:#0f172a;padding:20px;border-radius:14px;text-align:center" onclick="event.stopPropagation()"><div style="color:#fff;font-size:14px;margin-bottom:12px">截图这张二维码，发给朋友/群</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(location.href)+'" style="width:200px;height:200px;background:#fff;padding:8px;border-radius:8px"><div style="color:#94a3b8;font-size:12px;margin-top:12px">扫码就能打开</div></div>';
-    document.body.appendChild(m);
-  }
-  if(navigator.share && !/MicroMessenger/i.test(navigator.userAgent)){
-    navigator.share({title:document.title,url:location.href}).catch(()=>{});
-  }
-  navigator.clipboard && navigator.clipboard.writeText(location.href);
-};
-})();
-</script>
-<!-- 百度统计：去 mtj.baidu.com 注册后替换 YOUR_ID -->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?YOUR_ID";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-<script>
-// 你的判断：本地累计表态
+// 投票逻辑（时间胶囊）
 (function(){
   const KEY="huicheng_judge_v1";
-  const opts=[{k:"sure",label:"我看稳了",c:"#34d399",mood:"你比模型乐观"},{k:"risky",label:"有点悬",c:"#f87171",mood:"你比模型悲观"},{k:"wait",label:"不好说",c:"#94a3b8",mood:"你和模型一样谨慎"}];
+  const opts=[
+    {k:"sure",label:"我看稳了",cls:"vote-sure",mood:"你比模型乐观",color:"#34d399"},
+    {k:"risky",label:"有点悬",cls:"vote-risky",mood:"你比模型悲观",color:"#f87171"},
+    {k:"wait",label:"不好说",cls:"vote-wait",mood:"你和模型一样谨慎",color:"#94a3b8"}
+  ];
   let d=JSON.parse(localStorage.getItem(KEY)||'{"sure":0,"risky":0,"wait":0}');
+  const voted=localStorage.getItem(KEY+"_done");
+
   function render(){
     const total=opts.reduce((s,o)=>s+d[o.k],0);
-    const voted=localStorage.getItem(KEY+"_done");
     document.getElementById("voteBar").innerHTML=opts.map(o=>{
-      const pct=total?Math.round(d[o.k]/total*100):0;
-      const dis=voted?'pointer-events:none;opacity:.7':'';
-      return `<button onclick="judge('${o.k}')" style="${dis};flex:1;background:${o.c}22;border:1px solid ${o.c};color:${o.c};border-radius:10px;padding:10px 6px;cursor:pointer;font-size:13px;font-weight:700">${o.label}</button>`;
+      const dis=voted?'disabled':'';
+      return `<button class="${o.cls}" ${dis} onclick="judge('${o.k}')">${o.label}</button>`;
     }).join("");
+
     if(voted){
-      const my=opts.find(o=>d[o.k]>0);
-      document.getElementById("voteOut").innerHTML=`你这一票投给了「<b style="color:${my.c}">${my.label}</b>」——${my.mood}。<br>这是你本机的记录。2026年我们在这，一年后回来，看看自己的判断准不准。`;
-    } else {
-      document.getElementById("voteOut").innerHTML="还没表态，选一个。";
+      const my=opts.find(o=>d[o.k]>0)||opts[0];
+      const now=new Date();
+      const sealDate=`${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,"0")}.${String(now.getDate()).padStart(2,"0")}`;
+      document.getElementById("voteOut").innerHTML=
+        `你这一票投给了「<b style="color:${my.color}">${my.label}</b>」——${my.mood}。`;
+      document.getElementById("sealText").innerHTML=
+        `🔒 已封存 · <b>${sealDate}</b>　|　2030年回来开奖，看看你的判断准不准。`;
+      let barHtml="",labHtml="";
+      opts.forEach(o=>{
+        const pct=total?Math.round(d[o.k]/total*100):0;
+        barHtml+=`<i style="width:${pct}%;background:${o.color}"></i>`;
+        labHtml+=`<span style="color:${o.color}">${o.label} ${pct}%</span>`;
+      });
+      document.getElementById("distBar").innerHTML=barHtml;
+      document.getElementById("distLabel").innerHTML=labHtml;
+      document.getElementById("seal").classList.add("on");
     }
   }
   window.judge=function(k){
@@ -375,6 +449,41 @@ var _hmt = _hmt || [];
     render();
   };
   render();
+})();
+
+// 首屏初始化
+(async()=>{
+  let hotOk=true;
+  try{ await loadHot(); }catch(e){ hotOk=false; hotMeta={}; allData=[]; }
+  document.getElementById("scanInfo").textContent=
+    hotOk?scanText():"今日快照暂不可用，显示内置话题池；仿真结果不受影响。";
+  render();
+  try{
+    const b=HT.run(42,4000,HT.DEFAULT_PATHS);
+    document.getElementById("baseHit").textContent=b.hit.toFixed(0)+"%";
+    document.getElementById("baseP50").textContent=Math.round(b.p50);
+    const C=276.5;
+    const off=C*(1-b.hit/100);
+    const arc=document.getElementById("gaugeArc");
+    arc.style.transition="stroke-dashoffset 1.2s ease-out";
+    requestAnimationFrame(()=>{arc.style.strokeDashoffset=off;});
+  }catch(e){}
+})();
+</script>
+
+<script>
+// 点赞/分享
+(function(){
+  var k="like_"+location.pathname;
+  var n=parseInt(localStorage.getItem(k)||"0");
+  document.getElementById("pcount").textContent=n;
+  window.likePage=function(){n++;localStorage.setItem(k,n);document.getElementById("pcount").textContent=n;};
+  window.sharePage=function(){
+    if(navigator.share && !/MicroMessenger/i.test(navigator.userAgent)){
+      navigator.share({title:document.title,url:location.href}).catch(()=>{});
+    }
+    navigator.clipboard && navigator.clipboard.writeText(location.href);
+  };
 })();
 </script>
 </body></html>
