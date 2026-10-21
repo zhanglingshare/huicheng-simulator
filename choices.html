@@ -26,35 +26,47 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
 .stage{flex:1;min-height:0;position:relative;display:flex;align-items:flex-end;justify-content:center;margin:20px 0}
 .tower-wrap{position:relative;display:flex;align-items:flex-end;gap:20px;height:100%}
 .tower{display:flex;flex-direction:column-reverse;gap:6px;align-items:center;justify-content:flex-end}
-.block{width:180px;max-width:40vw;padding:14px 12px;border-radius:14px;
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+.block{width:180px;max-width:40vw;padding:16px 12px;border-radius:16px;
+  background:linear-gradient(145deg,rgba(255,255,255,.18) 0%,rgba(125,211,252,.08) 100%);
+  border:1px solid rgba(255,255,255,.25);
+  box-shadow:0 4px 20px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.3);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   text-align:center;cursor:pointer;transition:all .4s cubic-bezier(.34,1.56,.64,1);
-  position:relative}
-.block .b-name{font-size:13px;font-weight:700;color:#f0f4fa;line-height:1.3}
-.block .b-val{font-size:11px;color:#7dd3fc;margin-top:3px;font-variant-numeric:tabular-nums}
-.block.placed{background:rgba(125,211,252,.15);border-color:rgba(125,211,252,.4)}
-.block:hover{transform:translateY(-3px)}
+  position:relative;overflow:hidden}
+.block::before{content:"";position:absolute;top:0;left:0;right:0;height:40%;
+  background:linear-gradient(180deg,rgba(255,255,255,.15),transparent)}
+.block .b-name{font-size:13.5px;font-weight:700;color:#fff;line-height:1.3;position:relative}
+.block .b-val{font-size:11px;color:#7dd3fc;margin-top:4px;font-variant-numeric:tabular-nums;position:relative}
+.block.placed{background:linear-gradient(145deg,rgba(125,211,252,.25) 0%,rgba(59,130,246,.15) 100%);
+  border-color:rgba(125,211,252,.5);
+  box-shadow:0 4px 24px rgba(125,211,252,.2),inset 0 1px 0 rgba(255,255,255,.3)}
+.block:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.4)}
 .block.shake{animation:shake .4s}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
 
 /* 刻度线 */
-.scale{position:relative;width:2px;height:100%;background:rgba(255,255,255,.1);flex:none}
-.scale .mark{position:absolute;left:8px;transform:translateY(-50%);font-size:11px;color:#7a8ba3;white-space:nowrap}
+.scale{position:relative;width:3px;height:100%;background:linear-gradient(180deg,rgba(240,199,94,.4),rgba(255,255,255,.15));flex:none;border-radius:2px}
+.scale .mark{position:absolute;left:12px;transform:translateY(-50%);font-size:11.5px;color:#b8c5d9;white-space:nowrap;font-weight:600}
 .scale .mark.target{color:#f0c75e;font-weight:700}
-.scale .mark.base{color:#b8c5d9}
-.scale .target-line{position:absolute;left:-6px;right:-6px;height:1px;background:rgba(240,199,94,.5);border-top:1px dashed rgba(240,199,94,.6)}
-.scale .cur-line{position:absolute;left:-10px;right:-10px;height:2px;background:#7dd3fc;box-shadow:0 0 8px rgba(125,211,252,.6);transition:top .6s cubic-bezier(.34,1.56,.64,1)}
+.scale .mark.base{color:#7a8ba3;font-weight:400}
+.scale .target-line{position:absolute;left:-8px;right:-8px;height:2px;background:linear-gradient(90deg,transparent,rgba(240,199,94,.7),transparent);box-shadow:0 0 12px rgba(240,199,94,.4)}
+.scale .cur-line{position:absolute;left:-14px;right:-14px;height:3px;background:#7dd3fc;border-radius:2px;
+  box-shadow:0 0 16px rgba(125,211,252,.8),0 0 4px #fff;transition:bottom .6s cubic-bezier(.34,1.56,.64,1)}
+.scale .cur-line::after{content:"";position:absolute;right:-8px;top:50%;transform:translateY(-50%);
+  width:8px;height:8px;border-radius:50%;background:#7dd3fc;box-shadow:0 0 8px rgba(125,211,252,.8)}
 
 /* 底部未放积木 */
 .pool{flex:none;padding:10px 0 16px}
 .pool-label{font-size:11.5px;color:#7a8ba3;text-align:center;margin-bottom:10px}
 .pool-blocks{display:flex;gap:8px;overflow-x:auto;padding:4px;scrollbar-width:none}
 .pool-blocks::-webkit-scrollbar{display:none}
-.pool-block{flex:none;width:110px;padding:10px;border-radius:12px;
-  background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.15);
-  text-align:center;cursor:pointer;transition:.25s}
-.pool-block:hover{background:rgba(255,255,255,.1);border-color:rgba(125,211,252,.4)}
+.pool-block{flex:none;width:120px;padding:12px;border-radius:14px;
+  background:linear-gradient(145deg,rgba(255,255,255,.1) 0%,rgba(255,255,255,.04) 100%);
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
+  text-align:center;cursor:pointer;transition:.25s;backdrop-filter:blur(10px)}
+.pool-block:hover{background:linear-gradient(145deg,rgba(125,211,252,.2) 0%,rgba(125,211,252,.08) 100%);
+  border-color:rgba(125,211,252,.4);transform:translateY(-2px)}
 .pool-block .pb-name{font-size:11.5px;font-weight:600;color:#e2e8f0;line-height:1.3}
 .pool-block .pb-val{font-size:10px;color:#7dd3fc;margin-top:2px}
 
@@ -144,7 +156,9 @@ function render(){
   });
   // 底部地基
   var base=document.createElement('div');
-  base.style.cssText='width:200px;max-width:50vw;height:12px;border-radius:6px;background:rgba(255,255,255,.15)';
+  base.style.cssText='width:210px;max-width:52vw;height:14px;border-radius:7px;'+
+    'background:linear-gradient(180deg,rgba(255,255,255,.25),rgba(255,255,255,.08));'+
+    'box-shadow:0 4px 16px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.3)';
   tw.appendChild(base);
 
   // 池
