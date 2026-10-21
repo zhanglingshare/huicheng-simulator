@@ -7,28 +7,30 @@
 <title>惠城产业风洞 · 基本面</title>
 <style>
 :root{
-  --bg:#0a0a0e;
-  --card:#16161e;
-  --card2:#1d1d26;
-  --line:rgba(255,255,255,.07);
-  --line2:rgba(255,255,255,.12);
-  --ink:#f5f5f7;
-  --ink2:#a1a1ab;
-  --muted:#6b6b76;
-  --green:#34d399;
-  --red:#fb7185;
-  --gold:#e5c06a;
+  --bg:#0b1a2e;
+  --bg2:#13294a;
+  --card:rgba(255,255,255,.06);
+  --card2:rgba(255,255,255,.1);
+  --line:rgba(255,255,255,.12);
+  --line2:rgba(255,255,255,.2);
+  --ink:#f0f4fa;
+  --ink2:#b8c5d9;
+  --muted:#7a8ba3;
+  --green:#22c55e;
+  --red:#ef4444;
+  --gold:#f0c75e;
   --blue:#3b82f6;
   --cit:#f59e0b;
   --ind:#60a5fa;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%;overflow:hidden}
-body{background:var(--bg);color:var(--ink);
+body{background:linear-gradient(180deg,#0a1830 0%,#14294d 45%,#0c1e38 100%);color:var(--ink);
   font:15px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
   -webkit-font-smoothing:antialiased;position:relative}
-body::before{content:"";position:fixed;inset:0;z-index:0;
-  background:radial-gradient(1200px 600px at 50% -10%,rgba(59,130,246,.05),transparent 60%)}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(800px 400px at 50% 0%,rgba(59,130,246,.18),transparent 60%),
+             radial-gradient(600px 300px at 50% 100%,rgba(240,199,94,.06),transparent 60%)}
 
 /* ===== 布局 ===== */
 .hud{position:relative;z-index:10;height:100vh;display:flex;flex-direction:column;padding:14px 18px;max-width:100vw;overflow-x:hidden}
@@ -56,14 +58,17 @@ body::before{content:"";position:fixed;inset:0;z-index:0;
 .qgroup-label i{width:6px;height:6px;border-radius:50%}
 .qgroup-label .who{font-weight:400}
 
-/* ===== 问题卡 ===== */
+/* ===== 问题卡（玻璃拟态） ===== */
 .qlist{display:flex;flex-direction:column;gap:10px;padding-bottom:10px}
-.qcard{position:relative;width:100%;box-sizing:border-box;text-align:left;border:1px solid var(--line);
-  background:var(--card);padding:16px 18px;cursor:pointer;transition:.2s;color:var(--ink);
+.qcard{position:relative;width:100%;box-sizing:border-box;text-align:left;
+  border:1px solid var(--line);background:rgba(255,255,255,.06);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  padding:16px 18px;cursor:pointer;transition:.25s;color:var(--ink);
   display:flex;align-items:center;gap:14px;font-family:inherit;border-radius:20px}
-.qcard:hover{background:var(--card2)}
-.qcard .qico{position:relative;flex:none;width:40px;height:40px;border-radius:12px;
-  display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.04)}
+.qcard:hover{background:rgba(255,255,255,.1);transform:translateY(-1px)}
+.qcard .qico{position:relative;flex:none;width:42px;height:42px;border-radius:13px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.08);border:1px solid var(--line)}
 .qcard .qico svg{width:20px;height:20px}
 .qcard .qbody{flex:1;min-width:0;overflow:hidden}
 .qcard .qtxt{font-size:16px;font-weight:700;line-height:1.35}
@@ -105,49 +110,63 @@ body::before{content:"";position:fixed;inset:0;z-index:0;
 .bet-step .qbig{font-size:30px;font-weight:800;line-height:1.25;letter-spacing:-.3px;margin-bottom:8px}
 .bet-step .lead{font-size:13px;color:var(--muted);margin-bottom:24px}
 .bet-opts{display:flex;gap:12px}
-.bet-btn{flex:1;border:1px solid var(--line2);background:var(--card);border-radius:18px;
+.bet-btn{flex:1;border:1px solid var(--line2);background:rgba(255,255,255,.06);border-radius:18px;
   padding:20px 12px;cursor:pointer;color:var(--ink);font-family:inherit;transition:.2s;
-  display:flex;flex-direction:column;align-items:center;gap:6px}
+  display:flex;flex-direction:column;align-items:center;gap:6px;backdrop-filter:blur(10px)}
 .bet-btn .lb{font-size:18px;font-weight:800}
 .bet-btn .ds{font-size:11px;color:var(--muted)}
-.bet-btn:hover{background:var(--card2);transform:translateY(-1px)}
-.bet-btn.b-up:hover{border-color:var(--green)}
-.bet-btn.b-down:hover{border-color:var(--red)}
+.bet-btn:hover{background:rgba(255,255,255,.12);transform:translateY(-2px)}
+.bet-btn.b-up:hover{border-color:var(--green);box-shadow:0 4px 20px rgba(34,197,94,.2)}
+.bet-btn.b-down:hover{border-color:var(--red);box-shadow:0 4px 20px rgba(239,68,68,.2)}
 
-/* 天平（线稿） */
-.scale-wrap{margin:6px 0 24px}
-.scale-meta{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-bottom:2px}
+/* 天平（玻璃容器 + 金属质感） */
+.scale-wrap{margin:6px 0 24px;background:rgba(255,255,255,.05);
+  border:1px solid var(--line);border-radius:20px;padding:16px 14px 10px;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.scale-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:8px}
 .scale-meta .l{color:var(--green);font-weight:600}
 .scale-meta .r{color:var(--red);font-weight:600}
-.scale-meta .mid{color:var(--ink2)}
-.scale-svg{display:block;margin:0 auto;width:180px;height:110px;overflow:visible}
-.scale-svg .beam{transform-origin:90px 30px;transition:transform .9s cubic-bezier(.34,1.56,.64,1)}
+.scale-meta .mid{color:var(--gold);font-weight:600}
+.scale-svg{display:block;margin:0 auto;width:200px;height:130px;overflow:visible}
+.scale-svg .beam{transform-origin:100px 35px;transition:transform .9s cubic-bezier(.34,1.56,.64,1)}
 
-/* 现实牌（深灰大圆角，超大白字） */
-.cards-grid{display:flex;flex-direction:column;gap:14px}
-.fcard{perspective:1200px;cursor:pointer}
-.fcard .f-inner{position:relative;width:100%;min-height:100px;transform-style:preserve-3d;
+/* 现实牌 */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.fcard{perspective:1200px;cursor:pointer;min-height:150px}
+.fcard .f-inner{position:relative;width:100%;height:150px;transform-style:preserve-3d;
   transition:transform .6s cubic-bezier(.4,.9,.3,1.2)}
 .fcard.open .f-inner{transform:rotateY(180deg)}
 .f-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
-  border-radius:22px;border:1px solid var(--line);background:var(--card);
-  display:flex;flex-direction:column;justify-content:center;padding:18px 22px}
-.f-back{align-items:center;justify-content:center;color:var(--muted);
-  animation:breathe 2.4s ease-in-out infinite}
-.f-back .qmark{font-size:26px;color:var(--muted);font-weight:300}
+  border-radius:16px;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:14px;text-align:center}
+/* 未翻牌：深蓝底 + 金问号 */
+.f-back{background:linear-gradient(145deg,#1e3a66,#152a4d);
+  border:1.5px solid rgba(240,199,94,.35);
+  color:var(--gold);animation:breathe 2.4s ease-in-out infinite}
+.f-back .qmark{font-size:32px;color:var(--gold);font-weight:300;opacity:.85}
+.f-back .tap{font-size:11.5px;color:var(--muted);margin-top:6px}
 @keyframes breathe{
-  0%,100%{transform:translateY(0);box-shadow:0 0 0 rgba(255,255,255,0)}
-  50%{transform:translateY(-3px);box-shadow:0 6px 20px rgba(255,255,255,.04)}
+  0%,100%{transform:translateY(0);box-shadow:0 0 0 rgba(240,199,94,0)}
+  50%{transform:translateY(-3px);box-shadow:0 6px 24px rgba(240,199,94,.12)}
 }
-.f-front{transform:rotateY(180deg)}
-.f-front .fk{font-size:11.5px;color:var(--muted);margin-bottom:8px;letter-spacing:.5px}
-.f-front .fv{font-size:38px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-1px}
-.f-front .fd{position:absolute;right:22px;bottom:18px;font-size:13px;font-weight:600}
-.f-front.g .fd{color:var(--green)}
-.f-front.b .fd{color:var(--red)}
-.f-front.n .fv{color:var(--ink)}
-.f-front.g .fv{color:var(--ink)}
-.f-front.b .fv{color:var(--red)}
+/* 已翻牌：白底 + 彩边 + 卷角 */
+.f-front{transform:rotateY(180deg);background:#f8fafc;color:#1a2332;
+  border:1.5px solid var(--line)}
+.f-front.g{border-color:#22c55e;box-shadow:0 4px 20px rgba(34,197,94,.15)}
+.f-front.b{border-color:#ef4444;box-shadow:0 4px 20px rgba(239,68,68,.15)}
+.f-front.n{border-color:#94a3b8}
+.f-front::after{content:"";position:absolute;left:0;bottom:0;width:22px;height:22px;
+  background:linear-gradient(135deg,transparent 50%,rgba(0,0,0,.1) 50%);
+  border-bottom-left-radius:14px}
+.f-front.g::after{background:linear-gradient(135deg,transparent 50%,rgba(34,197,94,.3) 50%)}
+.f-front.b::after{background:linear-gradient(135deg,transparent 50%,rgba(239,68,68,.3) 50%)}
+.f-front .fk{font-size:11px;color:#64748b;margin-bottom:6px;font-weight:600}
+.f-front .fv{font-size:24px;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums;letter-spacing:-.5px;color:#0f172a}
+.f-front.g .fv{color:#15803d}
+.f-front.b .fv{color:#dc2626}
+.f-front .fd{font-size:12px;font-weight:700;margin-top:4px}
+.f-front.g .fd{color:#15803d}
+.f-front.b .fd{color:#dc2626}
 /* 红牌翻出时震动 */
 .fcard.open.shake .f-inner{animation:shake .5s}
 @keyframes shake{
@@ -156,11 +175,11 @@ body::before{content:"";position:fixed;inset:0;z-index:0;
   50%{transform:rotateY(180deg) translateX(4px)}
   75%{transform:rotateY(180deg) translateX(-2px)}
 }
-/* 绿牌翻出时数字发光 */
+/* 绿牌翻出时弹出 */
 .fcard.open.pop .f-inner{animation:pop .5s}
 @keyframes pop{
   0%{transform:rotateY(180deg) scale(1)}
-  50%{transform:rotateY(180deg) scale(1.04)}
+  50%{transform:rotateY(180deg) scale(1.05)}
   100%{transform:rotateY(180deg) scale(1)}
 }
 
@@ -178,9 +197,9 @@ body::before{content:"";position:fixed;inset:0;z-index:0;
 .bp-front .fv{color:var(--gold);font-size:24px;font-weight:700;line-height:1.4}
 @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-/* 结果区 */
+/* 结果区（玻璃） */
 .result{margin-top:16px;border:1px solid var(--line);border-radius:20px;padding:18px 20px;
-  background:var(--card);display:none}
+  background:rgba(255,255,255,.06);backdrop-filter:blur(12px);display:none}
 .result.show{display:block;animation:fade .5s}
 .result .rline{display:flex;gap:10px;font-size:13.5px;line-height:1.65;margin-bottom:10px}
 .result .rline:last-child{margin-bottom:0}
@@ -430,19 +449,34 @@ function renderList(){
 }
 function switchTab(t){curTab=t;renderList();}
 
-// ========== 天平 SVG ==========
+// ========== 天平 SVG（金属质感） ==========
 function scaleSVG(){
-  return '<svg class="scale-svg" viewBox="0 0 180 110" fill="none">'
+  return '<svg class="scale-svg" viewBox="0 0 200 130" fill="none">'
+    +'<defs>'
+    +'<linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">'
+    +'<stop offset="0" stop-color="#e8eef5"/><stop offset=".5" stop-color="#b8c5d9"/>'
+    +'<stop offset="1" stop-color="#8a9bb5"/></linearGradient>'
+    +'<linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">'
+    +'<stop offset="0" stop-color="#f5d67a"/><stop offset="1" stop-color="#c9a24a"/></linearGradient>'
+    +'</defs>'
+    // 底座
+    +'<ellipse cx="100" cy="118" rx="50" ry="5" fill="rgba(0,0,0,.3)"/>'
+    +'<rect x="85" y="100" width="30" height="18" rx="3" fill="url(#metal)"/>'
+    +'<rect x="60" y="115" width="80" height="6" rx="3" fill="url(#metal)"/>'
+    // 支柱
+    +'<rect x="97" y="40" width="6" height="62" rx="2" fill="url(#metal)"/>'
+    // 中轴
+    +'<circle cx="100" cy="40" r="6" fill="url(#gold)"/>'
+    // 横梁（可转动）
     +'<g class="beam" id="beamG">'
-    +'<line x1="20" y1="30" x2="160" y2="30" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>'
-    +'<line x1="30" y1="30" x2="30" y2="55" stroke="rgba(255,255,255,.35)" stroke-width="1"/>'
-    +'<path d="M18 55 Q30 65 42 55 Z" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>'
-    +'<line x1="150" y1="30" x2="150" y2="55" stroke="rgba(255,255,255,.35)" stroke-width="1"/>'
-    +'<path d="M138 55 Q150 65 162 55 Z" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>'
+    +'<rect x="25" y="37" width="150" height="6" rx="3" fill="url(#metal)"/>'
+    // 左吊线+托盘
+    +'<line x1="40" y1="43" x2="40" y2="70" stroke="#b8c5d9" stroke-width="1.5"/>'
+    +'<ellipse cx="40" cy="74" rx="18" ry="4" fill="url(#metal)"/>'
+    // 右吊线+托盘
+    +'<line x1="160" y1="43" x2="160" y2="70" stroke="#b8c5d9" stroke-width="1.5"/>'
+    +'<ellipse cx="160" cy="74" rx="18" ry="4" fill="url(#metal)"/>'
     +'</g>'
-    +'<circle cx="90" cy="30" r="3" fill="rgba(255,255,255,.7)"/>'
-    +'<path d="M90 33 L82 85 L98 85 Z" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>'
-    +'<line x1="70" y1="85" x2="110" y2="85" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>'
     +'</svg>';
 }
 
