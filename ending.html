@@ -3,47 +3,67 @@
 <title>让每一个重大决策，先跑一遍 · 惠城产业风洞</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
+:root{
+  --glass:rgba(255,255,255,.06); --glass-b:rgba(255,255,255,.12);
+  --ink:#f1f5f9; --ink2:#cbd5e1; --muted:#94a3b8;
+  --neon:#38bdf8; --warm:#fbbf24; --ok:#34d399; --bad:#fb7185; --orange:#fb923c;
+}
 *{box-sizing:border-box}
-body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
-.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
-.nav b{font-size:14px;margin-right:6px;flex:none}
-.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
-.nav a.on{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
-.wrap{max-width:840px;margin:auto;padding:18px}
-.hero{text-align:center;padding:42px 22px;background:radial-gradient(ellipse at top,#10234a 0%,#0a0f1a 70%);border:1px solid #1c2739;border-radius:16px;margin-bottom:14px}
+body{margin:0;background:linear-gradient(180deg,#04060f 0%,#0a0f24 30%,#0b1226 100%);color:var(--ink);font:14px/1.7 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh;overflow-x:hidden}
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:10px 14px;background:rgba(6,10,24,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--glass-b);overflow-x:auto}
+.nav b{font-size:14px;margin-right:6px;flex:none;color:var(--ink)}
+.nav a{background:var(--glass);color:var(--muted);border:1px solid var(--glass-b);padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none;transition:.2s}
+.nav a.on{background:rgba(56,189,248,.22);border-color:var(--neon);color:var(--neon);font-weight:700}
+.wrap{max-width:840px;margin:auto;padding:20px 16px 40px}
+.hero{text-align:center;padding:46px 22px;background:radial-gradient(ellipse at top,rgba(16,35,74,.7) 0%,rgba(10,15,26,.4) 70%);backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:18px;margin-bottom:16px}
 .hero .kick{font-size:12px;letter-spacing:3px;color:#60a5fa;margin-bottom:14px}
 .hero h1{font-size:25px;line-height:1.5;margin:0}
-.hero p{font-size:13px;color:#9aa9bd;margin:14px 0 0}
-.card{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:18px;margin-bottom:14px}
-.card h2{font-size:16px;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid #1c2739}
-.policy{background:linear-gradient(160deg,#0a1428,#0e1523);border-color:#1e3a5f}
-.policy .quote{border-left:3px solid #60a5fa;background:#0a0f1a;border-radius:0 8px 8px 0;padding:9px 12px;margin:9px 0;font-size:12.5px;color:#dbe7f5;line-height:1.85}
+.hero p{font-size:13px;color:var(--muted);margin:14px 0 0}
+.card{background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 4px 24px rgba(0,0,0,.25)}
+.card h2{font-size:16px;margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.08)}
+.policy{background:linear-gradient(160deg,rgba(10,20,40,.5),rgba(14,21,35,.4));border-color:rgba(59,130,246,.25)}
+.policy .quote{border-left:3px solid #60a5fa;background:rgba(10,15,26,.55);border-radius:0 8px 8px 0;padding:10px 13px;margin:10px 0;font-size:12.5px;color:#dbe7f5;line-height:1.85}
 .policy .quote b{color:#93c5fd}
-.policy .src{font-size:11px;color:#6b7280;margin-top:6px}
-.world .row{display:flex;gap:11px;align-items:flex-start;background:#0a0f1a;border:1px solid #1c2739;border-radius:10px;padding:11px 13px;margin-bottom:9px}
-.world .flag{flex:none;width:52px;font-size:12px;font-weight:800;color:#fbbf24}
-.world .txt{flex:1;font-size:12.3px;color:#cbd5e1;line-height:1.8}
-.world .txt b{color:#e6edf3}
-.world .note{font-size:12.5px;color:#9aa9bd;text-align:center;margin-top:10px;line-height:1.9}
+.policy .src{font-size:11px;color:var(--muted);margin-top:6px}
+.world .row{display:flex;gap:12px;align-items:flex-start;background:rgba(10,15,26,.55);border:1px solid var(--glass-b);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+.world .flag{flex:none;width:56px;font-size:12px;font-weight:800;color:var(--warm)}
+.world .txt{flex:1;font-size:12.3px;color:var(--ink2);line-height:1.8}
+.world .txt b{color:var(--ink)}
+.world .note{font-size:12.5px;color:var(--muted);text-align:center;margin-top:12px;line-height:1.9}
+.world-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:11px}
+.world-card{background:rgba(10,15,26,.55);border:1px solid var(--glass-b);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:7px}
+.world-card .wh{display:flex;align-items:center;gap:9px}
+.world-card .wh .emoji{font-size:22px}
+.world-card .wh .cn{font-size:13.5px;font-weight:800;color:var(--ink)}
+.world-card .pj{font-size:11px;font-weight:700;color:var(--neon);background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.25);border-radius:6px;padding:3px 8px;align-self:flex-start}
+.world-card .de{font-size:11.5px;color:var(--ink2);line-height:1.75;margin:0}
 .why{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:700px){.why{grid-template-columns:1fr}}
-.why .step{background:#0a0f1a;border:1px solid #1c2739;border-radius:10px;padding:14px}
-.why .step .n{font-size:11px;font-weight:800;color:#fb923c;letter-spacing:1px}
-.why .step h3{font-size:13.5px;margin:6px 0;color:#fbbf24}
+.why .step{background:rgba(10,15,26,.55);border:1px solid var(--glass-b);border-radius:12px;padding:16px}
+.why .step .n{font-size:11px;font-weight:800;color:var(--orange);letter-spacing:1px}
+.why .step h3{font-size:13.5px;margin:6px 0;color:var(--warm)}
 .why .step p{font-size:12px;color:#a9b6c9;margin:0;line-height:1.85}
 .grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
 @media(max-width:700px){.grid6{grid-template-columns:1fr 1fr}}
-.feat{background:#0a0f1a;border:1px solid #1c2739;border-radius:10px;padding:13px}
+.feat{background:rgba(10,15,26,.55);border:1px solid var(--glass-b);border-radius:12px;padding:14px}
 .feat .ic{font-size:20px;margin-bottom:5px}
-.feat b{font-size:12.8px;color:#e6edf3;display:block;margin-bottom:3px}
-.feat span{font-size:11px;color:#8fa3bf;line-height:1.7}
-.closing{text-align:center;padding:34px 24px;background:linear-gradient(160deg,#150e08,#0a0f1a);border:1px solid #7c2d12;border-radius:14px;margin-bottom:14px}
-.closing .big{font-size:15px;line-height:2.1;color:#e6edf3}
-.closing .big b{color:#fbbf24}
-.sign{font-size:12px;color:#8fa3bf;margin-top:18px}
-.sign b{color:#fbbf24}
-.btn{background:#1d4ed8;color:#fff;border:0;padding:11px 24px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
-.btn.ghost{background:transparent;border:1px solid #2b3c5a;color:#cbd5e1}
+.feat b{font-size:12.8px;color:var(--ink);display:block;margin-bottom:3px}
+.feat span{font-size:11px;color:var(--muted);line-height:1.7}
+.closing{text-align:center;padding:36px 24px;background:linear-gradient(160deg,rgba(21,14,8,.55),rgba(10,15,26,.4));border:1px solid rgba(251,146,60,.3);border-radius:16px;margin-bottom:16px}
+.closing .big{font-size:15px;line-height:2.1;color:var(--ink)}
+.closing .big b{color:var(--warm)}
+.sign{font-size:12px;color:var(--muted);margin-top:18px}
+.sign b{color:var(--warm)}
+.btn{background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:#fff;border:0;padding:11px 24px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 4px 16px rgba(59,130,246,.35)}
+.btn.ghost{background:transparent;border:1px solid var(--glass-b);color:var(--ink2);box-shadow:none}
+/* 每日数据流水线 */
+.pipeline{display:flex;align-items:stretch;gap:0;margin:16px 0 8px;flex-wrap:wrap}
+.pl-step{flex:1;min-width:110px;text-align:center;position:relative;padding:0 6px}
+.pl-step .circle{width:46px;height:46px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:20px;background:rgba(56,189,248,.14);border:1.5px solid var(--neon);box-shadow:0 0 16px rgba(56,189,248,.25)}
+.pl-step .t{font-size:12.5px;font-weight:700;color:var(--ink)}
+.pl-step .d{font-size:10.5px;color:var(--muted);margin-top:3px;line-height:1.5}
+.pl-step:not(:last-child)::after{content:"→";position:absolute;right:-6px;top:13px;color:var(--neon);font-size:18px;z-index:2}
+@media(max-width:560px){.pl-step{min-width:33%;margin-bottom:16px}.pl-step:nth-child(3)::after{display:none}}
 </style></head><body>
 
 <div class="nav">
@@ -88,11 +108,33 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
   <div class="card world">
     <h2>放眼世界，“先算后干”早已是通行做法</h2>
     <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 12px">在区域和城市决策上先推演、后拍板，不是哪一国的专利。越是成熟的经济体，越舍得在这上面下功夫。</p>
-    <div class="row"><div class="flag">新加坡</div><div class="txt">国土小、试错不起，干脆建成全球首个国家级“数字孪生” <b>Virtual Singapore</b>，把整座城装进电脑，规划、建设、应急都先在里面“试一遍”。</div></div>
-    <div class="row"><div class="flag">美国</div><div class="txt">州和地方政府常用专门的区域经济模型（如 <b>REMI、IMPLAN</b>），加税、修路、建房、能源政策出台前，先算清会带来多少就业、多少收入、几家欢喜几家愁。</div></div>
-    <div class="row"><div class="flag">日本</div><div class="txt">国土交通省主导 <b>Project PLATEAU</b>，为约250个城市建成三维城市模型并开放数据，城市规划、防洪防灾都先在上面模拟。</div></div>
-    <div class="row"><div class="flag">韩国</div><div class="txt">把“数字孪生国土”写进国家空间政策，世宗、釜山等智慧城市先行试点，首尔用数字孪生实时模拟、调度交通。</div></div>
-    <div class="row"><div class="flag">英国</div><div class="txt">成立专门的“地方经济增长实证中心” <b>What Works Centre</b>，用证据回答“到底哪些政策真能拉动地方经济”，让决策少走弯路。</div></div>
+    <div class="world-grid">
+      <div class="world-card">
+        <div class="wh"><span class="emoji">🇸🇬</span><span class="cn">新加坡</span></div>
+        <div class="pj">Virtual Singapore</div>
+        <p class="de">国土小、试错不起，建成全球首个国家级"数字孪生"，把整座城装进电脑，规划、建设、应急都先"试一遍"。</p>
+      </div>
+      <div class="world-card">
+        <div class="wh"><span class="emoji">🇺🇸</span><span class="cn">美国</span></div>
+        <div class="pj">REMI / IMPLAN</div>
+        <p class="de">州和地方政府常用区域经济模型，加税、修路、建房、能源政策出台前，先算清带来多少就业、多少收入。</p>
+      </div>
+      <div class="world-card">
+        <div class="wh"><span class="emoji">🇯🇵</span><span class="cn">日本</span></div>
+        <div class="pj">Project PLATEAU</div>
+        <p class="de">国土交通省主导，为约250个城市建成三维城市模型并开放数据，城市规划、防洪防灾都先在上面模拟。</p>
+      </div>
+      <div class="world-card">
+        <div class="wh"><span class="emoji">🇰🇷</span><span class="cn">韩国</span></div>
+        <div class="pj">数字孪生国土</div>
+        <p class="de">把"数字孪生国土"写进国家空间政策，世宗、釜山先行试点，首尔用数字孪生实时模拟、调度交通。</p>
+      </div>
+      <div class="world-card">
+        <div class="wh"><span class="emoji">🇬🇧</span><span class="cn">英国</span></div>
+        <div class="pj">What Works Centre</div>
+        <p class="de">成立"地方经济增长实证中心"，用证据回答"到底哪些政策真能拉动地方经济"，让决策少走弯路。</p>
+      </div>
+    </div>
     <div class="note">这些地方并非比我们更聪明，而是更早懂得——<b style="color:#fbbf24">决策前多花一分“算”的功夫，决策后就能少交十分“试错”的学费。</b><br>我们做的，正是朝着这个方向，踏踏实实去努力。</div>
   </div>
 
@@ -128,6 +170,13 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
   <!-- 首页数据怎么来的 -->
   <div class="card">
     <h2>首页那些话题和去处，数据是怎么来的</h2>
+    <div class="pipeline">
+      <div class="pl-step"><div class="circle">📰</div><div class="t">公开采集</div><div class="d">政府公报·权威媒体·社交平台</div></div>
+      <div class="pl-step"><div class="circle">📊</div><div class="t">合理估算</div><div class="d">按公开声量分档，不编造数字</div></div>
+      <div class="pl-step"><div class="circle">✅</div><div class="t">结构校验</div><div class="d">字段校验通过才放行</div></div>
+      <div class="pl-step"><div class="circle">🌐</div><div class="t">每日上线</div><div class="d">每天自动刷新一次</div></div>
+    </div>
+    <p style="font-size:11px;color:#6b7280;text-align:center;margin:0 0 14px">每条话题都带真实来源链接，点回去能看原文；没有真实来源的条目不进数据。</p>
     <div class="grid6">
       <div class="feat"><div class="ic">📰</div><b>来源公开</b><span>政府公开公报、官方发布、主流媒体报道，以及公开社交平台上大家正在聊的本地事，每条都能点回去看原文。</span></div>
       <div class="feat"><div class="ic">🗓️</div><b>每天更新一次</b><span>统计的是最近24小时的公开讨论；页面上点"重新扫描"，读的就是今天这一份，不是每天随时在变。</span></div>
@@ -193,8 +242,8 @@ new Chart(document.getElementById('radar').getContext('2d'),{
   <button onclick="sharePage()">🔁 转给朋友</button>
 </div>
 <style>
-.likebar{position:relative;bottom:auto;left:auto;transform:none;display:flex;justify-content:center;margin:20px 0;background:rgba(15,23,42,.96);border:1px solid #3b82f6;border-radius:24px;padding:9px 20px;display:flex;gap:22px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.6)}
-.likebar button{background:none;border:none;color:#e2e8f0;font-size:14px;cursor:pointer}
+.likebar{position:relative;bottom:auto;left:auto;transform:none;display:flex;justify-content:center;margin:24px auto;background:rgba(15,23,42,.7);backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:24px;padding:10px 22px;gap:24px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.4);max-width:280px}
+.likebar button{background:none;border:none;color:var(--ink2);font-size:14px;cursor:pointer}
 .likebar button:active{transform:scale(1.15)}
 </style>
 <script>
