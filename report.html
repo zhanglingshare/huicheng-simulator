@@ -4,56 +4,82 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="model.js"></script>
 <style>
+:root{
+  --sky1:#04060f; --sky2:#0a0f24; --sky3:#121a30;
+  --glass:rgba(255,255,255,.06); --glass-b:rgba(255,255,255,.12);
+  --ink:#f1f5f9; --ink2:#cbd5e1; --muted:#94a3b8;
+  --neon:#38bdf8; --warm:#fbbf24; --ok:#34d399; --bad:#fb7185;
+  --orange:#fb923c; --purple:#8b5cf6;
+}
 *{box-sizing:border-box}
-body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
-.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
-.nav b{font-size:14px;margin-right:6px;flex:none}
-.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
-.nav a.on{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
-.wrap{max-width:860px;margin:auto;padding:18px}
-.cover{text-align:center;padding:40px 20px;background:linear-gradient(160deg,#0e1a30,#0a0f1a);border:1px solid #1c2739;border-radius:16px;margin-bottom:16px}
+body{margin:0;background:linear-gradient(180deg,#04060f 0%,#0a0f24 30%,#0b1226 100%);color:var(--ink);font:14px/1.7 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh}
+body{overflow-x:hidden}
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:10px 14px;background:rgba(6,10,24,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--glass-b);overflow-x:auto}
+.nav b{font-size:14px;margin-right:6px;flex:none;color:var(--ink)}
+.nav a{background:var(--glass);color:var(--muted);border:1px solid var(--glass-b);padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none;transition:.2s}
+.nav a.on{background:rgba(56,189,248,.22);border-color:var(--neon);color:var(--neon);font-weight:700}
+.wrap{max-width:860px;margin:auto;padding:20px 16px 40px}
+.cover{text-align:center;padding:44px 20px;background:linear-gradient(160deg,rgba(16,26,48,.7),rgba(10,15,26,.5));backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:18px;margin-bottom:16px}
 .cover .kick{font-size:12px;letter-spacing:3px;color:#60a5fa;margin-bottom:12px}
 .cover h1{font-size:27px;line-height:1.4;margin:0 0 10px}
-.cover .meta{font-size:12.5px;color:#8fa3bf;margin-top:16px}
-.card{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:18px;margin-bottom:14px}
-.card h2{font-size:16px;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid #1c2739}
+.cover .meta{font-size:12.5px;color:var(--muted);margin-top:16px}
+.card{background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 4px 24px rgba(0,0,0,.25)}
+.card h2{font-size:16px;margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.08)}
 .card h3{font-size:13.5px;color:#60a5fa;margin:18px 0 6px}
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
 @media(max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
-.kpi{background:#0a0f1a;border:1px solid #1c2739;border-radius:10px;padding:12px;text-align:center}
-.kpi .v{font-size:19px;font-weight:800;color:#fbbf24}
-.kpi .l{font-size:10.5px;color:#6b7280;margin-top:3px}
+.kpi{background:rgba(10,15,26,.6);border:1px solid var(--glass-b);border-radius:12px;padding:14px 10px;text-align:center}
+.kpi .v{font-size:19px;font-weight:800;color:var(--warm)}
+.kpi .l{font-size:10.5px;color:var(--muted);margin-top:3px}
 .lights{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
 @media(max-width:700px){.lights{grid-template-columns:1fr 1fr}}
-.light{border-radius:10px;padding:11px 12px;font-size:12px;border:1px solid}
+.light{border-radius:10px;padding:11px 12px;font-size:12px;border:1px solid;backdrop-filter:blur(6px)}
 .light .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
-.g{background:#0a1a12;border-color:#14532d}.g .dot{background:#22c55e}
-.y{background:#1a1808;border-color:#713f12}.y .dot{background:#eab308}
-.r{background:#1a0c0c;border-color:#7f1d1d}.r .dot{background:#ef4444}
+.g{background:rgba(20,83,45,.18);border-color:rgba(34,197,94,.4)}.g .dot{background:#22c55e;box-shadow:0 0 8px #22c55e}
+.y{background:rgba(113,63,18,.18);border-color:rgba(234,179,8,.4)}.y .dot{background:#eab308;box-shadow:0 0 8px #eab308}
+.r{background:rgba(127,29,29,.18);border-color:rgba(239,68,68,.4)}.r .dot{background:#ef4444;box-shadow:0 0 8px #ef4444}
 ol.find{margin:0;padding-left:20px}
-ol.find li{margin-bottom:10px;line-height:1.75}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+ol.find li{margin-bottom:10px;line-height:1.8}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:700px){.two{grid-template-columns:1fr}}
-.people{background:linear-gradient(160deg,#1a0e08,#0e1523);border:1px solid #7c2d12}
+.people{background:linear-gradient(160deg,rgba(26,14,8,.5),rgba(14,21,35,.4));border:1px solid rgba(251,146,60,.3)}
 .people .q{font-size:14px;font-weight:700;color:#fb923c;margin-bottom:8px}
-.people .a{font-size:12.5px;color:#cbd5e1;line-height:1.85}
+.people .a{font-size:12.5px;color:var(--ink2);line-height:1.85}
 .action{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start}
 .action .pri{flex:none;width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
 .action .body{flex:1}
 .action .body b{font-size:13.5px}
 .action .body p{font-size:12px;color:#9aa9bd;margin:3px 0 0}
-.src-list{font-size:12.5px;color:#cbd5e1;line-height:2}
+.kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:760px){.kanban{grid-template-columns:1fr}}
+.kan-col{display:flex;flex-direction:column;gap:10px}
+.kan-head{font-size:12.5px;font-weight:800;letter-spacing:.5px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.1)}
+.kan-item{background:rgba(10,15,26,.6);border:1px solid var(--glass-b);border-radius:10px;padding:12px 13px;flex:1}
+.kan-item b{font-size:13px;color:var(--ink);line-height:1.5}
+.kan-item p{font-size:11.5px;color:var(--muted);line-height:1.7;margin:6px 0 0}
+.kan-col:nth-child(1) .kan-item{border-left:3px solid #f87171}
+.kan-col:nth-child(2) .kan-item{border-left:3px solid #fb923c}
+.kan-col:nth-child(3) .kan-item{border-left:3px solid #3b82f6}
+/* 数据可信度金字塔 */
+.pyramid{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+.pyra{display:flex;align-items:center;gap:12px}
+.pyra .bar{height:44px;border-radius:8px;display:flex;align-items:center;padding:0 16px;font-size:12px;font-weight:700;color:#fff}
+.pyra .lab{font-size:11.5px;color:var(--ink2);max-width:340px;line-height:1.6}
+.pyra .lab b{color:var(--ink)}
+@media(max-width:560px){.pyra{flex-direction:column;align-items:flex-start;gap:4px}.pyra .lab{max-width:none;margin-bottom:6px}}
+.src-list{font-size:12.5px;color:var(--ink2);line-height:2}
 .src-list .grade{display:inline-block;width:22px;height:22px;line-height:22px;text-align:center;border-radius:50%;font-size:10px;font-weight:700;margin-right:6px}
-.bound{font-size:12.5px;line-height:1.9;color:#cbd5e1}
+.bound{font-size:12.5px;line-height:1.9;color:var(--ink2)}
 .author{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
 .author .badge{width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#1d4ed8,#0e7490);display:flex;align-items:center;justify-content:center;font-size:28px;flex:none;color:#fff;font-weight:700}
-.author .roles{font-size:12.5px;line-height:2;color:#cbd5e1}
-.tagline{font-size:12px;color:#8fa3bf;font-style:italic;margin-top:8px}
-.disc{font-size:11.5px;color:#6b7280;line-height:1.8;text-align:center}
-.btn{background:#1d4ed8;color:#fff;border:0;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
-.bigquote{font-size:15px;line-height:2;text-align:center;color:#e6edf3}
-.plain{margin-top:9px;background:#161207;border:1px solid #4a3a12;border-left:3px solid #f59e0b;border-radius:8px;padding:9px 11px;font-size:12.3px;line-height:1.85;color:#e8dcb8}
+.author .roles{font-size:12.5px;line-height:2;color:var(--ink2)}
+.tagline{font-size:12px;color:var(--muted);font-style:italic;margin-top:8px}
+.disc{font-size:11.5px;color:var(--muted);line-height:1.8;text-align:center}
+.btn{background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:#fff;border:0;padding:12px 26px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 4px 16px rgba(59,130,246,.35)}
+.bigquote{font-size:15px;line-height:2;text-align:center;color:var(--ink)}
+.plain{margin-top:10px;background:rgba(22,18,7,.5);border:1px solid rgba(245,158,11,.3);border-left:3px solid #f59e0b;border-radius:10px;padding:10px 12px;font-size:12.3px;line-height:1.85;color:#e8dcb8}
 .plain .lab{display:block;font-size:10.5px;font-weight:800;color:#f59e0b;letter-spacing:1px;margin-bottom:3px}
+svg{max-width:100%;height:auto}
 </style></head><body>
 
 <div class="nav">
@@ -83,6 +109,21 @@ ol.find li{margin-bottom:10px;line-height:1.75}
   <!-- 一页看懂 -->
   <div class="card">
     <h2>一、一页看懂：现在什么状态</h2>
+    <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-bottom:6px">
+      <div style="width:170px;height:104px;flex:none;position:relative">
+        <canvas id="gauge"></canvas>
+        <div style="position:absolute;left:0;right:0;bottom:6px;text-align:center;pointer-events:none">
+          <div style="font-size:26px;font-weight:800;color:#fbbf24;line-height:1">60</div>
+          <div style="font-size:10px;color:#94a3b8;margin-top:2px">城市健康度 · 承压</div>
+        </div>
+      </div>
+      <div style="flex:1;min-width:180px;font-size:13px;line-height:2">
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px"><span style="width:10px;height:10px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px #22c55e"></span>良好 <b style="color:#22c55e">3</b> 项</div>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px"><span style="width:10px;height:10px;border-radius:50%;background:#eab308;box-shadow:0 0 8px #eab308"></span>承压 <b style="color:#eab308">2</b> 项</div>
+        <div style="display:flex;gap:8px;align-items:center"><span style="width:10px;height:10px;border-radius:50%;background:#ef4444;box-shadow:0 0 8px #ef4444"></span>预警 <b style="color:#ef4444">3</b> 项</div>
+        <div style="font-size:11px;color:#6b7280;margin-top:6px">绿100/黄60/红20 加权示意，非官方评分</div>
+      </div>
+    </div>
     <div class="lights">
       <div class="light g"><span class="dot"></span>工业跑得快：规上工业+9.6%</div>
       <div class="light g"><span class="dot"></span>高新区强：632.7亿、+13.9%</div>
@@ -201,22 +242,49 @@ ol.find li{margin-bottom:10px;line-height:1.75}
   <!-- 行动建议 -->
   <div class="card">
     <h2>八、行动建议（按轻重缓急）</h2>
-    <div class="action"><div class="pri" style="background:#b91c1c">优先</div><div class="body"><b>盯紧关键项目投产节点</b><p>把影响高新区爬坡的重大项目列清单、节点到人，尽量避免延期；投产节奏稳，增长底盘才稳。</p></div></div>
-    <div class="action"><div class="pri" style="background:#b91c1c">优先</div><div class="body"><b>疏通通勤走廊</b><p>优化过江通道、公交运力与园区接驳，缩短东江湾到江北的通勤时间；通勤顺，招工和消费两头受益。</p></div></div>
-    <div class="action"><div class="pri" style="background:#c2410c">重要</div><div class="body"><b>保障学位与公共服务</b><p>落实2026年计划新增的约8000个学位与学校改扩建（2025年已新增公办义务教育学位超1.1万个），配套医疗、托育、保障性住房，提升家庭和年轻人留存意愿。</p></div></div>
-    <div class="action"><div class="pri" style="background:#c2410c">重要</div><div class="body"><b>做强本地产业循环</b><p>推动隔墙供应、生产性服务业与制造业对接，让工资、就业、消费更多在本地发生，稳住805亿消费基本盘。</p></div></div>
-    <div class="action"><div class="pri" style="background:#1d4ed8">持续</div><div class="body"><b>培育新动能与开放通道</b><p>培育AI与机器人等新产业，用好外贸增长和深惠通道；同时认清外需变量不在自己手里，作为长期布局而非短期依靠。</p></div></div>
-    <p style="font-size:11px;color:#5b6b82;margin:10px 0 0">建议方向均对应官方"高新区引领、产业协同、城市承载、民生保障、开放融深"等战略表述，为模拟推演的优先级提示，非替代官方决策。</p>
+    <div class="kanban">
+      <div class="kan-col">
+        <div class="kan-head" style="color:#f87171">🔴 立即优先</div>
+        <div class="kan-item">
+          <b>盯紧关键项目投产节点</b>
+          <p>重大项目列清单、节点到人，尽量避免延期；投产节奏稳，增长底盘才稳。</p>
+        </div>
+        <div class="kan-item">
+          <b>疏通通勤走廊</b>
+          <p>优化过江通道、公交运力与园区接驳，缩短东江湾到江北通勤；招工和消费两头受益。</p>
+        </div>
+      </div>
+      <div class="kan-col">
+        <div class="kan-head" style="color:#fb923c">🟠 重点推进</div>
+        <div class="kan-item">
+          <b>保障学位与公共服务</b>
+          <p>落实2026年约8000个新增学位（2025年已新增超1.1万），配套医疗、托育、保障房。</p>
+        </div>
+        <div class="kan-item">
+          <b>做强本地产业循环</b>
+          <p>推动隔墙供应、生产性服务业与制造业对接，稳住805亿消费基本盘。</p>
+        </div>
+      </div>
+      <div class="kan-col">
+        <div class="kan-head" style="color:#3b82f6">🔵 长期布局</div>
+        <div class="kan-item">
+          <b>培育新动能与开放通道</b>
+          <p>培育AI与机器人新产业，用好外贸增长和深惠通道；认清外需不在自己手里，作长期布局。</p>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:#6b7280;margin:12px 0 0">建议方向均对应官方"高新区引领、产业协同、城市承载、民生保障、开放融深"等战略表述，为模拟推演的优先级提示，非替代官方决策。</p>
   </div>
 
   <!-- 数据来源 -->
   <div class="card">
     <h2>九、数据来源与分级</h2>
-    <div class="src-list">
-      <div><span class="grade" style="background:#14532d;color:#fff">A</span><b>实测</b>：统计公报、政府工作报告、计划执行报告、民生实事中直接给出的数字</div>
-      <div><span class="grade" style="background:#1e40af;color:#fff">B</span><b>推估</b>：部分历史序列按公开增速回推</div>
-      <div><span class="grade" style="background:#713f12;color:#fff">C</span><b>代理</b>：镇街级供给代理（人口密度、是否点名、项目位置），非逐镇街实查</div>
-      <div><span class="grade" style="background:#7f1d1d;color:#fff">D</span><b>假设</b>：网络边权重、路径贡献区间、通勤强度（缺真实通勤OD数据）</div>
+    <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 4px">越靠塔底越硬、越可核对；越靠塔顶假设成分越多。这台模型把每类数据放在哪一层，全部公开。</p>
+    <div class="pyramid">
+      <div class="pyra"><div class="bar" style="background:#7f1d1d;width:130px">D · 假设</div><div class="lab"><b>网络边权重、路径贡献区间、通勤强度</b>——缺真实通勤OD数据，假设最多</div></div>
+      <div class="pyra"><div class="bar" style="background:#713f12;width:185px">C · 代理</div><div class="lab"><b>镇街级供给代理</b>（人口密度、是否点名、项目位置），非逐镇街实查</div></div>
+      <div class="pyra"><div class="bar" style="background:#1e40af;width:240px">B · 推估</div><div class="lab">部分历史序列<b>按公开增速回推</b>，非直接公布</div></div>
+      <div class="pyra"><div class="bar" style="background:#14532d;width:300px">A · 实测</div><div class="lab">统计公报、政府工作报告、计划执行报告、民生实事中<b>直接给出的数字</b></div></div>
     </div>
     <h3>主要公开来源</h3>
     <div style="font-size:12px;color:#cbd5e1;line-height:2">
@@ -272,6 +340,19 @@ ol.find li{margin-bottom:10px;line-height:1.75}
 <script>
 const gc='#1c2739', tc='#6b7280', axc='#93a4bd';
 Chart.defaults.font.family='-apple-system,"PingFang SC",sans-serif';
+
+// 健康度仪表盘（半圆）
+new Chart(document.getElementById('gauge').getContext('2d'),{
+  type:'doughnut',
+  data:{datasets:[{
+    data:[60,40],
+    backgroundColor:['#fbbf24','rgba(255,255,255,.07)'],
+    borderWidth:0,borderRadius:6
+  }]},
+  options:{responsive:true,maintainAspectRatio:false,cutout:'72%',
+    rotation:-90,circumference:180,
+    plugins:{legend:{display:false},tooltip:{enabled:false}}}
+});
 
 // 结构
 new Chart(document.getElementById('struct').getContext('2d'),{
@@ -347,8 +428,8 @@ new Chart(document.getElementById('coef').getContext('2d'),{
   <button onclick="sharePage()">🔁 转给朋友</button>
 </div>
 <style>
-.likebar{position:relative;bottom:auto;left:auto;transform:none;display:flex;justify-content:center;margin:20px 0;background:rgba(15,23,42,.96);border:1px solid #3b82f6;border-radius:24px;padding:9px 20px;display:flex;gap:22px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.6)}
-.likebar button{background:none;border:none;color:#e2e8f0;font-size:14px;cursor:pointer}
+.likebar{position:relative;bottom:auto;left:auto;transform:none;display:flex;justify-content:center;margin:24px auto;background:rgba(15,23,42,.7);backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:24px;padding:10px 22px;gap:24px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.4);max-width:300px}
+.likebar button{background:none;border:none;color:var(--ink2);font-size:14px;cursor:pointer}
 .likebar button:active{transform:scale(1.15)}
 </style>
 <script>
