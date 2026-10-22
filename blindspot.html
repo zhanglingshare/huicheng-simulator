@@ -3,26 +3,42 @@
 <title>惠城产业风洞 · 我们可能忽略了什么</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
+:root{
+  --sky1:#04060f; --sky2:#0a0f24; --sky3:#1e1b4b;
+  --glass:rgba(255,255,255,.06); --glass-b:rgba(255,255,255,.12);
+  --ink:#f1f5f9; --ink2:#cbd5e1; --muted:#94a3b8;
+  --neon:#38bdf8; --warm:#fbbf24; --ok:#34d399; --bad:#fb7185;
+  --orange:#f97316; --pink:#f472b6;
+}
 *{box-sizing:border-box}
-body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
-.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
-.nav b{font-size:14px;margin-right:6px;flex:none}
-.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
-.nav a.on{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
-.wrap{max-width:820px;margin:auto;padding:16px}
-h1{font-size:20px;margin:0 0 2px}
-.sub{color:#8fa3bf;font-size:13px;margin:0 0 16px}
-.card{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:16px;margin-bottom:12px}
-.card h2{font-size:14px;margin:0 0 10px}
-.btn{background:#1d4ed8;color:#fff;border:0;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
-.hint{font-size:11px;color:#5b6b82;text-align:center;margin-top:6px}
+body{margin:0;background:linear-gradient(180deg,#04060f 0%,#0a0f24 30%,#0b1226 100%);color:var(--ink);font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh}
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:10px 14px;background:rgba(6,10,24,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--glass-b);overflow-x:auto}
+.nav b{font-size:14px;margin-right:6px;flex:none;color:var(--ink)}
+.nav a{background:var(--glass);color:var(--muted);border:1px solid var(--glass-b);padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none;transition:.2s}
+.nav a.on{background:rgba(56,189,248,.22);border-color:var(--neon);color:var(--neon);font-weight:700}
+.wrap{max-width:780px;margin:auto;padding:20px 16px 40px}
+h1{font-size:22px;margin:0 0 4px;font-weight:800;letter-spacing:.3px}
+.sub{color:var(--muted);font-size:13px;margin:0 0 20px;line-height:1.7}
+.card{background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 4px 24px rgba(0,0,0,.25)}
+.card h2{font-size:14px;margin:0 0 12px;color:var(--ink);font-weight:700}
+.btn{background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:#fff;border:0;padding:12px 28px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 4px 16px rgba(59,130,246,.35)}
+.hint{font-size:11px;color:var(--muted);text-align:center;margin-top:10px;opacity:.8}
 .nodeL,.nodeR{cursor:pointer;transition:.2s}
-.nodeL:hover circle,.nodeR:hover circle{stroke-width:3}
-.tag{font-size:10px;fill:#5b6b82}
-.pop{background:#0a0f1a;border:1px solid #22304a;border-radius:8px;padding:12px;font-size:12.5px;color:#cbd5e1;display:none;line-height:1.7}
-.pop b{color:#fbbf24}
-.cursor{display:inline-block;width:2px;height:1.1em;background:#fbbf24;margin-left:1px;vertical-align:text-bottom;animation:blink .8s steps(1) infinite}
+.nodeL:hover circle,.nodeR:hover circle{stroke-width:3.5}
+.tag{font-size:10px;fill:var(--muted)}
+.pop{background:rgba(10,15,36,.85);backdrop-filter:blur(12px);border:1px solid var(--glass-b);border-left:3px solid var(--warm);border-radius:12px;padding:14px 16px;font-size:13px;color:var(--ink2);display:none;line-height:1.8;margin-top:12px}
+.pop b{color:var(--warm)}
+.pop .src{display:block;margin-top:8px;font-size:10.5px;color:var(--muted);opacity:.75}
+.cursor{display:inline-block;width:2px;height:1.1em;background:var(--warm);margin-left:1px;vertical-align:text-bottom;animation:blink .8s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
+svg{max-width:100%;height:auto;display:block}
+body{overflow-x:hidden}
+@media(max-width:560px){
+  .wrap{padding:16px 12px 32px}
+  .card{padding:14px;border-radius:14px}
+  h1{font-size:19px}
+  .chart-grid{grid-template-columns:1fr!important}
+}
 </style></head><body>
 
 <div class="nav">
@@ -108,12 +124,17 @@ h1{font-size:20px;margin:0 0 2px}
   </div>
 
   <!-- 冲击文字 -->
-  <div class="card" style="border-color:#7f1d1d;background:#120c14">
-    <div style="font-size:14.5px;line-height:2.1;color:#e6edf3">
+  <div class="card" style="border-color:rgba(251,191,36,.35);background:linear-gradient(135deg,rgba(30,20,10,.55),rgba(15,20,40,.5))">
+    <div style="font-size:13px;line-height:2.1;color:var(--ink2)">
       我们习惯为大项目、大数字、大平台激动——几十亿的投资、千亿的目标，写在最显眼的地方。<br>
-      但一座城真正的较量，藏在那些被叫做“配套”“民生”“小事”的地方：<b style="color:#f97316">一条每天要走的路、一个孩子的学位、一家楼下的小店、一个年轻人的去留。</b><br>
-      大项目能给一座城一个<b>高度</b>，但只有这些小地基，能决定它站不站得<b>稳</b>。<br>
-      我们总在为结果焦虑，却常常忘了——<b style="color:#fbbf24">结果，是地基长出来的。</b>
+      但一座城真正的较量，藏在那些被叫做"配套""民生""小事"的地方：<b style="color:var(--orange)">一条每天要走的路、一个孩子的学位、一家楼下的小店、一个年轻人的去留。</b>
+    </div>
+    <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08);font-size:15px;font-weight:700;line-height:2;color:var(--ink)">
+      大项目能给一座城一个<span style="color:var(--neon)">高度</span>，<br>
+      但只有这些小地基，能决定它站不站得<span style="color:var(--neon)">稳</span>。
+    </div>
+    <div style="margin-top:12px;text-align:center;font-size:17px;font-weight:800;color:var(--warm);letter-spacing:1px">
+      结果，是地基长出来的。
     </div>
   </div>
 
@@ -153,7 +174,7 @@ h1{font-size:20px;margin:0 0 2px}
   </div>
 
   <!-- 佐证小图 -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+  <div class="chart-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
     <div class="card" style="margin-bottom:0">
       <h2>学位：供给在追需求（示意）</h2>
       <div style="height:150px"><canvas id="eduChart"></canvas></div>
@@ -181,15 +202,17 @@ h1{font-size:20px;margin:0 0 2px}
   </div>
 
   <!-- 收尾 -->
-  <div class="card" style="margin-top:12px;text-align:center">
-    <div style="font-size:15px;line-height:2.1;color:#cbd5e1">
+  <div class="card" style="margin-top:16px;text-align:center;background:linear-gradient(180deg,rgba(56,189,248,.06),rgba(255,255,255,.03))">
+    <div style="font-size:14px;line-height:2.2;color:var(--ink2)">
       看一个地方，别只抬头看它有多高。<br>
-      低头看看——走在里面的人，路顺不顺、孩子有没有学上、日子有没有奔头。<br>
+      低头看看——走在里面的人，路顺不顺、孩子有没有学上、日子有没有奔头。<br><br>
       大数字会被记住一时，<br>
-      但只有<b style="color:#fbbf24">人愿意把下一个五年留在这里</b>，这座城才有真正的未来。<br>
-      <b style="color:#f97316;font-size:17px">人对了，数字，自然会跟上。</b>
+      但只有<b style="color:var(--warm)">人愿意把下一个五年留在这里</b>，这座城才有真正的未来。
     </div>
-    <div style="font-size:11px;color:#5b6b82;margin-top:12px;line-height:1.7">
+    <div style="margin-top:16px;font-size:18px;font-weight:800;color:var(--orange);letter-spacing:1px">
+      人对了，数字，自然会跟上。
+    </div>
+    <div style="font-size:11px;color:var(--muted);margin-top:16px;line-height:1.7;padding-top:14px;border-top:1px solid rgba(255,255,255,.08)">
       数字均来自惠城区统计公报、政府工作报告、民生实事等公开渠道；只说"关联/连着"，不说"导致"。通勤流向缺真实OD数据，为D级假设。
     </div>
   </div>
@@ -200,22 +223,22 @@ h1{font-size:20px;margin:0 0 2px}
 <script>
 // 弹窗数据（加强版）
 const pops=[
-  '<b style="font-size:13px">通勤 ↔ 高新区招工</b><br>'+
-  '过江通道早晚高峰排队，已经在发生。多堵十分钟，迟到的是工人，受损的是企业。<br>'+
-  '高新区要从632.7亿冲到1500亿，要的不是多一条路，是<b>人能不能每天按时站到岗位上</b>。通勤路上耽误的每一分钟，最后都会变成企业账上的成本、园区失去的产值。<br>'+
-  '<span class="tag">来源：直通车投诉、高新区目标</span>',
-  '<b style="font-size:13px">学位 ↔ 家庭留存</b><br>'+
-  '一个家庭决定留在哪座城，往往不是看工资单，是看孩子能不能进一所好学校。<br>'+
-  '十五五规划新增5万个公办学位、37所学校新建改扩建，追的正是这件事。<b>学位不只是教育问题，它是一座城能不能留住一个家庭的钥匙。</b>学位松一松，人就留一留。<br>'+
-  '<span class="tag">来源：2026民生实事</span>',
-  '<b style="font-size:13px">小店 ↔ 消费循环</b><br>'+
-  '楼下的早餐店、街角的五金铺、水东街的灯火——看着小，它们是一座城的烟火气，也是钱在本地转一圈的方式。<br>'+
-  '社消零805亿，近20家企业隔墙供应。<b>产业循环一旦转起来，工资在这发、消费在这花，钱才真正留在了这座城。</b>小店活，城市才活。<br>'+
-  '<span class="tag">来源：2025统计公报</span>',
-  '<b style="font-size:13px">年轻人 ↔ 城市未来</b><br>'+
-  '一座城最怕的，不是现在不够大，是年轻人用脚投票、一个个离开。<br>'+
-  '159.78万常住人口里，年轻人留不留，看的是有没有好岗位、好学校，更看这座城有没有奔头。<b>年轻人是一座城的未来时态——他们在哪，下一个十年就在哪。</b><br>'+
-  '<span class="tag">来源：2025统计公报</span>'
+  '<b style="font-size:14px;display:block;margin-bottom:6px">通勤 ↔ 高新区招工</b>'+
+  '过江通道早晚高峰排队，已经在发生。多堵十分钟，迟到的是工人，受损的是企业。<br><br>'+
+  '高新区要从632.7亿冲到1500亿，要的不是多一条路，是<b>人能不能每天按时站到岗位上</b>。通勤路上耽误的每一分钟，最后都会变成企业账上的成本、园区失去的产值。'+
+  '<span class="src">来源：直通车投诉、高新区目标</span>',
+  '<b style="font-size:14px;display:block;margin-bottom:6px">学位 ↔ 家庭留存</b>'+
+  '一个家庭决定留在哪座城，往往不是看工资单，是看孩子能不能进一所好学校。<br><br>'+
+  '十五五规划新增5万个公办学位、37所学校新建改扩建，追的正是这件事。<b>学位不只是教育问题，它是一座城能不能留住一个家庭的钥匙。</b>学位松一松，人就留一留。'+
+  '<span class="src">来源：2026民生实事</span>',
+  '<b style="font-size:14px;display:block;margin-bottom:6px">小店 ↔ 消费循环</b>'+
+  '楼下的早餐店、街角的五金铺、水东街的灯火——看着小，它们是一座城的烟火气，也是钱在本地转一圈的方式。<br><br>'+
+  '社消零805亿，近20家企业隔墙供应。<b>产业循环一旦转起来，工资在这发、消费在这花，钱才真正留在了这座城。</b>小店活，城市才活。'+
+  '<span class="src">来源：2025统计公报</span>',
+  '<b style="font-size:14px;display:block;margin-bottom:6px">年轻人 ↔ 城市未来</b>'+
+  '一座城最怕的，不是现在不够大，是年轻人用脚投票、一个个离开。<br><br>'+
+  '159.78万常住人口里，年轻人留不留，看的是有没有好岗位、好学校，更看这座城有没有奔头。<b>年轻人是一座城的未来时态——他们在哪，下一个十年就在哪。</b>'+
+  '<span class="src">来源：2025统计公报</span>'
 ];
 let cur=-1;
 const allLines=document.querySelectorAll('#lines line');
@@ -288,8 +311,8 @@ new Chart(document.getElementById('commChart').getContext('2d'),{
   type:'line',
   data:{labels:['2025','2026','2027','2028','2030'],
     datasets:[{label:'通勤压力',data:[40,48,55,62,72],borderColor:'#f97316',backgroundColor:'rgba(249,115,22,.15)',fill:true,tension:.3,pointRadius:2}]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-    scales:{x:{ticks:{color:'#6b7280',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#6b7280',font:{size:9}},grid:{color:'#1c2739'}},title:{display:true,text:'园区扩能，通勤人数跟着涨',color:'#6b7280',font:{size:9}}}}
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'园区扩能，通勤人数跟着涨',color:'#6b7280',font:{size:10}}},
+    scales:{x:{ticks:{color:'#6b7280',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#6b7280',font:{size:9}},grid:{color:'#1c2739'}}}}
 });
 </script>
 
@@ -298,8 +321,8 @@ new Chart(document.getElementById('commChart').getContext('2d'),{
   <button onclick="sharePage()">🔁 转给朋友</button>
 </div>
 <style>
-.likebar{position:relative;bottom:auto;left:auto;transform:none;display:flex;justify-content:center;margin:20px 0;background:rgba(15,23,42,.96);border:1px solid #3b82f6;border-radius:24px;padding:9px 20px;display:flex;gap:22px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.6)}
-.likebar button{background:none;border:none;color:#e2e8f0;font-size:14px;cursor:pointer}
+.likebar{position:relative;bottom:auto;left:auto;transform:none;display:flex;justify-content:center;margin:24px auto;background:rgba(15,23,42,.7);backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:24px;padding:10px 22px;gap:24px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.4);max-width:280px}
+.likebar button{background:none;border:none;color:var(--ink2);font-size:14px;cursor:pointer}
 .likebar button:active{transform:scale(1.15)}
 </style>
 <script>
