@@ -390,23 +390,13 @@ details.dcard .dbody h2{font-size:16px;margin:0 0 14px;padding-bottom:10px;borde
     <div class="exp-meta" id="expMeta">模型版本 v1.0 · 随机种子 42 · 单次 2 万次蒙特卡洛 · BASE 632.7 亿（2025 实测）· TARGET 1500 亿（外延参考）；压力叠加采用累计口径，与第⑥风洞页、第⑧报告页完全一致。<br>本结果为压力测试叙事，<b>不是预测，不构成投资建议</b>。</div>
   </div>
 
-  <!-- ③ 带走你的发现 -->
+  <!-- ③ 继续你的实验 -->
   <div class="card">
-    <h2>📤 带走你的发现</h2>
-    <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 14px">保存一张实验结果卡，或把<b>可复现的实验链接</b>发给朋友——对方打开后会自动恢复同一套情景，用同一版本模型重新计算、独立复核。</p>
+    <h2>🎛️ 继续你的实验</h2>
+    <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 14px">以上是你当前条件下的模型结果。可以回到报告页调整压力档位，或换一组情景再跑一次——这组结果只在本机本页查看，不向外导出。</p>
     <div class="share-grid">
-      <button class="share-btn pri" id="dlImg">📥 下载实验结果图片</button>
-      <button class="share-btn sec" id="cpLink">🔗 复制可复现实验链接</button>
-      <a class="share-btn ghost" href="report.html#d=0&c=0">🎛️ 回到第⑧页改条件</a>
-      <a class="share-btn ghost" href="windtunnel.html">🎲 再次挑战不同情景</a>
-    </div>
-    <div class="share-qr">
-      <img id="qrImg" alt="实验情景二维码" width="118" height="118">
-      <div class="qr-t">
-        <b style="color:#7dd3fc">扫码恢复你的实验</b><br>
-        二维码携带情景参数（项目延期 / 通勤堵塞档位），打开后由同一版本模型重新计算，而不是只保存一张结论图。
-        <div class="qr-link" id="qrLink">—</div>
-      </div>
+      <a class="share-btn pri" href="report.html#d=0&c=0">🎛️ 回到第⑧页改条件</a>
+      <a class="share-btn sec" href="windtunnel.html">🎲 再次挑战不同情景</a>
     </div>
   </div>
 
@@ -572,7 +562,6 @@ details.dcard .dbody h2{font-size:16px;margin:0 0 14px;padding-bottom:10px;borde
 
   <div class="likebar">
     <button onclick="likePage()">👍 <span id="pcount">0</span></button>
-    <button onclick="sharePage()">🔁 转给朋友</button>
   </div>
 
 </div>
@@ -695,11 +684,6 @@ details.dcard .dbody h2{font-size:16px;margin:0 0 14px;padding-bottom:10px;borde
     cChart.data.datasets[0].borderColor=cur.color;
     cChart.data.datasets[0].backgroundColor=cur.fill;
     cChart.update();
-    // 二维码与可复现链接
-    const url=location.origin+location.pathname+'#d='+cur.delay+'&c='+cur.commute;
-    $('qrLink').textContent=url;
-    $('qrImg').onerror=function(){this.style.display='none';};
-    $('qrImg').src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&data='+encodeURIComponent(url);
     // 舞台初始状态跟随实验
     setStage(ci!==0,false);
   }
@@ -722,78 +706,15 @@ details.dcard .dbody h2{font-size:16px;margin:0 0 14px;padding-bottom:10px;borde
   csBtn.addEventListener('click',()=>setStage(!shocked));
   window.__setStage=setStage;
 
-  /* 复制可复现实验链接 */
-  $('cpLink').addEventListener('click',()=>{
-    const url=location.origin+location.pathname+'#d='+cur.delay+'&c='+cur.commute;
-    const done=()=>{const o=$('cpLink').textContent;$('cpLink').textContent='✅ 已复制可复现链接';setTimeout(()=>$('cpLink').textContent=o,1800);};
-    if(navigator.clipboard)navigator.clipboard.writeText(url).then(done).catch(done);else done();
-  });
-
-  /* 下载实验结果图片（纯 Canvas 手绘，不依赖第三方库） */
-  $('dlImg').addEventListener('click',()=>{
-    const b=BASE,r=curR,dHit=Math.round(r.hit-b.hit),dP=Math.round(r.p50-b.p50);
-    const W=750,H=1080,cv=document.createElement('canvas');cv.width=W;cv.height=H;
-    const x=cv.getContext('2d');
-    // 背景
-    const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#0b1730');g.addColorStop(1,'#070b18');
-    x.fillStyle=g;x.fillRect(0,0,W,H);
-    x.strokeStyle='rgba(56,189,248,.4)';x.lineWidth=2;x.strokeRect(18,18,W-36,H-36);
-    // 标题
-    x.textAlign='left';x.fillStyle='#7dd3fc';x.font='700 22px sans-serif';x.fillText('惠城产业风洞 · 我的实验',48,74);
-    x.fillStyle='#f1f5f9';x.font='900 34px sans-serif';x.fillText('一场变化，如何影响一座城市',48,128);
-    // 情景
-    x.fillStyle='#fca5a5';x.font='700 22px sans-serif';x.fillText('情景：'+cur.name,48,178);
-    // 结果卡（当前）
-    function block(y,title,color,rr){
-      x.fillStyle=color;x.font='700 20px sans-serif';x.fillText(title,48,y);
-      x.fillStyle='#e2e8f0';x.font='900 40px sans-serif';x.fillText(Math.round(rr.hit)+'%',48,y+56);
-      x.fillStyle='#94a3b8';x.font='600 18px sans-serif';x.fillText('达标率（≥1500亿）',200,y+50);
-      x.fillStyle='#e2e8f0';x.font='900 40px sans-serif';x.fillText(Math.round(rr.p50).toLocaleString('zh-CN')+' 亿',48,y+116);
-      x.fillStyle='#94a3b8';x.font='600 18px sans-serif';x.fillText('中位产值 P50',260,y+110);
-      x.fillStyle='#cbd5e1';x.font='600 18px sans-serif';
-      x.fillText('P10–P90：'+Math.round(rr.p10)+' – '+Math.round(rr.p90)+' 亿',48,y+162);
-    }
-    block(240,'基准情景','#7dd3fc',b);
-    x.strokeStyle='rgba(255,255,255,.12)';x.beginPath();x.moveTo(48,470);x.lineTo(W-48,470);x.stroke();
-    block(500,'你的情景','#fca5a5',r);
-    // 差异
-    x.fillStyle='#fbbf24';x.font='800 22px sans-serif';
-    x.fillText('较基准：达标率 '+(dHit>0?'+':'−')+Math.abs(dHit)+' 个百分点 · 中位产值 '+(dP>0?'+':'−')+Math.abs(dP)+' 亿',48,760);
-    // 说明
-    x.fillStyle='#94a3b8';x.font='600 16px sans-serif';
-    x.fillText('模型 v1.0 · 随机种子 42 · 2 万次蒙特卡洛 · BASE 632.7 亿（2025 实测）',48,820);
-    x.fillText('TARGET 1500 亿（外延参考）· 压力叠加为累计口径，与第⑥/⑧页一致。',48,852);
-    x.fillStyle='#fcd34d';x.font='700 17px sans-serif';
-    x.fillText('⚠️ 本结果为压力测试叙事，不是预测，不构成投资建议。',48,910);
-    x.fillStyle='#64748b';x.font='600 15px sans-serif';
-    x.fillText('惠城产业决策风洞 · Demo版 ｜ 张凌 博士',48,972);
-    // 可复现链接（不含二维码，提示扫码）
-    x.fillStyle='#7dd3fc';x.font='600 15px sans-serif';
-    x.fillText('可复现：打开页面链接 #d='+cur.delay+'&c='+cur.commute+' 即可恢复同一情景',48,1010);
-    const a=document.createElement('a');a.download='惠城风洞实验-'+cur.key+'.png';a.href=cv.toDataURL('image/png');a.click();
-  });
-
   render();
 })();
 
-/* 点赞/分享（保留） */
+/* 点赞（本地记录，不导出） */
 (function(){
   var k="like_"+location.pathname;
   var n=parseInt(localStorage.getItem(k)||"0");
   document.getElementById("pcount").textContent=n;
   window.likePage=function(){n++;localStorage.setItem(k,n);document.getElementById("pcount").textContent=n;};
-  window.sharePage=function(){
-    var m=document.getElementById("shareModal");
-    var link=location.origin+location.pathname+location.hash;
-    if(!m){
-      m=document.createElement("div");m.id="shareModal";
-      m.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px";
-      m.onclick=function(){m.remove();};
-      m.innerHTML='<div style="background:#0f172a;padding:20px;border-radius:14px;text-align:center" onclick="event.stopPropagation()"><div style="color:#fff;font-size:14px;margin-bottom:12px">扫码恢复你的实验（含情景参数）</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(link)+'" style="width:200px;height:200px;background:#fff;padding:8px;border-radius:8px"><div style="color:#94a3b8;font-size:12px;margin-top:12px">用同一版本模型重新计算</div></div>';
-      document.body.appendChild(m);
-    }
-    navigator.clipboard && navigator.clipboard.writeText(link);
-  };
 })();
 </script>
 <!-- 百度统计 -->
