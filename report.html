@@ -80,6 +80,147 @@ ol.find li{margin-bottom:10px;line-height:1.8}
 .plain{margin-top:10px;background:rgba(22,18,7,.5);border:1px solid rgba(245,158,11,.3);border-left:3px solid #f59e0b;border-radius:10px;padding:10px 12px;font-size:12.3px;line-height:1.85;color:#e8dcb8}
 .plain .lab{display:block;font-size:10.5px;font-weight:800;color:#f59e0b;letter-spacing:1px;margin-bottom:3px}
 svg{max-width:100%;height:auto}
+/* 五条发现卡 */
+.find5{display:flex;flex-direction:column;gap:10px}
+.f5{display:flex;gap:13px;background:rgba(10,15,26,.55);border:1px solid var(--glass-b);border-radius:12px;padding:13px 15px;border-left:3px solid var(--neon)}
+.f5 .no{flex:none;font-size:20px;font-weight:900;color:var(--neon);line-height:1.1;width:30px}
+.f5 .fct{flex:1;min-width:0}
+.f5 .tt{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.f5 .chip{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;border:1px solid;letter-spacing:.5px}
+.f5 .ds{font-size:11.8px;color:var(--muted);line-height:1.8}
+.f5 .ds b{color:var(--warm)}
+.f5.c-str{border-left-color:#38bdf8}.f5.c-str .no{color:#38bdf8}.f5.c-str .chip{color:#7dd3fc;border-color:rgba(56,189,248,.4);background:rgba(56,189,248,.1)}
+.f5.c-risk{border-left-color:#fb7185}.f5.c-risk .no{color:#fb7185}.f5.c-risk .chip{color:#fda4af;border-color:rgba(251,113,133,.4);background:rgba(251,113,133,.1)}
+.f5.c-key{border-left-color:#fb923c}.f5.c-key .no{color:#fb923c}.f5.c-key .chip{color:#fdba74;border-color:rgba(251,146,60,.4);background:rgba(251,146,60,.1)}
+.f5.c-time{border-left-color:#8b5cf6}.f5.c-time .no{color:#8b5cf6}.f5.c-time .chip{color:#c4b5fd;border-color:rgba(139,92,246,.4);background:rgba(139,92,246,.1)}
+.f5.c-do{border-left-color:#34d399}.f5.c-do .no{color:#34d399}.f5.c-do .chip{color:#6ee7b7;border-color:rgba(52,211,153,.4);background:rgba(52,211,153,.1)}
+/* 集中度条 */
+.conc{margin-top:8px}
+.conc-track{height:9px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;display:flex}
+.conc-a{height:100%;background:linear-gradient(90deg,#fb923c,#f59e0b);border-radius:6px}
+.conc-leg{display:flex;gap:14px;font-size:10.5px;color:var(--muted);margin-top:4px;flex-wrap:wrap}
+.conc-leg i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px}
+/* 两本账 */
+.ledgers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+@media(max-width:680px){.ledgers{grid-template-columns:1fr}}
+.ledger{border-radius:12px;padding:14px;background:rgba(10,15,26,.55);border:1px solid var(--glass-b)}
+.ledger.l1{border-top:3px solid #3b82f6}
+.ledger.l2{border-top:3px solid #f87171}
+.ledger .lh{font-size:12.5px;font-weight:800;margin-bottom:3px;display:flex;align-items:center;gap:7px}
+.ledger.l1 .lh{color:#93c5fd}.ledger.l2 .lh{color:#fca5a5}
+.ledger .lhq{font-size:11px;color:var(--muted);margin-bottom:9px}
+.ledger ul{margin:0;padding:0;list-style:none}
+.ledger li{font-size:11.5px;color:var(--ink2);line-height:1.7;padding:4px 0 4px 18px;position:relative}
+.ledger li::before{content:"";position:absolute;left:2px;top:11px;width:7px;height:7px;border-radius:50%}
+.ledger.l1 li::before{background:#3b82f6}.ledger.l2 li::before{background:#f87171}
+.ledger li b{color:var(--ink)}
+.ledger-divider{text-align:center;font-size:11px;font-weight:700;color:var(--warm);background:rgba(127,60,10,.18);border:1px solid rgba(251,191,36,.3);border-radius:20px;padding:5px 12px;margin:8px 0}
+/* 敏感度横条（定性） */
+.sens{display:flex;flex-direction:column;gap:9px;margin:12px 0}
+.sens-row{display:grid;grid-template-columns:84px 1fr 58px;gap:10px;align-items:center;font-size:12px}
+.sens-row .nm{color:var(--ink2);font-weight:600}
+.sens-track{height:12px;border-radius:7px;background:rgba(255,255,255,.06);overflow:hidden}
+.sens-fill{height:100%;border-radius:7px;background:linear-gradient(90deg,#f87171,#fb923c)}
+.sens-fill.low{background:linear-gradient(90deg,#475569,#64748b)}
+.sens-fill.mid{background:linear-gradient(90deg,#b45309,#f59e0b)}
+.sens-row .rk{font-size:11px;color:var(--muted);text-align:right}
+/* 两本尺子（微分 vs 注入） */
+.rulers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+@media(max-width:680px){.rulers{grid-template-columns:1fr}}
+.ruler{border-radius:12px;padding:13px 15px;background:rgba(10,15,26,.55);border:1px solid var(--glass-b)}
+.ruler.a{border-left:3px solid #3b82f6}.ruler.b{border-left:3px solid #f87171}
+.ruler .rk{font-size:10.5px;font-weight:800;letter-spacing:.5px;margin-bottom:4px}
+.ruler.a .rk{color:#93c5fd}.ruler.b .rk{color:#fca5a5}
+.ruler .qt{font-size:12.5px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.ruler .how{font-size:11.3px;color:var(--muted);line-height:1.75}
+.ruler .how b{color:var(--ink2)}
+/* 连锁反应链 */
+.chains{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:680px){.chains{grid-template-columns:1fr}}
+.chain{background:rgba(10,15,26,.5);border:1px solid rgba(251,146,60,.28);border-radius:12px;padding:14px}
+.chain .q{font-size:12.5px;font-weight:700;color:#fb923c;margin-bottom:10px}
+.chain .flow{display:flex;flex-direction:column;gap:6px}
+.cnode{font-size:11.5px;color:var(--ink2);background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.25);border-radius:9px;padding:7px 11px;line-height:1.5}
+.cnode.good{background:rgba(52,211,153,.12);border-color:rgba(52,211,153,.3);color:#a7f3d0}
+.cnode.bad{background:rgba(251,113,133,.1);border-color:rgba(251,113,133,.3);color:#fecdd3}
+.carr{color:var(--warm);font-size:13px;text-align:center;line-height:1}
+/* 免责徽章 */
+.disc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:680px){.disc-grid{grid-template-columns:1fr}}
+.disc-item{display:flex;gap:10px;align-items:flex-start;background:rgba(10,15,26,.5);border:1px solid var(--glass-b);border-radius:10px;padding:11px 12px}
+.disc-item .di{flex:none;width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.3)}
+.disc-item .dt{font-size:11.8px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.disc-item .dd{font-size:11px;color:var(--muted);line-height:1.65}
+/* 来源徽章 */
+.src-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.src-badge{font-size:11.5px;color:var(--ink2);background:rgba(56,189,248,.08);border:1px solid rgba(56,189,246,.22);border-radius:20px;padding:6px 12px;display:flex;align-items:center;gap:6px}
+.role-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.role-badge{font-size:12px;color:#fde68a;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);border-radius:20px;padding:6px 13px}
+/* 口径标签 */
+.itag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;padding:2px 9px;border-radius:20px;margin-left:8px;vertical-align:middle}
+.itag.real{color:#6ee7b7;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.35)}
+.itag.est{color:#93c5fd;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.35)}
+.itag.sim{color:#fdba74;background:rgba(251,146,60,.12);border:1px solid rgba(251,146,60,.35)}
+.itag.plan{color:#d8b4fe;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.35)}
+.subh{font-size:13px;font-weight:700;color:#60a5fa;margin:18px 0 8px;display:flex;align-items:center;flex-wrap:wrap;gap:2px}
+.subh .num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(56,189,248,.18);border:1px solid rgba(56,189,248,.4);font-size:11px;color:#7dd3fc;margin-right:7px}
+/* 事件冲击双图 */
+.shock-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.shock-grid>*,.lab-grid>*{min-width:0}
+@media(max-width:680px){.shock-grid{grid-template-columns:1fr}}
+.shock-box{background:rgba(10,15,26,.5);border:1px solid var(--glass-b);border-radius:12px;padding:12px 14px 6px}
+.shock-box .cap{font-size:11.5px;color:var(--muted);margin-bottom:2px}
+.shock-box .cap b{color:var(--ink)}
+/* 滚动进入动画 */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+/* 健康扫描 */
+.kpis.scan-ready .kpi{opacity:0;transform:translateY(14px)}
+.kpis.scan-ready .kpi.in{opacity:1;transform:none;transition:opacity .55s ease,transform .55s ease}
+.kpi{cursor:pointer;transition:.2s}
+.kpi:hover{border-color:var(--neon)}
+.kpi.sel{border-color:var(--neon);box-shadow:0 0 0 1px var(--neon),0 0 18px rgba(56,189,248,.25)}
+.metric-detail{display:none;margin-top:12px;background:rgba(10,15,26,.6);border:1px solid rgba(56,189,248,.3);border-radius:12px;padding:12px 15px;font-size:12px;color:var(--ink2);line-height:1.8}
+.metric-detail.show{display:block;animation:fadein .3s ease}
+.metric-detail b{color:var(--ink)}
+.metric-detail .md-t{color:var(--neon);font-weight:700;margin-bottom:4px}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* 实验台 */
+.lab-card{background:linear-gradient(160deg,rgba(14,26,50,.6),rgba(10,15,26,.5));border:1px solid rgba(56,189,248,.3);border-radius:14px;padding:16px;margin-top:18px}
+.lab-head{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:800;color:#7dd3fc;margin-bottom:4px}
+.lab-sub{font-size:11.5px;color:var(--muted);margin-bottom:12px}
+.toggles{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.tgl{flex:1;min-width:150px;text-align:left;background:rgba(10,15,26,.6);border:1px solid var(--glass-b);border-radius:11px;padding:11px 14px;color:var(--ink2);font-size:12.5px;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:9px}
+.tgl .box{flex:none;width:20px;height:20px;border-radius:6px;border:2px solid #475569;display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent}
+.tgl .tt b{display:block;color:var(--ink);font-size:12.5px}
+.tgl .tt span{font-size:10.5px;color:var(--muted)}
+.tgl.on{border-color:#f87171;background:rgba(127,29,29,.18)}
+.tgl.on .box{background:#f87171;border-color:#f87171;color:#fff}
+.lab-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
+@media(max-width:720px){.lab-grid{grid-template-columns:1fr}}
+.traj-box{background:rgba(10,15,26,.5);border:1px solid var(--glass-b);border-radius:12px;padding:12px 14px 4px}
+.traj-box .cap{font-size:11.5px;color:var(--muted);margin-bottom:2px}
+.stat-box{display:flex;flex-direction:column;gap:10px}
+.bigstat{background:rgba(10,15,26,.55);border:1px solid var(--glass-b);border-radius:12px;padding:12px 14px}
+.bigstat .lab2{font-size:10.5px;color:var(--muted);letter-spacing:.5px}
+.bigstat .row{display:flex;align-items:baseline;gap:8px;margin-top:3px}
+.bigstat .cur{font-size:26px;font-weight:900;line-height:1}
+.bigstat .base{font-size:11.5px;color:var(--muted)}
+.bigstat .delta{font-size:11.5px;font-weight:700;margin-left:auto}
+.delta.down{color:#f87171}.delta.flat{color:#34d399}
+.gap-note{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.7}
+.gap-note b{color:var(--warm)}
+/* 实验结论 */
+.concl{margin-top:14px;background:rgba(20,14,30,.55);border:1px solid rgba(251,191,36,.3);border-radius:12px;padding:14px 16px}
+.concl .ch{font-size:12.5px;font-weight:800;color:#fbbf24;margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.concl .cb{font-size:12px;line-height:1.95;color:var(--ink2)}
+.concl .cb b{color:var(--ink)}
+.concl .cb .neg{color:#fca5a5}.concl .cb .pos{color:#86efac}
+.concl-btns{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
+.cbtn{background:rgba(56,189,248,.14);border:1px solid rgba(56,189,248,.4);color:#bae6fd;border-radius:10px;padding:8px 15px;font-size:12px;font-weight:700;cursor:pointer;transition:.2s}
+.cbtn:hover{background:rgba(56,189,248,.26)}
+.cbtn.ghost{background:transparent;border-color:var(--glass-b);color:var(--muted)}
 </style></head><body>
 
 <div class="nav">
@@ -140,28 +281,63 @@ svg{max-width:100%;height:auto}
   <!-- 执行摘要 -->
   <div class="card">
     <h2>二、五条核心发现</h2>
-    <ol class="find">
-      <li><b>惠城是三产占69%的中心城区</b>，2025年GDP 1203.33亿元；规上工业973.9亿元，高新区以632.7亿元、约占全区规上工业三分之二，是绝对主引擎。</li>
-      <li><b>增长靠"一个园区"扛着</b>：高新区占比约67.4%，一旦它的项目投产节奏或招工出问题，全区增长就会明显承压——鸡蛋集中在一个篮子里。</li>
-      <li><b>最被低估的不是大项目，是"通勤走廊"</b>：模拟提示通勤边影响系数高于单个龙头扩产落空；它一堵，产业招工和城市消费双向失血。</li>
-      <li><b>时间是被忽视的变量</b>：同样的项目，2028年投产和2030年投产，放进系统结果大不一样；"晚一点"在有明确节点的系统里是敏感参数。</li>
-      <li><b>改善通勤、学位、留人是性价比高的抓手</b>：比招大项目便宜、见效快、自己可控，却常被当成"配套"。</li>
-    </ol>
+    <div class="find5">
+      <div class="f5 c-str">
+        <div class="no">01</div>
+        <div class="fct">
+          <div class="tt">一座三产占 <b style="color:#fbbf24">69%</b> 的中心城区，高新区是主引擎 <span class="chip">结构事实</span></div>
+          <div class="ds">2025年 GDP <b>1203.33亿</b>，规上工业 <b>973.9亿</b>；高新区 <b>632.7亿</b>，约占全区规上工业三分之二。</div>
+          <div class="conc">
+            <div class="conc-track"><div class="conc-a" style="width:67.4%"></div></div>
+            <div class="conc-leg"><span><i style="background:#f59e0b"></i>高新区 67.4%</span><span><i style="background:rgba(255,255,255,.15)"></i>其他规上 32.6%</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="f5 c-risk">
+        <div class="no">02</div>
+        <div class="fct">
+          <div class="tt">增长靠“一个园区”扛着 <span class="chip">🧺 集中风险</span></div>
+          <div class="ds">鸡蛋集中在一个篮子里：一旦高新区的<b>投产节奏或招工</b>出问题，全区增长会明显承压。</div>
+        </div>
+      </div>
+      <div class="f5 c-key">
+        <div class="no">03</div>
+        <div class="fct">
+          <div class="tt">最被低估的不是大项目，是“通勤走廊” <span class="chip">🌉 被低估的命门</span></div>
+          <div class="ds">模拟显示通勤边影响系数<b>高于单个龙头扩产落空</b>；它一堵，产业招工与城市消费<b>双向失血</b>。</div>
+        </div>
+      </div>
+      <div class="f5 c-time">
+        <div class="no">04</div>
+        <div class="fct">
+          <div class="tt">时间是被忽视的变量 <span class="chip">⏳ 隐藏变量</span></div>
+          <div class="ds">同一个项目，<b>2028 投产 vs 2030 投产</b>，放进系统结果大不一样；“晚一点”在有明确节点的系统里是敏感参数。</div>
+        </div>
+      </div>
+      <div class="f5 c-do">
+        <div class="no">05</div>
+        <div class="fct">
+          <div class="tt">通勤、学位、留人是性价比最高的抓手 <span class="chip">🎯 高性价比抓手</span></div>
+          <div class="ds">比招大项目<b>便宜、见效快、自己可控</b>，却常被当成“配套”而排在后面。</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- 掂量 -->
   <div class="card">
-    <h2>三、我们站在哪：掂量快照</h2>
+    <h2>三、我们站在哪：掂量快照 <span class="itag real">官方实测</span></h2>
     <div class="kpis">
-      <div class="kpi"><div class="v">1203亿</div><div class="l">GDP · +4.3%</div></div>
-      <div class="kpi"><div class="v">973.9亿</div><div class="l">规上工业 · +9.6%</div></div>
-      <div class="kpi"><div class="v">632.7亿</div><div class="l">高新区 · +13.9%</div></div>
-      <div class="kpi"><div class="v">159.78万</div><div class="l">常住人口</div></div>
-      <div class="kpi"><div class="v" style="color:#f87171">-37.1%</div><div class="l">固定资产投资</div></div>
-      <div class="kpi"><div class="v">805亿</div><div class="l">社消零 · +3.7%</div></div>
-      <div class="kpi"><div class="v">64.6亿</div><div class="l">一般公共预算收入</div></div>
-      <div class="kpi"><div class="v">383.6亿</div><div class="l">外贸 · +7.1%</div></div>
+      <div class="kpi" data-t="GDP · 1203.33亿（+4.3%）" data-d="年初增长目标约 <b>6%</b>，实际 4.3%，差约 1.7 个百分点。来源：2025年计划执行快报数（非最终统计公报定数）。"><div class="v">1203亿</div><div class="l">GDP · +4.3%</div></div>
+      <div class="kpi" data-t="规上工业 · 973.9亿（+9.6%）" data-d="工业是“跑得最快”的一条腿，增速高于约 9% 的目标。来源：统计公报 / 政府工作报告。"><div class="v">973.9亿</div><div class="l">规上工业 · +9.6%</div></div>
+      <div class="kpi" data-t="高新区 · 632.7亿（+13.9%）" data-d="约占全区规上工业 <b>三分之二（67.4%）</b>，是绝对主引擎，也是增长集中度风险所在。来源：高新区高质量发展大会公开信息。"><div class="v">632.7亿</div><div class="l">高新区 · +13.9%</div></div>
+      <div class="kpi" data-t="常住人口 · 159.78万" data-d="人口目标完成不足一半，是“城市承载没跟上”的关键信号之一。来源：政府工作报告 / 统计公报。"><div class="v">159.78万</div><div class="l">常住人口</div></div>
+      <div class="kpi" data-t="固定资产投资 · −37.1%" data-d="八项指标中<b>唯一进入红区</b>：投资这条腿明显收缩，对后续投产节点形成压力。来源：计划执行快报数。"><div class="v" style="color:#f87171">-37.1%</div><div class="l">固定资产投资</div></div>
+      <div class="kpi" data-t="社会消费品零售 · 805亿（+3.7%）" data-d="年初目标约 <b>6%</b>，实际 3.7%，消费偏温，与“人气/人口”直接相关。来源：统计公报。"><div class="v">805亿</div><div class="l">社消零 · +3.7%</div></div>
+      <div class="kpi" data-t="一般公共预算收入 · 64.6亿" data-d="政府可支配财力，为公共服务与配套投入提供空间。来源：计划执行快报数。"><div class="v">64.6亿</div><div class="l">一般公共预算收入</div></div>
+      <div class="kpi" data-t="外贸进出口 · 383.6亿（+7.1%）" data-d="外需这一块在增长，但钥匙受全球环境影响，不完全在本地手里。来源：统计公报 / 公开披露。"><div class="v">383.6亿</div><div class="l">外贸 · +7.1%</div></div>
     </div>
+    <div class="metric-detail" id="metricDetail"><div class="md-t">点任一指标，查看口径、目标差距与来源</div></div>
     <div class="two">
       <div>
         <h3 style="margin-top:6px">三次产业结构</h3>
@@ -179,10 +355,10 @@ svg{max-width:100%;height:auto}
   <!-- 离目标多远 -->
   <div class="card">
     <h2>四、离目标还有多远</h2>
-    <h3>高新区产值爬坡：缺口压在几个投产节点上</h3>
+    <h3>高新区产值爬坡：缺口压在几个投产节点上 <span class="itag plan">规划节点 · 演示</span></h3>
     <div style="height:190px"><canvas id="climb"></canvas></div>
     <div class="plain"><span class="lab">人话版</span>这柱子一级级往上跳，就是高新区要爬的楼：今年632亿，后年破千亿，2030年到1500亿。它不是每年匀着涨，而是靠几个大项目投产“跳台阶”，就像爬楼梯——每一级都得踩稳。哪个项目晚投产，脚下那一级就可能踩空，后面全得慢下来。</div>
-    <h3>2030年三种可能情景</h3>
+    <h3>2030年三种可能情景 <span class="itag sim">模型情景 · 非预测</span></h3>
     <div style="height:180px"><canvas id="scen"></canvas></div>
     <div class="plain"><span class="lab">人话版</span>2030年高新区产值会落在哪个区间？这里算了三种“命”：顺的时候约1800亿，比目标高出一头；一半一半约1500亿，正好踩在目标线上；不顺时约1000亿，守住了千亿级园区，但离1500亿目标差一大截。最该警惕的是中间那根——预期值正好等于目标值，几乎不留余量，一个关键项目晚投产半年、或通勤一堵，就可能滑向下面那档。</div>
   </div>
@@ -191,7 +367,30 @@ svg{max-width:100%;height:auto}
   <div class="card" style="border-color:#7f1d1d">
     <h2>五、决策者最该重视的三件事</h2>
     <h3>1. 命门可能不在"招不到商"，在"投产与通勤"</h3>
-    <p style="font-size:13px;color:#cbd5e1;margin:0">这里要分两本账，不能混在一起排名。一本是常规敏感性：投资、外需、服务业、土地四个参数各自扰动，其中投资与外需影响靠前。另一本是我们单独做的<b>受控场景压测</b>——故意把“关键项目投产延期”“过江通勤堵塞”这两类现实里真可能发生的事单独拎出来压一遍；它们不在常规四参数排序里，但一旦发生，比“招不到商”更直接、更难补救。下面这张影响系数图，画的是后一类受控场景的相对冲击。</p>
+    <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 4px">这里要分两本账，不能混在一起排名——一把尺子答“常规波动”，一把尺子答“万一发生”。</p>
+    <div class="ledgers">
+      <div class="ledger l1">
+        <div class="lh">📏 账本一 · 常规敏感性</div>
+        <div class="lhq">四个参数各自扰动，看谁影响靠前</div>
+        <ul>
+          <li><b>投资</b>（影响靠前）</li>
+          <li><b>外需</b>（影响靠前）</li>
+          <li>服务业</li>
+          <li>土地</li>
+        </ul>
+      </div>
+      <div class="ledger l2">
+        <div class="lh">⚠️ 账本二 · 受控场景压测</div>
+        <div class="lhq">把现实里真可能发生的事单独注入压一遍</div>
+        <ul>
+          <li><b>关键项目投产延期</b></li>
+          <li><b>过江通勤堵塞</b></li>
+          <li>不在常规四参数排序里</li>
+          <li>一旦发生，比“招不到商”更直接、更难补救</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ledger-divider">🔀 两把尺子、两个问题，不放在同一个排序里比 · 下面影响系数图画的是账本二</div>
     <h3>2. 抓手优先级：先做"影响大、自己可控"的</h3>
     <div style="height:210px"><canvas id="matrix"></canvas></div>
     <div class="plain"><span class="lab">人话版</span>这张图教咱们把钱花在刀刃上：越靠右上角，越是“自己说了算、又管用”的事——修通勤路、办学位、留住人，都在这一片；而外贸、全球航运虽然热闹，钥匙却攥在别人手里。聪明的做法，是先把自己能掌控、又见效快的事办好，心里才踏实。</div>
@@ -202,16 +401,84 @@ svg{max-width:100%;height:auto}
   <!-- 各因素影响 -->
   <div class="card">
     <h2>六、哪些因素最牵动结果</h2>
-    <div style="height:200px"><canvas id="coef"></canvas></div>
-    <p style="font-size:11px;color:#fbbf24;margin:6px 0 0">注：图中系数为模型在当前假设参数下的相对敏感度估计值，非现实数据实测的相关系数；参数是否合理需用真实数据校准。</p>
-    <div class="plain"><span class="lab">人话版</span>哪些事最能"牵一发动全身"？排在最前的，是"项目能不能按时投产"和"通勤路顺不顺"；大家天天挂在嘴边的服务业、融深反倒靠后。这不是说后者不重要，而是工期一拖、通勤一堵，整座城晃得最厉害。这两件听起来不起眼的"小事"，其实正是惠城的命门。</div>
-    <div style="margin-top:14px;padding-top:12px;border-top:1px solid #1c2739">
-      <div style="font-size:13px;font-weight:700;color:#fbbf24;margin-bottom:8px">补充：参数敏感性分析（参数微分）</div>
-      <div class="plain" style="font-size:12.5px">
-        除了上面的相关系数，本项目还做了<b>参数敏感性分析</b>：保持其他四条路不变，只把某一条路的均值单独调高或调低 20%，用<b>同一个随机种子</b>重新跑蒙特卡洛（控制变量法），看达标概率和中位产值变多少。<br><br>
-        结果提示：在模型内部，<b>新投产项目</b>这条路的参数最敏感——它上下动 20%，达标概率的摆动幅度最大；<b>融深融湾</b>最不敏感，±20% 对整体结果影响有限。三大集群、AI机器人、服务业带动居中。<br><br>
-        <b>两本账，别混：</b>这里的参数敏感性是"参数微分"——回答"哪个参数最敏感"；⑥风洞页的受控场景是"事件注入"——回答"如果这件事发生会怎样"。前者是数学上的偏导，后者是现实中的情景，两把尺子两个问题，不放在同一个排序里比。<br><br>
-        <b>注意：</b>"敏感"不等于"重要"。敏感只说明"在模型里这个参数和结果绑得紧"，现实中哪条路该优先，还要结合可控性、成本和见效速度综合判断。参数 ±20% 是否对应现实中的合理波动范围，也需要用现实数据校准。
+    <div class="subh"><span class="num">1</span>尺子一 · 路径相关系数 <span class="itag sim">模型推演 · 关联强度</span></div>
+    <div style="font-size:11.5px;color:#94a3b8;margin:0 0 6px">五条路各自贡献与总产值的相关系数 |corr|（0–1，越大绑得越紧）。这是模型内部的“关联”，<b>不是现实因果</b>，也不与下方事件冲击比柱长。</div>
+    <div style="height:185px"><canvas id="coef"></canvas></div>
+    <div class="plain"><span class="lab">人话版</span>“新投产项目”这条路和结果绑得最紧，集群、AI、服务业依次靠后，融深最松。但相关系数只回答“谁和结果绑得紧”，回答不了“万一某件事真发生会怎样”——那是尺子二。</div>
+
+    <div class="subh"><span class="num">2</span>尺子二 · 受控事件冲击 <span class="itag sim">模型推演 · 事件注入</span></div>
+    <div style="font-size:11.5px;color:#94a3b8;margin:0 0 6px">同一基准、同一随机种子，把“关键项目投产延期”“过江通勤堵塞”分别单独注入，看达标率和中位产值各掉多少。</div>
+    <div class="shock-grid">
+      <div class="shock-box"><div class="cap">2030 达标率 <b>（≥1500亿概率）</b></div><div style="height:168px"><canvas id="shockHit"></canvas></div></div>
+      <div class="shock-box"><div class="cap">中位产值 <b>（亿元）</b></div><div style="height:168px"><canvas id="shockP"></canvas></div></div>
+    </div>
+    <div class="plain"><span class="lab">人话版</span>真把“项目延期”压一遍，达标率从 66% 掉到 48%（−19 个百分点）；“通勤堵塞”掉到 51%（−16 个点）。这两件事不在常规参数排序里，却比“招不到商”更直接、更难补救——这正是惠城的命门。</div>
+    <div style="margin-top:16px;padding-top:14px;border-top:1px solid #1c2739">
+      <div style="font-size:13px;font-weight:700;color:#fbbf24;margin-bottom:6px">补充：参数敏感性分析（参数微分）<span style="font-size:10.5px;font-weight:400;color:#94a3b8;margin-left:6px">控制变量法 · 只调一条路均值 ±20%，其他四条不动，同一随机种子重跑</span></div>
+      <div class="sens">
+        <div class="sens-row"><span class="nm">新投产项目</span><span class="sens-track"><span class="sens-fill" style="width:100%"></span></span><span class="rk">±37.6pp</span></div>
+        <div class="sens-row"><span class="nm">三大集群</span><span class="sens-track"><span class="sens-fill mid" style="width:41.8%"></span></span><span class="rk">±15.7pp</span></div>
+        <div class="sens-row"><span class="nm">AI机器人</span><span class="sens-track"><span class="sens-fill mid" style="width:20.5%"></span></span><span class="rk">±7.7pp</span></div>
+        <div class="sens-row"><span class="nm">服务业带动</span><span class="sens-track"><span class="sens-fill mid" style="width:20.5%"></span></span><span class="rk">±7.7pp</span></div>
+        <div class="sens-row"><span class="nm">融深融湾</span><span class="sens-track"><span class="sens-fill low" style="width:9.3%"></span></span><span class="rk">±3.5pp</span></div>
+      </div>
+      <p style="font-size:10.5px;color:#6b7280;margin:0 0 4px">数值为同一基准、同一随机种子（42，2万次）下达标概率的真实摆动；±20% 是否对应现实合理波动，需用真实数据校准。</p>
+      <div class="rulers">
+        <div class="ruler a">
+          <div class="rk">尺子一 · 参数微分</div>
+          <div class="qt">回答“哪个参数最敏感”</div>
+          <div class="how">数学上的<b>偏导</b>：逐个参数 ±20% 扰动，看达标概率摆动多大。</div>
+        </div>
+        <div class="ruler b">
+          <div class="rk">尺子二 · 事件注入</div>
+          <div class="qt">回答“如果这件事发生会怎样”</div>
+          <div class="how">现实中的<b>情景</b>：投产延期、通勤堵塞等具体事件单独注入（见⑥风洞页）。</div>
+        </div>
+      </div>
+      <div class="ledger-divider">⚖️ “敏感” ≠ “重要”：敏感只说明在模型里绑得紧；现实中先做哪条，还要看可控性、成本、见效速度。</div>
+    </div>
+
+    <!-- 动手实验台 -->
+    <div class="lab-card">
+      <div class="lab-head">🛠 动手实验台：把事件“注入”，看 2030 怎么变</div>
+      <div class="lab-sub">勾选下方真实可能发生的事件，未来轨迹与达标率用同一模型、同一随机种子实时重算（与⑥风洞页同一口径）。</div>
+      <div class="toggles">
+        <button class="tgl" id="tglDelay" data-k="delay">
+          <span class="box">✓</span>
+          <span class="tt"><b>关键项目投产延期</b><span>新投产项目贡献均值下调</span></span>
+        </button>
+        <button class="tgl" id="tglCommute" data-k="commute">
+          <span class="box">✓</span>
+          <span class="tt"><b>过江通勤堵塞</b><span>消费通道收窄、招工受影响</span></span>
+        </button>
+      </div>
+      <div class="lab-grid">
+        <div class="traj-box">
+          <div class="cap"><b>未来轨迹</b>：灰虚线是规划节点，2030 亮色柱为模型区间（p10–p90），点为中位</div>
+          <div style="height:232px"><canvas id="traj"></canvas></div>
+        </div>
+        <div class="stat-box">
+          <div class="bigstat">
+            <div class="lab2">2030 达标率（≥1500亿）</div>
+            <div class="row"><span class="cur" id="stHit">66%</span><span class="delta flat" id="stHitD">基准</span></div>
+            <div class="base">基准 <b>66%</b>（越低越危险）</div>
+          </div>
+          <div class="bigstat">
+            <div class="lab2">2030 中位产值（亿元）</div>
+            <div class="row"><span class="cur" id="stP">1579</span><span class="delta flat" id="stPD">基准</span></div>
+            <div class="base">基准 <b>1579</b> · 目标 <b>1500</b></div>
+          </div>
+        </div>
+      </div>
+      <div class="gap-note" id="gapNote"></div>
+      <div class="concl">
+        <div class="ch">📋 我的实验结论（随选择实时更新）</div>
+        <div class="cb" id="conclBody"></div>
+        <div class="concl-btns">
+          <button class="cbtn" id="copyConcl">📋 复制结论</button>
+          <button class="cbtn ghost" id="resetLab">↺ 再试一次</button>
+          <button class="cbtn ghost" id="shareLab">🔁 分享结果</button>
+        </div>
       </div>
     </div>
   </div>
@@ -219,22 +486,46 @@ svg{max-width:100%;height:auto}
   <!-- 老百姓 -->
   <div class="card people">
     <h2 style="border-color:#7c2d12">七、这和普通老百姓有什么关系</h2>
-    <div class="two">
-      <div>
-        <div class="q">我每天上班的路，为什么重要？</div>
-        <div class="a">过江通道堵不堵，连着你会不会迟到、扣不扣全勤，也连着企业能不能招到人。路顺了，上班顺心，园区也旺。</div>
+    <div class="chains">
+      <div class="chain">
+        <div class="q">🚇 我每天上班的路，为什么重要？</div>
+        <div class="flow">
+          <div class="cnode bad">过江通道堵</div>
+          <div class="carr">↓</div>
+          <div class="cnode">你迟到、扣全勤，企业也招不到人</div>
+          <div class="carr">↓</div>
+          <div class="cnode good">路顺了 → 上班顺心、园区旺</div>
+        </div>
       </div>
-      <div>
-        <div class="q">孩子的学位，和产业有啥关系？</div>
-        <div class="a">一个家庭留不留，往往看孩子有没有学上。2025年惠城已新增公办义务教育学位超1.1万个，2026年还计划再增约8000个；学位松一松，人才和家庭就留一留。</div>
+      <div class="chain">
+        <div class="q">🎒 孩子的学位，和产业有啥关系？</div>
+        <div class="flow">
+          <div class="cnode">2025 新增公办学位超 1.1 万，2026 再增约 8000</div>
+          <div class="carr">↓</div>
+          <div class="cnode">孩子有学上</div>
+          <div class="carr">↓</div>
+          <div class="cnode good">家庭留得住，人才和产业才留得住</div>
+        </div>
       </div>
-      <div>
-        <div class="q">楼下小店旺不旺，跟我有关吗？</div>
-        <div class="a">产业转起来，工资在这发、消费在这花，早餐店、商铺才旺。本地循环转得好，家门口的工作和生意才多。</div>
+      <div class="chain">
+        <div class="q">🍜 楼下小店旺不旺，跟我有关吗？</div>
+        <div class="flow">
+          <div class="cnode">产业转起来</div>
+          <div class="carr">↓</div>
+          <div class="cnode">工资在这发、消费在这花</div>
+          <div class="carr">↓</div>
+          <div class="cnode good">早餐店、商铺旺，家门口工作生意多</div>
+        </div>
       </div>
-      <div>
-        <div class="q">年轻人留不留，为什么是大事？</div>
-        <div class="a">一座城的未来在年轻人身上。有好工作、好学校、有奔头，年轻人才愿意把下一个五年留在这里，城才有活力。</div>
+      <div class="chain">
+        <div class="q">🌱 年轻人留不留，为什么是大事？</div>
+        <div class="flow">
+          <div class="cnode">有好工作、好学校</div>
+          <div class="carr">↓</div>
+          <div class="cnode">有奔头</div>
+          <div class="carr">↓</div>
+          <div class="cnode good">愿意把下一个五年留下，城才有活力</div>
+        </div>
       </div>
     </div>
   </div>
@@ -287,26 +578,26 @@ svg{max-width:100%;height:auto}
       <div class="pyra"><div class="bar" style="background:#14532d;width:300px">A · 实测</div><div class="lab">统计公报、政府工作报告、计划执行报告、民生实事中<b>直接给出的数字</b></div></div>
     </div>
     <h3>主要公开来源</h3>
-    <div style="font-size:12px;color:#cbd5e1;line-height:2">
-      · 惠州市、惠城区人民政府门户网站<br>
-      · 惠城区2025年国民经济和社会发展统计公报<br>
-      · 2026年惠城区政府工作报告、计划草案报告<br>
-      · 惠城高新区高质量发展大会公开信息<br>
-      · 惠州港绩效自评报告、上市公司公告及其他公开披露资料
+    <div class="src-badges">
+      <span class="src-badge">🏛 惠州市 / 惠城区政府门户</span>
+      <span class="src-badge">📊 惠城区2025年统计公报</span>
+      <span class="src-badge">📑 2026政府工作报告 · 计划草案</span>
+      <span class="src-badge">🏭 高新区高质量发展大会信息</span>
+      <span class="src-badge">📈 惠州港绩效自评 · 上市公司公告</span>
     </div>
   </div>
 
   <!-- 模型边界 -->
   <div class="card">
     <h2>十、模型边界与免责声明</h2>
-    <div class="bound">
-      1. <b>不是预测器</b>：不预测具体产值或招商成败，只在公开数据与明确假设下给出叙事分布与结构提示。<br>
-      2. <b>不做因果断言</b>：统一使用"关联、同步、结构提示"，不使用"因为A所以B"。路径系数和参数敏感性均为模型内部关联强度，不代表现实因果作用。<br>
-      3. <b>反事实不可验证，但参数可核对</b>：每个参数都能回到公开资料核对。<br>
-      4. <b>不是真涌现</b>：为可复现的弱涌现模拟，未达真实经济涌现量级。<br>
-      5. <b>可复现</b>：蒙特卡洛使用 mulberry32 伪随机数生成器，固定随机种子后结果完全可复现（同种子必同结果）；网络中心性使用 Brandes 介数算法，结果由代码实时计算，非硬编码。<br>
-      6. <b>两本账</b>：参数敏感性分析（参数微分，逐个参数±20%扰动）与受控场景压测（事件注入，投产延期/通勤堵塞等具体事件）分开计算、分开解读，不混排在同一个排序里。<br>
-      7. <b>不构成投资建议</b>，亦不替代官方决策；结论随假设改变而改变。
+    <div class="disc-grid">
+      <div class="disc-item"><div class="di">🔮</div><div><div class="dt">不是预测器</div><div class="dd">不预测具体产值或招商成败，只在公开数据与明确假设下给出叙事分布与结构提示。</div></div></div>
+      <div class="disc-item"><div class="di">🔗</div><div><div class="dt">不做因果断言</div><div class="dd">统一用“关联、同步、结构提示”，不用“因为A所以B”；系数均为模型内部关联强度，不代表现实因果。</div></div></div>
+      <div class="disc-item"><div class="di">🔍</div><div><div class="dt">反事实不可验证，参数可核对</div><div class="dd">每个参数都能回到公开资料逐一核对。</div></div></div>
+      <div class="disc-item"><div class="di">🌀</div><div><div class="dt">不是真涌现</div><div class="dd">为可复现的弱涌现模拟，未达到真实经济涌现的量级。</div></div></div>
+      <div class="disc-item"><div class="di">🔁</div><div><div class="dt">可复现</div><div class="dd">蒙特卡洛用 mulberry32 伪随机数，固定种子必同结果；网络中心性用 Brandes 介数算法实时计算，非硬编码。</div></div></div>
+      <div class="disc-item"><div class="di">📐</div><div><div class="dt">两本账分开</div><div class="dd">参数微分（±20%扰动）与受控场景（事件注入）分开计算、分开解读，不混排同一排序。</div></div></div>
+      <div class="disc-item" style="grid-column:1/-1;border-color:rgba(251,113,133,.35)"><div class="di" style="background:rgba(251,113,133,.14);border-color:rgba(251,113,133,.35)">⚠️</div><div><div class="dt">不构成投资建议，亦不替代官方决策</div><div class="dd">结论随假设改变而改变。</div></div></div>
     </div>
   </div>
 
@@ -317,12 +608,12 @@ svg{max-width:100%;height:auto}
       <div class="badge">张凌</div>
       <div style="flex:1;min-width:240px">
         <div style="font-size:16px;font-weight:700;color:#fbbf24">张凌 博士</div>
-        <div class="roles">
-          · 高校副教授<br>
-          · 南粤优秀教师<br>
-          · 国际SCI期刊审稿人<br>
-          · 广东省乡村振兴驻镇工作队成员<br>
-          · 曾任驻村第一书记
+        <div class="role-badges">
+          <span class="role-badge">👨‍🏫 高校副教授</span>
+          <span class="role-badge">🏅 南粤优秀教师</span>
+          <span class="role-badge">📝 国际SCI期刊审稿人</span>
+          <span class="role-badge">🌾 乡村振兴驻镇工作队成员</span>
+          <span class="role-badge">🏘️ 曾任驻村第一书记</span>
         </div>
         <div class="tagline">"把不确定性，变成可拍板的结构。"</div>
       </div>
@@ -400,27 +691,173 @@ new Chart(document.getElementById('matrix').getContext('2d'),{
     scales:{x:{title:{display:true,text:'自己可控程度 →',color:tc},min:0,max:10,ticks:{color:tc},grid:{color:gc}},
       y:{title:{display:true,text:'影响程度 →',color:tc},min:0,max:10,ticks:{color:tc},grid:{color:gc}}}}
 });
-// 影响系数：直接读 model.js 同一内核的真实输出，不再写死
-// m.coefs 顺序 = [新投产项目, 三大集群, AI机器人, 服务业带动, 融深融湾]
-const _m = HT.run(42, 10000, HT.DEFAULT_PATHS);
-// 通勤走廊：用风洞压测中"单独施加通勤"相对"单独施加投产延期"的达标率降幅比
-function _hitAfter(over){
-  const p = JSON.parse(JSON.stringify(HT.DEFAULT_PATHS)); over(p);
-  return HT.run(42, 10000, p).hit;
-}
-const _baseHit = _hitAfter(()=>{});
-const _commuteHit = _hitAfter(p=>{p[3].mu=Math.max(0,p[3].mu-60); p[0].mu=Math.max(0,p[0].mu-18);});
-const _delayHit   = _hitAfter(p=>{p[0].mu=Math.max(0,p[0].mu-90);});
-const _commuteRel  = (_baseHit-_commuteHit)/Math.max(1e-6,(_baseHit-_delayHit));
-const coefData = [_m.coefs[0], _commuteRel, _m.coefs[1], _m.coefs[2], _m.coefs[3], _m.coefs[4]];
+// ===== 统一基准：同一模型内核、同一随机种子，供报告页所有"推演"图共用 =====
+const _SEED=42, _N=20000;
+function _cloneP(){return JSON.parse(JSON.stringify(HT.DEFAULT_PATHS));}
+function _runSim(over){const p=_cloneP(); if(over)over(p); return HT.run(_SEED,_N,p);}
+const _base=_runSim(()=>{});
+const _delay=_runSim(p=>{p[0].mu=Math.max(0,p[0].mu-90);});
+const _commute=_runSim(p=>{p[3].mu=Math.max(0,p[3].mu-60); p[0].mu=Math.max(0,p[0].mu-18);});
+window._SIM={SEED:_SEED,N:_N,base:_base,delay:_delay,commute:_commute,run:_runSim,cloneP:_cloneP};
+
+// 图A：路径相关系数（仅5条路径的 |corr|，纯关联 0–1，不混入任何事件量）
 new Chart(document.getElementById('coef').getContext('2d'),{
   type:'bar',
-  data:{labels:['投产工期','通勤走廊','三大集群','AI机器人','服务业','融深'],datasets:[{
-    data:coefData.map(v=>+v.toFixed(2)),
-    backgroundColor:['#3b82f6','#f87171','#8b5cf6','#06b6d4','#fbbf24','#94a3b8'],borderRadius:4}]},
-  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>'相对强度 '+it.parsed.x.toFixed(2)+'（模型输出，非实测相关系数）'}}},
+  data:{labels:['新投产项目','三大集群','AI机器人','服务业带动','融深融湾'],datasets:[{
+    data:_base.coefs.map(v=>+v.toFixed(2)),
+    backgroundColor:['#3b82f6','#8b5cf6','#06b6d4','#fbbf24','#94a3b8'],borderRadius:4}]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>'相关系数 '+it.parsed.x.toFixed(2)+'（模型内部关联，非实测因果）'}}},
     scales:{x:{ticks:{color:tc},grid:{color:gc},max:1},y:{ticks:{color:axc},grid:{display:false}}}}
 });
+
+// 柱顶标值小插件
+function _barVal(unit){return {id:'bv'+unit,afterDatasetsDraw(c){const ctx=c.ctx;c.data.datasets.forEach((ds,i)=>{if(ds.type==='line')return;c.getDatasetMeta(i).data.forEach((bar,k)=>{ctx.save();ctx.fillStyle='#e2e8f0';ctx.font='700 11px sans-serif';ctx.textAlign='center';ctx.fillText(ds.data[k]+unit,bar.x,bar.y-6);ctx.restore();});});}};}
+
+// 图B-1：受控事件冲击 —— 达标率
+new Chart(document.getElementById('shockHit').getContext('2d'),{
+  type:'bar',
+  plugins:[_barVal('%')],
+  data:{labels:['基准','项目延期','通勤堵塞'],datasets:[{
+    data:[Math.round(_base.hit),Math.round(_delay.hit),Math.round(_commute.hit)],
+    backgroundColor:['#22c55e','#f87171','#fb923c'],borderRadius:6}]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>'达标率 '+it.parsed.y+'%'}}},
+    scales:{x:{ticks:{color:axc,font:{size:10}},grid:{display:false}},
+      y:{ticks:{color:tc,callback:v=>v+'%'},grid:{color:gc},min:0,max:100}}}
+});
+// 图B-2：受控事件冲击 —— 中位产值（含目标线）
+new Chart(document.getElementById('shockP').getContext('2d'),{
+  type:'bar',
+  plugins:[_barVal('亿')],
+  data:{labels:['基准','项目延期','通勤堵塞'],datasets:[
+    {data:[Math.round(_base.p50),Math.round(_delay.p50),Math.round(_commute.p50)],
+      backgroundColor:['#22c55e','#f87171','#fb923c'],borderRadius:6},
+    {type:'line',label:'目标',data:[HT.TARGET,HT.TARGET,HT.TARGET],borderColor:'#60a5fa',borderDash:[6,4],pointRadius:0,borderWidth:2}]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},
+      tooltip:{callbacks:{label:it=>it.dataset.label?('目标 '+HT.TARGET+'亿'):('中位产值 '+it.parsed.y+'亿')}}},
+    scales:{x:{ticks:{color:axc,font:{size:10}},grid:{display:false}},
+      y:{ticks:{color:tc,callback:v=>v+'亿'},grid:{color:gc},min:1300}}}
+});
+
+/* ============ 健康扫描 + 指标点击详情 ============ */
+(function(){
+  const kpis=document.querySelector('.kpis'), md=document.getElementById('metricDetail');
+  if(!kpis||!md)return;
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ks=kpis.querySelectorAll('.kpi');
+  if(!reduce){
+    kpis.classList.add('scan-ready');
+    const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){ks.forEach((k,i)=>setTimeout(()=>k.classList.add('in'),i*90));io.disconnect();}});},{threshold:.25});
+    io.observe(kpis);
+  }
+  ks.forEach(k=>k.addEventListener('click',()=>{
+    ks.forEach(x=>x.classList.remove('sel'));k.classList.add('sel');
+    md.classList.add('show');
+    md.innerHTML='<div class="md-t">'+k.dataset.t+'</div><div>'+k.dataset.d+'</div>';
+  }));
+})();
+
+/* ============ 滚动进入动画 ============ */
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const cards=document.querySelectorAll('.card');
+  cards.forEach(c=>c.classList.add('reveal'));
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.06});
+  cards.forEach(c=>io.observe(c));
+})();
+
+/* ============ 压力测试实验台：情景联动 ============ */
+(function(){
+  const trajEl=document.getElementById('traj');
+  if(!trajEl)return;
+  const state={delay:false,commute:false};
+  // 叠加口径：延期主导 p0（-90 已覆盖通勤附带的 p0-18），通勤主导 p3（-60）
+  function run(){
+    return _SIM.run(p=>{
+      if(state.delay) p[0].mu=Math.max(0,p[0].mu-90);
+      if(state.commute){ p[3].mu=Math.max(0,p[3].mu-60); if(!state.delay) p[0].mu=Math.max(0,p[0].mu-18); }
+    });
+  }
+  const plan=[632.7,820,1000,1500];
+  const traj=new Chart(trajEl.getContext('2d'),{
+    data:{labels:['2025','2026','2027','2030'],datasets:[
+      {type:'bar',label:'模型区间 p10–p90',data:[null,null,null,[_base.p10,_base.p90]],
+        backgroundColor:'rgba(56,189,248,.28)',borderColor:'rgba(56,189,248,.55)',borderWidth:1,borderRadius:4,order:2,barPercentage:.42,categoryPercentage:.6},
+      {type:'line',label:'规划节点',data:plan.slice(),borderColor:'#94a3b8',borderDash:[6,5],
+        pointRadius:4,pointBackgroundColor:'#94a3b8',borderWidth:1.5,order:3},
+      {type:'scatter',label:'模型中位',data:[null,null,null,_base.p50],
+        backgroundColor:'#fbbf24',pointRadius:9,borderColor:'#fff',borderWidth:1.5,order:1}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:axc,font:{size:10},boxWidth:14,padding:10}},
+        tooltip:{callbacks:{label:it=>{
+          if(it.dataset.label==='模型区间 p10–p90'&&Array.isArray(it.raw))return '区间 '+it.raw[0].toFixed(0)+'–'+it.raw[1].toFixed(0)+' 亿';
+          if(it.dataset.label==='模型中位'&&it.raw!=null)return '中位 '+it.raw.toFixed(0)+' 亿';
+          return it.dataset.label+' '+it.raw+' 亿';
+        }}}},
+      scales:{x:{ticks:{color:axc},grid:{display:false}},
+        y:{ticks:{color:tc,callback:v=>v+'亿'},grid:{color:gc},min:500,max:1900}}}
+  });
+  const elHit=document.getElementById('stHit'),elHitD=document.getElementById('stHitD'),
+        elP=document.getElementById('stP'),elPD=document.getElementById('stPD'),
+        gap=document.getElementById('gapNote'),concl=document.getElementById('conclBody');
+  let prevHit=Math.round(_base.hit),prevP=Math.round(_base.p50);
+  function tween(el,from,to,unit){
+    const s=performance.now(),d=650;
+    (function step(t){const k=Math.min(1,(t-s)/d),e=1-Math.pow(1-k,3),v=from+(to-from)*e;
+      el.textContent=Math.round(v)+unit; if(k<1)requestAnimationFrame(step);})(s);
+  }
+  function deltaText(el,val){
+    if(Math.abs(val)<0.5){el.textContent='与基准持平';el.className='delta flat';}
+    else{el.textContent=(val>0?'+':'−')+Math.abs(val)+(el===elHitD?'pp':'亿');el.className='delta '+(val<0?'down':'flat');}
+  }
+  function name(){
+    if(!state.delay&&!state.commute)return '基准情景';
+    return [state.delay&&'项目延期',state.commute&&'通勤堵塞'].filter(Boolean).join(' + ');
+  }
+  function render(){
+    const r=run();
+    const hit=Math.round(r.hit),p=Math.round(r.p50);
+    const dHit=hit-Math.round(_base.hit),dP=p-Math.round(_base.p50);
+    tween(elHit,prevHit,hit,'%'); tween(elP,prevP,p,'');
+    deltaText(elHitD,dHit); deltaText(elPD,dP);
+    prevHit=hit; prevP=p;
+    // 轨迹
+    traj.data.datasets[0].data=[null,null,null,[r.p10,r.p90]];
+    traj.data.datasets[2].data=[null,null,null,r.p50];
+    traj.update();
+    // 与目标差距
+    const gapP=p-HT.TARGET;
+    gap.innerHTML='当前为<b>'+name()+'</b>：中位 '+(p>=HT.TARGET?'<b style="color:#86efac">高于目标 '+(gapP)+'亿</b>':'<b style="color:#fca5a5">低于目标 '+(-gapP)+'亿</b>')+'，达标率 '+hit+'%（基准 66%）。'+
+      (hit<55?'⚠️ 已低于 55%，意味着每两次推演就有一次以上不达标。':'');
+    // 脆弱点
+    let weak=[];
+    if(state.delay)weak.push('投产节点（延期会直接削掉新投产贡献）');
+    if(state.commute)weak.push('通勤走廊（一堵则招工与消费双向失血）');
+    const weakTxt=weak.length?('<span class="neg">最脆弱处：'+weak.join('；')+'。</span>'):'主要脆弱点是投产节点与通勤走廊（见上方事件冲击）。';
+    const baseTxt='<b>实验设置：</b>'+name()+'；2030 达标率 <b>'+hit+'%</b>'+(dHit?' <span class="'+(dHit<0?'neg':'pos')+'">（'+(dHit>0?'+':'−')+Math.abs(dHit)+'pp）</span>':'')+'，中位产值 <b>'+p+'亿</b>'+(dP?' <span class="'+(dP<0?'neg':'pos')+'">（'+(dP>0?'+':'−')+Math.abs(dP)+'亿）</span>':'')+'，p10–p90 区间 '+r.p10.toFixed(0)+'–'+r.p90.toFixed(0)+' 亿。';
+    concl.innerHTML=baseTxt+weakTxt+'<br><span style="font-size:11px;color:#6b7280">模型版本：种子'+_SIM.SEED+'·'+_SIM.N.toLocaleString()+' 次蒙特卡洛；BASE 632.7 亿（2025实测）、TARGET 1500 亿（外延参考）、五路径μ/σ 为模型假设。此为压力测试叙事，非预测，不构成投资建议。</span>';
+  }
+  function text(){
+    const r=run();
+    return '【惠城产业风洞 · 我的实验结论】情景：'+name()+'\n2030达标率：'+Math.round(r.hit)+'%（基准66%），中位产值：'+Math.round(r.p50)+'亿（目标1500），区间'+r.p10.toFixed(0)+'–'+r.p90.toFixed(0)+'亿。\n模型：种子'+_SIM.SEED+'，'+_SIM.N+'次蒙特卡洛。压力测试非预测，不构成投资建议。';
+  }
+  document.querySelectorAll('.tgl').forEach(b=>b.addEventListener('click',()=>{
+    const k=b.dataset.k; state[k]=!state[k]; b.classList.toggle('on',state[k]); render();
+  }));
+  document.getElementById('resetLab').addEventListener('click',()=>{
+    state.delay=false;state.commute=false;
+    document.querySelectorAll('.tgl').forEach(b=>b.classList.remove('on')); render();
+  });
+  document.getElementById('copyConcl').addEventListener('click',function(){
+    navigator.clipboard&&navigator.clipboard.writeText(text());
+    const old=this.textContent;this.textContent='✅ 已复制';setTimeout(()=>this.textContent=old,1500);
+  });
+  document.getElementById('shareLab').addEventListener('click',()=>{ if(window.sharePage)window.sharePage(); });
+  render();
+})();
 </script>
 
 <div class="likebar">
