@@ -19,13 +19,23 @@ body{overflow-x:hidden}
 .nav a{background:var(--glass);color:var(--muted);border:1px solid var(--glass-b);padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none;transition:.2s}
 .nav a.on{background:rgba(56,189,248,.22);border-color:var(--neon);color:var(--neon);font-weight:700}
 .wrap{max-width:860px;margin:auto;padding:20px 16px 40px}
-.cover{text-align:center;padding:44px 20px;background:linear-gradient(160deg,rgba(16,26,48,.7),rgba(10,15,26,.5));backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:18px;margin-bottom:16px}
-.cover .kick{font-size:12px;letter-spacing:3px;color:#60a5fa;margin-bottom:12px}
-.cover h1{font-size:27px;line-height:1.4;margin:0 0 10px}
-.cover .meta{font-size:12.5px;color:var(--muted);margin-top:16px}
+.cover{position:relative;border-radius:20px;overflow:hidden;margin-bottom:18px;min-height:288px;display:flex;align-items:flex-end;border:1px solid var(--glass-b);box-shadow:0 20px 60px rgba(2,8,28,.6)}
+.cover .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%;z-index:0}
+.cover .hero-mask{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,12,26,.62) 0%,rgba(8,12,26,.28) 38%,rgba(8,12,26,.94) 100%),linear-gradient(90deg,rgba(6,10,22,.78) 0%,rgba(6,10,22,.28) 62%,transparent 100%)}
+.cover .hero-in{position:relative;z-index:2;padding:30px 34px 26px;width:100%}
+.cover .hero-pills{position:absolute;top:20px;right:22px;z-index:3;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.cover .hero-pill{font-size:11px;color:#dbeafe;background:rgba(10,18,38,.55);border:1px solid rgba(125,211,252,.35);backdrop-filter:blur(8px);border-radius:20px;padding:6px 13px;text-decoration:none}
+.cover .kick{font-size:12px;letter-spacing:3px;color:#7dd3fc;margin-bottom:10px;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+.cover h1{font-size:40px;line-height:1.12;margin:0 0 10px;font-weight:900;text-shadow:0 4px 24px rgba(0,0,0,.7)}
+.cover h1 .h-sub{display:block;font-size:20px;font-weight:800;margin-top:6px;background:linear-gradient(90deg,#7dd3fc 0%,#a5f3fc 45%,#fbbf24 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cover .hero-desc{font-size:13px;color:#cbd5e1;margin:0 0 4px;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.cover .meta{font-size:12px;color:#94a3b8;margin-top:14px;text-shadow:0 1px 8px rgba(0,0,0,.7)}
+@media(max-width:700px){.cover{min-height:236px}.cover h1{font-size:28px}.cover h1 .h-sub{font-size:16px}.cover .hero-in{padding:22px 20px 20px}.cover .hero-pills{position:static;justify-content:flex-start;margin-bottom:10px}.cover .hero-pills{display:none}}
 .card{background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 4px 24px rgba(0,0,0,.25)}
 .card h2{font-size:16px;margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.08)}
 .card h3{font-size:13.5px;color:#60a5fa;margin:18px 0 6px}
+.deep-divider{display:flex;align-items:center;gap:14px;justify-content:center;margin:26px 4px 18px;color:#fbbf24;font-size:13px;font-weight:700;letter-spacing:1px}
+.deep-divider .dd-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(251,191,36,.45),transparent)}
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
 @media(max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
 .kpi{background:rgba(10,15,26,.6);border:1px solid var(--glass-b);border-radius:12px;padding:14px 10px;text-align:center}
@@ -221,6 +231,113 @@ svg{max-width:100%;height:auto}
 .cbtn{background:rgba(56,189,248,.14);border:1px solid rgba(56,189,248,.4);color:#bae6fd;border-radius:10px;padding:8px 15px;font-size:12px;font-weight:700;cursor:pointer;transition:.2s}
 .cbtn:hover{background:rgba(56,189,248,.26)}
 .cbtn.ghost{background:transparent;border-color:var(--glass-b);color:var(--muted)}
+/* ===== 8指标经济CT体检卡 ===== */
+.scan-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:9px;margin:12px 0}
+@media(max-width:1080px){.scan-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:700px){.scan-grid{grid-template-columns:repeat(2,1fr)}}
+.metric{background:linear-gradient(165deg,rgba(22,33,58,.72),rgba(10,15,26,.5));border:1px solid var(--glass-b);border-radius:13px;padding:12px 11px 11px;cursor:pointer;transition:.22s;opacity:0;transform:translateY(14px);display:flex;flex-direction:column;position:relative;overflow:hidden}
+.metric.in{opacity:1;transform:none;transition:opacity .55s ease,transform .55s ease}
+.metric:hover{transform:translateY(-3px);border-color:var(--neon);box-shadow:0 12px 28px rgba(56,189,248,.16)}
+.metric.sel{box-shadow:0 0 0 1px var(--neon),0 0 18px rgba(56,189,248,.28)}
+.m-icon{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:7px}
+.metric.good .m-icon{background:rgba(52,211,153,.14);border:1px solid rgba(52,211,153,.32)}
+.metric.warn .m-icon{background:rgba(251,191,36,.14);border:1px solid rgba(251,191,36,.32)}
+.metric.bad .m-icon{background:rgba(251,113,133,.14);border:1px solid rgba(251,113,133,.32)}
+.metric.flat .m-icon{background:rgba(96,165,250,.14);border:1px solid rgba(96,165,250,.32)}
+.metric .m-name{font-size:10.5px;color:var(--ink2);line-height:1.4;min-height:28px;font-weight:600}
+.metric .m-val{font-size:22px;font-weight:900;line-height:1.05;margin:1px 0 2px}
+.metric .m-sub{font-size:9px;color:var(--muted);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.spark{height:24px;width:100%;margin:4px 0 7px}
+.spark svg{width:100%;height:100%;display:block}
+.metric.good .spark{color:#34d399}.metric.warn .spark{color:#fbbf24}.metric.bad .spark{color:#fb7185}.metric.flat .spark{color:#60a5fa}
+.metric .m-tag{font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:20px;display:inline-block;white-space:nowrap;align-self:flex-start;margin-top:auto}
+.metric.good{border-top-color:#34d399}.metric.good .m-val{color:#86efac}.metric.good .m-tag{color:#6ee7b7;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.3)}
+.metric.warn{border-top-color:#fbbf24}.metric.warn .m-val{color:#fcd34d}.metric.warn .m-tag{color:#fcd34d;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.3)}
+.metric.bad{border-top-color:#fb7185}.metric.bad .m-val{color:#fca5a5}.metric.bad .m-tag{color:#fda4af;background:rgba(251,113,133,.12);border:1px solid rgba(251,113,133,.3)}
+.metric.flat{border-top-color:#60a5fa}.metric.flat .m-val{color:#93c5fd}.metric.flat .m-tag{color:#93c5fd;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3)}
+
+.scan-note{font-size:10.5px;color:#6b7280;margin-top:8px;line-height:1.6}
+/* 体检结论条（无加权分） */
+.scan-verdict{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 10px}
+.sv{flex:1;min-width:90px;background:rgba(10,15,26,.55);border:1px solid var(--glass-b);border-radius:11px;padding:10px 12px;display:flex;align-items:center;gap:9px}
+.sv .dot{width:11px;height:11px;border-radius:50%;flex:none}
+.sv .n{font-size:19px;font-weight:900;line-height:1}
+.sv .t{font-size:10.5px;color:var(--muted);margin-left:3px}
+.sv.g .dot{background:#22c55e;box-shadow:0 0 8px #22c55e}.sv.g .n{color:#4ade80}
+.sv.y .dot{background:#eab308;box-shadow:0 0 8px #eab308}.sv.y .n{color:#facc15}
+.sv.r .dot{background:#ef4444;box-shadow:0 0 8px #ef4444}.sv.r .n{color:#f87171}
+/* ===== 分段档位滑块 ===== */
+.seg{margin:12px 0 4px}
+.seg-label{font-size:12px;font-weight:700;color:var(--ink2);margin:0 0 6px;display:flex;justify-content:space-between;align-items:center}
+.seg-label .seg-val{font-weight:900;font-size:12.5px}
+.seg-track{display:flex;gap:4px;background:rgba(10,15,26,.55);border:1px solid var(--glass-b);border-radius:11px;padding:4px}
+.seg-btn{flex:1;background:transparent;border:1px solid transparent;color:var(--muted);border-radius:8px;padding:9px 2px;font-size:10.5px;font-weight:700;cursor:pointer;transition:.15s;line-height:1.35}
+.seg-btn.on{background:rgba(239,68,68,.18);border-color:#f87171;color:#fecaca}
+.seg-btn.on.zero{background:rgba(52,211,153,.16);border-color:#34d399;color:#a7f3d0}
+.hero-main{border:1px solid rgba(56,189,248,.32);background:linear-gradient(160deg,rgba(14,26,50,.55),rgba(10,15,26,.4));border-radius:16px;padding:16px 14px 12px;margin:12px 0;box-shadow:0 10px 40px rgba(2,12,40,.5)}
+.hero-main .cap{font-size:11.5px;color:var(--muted);margin-bottom:2px}
+.cmp-tabs{display:flex;gap:6px;margin:10px 0 8px}
+.cmp-tabs button{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--glass-b);color:var(--muted);border-radius:10px;padding:9px;font-size:12px;font-weight:700;cursor:pointer}
+.cmp-tabs button.on{background:rgba(56,189,248,.16);border-color:var(--neon);color:var(--neon)}
+.cmp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:700px){.cmp-grid{grid-template-columns:1fr 1fr}}
+/* ===== 驾驶舱：情景tab / 主图+右面板 / 四结果卡 ===== */
+.scene-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:6px 0 14px}
+.scene-tabs button{background:rgba(255,255,255,.04);border:1px solid var(--glass-b);color:var(--ink2);border-radius:11px;padding:11px 8px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s}
+.scene-tabs button:hover{border-color:rgba(56,189,248,.4)}
+.scene-tabs button.on{background:linear-gradient(135deg,rgba(56,189,248,.28),rgba(56,189,248,.08));border-color:var(--neon);color:#fff;box-shadow:0 0 20px rgba(56,189,248,.25)}
+@media(max-width:700px){.scene-tabs{grid-template-columns:1fr 1fr}}
+.future-flex{display:grid;grid-template-columns:1.65fr 1fr;gap:14px;align-items:stretch}
+@media(max-width:820px){.future-flex{grid-template-columns:1fr}}
+.future-panel{background:linear-gradient(160deg,rgba(56,189,248,.12),rgba(8,14,30,.5));border:1px solid rgba(56,189,248,.28);border-radius:15px;padding:15px 16px;display:flex;flex-direction:column;gap:6px}
+.fp-head{font-size:12px;font-weight:700;color:var(--neon);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.fp-lbl{font-size:11px;color:var(--muted)}
+.fp-p50{font-size:36px;font-weight:800;color:#fff;line-height:1.1}
+.fp-p50 small{font-size:13px;color:var(--muted);font-weight:400;margin-left:4px}
+.fp-row2{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 0}
+.fp-hit{font-size:30px;font-weight:800;color:var(--neon)}
+.donut-wrap{width:78px;height:78px;flex:none}
+.fp-range{font-size:19px;font-weight:700;color:var(--ink)}
+.fp-range small{font-size:11px;color:var(--muted);font-weight:400}
+.cmp-tabs2{display:flex;gap:6px;margin:10px 0 4px}
+.cmp-tabs2 button{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--glass-b);color:var(--muted);border-radius:10px;padding:10px;font-size:12.5px;font-weight:700;cursor:pointer}
+.cmp-tabs2 button.on{background:rgba(56,189,248,.16);border-color:var(--neon);color:var(--neon)}
+.four-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+@media(max-width:700px){.four-cards{grid-template-columns:1fr 1fr}}
+.rcard{background:rgba(255,255,255,.035);border:1px solid var(--glass-b);border-radius:13px;padding:13px;transition:.2s}
+.rcard.cur{border-color:var(--neon);background:rgba(56,189,248,.08);box-shadow:0 0 18px rgba(56,189,248,.15)}
+.rc-head{font-size:12px;color:var(--ink2);font-weight:700;margin-bottom:9px;display:flex;align-items:center;gap:7px}
+.rc-dot{width:9px;height:9px;border-radius:50%;flex:none}
+.rc-dot.base{background:#34d399}.rc-dot.delay{background:#fb7185}.rc-dot.commute{background:#fb923c}.rc-dot.both{background:#f472b6}
+.rc-big{font-size:27px;font-weight:800;color:#fff;line-height:1.1}
+.rc-sub{font-size:13px;color:var(--muted);margin-top:3px}
+.rc-range{font-size:11px;color:var(--muted);margin-top:7px;border-top:1px dashed var(--glass-b);padding-top:6px}
+.rc-bar{height:6px;background:rgba(255,255,255,.07);border-radius:6px;overflow:hidden;margin-top:8px}
+.rc-bar-fill{height:100%;border-radius:6px;transition:width .55s cubic-bezier(.4,0,.2,1)}
+.dist-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.dist-stats .ds-cell{background:rgba(255,255,255,.035);border:1px solid var(--glass-b);border-radius:10px;padding:9px 10px;text-align:center}
+.dist-stats .ds-l{font-size:11px;color:var(--muted)}
+.dist-stats .ds-v{font-size:19px;font-weight:800;color:#fff;margin-top:2px}
+.dist-stats .ds-v small{font-size:11px;font-weight:500;color:var(--muted)}
+.dist-stats .ds-d{font-size:10.5px;color:var(--muted);margin-top:2px}
+.dist-stats .ds-d .neg{color:#fca5a5}.dist-stats .ds-d .pos{color:#86efac}
+/* 体检卡迷你火花线（状态方向示意，非历史序列） */
+.spark{height:26px;margin:6px 0 2px}
+
+.cmp-cell{background:rgba(10,15,26,.55);border:1px solid var(--glass-b);border-radius:11px;padding:10px 11px}
+.cmp-cell .k{font-size:10px;color:var(--muted);margin-bottom:4px;line-height:1.4}
+.cmp-cell .flow{display:flex;align-items:baseline;gap:5px;flex-wrap:wrap}
+.cmp-cell .from{font-size:12px;color:var(--muted);text-decoration:line-through;opacity:.7}
+.cmp-cell .arr{color:var(--muted);font-size:10px}
+.cmp-cell .to{font-size:18px;font-weight:900}
+.cmp-cell .to.bad{color:#fca5a5}.cmp-cell .to.good{color:#86efac}.cmp-cell .to.neutral{color:#cbd5e1}
+.cmp-cell .delta{font-size:10px;font-weight:700;margin-top:3px}
+.cmp-cell .delta.down{color:#fca5a5}.cmp-cell .delta.flat{color:#6ee7b7}
+.cmp-cell.wide{grid-column:1/-1}
+.inject{font-size:11px;line-height:1.75;color:var(--ink2)}
+.inject code{background:rgba(239,68,68,.14);color:#fca5a5;border-radius:5px;padding:1px 6px;font-size:10.5px;margin:0 2px;white-space:nowrap}
+.dist-box{display:none}
+.dist-box.show{display:block}
 </style></head><body>
 
 <div class="nav">
@@ -239,54 +356,211 @@ svg{max-width:100%;height:auto}
 
 <div class="wrap">
 
-  <!-- 封面 -->
+  <!-- 封面 · 夜景hero -->
   <div class="cover">
-    <div class="kick">区域产业决策风洞 · 第三类样本</div>
-    <h1>惠城区产业决策<br>模拟推演分析报告</h1>
-    <div style="font-size:13px;color:#cbd5e1">——人、产业与城市耦合网络的一次压力测试（Demo版）</div>
-    <div class="meta">作者：<b style="color:#fbbf24">张凌 博士</b> &nbsp;|&nbsp; 2026年10月 · 广东惠州</div>
+    <img class="hero-bg" src="assets/huicheng-night.jpg" alt="惠城滨江夜景">
+    <div class="hero-mask"></div>
+    <div class="hero-pills">
+      <span class="hero-pill">📊 数据更新：2025 年统计公报</span>
+      <a class="hero-pill" href="#sources">数据来源说明 ↓</a>
+    </div>
+    <div class="hero-in">
+      <div class="kick">区域产业决策风洞 · 第三类样本</div>
+      <h1>08 分析报告<span class="h-sub">数据看清现实，重点图表更清晰</span></h1>
+      <p class="hero-desc">从体检到未来，从关键因子到压力测试，一张图读懂惠城的机会与风险。</p>
+      <div class="meta">作者：<b style="color:#fbbf24">张凌 博士</b> · 2026年10月 · 广东惠州 · Demo版（模拟推演非预测）</div>
+    </div>
   </div>
 
-  <!-- 一页看懂 -->
+  <!-- 一、惠城经济CT · 八项体检指标 -->
   <div class="card">
-    <h2>一、一页看懂：现在什么状态</h2>
-    <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-bottom:6px">
-      <div style="width:170px;height:104px;flex:none;position:relative">
-        <canvas id="gauge"></canvas>
-        <div style="position:absolute;left:0;right:0;bottom:6px;text-align:center;pointer-events:none">
-          <div style="font-size:26px;font-weight:800;color:#fbbf24;line-height:1">60</div>
-          <div style="font-size:10px;color:#94a3b8;margin-top:2px">城市健康度 · 承压</div>
-        </div>
+    <h2>① 惠城经济CT · 八项体检指标 <span class="itag real">官方实测 · 2025</span></h2>
+    <div class="scan-verdict">
+      <div class="sv g"><span class="dot"></span><span class="n">3</span><span class="t">项跑得快<br>（工业·利润·外贸）</span></div>
+      <div class="sv y"><span class="n">4</span><span class="t">项温和承压<br>（GDP·消费·财力·收入）</span></div>
+      <div class="sv r"><span class="dot"></span><span class="n">1</span><span class="t">项明显下滑<br>（固定资产投资）</span></div>
+    </div>
+    <div style="font-size:10.5px;color:#6b7280;margin:-2px 0 2px">最新数据（同比）· 点任一指标卡，查看<b>口径、目标差距与来源</b>；迷你折线仅表示状态方向，不代表逐年数值。</div>
+    <div class="scan-grid" id="scanGrid">
+      <div class="metric good" data-t="规上工业增加值 · +10.8%（超目标）" data-d="规上工业<b>增加值</b>增速 10.8%，高于年初约 9% 的目标；规上工业<b>总产值</b>937.92 亿元（现价，+9.6%）、销售产值 899.44 亿元（+7.8%）。注意：<b>增加值与总产值是两个口径</b>。来源：惠城区2025年统计公报（区统计局，初步核算数）。">
+        <div class="m-icon">🏭</div>
+        <div class="m-name">规上工业增加值</div>
+        <div class="m-val">+10.8%</div>
+        <div class="m-sub">总产值 937.9 亿</div>
+        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,21 L15,18 L27,20 L39,13 L51,15 L63,8 L76,10 L88,4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,21 L15,18 L27,20 L39,13 L51,15 L63,8 L76,10 L88,4 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
+        <div class="m-tag">超目标 9%</div>
       </div>
-      <div style="flex:1;min-width:180px;font-size:13px;line-height:2">
-        <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px"><span style="width:10px;height:10px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px #22c55e"></span>良好 <b style="color:#22c55e">3</b> 项</div>
-        <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px"><span style="width:10px;height:10px;border-radius:50%;background:#eab308;box-shadow:0 0 8px #eab308"></span>承压 <b style="color:#eab308">2</b> 项</div>
-        <div style="display:flex;gap:8px;align-items:center"><span style="width:10px;height:10px;border-radius:50%;background:#ef4444;box-shadow:0 0 8px #ef4444"></span>预警 <b style="color:#ef4444">3</b> 项</div>
-        <div style="font-size:11px;color:#6b7280;margin-top:6px">绿100/黄60/红20 加权示意，非官方评分</div>
+      <div class="metric good" data-t="规上工业利润 · +49.7%（42.51 亿元）" data-d="规上工业企业实现利润总额 <b>42.51 亿元、+49.7%</b>；高技术制造业增加值 +15.6%（占比 37%）、先进制造业 +13.9%（占比 50.3%）。盈利大幅改善，是工业这条腿的亮点。来源：2025年统计公报。">
+        <div class="m-icon">💰</div>
+        <div class="m-name">规上工业利润</div>
+        <div class="m-val">+49.7%</div>
+        <div class="m-sub">42.51 亿元</div>
+        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,22 L15,20 L27,17 L39,15 L51,11 L63,10 L76,6 L88,3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,22 L15,20 L27,17 L39,15 L51,11 L63,10 L76,6 L88,3 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
+        <div class="m-tag">盈利高增长</div>
+      </div>
+      <div class="metric good" data-t="外贸进出口 · +7.1%（383.6 亿元）" data-d="货物进出口 383.6 亿元、+7.1%；其中<b>出口 239.0 亿元、+17.6%</b>，进口 144.6 亿元、-6.8%。实际利用外资 13.84 亿元、+27.3%。外需增长但受全球环境影响，钥匙不完全在本地。来源：2025年统计公报。">
+        <div class="m-icon">🚢</div>
+        <div class="m-name">外贸进出口</div>
+        <div class="m-val">+7.1%</div>
+        <div class="m-sub">383.6 亿 · 出口+17.6%</div>
+        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,21 L15,18 L27,19 L39,15 L51,13 L63,10 L76,7 L88,4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,21 L15,18 L27,19 L39,15 L51,13 L63,10 L76,7 L88,4 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
+        <div class="m-tag">出口拉动</div>
+      </div>
+      <div class="metric flat" data-t="居民人均可支配收入 · +4.5%（63776 元）" data-d="全体居民人均可支配收入 63776 元、+4.5%；城镇 68547 元（+4.2%）、农村 35998 元（+6.5%）。常住人口 159.78 万、城镇化率 85.74%。来源：2025年统计公报。">
+        <div class="m-icon">👤</div>
+        <div class="m-name">居民人均可支配收入</div>
+        <div class="m-val">+4.5%</div>
+        <div class="m-sub">63776 元</div>
+        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,18 L15,17 L27,18 L39,16 L51,16 L63,14 L76,14 L88,12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,18 L15,17 L27,18 L39,16 L51,16 L63,14 L76,14 L88,12 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
+        <div class="m-tag">平稳增长</div>
+      </div>
+      <div class="metric warn" data-t="GDP · 1203.33 亿元（+4.3%）" data-d="地区生产总值 1203.33 亿元、+4.3%，年初增长目标约 6%，<b>差约 1.7 个百分点</b>。三产结构 3.4:27.6:69.0（一产 +2.9%、二产 +2.3%、三产 +5.2%）；人均 GDP 75309 元（+3.0%）。来源：2025年统计公报（初步核算数）。">
+        <div class="m-icon">📊</div>
+        <div class="m-name">GDP 增速</div>
+        <div class="m-val">+4.3%</div>
+        <div class="m-sub">1203.33 亿 · 三产69%</div>
+        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,19 L15,17 L27,18 L39,16 L51,15 L63,14 L76,13 L88,11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,19 L15,17 L27,18 L39,16 L51,15 L63,14 L76,13 L88,11 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
+        <div class="m-tag">低于目标 6%</div>
+      </div>
+      <div class="metric warn" data-t="社消零 · 805.68 亿元（+3.7%）" data-d="社会消费品零售总额 805.68 亿元、+3.7%，年初目标约 6%，<b>差约 2.3 个百分点</b>；限上消费品零售额 525.26 亿元、+4.2%。消费偏温，与人口、人气直接相关。来源：2025年统计公报。">
+        <div class="m-icon">🛒</div>
+        <div class="m-name">社会消费品零售</div>
+        <div class="m-val">+3.7%</div>
+        <div class="m-sub">805.68 亿 · 限上+4.2%</div>
+        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,19 L15,18 L27,18 L39,16 L51,16 L63,14 L76,13 L88,12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,19 L15,18 L27,18 L39,16 L51,16 L63,14 L76,13 L88,12 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
+        <div class="m-tag">低于目标 6%</div>
+      </div>
+      <div class="metric flat" data-t="区本级一般公共预算 · 64.60 亿元（+3.5%）" data-d="区本级一般公共预算收入 <b>64.60 亿元、+3.5%</b>；全区（含市直）一般公共预算收入 195.86 亿元、+5.1%。政府可支配财力平稳，为公共服务与配套投入提供空间。来源：2025年统计公报。">
+        <div class="m-icon">🏛️</div>
+        <div class="m-name">一般公共预算收入</div>
+        <div class="m-val">+3.5%</div>
+        <div class="m-sub">区本级 64.60 亿</div>
+        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,18 L15,17 L27,17 L39,16 L51,15 L63,15 L76,13 L88,13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,18 L15,17 L27,17 L39,16 L51,15 L63,15 L76,13 L88,13 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
+        <div class="m-tag">基本平稳</div>
+      </div>
+      <div class="metric bad" data-t="固定资产投资 · −37.1%" data-d="8 项指标中<b>唯一明显下滑</b>：工业投资 -34.4%、基建投资 -20.0%、房地产开发投资 -47.3%；商品房销售面积 -47%、销售金额 -54%。年初目标约 1%，投资这条腿明显收缩，对后续投产节点形成压力。来源：2025年统计公报。">
+        <div class="m-icon">🏗️</div>
+        <div class="m-name">固定资产投资</div>
+        <div class="m-val">-37.1%</div>
+        <div class="m-sub">房地产开发 -47.3%</div>
+        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,7 L15,9 L27,8 L39,12 L51,11 L63,17 L76,16 L88,22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,7 L15,9 L27,8 L39,12 L51,11 L63,17 L76,16 L88,22 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
+        <div class="m-tag">明显下滑</div>
       </div>
     </div>
-    <div class="lights">
-      <div class="light g"><span class="dot"></span>工业跑得快：规上工业+9.6%</div>
-      <div class="light g"><span class="dot"></span>高新区强：632.7亿、+13.9%</div>
-      <div class="light g"><span class="dot"></span>就业稳：新增1.62万人</div>
-      <div class="light y"><span class="dot"></span>GDP增速4.3%，低于年初6%目标</div>
-      <div class="light y"><span class="dot"></span>消费+3.7%，低于6%目标</div>
-      <div class="light r"><span class="dot"></span>固定资产投资-37.1%（唯一红区）</div>
-      <div class="light r"><span class="dot"></span>人口目标完成不足一半</div>
-      <div class="light r"><span class="dot"></span>人均GDP低于全国、全省</div>
-    </div>
-    <p style="font-size:13px;color:#cbd5e1;margin:8px 0 0">一句话：<b style="color:#fbbf24">产业这条腿在快跑，但投资、人口、城市承载没有跟上。</b>跑得越快，越要看脚下的路稳不稳。</p>
+    <div class="metric-detail" id="metricDetail"><div class="md-t">点任一指标，查看口径、目标差距与来源</div></div>
+    <div class="scan-note">利润、外贸、财力、收入以实际增速与定性方向呈现，不设主观目标线。<b>所有数字均为 2025 年统计公报初步核算数，未做加权综合评分。</b>人口背景：2025 年常住人口 <b>159.78 万人</b>、城镇化率 85.74%，人均 GDP <b>7.53 万元</b>（+3.0%），不与上述增速指标同标尺评分。</div>
+    <p style="font-size:13px;color:#cbd5e1;margin:10px 0 0">一句话：<b style="color:#fbbf24">产业这条腿在快跑（工业、利润、外贸都是绿的），但固定资产投资 −37.1% 明显拖后腿，GDP、消费离年初目标也还有距离。</b>跑得越快，越要看脚下的路稳不稳。</p>
   </div>
+
+  <!-- 2030未来轨迹（驾驶舱：4情景tab + 主图 + 右结果面板） -->
+  <div class="card">
+    <h2>② 2030 未来轨迹 · 规划节点与模拟结果<span class="itag sim">模型推演 · 非预测</span></h2>
+    <p style="font-size:12.5px;color:var(--ink2);margin:0 0 10px;line-height:1.8">从 2025 实测锚点（632.7 亿）到 2030 模拟区间，看懂惠城的可能路径。灰虚线为线性参考（非逐年预测），模型只在 2030 给出结果分布。</p>
+    <div class="scene-tabs" id="sceneTabs">
+      <button class="on" data-s="0">基准情景</button>
+      <button data-s="1">项目延期</button>
+      <button data-s="2">通勤压力</button>
+      <button data-s="3">两者叠加</button>
+    </div>
+    <div class="future-flex">
+      <div>
+        <div class="cap" style="margin-bottom:6px">产值（亿元）· 白点＝2025 实测锚点（632.7 亿），灰虚线＝线性参考（非逐年预测），彩色扇形＝2028→2030 <b>概率锥</b>（仅 2030 端点 P10/P90 为模型真实分布，2028–2029 为视觉引导、不代表逐年概率），黄线＝中位 P50，金虚线＝1500 亿目标</div>
+        <div style="height:320px"><canvas id="futureMain"></canvas></div>
+      </div>
+      <div class="future-panel">
+        <div class="fp-head">📊 2030 模拟结果（当前情景）</div>
+        <div class="fp-lbl">中位数（P50）</div>
+        <div class="fp-p50"><b id="fpP">1,579</b><small>亿元</small></div>
+        <div class="fp-row2">
+          <div>
+            <div class="fp-lbl">达标率（≥1500 亿）</div>
+            <div class="fp-hit" id="fpHit">66%</div>
+          </div>
+          <div class="donut-wrap"><canvas id="hitDonut"></canvas></div>
+        </div>
+        <div class="fp-lbl">不确定性区间（P10–P90）</div>
+        <div class="fp-range"><b id="fpRange">1,349–1,822</b><small> 亿元</small></div>
+      </div>
+    </div>
+    <div class="concl">
+      <div class="ch">📋 我的实验结论（随情景实时更新）</div>
+      <div class="cb" id="conclBody"></div>
+      <div class="concl-btns">
+        <button class="cbtn" id="copyConcl">📋 复制结论</button>
+        <button class="cbtn ghost" id="shareLab">🔁 分享可恢复实验链接</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 情景对比四卡 -->
+  <div class="card">
+    <h2>③ 情景对比 · 四种压力的影响</h2>
+    <p style="font-size:12.5px;color:var(--ink2);margin:0 0 4px">不同压力情景下的结果对比，帮助理解风险来源。同一模型、同一随机种子（42，2 万次）。</p>
+    <div class="cmp-tabs2" id="cmpTabs2">
+      <button class="on" data-m="hit">达标率</button>
+      <button data-m="p">中位产值</button>
+    </div>
+    <div class="four-cards" id="fourCards">
+      <div class="rcard cur" data-r="0">
+        <div class="rc-head"><span class="rc-dot base"></span>基准情景</div>
+        <div class="rc-big" id="rc0big">66%</div>
+        <div class="rc-sub" id="rc0sub">中位 1,579 亿</div>
+        <div class="rc-range" id="rc0range">1,349–1,822</div>
+        <div class="rc-bar"><div class="rc-bar-fill" id="rc0bar" style="width:66%;background:linear-gradient(90deg,#38bdf8,#7dd3fc)"></div></div>
+      </div>
+      <div class="rcard" data-r="1">
+        <div class="rc-head"><span class="rc-dot delay"></span>项目延期</div>
+        <div class="rc-big" id="rc1big">48%</div>
+        <div class="rc-sub" id="rc1sub">中位 1,489 亿</div>
+        <div class="rc-range" id="rc1range">1,266–1,725</div>
+        <div class="rc-bar"><div class="rc-bar-fill" id="rc1bar" style="width:48%;background:linear-gradient(90deg,#fb7185,#fca5a5)"></div></div>
+      </div>
+      <div class="rcard" data-r="2">
+        <div class="rc-head"><span class="rc-dot commute"></span>通勤压力</div>
+        <div class="rc-big" id="rc2big">51%</div>
+        <div class="rc-sub" id="rc2sub">中位 1,504 亿</div>
+        <div class="rc-range" id="rc2range">1,282–1,740</div>
+        <div class="rc-bar"><div class="rc-bar-fill" id="rc2bar" style="width:51%;background:linear-gradient(90deg,#fb923c,#fdba74)"></div></div>
+      </div>
+      <div class="rcard" data-r="3">
+        <div class="rc-head"><span class="rc-dot both"></span>两者叠加</div>
+        <div class="rc-big" id="rc3big">31%</div>
+        <div class="rc-sub" id="rc3sub">中位 1,414 亿</div>
+        <div class="rc-range" id="rc3range">1,198–1,644</div>
+        <div class="rc-bar"><div class="rc-bar-fill" id="rc3bar" style="width:31%;background:linear-gradient(90deg,#f472b6,#f9a8d4)"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ④ 关键因子敏感性 -->
+  <div class="card">
+    <h2>④ 关键因子 · 敏感性分析（影响从大到小） <span class="itag sim">参数微分 · 控制变量</span></h2>
+    <p style="font-size:12.5px;color:var(--ink2);margin:0 0 8px;line-height:1.8">控制变量法：只调一条路均值 ±20%，其余四条不动，同一随机种子（42 · 2 万次）重跑。条长＝2030 达标率的摆动幅度，越长越敏感。</p>
+    <div style="height:236px"><canvas id="tornado"></canvas></div>
+    <p style="font-size:10.5px;color:#6b7280;margin:8px 0 0;line-height:1.7">真实结果：新投产项目在 45%↔83% 之间摆动 ±38pp，最敏感；三大集群 ±16pp；AI 机器人、生产性服务业各 ±8pp；融深融湾 ±3pp。<b>“敏感”≠“重要”</b>，且 ±20% 是否对应现实合理波动仍需用真实数据校准。</p>
+  </div>
+
+  <!-- ⑤ 结果分布 · 不确定性区间 -->
+  <div class="card">
+    <h2>⑤ 结果分布 · 不确定性区间 <span class="itag sim">模型推演 · 非预测</span></h2>
+    <p style="font-size:12.5px;color:var(--ink2);margin:0 0 8px">基准（蓝）与<b id="distCurName">当前情景</b>（红）的 2030 产值概率密度叠加；阴影越宽代表不确定性越大，竖线为 P10 / P50 / P90。</p>
+    <div style="height:268px"><canvas id="cmpDist"></canvas></div>
+    <div class="dist-stats" id="distStats"></div>
+  </div>
+
+
+  <!-- 深度研究分隔 -->
+  <div class="deep-divider"><span class="dd-line"></span>📖 深度研究 · 方法、行动与来源<span class="dd-line"></span></div>
 
   <!-- 执行摘要 -->
   <div class="card">
-    <h2>二、五条核心发现</h2>
+    <h2>六、五条核心发现</h2>
     <div class="find5">
       <div class="f5 c-str">
         <div class="no">01</div>
         <div class="fct">
           <div class="tt">一座三产占 <b style="color:#fbbf24">69%</b> 的中心城区，高新区是主引擎 <span class="chip">结构事实</span></div>
-          <div class="ds">2025年 GDP <b>1203.33亿</b>，规上工业 <b>973.9亿</b>；高新区 <b>632.7亿</b>，约占全区规上工业三分之二。</div>
+          <div class="ds">2025年 GDP <b>1203.33亿</b>，规上工业<b>总产值 937.9亿</b>（现价，增加值 +10.8%）；高新区 <b>632.7亿</b>，约占全区规上工业三分之二。</div>
           <div class="conc">
             <div class="conc-track"><div class="conc-a" style="width:67.4%"></div></div>
             <div class="conc-leg"><span><i style="background:#f59e0b"></i>高新区 67.4%</span><span><i style="background:rgba(255,255,255,.15)"></i>其他规上 32.6%</span></div>
@@ -324,20 +598,10 @@ svg{max-width:100%;height:auto}
     </div>
   </div>
 
-  <!-- 掂量 -->
+  <!-- 掂量：城市经济CT -->
   <div class="card">
-    <h2>三、我们站在哪：掂量快照 <span class="itag real">官方实测</span></h2>
-    <div class="kpis">
-      <div class="kpi" data-t="GDP · 1203.33亿（+4.3%）" data-d="年初增长目标约 <b>6%</b>，实际 4.3%，差约 1.7 个百分点。来源：2025年计划执行快报数（非最终统计公报定数）。"><div class="v">1203亿</div><div class="l">GDP · +4.3%</div></div>
-      <div class="kpi" data-t="规上工业 · 973.9亿（+9.6%）" data-d="工业是“跑得最快”的一条腿，增速高于约 9% 的目标。来源：统计公报 / 政府工作报告。"><div class="v">973.9亿</div><div class="l">规上工业 · +9.6%</div></div>
-      <div class="kpi" data-t="高新区 · 632.7亿（+13.9%）" data-d="约占全区规上工业 <b>三分之二（67.4%）</b>，是绝对主引擎，也是增长集中度风险所在。来源：高新区高质量发展大会公开信息。"><div class="v">632.7亿</div><div class="l">高新区 · +13.9%</div></div>
-      <div class="kpi" data-t="常住人口 · 159.78万" data-d="人口目标完成不足一半，是“城市承载没跟上”的关键信号之一。来源：政府工作报告 / 统计公报。"><div class="v">159.78万</div><div class="l">常住人口</div></div>
-      <div class="kpi" data-t="固定资产投资 · −37.1%" data-d="八项指标中<b>唯一进入红区</b>：投资这条腿明显收缩，对后续投产节点形成压力。来源：计划执行快报数。"><div class="v" style="color:#f87171">-37.1%</div><div class="l">固定资产投资</div></div>
-      <div class="kpi" data-t="社会消费品零售 · 805亿（+3.7%）" data-d="年初目标约 <b>6%</b>，实际 3.7%，消费偏温，与“人气/人口”直接相关。来源：统计公报。"><div class="v">805亿</div><div class="l">社消零 · +3.7%</div></div>
-      <div class="kpi" data-t="一般公共预算收入 · 64.6亿" data-d="政府可支配财力，为公共服务与配套投入提供空间。来源：计划执行快报数。"><div class="v">64.6亿</div><div class="l">一般公共预算收入</div></div>
-      <div class="kpi" data-t="外贸进出口 · 383.6亿（+7.1%）" data-d="外需这一块在增长，但钥匙受全球环境影响，不完全在本地手里。来源：统计公报 / 公开披露。"><div class="v">383.6亿</div><div class="l">外贸 · +7.1%</div></div>
-    </div>
-    <div class="metric-detail" id="metricDetail"><div class="md-t">点任一指标，查看口径、目标差距与来源</div></div>
+    <h2>七、产业结构与目标差距 <span class="itag real">官方实测 · 2025</span></h2>
+    <div style="font-size:12px;color:var(--muted);margin:0 0 8px">八项体检见上方模块①；这里进一步看三产结构与主要指标相对目标的差距。</div>
     <div class="two">
       <div>
         <h3 style="margin-top:6px">三次产业结构</h3>
@@ -352,20 +616,9 @@ svg{max-width:100%;height:auto}
     </div>
   </div>
 
-  <!-- 离目标多远 -->
-  <div class="card">
-    <h2>四、离目标还有多远</h2>
-    <h3>高新区产值爬坡：缺口压在几个投产节点上 <span class="itag plan">规划节点 · 演示</span></h3>
-    <div style="height:190px"><canvas id="climb"></canvas></div>
-    <div class="plain">这柱子一级级往上跳，就是高新区要爬的楼：今年632亿，后年破千亿，2030年到1500亿。它不是每年匀着涨，而是靠几个大项目投产“跳台阶”，就像爬楼梯——每一级都得踩稳。哪个项目晚投产，脚下那一级就可能踩空，后面全得慢下来。</div>
-    <h3>2030年三种可能情景 <span class="itag sim">模型情景 · 非预测</span></h3>
-    <div style="height:180px"><canvas id="scen"></canvas></div>
-    <div class="plain">2030年高新区产值会落在哪个区间？这里算了三种“命”：顺的时候约1800亿，比目标高出一头；一半一半约1500亿，正好踩在目标线上；不顺时约1000亿，守住了千亿级园区，但离1500亿目标差一大截。最该警惕的是中间那根——预期值正好等于目标值，几乎不留余量，一个关键项目晚投产半年、或通勤一堵，就可能滑向下面那档。</div>
-  </div>
-
   <!-- 决策者最该知道 -->
   <div class="card" style="border-color:#7f1d1d">
-    <h2>五、决策者最该重视的三件事</h2>
+    <h2>八、决策者最该重视的三件事</h2>
     <h3>1. 命门可能不在"招不到商"，在"投产与通勤"</h3>
     <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 4px">这里要分两本账，不能混在一起排名——一把尺子答“常规波动”，一把尺子答“万一发生”。</p>
     <div class="ledgers">
@@ -391,8 +644,9 @@ svg{max-width:100%;height:auto}
       </div>
     </div>
     <div class="ledger-divider">🔀 两把尺子、两个问题，不放在同一个排序里比 · 下面影响系数图画的是账本二</div>
-    <h3>2. 抓手优先级：先做"影响大、自己可控"的</h3>
+    <h3>2. 抓手优先级：先做"影响大、自己可控"的 <span class="itag est">专家示意判断 · 可拖动</span></h3>
     <div style="height:210px"><canvas id="matrix"></canvas></div>
+    <div style="font-size:10.5px;color:#94a3b8;margin:2px 0 6px">⚠️ 图中各点坐标（如通勤改善 8.5/8.5、学位 7.5/8）<b>为专家主观示意，非统计计算结果</b>，不与上面的相关系数、压测数字放在同一语境；<b>可直接拖动圆点</b>调整位置，作为讨论工具。</div>
     <div class="plain">这张图教咱们把钱花在刀刃上：越靠右上角，越是“自己说了算、又管用”的事——修通勤路、办学位、留住人，都在这一片；而外贸、全球航运虽然热闹，钥匙却攥在别人手里。聪明的做法，是先把自己能掌控、又见效快的事办好，心里才踏实。</div>
     <h3>3. 时间窗口不等人</h3>
     <p style="font-size:13px;color:#cbd5e1;margin:0">"再等等、稳一点、明年再做"听起来轻，但在有明确投产节点的系统里，晚一点会显著拉低达标可能。<b style="color:#f87171">该上的项目、该通的路、该供的地，窗口就这几年。</b></p>
@@ -400,7 +654,7 @@ svg{max-width:100%;height:auto}
 
   <!-- 各因素影响 -->
   <div class="card">
-    <h2>六、哪些因素最牵动结果</h2>
+    <h2>九、哪些因素最牵动结果</h2>
     <div class="subh"><span class="num">1</span>尺子一 · 路径相关系数 <span class="itag sim">模型推演 · 关联强度</span></div>
     <div style="font-size:11.5px;color:#94a3b8;margin:0 0 6px">五条路各自贡献与总产值的相关系数 |corr|（0–1，越大绑得越紧）。这是模型内部的“关联”，<b>不是现实因果</b>，也不与下方事件冲击比柱长。</div>
     <div style="height:185px"><canvas id="coef"></canvas></div>
@@ -414,15 +668,7 @@ svg{max-width:100%;height:auto}
     </div>
     <div class="plain">真把“项目延期”压一遍，达标率从 66% 掉到 48%（−19 个百分点）；“通勤堵塞”掉到 51%（−16 个点）。这两件事不在常规参数排序里，却比“招不到商”更直接、更难补救——这正是惠城的命门。</div>
     <div style="margin-top:16px;padding-top:14px;border-top:1px solid #1c2739">
-      <div style="font-size:13px;font-weight:700;color:#fbbf24;margin-bottom:6px">补充：参数敏感性分析（参数微分）<span style="font-size:10.5px;font-weight:400;color:#94a3b8;margin-left:6px">控制变量法 · 只调一条路均值 ±20%，其他四条不动，同一随机种子重跑</span></div>
-      <div class="sens">
-        <div class="sens-row"><span class="nm">新投产项目</span><span class="sens-track"><span class="sens-fill" style="width:100%"></span></span><span class="rk">±37.6pp</span></div>
-        <div class="sens-row"><span class="nm">三大集群</span><span class="sens-track"><span class="sens-fill mid" style="width:41.8%"></span></span><span class="rk">±15.7pp</span></div>
-        <div class="sens-row"><span class="nm">AI机器人</span><span class="sens-track"><span class="sens-fill mid" style="width:20.5%"></span></span><span class="rk">±7.7pp</span></div>
-        <div class="sens-row"><span class="nm">服务业带动</span><span class="sens-track"><span class="sens-fill mid" style="width:20.5%"></span></span><span class="rk">±7.7pp</span></div>
-        <div class="sens-row"><span class="nm">融深融湾</span><span class="sens-track"><span class="sens-fill low" style="width:9.3%"></span></span><span class="rk">±3.5pp</span></div>
-      </div>
-      <p style="font-size:10.5px;color:#6b7280;margin:0 0 4px">数值为同一基准、同一随机种子（42，2万次）下达标概率的真实摆动；±20% 是否对应现实合理波动，需用真实数据校准。</p>
+      
       <div class="rulers">
         <div class="ruler a">
           <div class="rk">尺子一 · 参数微分</div>
@@ -437,55 +683,11 @@ svg{max-width:100%;height:auto}
       </div>
       <div class="ledger-divider">⚖️ “敏感” ≠ “重要”：敏感只说明在模型里绑得紧；现实中先做哪条，还要看可控性、成本、见效速度。</div>
     </div>
-
-    <!-- 动手实验台 -->
-    <div class="lab-card">
-      <div class="lab-head">🛠 动手实验台：把事件“注入”，看 2030 怎么变</div>
-      <div class="lab-sub">勾选下方真实可能发生的事件，未来轨迹与达标率用同一模型、同一随机种子实时重算（与⑥风洞页同一口径）。</div>
-      <div class="toggles">
-        <button class="tgl" id="tglDelay" data-k="delay">
-          <span class="box">✓</span>
-          <span class="tt"><b>关键项目投产延期</b><span>新投产项目贡献均值下调</span></span>
-        </button>
-        <button class="tgl" id="tglCommute" data-k="commute">
-          <span class="box">✓</span>
-          <span class="tt"><b>过江通勤堵塞</b><span>消费通道收窄、招工受影响</span></span>
-        </button>
-      </div>
-      <div class="lab-grid">
-        <div class="traj-box">
-          <div class="cap"><b>未来轨迹</b>：灰虚线是规划节点，2030 亮色柱为模型区间（p10–p90），点为中位</div>
-          <div style="height:232px"><canvas id="traj"></canvas></div>
-        </div>
-        <div class="stat-box">
-          <div class="bigstat">
-            <div class="lab2">2030 达标率（≥1500亿）</div>
-            <div class="row"><span class="cur" id="stHit">66%</span><span class="delta flat" id="stHitD">基准</span></div>
-            <div class="base">基准 <b>66%</b>（越低越危险）</div>
-          </div>
-          <div class="bigstat">
-            <div class="lab2">2030 中位产值（亿元）</div>
-            <div class="row"><span class="cur" id="stP">1579</span><span class="delta flat" id="stPD">基准</span></div>
-            <div class="base">基准 <b>1579</b> · 目标 <b>1500</b></div>
-          </div>
-        </div>
-      </div>
-      <div class="gap-note" id="gapNote"></div>
-      <div class="concl">
-        <div class="ch">📋 我的实验结论（随选择实时更新）</div>
-        <div class="cb" id="conclBody"></div>
-        <div class="concl-btns">
-          <button class="cbtn" id="copyConcl">📋 复制结论</button>
-          <button class="cbtn ghost" id="resetLab">↺ 再试一次</button>
-          <button class="cbtn ghost" id="shareLab">🔁 分享结果</button>
-        </div>
-      </div>
-    </div>
   </div>
 
   <!-- 老百姓 -->
   <div class="card people">
-    <h2 style="border-color:#7c2d12">七、这和普通老百姓有什么关系</h2>
+    <h2 style="border-color:#7c2d12">十、这和普通老百姓有什么关系</h2>
     <div class="chains">
       <div class="chain">
         <div class="q">🚇 我每天上班的路，为什么重要？</div>
@@ -532,7 +734,7 @@ svg{max-width:100%;height:auto}
 
   <!-- 行动建议 -->
   <div class="card">
-    <h2>八、行动建议（按轻重缓急）</h2>
+    <h2>十一、行动建议（按轻重缓急）</h2>
     <div class="kanban">
       <div class="kan-col">
         <div class="kan-head" style="color:#f87171">🔴 立即优先</div>
@@ -568,8 +770,8 @@ svg{max-width:100%;height:auto}
   </div>
 
   <!-- 数据来源 -->
-  <div class="card">
-    <h2>九、数据来源与分级</h2>
+  <div class="card" id="sources">
+    <h2>十二、数据来源与分级</h2>
     <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 4px">越靠塔底越硬、越可核对；越靠塔顶假设成分越多。这台模型把每类数据放在哪一层，全部公开。</p>
     <div class="pyramid">
       <div class="pyra"><div class="bar" style="background:#7f1d1d;width:130px">D · 假设</div><div class="lab"><b>网络边权重、路径贡献区间、通勤强度</b>——缺真实通勤OD数据，假设最多</div></div>
@@ -589,7 +791,7 @@ svg{max-width:100%;height:auto}
 
   <!-- 模型边界 -->
   <div class="card">
-    <h2>十、模型边界与免责声明</h2>
+    <h2>十三、模型边界与免责声明</h2>
     <div class="disc-grid">
       <div class="disc-item"><div class="di">🔮</div><div><div class="dt">不是预测器</div><div class="dd">不预测具体产值或招商成败，只在公开数据与明确假设下给出叙事分布与结构提示。</div></div></div>
       <div class="disc-item"><div class="di">🔗</div><div><div class="dt">不做因果断言</div><div class="dd">统一用“关联、同步、结构提示”，不用“因为A所以B”；系数均为模型内部关联强度，不代表现实因果。</div></div></div>
@@ -603,7 +805,7 @@ svg{max-width:100%;height:auto}
 
   <!-- 作者 -->
   <div class="card">
-    <h2>十一、作者介绍</h2>
+    <h2>十四、作者介绍</h2>
     <div class="author">
       <div class="badge">张凌</div>
       <div style="flex:1;min-width:240px">
@@ -632,19 +834,6 @@ svg{max-width:100%;height:auto}
 const gc='#1c2739', tc='#6b7280', axc='#93a4bd';
 Chart.defaults.font.family='-apple-system,"PingFang SC",sans-serif';
 
-// 健康度仪表盘（半圆）
-new Chart(document.getElementById('gauge').getContext('2d'),{
-  type:'doughnut',
-  data:{datasets:[{
-    data:[60,40],
-    backgroundColor:['#fbbf24','rgba(255,255,255,.07)'],
-    borderWidth:0,borderRadius:6
-  }]},
-  options:{responsive:true,maintainAspectRatio:false,cutout:'72%',
-    rotation:-90,circumference:180,
-    plugins:{legend:{display:false},tooltip:{enabled:false}}}
-});
-
 // 结构
 new Chart(document.getElementById('struct').getContext('2d'),{
   type:'doughnut',
@@ -652,45 +841,52 @@ new Chart(document.getElementById('struct').getContext('2d'),{
     backgroundColor:['#94a3b8','#3b82f6','#fbbf24'],borderColor:'#0e1523',borderWidth:2}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:axc,font:{size:10},padding:8}}}}
 });
-// 实际vs目标
+// 实际vs目标（工业为"规上工业增加值"口径，目标9%）
 new Chart(document.getElementById('vstarget').getContext('2d'),{
   type:'bar',
-  data:{labels:['GDP','工业','消费','投资'],datasets:[
+  data:{labels:['GDP','工业增加值','消费','投资'],datasets:[
     {label:'实际',data:[4.3,10.8,3.7,-37.1],backgroundColor:'#3b82f6',borderRadius:3},
     {label:'目标',data:[6,9,6,1],backgroundColor:'#f87171',borderRadius:3}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:axc,font:{size:10}}}},
     scales:{x:{ticks:{color:tc,font:{size:10}},grid:{display:false}},y:{ticks:{color:tc,callback:v=>v+'%'},grid:{color:gc}}}}
 });
-// 爬坡
-new Chart(document.getElementById('climb').getContext('2d'),{
-  type:'bar',
-  data:{labels:['2025','2026','2027','2030'],datasets:[{data:[632.7,820,1000,1500],
-    backgroundColor:['#3b82f6','#3b82f6','#fbbf24','#f87171'],borderRadius:5}]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>it.parsed.y+'亿'}}},
-    scales:{x:{ticks:{color:axc},grid:{display:false}},y:{ticks:{color:tc,callback:v=>v+'亿'},grid:{color:gc}}}}
-});
-// 三情景
-new Chart(document.getElementById('scen').getContext('2d'),{
-  type:'bar',
-  data:{labels:['不顺','一半一半','顺利'],datasets:[{
-    data:[1000,1500,1800],backgroundColor:['#f87171','#fbbf24','#22c55e'],borderRadius:5},
-    {type:'line',label:'目标线',data:[1500,1500,1500],borderColor:'#60a5fa',borderDash:[6,4],pointRadius:0,borderWidth:2}]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>it.parsed.y+'亿'}}},
-    scales:{x:{ticks:{color:axc},grid:{display:false}},y:{ticks:{color:tc,callback:v=>v+'亿'},grid:{color:gc},min:500}}}
-});
-// 优先级矩阵
-new Chart(document.getElementById('matrix').getContext('2d'),{
-  type:'scatter',
-  data:{datasets:[{data:[
+// 优先级矩阵（专家示意判断：坐标主观，点可拖动，仅作讨论工具）
+(function(){
+  const cv=document.getElementById('matrix'),ctx=cv.getContext('2d');
+  const pts=[
     {x:8.5,y:8.5,l:'通勤改善'},{x:7.5,y:8,l:'学位供给'},{x:7,y:7.5,l:'留人环境'},
     {x:8,y:6,l:'投产盯节点'},{x:6,y:5,l:'本地循环'},{x:5,y:3.5,l:'AI新动能'},
-    {x:4,y:2.5,l:'外需贸易'},{x:3,y:2,l:'全球航运'}],
-    backgroundColor:'#fb923c',pointRadius:9,pointHoverRadius:11}]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
-    tooltip:{callbacks:{label:c=>c.raw.l}}},
-    scales:{x:{title:{display:true,text:'自己可控程度 →',color:tc},min:0,max:10,ticks:{color:tc},grid:{color:gc}},
-      y:{title:{display:true,text:'影响程度 →',color:tc},min:0,max:10,ticks:{color:tc},grid:{color:gc}}}}
-});
+    {x:4,y:2.5,l:'外需贸易'},{x:3,y:2,l:'全球航运'}];
+  const labelPlugin={id:'mlabel',afterDatasetsDraw(c){
+    const m=c.getDatasetMeta(0);
+    m.data.forEach((pt,i)=>{
+      c.ctx.save();c.ctx.fillStyle='#e2e8f0';c.ctx.font='600 10px sans-serif';c.ctx.textAlign='center';
+      c.ctx.fillText(pts[i].l,pt.x,pt.y-15);c.ctx.restore();
+    });
+  }};
+  const chart=new Chart(ctx,{
+    type:'scatter',
+    data:{datasets:[{data:pts,backgroundColor:'#fb923c',borderColor:'#fff',borderWidth:1,pointRadius:10,pointHoverRadius:12}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw.l+'（示意，可拖动）'}}},
+      scales:{x:{title:{display:true,text:'自己可控程度 →',color:tc},min:0,max:10,ticks:{color:tc},grid:{color:gc}},
+        y:{title:{display:true,text:'影响程度 →',color:tc},min:0,max:10,ticks:{color:tc},grid:{color:gc}}}},
+    plugins:[labelPlugin]
+  });
+  let drag=null;
+  function xy(e){const r=cv.getBoundingClientRect(),t=e.touches?e.touches[0]:e;
+    return {x:Math.max(0,Math.min(10,chart.scales.x.getValueForPixel(t.clientX-r.left))),
+            y:Math.max(0,Math.min(10,chart.scales.y.getValueForPixel(t.clientY-r.top)))};}
+  function hit(e){const r=cv.getBoundingClientRect(),t=e.touches?e.touches[0]:e,m=chart.getDatasetMeta(0);
+    for(let i=0;i<m.data.length;i++){const el=m.data[i],dx=t.clientX-r.left-el.x,dy=t.clientY-r.top-el.y;
+      if(dx*dx+dy*dy<20*20)return i;}return null;}
+  function down(e){const i=hit(e);if(i!=null){drag=i;cv.style.cursor='grabbing';e.preventDefault();}}
+  function move(e){if(drag==null){cv.style.cursor=hit(e)!=null?'grab':'';return;}
+    const p=xy(e);pts[drag].x=+p.x.toFixed(1);pts[drag].y=+p.y.toFixed(1);chart.update('none');e.preventDefault();}
+  function up(){drag=null;cv.style.cursor='';}
+  cv.addEventListener('mousedown',down);window.addEventListener('mousemove',move);window.addEventListener('mouseup',up);
+  cv.addEventListener('touchstart',down,{passive:false});window.addEventListener('touchmove',move,{passive:false});window.addEventListener('touchend',up);
+})();
 // ===== 统一基准：同一模型内核、同一随机种子，供报告页所有"推演"图共用 =====
 const _SEED=42, _N=20000;
 function _cloneP(){return JSON.parse(JSON.stringify(HT.DEFAULT_PATHS));}
@@ -738,24 +934,60 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
     plugins:{legend:{display:false},
       tooltip:{callbacks:{label:it=>it.dataset.label?('目标 '+HT.TARGET+'亿'):('中位产值 '+it.parsed.y+'亿')}}},
     scales:{x:{ticks:{color:axc,font:{size:10}},grid:{display:false}},
-      y:{ticks:{color:tc,callback:v=>v+'亿'},grid:{color:gc},min:1300}}}
+      y:{ticks:{color:tc,callback:v=>v+'亿'},grid:{color:gc},min:1300,suggestedMax:1660}}}
 });
 
-/* ============ 健康扫描 + 指标点击详情 ============ */
+// 敏感性单向条形：各路径 μ±20% 时达标率的摆动幅度（真实 seed42·2万次，从大到小）
 (function(){
-  const kpis=document.querySelector('.kpis'), md=document.getElementById('metricDetail');
-  if(!kpis||!md)return;
+  const el=document.getElementById('tornado');
+  if(!el)return;
+  const rows=[['新投产项目',38,'45%↔83%'],['三大集群',16,'58%↔74%'],['AI机器人',8,'62%↔70%'],['生产性服务业',8,'62%↔70%'],['融深融湾',3,'65%↔68%']];
+  const colors=['#f87171','#fb923c','#fbbf24','#f59e0b','#64748b'];
+  const lbl={id:'sensLbl',afterDatasetsDraw(c){
+    const y=c.scales.y,x=c.scales.x;
+    c.ctx.save();c.ctx.font='700 11px sans-serif';c.ctx.textBaseline='middle';c.ctx.textAlign='left';
+    rows.forEach((r,i)=>{
+      const px=x.getPixelForValue(r[1]),py=y.getPixelForValue(i);
+      c.ctx.fillStyle='#f1f5f9';c.ctx.fillText('±'+r[1]+'pp',px+7,py);
+    });
+    c.ctx.restore();
+  }};
+  new Chart(el.getContext('2d'),{
+    type:'bar',
+    data:{labels:rows.map(r=>r[0]),datasets:[
+      {label:'达标率摆动幅度（μ±20%，pp）',data:rows.map(r=>r[1]),
+       backgroundColor:colors,borderRadius:5,barPercentage:.62,categoryPercentage:.8}
+    ]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},
+        tooltip:{callbacks:{label:it=>{
+          const r=rows[it.dataIndex];
+          return 'μ±20% 达标率 '+r[2]+'（摆动 ±'+r[1]+'pp）';
+        }}}},
+      scales:{
+        x:{min:0,max:46,ticks:{color:tc,callback:v=>v+'pp'},grid:{color:gc},
+           title:{display:true,text:'参数 μ±20% 时，2030 达标率的摆动幅度（pp，越长越敏感）',color:axc,font:{size:10}}},
+        y:{ticks:{color:axc,font:{size:11}},grid:{display:false}}}},
+    plugins:[lbl]
+  });
+})();
+
+/* ============ 经济CT扫描 + 指标点击详情 ============ */
+(function(){
+  const grid=document.getElementById('scanGrid'), md=document.getElementById('metricDetail');
+  if(!grid||!md)return;
   const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const ks=kpis.querySelectorAll('.kpi');
-  if(!reduce){
-    kpis.classList.add('scan-ready');
-    const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){ks.forEach((k,i)=>setTimeout(()=>k.classList.add('in'),i*90));io.disconnect();}});},{threshold:.25});
-    io.observe(kpis);
+  const ks=grid.querySelectorAll('.metric');
+  if(reduce){ks.forEach(k=>k.classList.add('in'));}
+  else{
+    const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){ks.forEach((k,i)=>setTimeout(()=>k.classList.add('in'),i*80));io.disconnect();}});},{threshold:.15});
+    io.observe(grid);
   }
   ks.forEach(k=>k.addEventListener('click',()=>{
     ks.forEach(x=>x.classList.remove('sel'));k.classList.add('sel');
     md.classList.add('show');
     md.innerHTML='<div class="md-t">'+k.dataset.t+'</div><div>'+k.dataset.d+'</div>';
+    md.scrollIntoView({behavior:reduce?'auto':'smooth',block:'nearest'});
   }));
 })();
 
@@ -768,96 +1000,198 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
   cards.forEach(c=>io.observe(c));
 })();
 
-/* ============ 压力测试实验台：情景联动 ============ */
+/* ============ 2030未来轨迹驾驶舱：4情景tab + 主图 + 右结果面板 + 四卡对比（累计口径，对齐⑥风洞页） ============ */
 (function(){
-  const trajEl=document.getElementById('traj');
-  if(!trajEl)return;
-  const state={delay:false,commute:false};
-  // 叠加口径：延期主导 p0（-90 已覆盖通勤附带的 p0-18），通勤主导 p3（-60）
-  function run(){
-    return _SIM.run(p=>{
-      if(state.delay) p[0].mu=Math.max(0,p[0].mu-90);
-      if(state.commute){ p[3].mu=Math.max(0,p[3].mu-60); if(!state.delay) p[0].mu=Math.max(0,p[0].mu-18); }
-    });
+  const mainEl=document.getElementById('futureMain');
+  if(!mainEl)return;
+  // 4个预置情景（累计口径，与⑥风洞页一致：延期削新投产；通勤削服务业并按0.3连带削新投产）
+  const SC=[
+    {name:'基准情景',delay:0,commute:0,color:'#38bdf8',alpha:'rgba(56,189,248,.32)'},
+    {name:'项目延期',delay:90,commute:0,color:'#fb7185',alpha:'rgba(251,113,133,.32)'},
+    {name:'通勤压力',delay:0,commute:60,color:'#fb923c',alpha:'rgba(251,146,60,.32)'},
+    {name:'两者叠加',delay:90,commute:60,color:'#f472b6',alpha:'rgba(244,114,182,.32)'}
+  ];
+  function inject(p,s){
+    if(s.delay>0)p[0].mu=Math.max(0,p[0].mu-s.delay);
+    if(s.commute>0){p[3].mu=Math.max(0,p[3].mu-s.commute);p[0].mu=Math.max(0,p[0].mu-s.commute*0.3);}
   }
-  const plan=[632.7,820,1000,1500];
-  const traj=new Chart(trajEl.getContext('2d'),{
-    data:{labels:['2025','2026','2027','2030'],datasets:[
-      {type:'bar',label:'模型区间 p10–p90',data:[null,null,null,[_base.p10,_base.p90]],
-        backgroundColor:'rgba(56,189,248,.28)',borderColor:'rgba(56,189,248,.55)',borderWidth:1,borderRadius:4,order:2,barPercentage:.42,categoryPercentage:.6},
-      {type:'line',label:'规划节点',data:plan.slice(),borderColor:'#94a3b8',borderDash:[6,5],
-        pointRadius:4,pointBackgroundColor:'#94a3b8',borderWidth:1.5,order:3},
-      {type:'scatter',label:'模型中位',data:[null,null,null,_base.p50],
-        backgroundColor:'#fbbf24',pointRadius:9,borderColor:'#fff',borderWidth:1.5,order:1}
+  const res=SC.map(s=>_SIM.run(p=>inject(p,s)));
+  const baseHit=Math.round(_base.hit);
+  let cur=0;
+  const fmt=n=>Math.round(n).toLocaleString();
+  // 主图：线性参考 + 2028→2030 概率锥（仅2030端点为模型真实分布；2028→2029为视觉引导）
+  const YRS=['2025','2026','2027','2028','2029','2030'];
+  const refLine=YRS.map((_,i)=>HT.BASE+(HT.TARGET-HT.BASE)*i/(YRS.length-1));
+  const ref2028=refLine[3];
+  let mainL={p10:res[0].p10,p90:res[0].p90,p50:res[0].p50,stress:false};
+  // 锥形：2025–2028 沿参考线重合（面积为0、不填充），2028 尖端起线性发散，2030 完全展开到模型分位
+  function coneData(r,key){
+    const v=r[key], mid=ref2028+(v-ref2028)/2;
+    return [refLine[0],refLine[1],refLine[2],ref2028,mid,v];
+  }
+  const mainLabelPlugin={id:'mainlab',afterDatasetsDraw(c){
+    const x=c.scales.x.getPixelForValue(5),y=c.scales.y;
+    const col=mainL.stress?'#fca5a5':'#7dd3fc';
+    c.ctx.save();c.ctx.font='600 11px sans-serif';c.ctx.textAlign='left';c.ctx.textBaseline='middle';
+    c.ctx.fillStyle=col;c.ctx.fillText('P90 '+Math.round(mainL.p90),x+12,y.getPixelForValue(mainL.p90));
+    c.ctx.fillStyle='#fbbf24';c.ctx.fillText('P50 '+Math.round(mainL.p50),x+12,y.getPixelForValue(mainL.p50));
+    c.ctx.fillStyle=col;c.ctx.fillText('P10 '+Math.round(mainL.p10),x+12,y.getPixelForValue(mainL.p10));
+    c.ctx.restore();
+  }};
+  const main=new Chart(mainEl.getContext('2d'),{
+    data:{labels:YRS,datasets:[
+      {type:'line',id:'coneHi',label:'概率锥区间 P10–P90（仅2030为模型真实分布）',data:coneData(res[0],'p90'),
+        borderColor:(ctx)=>ctx.dataIndex>=3?SC[0].color:'transparent',borderWidth:1.6,pointRadius:0,pointHoverRadius:0,fill:1,backgroundColor:SC[0].alpha,order:6,tension:0},
+      {type:'line',id:'coneLo',label:'__hide_coneLo__',data:coneData(res[0],'p10'),
+        borderColor:(ctx)=>ctx.dataIndex>=3?SC[0].color:'transparent',borderWidth:1.6,pointRadius:0,pointHoverRadius:0,fill:false,order:6,tension:0},
+      {type:'line',label:'中位轨迹 P50',data:coneData(res[0],'p50'),borderColor:(ctx)=>ctx.dataIndex>=3?'#fbbf24':'transparent',borderWidth:2.2,pointRadius:0,pointHoverRadius:0,fill:false,order:5,spanGaps:true},
+      {type:'line',label:'线性参考（非逐年预测）',data:refLine.slice(),borderColor:'#94a3b8',borderDash:[6,5],pointRadius:0,pointHoverRadius:0,borderWidth:1.6,order:4,spanGaps:true},
+      {type:'line',label:'1500亿参考目标',data:YRS.map(()=>1500),borderColor:'#fbbf24',borderDash:[2,4],pointRadius:0,borderWidth:1.4,order:3},
+      {type:'scatter',label:'2025实测锚点',data:[HT.BASE,null,null,null,null,null],backgroundColor:'#fff',pointRadius:6,borderColor:'#38bdf8',borderWidth:2,order:2}
     ]},
     options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{labels:{color:axc,font:{size:10},boxWidth:14,padding:10}},
+      plugins:{legend:{position:'top',align:'start',labels:{color:axc,font:{size:window.innerWidth<600?9:10},boxWidth:14,padding:window.innerWidth<600?6:10,filter:(it)=>it.text!=='__hide_coneLo__'}},
         tooltip:{callbacks:{label:it=>{
-          if(it.dataset.label==='模型区间 p10–p90'&&Array.isArray(it.raw))return '区间 '+it.raw[0].toFixed(0)+'–'+it.raw[1].toFixed(0)+' 亿';
-          if(it.dataset.label==='模型中位'&&it.raw!=null)return '中位 '+it.raw.toFixed(0)+' 亿';
-          return it.dataset.label+' '+it.raw+' 亿';
+          if(it.dataset.label&&it.dataset.label.indexOf('概率锥')===0&&it.raw!=null&&it.dataIndex>=5)return it.dataset.label.replace(/（.*$/,'')+' '+Math.round(it.raw)+' 亿';
+          if(it.dataset.label&&it.dataset.label.indexOf('中位轨迹')===0&&it.raw!=null&&it.dataIndex===5)return '中位 P50 '+Math.round(it.raw)+' 亿';
+          if(it.dataIndex>=3&&it.dataIndex<5)return null; // 2028/2029 为视觉引导，不提示具体值
+          if(it.raw==null)return null;
+          return it.dataset.label+' '+Math.round(it.raw)+' 亿';
         }}}},
       scales:{x:{ticks:{color:axc},grid:{display:false}},
-        y:{ticks:{color:tc,callback:v=>v+'亿'},grid:{color:gc},min:500,max:1900}}}
+        y:{ticks:{color:tc,callback:v=>v+'亿'},grid:{color:gc},min:500,max:1950}},
+      layout:{padding:{right:66}}},
+    plugins:[mainLabelPlugin]
   });
-  const elHit=document.getElementById('stHit'),elHitD=document.getElementById('stHitD'),
-        elP=document.getElementById('stP'),elPD=document.getElementById('stPD'),
-        gap=document.getElementById('gapNote'),concl=document.getElementById('conclBody');
-  let prevHit=Math.round(_base.hit),prevP=Math.round(_base.p50);
-  function tween(el,from,to,unit){
-    const s=performance.now(),d=650;
-    (function step(t){const k=Math.min(1,(t-s)/d),e=1-Math.pow(1-k,3),v=from+(to-from)*e;
-      el.textContent=Math.round(v)+unit; if(k<1)requestAnimationFrame(step);})(s);
-  }
-  function deltaText(el,val){
-    if(Math.abs(val)<0.5){el.textContent='与基准持平';el.className='delta flat';}
-    else{el.textContent=(val>0?'+':'−')+Math.abs(val)+(el===elHitD?'pp':'亿');el.className='delta '+(val<0?'down':'flat');}
-  }
-  function name(){
-    if(!state.delay&&!state.commute)return '基准情景';
-    return [state.delay&&'项目延期',state.commute&&'通勤堵塞'].filter(Boolean).join(' + ');
-  }
-  function render(){
-    const r=run();
-    const hit=Math.round(r.hit),p=Math.round(r.p50);
-    const dHit=hit-Math.round(_base.hit),dP=p-Math.round(_base.p50);
-    tween(elHit,prevHit,hit,'%'); tween(elP,prevP,p,'');
-    deltaText(elHitD,dHit); deltaText(elPD,dP);
-    prevHit=hit; prevP=p;
-    // 轨迹
-    traj.data.datasets[0].data=[null,null,null,[r.p10,r.p90]];
-    traj.data.datasets[2].data=[null,null,null,r.p50];
-    traj.update();
-    // 与目标差距
+  // 达标率环形图（右结果面板）
+  const donut=new Chart(document.getElementById('hitDonut').getContext('2d'),{
+    type:'doughnut',
+    data:{datasets:[{data:[res[0].hit,100-res[0].hit],backgroundColor:[SC[0].color,'rgba(255,255,255,.08)'],borderWidth:0,cutout:'74%'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{enabled:false}}}
+  });
+  function apply(i){
+    cur=i;const r=res[i],s=SC[i];
+    main.data.datasets[0].data=coneData(r,'p90');
+    main.data.datasets[0].borderColor=(ctx)=>ctx.dataIndex>=3?s.color:'transparent';
+    main.data.datasets[0].backgroundColor=s.alpha;
+    main.data.datasets[1].data=coneData(r,'p10');
+    main.data.datasets[1].borderColor=(ctx)=>ctx.dataIndex>=3?s.color:'transparent';
+    main.data.datasets[2].data=coneData(r,'p50');
+    mainL={p10:r.p10,p90:r.p90,p50:r.p50,stress:i>0};
+    main.update();
+    document.getElementById('fpP').textContent=fmt(r.p50);
+    document.getElementById('fpHit').textContent=Math.round(r.hit)+'%';
+    document.getElementById('fpRange').textContent=fmt(r.p10)+'–'+fmt(r.p90);
+    donut.data.datasets[0].data=[r.hit,100-r.hit];
+    donut.data.datasets[0].backgroundColor=[s.color,'rgba(255,255,255,.08)'];
+    donut.update();
+    document.querySelectorAll('.rcard').forEach((c,j)=>c.classList.toggle('cur',j===i));
+    if(typeof updateDist==='function')updateDist(i);
+    const hit=Math.round(r.hit),p=Math.round(r.p50),dHit=hit-baseHit;
     const gapP=p-HT.TARGET;
-    gap.innerHTML='当前为<b>'+name()+'</b>：中位 '+(p>=HT.TARGET?'<b style="color:#86efac">高于目标 '+(gapP)+'亿</b>':'<b style="color:#fca5a5">低于目标 '+(-gapP)+'亿</b>')+'，达标率 '+hit+'%（基准 66%）。'+
-      (hit<55?'⚠️ 已低于 55%，意味着每两次推演就有一次以上不达标。':'');
-    // 脆弱点
-    let weak=[];
-    if(state.delay)weak.push('投产节点（延期会直接削掉新投产贡献）');
-    if(state.commute)weak.push('通勤走廊（一堵则招工与消费双向失血）');
-    const weakTxt=weak.length?('<span class="neg">最脆弱处：'+weak.join('；')+'。</span>'):'主要脆弱点是投产节点与通勤走廊（见上方事件冲击）。';
-    const baseTxt='<b>实验设置：</b>'+name()+'；2030 达标率 <b>'+hit+'%</b>'+(dHit?' <span class="'+(dHit<0?'neg':'pos')+'">（'+(dHit>0?'+':'−')+Math.abs(dHit)+'pp）</span>':'')+'，中位产值 <b>'+p+'亿</b>'+(dP?' <span class="'+(dP<0?'neg':'pos')+'">（'+(dP>0?'+':'−')+Math.abs(dP)+'亿）</span>':'')+'，p10–p90 区间 '+r.p10.toFixed(0)+'–'+r.p90.toFixed(0)+' 亿。';
-    concl.innerHTML=baseTxt+weakTxt+'<br><span style="font-size:11px;color:#6b7280">模型版本：种子'+_SIM.SEED+'·'+_SIM.N.toLocaleString()+' 次蒙特卡洛；BASE 632.7 亿（2025实测）、TARGET 1500 亿（外延参考）、五路径μ/σ 为模型假设。此为压力测试叙事，非预测，不构成投资建议。</span>';
+    const gapTxt=p>=HT.TARGET?'<span class="pos">中位高于目标 '+gapP+' 亿</span>':'<span class="neg">中位低于目标 '+(-gapP)+' 亿</span>';
+    const miss=100-hit;let warn='';
+    if(i>0){warn=(miss>=50?'<span class="neg">⚠️ 每两次推演就有一次以上不达标。</span>':'约每 '+Math.max(2,Math.round(100/miss))+' 次推演有 1 次不达标。');}
+    document.getElementById('conclBody').innerHTML='<b>当前情景：</b>'+s.name+'；2030 达标率 <b>'+hit+'%</b>'+(i>0?' <span class="'+(dHit<0?'neg':'pos')+'">（基准 '+baseHit+'%，'+(dHit>0?'+':'−')+Math.abs(dHit)+'pp）</span>':'')+'，中位产值 <b>'+p+' 亿</b>，p10–p90 区间 '+fmt(r.p10)+'–'+fmt(r.p90)+' 亿。'+gapTxt+(warn?'<br>'+warn:'')+'<br><span style="font-size:11px;color:#6b7280">模型版本：种子 '+_SIM.SEED+' · '+_SIM.N.toLocaleString()+' 次蒙特卡洛；BASE 632.7 亿（2025 实测）、TARGET 1500 亿（外延参考，非刚性）；压力叠加采用累计口径（与⑥风洞页一致）。此为压力测试叙事，非预测，不构成投资建议。</span>';
+    history.replaceState(null,'','#d='+s.delay+'&c='+s.commute);
+    try{localStorage.setItem('huicheng_experiment',JSON.stringify({v:'1.0',seed:_SIM.SEED,N:_SIM.N,delay:s.delay,commute:s.commute}));}catch(e){}
   }
-  function text(){
-    const r=run();
-    return '【惠城产业风洞 · 我的实验结论】情景：'+name()+'\n2030达标率：'+Math.round(r.hit)+'%（基准66%），中位产值：'+Math.round(r.p50)+'亿（目标1500），区间'+r.p10.toFixed(0)+'–'+r.p90.toFixed(0)+'亿。\n模型：种子'+_SIM.SEED+'，'+_SIM.N+'次蒙特卡洛。压力测试非预测，不构成投资建议。';
-  }
-  document.querySelectorAll('.tgl').forEach(b=>b.addEventListener('click',()=>{
-    const k=b.dataset.k; state[k]=!state[k]; b.classList.toggle('on',state[k]); render();
+  document.querySelectorAll('#sceneTabs button').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('#sceneTabs button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');apply(+b.dataset.s);
   }));
-  document.getElementById('resetLab').addEventListener('click',()=>{
-    state.delay=false;state.commute=false;
-    document.querySelectorAll('.tgl').forEach(b=>b.classList.remove('on')); render();
-  });
+  // 分箱（分布对比用）
+  function hist(raw){
+    const lo=950,hi=2050,step=42,bins=[];
+    for(let x=lo;x<hi;x+=step)bins.push({x:Math.round(x+step/2),c:0});
+    (raw||[]).forEach(v=>{const k=Math.floor((v-lo)/step);if(k>=0&&k<bins.length)bins[k].c++;});
+    return bins;
+  }
+  let distChart=null;
+  let distL={p10:res[0].p10,p50:res[0].p50,p90:res[0].p90,color:SC[0].color};
+  const distLinePlugin={id:'distLine',afterDatasetsDraw(c){
+    const x=c.scales.x,y=c.scales.y;
+    c.ctx.save();c.ctx.font='600 10.5px sans-serif';c.ctx.textAlign='center';c.ctx.textBaseline='bottom';
+    [['P10',distL.p10,.65],['P50',distL.p50,1],['P90',distL.p90,.65]].forEach(([t,v,a])=>{
+      const px=x.getPixelForValue(v);
+      c.ctx.strokeStyle=distL.color;c.ctx.globalAlpha=a;c.ctx.lineWidth=1.2;c.ctx.setLineDash([3,3]);
+      c.ctx.beginPath();c.ctx.moveTo(px,y.top);c.ctx.lineTo(px,y.bottom);c.ctx.stroke();
+      c.ctx.globalAlpha=1;c.ctx.setLineDash([]);c.ctx.fillStyle=distL.color;
+      c.ctx.fillText(t+' '+Math.round(v),px,y.top+14);
+    });
+    c.ctx.restore();
+  }};
+  function buildDist(){
+    if(distChart)return;
+    const bBins=hist(_base.rawResults||_base.results);
+    distChart=new Chart(document.getElementById('cmpDist').getContext('2d'),{
+      type:'line',
+      data:{datasets:[
+        {label:'基准',data:bBins.map(b=>({x:b.x,y:b.c})),borderColor:'#38bdf8',backgroundColor:'rgba(56,189,248,.15)',fill:true,tension:.4,pointRadius:0,borderWidth:2},
+        {label:'当前情景',data:bBins.map(b=>({x:b.x,y:b.c})),borderColor:SC[0].color,backgroundColor:SC[0].alpha,fill:true,tension:.4,pointRadius:0,borderWidth:2}]},
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{labels:{color:axc,font:{size:10}}},
+          tooltip:{callbacks:{label:it=>it.dataset.label+' · 产值约 '+Math.round(it.parsed.x)+' 亿'}}},
+        scales:{x:{type:'linear',min:1000,max:2050,ticks:{color:tc,maxTicksLimit:7,callback:v=>v+'亿'},grid:{color:gc}},
+          y:{display:false,beginAtZero:true}}
+      },
+      plugins:[distLinePlugin]
+    });
+  }
+  function updateDist(i){
+    const r=res[i],s=SC[i];
+    if(!distChart)return;
+    const cBins=hist(r.rawResults||r.results);
+    distChart.data.datasets[1].data=cBins.map(b=>({x:b.x,y:b.c}));
+    distChart.data.datasets[1].borderColor=s.color;
+    distChart.data.datasets[1].backgroundColor=s.alpha;
+    distChart.data.datasets[1].label=s.name;
+    distL={p10:r.p10,p50:r.p50,p90:r.p90,color:s.color};
+    distChart.update();
+    const nm=document.getElementById('distCurName');if(nm)nm.textContent='「'+s.name+'」';
+    const cell=(lab,v,bv)=>{const d=Math.round(v-bv);return '<div class="ds-cell"><div class="ds-l">'+lab+'</div><div class="ds-v">'+fmt(v)+'<small> 亿</small></div><div class="ds-d">基准 '+fmt(bv)+' · <span class="'+(d<0?'neg':'pos')+'">'+(d>0?'+':'−')+Math.abs(d)+'</span></div></div>';};
+    const box=document.getElementById('distStats');
+    if(box)box.innerHTML=cell('P10（偏悲观）',r.p10,_base.p10)+cell('P50（中位）',r.p50,_base.p50)+cell('P90（偏乐观）',r.p90,_base.p90);
+  }
+  // 四卡指标切换（达标率 / 中位产值）
+  document.querySelectorAll('#cmpTabs2 button').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('#cmpTabs2 button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    const m=b.dataset.m;
+    for(let i=0;i<4;i++){
+      document.getElementById('rc'+i+'big').textContent=m==='hit'?Math.round(res[i].hit)+'%':fmt(res[i].p50)+' 亿';
+      document.getElementById('rc'+i+'sub').textContent=m==='hit'?('中位 '+fmt(res[i].p50)+' 亿'):('达标率 '+Math.round(res[i].hit)+'%');
+      document.getElementById('rc'+i+'bar').style.width=(m==='hit'?res[i].hit:Math.min(100,res[i].p50/1800*100))+'%';
+    }
+  }));
+  buildDist();
+  // 复制结论 / 分享可恢复链接
   document.getElementById('copyConcl').addEventListener('click',function(){
-    navigator.clipboard&&navigator.clipboard.writeText(text());
+    const r=res[cur];
+    const txt='【惠城产业风洞 · 我的实验结论】情景：'+SC[cur].name+'\n2030达标率：'+Math.round(r.hit)+'%（基准'+baseHit+'%），中位产值：'+Math.round(r.p50)+'亿（目标1500），区间'+fmt(r.p10)+'–'+fmt(r.p90)+'亿。\n模型：种子'+_SIM.SEED+'，'+_SIM.N+'次蒙特卡洛。压力测试非预测，不构成投资建议。';
+    navigator.clipboard&&navigator.clipboard.writeText(txt);
     const old=this.textContent;this.textContent='✅ 已复制';setTimeout(()=>this.textContent=old,1500);
   });
-  document.getElementById('shareLab').addEventListener('click',()=>{ if(window.sharePage)window.sharePage(); });
-  render();
+  document.getElementById('shareLab').addEventListener('click',function(){
+    const link=location.origin+location.pathname+'#d='+SC[cur].delay+'&c='+SC[cur].commute;
+    if(navigator.clipboard)navigator.clipboard.writeText(link);
+    const old=this.textContent;this.textContent='✅ 链接已复制（含实验设置）';setTimeout(()=>this.textContent=old,1800);
+  });
+  // 从 URL hash 恢复情景（可复现链接）
+  (function(){
+    const m=location.hash.match(/d=(\d+).*c=(\d+)/);
+    if(m){
+      const d=+m[1],c=+m[2],i=SC.findIndex(s=>s.delay===d&&s.commute===c);
+      if(i>0){
+        document.querySelector('#sceneTabs button[data-s="0"]').classList.remove('on');
+        const btn=document.querySelector('#sceneTabs button[data-s="'+i+'"]');
+        if(btn)btn.classList.add('on');cur=i;
+      }
+    }
+  })();
+  apply(cur);
 })();
+
 </script>
 
 <div class="likebar">
