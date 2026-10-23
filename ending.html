@@ -64,6 +64,57 @@ body{margin:0;background:linear-gradient(180deg,#04060f 0%,#0a0f24 30%,#0b1226 1
 .pl-step .d{font-size:10.5px;color:var(--muted);margin-top:3px;line-height:1.5}
 .pl-step:not(:last-child)::after{content:"→";position:absolute;right:-6px;top:13px;color:var(--neon);font-size:18px;z-index:2}
 @media(max-width:560px){.pl-step{min-width:33%;margin-bottom:16px}.pl-step:nth-child(3)::after{display:none}}
+/* 双受众对照 */
+.aud{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+@media(max-width:600px){.aud{grid-template-columns:1fr}}
+.aud-card{border-radius:14px;padding:16px 17px;position:relative;overflow:hidden}
+.aud-card.leader{background:linear-gradient(160deg,rgba(29,78,216,.24),rgba(10,15,26,.45));border:1px solid rgba(59,130,246,.4)}
+.aud-card.people{background:linear-gradient(160deg,rgba(245,158,11,.2),rgba(10,15,26,.45));border:1px solid rgba(245,158,11,.4)}
+.aud-card .who{font-size:14px;font-weight:800;display:flex;align-items:center;gap:9px;margin-bottom:9px}
+.aud-card.leader .who{color:#93c5fd}
+.aud-card.people .who{color:#fcd34d}
+.aud-card .who .ico{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex:none}
+.aud-card.leader .ico{background:rgba(59,130,246,.2);border:1px solid rgba(59,130,246,.4)}
+.aud-card.people .ico{background:rgba(245,158,11,.18);border:1px solid rgba(245,158,11,.38)}
+.aud-card p{font-size:11.8px;color:var(--ink2);margin:0;line-height:1.85}
+.aud-card p b{color:var(--ink)}
+.aud-mid{text-align:center;font-size:11.5px;color:var(--muted);margin:-6px 0 14px}
+/* 政策时间轴 */
+.tl{position:relative;margin:18px 0 6px}
+.tl-line{position:absolute;left:12%;right:12%;top:18px;height:2px;background:linear-gradient(90deg,#60a5fa,#3b82f6,#f59e0b)}
+.tl-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;position:relative}
+.tl-node{text-align:center}
+.tl-node .dot{width:36px;height:36px;border-radius:50%;margin:0 auto 9px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;background:#0a0f1a;border:2px solid var(--neon);color:var(--neon);z-index:2;position:relative}
+.tl-node:nth-child(2) .dot{border-color:#3b82f6;color:#93c5fd}
+.tl-node:nth-child(3) .dot{border-color:#f59e0b;color:#fcd34d}
+.tl-node .yr{font-size:13px;font-weight:800;color:var(--warm);margin-bottom:3px}
+.tl-node .ev{font-size:11.8px;font-weight:700;color:var(--ink);margin-bottom:4px;line-height:1.5}
+.tl-node .ds{font-size:10.5px;color:var(--muted);line-height:1.65}
+@media(max-width:600px){.tl-line{display:none}.tl-row{grid-template-columns:1fr;gap:0}.tl-node{display:flex;gap:13px;text-align:left;align-items:flex-start;padding:0 0 16px 16px;border-left:2px solid rgba(59,130,246,.35);margin-left:9px}.tl-node:last-child{border-left-color:transparent;padding-bottom:0}.tl-node .dot{margin:0;flex:none}}
+/* 2522框架 */
+.dcn{margin:18px 0 4px}
+.dcn-row{display:flex;align-items:stretch;gap:11px;margin-bottom:9px}
+.dcn-num{flex:none;width:46px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:900;font-style:italic}
+.dcn-body{flex:1;background:rgba(10,15,26,.55);border:1px solid var(--glass-b);border-radius:11px;padding:9px 13px}
+.dcn-body .lab{font-size:11.8px;font-weight:800;margin-bottom:6px}
+.dcn-chip{display:inline-block;font-size:10.5px;padding:2.5px 9px;border-radius:20px;background:rgba(255,255,255,.07);border:1px solid var(--glass-b);color:var(--ink2);margin:0 5px 5px 0}
+.dcn-row.b1 .dcn-num{background:rgba(59,130,246,.18);border:1px solid rgba(59,130,246,.45);color:#60a5fa}
+.dcn-row.b1 .lab{color:#93c5fd}
+.dcn-row.b5 .dcn-num{background:rgba(245,158,11,.18);border:1px solid rgba(245,158,11,.45);color:#fbbf24}
+.dcn-row.b5 .lab{color:#fcd34d}
+.dcn-row.b2 .dcn-num{background:rgba(52,211,153,.16);border:1px solid rgba(52,211,153,.4);color:#34d399}
+.dcn-row.b2 .lab{color:#6ee7b7}
+.dcn-row.b2b .dcn-num{background:rgba(167,139,250,.18);border:1px solid rgba(167,139,250,.4);color:#a78bfa}
+.dcn-row.b2b .lab{color:#c4b5fd}
+/* 能力升级阶梯 */
+.stair{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:16px 0 6px;align-items:end}
+.step-card{background:rgba(10,15,26,.55);border:1px solid var(--glass-b);border-radius:12px;padding:12px 8px;text-align:center}
+.step-card .lv{font-size:9.5px;font-weight:800;color:var(--orange);letter-spacing:.5px}
+.step-card h4{font-size:11.5px;color:var(--ink);margin:4px 0 5px;font-weight:700}
+.step-card p{font-size:10px;color:var(--muted);line-height:1.6;margin:0}
+.step-card .ic{flex:none;width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3);font-size:15px;margin:0 auto 7px}
+@media(min-width:761px){.step-card:nth-child(1){margin-top:48px}.step-card:nth-child(2){margin-top:40px}.step-card:nth-child(3){margin-top:32px}.step-card:nth-child(4){margin-top:24px}.step-card:nth-child(5){margin-top:14px}.step-card:nth-child(6){margin-top:4px;border-color:rgba(245,158,11,.45);background:linear-gradient(180deg,rgba(245,158,11,.12),rgba(10,15,26,.5))}}
+@media(max-width:760px){.stair{grid-template-columns:1fr}.step-card{display:flex;align-items:flex-start;gap:12px;text-align:left;padding:13px 14px}.step-card .ic{margin:0}.step-card .tx{flex:1}.step-card h4{margin:0 0 3px}.step-card .lv{margin-bottom:2px}}
 </style></head><body>
 
 <div class="nav">
@@ -88,11 +139,17 @@ body{margin:0;background:linear-gradient(180deg,#04060f 0%,#0a0f24 30%,#0b1226 1
     <p>我们不替任何人做决定，只想在拍板之前，多帮着看一步路。</p>
   </div>
 
-  <div style="background:#0f1a2e;border:1px solid #1e3a5f;border-left:3px solid #3b82f6;border-radius:10px;padding:14px 16px;margin-bottom:16px;font-size:13px;color:#cbd5e1;line-height:1.9">
-    <b style="color:#60a5fa">这台风洞为谁做？</b><br>
-    给<b style="color:#fff">决策者</b>：参数公开可改，通勤、投产、外迁拨一下看系统怎么响应，做方案前先跑压力测试。<br>
-    也给<b style="color:#fff">普通人</b>：你上班的东江湾、吃饭的江北CBD、每天走的那座桥，都在这张网里。一个项目晚两年、一条通勤路堵了，会怎样影响你的工作和日子？<b style="color:#fff">只用公开数据跑一遍，讲人话。</b>
+  <div class="aud">
+    <div class="aud-card leader">
+      <div class="who"><span class="ico">🧭</span>给决策者</div>
+      <p>参数公开可改，通勤、投产、外迁拨一下看系统怎么响应，<b>做方案前先跑一遍压力测试</b>。</p>
+    </div>
+    <div class="aud-card people">
+      <div class="who"><span class="ico">🏘️</span>给普通人</div>
+      <p>你上班的东江湾、吃饭的江北CBD、每天走的那座桥，都在这张网里。一个项目晚两年、一条路堵了，会怎样影响你的工作和日子？<b>只用公开数据跑一遍，讲人话。</b></p>
+    </div>
   </div>
+  <div class="aud-mid">同一台风洞 · 两种打开方式，都只看公开数据、都讲人话</div>
 
   <!-- 数字中国依据 -->
   <div class="card policy">
@@ -100,7 +157,24 @@ body{margin:0;background:linear-gradient(180deg,#04060f 0%,#0a0f24 30%,#0b1226 1
     <p style="font-size:12.5px;color:#cbd5e1;margin:0">城市决策的科学化，不是一个人、一个地方的心血来潮，而是国家早已指明的方向。</p>
     <div class="quote">《中华人民共和国国民经济和社会发展第十四个五年规划和2035年远景目标纲要》提出：<b>“加快构建数字技术辅助政府决策机制，提高基于高频大数据精准动态监测预测预警水平”</b>，并要求<b>“探索建设数字孪生城市”</b>、<b>“不断提高决策科学性”</b>。</div>
     <div class="quote">2023年中共中央、国务院印发的《数字中国建设整体布局规划》，按照“2522”整体框架布局，要求数字技术与经济、政治、社会等“五位一体”深度融合，<b>“发展高效协同的数字政务”</b>。</div>
-    <p style="font-size:12.5px;color:#cbd5e1;margin:10px 0 0">这台小小的产业风洞，正是把“数字技术辅助决策”落到一个城区的具体尝试——它不宏大，却是数字中国这座大厦里，一块<b style="color:#93c5fd">看得见、摸得着、可核对</b>的砖。</p>
+
+    <div class="tl">
+      <div class="tl-line"></div>
+      <div class="tl-row">
+        <div class="tl-node"><div class="dot">①</div><div><div class="yr">2021.03</div><div class="ev">十四五规划纲要</div><div class="ds">提出数字技术辅助政府决策、探索建设数字孪生城市、提高决策科学性</div></div></div>
+        <div class="tl-node"><div class="dot">②</div><div><div class="yr">2023.02</div><div class="ev">数字中国建设整体布局规划</div><div class="ds">确立“2522”整体框架，要求发展高效协同的数字政务</div></div></div>
+        <div class="tl-node"><div class="dot">③</div><div><div class="yr">2035</div><div class="ev">远景目标</div><div class="ds">数字治理水平显著提升，决策更透明、可核对、能复盘</div></div></div>
+      </div>
+    </div>
+
+    <div class="dcn">
+      <div class="dcn-row b1"><div class="dcn-num">2</div><div class="dcn-body"><div class="lab">两大基础</div><span class="dcn-chip">数字基础设施</span><span class="dcn-chip">数据资源体系</span></div></div>
+      <div class="dcn-row b5"><div class="dcn-num">5</div><div class="dcn-body"><div class="lab">五位一体 · 深度融合</div><span class="dcn-chip">数字经济</span><span class="dcn-chip">数字政治</span><span class="dcn-chip">数字文化</span><span class="dcn-chip">数字社会</span><span class="dcn-chip">数字生态</span></div></div>
+      <div class="dcn-row b2"><div class="dcn-num">2</div><div class="dcn-body"><div class="lab">两大能力</div><span class="dcn-chip">数字技术创新体系</span><span class="dcn-chip">数字安全屏障</span></div></div>
+      <div class="dcn-row b2b"><div class="dcn-num">2</div><div class="dcn-body"><div class="lab">两个环境</div><span class="dcn-chip">国内数字化发展环境</span><span class="dcn-chip">国际数字化发展环境</span></div></div>
+    </div>
+
+    <p style="font-size:12.5px;color:#cbd5e1;margin:14px 0 0">这台小小的产业风洞，正是把“数字技术辅助决策”落到一个城区的具体尝试——它不宏大，却是数字中国这座大厦里，一块<b style="color:#93c5fd">看得见、摸得着、可核对</b>的砖。</p>
     <div class="src">依据来源：中国政府网（gov.cn）公开发布的“十四五”规划纲要、《数字中国建设整体布局规划》。</div>
   </div>
 
@@ -190,13 +264,32 @@ body{margin:0;background:linear-gradient(180deg,#04060f 0%,#0a0f24 30%,#0b1226 1
   <!-- 正式版要补的功课 -->
   <div class="card">
     <h2>正式版，还要接受更严格的检验</h2>
-    <div class="grid6">
-      <div class="feat"><div class="ic">🌬️</div><b>更多压力测试</b><span>不只通勤，还包括极端天气、产业链断点、外部冲击、政策变化等多重压力同时发生的组合情景。</span></div>
-      <div class="feat"><div class="ic">🎯</div><b>更细的找“命门”</b><span>把每个项目、每条关系、每个参数逐一扰动，精确找出“最不能出错”的那个位置。</span></div>
-      <div class="feat"><div class="ic">🎲</div><b>成千上万次推演</b><span>让未来在不同条件下反复演化，给出更稳健的可能性分布，而不是只给一个数字。</span></div>
-      <div class="feat"><div class="ic">📡</div><b>更真实的数据</b><span>对接统计、交通、就业、教育等更多真实数据源，逐步减少假设成分，让结论更扎实。</span></div>
-      <div class="feat"><div class="ic">🛠️</div><b>可交互 · 可核对</b><span>决策者可以自己改参数、提问题、现场推演，每一步都能回到公开资料核对。</span></div>
-      <div class="feat"><div class="ic">🧭</div><b>从看见到怎么走</b><span>不止于指出哪里脆弱，更进一步和一线一起，推演具体行动怎么走、先后如何排。</span></div>
+    <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 4px">不是一步到位，而是沿“更全 → 更准 → 更稳 → 更实 → 更开 → 更远”一级级把功夫做扎实。</p>
+    <div class="stair">
+      <div class="step-card">
+        <div class="ic">🌬️</div>
+        <div class="tx"><div class="lv">更全</div><h4>更多压力测试</h4><p>极端天气、产业链断点、外部冲击、政策变化等多重压力同时发生的组合情景。</p></div>
+      </div>
+      <div class="step-card">
+        <div class="ic">🎯</div>
+        <div class="tx"><div class="lv">更准</div><h4>更细找“命门”</h4><p>把每个项目、每条关系、每个参数逐一扰动，精确找出“最不能出错”的位置。</p></div>
+      </div>
+      <div class="step-card">
+        <div class="ic">🎲</div>
+        <div class="tx"><div class="lv">更稳</div><h4>上万次推演</h4><p>让未来在不同条件下反复演化，给出更稳健的可能性分布，而非只给一个数字。</p></div>
+      </div>
+      <div class="step-card">
+        <div class="ic">📡</div>
+        <div class="tx"><div class="lv">更实</div><h4>更真实数据</h4><p>对接统计、交通、就业、教育等真实数据源，逐步减少假设成分，让结论更扎实。</p></div>
+      </div>
+      <div class="step-card">
+        <div class="ic">🛠️</div>
+        <div class="tx"><div class="lv">更开</div><h4>可交互可核对</h4><p>决策者自己改参数、提问题、现场推演，每一步都能回到公开资料核对。</p></div>
+      </div>
+      <div class="step-card">
+        <div class="ic">🧭</div>
+        <div class="tx"><div class="lv">更远</div><h4>从看见到怎么走</h4><p>不止指出哪里脆弱，更进一步和一线一起，推演具体行动怎么走、先后如何排。</p></div>
+      </div>
     </div>
   </div>
 
