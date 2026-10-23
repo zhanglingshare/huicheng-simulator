@@ -1,32 +1,238 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>惠城产业风洞 · 未来</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠城产业风洞 · 把未来反复扔</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%230b1a33'/%3E%3Cpath d='M5 14l4-4 3 3 5-6' fill='none' stroke='%2322d3ee' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Ma+Shan+Zheng&family=Long+Cang">
+<script src="echarts.min.js"></script>
 <script src="model.js"></script>
 <style>
+:root{
+  --bg:#04070f; --panel:rgba(12,20,38,.72); --panel2:rgba(10,16,30,.86);
+  --line:rgba(64,130,255,.25); --line2:rgba(34,211,238,.35);
+  --txt:#e6edf7; --muted:#8fa3c4;
+  --cyan:#22d3ee; --blue:#3b82f6; --gold:#fbbf24; --red:#f87171; --green:#34d399; --purple:#8b5cf6;
+}
 *{box-sizing:border-box}
-body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
-.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
-.nav b{font-size:14px;margin-right:6px;flex:none}
-.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
-.nav a.on{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
-.wrap{max-width:800px;margin:auto;padding:16px}
-h1{font-size:20px;margin:0 0 2px}
-.sub{color:#8fa3bf;font-size:13px;margin:0 0 16px}
-.card{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:16px;margin-bottom:12px}
-.card h2{font-size:14px;margin:0 0 12px}
-.btn{background:#1d4ed8;color:#fff;border:0;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer}
-.result{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
-.stat{background:#0a0f1a;border:1px solid #1c2739;border-radius:10px;padding:12px;text-align:center}
-.stat .v{font-size:22px;font-weight:800;color:#fbbf24}
-.stat .l{font-size:11px;color:#6b7280;margin-top:2px}
-.prob{font-size:32px;font-weight:800;text-align:center;margin:10px 0}
-.slider-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:12px}
-.slider-row label{flex:1;color:#93a4bd}
-.slider-row input{flex:2;accent-color:#3b82f6}
-.slider-row span{width:50px;text-align:right;color:#fbbf24;font-weight:600}
-#err{color:#f87171;font-size:12px;padding:8px;display:none}
+html,body{margin:0}
+body{background:var(--bg);color:var(--txt);font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh}
+/* ===== 背景层 ===== */
+.bg{position:fixed;inset:0;z-index:-2;overflow:hidden;
+  background:radial-gradient(1200px 620px at 72% -12%,rgba(30,70,150,.38),transparent 60%),
+  radial-gradient(900px 520px at 8% 108%,rgba(20,100,160,.28),transparent 60%),
+  linear-gradient(180deg,#050a15,#03060d 60%,#04070f)}
+.bg .gridline{position:absolute;inset:0;background-image:linear-gradient(rgba(80,150,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(80,150,255,.06) 1px,transparent 1px);background-size:46px 46px;
+  -webkit-mask-image:radial-gradient(ellipse at 50% 25%,#000 25%,transparent 72%);mask-image:radial-gradient(ellipse at 50% 25%,#000 25%,transparent 72%)}
+.bg .skyline{position:absolute;bottom:0;left:0;width:100%;height:38vh;opacity:.55}
+.stars span{position:absolute;width:2px;height:2px;border-radius:50%;background:#9fd0ff;animation:tw 4s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.25}50%{opacity:1}}
+/* ===== 导航 ===== */
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(5,9,18,.92);border-bottom:1px solid var(--line);overflow-x:auto;backdrop-filter:blur(12px)}
+.nav b{font-size:14px;margin-right:6px;flex:none;white-space:nowrap}
+.nav a{background:rgba(19,28,43,.8);color:#93a4bd;border:1px solid rgba(34,48,74,.8);padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
+.nav a.on{background:linear-gradient(135deg,#1d4ed8,#2563eb);border-color:#3b82f6;color:#fff;font-weight:600;box-shadow:0 0 14px rgba(59,130,246,.4)}
+/* ===== 玻璃 ===== */
+.glass{background:linear-gradient(160deg,rgba(28,46,86,.72),rgba(12,21,42,.66));border:1px solid rgba(96,165,250,.32);border-radius:16px;
+  box-shadow:0 10px 36px rgba(0,0,0,.45),0 0 24px rgba(59,130,246,.14),inset 0 1px 0 rgba(255,255,255,.08);
+  backdrop-filter:blur(16px)}
+/* ===== Hero ===== */
+.hero{padding:50px 20px 30px;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;min-height:210px;
+  background:url('assets/night-hero.jpg') center 32%/cover no-repeat}
+.hero::before{content:"";position:absolute;inset:0;z-index:0;
+  background:linear-gradient(100deg,rgba(4,7,15,.82) 0%,rgba(4,7,15,.45) 48%,rgba(4,7,15,.7) 100%),
+  linear-gradient(180deg,rgba(4,7,15,.4),rgba(4,7,15,.92) 100%)}
+.hero>*{position:relative;z-index:1}
+.hero h1{font-size:clamp(30px,6.4vw,56px);font-weight:900;letter-spacing:1px;margin:0;display:flex;align-items:baseline;gap:14px}
+.hero .num{background:linear-gradient(180deg,#d6ecff,#1f78e8);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(59,130,246,.55))}
+.hero .tt{color:#f5f9ff;text-shadow:0 2px 18px rgba(0,0,0,.5)}
+.hero .sub{color:#dbe7fa;font-size:clamp(13px,2.7vw,17px);margin:12px 0 0;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.hero-quote{margin-top:14px;font-family:'Long Cang',cursive;font-size:clamp(24px,6vw,30px);color:#fef3c7;line-height:1.2;
+  text-shadow:0 2px 14px rgba(0,0,0,.65),0 0 26px rgba(251,191,36,.25)}
+.hero-quote .hqa{color:#fcd34d;font-size:.62em;margin-left:8px}
+@media(min-width:880px){
+  .hero-quote{position:absolute;right:7%;top:50%;transform:translateY(-50%);margin:0;text-align:center;
+    font-size:clamp(30px,3.4vw,42px)}
+  .hero-quote .hqa{display:block;margin:2px 0 0;text-align:right;font-size:.6em}
+}
+/* ===== 分段控件 ===== */
+.seg{display:inline-flex;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:3px;gap:2px;flex:none}
+.seg button{background:none;border:0;color:var(--muted);padding:7px 12px;border-radius:8px;font-size:12.5px;cursor:pointer;white-space:nowrap}
+.seg button.on{background:linear-gradient(135deg,#1d4ed8,#2563eb);color:#fff;box-shadow:0 0 12px rgba(59,130,246,.5)}
+/* ===== 主视觉 ===== */
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px 6px;flex-wrap:wrap}
+.panel-head h2{font-size:15px;margin:0;font-weight:800}
+.panel-head .cap{font-size:11.5px;color:var(--muted);margin-top:2px}
+.toolrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#mainChart{height:340px;width:100%}
+.chart-wrap{padding:4px 8px 12px}
+.tgl{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);cursor:pointer;user-select:none;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:rgba(10,16,30,.7)}
+.tgl i{width:16px;height:16px;border-radius:5px;border:1px solid rgba(34,211,238,.5);display:inline-block;position:relative}
+.tgl.on i{background:linear-gradient(135deg,#1d4ed8,#22d3ee)}
+.tgl.on i::after{content:"";position:absolute;left:4px;top:1px;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(40deg)}
+/* ===== 结果四卡 ===== */
+.stats4{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:0 16px 16px}
+.stat{padding:15px 16px;border-radius:14px;position:relative;overflow:hidden}
+.stat .big{font-size:clamp(24px,6vw,36px);font-weight:900;font-variant-numeric:tabular-nums;line-height:1.15;margin-top:9px}
+.stat .lab{font-size:12.5px;font-weight:700;display:flex;align-items:center;gap:8px}
+.stat .lab .sico{width:27px;height:27px;flex:none;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(59,130,246,.3),rgba(34,211,238,.12));border:1px solid rgba(34,211,238,.3)}
+.stat .lab .sico svg{width:15px;height:15px;stroke:#7dd3fc;fill:none;stroke-width:1.8}
+.stat .desc{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.55}
+.stat .ring{position:absolute;right:12px;top:42px;width:72px;height:72px}
+.stat .ring .rb{fill:none;stroke:rgba(255,255,255,.1);stroke-width:7}
+.stat .ring .rf{fill:none;stroke-width:7;stroke-linecap:round;transform:rotate(-90deg);transform-origin:center;transition:stroke-dashoffset .9s ease}
+.stat.has-ring .big,.stat.has-ring .desc{margin-right:82px}
+/* ===== 路径控制 ===== */
+.ctrl{padding:14px}
+.ctrl-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.ctrl-head h2{font-size:15px;margin:0;font-weight:800}
+.path{display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;background:rgba(10,18,34,.6);border:1px solid rgba(64,130,255,.18);margin-bottom:10px}
+.pico{width:40px;height:40px;flex:none;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(59,130,246,.25),rgba(34,211,238,.12));border:1px solid rgba(34,211,238,.3)}
+.pico svg{width:21px;height:21px;stroke:#7dd3fc;fill:none;stroke-width:1.8}
+.pinfo{flex:1;min-width:0}
+.pname{font-size:13.5px;font-weight:700}
+.pdesc{font-size:10.5px;color:var(--muted)}
+.pbar{height:6px;border-radius:4px;background:rgba(255,255,255,.07);margin:7px 0 4px;overflow:hidden}
+.pfill{height:100%;border-radius:4px;background:linear-gradient(90deg,#1d6fe0,#22d3ee);box-shadow:0 0 10px rgba(34,211,238,.6);transition:width .3s}
+.pval{flex:none;text-align:right;min-width:62px}
+.pval b{font-size:17px;color:var(--gold);font-variant-numeric:tabular-nums}
+.pval small{display:block;font-size:10px;color:var(--muted)}
+input[type=range]{width:100%;-webkit-appearance:none;height:18px;background:transparent;margin:0;padding:0}
+input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:3px;background:rgba(255,255,255,.12)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;margin-top:-7px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#cfe9ff,#2f7fe8);border:1px solid #9fd0ff;box-shadow:0 0 12px rgba(59,130,246,.8)}
+input[type=range]::-moz-range-track{height:4px;border-radius:3px;background:rgba(255,255,255,.12)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#cfe9ff,#2f7fe8);border:1px solid #9fd0ff}
+input[type=range]:disabled{opacity:.4;cursor:not-allowed}
+.path.disabled{opacity:.62}
+/* ===== 折叠 ===== */
+.collapsible{overflow:hidden}
+.collapsible > header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;cursor:pointer;list-style:none}
+.collapsible > header h2{font-size:14.5px;margin:0;font-weight:800}
+.collapsible .body{padding:0 16px 16px;display:none}
+.collapsible.open .body{display:block}
+.collapsible .arrow{transition:transform .25s;flex:none;color:var(--muted)}
+.collapsible.open .arrow{transform:rotate(90deg)}
+/* ===== 按钮 ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 16px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--txt)}
+.btn.primary{background:linear-gradient(135deg,#1d4ed8,#2563eb);border-color:#3b82f6;color:#fff;box-shadow:0 0 18px rgba(59,130,246,.45)}
+.btn.full{width:100%}
+.btn-row{display:flex;gap:10px;margin-top:6px}
+.btn-row .btn{flex:1}
+/* ===== 高级分析 ===== */
+.mini-chart{height:200px;width:100%}
+.mini-note{font-size:12px;color:#b9c8e2;margin-top:8px;line-height:1.75}
+.analysis-block{margin-bottom:16px}
+.analysis-block h3{font-size:13px;margin:0 0 8px;color:#cfe0ff}
+/* ===== 底部 ===== */
+.notice{display:flex;gap:12px;align-items:center;padding:14px 16px;border-radius:12px;
+  background:rgba(15,28,56,.72);border:1px solid rgba(64,130,255,.3)}
+.notice svg{width:22px;height:22px;flex:none;stroke:#7dd3fc;fill:none;stroke-width:1.8}
+.assume-btn{flex:none;background:rgba(255,255,255,.07);border:1px solid rgba(125,211,252,.55);color:#dcefff;
+  padding:10px 16px;border-radius:10px;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .2s}
+.assume-btn:hover{background:rgba(125,211,252,.18)}
+.assume-body{margin:10px 16px 0;padding:14px 16px;border-radius:12px;background:rgba(10,20,40,.72);
+  border:1px solid rgba(64,130,255,.25);font-size:12px;color:#b9c8e2;line-height:1.9}
+.night-foot{position:relative;margin-top:26px;
+  background:url('assets/night-footer.jpg') center 40%/cover no-repeat}
+.night-foot::before{content:"";position:absolute;inset:0;z-index:0;
+  background:linear-gradient(180deg,rgba(4,7,15,.96) 0%,rgba(4,7,15,.42) 42%,rgba(4,7,15,.78) 100%)}
+.night-foot>*{position:relative;z-index:1}
+.slogan{text-align:center;padding:46px 16px 12px}
+.slogan .l1{font-family:'Long Cang',cursive;font-size:clamp(30px,6.6vw,52px);font-weight:400;line-height:1.4;color:#f7fbff;text-shadow:0 2px 16px rgba(0,0,0,.65),0 0 30px rgba(125,211,252,.25)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;padding:18px 16px 42px}
+.footer-bottom .foot-actions{padding:0;margin:0}
+.open-future{text-align:right;color:#e3edff;font-size:13px;font-weight:700;line-height:1.5}
+.open-future .en{font-size:10px;color:#9fc2f0;letter-spacing:1.6px;margin-top:4px;text-transform:uppercase;font-weight:400}
+.foot-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;padding:14px 16px 42px}
+@media(max-width:720px){
+  .notice{flex-direction:column;align-items:stretch;gap:11px}
+  .assume-btn{width:100%;justify-content:center}
+  .footer-bottom{flex-direction:column;align-items:stretch}
+  .open-future{text-align:right}
+  .footer-bottom .foot-actions{justify-content:center}
+}
+/* ===== 保存列表 ===== */
+.saved-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;background:rgba(10,18,34,.6);border:1px solid rgba(64,130,255,.16);margin-bottom:8px;font-size:12px}
+.saved-item b{color:var(--gold);font-variant-numeric:tabular-nums}
+.saved-item .del{cursor:pointer;color:var(--red);padding:4px 8px;flex:none}
+/* ===== 弹层 ===== */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px}
+.modal.show{display:flex}
+.modal .box{background:#0b1426;border:1px solid var(--line);border-radius:16px;padding:20px;max-width:420px;width:100%;max-height:88vh;overflow:auto}
+.modal h3{margin:0 0 12px;font-size:15px}
+.modal .close{float:right;cursor:pointer;color:var(--muted)}
+#shareImg{width:100%;border-radius:10px;display:block}
+/* ===== likebar ===== */
+.likebar{display:flex;justify-content:center;margin:14px 16px 24px;background:rgba(15,23,42,.96);border:1px solid #3b82f6;border-radius:24px;padding:9px 20px;gap:22px;box-shadow:0 6px 24px rgba(0,0,0,.6)}
+.likebar button{background:none;border:none;color:#e2e8f0;font-size:14px;cursor:pointer}
+.likebar button:active{transform:scale(1.15)}
+/* ===== 移动端：顺序重排 + 控制台折叠 ===== */
+@media(max-width:1023px){
+  .grid{display:flex;flex-direction:column;gap:12px;padding:0 12px}
+  .m-visual{order:2}
+  .m-stats{order:3}
+  .plain-note{order:4}
+  .m-ctrl{order:5}
+  .m-analysis{order:6}
+  .m-guess{order:7}
+  .m-ctrl,.m-guess,.m-analysis,.m-visual,.m-stats{margin-top:0}
+  .stats4{padding:0}
+}
+/* ===== 桌面布局 ===== */
+@media(min-width:1024px){
+  .shell{max-width:1440px;margin:auto}
+  .hero{padding:72px 28px 50px}
+  .grid{display:grid;grid-template-columns:348px 1fr;gap:16px;align-items:start;padding:0 16px;
+    grid-template-areas:"ctrl visual" "ctrl stats" "ctrl note" "guess analysis"}
+  .m-ctrl{grid-area:ctrl;position:sticky;top:66px}
+  .m-guess{grid-area:guess}
+  .m-visual{grid-area:visual;min-width:0}
+  .m-stats{grid-area:stats}
+  .m-analysis{grid-area:analysis}
+  .plain-note{grid-area:note}
+  #ctrlBox > header{cursor:default}
+  #ctrlBox .body{display:block!important}
+  #ctrlBox .arrow{display:none}
+  .stats4{grid-template-columns:repeat(2,1fr);padding:0 12px 16px}
+  #mainChart{height:420px}
+  .chart-wrap{padding:4px 10px 12px}
+}
+@media(min-width:1200px){
+  .stats4{grid-template-columns:repeat(4,1fr);}
+}
+.plain-note{margin:10px 14px 0;padding:10px 13px;border:1px solid rgba(96,165,250,.28);
+  border-radius:10px;background:linear-gradient(90deg,rgba(30,58,138,.18),rgba(30,58,138,.04));
+  font-size:13px;color:#dbe7ff;line-height:1.7}
+.plain-note b{color:#fbbf24}
+.chart-guide{margin:0 14px 8px;padding:9px 13px;border:1px dashed rgba(148,163,184,.35);
+  border-radius:9px;font-size:12.5px;color:#b9c8e4;line-height:1.8;display:none}
+.chart-guide.open{display:block}
+.guide-btn{cursor:pointer;user-select:none;font-size:12px;color:#93c5fd;white-space:nowrap;
+  border:1px solid rgba(147,197,253,.35);border-radius:999px;padding:3px 11px;background:rgba(30,58,138,.15)}
+.guide-btn:hover{background:rgba(59,130,246,.25)}
+.sens-verdict{margin:8px 0 10px;padding:11px 13px;border:1px solid rgba(251,191,36,.35);
+  border-radius:10px;background:linear-gradient(90deg,rgba(120,53,15,.22),rgba(120,53,15,.05));
+  font-size:13.5px;color:#fde68a;line-height:1.8}
+.sens-verdict .vh{color:#fbbf24;font-size:15px;font-weight:800}
+@media(max-width:720px){
+  .plain-note{margin:10px 2px 0}
+  .chart-guide{margin:0 2px 8px}
+}
 </style></head><body>
+
+<div class="bg">
+  <div class="gridline"></div>
+  <div class="stars" id="stars"></div>
+  <svg class="skyline" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
+    <path fill="#0a1426" d="M0,300 L0,190 L40,190 L40,150 L70,150 L70,120 L100,120 L100,170 L140,170 L140,100 L175,100 L175,70 L205,70 L205,140 L250,140 L250,170 L290,170 L290,120 L330,120 L330,150 L370,150 L370,90 L405,90 L405,60 L440,60 L440,130 L490,130 L490,160 L540,160 L540,110 L580,110 L580,140 L620,140 L620,80 L660,80 L660,110 L700,110 L700,150 L750,150 L750,100 L790,100 L790,130 L840,130 L840,70 L880,70 L880,110 L920,110 L920,150 L970,150 L970,120 L1010,120 L1010,80 L1050,80 L1050,130 L1100,130 L1100,160 L1150,160 L1150,110 L1190,110 L1190,140 L1230,140 L1230,90 L1270,90 L1270,130 L1310,130 L1310,170 L1360,170 L1360,140 L1400,140 L1400,180 L1440,180 L1440,300 Z"/>
+    <g fill="#fcd34d" opacity=".5">
+      <rect x="148" y="110" width="4" height="5"/><rect x="182" y="82" width="4" height="5"/><rect x="412" y="72" width="4" height="5"/><rect x="378" y="102" width="4" height="5"/>
+      <rect x="628" y="92" width="4" height="5"/><rect x="848" y="82" width="4" height="5"/><rect x="1018" y="92" width="4" height="5"/><rect x="1238" y="102" width="4" height="5"/>
+      <rect x="78" y="132" width="4" height="5"/><rect x="298" y="132" width="4" height="5"/><rect x="548" y="122" width="4" height="5"/><rect x="978" y="132" width="4" height="5"/>
+      <rect x="1278" y="102" width="4" height="5"/><rect x="1368" y="152" width="4" height="5"/><rect x="700" y="122" width="4" height="5"/><rect x="1108" y="142" width="4" height="5"/>
+    </g>
+  </svg>
+</div>
 
 <div class="nav">
   <b>惠城产业风洞</b>
@@ -42,457 +248,776 @@ h1{font-size:20px;margin:0 0 2px}
   <a href="ending.html">⑨ 结语</a>
 </div>
 
-<div class="wrap">
-  <h1 id="pageTitle">把未来反复扔</h1>
-  <p class="sub">选模式、调参数、点按钮，看结果怎么变。同种子必同结果。</p>
-
-  <!-- 先猜后揭 -->
-  <div id="guessBox" style="margin:12px 0;padding:16px;background:linear-gradient(135deg,#1e293b,#0f172a);border:1px solid #fbbf24;border-radius:14px">
-    <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:4px">🎯 先别往下看——你觉得2030年惠城最可能落到多少？</div>
-    <div style="font-size:12.5px;color:#94a3b8;margin-bottom:12px">凭直觉选一个，然后再看模型跑出来的分布。</div>
-    <div style="display:flex;gap:8px">
-      <button onclick="guess(1)" style="flex:1;background:#f8717122;border:1px solid #f87171;color:#f87171;border-radius:10px;padding:10px 6px;cursor:pointer;font-size:13px;font-weight:700">1300亿以下</button>
-      <button onclick="guess(2)" style="flex:1;background:#fbbf2422;border:1px solid #fbbf24;color:#fbbf24;border-radius:10px;padding:10px 6px;cursor:pointer;font-size:13px;font-weight:700">1300-1600亿</button>
-      <button onclick="guess(3)" style="flex:1;background:#34d39922;border:1px solid #34d399;color:#34d399;border-radius:10px;padding:10px 6px;cursor:pointer;font-size:13px;font-weight:700">1600亿以上</button>
-    </div>
-    <div id="guessOut" style="margin-top:10px;font-size:12.5px;color:#cbd5e1"></div>
-  </div>
-
-  <div id="err"></div>
-
-  <div class="card">
-    <h2>调一调</h2>
-    <div class="slider-row">
-      <label>新投产项目节奏</label>
-      <input type="range" id="s1" min="300" max="700" value="500">
-      <span id="v1">500</span>
-    </div>
-    <div class="slider-row">
-      <label>三大集群扩能</label>
-      <input type="range" id="s2" min="100" max="300" value="200">
-      <span id="v2">200</span>
-    </div>
-    <div class="slider-row">
-      <label>AI机器人新赛道</label>
-      <input type="range" id="s3" min="50" max="150" value="100">
-      <span id="v3">100</span>
-    </div>
-    <div class="slider-row">
-      <label>随机种子（同种子=同结果）</label>
-      <input type="number" id="seed" value="42" style="flex:2;accent-color:#3b82f6;background:#0a0f1a;border:1px solid #1c2739;color:#fbbf24;padding:4px 8px;border-radius:4px">
-      <span style="width:50px"></span>
-    </div>
-    <div class="slider-row">
-      <label>模拟次数</label>
-      <div style="flex:2;display:flex;gap:8px">
-        <label style="flex:1;display:flex;align-items:center;gap:4px;cursor:pointer"><input type="radio" name="mode" value="1000" checked> 快速（1000次）</label>
-        <label style="flex:1;display:flex;align-items:center;gap:4px;cursor:pointer"><input type="radio" name="mode" value="10000"> 完整（10000次）</label>
-      </div>
-      <span style="width:50px"></span>
-    </div>
-    <div style="text-align:center;margin-top:10px">
-      <button class="btn" onclick="run()">🎲 开始模拟</button>
+<div class="shell">
+  <div class="hero">
+    <h1><span class="num">05</span><span class="tt">把未来反复扔</span></h1>
+    <p class="sub">用蒙特卡洛反复模拟未来，不是预测，而是看可能区间。</p>
+    <div class="hero-quote">
+      不确定的未来<br>也可以被看见<span class="hqa">↘</span>
     </div>
   </div>
 
-  <div class="card" id="paramCard" style="display:none">
-    <h2>扰动参数透明面板（可复现）</h2>
-    <div style="font-size:12px;color:#93a4bd;line-height:2">
-      <div><b>随机种子：</b><span id="pSeed" style="color:#fbbf24"></span>（mulberry32 PRNG，同种子必同结果）</div>
-      <div><b>模拟次数：</b><span id="pN" style="color:#fbbf24"></span>次</div>
-      <div><b>基准产值：</b>632.7亿（2025高新区实测）</div>
-      <div><b>参考目标：</b>1500亿（模型外延目标，非政府刚性指标）</div>
-      <div style="margin-top:6px"><b>五条路径扰动分布（正态分布 N(μ,σ²)）：</b></div>
-      <div id="pPaths" style="padding-left:16px"></div>
-      <div style="margin-top:6px"><b>全局噪声：</b>正态分布 σ=8%（模拟外部冲击、政策变化、随机扰动）</div>
-      <div style="margin-top:6px;color:#6b7280;font-size:11px">以上参数全部公开。你可以改种子、改滑块、改次数，结果应该和我的一致——如果不一致，说明我的代码有问题，欢迎指出。</div>
+  <div class="grid">
+    <!-- ===== 路径控制台（移动端折叠，桌面常驻） ===== -->
+    <div class="glass collapsible m-ctrl" id="ctrlBox">
+      <header onclick="ctrlHeaderClick()">
+        <h2>2030 产业发展路径设置</h2>
+        <div style="display:flex;align-items:center;gap:8px">
+          <button class="btn" id="resetBtn" style="padding:7px 12px" onclick="event.stopPropagation()">恢复默认</button>
+          <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+      </header>
+      <div class="body">
+        <div id="pathList"></div>
+        <div class="btn-row">
+          <button class="btn primary" id="runBtn">运行模拟</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 先猜后揭 ===== -->
+    <div class="glass collapsible m-guess" id="guessBox">
+      <header onclick="toggleCollapse('guessBox')">
+        <h2>先别往下看——你猜2030落在哪？</h2>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+      </header>
+      <div class="body">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:10px">凭直觉选一个，再看模拟结果落在哪个区间。</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn" style="flex:1;min-width:90px;color:var(--red);border-color:rgba(248,113,113,.5)" onclick="guess(1)">1300亿以下</button>
+          <button class="btn" style="flex:1;min-width:90px;color:var(--gold);border-color:rgba(251,191,36,.5)" onclick="guess(2)">1300-1600亿</button>
+          <button class="btn" style="flex:1;min-width:90px;color:var(--green);border-color:rgba(52,211,153,.5)" onclick="guess(3)">1600亿以上</button>
+        </div>
+        <div id="guessOut" style="margin-top:10px;font-size:12.5px;color:#cbd5e1"></div>
+      </div>
+    </div>
+
+    <!-- ===== 主视觉 ===== -->
+    <div class="glass m-visual">
+      <div class="panel-head">
+        <div>
+          <h2>2030 年地区产值 · 模拟结果</h2>
+          <div class="cap" id="capText">基于随机模拟，呈现可能的结果分布区间</div>
+        </div>
+        <div class="toolrow">
+          <div class="seg" id="nSeg">
+            <button data-n="10000" class="on">一万次模拟（推荐）</button>
+            <button data-n="1000">一千次模拟</button>
+          </div>
+          <div class="seg" id="scenSeg">
+            <button data-s="current" class="on">当前情景</button>
+            <button data-s="base">基准情景</button>
+          </div>
+        </div>
+      </div>
+      <div class="panel-head" style="padding-top:0">
+        <div class="toolrow">
+          <div class="seg" id="viewSeg">
+            <button data-v="dist" class="on">分布图</button>
+            <button data-v="cdf">累计概率</button>
+            <button data-v="cmp">对比视图</button>
+          </div>
+          <span class="tgl" id="baseTgl"><i></i>对照基准情景</span>
+          <button class="guide-btn" id="guideBtn" onclick="toggleGuide()">怎么读这张图</button>
+        </div>
+      </div>
+      <div class="chart-guide" id="chartGuide">① 柱子越高 = 这个产值区间在模拟里越常出现；<br>② 橙色虚线是 1500 亿参考目标，柱子跨过它就算“达标”；<br>③ 蓝/黄圆点标出三种典型未来：保守（P10）、中间（P50）、乐观（P90）。</div>
+      <div class="chart-wrap"><div id="mainChart"></div></div>
+    </div>
+
+    <!-- ===== 结果四卡 ===== -->
+    <div class="stats4 m-stats" id="stats4"></div>
+    <div class="plain-note" id="plainNote"></div>
+
+    <!-- ===== 高级分析（折叠） ===== -->
+    <div class="glass collapsible m-analysis" id="analysisBox">
+      <header onclick="toggleCollapse('analysisBox')">
+        <h2>高级分析：路径系数 · 灵敏度</h2>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+      </header>
+      <div class="body">
+        <div class="analysis-block">
+          <h3>五条路怎样影响结果？路径系数图</h3>
+          <div class="mini-chart" id="pathCoefChart" style="height:350px"></div>
+          <div class="mini-note" id="pathCoefNote"></div>
+        </div>
+        <div class="analysis-block">
+          <h3>哪个旋钮最灵敏？逐路径 ±20% 一拧，达标率动多少</h3>
+          <button class="btn primary" id="sensBtn" style="margin-bottom:10px">跑一跑：哪条路径最灵敏</button>
+          <span id="sensStatus" style="font-size:11px;color:var(--muted)"></span>
+          <div id="sensWrap" style="display:none">
+            <div class="mini-chart" id="sensChart" style="height:260px"></div>
+            <div class="mini-note" id="sensNote"></div>
+            <div id="sensTable" style="font-size:11.5px;color:var(--muted);margin-top:10px"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div id="out" style="display:none">
-    <div class="prob" id="prob"></div>
-    <div style="text-align:center;font-size:12px;color:#6b7280;margin:-8px 0 10px">达到1500亿的概率</div>
-    <div class="result">
-      <div class="stat"><div class="v" id="p10">—</div><div class="l">第10百分位（较差）</div></div>
-      <div class="stat"><div class="v" id="p50">—</div><div class="l">中位数</div></div>
-      <div class="stat"><div class="v" id="p90">—</div><div class="l">第90百分位（较好）</div></div>
-    </div>
-
-    <div class="card">
-      <h2 id="histTitle">模拟结果分布</h2>
-      <div style="height:260px"><canvas id="chart"></canvas></div>
-      <div id="chart-note" style="font-size:12px;color:#8fa3bf;margin-top:8px;text-align:center"></div>
-    </div>
-
-    <div class="card">
-      <h2>每一路贡献多少</h2>
-      <div style="height:140px"><canvas id="contrib"></canvas></div>
-      <div id="contrib-note" style="font-size:12px;color:#8fa3bf;margin-top:8px"></div>
-    </div>
-
-    <div class="card">
-      <h2>哪件事波动最大</h2>
-      <div style="height:180px"><canvas id="tornado"></canvas></div>
-      <div id="torn-note" style="font-size:12px;color:#8fa3bf;margin-top:8px"></div>
-    </div>
-
-    <div class="card">
-      <h2>哪条路与结果关联最强（影响系数）</h2>
-      <div style="height:180px"><canvas id="pathcoef"></canvas></div>
-      <div id="pcoef-note" style="font-size:12px;color:#8fa3bf;margin-top:8px"></div>
-    </div>
-
-    <div class="card" style="border-color:#2b3a55">
-      <h2>参数敏感性分析（逐个参数 ±20% 扰动）</h2>
-      <div style="font-size:12px;color:#8fa3bf;margin-bottom:10px;line-height:1.7">
-        <b style="color:#fbbf24">这是参数微分，不是场景压测。</b>
-        保持其他参数不变，只把某一条路的均值单独调高或调低 20%，用<b>同一个随机种子</b>重新跑模拟，看达标概率和中位产值变多少。
-        与⑥风洞页的"事件注入"（投产延期、通勤堵塞等具体事件）是两本账，不可混排。
-      </div>
-      <div style="text-align:center;margin:10px 0">
-        <button class="btn" onclick="runSensitivity()" style="background:#059669">⚡ 跑参数敏感性分析</button>
-        <span id="sens-status" style="font-size:11px;color:#6b7280;margin-left:10px"></span>
-      </div>
-      <div id="sens-out" style="display:none">
-        <div style="height:220px"><canvas id="sens-chart"></canvas></div>
-        <div id="sens-note" style="font-size:12px;color:#8fa3bf;margin-top:10px;line-height:1.8"></div>
-        <div style="margin-top:12px">
-          <div style="font-size:12px;font-weight:600;color:#93a4bd;margin-bottom:6px">中位产值变化（±20%扰动）</div>
-          <div id="sens-table" style="font-size:11.5px;color:#93a4bd"></div>
-        </div>
+  <!-- ===== 底部夜景 ===== -->
+  <div class="night-foot">
+  <div class="notice" style="margin:18px 16px 0">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+    <div style="flex:1;min-width:0">
+      <div style="font-size:13px;font-weight:800;color:#e3edff">重要说明</div>
+      <div style="font-size:12px;color:#b3c2dd;margin-top:3px;line-height:1.65">
+        本页基于公开数据与设定情景进行模拟，结果不代表现实预测。2030 年的产值不是一个固定数字，而是一个可能区间——路径不同，区间随之移动。
       </div>
     </div>
-
-    <div class="card">
-      <h2>三个情景</h2>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
-        <div style="background:#0a0f1a;border:1px solid #7f1d1d;border-radius:8px;padding:10px;text-align:center">
-          <div style="font-size:11px;color:#6b7280">较差情景（P10）</div>
-          <div style="font-size:18px;font-weight:800;color:#f87171" id="bad">—</div>
-        </div>
-        <div style="background:#0a0f1a;border:1px solid #713f12;border-radius:8px;padding:10px;text-align:center">
-          <div style="font-size:11px;color:#6b7280">中位情景（P50）</div>
-          <div style="font-size:18px;font-weight:800;color:#fbbf24" id="mid">—</div>
-        </div>
-        <div style="background:#0a0f1a;border:1px solid #14532d;border-radius:8px;padding:10px;text-align:center">
-          <div style="font-size:11px;color:#6b7280">较好情景（P90）</div>
-          <div style="font-size:18px;font-weight:800;color:#34d399" id="good">—</div>
-        </div>
-      </div>
-      <div id="scen-note" style="font-size:12px;color:#8fa3bf;margin-top:8px"></div>
+    <button class="assume-btn" onclick="toggleCollapse('assumeBox')">查看假设条件 <span style="margin-left:2px">→</span></button>
+  </div>
+  <div class="collapsible" id="assumeBox">
+    <div class="body assume-body">
+      · 现实锚点：2025 年高新区规上工业总产值 632.7 亿元（公开实测）。<br>
+      · 参考目标：1500 亿元为模型外延参考目标，非政府刚性指标。<br>
+      · 五条路径的产值贡献，为情景假设，可在左侧调节；模拟结果叠加外部冲击与随机因素，呈现可能区间。
     </div>
+  </div>
 
-    <div id="conclusion" style="background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:16px;font-size:13px;line-height:1.8;color:#cbd5e1"></div>
+  <div class="slogan">
+    <div class="l1">在不确定的世界里<br>用数据看见更多可能</div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="foot-actions">
+      <button class="btn primary" id="saveBtn">保存当前结果</button>
+      <button class="btn" id="shareBtn">生成分享图</button>
+      <button class="btn" id="savedListBtn">已保存实验</button>
+    </div>
+    <div class="open-future">
+      更开放的惠城 · 连接更大的未来
+      <div class="en">A MORE OPEN HUICHENG · A BIGGER FUTURE</div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- 分享图弹层 -->
+<div class="modal" id="shareModal">
+  <div class="box">
+    <span class="close" onclick="closeModal('shareModal')">关闭</span>
+    <h3>分享本次模拟结果</h3>
+    <img id="shareImg" alt="模拟结果分享图">
+    <div style="font-size:11px;color:var(--muted);margin-top:10px">长按图片可保存；基于公开数据与设定情景进行模拟，结果不代表现实预测。</div>
+    <a class="btn primary full" id="downloadShare" style="margin-top:12px" download="惠城未来模拟.png">下载图片</a>
+  </div>
+</div>
+
+<!-- 已保存列表弹层 -->
+<div class="modal" id="savedModal">
+  <div class="box">
+    <span class="close" onclick="closeModal('savedModal')">关闭</span>
+    <h3>已保存的实验</h3>
+    <div id="savedList"></div>
   </div>
 </div>
 
 <script>
-// 算法内核（mulberry32 / 正态 / 分位数 / 相关系数 / 蒙特卡洛）已抽到
-// 同目录 model.js 的 HT 对象，future / windtunnel / report 三页共用。
-// 这里只保留一个简短别名，供本页敏感性分析调用，行为与 HT.run 完全一致。
-function simulate(seed,N,paths){ return HT.run(seed,N,paths); }
-let lastRun=null;
-const charts={};
-function destroy(k){if(charts[k]){charts[k].destroy();delete charts[k];}}
+/* ===== 路径情景配置（名称/说明/可调范围/默认情景） ===== */
+var PATHS_META=[
+  {id:'p1',name:'新投产项目落地',desc:'重大项目陆续投产达效',min:300,max:700,step:10,def:500,color:'#3b82f6',
+   ico:'<path d="M3 21V10l5 4V10l5 4V7l8 4v10z"/><path d="M7 21v-4M12 21v-4M17 21v-4"/>'},
+  {id:'p2',name:'三大集群扩能',desc:'电子信息、新能源、先进制造',min:100,max:300,step:10,def:200,color:'#8b5cf6',
+   ico:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>'},
+  {id:'p3',name:'AI与机器人新赛道',desc:'新质生产力培育',min:50,max:150,step:5,def:100,color:'#06b6d4',
+   ico:'<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/>'},
+  {id:'p4',name:'生产性服务业带动',desc:'生产性服务业与现代服务业',min:50,max:150,step:5,def:100,color:'#fbbf24',
+   ico:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>'},
+  {id:'p5',name:'融深融湾',desc:'湾区协同与要素流动',min:20,max:80,step:5,def:50,color:'#f87171',
+   ico:'<path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7 0zM14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 0z"/>'}
+];
+var SEED=42, BIN_MIN=800, BIN_MAX=2400, BINS=48;
+var PATH_CONF=[80,70,60,60,50];
+var state={N:10000, view:'dist', showBase:false, scenarioMode:'current', userVals:null, current:null, base:null, lastVals:null};
+var charts={};
 
-['s1','s2','s3'].forEach(id=>{
-  document.getElementById(id).oninput=function(){
-    document.getElementById(id.replace('s','v')).textContent=this.value;
-  };
-});
-
-function run(){
-  try{
-    var seed=+document.getElementById('seed').value||42;
-    var N=+document.querySelector('input[name="mode"]:checked').value;
-    var paths=[
-      {mu:+document.getElementById('s1').value, sd:100, name:'新投产项目', color:'#3b82f6'},
-      {mu:+document.getElementById('s2').value, sd:60, name:'三大集群', color:'#8b5cf6'},
-      {mu:+document.getElementById('s3').value, sd:40, name:'AI机器人', color:'#06b6d4'},
-      {mu:100, sd:40, name:'服务业带动', color:'#fbbf24'},
-      {mu:50, sd:30, name:'融深融湾', color:'#f87171'}
-    ];
-    var base=632.7;
-    var m=HT.run(seed,N,paths);
-    var p10=m.p10, p50=m.p50, p90=m.p90, hit=m.hit, coefs=m.coefs, results=m.results;
-
-    document.getElementById('prob').innerHTML='<span style="color:'+(hit>50?'#34d399':hit>20?'#fbbf24':'#f87171')+'">'+hit.toFixed(1)+'%</span>';
-    document.getElementById('p10').textContent=Math.round(p10)+'亿';
-    document.getElementById('p50').textContent=Math.round(p50)+'亿';
-    document.getElementById('p90').textContent=Math.round(p90)+'亿';
-    document.getElementById('bad').textContent=Math.round(p10)+'亿';
-    document.getElementById('mid').textContent=Math.round(p50)+'亿';
-    document.getElementById('good').textContent=Math.round(p90)+'亿';
-
-    // 直方图
-    var bins=40, min=Math.floor(p10*0.85), max=Math.ceil(p90*1.15), step=(max-min)/bins;
-    var labels=[], data=[];
-    for(var b=0;b<bins;b++){labels.push(Math.round(min+step*(b+0.5)));data.push(0);}
-    results.forEach(function(r){var bi=Math.min(bins-1,Math.max(0,Math.floor((r-min)/step)));data[bi]++;});
-    var colors=data.map(function(v,i){return labels[i]>=1500?'#f87171':'#3b82f6';});
-    destroy('hist');
-    charts.hist=new Chart(document.getElementById('chart').getContext('2d'),{
-      type:'bar',
-      data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderRadius:2}]},
-      options:{responsive:true,maintainAspectRatio:false,
-        plugins:{legend:{display:false},tooltip:{callbacks:{title:function(it){return it[0].label+'亿';},label:function(it){return '出现'+it.parsed.y+'次';}}}},
-        scales:{x:{ticks:{color:'#6b7280',maxTicksLimit:8},grid:{display:false}},y:{ticks:{color:'#6b7280'},grid:{color:'#1c2739'}}}
-      }
-    });
-
-    var hitCount=Math.round(N*hit/100), missCount=N-hitCount;
-    document.getElementById('chart-note').innerHTML=
-      N.toLocaleString()+'次模拟里约 <b style="color:#f87171">'+hitCount.toLocaleString()+'次</b>过了1500亿（达标率 '+hit.toFixed(1)+'%），<b style="color:#3b82f6">'+missCount.toLocaleString()+'次</b>没过。中位数落在 <b style="color:#fbbf24">'+Math.round(p50)+'亿</b>。';
-
-    // 贡献堆叠
-    var cNames=['现有盘子'].concat(paths.map(function(p){return p.name;}));
-    var cColors=['#1c2739'].concat(paths.map(function(p){return p.color;}));
-    var cVals=[base].concat(paths.map(function(p){return p.mu;}));
-    destroy('contrib');
-    charts.contrib=new Chart(document.getElementById('contrib').getContext('2d'),{
-      type:'bar',
-      data:{labels:['2030年'],datasets:cNames.map(function(n,i){return {label:n,data:[cVals[i]],backgroundColor:cColors[i],stack:'s'};})},
-      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
-        plugins:{legend:{position:'bottom',labels:{color:'#93a4bd',font:{size:10}}}},
-        scales:{x:{stacked:true,ticks:{color:'#6b7280'},grid:{color:'#1c2739'}},y:{stacked:true,ticks:{color:'#93a4bd'},grid:{display:false}}}
-      }
-    });
-
-    // 龙卷风
-    var tData=paths.slice().sort(function(a,b){return b.sd-a.sd;});
-    destroy('torn');
-    charts.torn=new Chart(document.getElementById('tornado').getContext('2d'),{
-      type:'bar',
-      data:{labels:tData.map(function(d){return d.name;}),datasets:[
-        {label:'下限',data:tData.map(function(d){return -d.sd;}),backgroundColor:'#f87171'},
-        {label:'上限',data:tData.map(function(d){return d.sd;}),backgroundColor:'#3b82f6'}
-      ]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
-        tooltip:{callbacks:{label:function(it){var d=tData[it.dataIndex];return d.name+' 波动±'+d.sd+'亿';}}}},
-        scales:{x:{ticks:{color:'#6b7280',callback:function(v){return Math.abs(v)+'亿';}},grid:{color:'#1c2739'}},y:{ticks:{color:'#93a4bd'},grid:{display:false}}}
-      }
-    });
-
-    // 路径系数
-    destroy('pcoef');
-    charts.pcoef=new Chart(document.getElementById('pathcoef').getContext('2d'),{
-      type:'bar',
-      data:{labels:paths.map(function(p){return p.name;}),datasets:[{data:coefs,backgroundColor:paths.map(function(p){return p.color;}),borderRadius:4}]},
-      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
-        tooltip:{callbacks:{label:function(it){return '影响系数 '+it.parsed.x.toFixed(3);}}}},
-        scales:{x:{ticks:{color:'#6b7280'},grid:{color:'#1c2739'},max:1},y:{ticks:{color:'#93a4bd'},grid:{display:false}}}
-      }
-    });
-
-    var maxI=coefs.indexOf(Math.max.apply(null,coefs));
-
-    // 人话解读（详尽版）
-    document.getElementById('contrib-note').innerHTML=
-      '<b>这张图在看什么：</b>2030年高新区的产值，不是凭空冒出来的，是从现在632亿的盘子上，五条路一段一段加上去的。<br>'+
-      '<b>怎么看：</b>最下面灰色那段是"现在已经有的632亿"，往上每一段颜色代表一条路能加多少。蓝色那段（新投产项目）最长，约'+paths[0].mu+'亿，占了全部新增量的一半还多——相当于五条路里它一个人扛了一半的活。紫色（三大集群）约'+paths[1].mu+'亿排第二，剩下三段（AI、服务业、融深）加起来才'+(paths[2].mu+paths[3].mu+paths[4].mu)+'亿，每段都比较短。<br>'+
-      '<b>这意味着：</b>高新区能不能到1500亿，主要看新投产项目这条路走不走得顺。这条路如果打折扣，其他几条加起来也补不上窟窿。';
-
-    document.getElementById('torn-note').innerHTML=
-      '<b>这张图在看什么：</b>五条路每条都不是板上钉钉的数，都有"说好也可能、说坏也可能"的摆动空间。这张图把每条路<b>模型设定的波动范围</b>（±1个标准差）摆出来。<br>'+
-      '<b>怎么看：</b>横条往左右伸得越长，说明这条路的结果越说不准。比如新投产项目，设定的波动范围是±'+paths[0].sd+'亿。最下面那条（融深融湾）横条最短，说明设定的摆动幅度小。<br>'+
-      '<b>注意：</b>这里的波动范围是模型设定的参数（σ），不是从历史数据估计的实测敏感性。参数是否合理，需要用现实数据校准——这正是开源可修改的意义。<br>'+
-      '<b>这意味着：</b>做计划的时候，最上面那条路不能按"最好情况"排，得给它留足余量。因为它一旦往下摆，整体结果直接被拉下来一大截。';
-
-    document.getElementById('pcoef-note').innerHTML=
-      '<b>这张图在看什么：</b>五条路都在转，但"在转"和"与最终结果关联强"是两回事。这张图回答的是：在模型内部，哪条路的波动和最终产值的波动绑得最紧。<br>'+
-      '<b>怎么看：</b>条越长，说明这条路上下动一点，最终结果就跟着动得多。排第一的是<b style="color:'+paths[maxI].color+'">'+paths[maxI].name+'</b>（系数'+coefs[maxI].toFixed(3)+'），它和结果的关联最强。排最后的那条系数最小，意思是它好不好，对最终结果影响有限——它在转，但更像是"空转"。<br>'+
-      '<b>注意：</b>这个系数是模型内部的相关系数，只说明"在这组参数下，这条路和结果同步波动的程度"，<b>不能直接证明某条产业路径在现实中具有更强的因果作用</b>。现实因果需要更严格的识别策略。<br>'+
-      '<b>这意味着：</b>资源和精力有限的时候，可以先关注关联强的路，它在模型里见效最直接。但别把模型里的关联强度当成现实中的因果定论。';
-
-    document.getElementById('scen-note').innerHTML=
-      '<b>这张图在看什么：</b>把'+N.toLocaleString()+'次模拟结果从小到大排队，挑出三个统计分位：第10百分位（较差）、中位数（P50）、第90百分位（较好）。<br>'+
-      '<b>怎么看：</b>较差情景约'+Math.round(p10)+'亿，对应"项目延期+招商不顺"同时发生；中位情景约'+Math.round(p50)+'亿，对应"按节奏正常走"；较好情景约'+Math.round(p90)+'亿，对应"招商超预期+投产提前"。较差和较好之间差了大约'+Math.round(p90-p10)+'亿。<br>'+
-      '<b>这意味着：</b>较差和较好的差距，差不多相当于现在高新区半年的产值。这个摆动幅度说明：结果不是"一定怎样"，而是落在一个区间里，关键看几个关键节点能不能守住。';
-
-    document.getElementById('conclusion').innerHTML=
-      '中位数落在 <b style="color:#fbbf24">'+Math.round(p50)+'亿</b>，'+
-      (hit>50?'模拟中过半数能达到':'模拟中过半数够不着')+'1500亿参考目标。'+
-      '在模型内部，与最终产值关联最强的是 <b style="color:'+paths[maxI].color+'">'+paths[maxI].name+'</b>（系数'+coefs[maxI].toFixed(3)+'）。'+
-      '注意：这是模型内部的关联强度，不代表现实中的因果作用大小。其他几条路在转，但与最终结果的关联没那么强。';
-
-    // 扰动参数透明面板
-    document.getElementById('paramCard').style.display='block';
-    document.getElementById('pSeed').textContent=seed;
-    document.getElementById('pN').textContent=N.toLocaleString();
-    document.getElementById('pPaths').innerHTML=paths.map(function(p){
-      return '<div>· '+p.name+'：μ='+p.mu+'亿，σ='+p.sd+'亿（正态分布，下限截断为0）</div>';
-    }).join('');
-
-    document.getElementById('out').style.display='block';
-    lastRun={p10:p10,p50:p50,p90:p90,hit:hit,N:N};
-  }catch(e){
-    var el=document.getElementById('err');
-    el.style.display='block';
-    el.textContent='错误: '+e.message+' | Chart是否加载: '+(typeof Chart!=='undefined'?'是':'否');
+/* ===== 工具 ===== */
+function $(id){return document.getElementById(id);}
+function round(v){return Math.round(v);}
+function toast(msg){
+  var t=document.createElement('div');t.textContent=msg;
+  t.style.cssText='position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:rgba(10,20,40,.96);border:1px solid rgba(64,130,255,.5);color:#fff;padding:10px 18px;border-radius:20px;font-size:13px;z-index:10000';
+  document.body.appendChild(t);setTimeout(function(){t.remove();},1800);
+}
+function toggleCollapse(id){
+  var el=$(id), opening=!el.classList.contains('open');
+  el.classList.toggle('open');
+  if(opening&&id==='analysisBox'){
+    setTimeout(function(){
+      if(charts.pathcoef)charts.pathcoef.resize();
+      if(state.current)renderPathCoef(state.current);
+      if(charts.sens)charts.sens.resize();
+    },60);
   }
 }
+function closeModal(id){$(id).classList.remove('show');}
+/* 控制台：仅移动端可折叠，桌面常驻 */
+function ctrlHeaderClick(){if(window.innerWidth<1024)toggleCollapse('ctrlBox');}
 
-// 参数敏感性分析：逐个参数±20%扰动，同种子控制变量
-function runSensitivity(){
-  try{
-    var seed=+document.getElementById('seed').value||42;
-    var N=+document.querySelector('input[name="mode"]:checked').value;
-    document.getElementById('sens-status').textContent='正在跑 11 次模拟（基准 + 5参数×2方向）…';
-    document.getElementById('sens-out').style.display='none';
+/* ===== 渲染路径卡 ===== */
+function renderPaths(){
+  var html='';
+  PATHS_META.forEach(function(m,i){
+    html+='<div class="path"><div class="pico"><svg viewBox="0 0 24 24">'+m.ico+'</svg></div>'+
+      '<div class="pinfo"><div class="pname">'+m.name+'</div><div class="pdesc">'+m.desc+'</div>'+
+      '<div class="pbar"><div class="pfill" id="fill-'+m.id+'"></div></div>'+
+      '<input type="range" id="'+m.id+'" min="'+m.min+'" max="'+m.max+'" step="'+m.step+'" value="'+m.def+'"></div>'+
+      '<div class="pval"><b id="val-'+m.id+'">+'+m.def+'</b><small>把握度 '+PATH_CONF[i]+'%</small></div></div>';
+  });
+  $('pathList').innerHTML=html;
+  PATHS_META.forEach(function(m){
+    $(m.id).addEventListener('input',function(){updatePathDisplay();});
+    $(m.id).addEventListener('change',function(){scheduleRerun();});
+  });
+  updatePathDisplay();
+}
+function getVals(){
+  var vals=[];PATHS_META.forEach(function(m){vals.push(+$(m.id).value);});return vals;
+}
+function updatePathDisplay(){
+  var vals=getVals();
+  PATHS_META.forEach(function(m,i){
+    $('val-'+m.id).textContent='+'+vals[i];
+    $('fill-'+m.id).style.width=((vals[i]-m.min)/(m.max-m.min)*100)+'%';
+  });
+}
+/* ===== 路径→模型输入：用户调情景值 mu，内部波动参数 sd 沿用模型默认（不展示） ===== */
+function pathsFromVals(vals){
+  return PATHS_META.map(function(m,i){
+    return {mu:vals[i],sd:HT.DEFAULT_PATHS[i].sd,name:m.name,color:m.color};
+  });
+}
+var rerunTimer=null;
+function scheduleRerun(){
+  clearTimeout(rerunTimer);
+  rerunTimer=setTimeout(function(){runSim(false);},350);
+}
 
-    // 基准参数
-    var basePaths=[
-      {mu:+document.getElementById('s1').value,sd:100,name:'新投产项目',color:'#3b82f6'},
-      {mu:+document.getElementById('s2').value,sd:60,name:'三大集群',color:'#8b5cf6'},
-      {mu:+document.getElementById('s3').value,sd:40,name:'AI机器人',color:'#06b6d4'},
-      {mu:100,sd:40,name:'服务业带动',color:'#fbbf24'},
-      {mu:50,sd:30,name:'融深融湾',color:'#f87171'}
-    ];
-
-    // 基准结果（同种子）
-    var base=simulate(seed,N,basePaths);
-
-    // 逐个参数±20%
-    var results=[];
-    for(var i=0;i<basePaths.length;i++){
-      // +20%
-      var pathsPlus=JSON.parse(JSON.stringify(basePaths));
-      pathsPlus[i].mu=Math.round(pathsPlus[i].mu*1.2);
-      var rPlus=simulate(seed,N,pathsPlus);
-      // -20%
-      var pathsMinus=JSON.parse(JSON.stringify(basePaths));
-      pathsMinus[i].mu=Math.round(pathsMinus[i].mu*0.8);
-      var rMinus=simulate(seed,N,pathsMinus);
-
-      results.push({
-        name:basePaths[i].name,
-        color:basePaths[i].color,
-        plusProb:rPlus.hit-base.hit,
-        minusProb:rMinus.hit-base.hit,
-        plusP50:rPlus.p50-base.p50,
-        minusP50:rMinus.p50-base.p50
-      });
-    }
-
-    // 按达标概率变化绝对值排序
-    results.sort(function(a,b){
-      return (Math.abs(b.plusProb)+Math.abs(b.minusProb))-(Math.abs(a.plusProb)+Math.abs(a.minusProb));
-    });
-
-    // 画龙卷风图（达标概率变化）
-    destroy('sens');
-    charts.sens=new Chart(document.getElementById('sens-chart').getContext('2d'),{
-      type:'bar',
-      data:{
-        labels:results.map(function(r){return r.name;}),
-        datasets:[
-          {label:'参数+20%',data:results.map(function(r){return r.plusProb.toFixed(1);}),backgroundColor:'#3b82f6'},
-          {label:'参数-20%',data:results.map(function(r){return r.minusProb.toFixed(1);}),backgroundColor:'#f87171'}
-        ]
-      },
-      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
-        plugins:{legend:{position:'top',labels:{color:'#93a4bd',font:{size:11}}},
-          tooltip:{callbacks:{label:function(it){return it.dataset.label+': 达标率'+(it.parsed.x>=0?'+':'')+it.parsed.x.toFixed(1)+'%';}}}},
-        scales:{x:{ticks:{color:'#6b7280',callback:function(v){return v+'%';}},grid:{color:'#1c2739'}},
-          y:{ticks:{color:'#93a4bd',font:{size:11}},grid:{display:false}}}}
-    });
-
-    // 解读
-    var mostSensitive=results[0];
-    var leastSensitive=results[results.length-1];
-    document.getElementById('sens-note').innerHTML=
-      '<b>这张图在看什么：</b>保持其他四条路不变，只把某一条路的均值单独调高或调低20%，用同一个随机种子重新跑。蓝色是+20%后达标率的变化，红色是-20%后的变化。横条越长，说明这条路越敏感。<br>'+
-      '<b>怎么看：</b>最敏感的是<b style="color:'+mostSensitive.color+'">'+mostSensitive.name+'</b>——+20%达标率'+(mostSensitive.plusProb>=0?'+':'')+mostSensitive.plusProb.toFixed(1)+'%，-20%达标率'+(mostSensitive.minusProb>=0?'+':'')+mostSensitive.minusProb.toFixed(1)+'%，上下差'+(Math.abs(mostSensitive.plusProb)+Math.abs(mostSensitive.minusProb)).toFixed(1)+'个百分点。最不敏感的是<b style="color:'+leastSensitive.color+'">'+leastSensitive.name+'</b>，±20%对达标率影响有限。<br>'+
-      '<b>注意：</b>这是模型内部的参数敏感性，用同一个种子控制了随机扰动，差异纯粹来自参数变化。但参数±20%是否对应现实中的合理波动范围，需要用现实数据校准。<br>'+
-      '<b>这意味着：</b>资源有限时，先盯最敏感的那条路——它动一点，整体达标概率就动得多。但"敏感"不等于"重要"，敏感只说明"在模型里这个参数和结果绑得紧"，现实中哪条路该优先，还要结合可控性、成本和见效速度综合判断。';
-
-    // 中位产值变化表
-    var tableHtml='<table style="width:100%;border-collapse:collapse;font-size:11px">';
-    tableHtml+='<tr style="color:#6b7280;border-bottom:1px solid #1c2739"><td style="padding:4px 8px;text-align:left">参数</td><td style="padding:4px 8px;text-align:right">-20%中位产值</td><td style="padding:4px 8px;text-align:right">基准</td><td style="padding:4px 8px;text-align:right">+20%中位产值</td><td style="padding:4px 8px;text-align:right">波动幅度</td></tr>';
-    results.forEach(function(r){
-      var range=Math.abs(r.plusP50)+Math.abs(r.minusP50);
-      tableHtml+='<tr style="border-bottom:1px solid #152033"><td style="padding:4px 8px;color:'+r.color+'">'+r.name+'</td>'+
-        '<td style="padding:4px 8px;text-align:right;color:#f87171">'+Math.round(base.p50+r.minusP50)+'亿</td>'+
-        '<td style="padding:4px 8px;text-align:right;color:#fbbf24">'+Math.round(base.p50)+'亿</td>'+
-        '<td style="padding:4px 8px;text-align:right;color:#34d399">'+Math.round(base.p50+r.plusP50)+'亿</td>'+
-        '<td style="padding:4px 8px;text-align:right;color:#93a4bd">±'+Math.round(range/2)+'亿</td></tr>';
-    });
-    tableHtml+='</table>';
-    document.getElementById('sens-table').innerHTML=tableHtml;
-
-    document.getElementById('sens-status').textContent='完成（基准达标率'+base.hit.toFixed(1)+'%，中位'+Math.round(base.p50)+'亿）';
-    document.getElementById('sens-out').style.display='block';
-  }catch(e){
-    document.getElementById('sens-status').innerHTML='<span style="color:#f87171">错误: '+e.message+'</span>';
+/* ===== 分箱统计（从模拟结果计算，主图/卡片同源） ===== */
+function binStats(run){
+  var step=(BIN_MAX-BIN_MIN)/BINS, centers=[], counts=[], dens=[], map={};
+  for(var b=0;b<BINS;b++){
+    var lo=BIN_MIN+step*b, hi=lo+step, c=round(lo+step/2), n=0;
+    for(var i=0;i<run.results.length;i++){var r=run.results[i];if(r>=lo&&r<hi)n++;}
+    centers.push(c);counts.push(n);
+    var d=n/run.results.length/step;
+    dens.push(d);map[c]={count:n,dens:d};
   }
+  return {centers:centers,counts:counts,dens:dens,map:map,step:step};
+}
+function cdfData(run){
+  var arr=run.results, out=[], j=0;
+  for(var x=BIN_MIN;x<=BIN_MAX;x+=20){
+    while(j<arr.length&&arr[j]<=x)j++;
+    out.push([x,round(j/arr.length*1000)/10]);
+  }
+  return out;
+}
+
+/* ===== 主图 option ===== */
+function axisCommon(){
+  return {
+    xAxis:{type:'value',min:BIN_MIN,max:BIN_MAX,name:'产值（亿元）',nameLocation:'middle',nameGap:28,
+      nameTextStyle:{color:'#8fa3c4'},axisLabel:{color:'#8fa3c4'},splitLine:{lineStyle:{color:'rgba(255,255,255,.06)'}}},
+    yAxis:{type:'value',name:'概率密度',nameTextStyle:{color:'#8fa3c4'},
+      axisLabel:{color:'#8fa3c4'},splitLine:{lineStyle:{color:'rgba(255,255,255,.06)'}}},
+    grid:{left:62,right:28,top:58,bottom:54,containLabel:true}
+  };
+}
+function isCompact(){return window.innerWidth<768;}
+function percentileLines(run){
+  var p10=round(run.p10),p50=round(run.p50),p90=round(run.p90);
+  return {
+    markArea:{silent:true,data:[[{xAxis:p10,itemStyle:{color:'rgba(59,130,246,.07)'}},{xAxis:p90}]]},
+    markLine:{symbol:'none',silent:true,label:{show:false},data:[
+      {xAxis:1500,lineStyle:{color:'#fb923c',type:'dashed',width:1.7}},
+      {xAxis:p10,lineStyle:{color:'#60a5fa',type:'dashed',width:1.4}},
+      {xAxis:p50,lineStyle:{color:'#fbbf24',type:'dashed',width:1.4}},
+      {xAxis:p90,lineStyle:{color:'#60a5fa',type:'dashed',width:1.4}}
+    ]}
+  };
+}
+/* 标签：圆点 + 两行 + 千分位，位置在柱子中上部；1500 为最高橙色框 */
+function percentileMarkPoints(run,maxDens){
+  var p10=round(run.p10),p50=round(run.p50),p90=round(run.p90),c=isCompact();
+  var f10=p10.toLocaleString('en-US'),f50=p50.toLocaleString('en-US'),f90=p90.toLocaleString('en-US');
+  var sideY=c?maxDens*.68:maxDens*.94, midY=c?maxDens*.96:maxDens*.98, tgtY=c?maxDens*1.2:maxDens*1.18;
+  return {symbol:'circle',symbolSize:8,
+    data:[
+      {coord:[1500,tgtY],itemStyle:{color:'#fb923c',borderColor:'#fff',borderWidth:1},
+        label:{show:true,position:'top',color:'#7c2d12',fontSize:11.5,fontWeight:'bold',
+          backgroundColor:'#fb923c',padding:[3,9],borderRadius:5,distance:4,
+          formatter:c?'1500':'1500亿目标线'}},
+      {coord:[run.p10,sideY],itemStyle:{color:'#60a5fa',borderColor:'#fff',borderWidth:1},
+        label:{show:true,position:'top',color:'#bfdbfe',fontSize:11.5,fontWeight:'bold',lineHeight:14,distance:4,
+          formatter:c?f10:'P10\n'+f10+'亿'}},
+      {coord:[run.p50,midY],itemStyle:{color:'#fbbf24',borderColor:'#fff',borderWidth:1},
+        label:{show:true,position:'top',color:'#fde68a',fontSize:11.5,fontWeight:'bold',lineHeight:14,distance:4,
+          formatter:c?f50:'P50\n'+f50+'亿'}},
+      {coord:[run.p90,sideY],itemStyle:{color:'#60a5fa',borderColor:'#fff',borderWidth:1},
+        label:{show:true,position:'top',color:'#bfdbfe',fontSize:11.5,fontWeight:'bold',lineHeight:14,distance:4,
+          formatter:c?f90:'P90\n'+f90+'亿'}}
+    ]};
+}
+function buildOption(run, animate, baseRun){
+  var bs=binStats(run);
+  var tipMap=bs.map;
+  var tooltip={trigger:'axis',confine:true,axisPointer:{type:'shadow'},
+    backgroundColor:'rgba(8,14,28,.95)',borderColor:'rgba(64,130,255,.4)',textStyle:{color:'#e6edf7',fontSize:12},
+    formatter:function(params){
+      if(!params||!params.length)return'';
+      var x=params[0].value[0], info=tipMap[round(x)];
+      var s='产值约 '+round(x)+' 亿';
+      if(info)s+='<br>出现 '+info.count+' 次（占比 '+(info.dens*bs.step*100).toFixed(1)+'%）<br>概率密度 '+info.dens.toFixed(4);
+      return s;
+    }};
+  var barData=bs.centers.map(function(c,i){return [c,bs.dens[i]];});
+  var densData=bs.centers.map(function(c,i){return [c,bs.dens[i]];});
+  var p50Val=round(run.p50),densAtP50=0,bestD=1e9;
+  bs.centers.forEach(function(c,i){var d=Math.abs(c-run.p50);if(d<bestD){bestD=d;densAtP50=bs.dens[i];}});
+
+  if(state.view==='dist'){
+    var ax=axisCommon();
+    var maxDens=Math.max.apply(null,bs.dens);
+    var yAxis={type:'value',name:'概率密度',max:maxDens*1.42,min:0,
+      nameTextStyle:{color:'#8fa3c4'},
+      axisLabel:{color:'#8fa3c4',formatter:function(v){return (+v.toFixed(4)).toString();}},
+      splitLine:{lineStyle:{color:'rgba(255,255,255,.06)'}}};
+    var legendData=['模拟结果分布','概率密度曲线'];
+    var series=[{
+      type:'bar',name:'模拟结果分布',data:barData,barWidth:'92%',
+      itemStyle:{color:{type:'linear',x:0,y:0,x2:0,y2:1,colorStops:[
+        {offset:0,color:'rgba(191,232,255,.98)'},
+        {offset:0.45,color:'rgba(59,130,246,.85)'},
+        {offset:1,color:'rgba(29,78,216,.55)'}]}},
+      animationDelay:animate?function(idx){return idx*14;}:0,animationDuration:animate?520:320
+    }];
+    var lines=percentileLines(run);
+    series[0].markArea=lines.markArea;series[0].markLine=lines.markLine;
+    series[0].markPoint=percentileMarkPoints(run,maxDens);
+    series.push({type:'line',name:'概率密度曲线',data:densData,smooth:true,showSymbol:false,z:6,
+      lineStyle:{color:'#f0f7ff',width:2.2,shadowColor:'rgba(180,220,255,.7)',shadowBlur:12},
+      animationDelay:animate?680:0,animationDuration:600});
+    if(state.showBase&&baseRun){
+      legendData.push('基准情景');
+      var bbs=binStats(baseRun);
+      series.push({type:'line',name:'基准情景',data:bbs.centers.map(function(c,i){return [c,bbs.dens[i]];}),
+        smooth:true,showSymbol:false,lineStyle:{color:'#94a3b8',type:'dashed',width:1.6},animation:false});
+    }
+    return {tooltip:tooltip,legend:{data:legendData,textStyle:{color:'#c4d4ee',fontSize:11},top:6,right:14,itemWidth:12,itemHeight:9},
+      grid:ax.grid,xAxis:ax.xAxis,yAxis:yAxis,series:series};
+  }
+  if(state.view==='cdf'){
+    var cdf=cdfData(run);
+    return {
+      tooltip:{trigger:'axis',confine:true,backgroundColor:'rgba(8,14,28,.95)',borderColor:'rgba(64,130,255,.4)',
+        textStyle:{color:'#e6edf7',fontSize:12},
+        formatter:function(p){return '产值 '+round(p[0].value[0])+' 亿<br>累计 '+p[0].value[1]+'% 的结果落在此值以下';}},
+      grid:{left:62,right:28,top:46,bottom:54,containLabel:true},
+      xAxis:{type:'value',min:BIN_MIN,max:BIN_MAX,name:'产值（亿元）',nameLocation:'middle',nameGap:28,
+        nameTextStyle:{color:'#8fa3c4'},axisLabel:{color:'#8fa3c4'},splitLine:{lineStyle:{color:'rgba(255,255,255,.06)'}}},
+      yAxis:{type:'value',min:0,max:100,name:'累计概率（%）',nameTextStyle:{color:'#8fa3c4'},
+        axisLabel:{color:'#8fa3c4'},splitLine:{lineStyle:{color:'rgba(255,255,255,.06)'}}},
+      series:[{type:'line',data:cdf,showSymbol:false,smooth:false,
+        lineStyle:{color:'#22d3ee',width:2.5},
+        areaStyle:{color:{type:'linear',x:0,y:0,x2:0,y2:1,colorStops:[{offset:0,color:'rgba(34,211,238,.35)'},{offset:1,color:'rgba(34,211,238,.02)'}]}},
+        markLine:{symbol:'none',data:[
+          {xAxis:1500,lineStyle:{color:'#fbbf24',type:'dashed',width:1.6},label:{formatter:'1500亿处累计 '+run.hit.toFixed(1)+'% 达标',color:'#fbbf24',position:'insideStartTop'}}
+        ]}}]
+    };
+  }
+  /* cmp 对比视图 */
+  var ax2=axisCommon();
+  var bbs2=baseRun?binStats(baseRun):null;
+  var series2=[{type:'bar',name:'当前情景',data:barData,barWidth:'92%',
+      itemStyle:{color:'rgba(34,211,238,.4)'},animationDuration:320},
+    {type:'line',name:'当前情景',data:densData,smooth:true,showSymbol:false,
+      lineStyle:{color:'#22d3ee',width:2.5},animationDuration:400}];
+  if(bbs2){
+    series2.push({type:'line',name:'基准情景',data:bbs2.centers.map(function(c,i){return [c,bbs2.dens[i]];}),
+      smooth:true,showSymbol:false,lineStyle:{color:'#94a3b8',type:'dashed',width:2}});
+  }
+  return {tooltip:tooltip,grid:ax2.grid,xAxis:ax2.xAxis,yAxis:ax2.yAxis,
+    legend:{data:['当前情景','基准情景'],textStyle:{color:'#c4d4ee'},top:8,right:18},
+    series:series2};
+}
+
+/* ===== 数字滚动 ===== */
+function countUp(el,from,to,decimals,suffix,dur){
+  var start=null;
+  function frame(ts){
+    if(!start)start=ts;
+    var p=Math.min(1,(ts-start)/dur);
+    var v=from+(to-from)*p;
+    el.textContent=(decimals?v.toFixed(decimals):round(v).toLocaleString('en-US'))+suffix;
+    if(p<1)requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+/* ===== 结果四卡 ===== */
+function ringHtml(pct,color){
+  var C=157.08,off=C*(1-pct/100);
+  return '<div class="ring"><svg viewBox="0 0 60 60"><circle class="rb" cx="30" cy="30" r="25"/>'+
+    '<circle class="rf" cx="30" cy="30" r="25" stroke="'+color+'" stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+C.toFixed(1)+'" data-off="'+off.toFixed(1)+'"/></svg></div>';
+}
+function renderCards(run,animate){
+  var hitColor=run.hit>=50?'#34d399':run.hit>=20?'#fbbf24':'#f87171';
+  var hitCount=round(state.N*run.hit/100);
+  var cards=[
+    {big:{to:run.hit,dec:1,suf:'%',color:hitColor},ring:true,
+     ico:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.2" fill="'+hitColor+'" stroke="none"/>',
+     lab:'达标率（≥1500亿）',
+     desc:'在 '+state.N.toLocaleString()+' 次模拟中，有 '+hitCount.toLocaleString()+' 次达到或超过 1500 亿'},
+    {big:{to:run.p50,dec:0,suf:'亿',color:'#fbbf24'},
+     ico:'<path d="M4 20V11M10 20V4M16 20v-8M21 20H3"/>',
+     lab:'中位产值（P50）',desc:'50% 的模拟结果低于该值，50% 高于该值'},
+    {big:{to:run.p10,dec:0,suf:'亿',color:'#f87171'},
+     ico:'<path d="M12 4v13M7 12l5 5 5-5M5 20h14"/>',
+     lab:'P10（偏保守情景）',desc:'10% 的模拟结果低于该值，属于相对保守的可能情况'},
+    {big:{to:run.p90,dec:0,suf:'亿',color:'#34d399'},
+     ico:'<path d="M12 20V7M7 12l5-5 5 5M5 4h14"/>',
+     lab:'P90（偏乐观情景）',desc:'10% 的模拟结果高于该值，属于相对乐观的可能情况'}
+  ];
+  var html='';
+  cards.forEach(function(c){
+    html+='<div class="glass stat'+(c.ring?' has-ring':'')+'"><div class="lab"><span class="sico"><svg viewBox="0 0 24 24">'+c.ico+'</svg></span>'+c.lab+'</div>'+
+      '<div class="big" style="color:'+c.big.color+'">—</div><div class="desc">'+c.desc+'</div>'+
+      (c.ring?ringHtml(c.big.to,hitColor):'')+'</div>';
+  });
+  $('stats4').innerHTML=html;
+  var rf=$('stats4').querySelectorAll('.rf');
+  for(var k=0;k<rf.length;k++){(function(c){
+    function set(){c.setAttribute('stroke-dashoffset',c.getAttribute('data-off'));}
+    if(animate)setTimeout(set,90);else set();
+  })(rf[k]);}
+  if(animate){
+    var bigs=$('stats4').querySelectorAll('.big');
+    cards.forEach(function(c,i){
+      var from=state.lastVals?state.lastVals[i]:0;
+      countUp(bigs[i],from,c.big.to,c.big.dec,c.big.suf,900);
+    });
+  }else{
+    var bigs2=$('stats4').querySelectorAll('.big');
+    cards.forEach(function(c,i){bigs2[i].textContent=(c.big.dec?c.big.to.toFixed(c.big.dec):round(c.big.to).toLocaleString('en-US'))+c.big.suf;});
+  }
+  state.lastVals=cards.map(function(c){return c.big.to;});
+}
+
+/* ===== 人话解读（随结果动态改写） ===== */
+function renderPlain(run,vals){
+  var per=Math.round(run.hit/10), touched=vals.some(function(v,i){return v!==PATHS_META[i].def;});
+  var head=touched?'<b>这一组路径：</b>':'<b>按现在这组路径：</b>';
+  $('plainNote').innerHTML=head+'每 10 次模拟里约有 <b>'+per+' 次</b> 摸到 1500 亿；就算最不走运的那 10%，也有 <b>'+
+    round(run.p10).toLocaleString('en-US')+' 亿</b> 打底。';
+}
+function toggleGuide(){
+  var g=$('chartGuide');
+  g.classList.toggle('open');
+  $('guideBtn').textContent=g.classList.contains('open')?'收起读图说明':'怎么读这张图';
+  setTimeout(function(){if(charts.main)charts.main.resize();},0);
+}
+
+/* ===== 高级分析：PLS-SEM 式路径系数图 ===== */
+function coefLevel(c){
+  if(c>=0.45)return '影响大';
+  if(c>=0.30)return '影响中';
+  if(c>=0.18)return '影响较小';
+  return '影响弱';
+}
+function renderPathCoef(run){
+  var cw0=$('pathCoefChart').clientWidth;
+  if(cw0<10)return; // 面板折叠时不渲染，等展开后再初始化，避免在0宽容器里布局错位
+  if(!charts.pathcoef)charts.pathcoef=echarts.init($('pathCoefChart'));
+  var cw=cw0||600, mob=cw<420;
+  var nodeW=mob?96:148, resW=mob?100:152, resH=mob?76:104;
+  var xL=100, yTop=34, yGap=66;
+  var resX=500, yRes=yTop+2*yGap;
+  // 标签位置：手机放在路径前1/3处（路径未汇聚、纵向间距大、远离结果节点）；桌面放中点
+  var labT=mob?0.29:0.5;
+  var labX=round(xL+labT*(resX-xL));
+  var labYs=PATHS_META.map(function(m,i){
+    var yL=yTop+i*yGap;
+    return round(yL+(yRes-yL)*labT);
+  });
+  var nodes=[];
+  PATHS_META.forEach(function(m,i){
+    nodes.push({
+      name:m.name, x:xL, y:yTop+i*yGap, symbolSize:[nodeW,44],
+      itemStyle:{color:'rgba(13,22,40,.95)',borderColor:m.color,borderWidth:2,
+        shadowBlur:12,shadowColor:m.color},
+      label:{show:true,color:'#eaf1fc',fontSize:mob?10.5:12,fontWeight:'bold'}
+    });
+  });
+  nodes.push({
+    name:'__RESULT__', x:resX, y:yRes, symbolSize:[resW,resH],
+    itemStyle:{color:new echarts.graphic.LinearGradient(0,0,1,1,
+        [{offset:0,color:'#1d4ed8'},{offset:1,color:'#0e7490'}]),
+      borderColor:'#60a5fa',borderWidth:2,shadowBlur:26,shadowColor:'rgba(59,130,246,.6)'},
+    label:{show:true,color:'#ffffff',fontSize:mob?11:13,fontWeight:'bold',lineHeight:mob?15:18,
+      formatter:'2030年地区产值\n{small|达标率 '+run.hit.toFixed(1)+'% · 中位 '+round(run.p50).toLocaleString('en-US')+'亿}',
+      rich:{small:{fontSize:mob?9:11,color:'#a5d8ff',fontWeight:'normal',lineHeight:mob?14:16}}}
+  });
+  // 不可见边界节点：撑开左右留白，避免窄屏节点贴边被裁
+  nodes.push({name:'__BL',x:mob?0:18,y:yRes,symbolSize:[1,1],itemStyle:{color:'transparent'},label:{show:false}});
+  nodes.push({name:'__BR',x:mob?600:582,y:yRes,symbolSize:[1,1],itemStyle:{color:'transparent'},label:{show:false}});
+  var links=PATHS_META.map(function(m,i){
+    var c=run.coefs[i];
+    return {
+      source:m.name, target:'__RESULT__',
+      lineStyle:{
+        width:1.5+c*9,
+        color:c>=0.30?m.color:'#64748b',
+        opacity:0.35+c*0.6,
+        curveness:0
+      }
+    };
+  });
+  PATHS_META.forEach(function(m,i){
+    var c=run.coefs[i];
+    nodes.push({
+      name:'__L'+i, x:labX, y:labYs[i], symbolSize:[2,2],
+      itemStyle:{color:'transparent'},
+      label:{show:true,color:c>=0.30?'#f1f5ff':'#cbd5e1',fontSize:mob?10:12,fontWeight:'bold',
+        backgroundColor:'rgba(8,14,28,.85)',padding:[2,7],borderRadius:6,
+        borderColor:c>=0.30?m.color:'#475569',borderWidth:1,
+        formatter:c.toFixed(2)+' '+coefLevel(c)}
+    });
+  });
+  charts.pathcoef.setOption({
+    tooltip:{show:false},
+    series:[{
+      type:'graph',layout:'none',roam:false,
+      edgeSymbol:['none','arrow'],edgeSymbolSize:9,
+      data:nodes,links:links,
+      emphasis:{focus:'adjacency',lineStyle:{width:6}},
+      animationDuration:900
+    }]
+  },true);
+  var mi=run.coefs.indexOf(Math.max.apply(null,run.coefs));
+  var li=run.coefs.indexOf(Math.min.apply(null,run.coefs));
+  $('pathCoefNote').innerHTML=
+    '<b>怎么看：</b>左边五条路，各用一支箭头指向右边的 2030 年产值。箭头上的数字是<b>路径系数</b>——线越粗、数字越大，这条路在模拟里对结果的影响越大。<br>'+
+    '<b>一眼看到：</b>“挑大梁”的是 <b style="color:'+PATHS_META[mi].color+'">'+PATHS_META[mi].name+'</b>（'+run.coefs[mi].toFixed(2)+'），影响最弱的是 <b style="color:'+PATHS_META[li].color+'">'+PATHS_META[li].name+'</b>（'+run.coefs[li].toFixed(2)+'）。<br>'+
+    '<b>注意：</b>路径系数是模拟结果里各因素与产值的<b>关联强度</b>，不是模型内部权重，也不能直接证明现实因果；现实作用还要看可控性、成本与见效速度。';
+}
+function runSensitivity(){
+  $('sensStatus').textContent='正在跑 11 次模拟（基准 + 5 路径 × 2 方向）…';
+  setTimeout(function(){
+    try{
+      var vals=getVals(), basePaths=pathsFromVals(vals), base=HT.run(SEED,state.N,basePaths), rows=[];
+      for(var i=0;i<PATHS_META.length;i++){
+        var pp=pathsFromVals(vals.map(function(v,k){return k===i?round(v*1.2):v;}));
+        var pm=pathsFromVals(vals.map(function(v,k){return k===i?round(v*0.8):v;}));
+        var rp=HT.run(SEED,state.N,pp), rm=HT.run(SEED,state.N,pm);
+        rows.push({name:PATHS_META[i].name,color:PATHS_META[i].color,
+          plus:rp.hit-base.hit,minus:rm.hit-base.hit,
+          p50plus:rp.p50-base.p50,p50minus:rm.p50-base.p50});
+      }
+      rows.sort(function(a,b){return (Math.abs(b.plus)+Math.abs(b.minus))-(Math.abs(a.plus)+Math.abs(a.minus));});
+      var maxAbs=Math.max.apply(null,rows.map(function(r){return Math.max(Math.abs(r.plus),Math.abs(r.minus));}));
+      var lim=Math.ceil(Math.max(1,maxAbs));
+      if(!charts.sens)charts.sens=echarts.init($('sensChart'));
+      charts.sens.setOption({
+        tooltip:{trigger:'axis',confine:true,backgroundColor:'rgba(8,14,28,.95)',borderColor:'rgba(64,130,255,.4)',
+          textStyle:{color:'#e6edf7',fontSize:12},
+          formatter:function(p){
+            var s=p[0].name;
+            p.forEach(function(x){s+='<br>'+x.seriesName+'：'+(x.value>=0?'+':'')+x.value.toFixed(1)+' 个百分点';});
+            return s;
+          }},
+        grid:{left:128,right:56,top:10,bottom:28,containLabel:true},
+        xAxis:{type:'value',min:-lim,max:lim,
+          axisLabel:{color:'#8fa3c4',formatter:function(v){return (v>0?'+':'')+v+'%';}},
+          splitLine:{lineStyle:{color:'rgba(255,255,255,.06)'}}},
+        yAxis:{type:'category',data:rows.map(function(r){return r.name;}).reverse(),
+          axisLabel:{color:'#c4d4ee',fontSize:12.5,fontWeight:'bold'}},
+        series:[
+          {name:'+20% 加码',type:'bar',barWidth:15,
+            data:rows.map(function(r){return r.plus>0?round(r.plus*10)/10:0;}).reverse(),
+            itemStyle:{color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#22d3ee'},{offset:1,color:'#3b82f6'}]),
+              borderRadius:[0,6,6,0],shadowBlur:14,shadowColor:'rgba(34,211,238,.5)'},
+            label:{show:true,position:'right',color:'#a5f3fc',fontSize:13.5,fontWeight:'bold',
+              formatter:function(p){return p.value>0?'+'+p.value.toFixed(1):'';}},
+            animationDelay:function(idx){return idx*130;},
+            markLine:{symbol:'none',silent:true,
+              lineStyle:{color:'#ffffff',type:'dashed',width:1.4,opacity:.85},
+              label:{show:true,position:'insideEndTop',formatter:'基准达标率 '+base.hit.toFixed(1)+'%',color:'#e2e8f0',fontSize:11},
+              data:[{xAxis:0}]}},
+          {name:'−20% 砍减',type:'bar',barWidth:15,
+            data:rows.map(function(r){return r.minus<0?round(r.minus*10)/10:0;}).reverse(),
+            itemStyle:{color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#f87171'},{offset:1,color:'#fb7185'}]),
+              borderRadius:[6,0,0,6],shadowBlur:14,shadowColor:'rgba(248,113,113,.45)'},
+            label:{show:true,position:'left',color:'#fecdd3',fontSize:13.5,fontWeight:'bold',
+              formatter:function(p){return p.value<0?'−'+(-p.value).toFixed(1):'';}},
+            animationDelay:function(idx){return idx*130;}}
+        ]
+      });
+      var most=rows[0],least=rows[rows.length-1];
+      var mUp=most.plus>=0?most.plus:-most.plus, mDn=most.minus<0?-most.minus:most.minus;
+      var tot=(mUp+mDn).toFixed(1), lTot=(Math.abs(least.plus)+Math.abs(least.minus)).toFixed(1);
+      $('sensNote').innerHTML=
+        '<div class="sens-verdict">最灵的旋钮是 <b style="color:'+most.color+'">'+most.name+'</b>：加码 20% 达标率 +'+mUp.toFixed(1)+
+        ' 个百分点、砍 20% 掉 '+mDn.toFixed(1)+'，一拧就波动 '+tot+' 个百分点 ≈ 每 10 次模拟多/少约 '+
+        Math.max(1,Math.round(tot/10))+' 次达标；<br>最沉稳的是 '+least.name+'，同样拧 20% 只动 '+lTot+' 个百分点。</div>'+
+        '<b>怎么看：</b>青条 = 加码 20% 能把达标率抬多少；红条 = 砍 20% 会掉多少。条越长，这条路越值得盯着。<br>'+
+        '<b>注意：</b>“敏感”不等于“重要”——它说明在模拟里这条路与结果绑得紧；现实中还要看可控性、成本与见效速度。';
+      var tbl='<table style="width:100%;border-collapse:collapse;font-size:11px"><tr style="color:#8fa3c4;border-bottom:1px solid rgba(255,255,255,.1)">'+
+        '<td style="padding:4px 6px;text-align:left">路径</td><td style="padding:4px 6px;text-align:right">-20% 中位</td><td style="padding:4px 6px;text-align:right">基准</td><td style="padding:4px 6px;text-align:right">+20% 中位</td></tr>';
+      rows.forEach(function(r){
+        tbl+='<tr style="border-bottom:1px solid rgba(255,255,255,.06)"><td style="padding:4px 6px;color:'+r.color+'">'+r.name+'</td>'+
+          '<td style="padding:4px 6px;text-align:right;color:#f87171">'+round(base.p50+r.p50minus)+'亿</td>'+
+          '<td style="padding:4px 6px;text-align:right;color:#fbbf24">'+round(base.p50)+'亿</td>'+
+          '<td style="padding:4px 6px;text-align:right;color:#34d399">'+round(base.p50+r.p50plus)+'亿</td></tr>';
+      });
+      tbl+='</table>';
+      $('sensTable').innerHTML=tbl;
+      $('sensStatus').textContent='完成（基准达标率 '+base.hit.toFixed(1)+'%，中位 '+round(base.p50)+' 亿）';
+      $('sensWrap').style.display='block';
+    }catch(e){$('sensStatus').innerHTML='<span style="color:#f87171">'+e.message+'</span>';}
+  },30);
+}
+
+/* ===== 保存 / 分享 ===== */
+var SAVE_KEY='huicheng_future_saves';
+function getSaves(){try{return JSON.parse(localStorage.getItem(SAVE_KEY)||'[]');}catch(e){return[];}}
+function saveCurrent(){
+  var run=state.current,vals=getVals();
+  var arr=getSaves();
+  arr.unshift({t:new Date().toLocaleString('zh-CN',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}),
+    N:state.N,hit:round(run.hit*10)/10,p10:round(run.p10),p50:round(run.p50),p90:round(run.p90),vals:vals});
+  localStorage.setItem(SAVE_KEY,JSON.stringify(arr));
+  toast('已保存，共 '+arr.length+' 份实验');
+}
+function renderSaved(){
+  var arr=getSaves(),html='';
+  if(!arr.length)html='<div style="font-size:12px;color:#8fa3c4">还没有保存的实验。</div>';
+  arr.forEach(function(s,i){
+    html+='<div class="saved-item"><div>#'+(arr.length-i)+' '+s.t+' · '+s.N.toLocaleString()+' 次<br>'+
+      '<span style="color:#93c5fd">P10 '+s.p10+'亿</span> · <b>P50 '+s.p50+'亿</b> · <span style="color:#6ee7b7">P90 '+s.p90+'亿</span> · 达标率 '+s.hit+'%</div>'+
+      '<span class="del" onclick="delSave('+i+')">删除</span></div>';
+  });
+  $('savedList').innerHTML=html;
+  $('savedModal').classList.add('show');
+}
+function delSave(i){
+  var arr=getSaves();arr.splice(i,1);localStorage.setItem(SAVE_KEY,JSON.stringify(arr));renderSaved();
+}
+function makeShare(){
+  var url=charts.main.getDataURL({type:'png',pixelRatio:2,backgroundColor:'#04070f'});
+  $('shareImg').src=url;
+  $('downloadShare').href=url;
+  $('shareModal').classList.add('show');
+}
+
+/* ===== 先猜后揭 ===== */
+function guess(n){
+  var run=state.current;
+  if(!run){toast('模拟还在跑，稍等一下');return;}
+  var p50=run.p50,hit=run.hit;
+  var bucket=p50<1300?1:(p50<=1600?2:3);
+  var names={1:'1300亿以下',2:'1300–1600亿',3:'1600亿以上'};
+  var verdict=(n===bucket)?'你选的「'+names[n]+'」，正是中位结果 '+round(p50)+'亿 落的位置——猜中了。'
+    :'你选了「'+names[n]+'」，中位结果 '+round(p50)+' 亿实际落在「'+names[bucket]+'」。';
+  $('guessOut').innerHTML=verdict+'<br>达标率约 '+hit.toFixed(0)+'%，这是跑了 '+state.N.toLocaleString()+' 次的结果。';
+  $('guessBox').classList.add('open');
+}
+
+/* ===== 主流程 ===== */
+function runSim(animate){
+  updatePathDisplay();
+  var vals=getVals();
+  state.current=HT.run(SEED,state.N,pathsFromVals(vals));
+  if(!state.base||state.baseN!==state.N){
+    state.base=HT.run(SEED,state.N,HT.DEFAULT_PATHS);state.baseN=state.N;
+  }
+  charts.main.setOption(buildOption(state.current,animate,state.base),true);
+  renderCards(state.current,animate);
+  renderPlain(state.current,vals);
+  renderPathCoef(state.current);
+  $('capText').textContent=state.view==='dist'?'基于 '+state.N.toLocaleString()+' 次随机模拟，呈现可能的结果分布区间'
+    :state.view==='cdf'?'累计概率：从低到高，多少结果落在某产值以下'
+    :'对比当前情景与基准情景的分布差异';
+}
+function resetDefaults(){
+  PATHS_META.forEach(function(m){$(m.id).value=m.def;});
+  state.lastVals=null;
+  runSim(true);
+  toast('已恢复默认情景');
+}
+function setScenario(mode){
+  if(mode==='base'){
+    state.userVals=getVals();
+    PATHS_META.forEach(function(m){$(m.id).value=m.def;$(m.id).disabled=true;});
+    document.querySelectorAll('.path').forEach(function(p){p.classList.add('disabled');});
+    state.scenarioMode='base';
+  }else{
+    PATHS_META.forEach(function(m){$(m.id).disabled=false;});
+    document.querySelectorAll('.path').forEach(function(p){p.classList.remove('disabled');});
+    if(state.userVals){PATHS_META.forEach(function(m,i){$(m.id).value=state.userVals[i];});}
+    state.scenarioMode='current';
+  }
+  state.lastVals=null;
+  runSim(true);
+}
+function initStars(){
+  var h='';
+  for(var i=0;i<26;i++){
+    h+='<span style="left:'+(Math.random()*100)+'%;top:'+(Math.random()*60)+'%;animation-delay:'+(Math.random()*4)+'s"></span>';
+  }
+  $('stars').innerHTML=h;
 }
 
 window.addEventListener('load',function(){
-  if(typeof Chart==='undefined'){
-    var el=document.getElementById('err');
-    el.style.display='block';
-    el.textContent='图表库没加载出来，请刷新页面或检查网络。';
-    return;
-  }
-  run();
+  if(typeof echarts==='undefined'){toast('图表库未加载，请刷新');return;}
+  initStars();
+  renderPaths();
+  charts.main=echarts.init($('mainChart'));
+  state.base=HT.run(SEED,state.N,HT.DEFAULT_PATHS);state.baseN=state.N;
+  runSim(true);
+  /* 控件事件 */
+  $('runBtn').addEventListener('click',function(){state.lastVals=null;runSim(true);});
+  $('resetBtn').addEventListener('click',resetDefaults);
+  $('saveBtn').addEventListener('click',saveCurrent);
+  $('shareBtn').addEventListener('click',makeShare);
+  $('savedListBtn').addEventListener('click',renderSaved);
+  $('sensBtn').addEventListener('click',runSensitivity);
+  $('nSeg').querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click',function(){
+      $('nSeg').querySelectorAll('button').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on');
+      state.N=+b.dataset.n;state.lastVals=null;
+      state.base=HT.run(SEED,state.N,HT.DEFAULT_PATHS);state.baseN=state.N;
+      runSim(true);
+    });
+  });
+  $('scenSeg').querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click',function(){
+      $('scenSeg').querySelectorAll('button').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on');
+      setScenario(b.dataset.s);
+    });
+  });
+  $('viewSeg').querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click',function(){
+      $('viewSeg').querySelectorAll('button').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on');
+      state.view=b.dataset.v;
+      charts.main.setOption(buildOption(state.current,false,state.base),true);
+      $('capText').textContent=state.view==='dist'?'基于 '+state.N.toLocaleString()+' 次随机模拟，呈现可能的结果分布区间'
+        :state.view==='cdf'?'累计概率：从低到高，多少结果落在某产值以下'
+        :'对比当前情景与基准情景的分布差异';
+    });
+  });
+  $('baseTgl').addEventListener('click',function(){
+    state.showBase=!state.showBase;
+    $('baseTgl').classList.toggle('on',state.showBase);
+    if(state.view==='dist')charts.main.setOption(buildOption(state.current,false,state.base),true);
+  });
+});
+window.addEventListener('resize',function(){
+  Object.keys(charts).forEach(function(k){if(charts[k])charts[k].resize();});
 });
 </script>
 
-<div class="likebar">
-  <button onclick="likePage()">👍 <span id="pcount">0</span></button>
-  <button onclick="sharePage()">🔁 转给朋友</button>
-</div>
-<style>
-.likebar{position:relative;bottom:auto;left:auto;transform:none;display:flex;justify-content:center;margin:20px 0;background:rgba(15,23,42,.96);border:1px solid #3b82f6;border-radius:24px;padding:9px 20px;display:flex;gap:22px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.6)}
-.likebar button{background:none;border:none;color:#e2e8f0;font-size:14px;cursor:pointer}
-.likebar button:active{transform:scale(1.15)}
-</style>
-<script>
-(function(){
-  var k="like_"+location.pathname;
-  var n=parseInt(localStorage.getItem(k)||"0");
-  document.getElementById("pcount").textContent=n;
-  window.likePage=function(){
-    n++;localStorage.setItem(k,n);
-    document.getElementById("pcount").textContent=n;
-  };
-  window.sharePage=function(){
-  var m=document.getElementById("shareModal");
-  if(!m){
-    m=document.createElement("div");
-    m.id="shareModal";
-    m.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px";
-    m.onclick=function(){m.remove();};
-    m.innerHTML='<div style="background:#0f172a;padding:20px;border-radius:14px;text-align:center" onclick="event.stopPropagation()"><div style="color:#fff;font-size:14px;margin-bottom:12px">截图二维码，发给朋友/群</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(location.href)+'" style="width:200px;height:200px;background:#fff;padding:8px;border-radius:8px"><div style="color:#94a3b8;font-size:12px;margin-top:12px">扫码打开</div></div>';
-    document.body.appendChild(m);
-  }
-  navigator.clipboard && navigator.clipboard.writeText(location.href);
-};
-})();
-</script>
-<!-- 百度统计：去 mtj.baidu.com 注册后替换 YOUR_ID -->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?YOUR_ID";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-<script>
-// 先猜后揭：揭晓内容读本次真实 run 的中位数/概率/次数，不写死
-function guess(n){
-  if(!lastRun){document.getElementById('guessOut').textContent='模型还在跑，稍等一下再点。';return;}
-  const p50=lastRun.p50, hit=lastRun.hit, N=lastRun.N;
-  const actualBucket=p50<1300?1:(p50<=1600?2:3);
-  const rangeName={1:'1300亿以下',2:'1300–1600亿',3:'1600亿以上'};
-  const verdict=(n===actualBucket)
-    ? '你选的「'+rangeName[n]+'」，正是模型中位数 '+Math.round(p50)+'亿 落的位置——猜中了。'
-    : '你选了「'+rangeName[n]+'」，模型中位数 '+Math.round(p50)+'亿 实际落在「'+rangeName[actualBucket]+'」。';
-  document.getElementById('guessOut').innerHTML=
-    '揭晓：'+verdict+'<br>过1500亿的概率约 '+hit.toFixed(0)+'%，下面这张分布，是它跑了 '+N.toLocaleString()+' 遍的结果。';
-  document.getElementById('guessBox').style.borderColor='#34d399';
-}
-</script>
 </body></html>
