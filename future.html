@@ -342,11 +342,11 @@ input[type=range]:disabled{opacity:.4;cursor:not-allowed}
           <div class="mini-note" id="pathCoefNote"></div>
         </div>
         <div class="analysis-block">
-          <h3>哪个旋钮最灵敏？逐路径 ±20% 一拧，达标率动多少</h3>
+          <h3>哪个旋钮最灵敏？每条路 ±20%，达标率会变成多少</h3>
           <button class="btn primary" id="sensBtn" style="margin-bottom:10px">跑一跑：哪条路径最灵敏</button>
           <span id="sensStatus" style="font-size:11px;color:var(--muted)"></span>
           <div id="sensWrap" style="display:none">
-            <div class="mini-chart" id="sensChart" style="height:260px"></div>
+            <div class="mini-chart" id="sensChart" style="height:300px"></div>
             <div class="mini-note" id="sensNote"></div>
             <div id="sensTable" style="font-size:11.5px;color:var(--muted);margin-top:10px"></div>
           </div>
@@ -815,52 +815,65 @@ function runSensitivity(){
           p50plus:rp.p50-base.p50,p50minus:rm.p50-base.p50});
       }
       rows.sort(function(a,b){return (Math.abs(b.plus)+Math.abs(b.minus))-(Math.abs(a.plus)+Math.abs(a.minus));});
-      var maxAbs=Math.max.apply(null,rows.map(function(r){return Math.max(Math.abs(r.plus),Math.abs(r.minus));}));
-      var lim=Math.ceil(Math.max(1,maxAbs));
       if(!charts.sens)charts.sens=echarts.init($('sensChart'));
+      var baseHit=round(base.hit*10)/10;
+      // 达标率尺子：直接展示 ±20% 后的“达标率结果”，而不是百分点变动
+      var pDatas=rows.map(function(r){return {name:r.name,color:r.color,
+        plus:Math.max(0,Math.min(100,round((base.hit+r.plus)*10)/10)),
+        minus:Math.max(0,Math.min(100,round((base.hit+r.minus)*10)/10))};});
       charts.sens.setOption({
         tooltip:{trigger:'axis',confine:true,backgroundColor:'rgba(8,14,28,.95)',borderColor:'rgba(64,130,255,.4)',
           textStyle:{color:'#e6edf7',fontSize:12},
           formatter:function(p){
-            var s=p[0].name;
-            p.forEach(function(x){s+='<br>'+x.seriesName+'：'+(x.value>=0?'+':'')+x.value.toFixed(1)+' 个百分点';});
-            return s;
+            var nm=p[0].name, r=null;
+            pDatas.forEach(function(x){if(x.name===nm)r=x;});
+            if(!r)return nm;
+            var up=round((r.plus-base.hit)*10)/10, dn=round((r.minus-base.hit)*10)/10;
+            return nm+'<br>加码 20% 后：达标率 '+r.plus.toFixed(1)+'%（比基准 '+ (up>=0?'+':'')+up.toFixed(1)+'）'+
+              '<br>砍减 20% 后：达标率 '+r.minus.toFixed(1)+'%（比基准 '+ (dn>=0?'+':'')+dn.toFixed(1)+'）';
           }},
-        grid:{left:128,right:56,top:10,bottom:28,containLabel:true},
-        xAxis:{type:'value',min:-lim,max:lim,
-          axisLabel:{color:'#8fa3c4',formatter:function(v){return (v>0?'+':'')+v+'%';}},
-          splitLine:{lineStyle:{color:'rgba(255,255,255,.06)'}}},
+        legend:{top:0,textStyle:{color:'#c4d4ee',fontSize:11},itemWidth:14,itemHeight:8,
+          data:['加码 20%','砍减 20%']},
+        grid:{left:128,right:52,top:26,bottom:26,containLabel:true},
+        xAxis:{type:'value',min:0,max:100,
+          axisLabel:{color:'#8fa3c4',formatter:'{value}%'},
+          splitLine:{lineStyle:{color:'rgba(255,255,255,.06)'}},
+          name:'达标率（%，≥1500亿）',nameTextStyle:{color:'#7e90ad',fontSize:10.5},
+          nameLocation:'middle',nameGap:26},
         yAxis:{type:'category',data:rows.map(function(r){return r.name;}).reverse(),
           axisLabel:{color:'#c4d4ee',fontSize:12.5,fontWeight:'bold'}},
         series:[
-          {name:'+20% 加码',type:'bar',barWidth:15,
-            data:rows.map(function(r){return r.plus>0?round(r.plus*10)/10:0;}).reverse(),
+          {name:'加码 20%',type:'bar',barWidth:15,
+            data:pDatas.map(function(r){return r.plus;}).reverse(),
             itemStyle:{color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#22d3ee'},{offset:1,color:'#3b82f6'}]),
               borderRadius:[0,6,6,0],shadowBlur:14,shadowColor:'rgba(34,211,238,.5)'},
-            label:{show:true,position:'right',color:'#a5f3fc',fontSize:13.5,fontWeight:'bold',
-              formatter:function(p){return p.value>0?'+'+p.value.toFixed(1):'';}},
+            label:{show:true,position:'right',color:'#a5f3fc',fontSize:13,fontWeight:'bold',
+              formatter:function(p){return p.value.toFixed(1)+'%';}},
             animationDelay:function(idx){return idx*130;},
             markLine:{symbol:'none',silent:true,
               lineStyle:{color:'#ffffff',type:'dashed',width:1.4,opacity:.85},
-              label:{show:true,position:'insideEndTop',formatter:'基准达标率 '+base.hit.toFixed(1)+'%',color:'#e2e8f0',fontSize:11},
-              data:[{xAxis:0}]}},
-          {name:'−20% 砍减',type:'bar',barWidth:15,
-            data:rows.map(function(r){return r.minus<0?round(r.minus*10)/10:0;}).reverse(),
+              label:{show:true,position:'insideEndTop',formatter:'基准达标率 '+baseHit+'%',color:'#e2e8f0',fontSize:11},
+              data:[{xAxis:baseHit}]}},
+          {name:'砍减 20%',type:'bar',barWidth:15,
+            data:pDatas.map(function(r){return r.minus;}).reverse(),
             itemStyle:{color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#f87171'},{offset:1,color:'#fb7185'}]),
               borderRadius:[6,0,0,6],shadowBlur:14,shadowColor:'rgba(248,113,113,.45)'},
-            label:{show:true,position:'left',color:'#fecdd3',fontSize:13.5,fontWeight:'bold',
-              formatter:function(p){return p.value<0?'−'+(-p.value).toFixed(1):'';}},
+            label:{show:true,position:'inside',color:'#ffe4e6',fontSize:13,fontWeight:'bold',
+              formatter:function(p){return p.value.toFixed(1)+'%';}},
             animationDelay:function(idx){return idx*130;}}
         ]
       });
       var most=rows[0],least=rows[rows.length-1];
       var mUp=most.plus>=0?most.plus:-most.plus, mDn=most.minus<0?-most.minus:most.minus;
       var tot=(mUp+mDn).toFixed(1), lTot=(Math.abs(least.plus)+Math.abs(least.minus)).toFixed(1);
+      var mostP=pDatas[0], leastP=pDatas[pDatas.length-1];
       $('sensNote').innerHTML=
-        '<div class="sens-verdict">最灵的旋钮是 <b style="color:'+most.color+'">'+most.name+'</b>：加码 20% 达标率 +'+mUp.toFixed(1)+
-        ' 个百分点、砍 20% 掉 '+mDn.toFixed(1)+'，一拧就波动 '+tot+' 个百分点 ≈ 每 10 次模拟多/少约 '+
-        Math.max(1,Math.round(tot/10))+' 次达标；<br>最沉稳的是 '+least.name+'，同样拧 20% 只动 '+lTot+' 个百分点。</div>'+
-        '<b>怎么看：</b>青条 = 加码 20% 能把达标率抬多少；红条 = 砍 20% 会掉多少。条越长，这条路越值得盯着。<br>'+
+        '<div class="sens-verdict">最灵的旋钮是 <b style="color:'+most.color+'">'+most.name+'</b>：加码 20%，达标率从 '+baseHit+
+        '% 涨到 <b style="color:#a5f3fc">'+mostP.plus.toFixed(1)+'%</b>；砍减 20%，掉到 <b style="color:#fecdd3">'+mostP.minus.toFixed(1)+
+        '%</b>——一拧就摆动 '+tot+' 个百分点 ≈ 每 10 次模拟多/少约 '+Math.max(1,Math.round(tot/10))+' 次达标；<br>'+
+        '最沉稳的是 '+least.name+'，同样拧 20%，达标率只在 '+leastP.minus.toFixed(1)+'%～'+leastP.plus.toFixed(1)+'% 之间晃。'+
+        '</div>'+
+        '<b>怎么看：</b>蓝条 = 加码 20% 后还能保住的达标率；红条 = 砍减 20% 后剩下的达标率。条越长、离基准线越远，这条路越值得盯着。<br>'+
         '<b>注意：</b>“敏感”不等于“重要”——它说明在模拟里这条路与结果绑得紧；现实中还要看可控性、成本与见效速度。';
       var tbl='<table style="width:100%;border-collapse:collapse;font-size:11px"><tr style="color:#8fa3c4;border-bottom:1px solid rgba(255,255,255,.1)">'+
         '<td style="padding:4px 6px;text-align:left">路径</td><td style="padding:4px 6px;text-align:right">-20% 中位</td><td style="padding:4px 6px;text-align:right">基准</td><td style="padding:4px 6px;text-align:right">+20% 中位</td></tr>';
@@ -872,7 +885,7 @@ function runSensitivity(){
       });
       tbl+='</table>';
       $('sensTable').innerHTML=tbl;
-      $('sensStatus').textContent='完成（基准达标率 '+base.hit.toFixed(1)+'%，中位 '+round(base.p50)+' 亿）';
+      $('sensStatus').textContent='完成（基准达标率 '+baseHit.toFixed(1)+'%，中位 '+round(base.p50).toLocaleString()+' 亿）';
       $('sensWrap').style.display='block';
     }catch(e){$('sensStatus').innerHTML='<span style="color:#f87171">'+e.message+'</span>';}
   },30);
