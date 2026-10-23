@@ -332,19 +332,14 @@ input[type=range]:disabled{opacity:.4;cursor:not-allowed}
     <!-- ===== 高级分析（折叠） ===== -->
     <div class="glass collapsible m-analysis" id="analysisBox">
       <header onclick="toggleCollapse('analysisBox')">
-        <h2>高级分析：贡献 · 关联 · 敏感性</h2>
+        <h2>高级分析：路径系数 · 灵敏度</h2>
         <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
       </header>
       <div class="body">
         <div class="analysis-block">
-          <h3>每一路贡献多少</h3>
-          <div class="mini-chart" id="contribChart"></div>
-          <div class="mini-note" id="contribNote"></div>
-        </div>
-        <div class="analysis-block">
-          <h3>哪条路与结果关联最强</h3>
-          <div class="mini-chart" id="coefChart"></div>
-          <div class="mini-note" id="coefNote"></div>
+          <h3>五条路怎样影响结果？路径系数图</h3>
+          <div class="mini-chart" id="pathCoefChart" style="height:350px"></div>
+          <div class="mini-note" id="pathCoefNote"></div>
         </div>
         <div class="analysis-block">
           <h3>哪个旋钮最灵敏？逐路径 ±20% 一拧，达标率动多少</h3>
@@ -445,7 +440,17 @@ function toast(msg){
   t.style.cssText='position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:rgba(10,20,40,.96);border:1px solid rgba(64,130,255,.5);color:#fff;padding:10px 18px;border-radius:20px;font-size:13px;z-index:10000';
   document.body.appendChild(t);setTimeout(function(){t.remove();},1800);
 }
-function toggleCollapse(id){$(id).classList.toggle('open');}
+function toggleCollapse(id){
+  var el=$(id), opening=!el.classList.contains('open');
+  el.classList.toggle('open');
+  if(opening&&id==='analysisBox'){
+    setTimeout(function(){
+      if(charts.pathcoef)charts.pathcoef.resize();
+      if(state.current)renderPathCoef(state.current);
+      if(charts.sens)charts.sens.resize();
+    },60);
+  }
+}
 function closeModal(id){$(id).classList.remove('show');}
 /* 控制台：仅移动端可折叠，桌面常驻 */
 function ctrlHeaderClick(){if(window.innerWidth<1024)toggleCollapse('ctrlBox');}
@@ -713,45 +718,88 @@ function toggleGuide(){
   setTimeout(function(){if(charts.main)charts.main.resize();},0);
 }
 
-/* ===== 高级分析 ===== */
-function renderContrib(vals){
-  if(!charts.contrib)charts.contrib=echarts.init($('contribChart'));
-  var names=['现有盘子'].concat(PATHS_META.map(function(m){return m.name;}));
-  var cols=['#334155'].concat(PATHS_META.map(function(m){return m.color;}));
-  var d=[HT.BASE].concat(vals);
-  charts.contrib.setOption({
-    tooltip:{trigger:'axis',confine:true,axisPointer:{type:'shadow'},backgroundColor:'rgba(8,14,28,.95)',
-      borderColor:'rgba(64,130,255,.4)',textStyle:{color:'#e6edf7',fontSize:12}},
-    legend:{bottom:0,textStyle:{color:'#93a4bd',fontSize:10},itemWidth:10,itemHeight:8},
-    grid:{left:50,right:20,top:16,bottom:54,containLabel:true},
-    xAxis:{type:'value',axisLabel:{color:'#8fa3c4'},splitLine:{lineStyle:{color:'rgba(255,255,255,.06)'}}},
-    yAxis:{type:'category',data:['2030年'],axisLabel:{color:'#8fa3c4'}},
-    series:names.map(function(n,i){return {name:n,type:'bar',stack:'s',data:[d[i]],itemStyle:{color:cols[i]}};})
-  });
-  $('contribNote').innerHTML=
-    '<b>这张图在看什么：</b>2030 年的产值不是凭空冒出来的，是从现在的盘子上，五条路一段一段加上去的。<br>'+
-    '<b>怎么看：</b>灰色是“现在已有的盘子”，往上每段颜色代表一条路能加多少。'+PATHS_META[0].name+'约 '+vals[0]+' 亿，是新增量里最长的一段；其余路径依次补上。<br>'+
-    '<b>这意味着：</b>能不能靠近 1500 亿，主要看新增量最大的几条路走不走得顺。';
+/* ===== 高级分析：PLS-SEM 式路径系数图 ===== */
+function coefLevel(c){
+  if(c>=0.45)return '影响大';
+  if(c>=0.30)return '影响中';
+  if(c>=0.18)return '影响较小';
+  return '影响弱';
 }
-function renderCoef(run){
-  if(!charts.coef)charts.coef=echarts.init($('coefChart'));
-  var names=PATHS_META.map(function(m){return m.name;});
-  charts.coef.setOption({
-    tooltip:{trigger:'axis',confine:true,backgroundColor:'rgba(8,14,28,.95)',borderColor:'rgba(64,130,255,.4)',
-      textStyle:{color:'#e6edf7',fontSize:12},
-      formatter:function(p){return p[0].name+'：关联度 '+p[0].value.toFixed(3);}},
-    grid:{left:110,right:24,top:14,bottom:26,containLabel:true},
-    xAxis:{type:'value',max:1,axisLabel:{color:'#8fa3c4'},splitLine:{lineStyle:{color:'rgba(255,255,255,.06)'}}},
-    yAxis:{type:'category',data:names.slice().reverse(),axisLabel:{color:'#c4d4ee',fontSize:11}},
-    series:[{type:'bar',data:run.coefs.slice().reverse().map(function(v,i){
-        var ri=PATHS_META.length-1-i;return {value:v,itemStyle:{color:PATHS_META[ri].color}};}),
-      barWidth:14,itemStyle:{borderRadius:[0,4,4,0]}}]
+function renderPathCoef(run){
+  var cw0=$('pathCoefChart').clientWidth;
+  if(cw0<10)return; // 面板折叠时不渲染，等展开后再初始化，避免在0宽容器里布局错位
+  if(!charts.pathcoef)charts.pathcoef=echarts.init($('pathCoefChart'));
+  var cw=cw0||600, mob=cw<420;
+  var nodeW=mob?96:148, resW=mob?100:152, resH=mob?76:104;
+  var xL=100, yTop=34, yGap=66;
+  var resX=500, yRes=yTop+2*yGap;
+  // 标签位置：手机放在路径前1/3处（路径未汇聚、纵向间距大、远离结果节点）；桌面放中点
+  var labT=mob?0.29:0.5;
+  var labX=round(xL+labT*(resX-xL));
+  var labYs=PATHS_META.map(function(m,i){
+    var yL=yTop+i*yGap;
+    return round(yL+(yRes-yL)*labT);
   });
+  var nodes=[];
+  PATHS_META.forEach(function(m,i){
+    nodes.push({
+      name:m.name, x:xL, y:yTop+i*yGap, symbolSize:[nodeW,44],
+      itemStyle:{color:'rgba(13,22,40,.95)',borderColor:m.color,borderWidth:2,
+        shadowBlur:12,shadowColor:m.color},
+      label:{show:true,color:'#eaf1fc',fontSize:mob?10.5:12,fontWeight:'bold'}
+    });
+  });
+  nodes.push({
+    name:'__RESULT__', x:resX, y:yRes, symbolSize:[resW,resH],
+    itemStyle:{color:new echarts.graphic.LinearGradient(0,0,1,1,
+        [{offset:0,color:'#1d4ed8'},{offset:1,color:'#0e7490'}]),
+      borderColor:'#60a5fa',borderWidth:2,shadowBlur:26,shadowColor:'rgba(59,130,246,.6)'},
+    label:{show:true,color:'#ffffff',fontSize:mob?11:13,fontWeight:'bold',lineHeight:mob?15:18,
+      formatter:'2030年地区产值\n{small|达标率 '+run.hit.toFixed(1)+'% · 中位 '+round(run.p50).toLocaleString('en-US')+'亿}',
+      rich:{small:{fontSize:mob?9:11,color:'#a5d8ff',fontWeight:'normal',lineHeight:mob?14:16}}}
+  });
+  // 不可见边界节点：撑开左右留白，避免窄屏节点贴边被裁
+  nodes.push({name:'__BL',x:mob?0:18,y:yRes,symbolSize:[1,1],itemStyle:{color:'transparent'},label:{show:false}});
+  nodes.push({name:'__BR',x:mob?600:582,y:yRes,symbolSize:[1,1],itemStyle:{color:'transparent'},label:{show:false}});
+  var links=PATHS_META.map(function(m,i){
+    var c=run.coefs[i];
+    return {
+      source:m.name, target:'__RESULT__',
+      lineStyle:{
+        width:1.5+c*9,
+        color:c>=0.30?m.color:'#64748b',
+        opacity:0.35+c*0.6,
+        curveness:0
+      }
+    };
+  });
+  PATHS_META.forEach(function(m,i){
+    var c=run.coefs[i];
+    nodes.push({
+      name:'__L'+i, x:labX, y:labYs[i], symbolSize:[2,2],
+      itemStyle:{color:'transparent'},
+      label:{show:true,color:c>=0.30?'#f1f5ff':'#cbd5e1',fontSize:mob?10:12,fontWeight:'bold',
+        backgroundColor:'rgba(8,14,28,.85)',padding:[2,7],borderRadius:6,
+        borderColor:c>=0.30?m.color:'#475569',borderWidth:1,
+        formatter:c.toFixed(2)+' '+coefLevel(c)}
+    });
+  });
+  charts.pathcoef.setOption({
+    tooltip:{show:false},
+    series:[{
+      type:'graph',layout:'none',roam:false,
+      edgeSymbol:['none','arrow'],edgeSymbolSize:9,
+      data:nodes,links:links,
+      emphasis:{focus:'adjacency',lineStyle:{width:6}},
+      animationDuration:900
+    }]
+  },true);
   var mi=run.coefs.indexOf(Math.max.apply(null,run.coefs));
-  $('coefNote').innerHTML=
-    '<b>这张图在看什么：</b>五条路都在变，但“在变”和“与最终结果绑得紧”是两回事。条越长，说明这条路上下动一点，最终结果跟着动得越多。<br>'+
-    '<b>怎么看：</b>排第一的是 <b style="color:'+PATHS_META[mi].color+'">'+PATHS_META[mi].name+'</b>（关联度 '+run.coefs[mi].toFixed(3)+'）；最短的那条，对结果影响相对有限。<br>'+
-    '<b>注意：</b>这是模拟结果里的同步波动程度，<b>不能直接证明某条路径在现实中因果作用更强</b>，现实因果需要更严格的识别。';
+  var li=run.coefs.indexOf(Math.min.apply(null,run.coefs));
+  $('pathCoefNote').innerHTML=
+    '<b>怎么看：</b>左边五条路，各用一支箭头指向右边的 2030 年产值。箭头上的数字是<b>路径系数</b>——线越粗、数字越大，这条路在模拟里对结果的影响越大。<br>'+
+    '<b>一眼看到：</b>“挑大梁”的是 <b style="color:'+PATHS_META[mi].color+'">'+PATHS_META[mi].name+'</b>（'+run.coefs[mi].toFixed(2)+'），影响最弱的是 <b style="color:'+PATHS_META[li].color+'">'+PATHS_META[li].name+'</b>（'+run.coefs[li].toFixed(2)+'）。<br>'+
+    '<b>注意：</b>路径系数是模拟结果里各因素与产值的<b>关联强度</b>，不是模型内部权重，也不能直接证明现实因果；现实作用还要看可控性、成本与见效速度。';
 }
 function runSensitivity(){
   $('sensStatus').textContent='正在跑 11 次模拟（基准 + 5 路径 × 2 方向）…';
@@ -886,8 +934,7 @@ function runSim(animate){
   charts.main.setOption(buildOption(state.current,animate,state.base),true);
   renderCards(state.current,animate);
   renderPlain(state.current,vals);
-  renderContrib(vals);
-  renderCoef(state.current);
+  renderPathCoef(state.current);
   $('capText').textContent=state.view==='dist'?'基于 '+state.N.toLocaleString()+' 次随机模拟，呈现可能的结果分布区间'
     :state.view==='cdf'?'累计概率：从低到高，多少结果落在某产值以下'
     :'对比当前情景与基准情景的分布差异';
