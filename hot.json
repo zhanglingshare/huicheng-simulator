@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
   "region": "huicheng",
-  "updated": "2026-10-24 07:31",
-  "fetched_at": "2026-10-24 07:31",
+  "updated": "2026-10-25 07:33",
+  "fetched_at": "2026-10-25 07:33",
   "frequency": "每日更新一次",
   "count": 10,
   "stats": [
@@ -16,6 +16,28 @@
   "note": "话题按编辑关注程度排序，标注关注档（高/较高/中）与来源级别；每条显示原报道时间、最近抓取与核验状态（官方原文或≥2独立来源=已核验，单源媒体/本地=待核实），缺失标「待核实」。本页不展示平台后台真实阅读、转发、点赞数据。话题均来自公开渠道，每日更新。",
   "items": [
     {
+      "title": "1-9月惠城138宗重点项目完成投资103.05亿元，新动工29宗、新竣工18宗",
+      "cat": "industry",
+      "emoji": "🏗️",
+      "tier": "较高",
+      "srcLevel": "官方发布",
+      "live": false,
+      "source": "惠城区政府·重点建设项目",
+      "url": "http://www.hcq.gov.cn/hcqzdlyxxgk/zdjsxm/ssqk/content/post_5872769.html",
+      "summary": "2026年1-9月，全区138宗重点项目完成投资103.05亿元、完成年度计划71.27%，其中67宗省市重点项目完成投资83.48亿元、完成年度计划80.94%；全区新动工项目29宗、新竣工项目18宗，重点项目建设按时间节点推进。",
+      "published_at": "2026-10-16",
+      "event_date": "2026-09",
+      "fetched_at": "2026-10-25 07:33",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "info",
+        "ident": "industry",
+        "objects": "惠城重点项目建设",
+        "direction": "利好",
+        "assumption": "进度与投资额为官方公开口径"
+      }
+    },
+    {
       "title": "惠州第一高桥东江特大桥全桥合龙，惠霞高速冲刺年内建成通车",
       "cat": "city",
       "emoji": "🌉",
@@ -27,7 +49,7 @@
       "summary": "惠州“第一高桥”惠霞高速控制性工程东江特大桥（水口街道，桥塔总高172米）实现全桥合龙，打通跨东江通道，为项目年内建成通车奠定基础，是“丰”字交通主框架南北轴线的关键节点。",
       "published_at": "2026-10-21",
       "event_date": "2026-10",
-      "fetched_at": "2026-10-24 07:31",
+      "fetched_at": "2026-10-25 07:33",
       "verified_status": "已核验",
       "fate": {
         "kind": "info",
@@ -38,31 +60,9 @@
       }
     },
     {
-      "title": "32名邻里守望员结对帮扶困难老人，汝湖镇织密社区关爱网络",
-      "cat": "gossip",
-      "emoji": "❤️",
-      "tier": "较高",
-      "srcLevel": "官方发布",
-      "live": false,
-      "source": "惠城区政府·政务要闻",
-      "url": "https://www.hcq.gov.cn/zwgk/zwyw/content/post_5875652.html",
-      "summary": "自今年3月实施以来，汝湖镇社工站组建起32人邻里守望员队伍，与辖区特殊困难老年人结对帮扶，常态化上门探访、日常问候、风险排查，持续关注独居、高龄、困难长者生活状况，织密社区老年人关爱网络。",
-      "published_at": "2026-10-21",
-      "event_date": "2026-10",
-      "fetched_at": "2026-10-24 07:31",
-      "verified_status": "已核验",
-      "fate": {
-        "kind": "life",
-        "ident": "gossip",
-        "objects": "独居、高龄长者",
-        "direction": "中性",
-        "assumption": "队伍规模为官方公开口径"
-      }
-    },
-    {
       "title": "金澜新材料落子惠城高新区：总投资10.5亿元新能源高分子材料项目落地",
       "cat": "industry",
-      "emoji": "🏗️",
+      "emoji": "🏭",
       "tier": "较高",
       "srcLevel": "官方发布",
       "live": false,
@@ -71,7 +71,7 @@
       "summary": "广东金澜新材料科技有限公司竞得水口街道新民洛塘片区JD134-02-01地块（约115.2亩），金澜新能源高分子材料项目正式落地惠城高新区，总投资规模不低于10.5亿元，将建设全球研发中心、智能制造中心、供应链与结算中心等板块。",
       "published_at": "2026-10-13",
       "event_date": "2026-10",
-      "fetched_at": "2026-10-24 07:31",
+      "fetched_at": "2026-10-25 07:33",
       "verified_status": "已核验",
       "fate": {
         "kind": "info",
@@ -79,28 +79,6 @@
         "objects": "惠城高新区产业载体",
         "direction": "利好",
         "assumption": "投资额以官方公示为准"
-      }
-    },
-    {
-      "title": "河南岸街道开展音乐疗愈小组活动，助力残障人士身心康复与社会融入",
-      "cat": "livelihood",
-      "emoji": "🎵",
-      "tier": "较高",
-      "srcLevel": "官方发布",
-      "live": false,
-      "source": "惠城区政府·镇办动态",
-      "url": "http://www.hcq.gov.cn/zwgk/zbdt/index.html",
-      "summary": "河南岸街道开展音乐疗愈小组活动，以音乐为纽带助力残障人士身心康复与社会融入，暖心的基层服务让更多人被看见、被陪伴。",
-      "published_at": "2026-10-21",
-      "event_date": "2026-10-21",
-      "fetched_at": "2026-10-24 07:31",
-      "verified_status": "已核验",
-      "fate": {
-        "kind": "life",
-        "ident": "livelihood",
-        "objects": "残障人士",
-        "direction": "中性",
-        "assumption": "活动信息以街道发布为准"
       }
     },
     {
@@ -115,7 +93,7 @@
       "summary": "2026年国庆黄金周，惠州博物馆所属六馆一祠一园区免费开放，开展义务讲解、各类活动超40场次，非遗体验、红色展览、诗词雅集、国风音乐会轮番上演，7天接待超13万人次，文博场馆成为假期人气担当。",
       "published_at": "2026-10-10",
       "event_date": "2026-10",
-      "fetched_at": "2026-10-24 07:31",
+      "fetched_at": "2026-10-25 07:33",
       "verified_status": "已核验",
       "fate": {
         "kind": "life",
@@ -126,47 +104,25 @@
       }
     },
     {
-      "title": "桥东街道新建社区联合市六小开展家庭教育主题讲座",
-      "cat": "livelihood",
-      "emoji": "🏫",
-      "tier": "较高",
+      "title": "惠城高新区组建7支招商分队，全年力争引进产业项目25宗以上、投资超百亿",
+      "cat": "industry",
+      "emoji": "📈",
+      "tier": "中",
       "srcLevel": "官方发布",
       "live": false,
-      "source": "惠城区政府·镇办动态",
-      "url": "http://www.hcq.gov.cn/zwgk/zbdt/index.html",
-      "summary": "桥东街道新建社区联合惠州市第六小学开展家庭教育主题讲座，家校社联动，一起聊怎么陪孩子长大。",
-      "published_at": "2026-10-22",
-      "event_date": "2026-10-22",
-      "fetched_at": "2026-10-24 07:31",
+      "source": "惠城高新区·人大建议答复",
+      "url": "http://www.hcq.gov.cn/hzhckjyglw/gkmlpt/content/5/5876/post_5876257.html",
+      "summary": "惠城高新区2026年实施“招商引资攻坚年”，已组建7支招商分队开展全员招商，深化“管委会+国企”协同招商并配套产业基金，力争全年引进产业项目25宗以上、引进投资不少于100亿元，聚焦新能源、智能装备制造等产业链上下游配套。",
+      "published_at": "2026-10-21",
+      "event_date": "2026",
+      "fetched_at": "2026-10-25 07:33",
       "verified_status": "已核验",
       "fate": {
         "kind": "info",
-        "ident": "livelihood",
-        "objects": "学生家庭",
-        "direction": "中性",
-        "assumption": "讲座信息以社区发布为准"
-      }
-    },
-    {
-      "title": "惠城区“巧手妈妈·匠心工坊”手工艺技能公益培训在江北举行",
-      "cat": "livelihood",
-      "emoji": "🧵",
-      "tier": "较高",
-      "srcLevel": "官方发布",
-      "live": false,
-      "source": "惠城区政府·镇办动态",
-      "url": "http://www.hcq.gov.cn/zwgk/zbdt/index.html",
-      "summary": "惠城区“巧手妈妈·匠心工坊”手工艺技能公益培训在江北开班，为宝妈们提供一个学技能、交朋友、增收的新窗口。",
-      "published_at": "2026-10-22",
-      "event_date": "2026-10-22",
-      "fetched_at": "2026-10-24 07:31",
-      "verified_status": "已核验",
-      "fate": {
-        "kind": "life",
-        "ident": "livelihood",
-        "objects": "宝妈群体",
-        "direction": "中性",
-        "assumption": "培训信息以主办方发布为准"
+        "ident": "industry",
+        "objects": "惠城高新区招商引资",
+        "direction": "利好",
+        "assumption": "目标为全年计划口径，最终以实际落地为准"
       }
     },
     {
@@ -181,7 +137,7 @@
       "summary": "惠城人才安居项目迎新进展：下良人才社区正式投用300套精装公寓，实现“拎包入住”，现场同步举行集中签约，4家意向租赁企业与时盛生活超市、百姓缘药店、智慧社区饭堂、24小时自助健身房等商家入驻，青年人才安家有了新选择。",
       "published_at": "2026-10-24",
       "event_date": "2026-10-24",
-      "fetched_at": "2026-10-24 07:31",
+      "fetched_at": "2026-10-25 07:33",
       "verified_status": "待核实",
       "fate": {
         "kind": "info",
@@ -192,25 +148,25 @@
       }
     },
     {
-      "title": "“鹅城之恋·金秋觅爱”青年交友联谊活动今早开跑，线上匹配+线下趣味联谊",
-      "cat": "fun",
-      "emoji": "💘",
+      "title": "32名邻里守望员结对帮扶困难老人，汝湖镇织密社区关爱网络",
+      "cat": "gossip",
+      "emoji": "❤️",
       "tier": "中",
-      "srcLevel": "媒体报道",
+      "srcLevel": "官方发布",
       "live": false,
-      "source": "今日头条·惠城发布",
-      "url": "http://m.toutiao.com/group/7694959224262001171/",
-      "summary": "惠城区2026年“鹅城之恋·金秋觅爱”青年交友联谊活动（第二场）10月24日上午举行，由惠城区民政局主办，采用线上“精准匹配+线下趣味联谊”结合模式，立足本地青年交友需求，主打轻松松弛的社交氛围。",
-      "published_at": "2026-10-24",
-      "event_date": "2026-10-24",
-      "fetched_at": "2026-10-24 07:31",
-      "verified_status": "待核实",
+      "source": "惠城区政府·政务要闻",
+      "url": "https://www.hcq.gov.cn/zwgk/zwyw/content/post_5875652.html",
+      "summary": "自今年3月实施以来，汝湖镇社工站组建起32人邻里守望员队伍，与辖区特殊困难老年人结对帮扶，常态化上门探访、日常问候、风险排查，持续关注独居、高龄、困难长者生活状况，织密社区老年人关爱网络。",
+      "published_at": "2026-10-21",
+      "event_date": "2026-10",
+      "fetched_at": "2026-10-25 07:33",
+      "verified_status": "已核验",
       "fate": {
         "kind": "life",
-        "ident": "fun",
-        "objects": "本地青年",
+        "ident": "gossip",
+        "objects": "独居、高龄长者",
         "direction": "中性",
-        "assumption": "活动信息以主办方发布为准"
+        "assumption": "队伍规模为官方公开口径"
       }
     },
     {
@@ -225,7 +181,7 @@
       "summary": "水口人民路美食街是惠州本地人气很高的大型夜市，营业时间16:00到凌晨3:00，傍晚6点后人气最旺，烟火气拉满。",
       "published_at": "2026-10-03",
       "event_date": "2026-10",
-      "fetched_at": "2026-10-24 07:31",
+      "fetched_at": "2026-10-25 07:33",
       "verified_status": "待核实",
       "fate": {
         "kind": "life",
@@ -233,6 +189,50 @@
         "objects": "食客",
         "direction": "中性",
         "assumption": "人气为公开打卡热度合理估算"
+      }
+    },
+    {
+      "title": "河南岸街道开展音乐疗愈小组活动，助力残障人士身心康复与社会融入",
+      "cat": "livelihood",
+      "emoji": "🎵",
+      "tier": "中",
+      "srcLevel": "官方发布",
+      "live": false,
+      "source": "惠城区政府·镇办动态",
+      "url": "http://www.hcq.gov.cn/zwgk/zbdt/index.html",
+      "summary": "河南岸街道开展音乐疗愈小组活动，以音乐为纽带助力残障人士身心康复与社会融入，暖心的基层服务让更多人被看见、被陪伴。",
+      "published_at": "2026-10-21",
+      "event_date": "2026-10-21",
+      "fetched_at": "2026-10-25 07:33",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "life",
+        "ident": "livelihood",
+        "objects": "残障人士",
+        "direction": "中性",
+        "assumption": "活动信息以街道发布为准"
+      }
+    },
+    {
+      "title": "惠城区“巧手妈妈·匠心工坊”手工艺技能公益培训在江北举行",
+      "cat": "livelihood",
+      "emoji": "🧵",
+      "tier": "中",
+      "srcLevel": "官方发布",
+      "live": false,
+      "source": "惠城区政府·镇办动态",
+      "url": "http://www.hcq.gov.cn/zwgk/zbdt/index.html",
+      "summary": "惠城区“巧手妈妈·匠心工坊”手工艺技能公益培训在江北开班，为宝妈们提供一个学技能、交朋友、增收的新窗口。",
+      "published_at": "2026-10-22",
+      "event_date": "2026-10-22",
+      "fetched_at": "2026-10-25 07:33",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "life",
+        "ident": "livelihood",
+        "objects": "宝妈群体",
+        "direction": "中性",
+        "assumption": "培训信息以主办方发布为准"
       }
     }
   ]
