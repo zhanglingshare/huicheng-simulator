@@ -301,7 +301,8 @@ input[type=range]:disabled{opacity:.4;cursor:not-allowed}
         </div>
         <div class="toolrow">
           <div class="seg" id="nSeg">
-            <button data-n="10000" class="on">一万次模拟（推荐）</button>
+            <button data-n="20000" class="on">两万次模拟（推荐）</button>
+            <button data-n="10000">一万次模拟</button>
             <button data-n="1000">一千次模拟</button>
           </div>
           <div class="seg" id="scenSeg">
@@ -429,7 +430,7 @@ var PATHS_META=[
 ];
 var SEED=42, BIN_MIN=800, BIN_MAX=2400, BINS=48;
 var PATH_CONF=[80,70,60,60,50];
-var state={N:10000, view:'dist', showBase:false, scenarioMode:'current', userVals:null, current:null, base:null, lastVals:null};
+var state={N:20000, view:'dist', showBase:false, scenarioMode:'current', userVals:null, current:null, base:null, lastVals:null};
 var charts={};
 
 /* ===== 工具 ===== */

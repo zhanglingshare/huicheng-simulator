@@ -19,9 +19,9 @@ for (const f of htmlFiles) {
   ok(f + '（' + blocks.length + ' 块）');
 }
 
-console.log('── 2) 模型口径断言（model.js 同源，SEED=42 N=10000）──');
+console.log('── 2) 模型口径断言（model.js 同源，SEED=42 N=20000，与页面全站统一口径）──');
 const HT = require(path.join(root, 'model.js'));
-const SEED = 42, N = 10000;
+const SEED = 42, N = 20000;
 const effects = { delay:[0,40,90,180], invest:[0,50,110,170], export:[0,30,70,120], shen:[0,15,30,45], dragon:[0,50], commute:[0,60,120,190] };
 const state = { delay:2, invest:1, export:1, shen:1, dragon:1, commute:1 };
 const order = ['delay','invest','export','shen','dragon','commute'];
@@ -34,15 +34,15 @@ const applyDrop = (p,key,drop) => {
 };
 const near = (a, b, t = 0.06) => Math.abs(a - b) <= t;
 const base = HT.run(SEED, N, HT.DEFAULT_PATHS);
-if (!near(base.hit, 66.24, 0.05)) bad('无冲击基准 hit 应≈66.24%，实际 ' + base.hit.toFixed(2) + '%');
+if (!near(base.hit, 66.43, 0.05)) bad('无冲击基准 hit 应≈66.43%，实际 ' + base.hit.toFixed(2) + '%');
 else ok('无冲击基准 hit = ' + base.hit.toFixed(2) + '%');
-if (!near(base.p50, 1577, 3)) bad('无冲击基准 P50 应≈1577亿，实际 ' + Math.round(base.p50));
+if (!near(base.p50, 1579, 3)) bad('无冲击基准 P50 应≈1579亿，实际 ' + Math.round(base.p50));
 else ok('无冲击基准 P50 = ' + Math.round(base.p50) + '亿');
 const rows = Object.keys(state).map(k => ({ k, drop: base.hit - HT.run(SEED, N, (() => { const p = JSON.parse(JSON.stringify(HT.DEFAULT_PATHS)); applyDrop(p, k, effects[k][state[k]]); return p; })()).hit })).sort((a, b) => b.drop - a.drop);
 if (rows[0].k !== 'delay' || rows[1].k !== 'commute' || rows[rows.length - 1].k !== 'shen')
   bad('压力排行顺序错误: ' + rows.map(r => r.k).join(' > '));
 else ok('压力排行：' + rows.map(r => r.k + ' -' + r.drop.toFixed(1) + '%').join(' | '));
-const marginExp = [19.06, 10.68, 5.19, 1.95, 8.85, 10.17];
+const marginExp = [18.9, 11.04, 5.33, 2.0, 9.38, 10.0];
 let prev = base.hit, margOK = true;
 const p = JSON.parse(JSON.stringify(HT.DEFAULT_PATHS));
 order.forEach((k, i) => {
@@ -52,10 +52,10 @@ order.forEach((k, i) => {
   prev = cur;
 });
 if (!margOK) bad('瀑布相邻边际与基准不一致（累计终值 ' + prev.toFixed(2) + '%）');
-else ok('瀑布六档相邻边际通过，累计终值 ' + prev.toFixed(2) + '%（旧错误基准 10.34 恰为全叠加）');
-if (!near(prev, 10.34, 0.05)) bad('累计终值应≈10.34%，实际 ' + prev.toFixed(2));
+else ok('瀑布六档相邻边际通过，累计终值 ' + prev.toFixed(2) + '%（N=20000 口径）');
+if (!near(prev, 9.79, 0.05)) bad('累计终值应≈9.79%，实际 ' + prev.toFixed(2));
 const hitCount = Math.round(N * base.hit / 100);
-if (hitCount !== 6624) bad('future 达标次数应 6624，实际 ' + hitCount);
+if (hitCount !== 13286) bad('future 达标次数应 13286，实际 ' + hitCount);
 else ok('future 达标次数 ' + hitCount.toLocaleString() + ' / ' + N.toLocaleString());
 
 console.log('── 3) 每日数据文件 ──');

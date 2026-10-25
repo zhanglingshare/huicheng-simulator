@@ -1,6 +1,6 @@
-// 修复后逻辑复算：与 windtunnel.html 修复版代码逐行一致（SEED=42, N=10000）
-const HT = require('./model.js');
-const SEED = 42, N = 10000;
+// 修复后逻辑复算：与 windtunnel.html 修复版代码逐行一致（SEED=42, N=20000，与全站统一口径）
+const HT = require('../model.js');
+const SEED = 42, N = 20000;
 const effects = {delay:[0,40,90,180],invest:[0,50,110,170],export:[0,30,70,120],shen:[0,15,30,45],dragon:[0,50],commute:[0,60,120,190]};
 const state = {delay:2,invest:1,export:1,shen:1,dragon:1,commute:1};
 const names = {delay:'投产延期',invest:'招商不及预期',export:'外需走弱',shen:'融深变慢',dragon:'龙头扩产落空',commute:'通勤压力'};

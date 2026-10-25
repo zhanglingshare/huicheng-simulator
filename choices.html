@@ -92,7 +92,7 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
     <a class="back" href="network.html">←</a>
     <div class="ttl">
       <h1>搭你的惠城 2030</h1>
-      <span>6 块积木，搭到 1500 亿</span>
+      <span>6 块积木，搭到模型参考刻度 1500 亿</span>
     </div>
   </div>
 
@@ -101,8 +101,8 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
       <div class="tower" id="tower"></div>
       <div class="scale" id="scale">
         <div class="target-line" style="top:0"></div>
-        <div class="mark target" style="top:0">1500亿 目标</div>
-        <div class="mark base" style="bottom:0">632.7亿 现在</div>
+        <div class="mark target" style="top:0">1500亿 参考刻度</div>
+        <div class="mark base" style="bottom:0">632.7亿 高新区现状</div>
         <div class="cur-line" id="curLine" style="bottom:0"></div>
       </div>
     </div>
@@ -118,7 +118,7 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
       <span class="r-label">你的塔高</span>
       <span class="r-val"><span id="curVal">632.7</span><small> 亿</small></span>
     </div>
-    <div class="r-gap" id="gap">离 1500 亿还差 867.3 亿</div>
+    <div class="r-gap" id="gap">离参考刻度 1500 亿还差 867.3 亿</div>
   </div>
 
   <button class="next-btn" id="nextBtn" onclick="goNext()">就这么着，跑模型 →</button>
@@ -194,10 +194,10 @@ function render(){
   var gapEl=document.getElementById('gap');
   var diff=TARGET-t;
   if(diff>0){
-    gapEl.textContent='离 1500 亿还差 '+diff.toFixed(0)+' 亿';
+    gapEl.textContent='离参考刻度 1500 亿还差 '+diff.toFixed(0)+' 亿';
     gapEl.className='r-gap';
   }else{
-    gapEl.textContent='已过 1500 亿 '+( -diff).toFixed(0)+' 亿';
+    gapEl.textContent='已过参考刻度 1500 亿 '+( -diff).toFixed(0)+' 亿';
     gapEl.className='r-gap over';
   }
 }

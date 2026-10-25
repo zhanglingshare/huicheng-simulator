@@ -422,7 +422,7 @@ svg{max-width:100%;height:auto}
         <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,19 L15,17 L27,18 L39,16 L51,15 L63,14 L76,13 L88,11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,19 L15,17 L27,18 L39,16 L51,15 L63,14 L76,13 L88,11 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
         <div class="m-tag">低于目标 6%</div>
       </div>
-      <div class="metric warn" data-t="社消零 · 805.68 亿元（+3.7%）" data-d="社会消费品零售总额 805.68 亿元、+3.7%，年初目标约 6%，<b>差约 2.3 个百分点</b>；限上消费品零售额 525.26 亿元、+4.2%。消费偏温，与人口、人气直接相关。来源：2025年统计公报。">
+      <div class="metric warn" data-t="社消零 · 805.68 亿元（+3.7%）" data-d="社会消费品零售总额 805.68 亿元、+3.7%，年初目标约 6%，<b>差约 2.3 个百分点</b>；限上消费品零售额 525.26 亿元、+4.2%（统计公报正文未列限上总额，该数出自经济运行简况/政府公报）。消费偏温，与人口、人气直接相关。来源：2025年统计公报、2025年经济运行简况。">
         <div class="m-icon">🛒</div>
         <div class="m-name">社会消费品零售</div>
         <div class="m-val">+3.7%</div>
@@ -455,7 +455,7 @@ svg{max-width:100%;height:auto}
   <!-- 2030未来轨迹（驾驶舱：4情景tab + 主图 + 右结果面板） -->
   <div class="card">
     <h2>② 2030 未来轨迹 · 规划节点与模拟结果<span class="itag sim">模型推演 · 非预测</span></h2>
-    <p style="font-size:12.5px;color:var(--ink2);margin:0 0 10px;line-height:1.8">从 2025 实测锚点（632.7 亿）到 2030 模拟区间，看懂惠城的可能路径。灰虚线为线性参考（非逐年预测），模型只在 2030 给出结果分布。</p>
+    <p style="font-size:12.5px;color:var(--ink2);margin:0 0 10px;line-height:1.8">从 2025 实测锚点（惠城高新区规上工业产值 632.7 亿，非全区 GDP）到 2030 模拟区间，看懂惠城的可能路径。灰虚线为线性参考（非逐年预测），模型只在 2030 给出结果分布。</p>
     <div class="scene-tabs" id="sceneTabs">
       <button class="on" data-s="0">基准情景</button>
       <button data-s="1">项目延期</button>
@@ -464,7 +464,7 @@ svg{max-width:100%;height:auto}
     </div>
     <div class="future-flex">
       <div>
-        <div class="cap" style="margin-bottom:6px">产值（亿元）· 白点＝2025 实测锚点（632.7 亿），灰虚线＝线性参考（非逐年预测），彩色扇形＝2028→2030 <b>概率锥</b>（仅 2030 端点 P10/P90 为模型真实分布，2028–2029 为视觉引导、不代表逐年概率），黄线＝中位 P50，金虚线＝1500 亿目标</div>
+        <div class="cap" style="margin-bottom:6px">产值（亿元，高新区规上工业口径）· 白点＝2025 实测锚点（高新区 632.7 亿），灰虚线＝线性参考（非逐年预测），彩色扇形＝2028→2030 <b>概率锥</b>（仅 2030 端点 P10/P90 为模型真实分布，2028–2029 为视觉引导、不代表逐年概率），黄线＝中位 P50，金虚线＝1500 亿模型参考刻度（非官方目标）</div>
         <div style="height:320px"><canvas id="futureMain"></canvas></div>
       </div>
       <div class="future-panel">
@@ -560,7 +560,7 @@ svg{max-width:100%;height:auto}
         <div class="no">01</div>
         <div class="fct">
           <div class="tt">一座三产占 <b style="color:#fbbf24">69%</b> 的中心城区，高新区是主引擎 <span class="chip">结构事实</span></div>
-          <div class="ds">2025年 GDP <b>1203.33亿</b>，规上工业<b>总产值 937.9亿</b>（现价，增加值 +10.8%）；高新区 <b>632.7亿</b>，约占全区规上工业三分之二。</div>
+          <div class="ds">2025年 GDP <b>1203.33亿</b>（全区口径），规上工业<b>总产值 937.9亿</b>（公报初步核算口径，现价，增加值 +10.8%）；高新区规上工业产值 <b>632.7亿</b>，约占全区规上工业三分之二（67.4%）。注意：632.7 与 1203.33 不是同一基数，不能直接相减。</div>
           <div class="conc">
             <div class="conc-track"><div class="conc-a" style="width:67.4%"></div></div>
             <div class="conc-leg"><span><i style="background:#f59e0b"></i>高新区 67.4%</span><span><i style="background:rgba(255,255,255,.15)"></i>其他规上 32.6%</span></div>
@@ -1046,7 +1046,7 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
         borderColor:(ctx)=>ctx.dataIndex>=3?SC[0].color:'transparent',borderWidth:1.6,pointRadius:0,pointHoverRadius:0,fill:false,order:6,tension:0},
       {type:'line',label:'中位轨迹 P50',data:coneData(res[0],'p50'),borderColor:(ctx)=>ctx.dataIndex>=3?'#fbbf24':'transparent',borderWidth:2.2,pointRadius:0,pointHoverRadius:0,fill:false,order:5,spanGaps:true},
       {type:'line',label:'线性参考（非逐年预测）',data:refLine.slice(),borderColor:'#94a3b8',borderDash:[6,5],pointRadius:0,pointHoverRadius:0,borderWidth:1.6,order:4,spanGaps:true},
-      {type:'line',label:'1500亿参考目标',data:YRS.map(()=>1500),borderColor:'#fbbf24',borderDash:[2,4],pointRadius:0,borderWidth:1.4,order:3},
+      {type:'line',label:'1500亿参考刻度（非官方目标）',data:YRS.map(()=>1500),borderColor:'#fbbf24',borderDash:[2,4],pointRadius:0,borderWidth:1.4,order:3},
       {type:'scatter',label:'2025实测锚点',data:[HT.BASE,null,null,null,null,null],backgroundColor:'#fff',pointRadius:6,borderColor:'#38bdf8',borderWidth:2,order:2}
     ]},
     options:{responsive:true,maintainAspectRatio:false,
@@ -1092,7 +1092,7 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
     const gapTxt=p>=HT.TARGET?'<span class="pos">中位高于目标 '+gapP+' 亿</span>':'<span class="neg">中位低于目标 '+(-gapP)+' 亿</span>';
     const miss=100-hit;let warn='';
     if(i>0){warn=(miss>=50?'<span class="neg">⚠️ 每两次推演就有一次以上不达标。</span>':'约每 '+Math.max(2,Math.round(100/miss))+' 次推演有 1 次不达标。');}
-    document.getElementById('conclBody').innerHTML='<b>当前情景：</b>'+s.name+'；2030 达标率 <b>'+hit+'%</b>'+(i>0?' <span class="'+(dHit<0?'neg':'pos')+'">（基准 '+baseHit+'%，'+(dHit>0?'+':'−')+Math.abs(dHit)+'pp）</span>':'')+'，中位产值 <b>'+p+' 亿</b>，p10–p90 区间 '+fmt(r.p10)+'–'+fmt(r.p90)+' 亿。'+gapTxt+(warn?'<br>'+warn:'')+'<br><span style="font-size:11px;color:#6b7280">模型版本：种子 '+_SIM.SEED+' · '+_SIM.N.toLocaleString()+' 次蒙特卡洛；BASE 632.7 亿（2025 实测）、TARGET 1500 亿（外延参考，非刚性）；压力叠加采用累计口径（与⑥风洞页一致）。此为压力测试叙事，非预测，不构成投资建议。</span>';
+    document.getElementById('conclBody').innerHTML='<b>当前情景：</b>'+s.name+'；2030 达标率 <b>'+hit+'%</b>'+(i>0?' <span class="'+(dHit<0?'neg':'pos')+'">（基准 '+baseHit+'%，'+(dHit>0?'+':'−')+Math.abs(dHit)+'pp）</span>':'')+'，中位产值 <b>'+p+' 亿</b>，p10–p90 区间 '+fmt(r.p10)+'–'+fmt(r.p90)+' 亿。'+gapTxt+(warn?'<br>'+warn:'')+'<br><span style="font-size:11px;color:#6b7280">模型版本：种子 '+_SIM.SEED+' · '+_SIM.N.toLocaleString()+' 次蒙特卡洛；BASE 632.7 亿（2025 惠城高新区规上工业产值实测，非全区 GDP）、TARGET 1500 亿（外延参考刻度，非刚性）；压力叠加采用累计口径（与⑥风洞页一致）。此为压力测试叙事，非预测，不构成投资建议。</span>';
     history.replaceState(null,'','#d='+s.delay+'&c='+s.commute);
     try{localStorage.setItem('huicheng_experiment',JSON.stringify({v:'1.0',seed:_SIM.SEED,N:_SIM.N,delay:s.delay,commute:s.commute}));}catch(e){}
   }
@@ -1168,7 +1168,7 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
   // 复制结论 / 分享可恢复链接
   document.getElementById('copyConcl').addEventListener('click',function(){
     const r=res[cur];
-    const txt='【惠城产业风洞 · 我的实验结论】情景：'+SC[cur].name+'\n2030达标率：'+Math.round(r.hit)+'%（基准'+baseHit+'%），中位产值：'+Math.round(r.p50)+'亿（目标1500），区间'+fmt(r.p10)+'–'+fmt(r.p90)+'亿。\n模型：种子'+_SIM.SEED+'，'+_SIM.N+'次蒙特卡洛。压力测试非预测，不构成投资建议。';
+    const txt='【惠城产业风洞 · 我的实验结论】情景：'+SC[cur].name+'\n2030达标率：'+Math.round(r.hit)+'%（基准'+baseHit+'%），中位产值：'+Math.round(r.p50)+'亿（参考刻度1500），区间'+fmt(r.p10)+'–'+fmt(r.p90)+'亿。\n模型：种子'+_SIM.SEED+'，'+_SIM.N+'次蒙特卡洛，BASE 632.7为2025高新区规上工业产值。压力测试非预测，不构成投资建议。';
     navigator.clipboard&&navigator.clipboard.writeText(txt);
     const old=this.textContent;this.textContent='✅ 已复制';setTimeout(()=>this.textContent=old,1500);
   });

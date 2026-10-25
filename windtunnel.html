@@ -116,7 +116,7 @@ h1{font-size:20px;margin:0 0 2px}
   <div class="card">
     <h2>四个压力叠加，达标率一层层掉</h2>
     <div style="height:220px"><canvas id="waterfall"></canvas></div>
-    <div class="hint">从67%开始，每根柱子是一个压力扣掉的部分。</div>
+    <div class="hint">从约66%开始，每根柱子是一个压力扣掉的部分。</div>
   </div>
 
   <!-- 下半场 -->
@@ -172,7 +172,7 @@ const names={delay:'投产延期',invest:'招商不及预期',export:'外需走�
 const charts={};
 function dk(k){if(charts[k]){charts[k].destroy();delete charts[k];}}
 const gridColor='#1c2739',tickColor='#6b7280';
-const SEED=42, N=10000;
+const SEED=42, N=20000;
 
 // 把某压力事件的损失量分配到对应路径（这个映射是模型设定，非实测）
 function applyDrop(p,key,drop){
@@ -282,7 +282,7 @@ function drawRank(){
   document.getElementById('final').innerHTML=
     '上半场四个常规压力，规划里都在盯着，这很对。<br>但把"龙头扩产落空"和"通勤压力"也放进来排序，结果有点反常识：<b style="color:#f87171">通勤压力排第'+cr+'</b>，<b style="color:#fbbf24">龙头扩产落空排第'+dr+'</b>。<br>'+
     '龙头扩产落空当然疼，但集群还在；可通勤路一堵，是产业招工和城市消费两个轮子一起卡。<br>通勤在规划里叫"基础设施配套"，风洞却提示它更像传动轴。好消息是——改善通勤比招大项目便宜、见效快、自己可控；风险是一堵就双向失血。这是一个被低估、性价比很高的抓手。<br>'+
-    '<span style="color:#6b7280;font-size:11px">注：达标率由 model.js 同一内核（基准632.7亿、种子42）重跑；"基准"为六项压力全为0的无冲击基准。压力损失量为模型设定，非实测。</span>';
+    '<span style="color:#6b7280;font-size:11px">注：达标率由 model.js 同一内核（基准 632.7 亿＝2025 惠城高新区规上工业产值、种子42、2万次）重跑；"基准"为六项压力全为0的无冲击基准。压力损失量为模型设定，非实测。</span>';
 }
 
 ['delay','invest','export','shen'].forEach(k=>{drawMini(k);renderRO(k);});

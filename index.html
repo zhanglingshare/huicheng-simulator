@@ -153,7 +153,7 @@ body.moff #net .heart .core{transform:none}
 .vote .qt{font-size:14px;font-weight:800;margin:0 0 3px}
 .vote .sub{font-size:11px;color:var(--muted);margin:0 0 10px}
 .gauge{height:8px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;position:relative;margin:8px 0 4px}
-.gauge i{display:block;height:100%;width:67%;background:linear-gradient(90deg,#38bdf8,#818cf8);border-radius:99px}
+.gauge i{display:block;height:100%;width:66%;background:linear-gradient(90deg,#38bdf8,#818cf8);border-radius:99px}
 .gstat{display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);margin-bottom:10px}
 .gstat b{color:var(--ink2);font-variant-numeric:tabular-nums}
 .vbtns{display:flex;gap:6px}
@@ -262,11 +262,11 @@ body.moff #net .heart .core{transform:none}
     <div class="brand"><span class="logo"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="white"/></svg></span>惠城产业风洞</div>
     <div class="res">
       <div class="r"><span class="v blue">1203亿</span><span class="l">GDP · 2025</span></div>
-      <div class="r"><span class="v">157.8万</span><span class="l">常住人口</span></div>
+      <div class="r"><span class="v">159.78万</span><span class="l">常住人口 · 2025</span></div>
       <div class="r"><span class="v green">4.3%</span><span class="l">2025增速</span></div>
-      <div class="r"><span class="v">67%</span><span class="l">2030达标概率</span></div>
+      <div class="r"><span class="v">66%</span><span class="l">2030达标概率(模型)</span></div>
     </div>
-    <div class="clock"><b>第 1 轮</b><br>每日 07:27 刷新</div>
+    <div class="clock" title="每日07:27只刷新今日话题与热度，模型参数不随新闻自动更新"><b>第 1 轮</b><br>每日 07:27 刷话题</div>
   </div>
 
   <!-- 视角切换 -->
@@ -294,7 +294,7 @@ body.moff #net .heart .core{transform:none}
           <div id="cnetNodes"></div>
         </div>
         <div class="stage-foot">
-          <span><b>惠城 823.69 亿</b>为官方口径（2024 社消零，全市第1）</span>
+          <span><b>惠城 805.68 亿</b>为官方口径（2025 社消零，+3.7%）</span>
           <span>外流结构 128 亿 / 52 / 34 / 42 亿均为<b>合理估算</b></span>
         </div>
       </div>
@@ -345,8 +345,8 @@ body.moff #net .heart .core{transform:none}
       </div>
       <div class="stage-foot">
         <button class="nf-btn" onclick="replayNet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 109-9 9 9 0 00-6.7 3M3 3v6h6"/></svg>重播供血动画</button>
-        <span><b>园区规上工业</b> 543.4亿 · +8.1%</span>
-        <span><b>固定资产投资</b> 564.95亿 · 全市第一</span>
+        <span><b>高新区规上工业</b> 632.7亿 · 占全区约67%（2025）</span>
+        <span><b>固定资产投资</b> 2025年 −37.1% · 调整期</span>
         <span><b>完整 26 主体</b>见 network</span>
       </div>
       </div>
@@ -377,10 +377,10 @@ body.moff #net .heart .core{transform:none}
       <!-- 市民公投 -->
       <div class="panel vote">
         <h3><span class="dot" style="background:var(--pink)"></span>市民公投</h3>
-        <p class="qt">2030年，惠城能到1500亿吗？</p>
-        <p class="sub">模型跑了很多遍：过线概率67%，中位数1579亿</p>
+        <p class="qt">2030年，惠城能到模型参考刻度1500亿吗？</p>
+        <p class="sub">模型跑了很多遍：过线约66%，中位数1579亿（1500为模型参考刻度，非官方目标）</p>
         <div class="gauge"><i></i></div>
-        <div class="gstat"><span>模型估算 <b>67%</b></span><span>中位数 <b>1579亿</b></span></div>
+        <div class="gstat"><span>模型估算 <b>66%</b></span><span>中位数 <b>1579亿</b></span></div>
         <div class="vbtns">
           <button class="vb-ok" onclick="judge('ok')">我看稳了</button>
           <button class="vb-bad" onclick="judge('bad')">有点悬</button>
@@ -626,7 +626,7 @@ body.moff #net .heart .core{transform:none}
   if(!svg)return;
   var NS="http://www.w3.org/2000/svg",VW=1000,VH=700;
   var NODES={
-    hero:{x:500,y:380,nm:"惠城",am:"823.69亿",color:"#38bdf8"},
+    hero:{x:500,y:380,nm:"惠城",am:"805.68亿",color:"#38bdf8"},
     sz:{x:175,y:175,nm:"深圳",am:"52亿",color:"#38bdf8"},
     dg:{x:825,y:175,nm:"东莞",am:"34亿",color:"#38bdf8"},
     ec:{x:830,y:520,nm:"电商",am:"42亿",color:"#fbbf24"}
@@ -675,7 +675,7 @@ body.moff #net .heart .core{transform:none}
       ? "<div class='dot'></div><div class='nm'>"+n.nm+"</div><div class='am'>"+n.am+"</div>"
       : "<div class='dot' style='background:currentColor'></div><div class='nm'>"+n.nm+"</div><div class='am'>"+n.am+"</div>";
     d.onclick=function(){
-      if(k==="hero")toast("惠城 · 2024 社消零 823.69 亿（官方口径，全市第1）");
+      if(k==="hero")toast("惠城 · 2025 社消零 805.68 亿（+3.7%，官方口径）");
       else toast(n.nm+" · 消费外流约 "+n.am+"（合理估算，非官方统计）");
     };
     document.getElementById("cnetNodes").appendChild(d);
