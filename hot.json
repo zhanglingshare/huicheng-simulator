@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
   "region": "huicheng",
-  "updated": "2026-10-26 07:35",
-  "fetched_at": "2026-10-26 07:35",
+  "updated": "2026-10-27 07:40",
+  "fetched_at": "2026-10-27 07:40",
   "frequency": "每日更新一次",
   "count": 10,
   "stats": [
@@ -27,7 +27,7 @@
       "summary": "2026年1-9月，全区138宗重点项目完成投资103.05亿元、完成年度计划71.27%，其中67宗省市重点项目完成投资83.48亿元、完成年度计划80.94%；全区新动工项目29宗、新竣工项目18宗，重点项目建设按时间节点推进。",
       "published_at": "2026-10-16",
       "event_date": "2026-09",
-      "fetched_at": "2026-10-26 07:35",
+      "fetched_at": "2026-10-27 07:40",
       "verified_status": "已核验",
       "fate": {
         "kind": "info",
@@ -49,7 +49,7 @@
       "summary": "惠州“第一高桥”惠霞高速控制性工程东江特大桥（水口街道，桥塔总高172米）实现全桥合龙，打通跨东江通道，为项目年内建成通车奠定基础，是“丰”字交通主框架南北轴线的关键节点。",
       "published_at": "2026-10-21",
       "event_date": "2026-10",
-      "fetched_at": "2026-10-26 07:35",
+      "fetched_at": "2026-10-27 07:40",
       "verified_status": "已核验",
       "fate": {
         "kind": "info",
@@ -71,7 +71,7 @@
       "summary": "广东金澜新材料科技有限公司竞得水口街道新民洛塘片区JD134-02-01地块（约115.2亩），金澜新能源高分子材料项目正式落地惠城高新区，总投资规模不低于10.5亿元，将建设全球研发中心、智能制造中心、供应链与结算中心等板块。",
       "published_at": "2026-10-13",
       "event_date": "2026-10",
-      "fetched_at": "2026-10-26 07:35",
+      "fetched_at": "2026-10-27 07:40",
       "verified_status": "已核验",
       "fate": {
         "kind": "info",
@@ -93,7 +93,7 @@
       "summary": "惠城高新区人才安居项目10月22日迎来双节点：下良人才社区正式投用，提供300套精装公寓、可满足约500人居住，直接惠及下良、鹿岗片区20多家企业；荔枝城邻里中心同日封顶，总投资约6.3亿元，规划890套保障性租赁住房并配建约1.12万平方米商业，预计2027年7月竣工交付。",
       "published_at": "2026-10-24",
       "event_date": "2026-10-22",
-      "fetched_at": "2026-10-26 07:35",
+      "fetched_at": "2026-10-27 07:40",
       "verified_status": "待核实",
       "fate": {
         "kind": "info",
@@ -101,6 +101,28 @@
         "objects": "青年人才、园区企业职工",
         "direction": "利好",
         "assumption": "房源与投资额为公开口径，交付以官方进度为准"
+      }
+    },
+    {
+      "title": "第六届粤港澳大湾区文化艺术节10月31日开幕，惠州将承办吉他文化艺术展演",
+      "cat": "fun",
+      "emoji": "🎭",
+      "tier": "较高",
+      "srcLevel": "媒体报道",
+      "live": true,
+      "source": "惠州文明网·惠州日报",
+      "url": "http://hz.wenming.cn/ecjj/202610/t20261014_9379785.htm",
+      "summary": "第六届粤港澳大湾区文化艺术节将于10月31日至11月30日举办，带来75台剧目、148场演出、25项重磅展览，10月31日晚在深圳开幕、大湾区11城地标同步亮灯；惠州将承办第五届粤港澳大湾区吉他文化艺术展演，11月至12月在惠州文化艺术中心举行，市民在家门口即可看演出、参与惠民活动。",
+      "published_at": "2026-10-14",
+      "event_date": "2026-10-31",
+      "fetched_at": "2026-10-27 07:40",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "info",
+        "ident": "fun",
+        "objects": "惠州文化艺术中心与市民观演",
+        "direction": "利好",
+        "assumption": "具体排期与票务以官方及场馆发布为准"
       }
     },
     {
@@ -115,7 +137,7 @@
       "summary": "惠城高新区2026年实施“招商引资攻坚年”，已组建7支招商分队开展全员招商，深化“管委会+国企”协同招商并配套产业基金，力争全年引进产业项目25宗以上、引进投资不少于100亿元，聚焦新能源、智能装备制造等产业链上下游配套。",
       "published_at": "2026-10-21",
       "event_date": "2026",
-      "fetched_at": "2026-10-26 07:35",
+      "fetched_at": "2026-10-27 07:40",
       "verified_status": "已核验",
       "fate": {
         "kind": "info",
@@ -137,7 +159,7 @@
       "summary": "2026年在粤工作院士惠州休养考察活动近日举行，由省委组织部、省科协和惠州市委、市政府主办，惠城区委、区政府等承办。院士们实地走访、交流研讨，为厚植生态优势、盘活文化资源、做强现代产业问诊把脉，并推动院士资源与本地产业需求对接。",
       "published_at": "2026-10-25",
       "event_date": "2026-10-22",
-      "fetched_at": "2026-10-26 07:35",
+      "fetched_at": "2026-10-27 07:40",
       "verified_status": "待核实",
       "fate": {
         "kind": "info",
@@ -148,91 +170,69 @@
       }
     },
     {
-      "title": "水口人民路夜市：营业到凌晨3点的高人气大夜市",
-      "cat": "food",
-      "emoji": "🌙",
+      "title": "华贸天地“寻梦灵感集”市集本周末开市，万圣节脱口秀、亲子剧集中登场",
+      "cat": "fun",
+      "emoji": "🎃",
+      "tier": "中",
+      "srcLevel": "媒体报道",
+      "live": true,
+      "source": "惠州本地宝·猫眼演出",
+      "url": "https://m.huizhou.bendibao.com/xiuxian/113471.shtm",
+      "summary": "华贸天地10月周更市集进入第三周，“寻梦灵感集”10月30日至11月1日开市、主打魔法与希望主题；10月31日万圣前夜VOX LIVEHOUSE有复古金曲派对，隆生广场打动喜剧脱口秀连演至10月31日，11月1日惠州文化艺术中心上演BBC正版授权亲子舞台剧《布鲁伊的大宝藏》，周末夜间与亲子活动选择丰富。",
+      "published_at": "2026-09-30",
+      "event_date": "2026-10-30",
+      "fetched_at": "2026-10-27 07:40",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "life",
+        "ident": "fun",
+        "objects": "华贸天地、隆生广场、文化艺术中心客流",
+        "direction": "利好",
+        "assumption": "活动时间以各主办方现场安排为准"
+      }
+    },
+    {
+      "title": "惠城横沥墨园村晚稻观摩：18个新品种同台，5个品种确定为下阶段主推",
+      "cat": "city",
+      "emoji": "🌾",
       "tier": "中",
       "srcLevel": "媒体报道",
       "live": false,
-      "source": "携程旅行公开笔记",
-      "url": "https://m.ctrip.com/webapp/you/community/detail?articleId=384363680",
-      "summary": "水口人民路美食街是惠州本地人气很高的大型夜市，营业时间16:00到凌晨3:00，傍晚6点后人气最旺，烟火气拉满。",
-      "published_at": "2026-10-03",
-      "event_date": "2026-10",
-      "fetched_at": "2026-10-26 07:35",
-      "verified_status": "待核实",
-      "fate": {
-        "kind": "life",
-        "ident": "food",
-        "objects": "食客",
-        "direction": "中性",
-        "assumption": "人气为公开打卡热度合理估算"
-      }
-    },
-    {
-      "title": "32名邻里守望员结对帮扶困难老人，汝湖镇织密社区关爱网络",
-      "cat": "gossip",
-      "emoji": "❤️",
-      "tier": "中",
-      "srcLevel": "官方发布",
-      "live": false,
-      "source": "惠城区政府·政务要闻",
-      "url": "https://www.hcq.gov.cn/zwgk/zwyw/content/post_5875652.html",
-      "summary": "自今年3月实施以来，汝湖镇社工站组建起32人邻里守望员队伍，与辖区特殊困难老年人结对帮扶，常态化上门探访、日常问候、风险排查，持续关注独居、高龄、困难长者生活状况，织密社区老年人关爱网络。",
-      "published_at": "2026-10-21",
-      "event_date": "2026-10",
-      "fetched_at": "2026-10-26 07:35",
-      "verified_status": "已核验",
-      "fate": {
-        "kind": "life",
-        "ident": "gossip",
-        "objects": "独居、高龄长者",
-        "direction": "中性",
-        "assumption": "队伍规模为官方公开口径"
-      }
-    },
-    {
-      "title": "河南岸街道开展音乐疗愈小组活动，助力残障人士身心康复与社会融入",
-      "cat": "livelihood",
-      "emoji": "🎵",
-      "tier": "中",
-      "srcLevel": "官方发布",
-      "live": false,
-      "source": "惠城区政府·镇办动态",
-      "url": "http://www.hcq.gov.cn/zwgk/zbdt/index.html",
-      "summary": "河南岸街道开展音乐疗愈小组活动，以音乐为纽带助力残障人士身心康复与社会融入，暖心的基层服务让更多人被看见、被陪伴。",
-      "published_at": "2026-10-21",
-      "event_date": "2026-10-21",
-      "fetched_at": "2026-10-26 07:35",
-      "verified_status": "已核验",
-      "fate": {
-        "kind": "life",
-        "ident": "livelihood",
-        "objects": "残障人士",
-        "direction": "中性",
-        "assumption": "活动信息以街道发布为准"
-      }
-    },
-    {
-      "title": "惠城区“巧手妈妈·匠心工坊”手工艺技能公益培训在江北举行",
-      "cat": "livelihood",
-      "emoji": "🧵",
-      "tier": "中",
-      "srcLevel": "官方发布",
-      "live": false,
-      "source": "惠城区政府·镇办动态",
-      "url": "http://www.hcq.gov.cn/zwgk/zbdt/index.html",
-      "summary": "惠城区“巧手妈妈·匠心工坊”手工艺技能公益培训在江北开班，为宝妈们提供一个学技能、交朋友、增收的新窗口。",
-      "published_at": "2026-10-22",
+      "source": "南方+",
+      "url": "https://www.nfnews.com/content/n614JKBd3P.html",
+      "summary": "10月22日，惠城区农水局联合省农科院在横沥镇墨园村水稻核心示范区举办晚造水稻优新品种观摩与技术培训，60余名农技人员、企业、合作社和种粮大户参加；现场18个参展品种（9个常规稻、9个杂优稻）长势均衡，玖里香、华航香银针、香禾优细丝苗、贵两优金香、粳香优莉丝5个品种因高产稳产、米质优良、抗性强被确定为下一阶段主推品种。",
+      "published_at": "2026-10-26",
       "event_date": "2026-10-22",
-      "fetched_at": "2026-10-26 07:35",
+      "fetched_at": "2026-10-27 07:40",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "info",
+        "ident": "city",
+        "objects": "横沥、芦洲种粮大户与丝苗米产业",
+        "direction": "利好",
+        "assumption": "品种推广面积与增产效果以后续实际种植为准"
+      }
+    },
+    {
+      "title": "首届大湾区收藏艺术品联展11月5日闭幕，市博物馆120件民间珍藏免费看",
+      "cat": "fun",
+      "emoji": "🏺",
+      "tier": "中",
+      "srcLevel": "官方发布",
+      "live": true,
+      "source": "惠州市文化广电旅游体育局",
+      "url": "http://wgltj.huizhou.gov.cn/wsfw/ggwh/ggwhdt/content/post_5850689.html",
+      "summary": "“鹅城雅集·湾区藏晖”首届大湾区收藏艺术品联展正在惠州市博物馆二楼展厅展出，汇集惠、广、深、莞、肇五市120件民间珍藏，含4件首次亮相的官窑瓷器与岭南乡贤书画，免费免预约、逢周一闭馆，展期至11月5日、临近闭幕，适合文博爱好者周末前往。",
+      "published_at": "2026-09-11",
+      "event_date": "2026-11-05",
+      "fetched_at": "2026-10-27 07:40",
       "verified_status": "已核验",
       "fate": {
         "kind": "life",
-        "ident": "livelihood",
-        "objects": "宝妈群体",
-        "direction": "中性",
-        "assumption": "培训信息以主办方发布为准"
+        "ident": "fun",
+        "objects": "市博物馆与文博观展人群",
+        "direction": "利好",
+        "assumption": "开放时间以场馆公告为准"
       }
     }
   ]
