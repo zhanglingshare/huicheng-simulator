@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
   "region": "huicheng",
-  "updated": "2026-10-27 07:40",
-  "fetched_at": "2026-10-27 07:40",
+  "updated": "2026-10-28 07:31",
+  "fetched_at": "2026-10-28 07:31",
   "frequency": "每日更新一次",
   "count": 10,
   "stats": [
@@ -170,28 +170,6 @@
       }
     },
     {
-      "title": "华贸天地“寻梦灵感集”市集本周末开市，万圣节脱口秀、亲子剧集中登场",
-      "cat": "fun",
-      "emoji": "🎃",
-      "tier": "中",
-      "srcLevel": "媒体报道",
-      "live": true,
-      "source": "惠州本地宝·猫眼演出",
-      "url": "https://m.huizhou.bendibao.com/xiuxian/113471.shtm",
-      "summary": "华贸天地10月周更市集进入第三周，“寻梦灵感集”10月30日至11月1日开市、主打魔法与希望主题；10月31日万圣前夜VOX LIVEHOUSE有复古金曲派对，隆生广场打动喜剧脱口秀连演至10月31日，11月1日惠州文化艺术中心上演BBC正版授权亲子舞台剧《布鲁伊的大宝藏》，周末夜间与亲子活动选择丰富。",
-      "published_at": "2026-09-30",
-      "event_date": "2026-10-30",
-      "fetched_at": "2026-10-27 07:40",
-      "verified_status": "已核验",
-      "fate": {
-        "kind": "life",
-        "ident": "fun",
-        "objects": "华贸天地、隆生广场、文化艺术中心客流",
-        "direction": "利好",
-        "assumption": "活动时间以各主办方现场安排为准"
-      }
-    },
-    {
       "title": "惠城横沥墨园村晚稻观摩：18个新品种同台，5个品种确定为下阶段主推",
       "cat": "city",
       "emoji": "🌾",
@@ -214,25 +192,47 @@
       }
     },
     {
-      "title": "首届大湾区收藏艺术品联展11月5日闭幕，市博物馆120件民间珍藏免费看",
-      "cat": "fun",
-      "emoji": "🏺",
+      "title": "2026年惠城区养老护理员培训班开班，近80名学员在江北参训补齐养老服务人才短板",
+      "cat": "livelihood",
+      "emoji": "👵",
       "tier": "中",
-      "srcLevel": "官方发布",
-      "live": true,
-      "source": "惠州市文化广电旅游体育局",
-      "url": "http://wgltj.huizhou.gov.cn/wsfw/ggwh/ggwhdt/content/post_5850689.html",
-      "summary": "“鹅城雅集·湾区藏晖”首届大湾区收藏艺术品联展正在惠州市博物馆二楼展厅展出，汇集惠、广、深、莞、肇五市120件民间珍藏，含4件首次亮相的官窑瓷器与岭南乡贤书画，免费免预约、逢周一闭馆，展期至11月5日、临近闭幕，适合文博爱好者周末前往。",
-      "published_at": "2026-09-11",
-      "event_date": "2026-11-05",
-      "fetched_at": "2026-10-27 07:40",
+      "srcLevel": "媒体报道",
+      "live": false,
+      "source": "惠城发布",
+      "url": "http://m.toutiao.com/group/7701312621454049826/",
+      "summary": "10月27日上午，2026年惠城区养老护理员培训班开班暨理论培训在江北街道党群服务中心举办，近80名学员参训，围绕养老照护专业技能开展培训，应对人口老龄化、补齐养老服务人才短板。",
+      "published_at": "2026-10-27",
+      "event_date": "2026-10-27",
+      "fetched_at": "2026-10-28 07:31",
       "verified_status": "已核验",
       "fate": {
-        "kind": "life",
-        "ident": "fun",
-        "objects": "市博物馆与文博观展人群",
+        "kind": "info",
+        "ident": "livelihood",
+        "objects": "惠城区养老服务从业人员",
         "direction": "利好",
-        "assumption": "开放时间以场馆公告为准"
+        "assumption": "培训规模与课程以官方发布为准"
+      }
+    },
+    {
+      "title": "惠州启动农村地区免费流感疫苗接种：65岁以上老人、义务教育阶段学生可免费接种",
+      "cat": "livelihood",
+      "emoji": "💉",
+      "tier": "中",
+      "srcLevel": "媒体报道",
+      "live": false,
+      "source": "南方都市报",
+      "url": "http://m.toutiao.com/group/7701240529019617846/",
+      "summary": "惠州市疾控中心消息，2026-2027流感季已启动农村地区免费流感疫苗接种，65周岁及以上老年人、义务教育阶段中小学生两类人群可享1剂次三价流感裂解疫苗免费接种，各县区接种门诊名单已公布。",
+      "published_at": "2026-10-27",
+      "event_date": "2026-10-27",
+      "fetched_at": "2026-10-28 07:31",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "info",
+        "ident": "livelihood",
+        "objects": "农村老人与中小学生",
+        "direction": "利好",
+        "assumption": "接种安排以疾控部门和门诊公告为准"
       }
     }
   ]
