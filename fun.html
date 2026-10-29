@@ -196,7 +196,7 @@ function refresh(){const items=filtered();if(!items.includes(state.selected))sta
 function renderPulses(){const el=$("storyList");el.replaceChildren();(state.data.pulse||[]).slice(0,3).forEach(txt=>{const p=document.createElement("p");p.className="story";p.textContent=txt;el.appendChild(p);});if(!el.children.length){el.innerHTML='<p class="story">暂无可用的城市生活线索。</p>';}}
 function renderMeta(){const d=state.data;$("sumCount").textContent=d.spots.length;$("sumHot").textContent=d.spots.filter(s=>s.level==="高").length;$("sumPulse").textContent=(d.pulse||[]).length;$("updateTime").textContent=d.updated?"更新 "+d.updated.slice(5):"每日更新";$("sourceNote").textContent=(d.note||"去处热度来自公开打卡分档，非实时人数统计。")+(d.updated?" · 最近刷新 "+d.updated:"");}
 function normalize(d){if(!d||!Array.isArray(d.spots)||!d.spots.length)return BASE_SNAPSHOT;return {updated:d.updated||"",note:d.note||BASE_SNAPSHOT.note,pulse:Array.isArray(d.pulse)?d.pulse:[],spots:d.spots.map(x=>({n:String(x.n||"未命名"),c:String(x.c||"show"),tag:String(x.tag||""),why:String(x.why||""),d:String(x.d||""),watch:String(x.watch||""),hot:Math.max(0,Number(x.hot||0)),level:String(x.level||"中")})),season:d.season||""};}
-function applyData(d){state.data=normalize(d);state.selected=sorted()[0]||null;renderMeta();renderFilters();refresh();renderPulses();}
+function applyData(d){state.data=normalize(d);state.selected=sorted()[0]||null;renderMeta();renderFilters();renderLensControls();refresh();renderPulses();renderScenario();renderGroupResult();}
 function setMode(k){state.display=k;$("mapToggle").classList.toggle("on",k==="map");$("listToggle").classList.toggle("on",k==="list");$("mapToggle").setAttribute("aria-pressed",String(k==="map"));$("listToggle").setAttribute("aria-pressed",String(k==="list"));$("mapBody").classList.toggle("list-hidden",k!=="map");$("listMode").classList.toggle("show",k==="list");}
 function randomPick(){if(state.isRolling)return;const list=filtered();if(!list.length){toast("这个条件没有去处，换个分类吧");return;}state.isRolling=true;const btn=$("rollBtn");btn.disabled=true;btn.textContent="✦ 正在探索城市…";let i=0;let temp;const duration=window.matchMedia("(prefers-reduced-motion:reduce)").matches?0:760;const tick=setInterval(()=>{temp=list[Math.floor(Math.random()*list.length)];selectSpot(temp);i++;if(i>=7)clearInterval(tick);},95);setTimeout(()=>{clearInterval(tick);const picked=list[Math.floor(Math.random()*list.length)];selectSpot(picked,true);btn.disabled=false;btn.textContent="🎲 再摇一站 ↗";state.isRolling=false;},duration);}
 function invite(){const s=state.selected;if(!s)return;const message="周末要不要一起去「"+s.n+"」？听说这里"+(s.why||"值得逛逛")+"。这是从惠城产业风洞公开去处里挑的，活动和营业时间我们出发前再确认一下～";if(navigator.clipboard?.writeText){navigator.clipboard.writeText(message).then(()=>toast("已复制邀约文案，发给朋友吧 ✨")).catch(()=>fallbackCopy(message));}else fallbackCopy(message);}
@@ -204,6 +204,142 @@ function fallbackCopy(txt){const ta=document.createElement("textarea");ta.value=
 function renderPlan(){const p=$("myPlan");if(!state.wish.size){p.hidden=true;return;}p.hidden=false;$("planCount").textContent=state.wish.size+"处";const list=$("myPlanItems");list.replaceChildren();state.wish.forEach(name=>{const span=document.createElement("span");span.textContent=name;list.appendChild(span);});}
 function save(){const s=state.selected;if(!s)return;const had=state.wish.has(s.n);had?state.wish.delete(s.n):state.wish.add(s.n);$("saveBtn").textContent=state.wish.has(s.n)?"✓ 已加入清单":"☆ 加入清单";renderPlan();toast(had?"已从本次清单中移除":"已加入本次探索清单（仅保留在当前页面）");}
 function sharePlan(){if(!state.wish.size){toast("先选几个去处吧");return;}const message="我在惠城产业风洞挑了这几个去处："+Array.from(state.wish).join("、")+"。要不要一起去？我们出发前再确认营业时间和活动安排～";if(navigator.clipboard?.writeText){navigator.clipboard.writeText(message).then(()=>toast("已复制今晚清单 ✨")).catch(()=>fallbackCopy(message));}else fallbackCopy(message);}
+
+/* ===== 城市选择实验：只改变用户偏好排序，不改变实际热度数据 ===== */
+function renderLensControls(){
+ const roles=$("personaButtons");roles.replaceChildren();
+ Object.entries(PERSONAS).forEach(([key,p])=>{
+   const b=document.createElement("button");b.type="button";b.textContent=p.icon+" "+p.label;
+   b.setAttribute("aria-pressed",String(state.role===key));
+   b.addEventListener("click",()=>{state.role=key;renderLensControls();refresh();renderScenario();renderGroupResult();});
+   roles.appendChild(b);
+ });
+ const times=$("timeButtons");times.replaceChildren();
+ Object.entries(TIMES).forEach(([key,t])=>{
+   const b=document.createElement("button");b.type="button";b.textContent=t.label;
+   b.setAttribute("aria-pressed",String(state.time===key));
+   b.addEventListener("click",()=>{state.time=key;renderLensControls();refresh();renderScenario();renderGroupResult();});
+   times.appendChild(b);
+ });
+ const interventions=$("interventionOptions");interventions.replaceChildren();
+ Object.entries(CHANGES).forEach(([key,ch])=>{
+   const b=document.createElement("button");b.type="button";
+   b.setAttribute("aria-pressed",String(state.intervention===key));
+   const name=document.createElement("span");name.textContent=(key==="none"?"↺ ":"✦ ")+ch.label;
+   const tip=document.createElement("small");tip.textContent=key==="none"?"恢复原来偏好排序":"一种可讨论的假设";
+   b.appendChild(name);b.appendChild(tip);
+   b.addEventListener("click",()=>{state.intervention=key;renderLensControls();refresh();renderScenario();renderGroupResult();});
+   interventions.appendChild(b);
+ });
+ $("cityLens").dataset.active=String(state.role!=="any");
+}
+function renderLensNarrative(){
+ const persona=PERSONAS[state.role]||PERSONAS.any,tm=TIMES[state.time]||TIMES["20"],shift=CHANGES[state.intervention]||CHANGES.none;
+ const label=persona.label+" · "+tm.label+(state.intervention==="none"?"":" · "+shift.label);
+ $("mapScenarioLabel").textContent="✦ "+label;
+ const spot=state.selected;
+ if(!spot){$("focusLens").textContent="换个身份、时段或城市条件，看看地图亮起哪些去处。";return;}
+ $("focusLens").textContent="✦ "+label+"：此地点在当前情景的匹配顺序发生变化，但公开讨论热度仍按原数据展示。"+(state.time==="00"?" 深夜开放状态未知，请提前核实。":"");
+}
+function renderScenario(){
+ const baseline={role:state.role,time:state.time,intervention:"none"};
+ const before=state.data.spots.slice().sort((a,b)=>fitScore(b,baseline)-fitScore(a,baseline))[0];
+ const after=sorted()[0];
+ const ch=CHANGES[state.intervention]||CHANGES.none;
+ $("scenarioHeadline").textContent=state.intervention==="none"?"当前假设 · 哪一站更受偏好？":"如果「"+ch.label+"」";
+ const route=$("scenarioRoute");route.replaceChildren();
+ [[before?.n||"暂无去处",false],["→",true],[after?.n||"暂无去处",false]].forEach(([name,isArrow])=>{
+  const node=document.createElement(isArrow?"b":"span");node.textContent=name;route.appendChild(node);
+ });
+ const s=state.intervention==="none"?"你可以调整一项城市条件，看看推荐次序是否改变。":ch.tip+"。"+(before?.n===after?.n?"当前首选没有改变，仍需检查其他选择与现实约束。":"首选发生变化，但不代表现实参与人数会增加。");
+ $("scenarioExplain").textContent=s+" 夜间营业、通勤时间和具体费用尚无可核实的完整数据。";
+}
+/* ===== 不需要后端的接力组队：邀请链接与匿名回复链接 ===== */
+const validRole=r=>Object.hasOwn(PERSONAS,r), validTime=t=>Object.hasOwn(TIMES,String(t));
+function makeCode(){return Math.random().toString(36).slice(2,11).toUpperCase();}
+function copySafe(text,done){
+ if(navigator.clipboard?.writeText)navigator.clipboard.writeText(text).then(()=>toast(done)).catch(()=>fallbackCopy(text));
+ else fallbackCopy(text);
+}
+function makeShareUrl(key,payload){
+ const u=new URL("fun.html",location.href);u.search="";
+ u.searchParams.set(key,JSON.stringify(payload));return u.href;
+}
+function loadGroupInvite(){
+ const raw=new URL(location.href).searchParams.get("hcjoin");
+ if(!raw)return;
+ try{
+  const p=JSON.parse(raw);
+  if(p.v!==1||typeof p.g!=="string"||!/^[A-Z0-9]{5,16}$/.test(p.g)||!validRole(p.role)||!validTime(p.time))throw new Error("Invalid invitation");
+  state.groupId=p.g;state.groupGuest=true;state.hostPref={role:p.role,time:String(p.time),intervention:"none"};
+  $("inviteCard").hidden=false;
+  $("inviteTitle").textContent="你收到了一场「惠城去哪玩」组队邀请";
+  $("inviteLink").value="邀请人："+PERSONAS[p.role].label+" · "+TIMES[p.time].label+"。请选择自己的身份与时段，然后复制回复发回去。";
+  $("inviteLink").readOnly=true;
+  $("copyInviteBtn").hidden=true;
+  $("replyTitle").textContent="邀请人需要你的一个选择";
+  $("groupLimit").textContent="这是离线接力邀请：你选好偏好后点击「复制我的回复」，将回复链接发回邀请人。不会自动同步，也不会收集身份或定位信息。";
+  $("groupLab").classList.add("guest-mode");
+ }catch(e){toast("此邀请链接无法识别，请让朋友重新分享。");}
+}
+function createGroup(){
+ const g=makeCode();state.groupId=g;state.groupGuest=false;state.hostPref=null;state.friends=[];
+ const invitation=makeShareUrl("hcjoin",{v:1,g,role:state.role,time:state.time});
+ $("inviteCard").hidden=false;
+ $("inviteTitle").textContent="已创建一次接力组队，复制邀请链接";
+ $("inviteLink").value=invitation;$("copyInviteBtn").hidden=false;
+ $("groupLimit").textContent="朋友打开邀请链接选择偏好，再通过「复制我的回复」把回复链接发回你；将链接粘贴到下方输入框才会参与本地汇总。没有服务器自动投票或同步。";
+ renderGroupResult();copySafe(invitation,"邀请链接已复制，发给朋友吧 ✨");
+}
+function sendReply(){
+ if(!state.groupId){toast("请先发起组队，或打开朋友发给你的邀请链接");return;}
+ if(!state.replyId)state.replyId=makeCode();
+ const response=makeShareUrl("hcreply",{v:1,g:state.groupId,id:state.replyId,role:state.role,time:state.time});
+ copySafe(response,"已复制匿名回复链接，发回给组队发起人。");
+}
+function addFriendReply(){
+ if(!state.groupId){toast("先发起组队，才能汇总伙伴选择");return;}
+ if(state.groupGuest){toast("请把选择发给邀请人，由发起人汇总");return;}
+ const raw=$("friendReply").value.trim();if(!raw){toast("先粘贴朋友的回复链接");return;}
+ try{
+  let u;try{u=new URL(raw,location.href);}catch(e){throw new Error("url");}
+  const encoded=u.searchParams.get("hcreply");if(!encoded)throw new Error("reply");
+  const p=JSON.parse(encoded);
+  if(p.v!==1||p.g!==state.groupId||!/^[A-Z0-9]{5,16}$/.test(p.id)||!validRole(p.role)||!validTime(p.time))throw new Error("fields");
+  if(state.friends.some(x=>x.id===p.id)){toast("这个伙伴的回复已经加入");return;}
+  if(state.friends.length>=8){toast("单次体验最多汇总8位伙伴");return;}
+  state.friends.push({id:p.id,role:p.role,time:String(p.time),intervention:"none"});
+  $("friendReply").value="";renderGroupResult();toast("已加入一位伙伴的选择");
+ }catch(e){toast("回复链接无效，或不是本次组队。请检查后重试。");}
+}
+function renderGroupResult(){
+ const host=state.groupGuest?state.hostPref:{role:state.role,time:state.time,intervention:"none"};
+ const profiles=[host,...state.friends];
+ if(state.groupGuest)profiles.push({role:state.role,time:state.time,intervention:"none"});
+ const enough=!!state.groupId&&(state.groupGuest||state.friends.length>0);
+ const people=$("groupParticipants");people.replaceChildren();
+ if(state.groupId){
+  profiles.forEach((p,i)=>{const tag=document.createElement("span");tag.textContent=(i===0?"发起人":state.groupGuest&&i===profiles.length-1?"你":"伙伴"+i)+" · "+PERSONAS[p.role].label+" · "+TIMES[p.time].label;people.appendChild(tag);});
+ }
+ $("groupResult").hidden=!enough;
+ if(!enough)return;
+ const rec=state.data.spots.slice().sort((a,b)=>{
+  const aScore=profiles.reduce((n,p)=>n+fitScore(a,p),0)/profiles.length;
+  const bScore=profiles.reduce((n,p)=>n+fitScore(b,p),0)/profiles.length;
+  return bScore-aScore;
+ }).slice(0,3);
+ $("groupResultTitle").textContent=profiles.length+"人偏好 · 这三站值得共同讨论";
+ const el=$("groupRecommendations");el.replaceChildren();
+ rec.forEach((s,i)=>{const item=document.createElement("li");item.textContent=String(i+1)+". "+s.n+" · "+(s.tag||"公开去处")+"（仅按参与者的选择排序）";el.appendChild(item);});
+}
+$("groupJump").addEventListener("click",()=>{$("groupLab").scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});});
+$("createGroupBtn").addEventListener("click",createGroup);
+$("copyInviteBtn").addEventListener("click",()=>{if(state.groupId)copySafe($("inviteLink").value,"邀请链接已复制");});
+$("shareVoteBtn").addEventListener("click",sendReply);
+$("addReplyBtn").addEventListener("click",addFriendReply);
+$("friendReply").addEventListener("keydown",e=>{if(e.key==="Enter")addFriendReply();});
+loadGroupInvite();
+
 $("spotSearch").addEventListener("input",e=>{state.search=e.target.value.trim().toLowerCase();refresh();});$("rollBtn").addEventListener("click",randomPick);$("mapRollBtn").addEventListener("click",randomPick);$("inviteBtn").addEventListener("click",invite);$("saveBtn").addEventListener("click",save);$("planShare").addEventListener("click",sharePlan);$("mapToggle").addEventListener("click",()=>setMode("map"));$("listToggle").addEventListener("click",()=>setMode("list"));
 applyData(BASE_SNAPSHOT);renderPlan();
 if(location.protocol!=="file:"){fetch("life.json?ts="+Date.now(),{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("No life.json");return r.json();}).then(applyData).catch(()=>{toast("暂未读取到最新数据，正在显示 10/29 示例快照");});}
