@@ -100,7 +100,7 @@ async function run(){
  elements.kgDate.value='0';
  elements.kgDate.fire('input',{target:elements.kgDate});
  assert.equal(elements.kgNodeCount.textContent,'1','Earlier date keeps only already-published high-tech-zone evidence');
- assert(elements.kgDetailTitle.textContent.includes('找工作'),'Hidden selected fact safely resets to starting question');
+ assert.equal(elements.kgDetailTitle.textContent,'我想找一份好工作','Hidden selected fact safely resets to starting question');
  controls['[data-persona]'][3].fire('click');
  assert.equal(elements.kgNodes.children.length,6,'Whole-city view starts with one question + five directions');
  controls['[data-grade]'][1].fire('click');
