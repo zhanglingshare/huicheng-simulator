@@ -139,6 +139,9 @@
   #pop .fact{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#f7f9fc;border:1px solid #f1f5f9;border-radius:var(--r-sm);padding:8px 12px;font-size:11.5px;transition:.15s}
   #pop .fact:hover{background:#f2f6fb}
   #pop .fact b{font-size:11.5px;font-weight:800;text-align:right}
+  #pop .kpi{display:flex;align-items:center;gap:9px;background:#f7f9fc;border:1px solid #f1f5f9;border-radius:var(--r-sm);padding:8px 12px;font-size:11.5px;font-weight:700;color:#334155;transition:.15s}
+  #pop .kpi:hover{background:#f2f6fb;border-color:#e6ecf4}
+  #pop .kpi .kpi-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0}
   #pop .src{font-size:10.5px;color:var(--sub);line-height:1.7;border-top:1px solid #f1f5f9;padding-top:12px;margin-top:4px}
   #pop .src .src-card{display:block;background:#f7f9fc;border:1px solid #eef2f7;border-radius:var(--r-sm);padding:8px 11px;margin-bottom:7px;word-break:break-all;transition:.15s}
   #pop .src .src-card:hover{border-color:#cdd9ea;background:#f2f6fb}
@@ -705,8 +708,12 @@ function showNodePop(n){
   const relEdges=edges.filter(e=>
     (e.source_node_id===n.node_id||e.target_node_id===n.node_id));
   let html='<p>'+n.description+'</p>'+gradeChip(n.evidence_grade);
-  if(n.stat) html+='<div class="facts"><div class="fact"><span>关键指标</span><b style="font-size:11px">'+n.stat+'</b></div></div>';
-  html+='<div class="facts"><div style="font-size:11px;font-weight:800;color:#475569">相连关系（'+relEdges.length+'）</div>';
+  if(n.stat){
+    const kpis=n.stat.split('·').filter(Boolean);
+    html+='<div class="facts"><div class="sec-t">关键指标（'+kpis.length+'）</div>'+
+      kpis.map(k=>'<div class="kpi"><span class="kpi-dot"></span>'+k+'</div>').join("")+'</div>';
+  }
+  html+='<div class="facts"><div class="sec-t">相连关系（'+relEdges.length+'）</div>';
   relEdges.forEach(e=>{
     const other=e.source_node_id===n.node_id?e.target_node_id:e.source_node_id;
     const on=nodes.find(x=>x.node_id===other);
