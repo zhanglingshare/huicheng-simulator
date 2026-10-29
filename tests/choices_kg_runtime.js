@@ -4,7 +4,7 @@
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const root=path.join(__dirname,'..');
 class FakeElement{
- constructor(tag='div'){this.tagName=tag;this.listeners={};this.children=[];this.attrs={};this.dataset={};this.style={};this.hidden=false;this.clientWidth=850;this.clientHeight=630;this.value='';this._innerHTML='';this.textContent='';this.firstChild={textContent:''};}
+ constructor(tag='div'){this.tagName=tag;this.listeners={};this.children=[];this.attrs={};this.dataset={};this.style={};this.hidden=false;this.clientWidth=850;this.clientHeight=630;this.value='';this._innerHTML='';this.textContent='';this.firstChild={textContent:''};this.classList={add(){},remove(){},toggle(){}};}
  setAttribute(key,val){this.attrs[key]=String(val);if(key.startsWith('data-'))this.dataset[key.slice(5).replace(/-([a-z])/g,(_,c)=>c.toUpperCase())]=String(val)}
  getAttribute(key){return this.attrs[key]??null}
  addEventListener(name,cb){(this.listeners[name]??=[]).push(cb)}
