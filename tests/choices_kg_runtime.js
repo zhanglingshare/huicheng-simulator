@@ -88,9 +88,11 @@ async function run(){
  assert.equal(elements.kgNodeCount.textContent,'0','No fabricated subjects appear initially');
  assert.equal(elements.kgMobileNodes.children.length,4,'Mobile node buttons match graph');
  clickNode('p:0');
- assert(elements.kgNodes.children.length>4,'Choosing a path expands real subjects');
- assert(+elements.kgNodeCount.textContent>=3,'Existing source-backed entities display');
- assert(elements.kgEdges.children.some(e=>e.dataset.edge.startsWith('fact:')),'Real fact edges appear');
+ assert.equal(elements.kgNodes.children.length,5,'First path click reveals just one subject');
+ assert.equal(elements.kgNodeCount.textContent,'1','Single-step first expansion');
+ elements.kgExpand.fire('click');
+ assert.equal(elements.kgNodeCount.textContent,'2','One more subject appears on next expansion');
+ assert(elements.kgEdges.children.some(e=>e.dataset.edge.startsWith('fact:')),'Real fact edges appear when both endpoints are visible');
  assert(elements.kgMobileNodes.children.length===elements.kgNodes.children.length,'Mobile rail updates as nodes grow');
  const fact=elements.kgEdges.children.find(e=>e.dataset.edge.startsWith('fact:'));
  clickEdge(fact.dataset.edge);
