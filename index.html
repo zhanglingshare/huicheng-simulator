@@ -133,6 +133,9 @@ body.moff #net .heart .core{transform:none}
 .mini-node:hover .tip{opacity:1}
 .stage-foot{padding:8px 16px 12px;font-size:11px;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);display:flex;gap:14px;flex-wrap:wrap}
 .stage-foot b{color:var(--ink2)}
+.stage-foot .holo-entry{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border:1px solid rgba(56,189,248,.28);border-radius:999px;color:var(--neon);background:rgba(56,189,248,.08);font-size:11px;font-weight:800;text-decoration:none;white-space:nowrap;transition:background .16s,border-color .16s,transform .16s}
+.stage-foot .holo-entry:hover{background:rgba(56,189,248,.16);border-color:rgba(56,189,248,.55);transform:translateY(-1px)}
+.stage-foot .holo-entry:focus-visible{outline:3px solid rgba(56,189,248,.45);outline-offset:2px}
 
 /* 右侧事件播报 */
 .side{display:flex;flex-direction:column;gap:10px;min-height:0}
@@ -348,6 +351,7 @@ body.moff #net .heart .core{transform:none}
         <span><b>高新区规上工业</b> 632.7亿 · 占全区约67%（2025）</span>
         <span><b>固定资产投资</b> 2025年 −37.1% · 调整期</span>
         <span><b>完整 26 主体</b>见 network</span>
+        <a class="holo-entry" href="holo.html" aria-label="打开惠城全息关系版">打开全息关系版 ↗</a>
       </div>
       </div>
 
@@ -405,6 +409,9 @@ body.moff #net .heart .core{transform:none}
     </a>
     <a href="choices.html">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20l4-10 4 6 4-8 4 4"/></svg></span>五条路
+    </a>
+    <a href="holo.html" title="打开全息关系版">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M10.8 7.2 6.2 15.8M13.2 7.2l4.6 8.6M7.5 18h9"/></svg></span>全息关系
     </a>
     <a href="windtunnel.html">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v3m0 12v3m9-9h-3M6 12H3m14.5-6.5l-2 2m-7 7l-2 2m11 0l-2-2m-7-7l-2-2"/><circle cx="12" cy="12" r="3"/></svg></span>风洞
