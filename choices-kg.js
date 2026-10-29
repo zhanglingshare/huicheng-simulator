@@ -30,7 +30,10 @@ function focusDiagram(){
  const root=edge?edge.to:selected;
  const center=visible.find(x=>x.id===root)||visible[0];
  const neighbors=links.filter(x=>x.from===center.id||x.to===center.id)
-  .sort((a,b)=>Number(b.type==="fact")-Number(a.type==="fact"))
+  .sort((a,b)=>{
+   const other=x=>visible.find(n=>n.id===(x.from===center.id?x.to:x.from));
+   return Number(b.type==="fact")-Number(a.type==="fact")||Number(other(b)?.type==="entity")-Number(other(a)?.type==="entity");
+  })
   .map(e=>visible.find(n=>n.id===(e.from===center.id?e.to:e.from))).filter(Boolean);
  const chosen=[];for(const n of neighbors){if(!chosen.some(x=>x.id===n.id))chosen.push(n);if(chosen.length===2)break;}
  if(edge&&center.id!==edge.from&&!chosen.some(x=>x.id===edge.from)){
@@ -43,7 +46,7 @@ function focusDiagram(){
 }
 function say(msg){$("kgToast").textContent=msg;$("kgToast").hidden=false;clearTimeout(say.timer);say.timer=setTimeout(()=>$("kgToast").hidden=true,2300);}
 function hint(msg){$("kgHint").textContent=msg;$("kgHint").classList.add("show");clearTimeout(hint.timer);hint.timer=setTimeout(()=>$("kgHint").classList.remove("show"),3200);}
-function record(){history.push({persona,selected,tab,grade,date,expanded:[...expanded],paths:[...paths]});if(history.length>30)history.shift();}
+function record(){history.push({persona,selected,tab,grade,date,expanded:[...expanded],paths:[...paths],event:activeEvent?.change_id||null});if(history.length>30)history.shift();}
 function hasSource(ids){return (ids||[]).some(id=>{const s=sources.get(id);return s&&String(s.published_at).slice(0,10)<=date;});}
 function permitted(n){return n&&n.evidence_grade!=="C"&&(grade==="AB"||n.evidence_grade!=="B")&&hasSource(n.source_ids);}
 function permittedEdge(e){return e&&e.evidence_grade!=="C"&&(grade==="AB"||e.evidence_grade==="A")&&hasSource(e.source_ids);}
@@ -262,7 +265,7 @@ function inspect(){
  $("kgDetailBody").innerHTML=tab==="what"?explanation():tab==="links"?related():provenance();
  $("kgDetailBody").querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",()=>focus(b.dataset.open)));
  const extra=edge?[]:neighbors(node.id),button=$("kgExpand");
- button.disabled=!!edge||node.type!=="question"&&!extra.length;
+ button.disabled=!!edge||node.type==="question"||!extra.length;
  button.firstChild.textContent=edge?"查看证据来源":node.type==="question"?"请选择一个规划路径":extra.length?"发现下一条关系 · 还有 "+extra.length+" 个":"当前无更多邻居";
  button.querySelector("span").textContent=button.disabled?"✓":"↗";
 }
@@ -274,6 +277,7 @@ function controls(){
  $("kgBack").disabled=!history.length;
 }
 function render(){
+ if(activeEvent&&eventDate(activeEvent)>date)activeEvent=null;
  paint();
  // The selected edge/entity may disappear when evidence tier or source cutoff changes.
  // Never render an inspector for a filtered-out relation.
@@ -305,7 +309,7 @@ function changePersona(key){
 }
 function undo(){
  if(!history.length)return;const prev=history.pop();
- persona=prev.persona;selected=prev.selected;tab=prev.tab;grade=prev.grade;date=prev.date;expanded=new Set(prev.expanded);paths=new Set(prev.paths);render();
+ persona=prev.persona;selected=prev.selected;tab=prev.tab;grade=prev.grade;date=prev.date;expanded=new Set(prev.expanded);paths=new Set(prev.paths);activeEvent=eventRecords.find(x=>x.change_id===prev.event)||null;render();
 }
 function transform(){$("kgViewport").setAttribute("transform","translate("+shift.x+" "+shift.y+") scale("+scale+")");$("kgZoomLabel").textContent=Math.round(scale*100)+"%";}
 function point(event){const m=$("kgSvg").getScreenCTM();if(!m)return null;const p=$("kgSvg").createSVGPoint();p.x=event.clientX;p.y=event.clientY;return p.matrixTransform(m.inverse());}
@@ -337,7 +341,7 @@ svg.addEventListener("keydown",e=>{if(!["Enter"," "].includes(e.key))return;cons
 document.querySelectorAll("[data-persona]").forEach(b=>b.addEventListener("click",()=>changePersona(b.dataset.persona)));
 document.querySelectorAll("[data-grade]").forEach(b=>b.addEventListener("click",()=>{if(grade===b.dataset.grade)return;record();grade=b.dataset.grade;render();hint(grade==="AB"?"B级关系为推断，并不等于已证实":"只显示A级事实边");}));
 document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>{tab=b.dataset.tab;inspect();}));
-$("kgDate").addEventListener("input",e=>{const value=DATES[+e.target.value];if(value===date)return;record();date=value;render();hint("此处按来源发布日期筛选，不等于历史快照");});
+$("kgDate").addEventListener("input",e=>{const value=DATES[+e.target.value];if(value===date)return;record();date=value;if(activeEvent&&eventDate(activeEvent)>date)activeEvent=null;render();hint("依据公开日期筛选；点击事件卡片查看有来源的结构变化");});
 $("kgExpand").addEventListener("click",()=>{record();expand(selected);});
 $("kgBack").addEventListener("click",undo);
 $("kgHome").addEventListener("click",()=>{expanded.clear();paths.clear();history=[];points.clear();seenNodes.clear();seenEdges.clear();selected="q:"+persona;tab="what";activeEvent=null;scale=1;shift={x:0,y:0};render();hint("已重新开始探索");});
@@ -350,7 +354,7 @@ function copied(text){
 }
 function fallback(text){const t=document.createElement("textarea");t.value=text;t.style.position="fixed";t.style.left="-9999px";document.body.appendChild(t);t.select();let ok=false;try{ok=document.execCommand("copy")}catch(e){}t.remove();say(ok?"已复制链接":"请使用浏览器自带分享功能");}
 $("kgShare").addEventListener("click",()=>{
- const url=new URL(location.href);url.hash=new URLSearchParams({persona,selected,grade,date,paths:[...paths].join(","),entities:[...expanded].join(",")}).toString();
+ const url=new URL(location.href);url.hash=new URLSearchParams({persona,selected,grade,date,paths:[...paths].join(","),entities:[...expanded].join(","),event:activeEvent?.change_id||""}).toString();
  copied("惠城规划知识图谱 · 当前探索\n"+url.href+"\n虚线为解释性示意，并非已证明的因果。");
 });
 function shareState(){
@@ -361,8 +365,9 @@ function shareState(){
  paths=new Set(String(p.get("paths")||"").split(",").filter(s=>/^[0-4]$/.test(s)).map(Number));
  expanded=new Set(String(p.get("entities")||"").split(",").filter(id=>nodes.has(id)));
  const wanted=p.get("selected");
- if(wanted==="q:"+persona||/^p:[0-4]$/.test(wanted)||wanted?.startsWith("e:")&&expanded.has(wanted.slice(2)))selected=wanted;
+ if(wanted==="q:"+persona||/^p:[0-4]$/.test(wanted)||wanted?.startsWith("e:")&&expanded.has(wanted.slice(2))||wanted?.startsWith("fact:")&&raw.edges.some(e=>e.edge_id===wanted.slice(5)))selected=wanted;
  else selected="q:"+persona;
+ activeEvent=eventRecords.find(x=>x.change_id===p.get("event")&&eventDate(x)<=date)||null;
 }
 function background(){
  const c=$("kgCity"),w=Math.max(1,c.clientWidth),hh=Math.max(1,c.clientHeight),dpr=Math.min(window.devicePixelRatio||1,2),ctx=c.getContext("2d");c.width=w*dpr;c.height=hh*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
