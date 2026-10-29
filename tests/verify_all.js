@@ -33,6 +33,24 @@ if (!fs.existsSync(holoPath)) {
   else bad('全息关系页缺少返回 index.html 的路径');
 }
 
+
+console.log('── 1c) 共享设计令牌接入 ──');
+const tokenPath = path.join(root, 'assets', 'design-tokens.css');
+if (!fs.existsSync(tokenPath)) {
+  bad('缺少 assets/design-tokens.css');
+} else {
+  const tokenCss = fs.readFileSync(tokenPath, 'utf8');
+  for (const token of ['--hc-space-1', '--hc-radius-md', '--hc-dark-text', '--hc-light-ink', '--hc-focus-ring']) {
+    if (tokenCss.includes(token)) ok('设计令牌存在 ' + token);
+    else bad('设计令牌缺失 ' + token);
+  }
+  for (const page of ['index.html', 'holo.html', 'report.html']) {
+    const html = fs.readFileSync(path.join(root, page), 'utf8');
+    if (html.includes('href="assets/design-tokens.css"')) ok(page + ' 已接入共享设计令牌');
+    else bad(page + ' 未接入共享设计令牌');
+  }
+}
+
 console.log('── 2) 模型口径断言（model.js 同源，SEED=42 N=20000，与页面全站统一口径）──');
 const HT = require(path.join(root, 'model.js'));
 const SEED = 42, N = 20000;
