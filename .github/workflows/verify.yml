@@ -17,3 +17,4 @@ jobs:
         run: |
           node tests/verify_all.js
           node tests/choices_kg_check.js
+          node tests/choices_kg_runtime.js
