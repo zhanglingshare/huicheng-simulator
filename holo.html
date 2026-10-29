@@ -5,16 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>看见惠城 · 全息关系版</title>
 <meta name="description" content="用关系网络看惠城：产业、企业、投资、交通、文旅、人居与区域协作之间的有证据关系及其变化；已证实/推断/假设分层呈现，变化由动画与高亮凸显。">
+<link rel="stylesheet" href="assets/design-tokens.css">
 <style>
   :root{
-    --ink:#0f1c2e; --ink2:#1e2b3a; --sub:#64748b; --faint:#94a3b8;
-    --line:#e7ecf3; --line2:#eef2f7;
-    --blue:#2563eb; --cyan:#0891b2; --teal:#0d9488;
-    --red:#e11d48; --purple:#7c3aed; --green:#16a34a; --amber:#d97706;
+    --ink:var(--hc-light-ink,#0f1c2e); --ink2:var(--hc-light-ink-soft,#1e2b3a); --sub:var(--hc-light-muted,#64748b); --faint:var(--hc-light-faint,#94a3b8);
+    --line:var(--hc-light-line,#e7ecf3); --line2:var(--hc-light-line-soft,#eef2f7);
+    --blue:var(--hc-light-blue,#2563eb); --cyan:var(--hc-light-cyan,#0891b2); --teal:var(--hc-light-teal,#0d9488);
+    --red:var(--hc-light-red,#e11d48); --purple:var(--hc-light-purple,#7c3aed); --green:var(--hc-light-green,#16a34a); --amber:var(--hc-light-amber,#d97706);
     --sh-sm:0 1px 2px rgba(15,28,46,.05),0 2px 8px rgba(15,28,46,.05);
     --sh-md:0 1px 3px rgba(15,28,46,.04),0 10px 28px rgba(15,28,46,.09);
     --sh-lg:0 6px 16px rgba(15,28,46,.10),0 28px 64px rgba(15,28,46,.24);
-    --r-sm:10px; --r-md:14px; --r-lg:20px;
+    --r-sm:var(--hc-radius-sm,10px); --r-md:var(--hc-radius-md,14px); --r-lg:var(--hc-radius-lg,20px);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
