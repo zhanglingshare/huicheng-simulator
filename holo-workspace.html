@@ -1304,7 +1304,7 @@ function renderDetail(kind, data){
       '<div class="d-note">此处展示公开记录与问题提示，不代表在线 AI 判断或真实用户投票。</div>';
   }
   host.scrollTop=0;
-  host.querySelectorAll('.goto').forEach(function(b){b.addEventListener('click',function(){document.getElementById('tabDetail').click();const id=b.getAttribute('data-focus-node');if(id)focusNode(id);});});
+  host.querySelectorAll('.goto').forEach(function(b){b.addEventListener('click',function(){document.getElementById('tabDetail').click();const id=b.getAttribute('data-focus-node');if(id&&byId[id]){select(id);pulseNode(id,3400);}});});
 }
 
 
@@ -1417,7 +1417,7 @@ function renderTimeline(){
     const b = document.createElement('button');
     b.className = 'tl-ev';
     b.style.left = (6 + (88 / (EVENTS.length - 1)) * i) + '%';
-    b.innerHTML = `<span class="l">${ev.t}</span><span class="n" style="background:${ev.kind === '新建' ? '#16a34a' : ev.kind === '扩产' ? '#d97706' : ev.kind === '新主体' ? '#2563eb' : ev.kind === '基础设施' ? '#dc2626' : '#7c3aed'}"></span><span class="d">${ev.d}</span>`;
+    b.innerHTML = `<span class="l">${esc(ev.t)}</span><span class="n" style="background:${ev.kind === '新主体' ? '#16a34a' : ev.kind === '新连接' ? '#2563eb' : ev.kind === '关系增强' ? '#d97706' : ev.kind === '关系减弱' ? '#dc2626' : ev.kind === '信息更新' ? '#0891b2' : '#7c3aed'}"></span><span class="d">${esc(ev.d)}</span>`;
     b.onclick = () => {
       document.querySelectorAll('.tl-ev').forEach(x => x.classList.remove('sel'));
       b.classList.add('sel');
