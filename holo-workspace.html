@@ -390,6 +390,16 @@ main{display:grid;grid-template-columns:200px minmax(0,1fr) 360px;gap:14px;paddi
 .ev-bar-row b{font-size:10px;color:#243b55;text-align:right;font-variant-numeric:tabular-nums}
 .frow .fvisual{display:flex;align-items:center;justify-content:center;width:38px;height:26px;color:#2563eb}
 .frow .fvisual svg{width:34px;height:24px;display:block}
+/* 情报流中的真实事件类型分布 */
+.feed-mix{margin:10px 0 7px;padding:10px 11px 11px;background:#f7faff;border:1px solid #e1eaf6;border-radius:12px}
+.feed-mix-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}
+.feed-mix-title{font-size:10.5px;font-weight:850;color:#334b66}
+.feed-mix-total{font-size:9.5px;color:#8191a6}
+.feed-mix-row{display:grid;grid-template-columns:minmax(58px,78px) 1fr 18px;gap:7px;align-items:center;margin-top:7px}
+.feed-mix-name{font-size:9.5px;color:#61748b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.feed-mix-track{height:6px;background:#e5edf7;border-radius:99px;overflow:hidden}
+.feed-mix-track i{display:block;height:100%;border-radius:99px;transition:width .3s}
+.feed-mix-num{font-size:9.5px;color:#334b66;text-align:right;font-weight:800;font-variant-numeric:tabular-nums}
 /* 输入框 */
 .composer{padding:10px 12px 12px;border-top:1px solid var(--line);background:#fbfcfe}
 .inp{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:12px;background:#fff;
@@ -1464,6 +1474,11 @@ function renderFeed(){
   const top=list[0];
   const topEvent=EVENTS.find(function(e){return e.id===top.id;})||EVENTS[0];
   const types=Array.from(new Set(list.map(function(f){return f.kind;})));
+  const typeCounts=types.map(function(k){return {kind:k,count:list.filter(function(f){return f.kind===k;}).length};}).sort(function(a,b){return b.count-a.count;});
+  const maxType=Math.max(1,...typeCounts.map(function(x){return x.count;}));
+  const mixHtml='<div class="feed-mix"><div class="feed-mix-head"><span class="feed-mix-title">公开变化类型分布</span><span class="feed-mix-total">共 '+list.length+' 条事件</span></div>'+
+    typeCounts.map(function(x){const colors={'新主体':'#2563eb','新连接':'#0d9488','关系增强':'#16a34a','关系变化':'#d97706','关系减弱':'#ea580c','信息更新':'#7c3aed'};const color=colors[x.kind]||'#64748b';return '<div class="feed-mix-row"><span class="feed-mix-name">'+esc(x.kind)+'</span><span class="feed-mix-track"><i style="width:'+(x.count/maxType*100)+'%;background:'+color+'"></i></span><b class="feed-mix-num">'+x.count+'</b></div>';}).join('')+
+    '</div>';
   let rows='',lastDate='';
   list.slice(1).forEach(function(f){
     const n=byId[f.node];
@@ -1487,8 +1502,8 @@ function renderFeed(){
     '</div>'+
     '<div class="ffilters"><button class="ff on" data-k="all">全部 '+list.length+'</button>'+
       types.map(function(k){return '<button class="ff" data-k="'+esc(k)+'">'+esc(k)+' '+list.filter(function(f){return f.kind===k;}).length+'</button>';}).join('')+
-    '</div>'+rows+
-    '<div class="d-note" style="justify-content:center;margin-top:10px">公开变化记录共 '+list.length+' 项 · 点击任一事件查看关联主体、变化和待核实事项</div>';
+    '</div>'+mixHtml+rows+
+    '<div class="d-note" style="justify-content:center;margin-top:10px">类型统计来自当前公开变化记录；点击任一事件查看关联主体、变化和待核实事项</div>';
   host.querySelectorAll('.frow').forEach(function(x){
     function openEvent(){
       const nodeId=x.getAttribute('data-node');
