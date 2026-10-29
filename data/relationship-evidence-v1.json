@@ -18,7 +18,7 @@
     "regional": "区域协作"
   },
   "node_count": 17,
-  "edge_count": 18,
+  "edge_count": 19,
   "note": "关系强度不编造：有公开量化数据才显示 metric，否则只给 strength_basis；C 级为待验证假设，前端须显式标注。",
   "nodes": [
     {
@@ -706,6 +706,27 @@
       "counter_evidence": "集群内部结构未细分",
       "last_verified_at": "2026-10-29",
       "change_status": "无显著变化"
+    },
+    {
+      "edge_id": "E019",
+      "source_node_id": "ai",
+      "target_node_id": "lyh",
+      "relation_type": "supply_chain",
+      "relation_description": "党代会明确以利元亨为链主，培育AI与机器人产业集群链属企业（链主-链属关系）",
+      "direction": "有方向",
+      "valid_period": "2026-10",
+      "evidence_type": "已证实事实",
+      "evidence_grade": "A",
+      "confidence": "高",
+      "metric": null,
+      "comparison_period": "2026",
+      "strength_basis": "区党代会报告+惠州日报点名链主",
+      "source_ids": [
+        "S017"
+      ],
+      "counter_evidence": "链属企业数量与协同规模未公开",
+      "last_verified_at": "2026-10-29",
+      "change_status": "增强"
     }
   ]
 }
