@@ -128,7 +128,7 @@ button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:
       <strong id="groupResultTitle">适合你们的三站</strong>
       <ul id="groupRecommendations"></ul><div class="group-actions" style="margin-bottom:0"><button type="button" id="shareConsensusBtn">✉️ 复制我们共同选的三站</button></div>
     </div>
-    <div class="group-limit" id="groupLimit">组队是纯前端“接力式共选”，不会自动收集其他人的答案。朋友需要把回复链接发回发起者，再由发起者粘贴汇总。所有偏好仅在链接和当前页面里，不代表真实公众投票。</div>
+    <div class="group-limit" id="groupLimit">组队是纯前端“接力式共选”，不会自动收集其他人的答案。朋友需要把回复链接发回发起者，再由发起者粘贴汇总。所有偏好仅在链接和当前页面里（用网址 # 片段传递），不代表真实公众投票；拿到链接的人可以看到你的偏好。</div>
   </section>
 </div>
 <div class="bottom"><div><strong>真正有意思的，不只是去哪玩。</strong> 更是人为什么聚集、哪些公共空间受欢迎、城市如何留住生活。</div><div class="source" id="sourceNote">数据按公开资料与近期香港公开打卡整理；热度为参考分档，不代表实际到场人数或开放状态。</div></div>
@@ -263,10 +263,11 @@ function copySafe(text,done){
 }
 function makeShareUrl(key,payload){
  const u=new URL("fun.html",location.href);u.search="";
- u.searchParams.set(key,JSON.stringify(payload));return u.href;
+ u.hash=key+"="+encodeURIComponent(JSON.stringify(payload));return u.href;
 }
+function readShareValue(u,key){const hash=new URLSearchParams(u.hash.replace(/^#/,""));return hash.get(key)||u.searchParams.get(key);}
 function loadGroupInvite(){
- const raw=new URL(location.href).searchParams.get("hcjoin");
+ const raw=readShareValue(new URL(location.href),"hcjoin");
  if(!raw)return;
  try{
   const p=JSON.parse(raw);
@@ -278,7 +279,7 @@ function loadGroupInvite(){
   $("inviteLink").readOnly=true;
   $("copyInviteBtn").hidden=true;
   $("replyTitle").textContent="邀请人需要你的一个选择";
-  $("groupLimit").textContent="这是离线接力邀请：你选好偏好后点击「复制我的回复」，将回复链接发回邀请人。不会自动同步，也不会收集身份或定位信息。";
+  $("groupLimit").textContent="这是离线接力邀请：你选好偏好后点击「复制我的回复」，将回复链接发回邀请人。不会自动同步，也不需要姓名或定位信息；偏好记录在网址的 # 片段中，不随页面请求发送。";
   $("groupLab").classList.add("guest-mode");
  }catch(e){toast("此邀请链接无法识别，请让朋友重新分享。");}
 }
@@ -288,7 +289,7 @@ function createGroup(){
  $("inviteCard").hidden=false;
  $("inviteTitle").textContent="已创建一次接力组队，复制邀请链接";
  $("inviteLink").value=invitation;$("copyInviteBtn").hidden=false;
- $("groupLimit").textContent="发起时的偏好已固定在邀请中；如果要改变自己的组队偏好，请重新发起。朋友需把回复链接发回你，由你粘贴汇总。没有服务器自动投票或同步。";
+ $("groupLimit").textContent="发起时的偏好已固定在邀请中；如果要改变自己的组队偏好，请重新发起。朋友需把回复链接发回你，由你粘贴汇总。没有服务器自动投票或同步；答案放在网址 # 片段中，不随页面请求发送。";
  renderGroupResult();copySafe(invitation,"邀请链接已复制，发给朋友吧 ✨");
 }
 function sendReply(){
@@ -303,7 +304,7 @@ function addFriendReply(){
  const raw=$("friendReply").value.trim();if(!raw){toast("先粘贴朋友的回复链接");return;}
  try{
   let u;try{u=new URL(raw,location.href);}catch(e){throw new Error("url");}
-  const encoded=u.searchParams.get("hcreply");if(!encoded)throw new Error("reply");
+  const encoded=readShareValue(u,"hcreply");if(!encoded)throw new Error("reply");
   const p=JSON.parse(encoded);
   if(p.v!==1||p.g!==state.groupId||!/^[A-Z0-9]{5,16}$/.test(p.id)||!validRole(p.role)||!validTime(p.time))throw new Error("fields");
   if(state.friends.some(x=>x.id===p.id)){toast("这个伙伴的回复已经加入");return;}
