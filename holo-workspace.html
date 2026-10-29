@@ -22,7 +22,7 @@ body{
   background:var(--bg); color:var(--ink); overflow:hidden;
   font:13px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-  display:grid; grid-template-rows:60px auto minmax(0,1fr) 106px; gap:14px; padding-bottom:14px;
+  display:grid; grid-template-rows:60px auto auto minmax(0,1fr) 106px; gap:12px; padding-bottom:14px;
 }
 button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:8px}
@@ -54,6 +54,30 @@ nav.main button.on{background:var(--ink);color:#fff;box-shadow:0 2px 8px rgba(13
   display:grid;place-items:center;font-size:12px;font-weight:800;color:#2c4a6e;border:2px solid #fff;
   box-shadow:0 0 0 1px var(--line)}
 
+.mode-switch{display:flex;align-items:center;gap:2px;padding:3px;border-radius:10px;background:#eef3f9;border:1px solid #e3eaf4;white-space:nowrap}
+.mode-switch button{border:0;background:transparent;border-radius:7px;padding:5px 9px;font-size:11px;font-weight:750;color:#64748b;cursor:pointer}
+.mode-switch button.on{background:#fff;color:#174ea6;box-shadow:0 1px 4px rgba(13,26,43,.10)}
+.brief{position:relative;isolation:isolate;display:flex;align-items:center;gap:14px;margin:0 20px;padding:10px 16px;min-height:72px;
+  background:linear-gradient(105deg,#e8f2ff 0%,#f8fbff 54%,#edf7ff 100%);border:1px solid #d9e8fb;border-radius:15px;
+  box-shadow:var(--sh-1);overflow:hidden}
+.brief:after{content:"";position:absolute;z-index:-1;right:-22px;top:-55px;width:330px;height:180px;opacity:.75;pointer-events:none;
+  background:radial-gradient(ellipse at 65% 75%,rgba(96,165,250,.22),transparent 58%),linear-gradient(155deg,transparent 48%,rgba(37,99,235,.06) 49%,transparent 51%)}
+.brief-icon{flex:none;width:42px;height:42px;display:grid;place-items:center;border-radius:12px;color:#fff;
+  background:linear-gradient(145deg,#2878f0,#123f91);box-shadow:0 5px 14px rgba(37,99,235,.22)}
+.brief-copy{flex:1;min-width:0;position:relative;z-index:1}
+.brief-meta{display:flex;align-items:center;gap:8px;color:#58749b;font-size:10px;font-weight:700;margin-bottom:2px}
+.brief-meta .brief-grade{padding:1px 6px;border-radius:5px;background:#e5efff;color:#2756a4}
+.brief h2{font-size:15px;line-height:1.4;color:#122b4d;font-weight:850;letter-spacing:.05px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brief p{font-size:11px;color:#536b88;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.brief-action{flex:none;position:relative;z-index:1;border:0;border-radius:10px;padding:9px 13px;background:#174a9c;color:#fff;font-size:11px;font-weight:750;cursor:pointer;box-shadow:0 4px 12px rgba(23,74,156,.16);transition:.16s}
+.brief-action:hover{background:#103b82;transform:translateY(-1px)}
+.brief-action:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.kpi .note{font-size:10px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi .kv .value-unit{font-size:11px;color:var(--muted);font-weight:650;letter-spacing:0}
+.kpi.date-kpi .kv{font-size:18px}
+.pro-only{display:none}
+body[data-mode="pro"] .pro-only{display:block}
+body[data-mode="pro"] .brief p{white-space:normal}
 /* ============ KPI ============ */
 .kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;padding:0 20px}
 .kpi{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:12px 15px 13px;
@@ -361,13 +385,22 @@ footer{margin:0 20px;background:#fff;border:1px solid var(--line);border-radius:
   .kpi .kv{font-size:20px}
 }
 @media (max-width:1220px){
+  header{gap:10px}
+  nav.main button{padding:7px 9px}
+  .head-right{gap:7px}
+  .search{width:170px}
+  .mode-switch button{padding:5px 7px}
   main{grid-template-columns:minmax(0,1fr) 340px}
   .rail{display:none}
   .kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
   .kpi:nth-child(n+4){display:none}
+  .brief-action{padding:8px 10px}
 }
 @media (max-height:860px){
-  body{grid-template-rows:56px auto minmax(0,1fr) 96px;gap:12px;padding-bottom:12px}
+  body{grid-template-rows:56px auto auto minmax(0,1fr) 96px;gap:10px;padding-bottom:12px}
+  .brief{min-height:62px;padding:8px 13px}
+  .brief-icon{width:36px;height:36px}
+  .brief h2{font-size:14px}
   .kpi{padding:10px 13px 11px}
   .kpi .kv{font-size:20px}
   .card{padding:11px}
@@ -378,6 +411,44 @@ footer{margin:0 20px;background:#fff;border:1px solid var(--line);border-radius:
   .sec{margin:13px 0 7px}
   .tl-h{font-size:11.5px}
 }
+
+@media (max-width:900px){
+  html,body{height:auto;min-height:100%}
+  body{display:flex;flex-direction:column;overflow:auto;gap:12px;padding:0 0 12px}
+  header{min-height:60px;height:auto;flex-wrap:wrap;padding:10px 14px;gap:10px}
+  nav.main{order:3;width:100%;overflow-x:auto;margin:0}
+  nav.main button{flex:1;min-width:max-content}
+  .head-right{margin-left:auto;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+  .search{width:220px;max-width:100%}
+  .brief{margin:0 12px;min-height:70px}
+  .kpis{padding:0 12px;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kpi:nth-child(n+4){display:block}
+  main{display:grid;grid-template-columns:minmax(0,1fr);padding:0 12px;min-height:auto}
+  .rail{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible}
+  .stage{min-height:520px}
+  .panel{min-height:520px}
+  footer{margin:0 12px;min-height:140px}
+  .tl{overflow-x:auto}
+}
+@media (max-width:560px){
+  header{align-items:flex-start}
+  .brand h1{font-size:14px}
+  .brand .tag{font-size:9px}
+  .head-right{width:100%;justify-content:space-between}
+  .search{flex:1;width:auto}
+  .avatar{display:none}
+  .brief{align-items:flex-start;flex-wrap:wrap;padding:10px 12px;gap:9px}
+  .brief-icon{width:34px;height:34px}
+  .brief-copy{width:calc(100% - 46px);flex:1}
+  .brief h2{font-size:13px;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+  .brief p{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+  .brief-action{margin-left:auto}
+  .rail{grid-template-columns:minmax(0,1fr)}
+  .stage{min-height:440px}
+  .kpi{padding:10px 11px}
+  .kpi .kv{font-size:20px}
+}
+
 </style>
 </head>
 <body>
@@ -406,31 +477,52 @@ footer{margin:0 20px;background:#fff;border:1px solid var(--line);border-radius:
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
       <input id="searchInput" placeholder="搜索企业、集群或事件…" aria-label="搜索">
     </div>
+    <div class="mode-switch" role="group" aria-label="阅读模式">
+      <button id="modePlain" type="button" class="on" aria-pressed="true">通俗</button>
+      <button id="modePro" type="button" aria-pressed="false">专业</button>
+    </div>
     <div class="status" id="dataStatus" title="公开关系数据状态"><i></i>正在读取公开数据</div>
     <div class="avatar" title="张凌">张</div>
   </div>
 </header>
 
-<section class="kpis" aria-label="核心指标">
+<section class="brief" aria-label="最近变化看点">
+  <div class="brief-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.5 13h6L10 22l9.5-12h-6z"/></svg>
+  </div>
+  <div class="brief-copy">
+    <div class="brief-meta"><span>最近变化</span><span id="briefDate">正在读取日期</span><span class="brief-grade" id="briefGrade">公开记录</span></div>
+    <h2 id="briefTitle">正在读取惠城最新公开变化…</h2>
+    <p id="briefSummary">这里呈现项目现有公开变化记录；关系关联不等于因果。</p>
+  </div>
+  <button class="brief-action" id="briefAction" type="button">看看它连到谁 <span aria-hidden="true">→</span></button>
+</section>
+
+<section class="kpis" aria-label="关系数据概览">
   <div class="kpi" style="--c:#2563eb">
-    <div class="kn">地区生产总值<span class="u">亿元</span></div>
-    <div class="kv">1,203.33 <span class="delta up">+4.3%</span></div>
+    <div class="kn">关系主体<span class="u">个</span></div>
+    <div class="kv"><span id="kpiNodes">—</span></div>
+    <div class="note">公开关系底座中的主体</div>
   </div>
   <div class="kpi" style="--c:#0891b2">
-    <div class="kn">规上工业总产值<span class="u">亿元</span></div>
-    <div class="kv">937.92 <span class="delta up">+9.6%</span></div>
+    <div class="kn">关系连接<span class="u">条</span></div>
+    <div class="kv"><span id="kpiEdges">—</span></div>
+    <div class="note">当前记录的主体关联</div>
   </div>
   <div class="kpi" style="--c:#7c3aed">
-    <div class="kn">社会消费品零售<span class="u">亿元</span></div>
-    <div class="kv">805.68 <span class="delta up">+3.7%</span></div>
+    <div class="kn">变化记录<span class="u">项</span></div>
+    <div class="kv"><span id="kpiChanges">—</span></div>
+    <div class="note">可追踪的公开变化</div>
   </div>
   <div class="kpi" style="--c:#d97706">
-    <div class="kn">外贸进出口<span class="u">亿元</span></div>
-    <div class="kv">383.60 <span class="delta up">+7.1%</span></div>
+    <div class="kn">公开来源<span class="u">条</span></div>
+    <div class="kv"><span id="kpiSources">—</span></div>
+    <div class="note">已关联的来源条目</div>
   </div>
-  <div class="kpi" style="--c:#16a34a">
-    <div class="kn">常住人口<span class="u">万人</span></div>
-    <div class="kv">159.78 <span class="delta flat">持平</span></div>
+  <div class="kpi date-kpi" style="--c:#16a34a">
+    <div class="kn">数据整理日</div>
+    <div class="kv"><span id="kpiDate">—</span></div>
+    <div class="note">以关系数据文件标注为准</div>
   </div>
 </section>
 
@@ -519,7 +611,7 @@ footer{margin:0 20px;background:#fff;border:1px solid var(--line);border-radius:
       </span>
       <div>
         <div class="t" id="p-title">惠城区产业关系情报</div>
-        <div class="s"><i></i><span id="p-sub">今年重大变化 · 值得讨论</span></div>
+        <div class="s"><i></i><span id="p-sub">点击事件查看公开依据与待核实事项</span></div>
       </div>
       <button class="more" title="更多">⋯</button>
     </div>
@@ -1182,7 +1274,7 @@ function renderDetail(kind, data){
     }).join(''):'<div class="txt">当前变化没有关联到具体主体。</div>';
     const edgesHtml=relatedEdges.length?relatedEdges.map(function(e){
       const a=byId[e.s],b=byId[e.t];
-      return '<div class="src"><div class="sn">'+esc((a?a.label:e.s)+' → '+(b?b.label:e.t))+' · '+esc(REL_NAME[e.relation_type]||'关系')+' · '+esc(e.grade)+' 级</div><div>'+esc(e.relation_description||e.label)+'</div><div class="limit">限制：'+esc(e.counter_evidence||'当前记录未注明具体限制。')+'</div></div>';
+      return '<div class="src"><div class="sn">'+esc((a?a.label:e.s)+' → '+(b?b.label:e.t))+' · '+esc(REL_NAME[e.relation_type]||'关系')+' · '+esc(e.grade)+' 级</div><div>'+esc(e.relation_description||e.label)+'</div><div class="limit">限制：'+esc(e.counter_evidence||'当前记录未注明具体限制。')+'</div><div class="pro-only"><div class="limit">记录类型：'+esc(e.evidence_type||'未注明')+' · 记录标记：'+esc(e.confidence||'未注明')+' · 关系依据：'+esc(e.strength_basis||'未注明')+' · 有效期：'+esc(e.valid_period||'未注明')+' · 最近核验：'+esc(e.last_verified_at||'未注明')+'</div></div></div>';
     }).join(''):'<div class="txt">当前事件没有关联到具体关系边。</div>';
     host.innerHTML=
       '<div class="d-hero">'+
@@ -1361,6 +1453,18 @@ function switchTab(which){
 document.getElementById('tabDetail').onclick = () => switchTab('detail');
 document.getElementById('tabFeed').onclick = () => switchTab('feed');
 
+function setReadingMode(mode){
+  const pro=mode==='pro';
+  document.body.dataset.mode=pro?'pro':'plain';
+  document.getElementById('modePlain').classList.toggle('on',!pro);
+  document.getElementById('modePro').classList.toggle('on',pro);
+  document.getElementById('modePlain').setAttribute('aria-pressed',String(!pro));
+  document.getElementById('modePro').setAttribute('aria-pressed',String(pro));
+}
+document.getElementById('modePlain').addEventListener('click',function(){setReadingMode('plain');});
+document.getElementById('modePro').addEventListener('click',function(){setReadingMode('pro');});
+setReadingMode('plain');
+
 /* 键盘：Esc 取消选择，+/- 缩放 */
 window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') select(null);
@@ -1408,8 +1512,27 @@ async function boot(){
     document.getElementById('layerCount').textContent=EDGES.length+' 条';
     const date=payload[0].generated_at||payload[1].generated_at||'公开数据';
     document.getElementById('dataStatus').innerHTML='<i></i>'+esc(date)+' 已更新';
+    document.getElementById('kpiNodes').textContent=NODES.length;
+    document.getElementById('kpiEdges').textContent=EDGES.length;
+    document.getElementById('kpiChanges').textContent=EVENTS.length;
+    document.getElementById('kpiSources').textContent=Object.keys(SOURCES).length;
+    document.getElementById('kpiDate').textContent=date;
     bindNodeEvents();
     const latest=EVENTS[0];
+    const briefAction=document.getElementById('briefAction');
+    if(latest){
+      document.getElementById('briefDate').textContent=latest.d||'日期未注明';
+      document.getElementById('briefTitle').textContent=latest.t;
+      document.getElementById('briefSummary').textContent=latest.before_after||latest.fact;
+      document.getElementById('briefGrade').textContent=gradeLabel(latest.grade);
+      briefAction.onclick=function(){document.getElementById('tabDetail').click();focusNode(latest.node,latest);};
+    }else{
+      document.getElementById('briefDate').textContent='暂无记录';
+      document.getElementById('briefTitle').textContent='当前没有可展示的公开变化';
+      document.getElementById('briefSummary').textContent='后续有新的可核对记录时，会在此处显示。';
+      document.getElementById('briefGrade').textContent='等待数据';
+      briefAction.disabled=true;
+    }
     if(latest){
       document.querySelectorAll('.tl-ev').forEach(function(x){x.classList.remove('sel');});
       const idx=EVENTS.findIndex(function(e){return e.id===latest.id;});
