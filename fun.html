@@ -2,377 +2,125 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='slateblue'/><circle cx='16' cy='16' r='6' fill='none' stroke='white' stroke-width='2.5'/><circle cx='16' cy='16' r='2' fill='white'/></svg>">
-<title>惠城产业风洞 · 第四页 · 风向标去哪玩</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>04 · 风向标｜今晚惠城去哪玩？</title>
 <style>
-:root{
-  --sky1:#04060f; --sky2:#0a0f24; --sky3:#1e1b4b;
-  --glass:rgba(255,255,255,.07); --glass-b:rgba(255,255,255,.13);
-  --ink:#f1f5f9; --ink2:#cbd5e1; --muted:#94a3b8;
-  --neon:#38bdf8; --warm:#fbbf24; --ok:#34d399; --bad:#fb7185; --pink:#f472b6;
-}
-*{box-sizing:border-box}
-html,body{margin:0;height:100%;overflow:hidden}
-body{background:var(--sky1);color:var(--ink);font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased;position:relative}
-
-/* ===== 场景：入夜城市 ===== */
-.scene{position:fixed;inset:0;z-index:0;overflow:hidden}
-.sky{position:absolute;inset:0;background:linear-gradient(180deg,#04060f 0%,#0a0f24 40%,#1e1b4b 66%,#3b1d4a 85%,#6b2a4a 96%)}
-.moon{position:absolute;left:72%;top:11%;width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 38% 38%,#fdf6e3,#e2e8f5 62%,#cbd5e1);box-shadow:0 0 40px rgba(226,232,245,.32),0 0 90px rgba(226,232,245,.16)}
-.stars{position:absolute;inset:0 0 30% 0}
-.stars i{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:.7;animation:tw 3s ease-in-out infinite}
-@keyframes tw{0%,100%{opacity:.25}50%{opacity:.95}}
-.mountains{position:absolute;left:0;right:0;bottom:22%;height:120px;background:linear-gradient(180deg,transparent,#0a0f24);clip-path:polygon(0 100%,8% 55%,18% 75%,28% 40%,40% 70%,52% 35%,64% 65%,76% 45%,88% 70%,100% 50%,100% 100%)}
-.skyline{position:absolute;left:0;right:0;bottom:18%;height:180px;display:flex;align-items:flex-end;gap:3px;padding:0 20px}
-.b{flex:1;background:linear-gradient(180deg,#161d33,#0a0f1f);border-radius:2px 2px 0 0;position:relative}
-.b::after{content:"";position:absolute;inset:8px 4px 4px;background-image:radial-gradient(circle,rgba(251,191,36,.9) 1px,transparent 1.5px),radial-gradient(circle,rgba(186,230,253,.6) 1px,transparent 1.5px);background-size:10px 12px,14px 16px;opacity:.8}
-.b.tall{flex:1.4}.b.wide{flex:2}
-.road{position:absolute;left:0;right:0;bottom:0;height:18%;background:linear-gradient(180deg,#0a0f1f,#020617);border-top:1px solid rgba(255,255,255,.06)}
-.road::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:repeating-linear-gradient(90deg,#fbbf24 0 30px,transparent 30px 60px);opacity:.5}
-.car{position:absolute;top:42%;width:8px;height:4px;border-radius:2px;background:#38bdf8;box-shadow:0 0 8px #38bdf8;animation:drive 6s linear infinite}
-.car.r{background:#f472b6;box-shadow:0 0 8px #f472b6;animation-duration:8s;animation-delay:-2s;top:58%}
-@keyframes drive{from{left:-5%}to{left:105%}}
-
-/* ===== HUD ===== */
-.hud{position:relative;z-index:10;height:100vh;display:flex;flex-direction:column;padding:12px}
-.topbar{display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:14px;padding:8px 14px;flex:none}
-.brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:14px;letter-spacing:.3px;flex:none}
-.brand .logo{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#38bdf8,#6366f1);display:flex;align-items:center;justify-content:center}
-.res{display:flex;gap:14px;flex:1;justify-content:center;flex-wrap:wrap}
-.res .r{display:flex;flex-direction:column;align-items:center;min-width:70px}
-.res .r .v{font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--warm)}
-.res .r .v.blue{color:var(--neon)}.res .r .v.green{color:var(--ok)}
-.res .r .l{font-size:10px;color:var(--muted);letter-spacing:.5px}
-.clock{font-size:11px;color:var(--muted);text-align:right;flex:none;line-height:1.4}
-.clock b{color:var(--ink2);font-size:13px}
-.mid{flex:1;margin-top:10px;min-height:0;position:relative}
-.view{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:12px}
-.stage{position:relative;background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--glass-b);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
-.stage-h{padding:12px 16px 0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.stage-h h2{font-size:16px;margin:0;font-weight:800}
-.stage-h .sub{font-size:11px;color:var(--muted)}
-.stage-h .live{margin-left:auto;font-size:10px;color:var(--ok);display:flex;align-items:center;gap:5px}
-.stage-h .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ok);animation:pulse2 1.5s infinite}
-@keyframes pulse2{0%,100%{opacity:1}50%{opacity:.3}}
-.stage-body{flex:1;position:relative;min-height:0;overflow:hidden;background:linear-gradient(180deg,rgba(6,10,24,.05),rgba(6,10,24,.32))}
-
-/* 市民广播滚动条 */
-.ticker{display:flex;align-items:center;gap:8px;margin:8px 16px 0;flex:none;background:rgba(255,255,255,.06);border:1px solid var(--glass-b);border-radius:9px;padding:6px 10px;overflow:hidden}
-.ticker .tk-ico{flex:none;font-size:12px}
-.tk-wrap{flex:1;overflow:hidden;position:relative;height:18px}
-.tk-track{position:absolute;left:0;top:0;white-space:nowrap;font-size:11px;color:var(--ink2);line-height:18px;animation:tkScroll 36s linear infinite}
-@keyframes tkScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-/* 热力点 */
-.spot-field{position:absolute;inset:0;z-index:5}
-.spot{position:absolute;transform:translate(-50%,-50%);cursor:pointer;text-align:center;transition:opacity .25s,filter .25s}
-.spot .halo{position:absolute;inset:-45%;border-radius:50%;background:radial-gradient(circle,var(--cc) 0%,transparent 68%);opacity:.5;animation:halo 2.6s ease-in-out infinite}
-.spot .core{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,#fff 0 10%,var(--cc) 42%,rgba(255,255,255,.06) 100%);box-shadow:0 0 12px var(--cc),0 0 26px var(--cc);border:1.5px solid rgba(255,255,255,.55);animation:spotPulse 2.6s ease-in-out infinite}
-.spot .ring{position:absolute;inset:0;border-radius:50%;border:2px solid var(--cc);opacity:0;animation:ringOut 2.6s ease-out infinite}
-.spot .nm{position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:3px;font-size:11px;font-weight:700;color:var(--ink);white-space:nowrap;background:rgba(13,20,38,.66);padding:0 6px;border-radius:5px;text-shadow:0 1px 3px #000}
-.spot.dim{opacity:.13;filter:saturate(.3)}
-.spot.sel .core{box-shadow:0 0 0 3px #fff,0 0 24px var(--cc),0 0 50px var(--cc)}
-@keyframes halo{0%,100%{transform:scale(.92);opacity:.32}50%{transform:scale(1.18);opacity:.62}}
-@keyframes spotPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
-@keyframes ringOut{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.3);opacity:0}}
-
-/* 雷达 */
-.radar{position:absolute;left:50%;top:56%;width:290px;height:290px;transform:translate(-50%,-50%);z-index:2;opacity:.45;pointer-events:none;transition:opacity .3s}
-.radar .rc{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(251,191,36,.15)}
-.radar .rc.a{inset:18%}.radar .rc.b{inset:36%}
-.radar .cross{position:absolute;inset:0;border-radius:50%;background:linear-gradient(rgba(251,191,36,.1) 1px,transparent 1px) 0 50%/100% 1px no-repeat,linear-gradient(90deg,rgba(251,191,36,.1) 1px,transparent 1px) 50% 0/1px 100% no-repeat}
-.radar .sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(251,191,36,.3),transparent 22%,transparent);animation:rsweep 4.5s linear infinite}
-@keyframes rsweep{to{transform:rotate(360deg)}}
-.radar .center{position:absolute;left:50%;top:50%;width:9px;height:9px;transform:translate(-50%,-50%);border-radius:50%;background:var(--warm);box-shadow:0 0 12px var(--warm)}
-.radar.scanning{opacity:1}
-.radar.scanning .sweep{animation-duration:.6s;background:conic-gradient(from 0deg,rgba(251,191,36,.6),transparent 30%,transparent)}
-.stage-cap{position:absolute;top:9px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:7px;background:rgba(13,20,38,.74);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(8px);padding:5px 14px;border-radius:20px;font-size:11.5px;color:#e2eaf7;white-space:nowrap;max-width:94%;z-index:9}
-.stage-cap .beat{width:9px;height:9px;border-radius:50%;background:var(--warm);box-shadow:0 0 7px var(--warm);animation:halo 1.4s ease-in-out infinite;flex:none}
-.stage-foot{padding:8px 16px 11px;font-size:10.5px;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);display:flex;gap:14px;flex-wrap:wrap}
-.stage-foot b{color:var(--ink2)}
-
-/* 右侧 */
-.side{display:flex;flex-direction:column;gap:10px;min-height:0;overflow-y:auto;scrollbar-width:none}
-.side::-webkit-scrollbar{display:none}
-.side-tab{display:none}
-.side-mask{display:none}
-.panel{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:14px;padding:12px 14px}
-.panel h3{font-size:12px;margin:0 0 10px;font-weight:700;letter-spacing:1px;color:var(--muted);text-transform:uppercase;display:flex;align-items:center;gap:6px}
-.panel h3 .dot{width:6px;height:6px;border-radius:50%;background:var(--warm)}
-.fgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
-.fchip{display:flex;align-items:center;gap:5px;justify-content:center;font-size:11px;font-weight:700;padding:7px 4px;border-radius:9px;background:rgba(255,255,255,.06);border:1px solid var(--glass-b);color:var(--muted);cursor:pointer;transition:.15s}
-.fchip.on{background:rgba(251,191,36,.16);border-color:rgba(251,191,36,.5);color:var(--warm)}
-.tcard{background:rgba(255,255,255,.05);border:1px solid var(--glass-b);border-radius:12px;padding:12px;min-height:150px}
-.card-head{display:flex;gap:10px;align-items:center;margin-bottom:4px}
-.card-emo{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;flex:none}
-.card-name{font-size:15px;font-weight:800;line-height:1.3}
-.card-tag{font-size:10.5px;color:var(--muted);margin-top:2px}
-.card-row{font-size:11.5px;color:var(--ink2);margin-top:7px;line-height:1.55}
-.card-row b{display:block;color:var(--neon);font-size:10px;letter-spacing:.5px;margin-bottom:2px}
-.card-row.watch{background:rgba(251,191,36,.09);border:1px solid rgba(251,191,36,.28);border-radius:9px;padding:8px 10px;margin-top:9px}
-.card-row.watch b{color:var(--warm)}
-.card-d{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.6;padding-top:8px;border-top:1px dashed rgba(255,255,255,.08)}
-.roll-btn{width:100%;background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#1a1206;border:0;border-radius:11px;padding:12px;font-size:14px;font-weight:800;cursor:pointer;letter-spacing:.5px;box-shadow:0 0 18px rgba(251,191,36,.28);transition:.15s}
-.roll-btn:active{transform:scale(.97)}
-.roll-btn:disabled{opacity:.6}
-.note{font-size:10px;color:var(--muted);line-height:1.6;margin-top:8px}
-
-/* 底部 dock */
-.dock{flex:none;margin-top:12px;display:flex;gap:8px;background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:16px;padding:10px 12px;overflow-x:auto;scrollbar-width:none}
-.dock::-webkit-scrollbar{display:none}
-.dock a{flex:1;min-width:72px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;border-radius:10px;font-size:11px;color:var(--ink2);text-decoration:none;transition:.15s;cursor:pointer}
-.dock a:hover{background:rgba(255,255,255,.08);color:var(--ink)}
-.dock a.on{background:rgba(56,189,248,.18);color:var(--neon)}
-.dock a .ic{width:22px;height:22px;display:flex;align-items:center;justify-content:center}
-.dock a .ic svg{width:20px;height:20px}
-#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:rgba(15,23,42,.95);color:#fff;padding:9px 16px;border-radius:10px;font-size:12px;z-index:99;white-space:nowrap;border:1px solid var(--glass-b);box-shadow:0 8px 24px rgba(0,0,0,.4)}
-
-@media(min-width:768px) and (max-width:1179px){
-  .view{grid-template-columns:minmax(0,1fr) 285px}
-  .res{gap:10px}
-  .dock a{min-width:64px}
-  .radar{width:240px;height:240px}
-  .spot{transform:translate(-50%,-50%) scale(.82)}
-  .spot .nm{font-size:10px}
-}
-@media(max-width:767px){
-  .view{grid-template-columns:1fr;grid-template-rows:1fr;overflow:hidden}
-  .stage{min-height:0}
-  .side{position:fixed;left:8px;right:8px;bottom:0;z-index:40;max-height:72vh;overflow-y:auto;border-radius:18px 18px 0 0;background:rgba(9,14,28,.97);border:1px solid rgba(255,255,255,.14);border-bottom:0;box-shadow:0 -10px 34px rgba(0,0,0,.5);transform:translateY(110%);transition:transform .28s ease;padding:12px 14px calc(env(safe-area-inset-bottom,0px) + 14px);scrollbar-width:none}
-  .side.open{transform:translateY(0)}
-  .side-mask{display:block;position:fixed;inset:0;z-index:35;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .25s}
-  .side-mask.on{opacity:1;pointer-events:auto}
-  .side-tab{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:99px;background:rgba(56,189,248,.13);border:1px solid rgba(56,189,248,.32);color:#7dd3fc;cursor:pointer;margin-left:4px}
-  .stage-h .sub{display:none}
-  .radar{width:210px;height:210px}
-  .res{gap:8px}.res .r{min-width:54px}.res .r .v{font-size:13px}
-  .brand{font-size:12px}.clock{display:none}
-  .dock a{min-width:60px;font-size:10px}
-  /* 窄屏缩小热力点，避免大圆互叠 */
-  .spot{transform:translate(-50%,-50%) scale(.58)}
-  .spot .nm{font-size:9px;margin-top:2px;white-space:nowrap}
-  .stage-h{gap:6px}.stage-h .live{font-size:9.5px}
-}
+:root{--bg:#edf4f7;--paper:#fff;--ink:#12243b;--secondary:#62788e;--soft:#8aa0b2;--line:#e0e9f1;--blue:#2786ec;--teal:#0b9aab;--amber:#f19b41;--purple:#8b62de;--green:#16a47c;--shadow:0 12px 36px rgba(39,73,109,.07);--panelrad:23px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font:14px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:radial-gradient(circle at 80% 0%,#d9eef8 0,transparent 34%),radial-gradient(circle at 0 60%,#e9f0ff 0,transparent 30%),var(--bg);-webkit-font-smoothing:antialiased}
+button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #93c5fd;outline-offset:3px}svg{display:block}::selection{background:#c9e7ff}
+.page{max-width:1536px;margin:auto;padding:25px clamp(16px,3.1vw,48px) 112px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 0 28px;border-bottom:1px solid rgba(105,143,177,.14)}.brand{display:flex;align-items:center;gap:11px;font-size:13px;font-weight:850;letter-spacing:.2px}.brandmark{width:38px;height:38px;display:grid;place-items:center;background:linear-gradient(145deg,#0f5b9a,#2f9bd5);border-radius:13px;color:white;box-shadow:0 8px 20px #318ad32e;font-size:19px}.brand-sub{font-size:10px;color:#8296a8;font-weight:600;letter-spacing:1px;margin-top:2px}.toplinks{display:flex;align-items:center;gap:12px;color:#647b94;font-size:11px;font-weight:650}.toplinks a{padding:8px 12px;border:1px solid #cfdfec;background:#f9fcff;border-radius:999px}.toplinks a:hover{border-color:#9bc5e8;background:#edf8ff}.source-dot{width:7px;height:7px;display:inline-block;background:#2cc8a6;border-radius:50%;margin-right:5px;box-shadow:0 0 0 4px #2cc8a618}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:26px;align-items:end;padding:28px 0 22px}.kicker{font-size:11px;font-weight:900;color:#1686ac;letter-spacing:2.5px}.hero h1{font-size:clamp(32px,4.1vw,54px);line-height:1.18;letter-spacing:-1.8px;margin:10px 0 12px;font-weight:920}.hero h1 em{color:#0b8fa9;font-style:normal;position:relative}.hero h1 em:after{content:"";position:absolute;left:2%;right:0;bottom:-3px;height:9px;background:#9de1ee83;border-radius:10px;z-index:-1}.lead{color:#6e8096;font-size:13px;line-height:1.8;margin:0;max-width:720px}.lead b{color:#2b557a}.summary{display:flex;align-items:center;gap:14px;white-space:nowrap;background:#fff;border:1px solid #dbe9f3;box-shadow:var(--shadow);padding:13px 18px;border-radius:18px}.summary .num{font-size:28px;font-weight:900;line-height:1;color:#183d62;letter-spacing:-1px}.summary .lab{font-size:10px;color:#748ba2;margin-top:5px}.summary .vline{height:34px;width:1px;background:#e1ebf3}.summary .num.hot{color:#ee784b}
+.explorer{background:rgba(255,255,255,.8);border:1px solid #dae8f2;box-shadow:0 6px 22px #3b6b9022;border-radius:17px;padding:11px 13px;display:flex;align-items:center;gap:12px;margin:0 0 18px;min-height:62px}.find-label{font-size:11px;color:#6c7e92;font-weight:850;white-space:nowrap}.chips{display:flex;gap:7px;align-items:center;flex:1;overflow-x:auto;scrollbar-width:none;padding:2px 0}.chips::-webkit-scrollbar{display:none}.chip{border:1px solid #e2eaf2;background:#f4f7fb;border-radius:11px;color:#567187;padding:10px 12px;white-space:nowrap;font-weight:730;font-size:11.5px;transition:.18s}.chip:hover{border-color:#9bc5e7;color:#165b96}.chip.on{background:#123e66;color:#fff;border-color:#123e66;box-shadow:0 5px 14px #154b7d25}.chip em{font-style:normal;margin-right:5px}.search{display:flex;align-items:center;border-left:1px solid #dce7f0;gap:7px;padding-left:13px;min-width:180px;max-width:250px}.search svg{flex:none;color:#8aa0b2}.search input{width:100%;border:0;outline:0;background:transparent;color:#273b52;font-size:11.5px}.search input::placeholder{color:#91a1b0}
+.main-grid{display:grid;grid-template-columns:minmax(0,1.76fr) minmax(335px,.83fr);gap:17px;align-items:stretch}.card{background:#fff;border:1px solid #dce9f2;border-radius:var(--panelrad);box-shadow:var(--shadow);min-width:0}.map-card{overflow:hidden;position:relative}.map-top{display:flex;align-items:center;gap:11px;padding:19px 22px 13px;justify-content:space-between}.headleft h2{font-size:16px;margin:0;font-weight:900;letter-spacing:-.2px}.headleft p{margin:3px 0 0;color:#8aa0b0;font-size:10.5px}.mode{display:flex;background:#edf4fa;padding:4px;border-radius:12px;gap:2px}.mode button{border:0;background:transparent;color:#6f879e;font-size:11px;font-weight:750;padding:7px 13px;border-radius:9px}.mode button.on{background:white;color:#21466b;box-shadow:0 2px 8px #30658a20}
+.map-body{height:570px;position:relative;margin:0 14px 14px;border-radius:17px;background:linear-gradient(145deg,#edf7fb,#f1f8f9 48%,#e7f1f5);border:1px solid #d9eaf4;overflow:hidden;isolation:isolate}.map-body:after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 35% 24%,#d9effe80,transparent 30%),radial-gradient(circle at 80% 80%,#cdecea66,transparent 32%)}.map-art{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.map-art .district{fill:#e5eef5;stroke:#d5e4f0;stroke-width:2}.map-art .zone{opacity:.7}.map-art .river-border{fill:none;stroke:#cae7f7;stroke-width:70;stroke-linecap:round}.map-art .river{fill:none;stroke:#a0dafa;stroke-width:60;stroke-linecap:round}.map-art .river-core{fill:none;stroke:#b9e8fe;stroke-width:25;stroke-linecap:round}.map-art .river-wave{fill:none;stroke:#f5fcff;stroke-width:2;stroke-dasharray:4 26;opacity:.85;animation:water 17s linear infinite}@keyframes water{to{stroke-dashoffset:-250}}.map-art text{font-family:inherit;fill:#97aabb;font-size:12px;font-weight:700;letter-spacing:2px}.map-art .place-hint{font-size:10px;letter-spacing:1px;fill:#a1b4c4}
+.map-status{position:absolute;top:17px;left:17px;right:16px;display:flex;align-items:flex-start;justify-content:space-between;gap:6px;pointer-events:none}.map-status .pill{display:inline-flex;gap:6px;align-items:center;border:1px solid #d6e8ef;border-radius:99px;background:#fffffff0;box-shadow:0 4px 14px #1b5c8320;padding:8px 10px;font-size:10px;font-weight:800;color:#58758b}.map-status .pill b{color:#136fa0}.map-status .pill:last-child{font-weight:650;color:#7b91a2}.map-status i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#1bb99b;box-shadow:0 0 0 3px #42c8a126}
+.pins{position:absolute;inset:0;z-index:2}.pin{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);border:0;background:transparent;padding:0;width:34px;height:34px;display:grid;place-items:center;transition:opacity .2s,filter .2s;z-index:var(--z);color:#154565;touch-action:manipulation}.pin:before{content:"";position:absolute;inset:-9px;background:var(--cc);border-radius:50%;opacity:.1;filter:blur(4px);animation:breath 3s ease-in-out infinite}@keyframes breath{50%{opacity:.22;transform:scale(1.2)}}.pin:after{content:"";position:absolute;width:19px;height:19px;border-radius:50%;background:var(--cc);border:3px solid #fff;box-shadow:0 2px 10px #1b5b7d55;transition:.2s}.pin .pin-label{position:absolute;top:27px;left:50%;transform:translateX(-50%);font-size:10.5px;font-weight:900;white-space:nowrap;color:#1d3e55;background:#fffffff2;border:1px solid #d9e8f0;border-radius:7px;padding:4px 8px;box-shadow:0 4px 12px #2f688a19;opacity:0;visibility:hidden;transition:.2s;pointer-events:none}.pin.prominent .pin-label,.pin.selected .pin-label,.pin:hover .pin-label,.pin:focus-visible .pin-label{opacity:1;visibility:visible}.pin.selected{z-index:40;filter:drop-shadow(0 0 4px var(--cc))}.pin.selected:after{width:23px;height:23px;border:4px solid #fff;box-shadow:0 0 0 3px var(--cc),0 0 0 9px color-mix(in srgb,var(--cc),transparent 85%)}.pin.dim{opacity:.13}.pin.hidden{display:none}.pin.selected:before{opacity:.22;animation:activeHalo 2.1s infinite}@keyframes activeHalo{50%{transform:scale(1.6);opacity:.1}}
+.map-foot{position:absolute;bottom:14px;left:16px;right:16px;display:flex;align-items:end;justify-content:space-between;gap:10px;pointer-events:none}.map-legend{display:flex;flex-wrap:wrap;gap:7px;max-width:76%;padding:9px 12px;background:#fffef4f2;border:1px solid #e1e7e4;border-radius:10px;font-size:9px;color:#64819a}.map-legend span{display:flex;align-items:center;gap:4px}.map-legend i{display:inline-block;width:7px;height:7px;background:var(--cc);border-radius:50%}.map-foot .footnote{font-size:9px;max-width:38%;text-align:right;color:#7590a5;background:#fffffff0;border-radius:8px;padding:6px 8px}.map-foot .footnote b{color:#597994}
+.list-mode{display:none;min-height:570px;padding:4px 19px 18px}.list-mode.show{display:block}.map-body.list-hidden{display:none}.place-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:4px}.place-item{display:flex;gap:10px;align-items:center;text-align:left;border:1px solid #e2eaf3;border-radius:13px;padding:13px;background:#f9fbfd;transition:.18s;min-width:0}.place-item:hover,.place-item:focus-visible{border-color:#99c9ef;background:#eef8ff}.place-item.selected{border-color:#67b7eb;background:#eff9ff}.place-item .pic{width:42px;height:42px;display:grid;place-items:center;background:var(--tint);border-radius:12px;font-size:22px;flex:none}.place-item .name{font-size:12px;font-weight:900;color:#19364e}.place-item .meta{font-size:10px;color:#7790a5;margin-top:4px}.place-item .heat{margin-left:auto;font-size:11px;color:#ed7b60;font-weight:850}
+.right-col{display:flex;flex-direction:column;gap:14px}.draw{position:relative;overflow:hidden;padding:20px;background:linear-gradient(135deg,#103b58,#145979 60%,#0b7c8c);color:#fff;border:1px solid #184d6a;border-radius:var(--panelrad);min-height:142px;box-shadow:0 13px 28px #25547724}.draw:before{content:"";position:absolute;width:220px;height:220px;right:-65px;top:-90px;border-radius:50%;border:1px solid #a1dcee55;box-shadow:0 0 0 25px #b4e7f010,0 0 0 53px #b4e7f012}.draw .eyebrow{color:#81e3d9;font-size:10px;font-weight:800;letter-spacing:2px}.draw h3{font-size:23px;line-height:1.25;margin:7px 0 7px;letter-spacing:-.5px}.draw p{font-size:11.5px;color:#c2e1ef;margin:0 0 13px;max-width:280px}.draw button{display:inline-flex;align-items:center;gap:10px;border:0;background:#fff;color:#115070;font-size:12px;font-weight:900;padding:10px 16px;border-radius:11px;box-shadow:0 5px 18px #112f4455;transition:transform .15s}.draw button:hover{transform:translateY(-1px)}.draw button:disabled{opacity:.7}.draw .sparkle{position:absolute;right:19px;bottom:7px;font-size:49px;opacity:.62;transform:rotate(-19deg);pointer-events:none}.draw .mini{font-size:10px;color:#b7d9e4;margin-left:9px}
+.focus-card{padding:19px 20px 18px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}.section-head h3{margin:0;font-size:12px;font-weight:900;letter-spacing:.3px}.section-head .small{font-size:10px;color:#91a5b5}.featured{display:flex;align-items:center;gap:13px}.featured .featured-icon{width:61px;height:61px;display:grid;place-items:center;border-radius:17px;background:linear-gradient(140deg,#e0f6f8,#e4edff);font-size:32px;flex:none}.featured h4{margin:0;font-size:24px;letter-spacing:-.7px;line-height:1.2}.featured .badge{display:inline-flex;align-items:center;gap:5px;margin-top:7px;border-radius:99px;background:#f2f7fd;padding:5px 9px;font-size:10px;font-weight:740;color:#54798e}.featured .heat{font-weight:900;color:#e87859}.featured .dot{height:5px;width:5px;background:#f09665;border-radius:50%;display:inline-block}.divider{height:1px;background:#e6eef4;margin:15px 0}.focus-reason{padding:11px 13px;border-radius:13px;border:1px solid #d5eaf3;background:#f1f9fe}.focus-reason b{font-size:10px;color:#238ba8;display:block;margin-bottom:4px}.focus-reason p{font-size:12px;color:#25485f;font-weight:700;margin:0;line-height:1.55}.focus-info{display:grid;gap:8px;margin-top:11px}.focus-info .info{display:flex;align-items:flex-start;gap:8px;color:#71889a;font-size:11px;line-height:1.65}.focus-info .info strong{flex:none;color:#345b73;font-size:10px;background:#ecf3f8;padding:4px 7px;border-radius:6px}.focus-info p{margin:0}.focus-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.action{border:1px solid #d2e4f0;padding:12px 7px;border-radius:11px;background:#f4f9fd;color:#28638a;font-size:11px;font-weight:850}.action.primary{background:linear-gradient(120deg,#177bab,#1e95be);color:#fff;border-color:#1e8eb9}.action:hover{filter:brightness(.97)}.focus-warn{font-size:9.5px;color:#91a2b2;margin-top:9px;line-height:1.5}
+.rank-card{padding:18px 19px 12px}.rank-list{display:grid;gap:7px}.rank{display:flex;align-items:center;width:100%;gap:11px;padding:10px;border:1px solid #e8eff4;border-radius:11px;background:#fafcfe;text-align:left;transition:.16s}.rank:hover{background:#eff8fd;border-color:#b9dbea}.rank.current{background:#edf9fc;border-color:#9ed4e5}.rank .ord{height:28px;width:28px;display:grid;place-items:center;border-radius:9px;background:#f2f5fb;color:#7691a5;font-size:11px;font-weight:900}.rank:first-child .ord{background:#fef1d5;color:#c88725}.rank .text strong{display:block;font-size:11.5px;color:#263f56}.rank .text span{display:block;color:#8a9eae;font-size:9.5px;margin-top:1px}.rank .score{margin-left:auto;font-size:14px;font-weight:900;color:#ec8d52}.rank .score small{font-size:9px;font-weight:600;color:#a1b0bb}
+.whisper{padding:17px 19px 15px}.whisper-title{display:flex;align-items:center;gap:7px;font-weight:900;font-size:12px;margin-bottom:9px}.whisper-title em{font-size:9px;color:#7a99ac;font-weight:700;font-style:normal;margin-left:auto}.story{font-size:11px;line-height:1.6;color:#607e93;border-left:3px solid #86c9dd;padding:4px 0 4px 11px;margin:9px 0}.story:last-child{margin-bottom:0}
+.bottom{margin-top:18px;border-radius:16px;border:1px solid #d9e7f0;background:#ffffffbc;display:flex;justify-content:space-between;gap:13px;padding:15px 20px;font-size:11px;color:#6c8296;line-height:1.65}.bottom strong{color:#2d536f}.bottom .source{max-width:500px;text-align:right;color:#8598a7}.empty{padding:60px 15px;text-align:center;color:#829bb0;font-size:12px}.toast{position:fixed;z-index:100;left:50%;bottom:85px;transform:translateX(-50%);color:#fff;background:#14324b;border-radius:12px;padding:12px 20px;box-shadow:0 12px 25px #294d7050;font-size:12px;max-width:min(95vw,410px);text-align:center}
+@media(max-width:1230px){.main-grid{grid-template-columns:minmax(0,1.3fr) minmax(305px,.85fr)}.map-body{height:525px}.summary{gap:11px;padding:12px}.hero h1{font-size:41px}.right-col{gap:12px}.focus-card{padding:16px}.whisper{display:none}}
+@media(max-width:980px){.page{padding:17px 18px 110px}.main-grid{grid-template-columns:minmax(0,1fr)}.right-col{display:grid;grid-template-columns:1fr 1fr;gap:13px}.draw{grid-column:1/-1;min-height:132px}.focus-card,.rank-card{min-height:300px}.map-body{height:475px}.whisper{display:block;grid-column:1/-1}.hero{grid-template-columns:1fr}.summary{justify-self:start}}
+@media(max-width:650px){.page{padding:13px 11px 106px}.top{padding-bottom:18px}.brand{font-size:12px}.brandmark{height:34px;width:34px}.toplinks{gap:4px}.toplinks .extra{display:none}.toplinks a{padding:7px 9px;font-size:10px}.hero{padding:23px 3px 16px;gap:15px}.hero h1{font-size:36px;letter-spacing:-1.5px;margin:8px 0}.lead{font-size:12px;line-height:1.7}.summary{width:100%;justify-content:space-around;border-radius:14px;box-shadow:none}.summary .num{font-size:23px}.summary .lab{font-size:10px}.explorer{padding:11px;flex-wrap:wrap;gap:8px;margin-bottom:12px}.find-label{display:none}.chips{order:1;flex-basis:100%;gap:5px}.chip{font-size:10.5px;padding:9px 10px}.search{order:0;width:100%;max-width:none;border-left:0;border-bottom:1px solid #e5eef5;padding:2px 4px 10px}.main-grid{gap:12px}.map-top{padding:16px 15px 13px}.headleft h2{font-size:14px}.mode button{font-size:10px;padding:6px 8px}.map-body{height:410px;margin:0 9px 9px;border-radius:13px}.map-status{top:8px;left:8px;right:8px}.map-status .pill{font-size:9px;padding:6px 7px}.map-status .pill:last-child{max-width:52%;text-align:right}.pin{width:26px;height:26px}.pin:after{width:13px;height:13px;border-width:2px}.pin.selected:after{width:19px;height:19px;border-width:3px}.pin .pin-label{font-size:9px;max-width:105px;overflow:hidden;text-overflow:ellipsis}.pin.prominent .pin-label{opacity:0;visibility:hidden}.pin.selected .pin-label{opacity:1;visibility:visible}.map-foot{left:7px;right:7px;bottom:7px}.map-legend{gap:5px;padding:7px;font-size:8px;max-width:78%}.map-foot .footnote{font-size:8px;max-width:40%}.right-col{display:flex;flex-direction:column;gap:11px}.draw{padding:18px;min-height:0}.draw h3{font-size:20px}.draw p{font-size:11px}.focus-card,.rank-card{min-height:0}.featured h4{font-size:21px}.bottom{flex-direction:column;font-size:10px;margin-top:12px;padding:14px}.bottom .source{text-align:left}.list-mode{min-height:405px;padding:0 10px 12px}.place-list{grid-template-columns:1fr;gap:7px}.place-item{padding:10px}.map-art text{font-size:10px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+.map-roll{position:absolute;bottom:56px;right:17px;z-index:8;border:1px solid #f6d79c;background:linear-gradient(145deg,#fffaf0,#fff2d8);color:#96611c;font-size:11px;font-weight:900;padding:11px 15px;border-radius:999px;box-shadow:0 7px 18px #a9702d25;transition:transform .18s}
+.map-roll:hover{transform:translateY(-2px)}
+@media(max-width:650px){.map-roll{bottom:55px;right:9px;font-size:10px;padding:10px 12px}}
 </style>
 <link rel="stylesheet" href="hc-journey-nav.css">
 </head>
 <body>
-
-<div class="scene">
-  <div class="sky"></div>
-  <div class="stars" id="stars"></div>
-  <div class="moon"></div>
-  <div class="mountains"></div>
-  <div class="skyline" id="skyline"></div>
-  <div class="road">
-    <div class="car"></div><div class="car r"></div>
-    <div class="car" style="animation-delay:-3s;top:30%"></div>
-    <div class="car r" style="animation-delay:-5s;top:70%"></div>
+<div class="page">
+<header class="top">
+  <div class="brand"><span class="brandmark">✦</span><div>惠城产业风洞<div class="brand-sub">HUICHENG · CITY EXPLORER</div></div></div>
+  <div class="toplinks"><span class="extra"><i class="source-dot"></i>公开去处 · 每日更新</span><a href="index.html">返回序章</a><a href="holo-workspace.html">看全息</a></div>
+</header>
+<section class="hero">
+  <div><div class="kicker">CHAPTER 04 / CITY IN MOTION</div><h1>今晚，惠城<em>去哪玩？</em></h1><p class="lead">不想做攻略，就在城市里随手点一个。<b>找去处、问朋友、看见夜晚的人气线索。</b> 这里是探索游戏，不是实时拥挤地图。</p></div>
+  <div class="summary"><div><div class="num" id="sumCount">14</div><div class="lab">公开去处</div></div><span class="vline"></span><div><div class="num hot" id="sumHot">4</div><div class="lab">高热讨论档</div></div><span class="vline"></span><div><div class="num" id="sumPulse">3</div><div class="lab">公开生活线索</div></div></div>
+</section>
+<section class="explorer" aria-label="筛选去哪玩"><span class="find-label">今天想怎么过？</span><div class="chips" id="categoryChips"></div><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg><input type="search" id="spotSearch" aria-label="搜索去处" placeholder="搜去处、夜景、咖啡、遛娃…" autocomplete="off"></label></section>
+<div class="main-grid">
+<section class="card map-card" aria-label="惠城去处探索图">
+  <header class="map-top"><div class="headleft"><h2>在惠城，找到你的今晚</h2><p>点击光点探索 · 河流与点位为概念示意，不是导航坐标</p></div><div class="mode" role="group" aria-label="切换查看模式"><button type="button" class="on" id="mapToggle" aria-pressed="true">探索图</button><button type="button" id="listToggle" aria-pressed="false">清单</button></div></header>
+  <div class="map-body" id="mapBody">
+    <svg class="map-art" viewBox="0 0 840 610" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path class="district" d="M62 66 Q330 -5 600 65 Q772 88 793 245 L765 474 Q676 566 478 561 L145 525 Q65 423 53 253 Z"/>
+      <path class="zone" fill="#e3eefd" d="M345 63 Q561 50 689 168 L604 276 Q498 254 391 232 Q331 168 345 63Z"/>
+      <path class="zone" fill="#e8f4e9" d="M495 297 Q632 262 764 333 L739 461 Q653 526 553 487 Q500 426 495 297Z"/>
+      <path class="zone" fill="#f8f2df" d="M170 330 Q313 311 420 390 L460 500 Q288 551 142 479 Q128 400 170 330Z"/>
+      <path class="river-border" d="M-80 368 Q140 348 324 314 T684 267 T925 302"/>
+      <path class="river" d="M-80 368 Q140 348 324 314 T684 267 T925 302"/>
+      <path class="river-core" d="M-80 368 Q140 348 324 314 T684 267 T925 302"/>
+      <path class="river-wave" d="M-80 368 Q140 348 324 314 T684 267 T925 302"/>
+      <text x="668" y="190">江 北</text><text x="134" y="448">西 湖 周 边</text><text x="600" y="443">老 城 活 力</text><text x="359" y="287" transform="rotate(-9 359 287)">东 江 · 探 索 意 象</text>
+      <g opacity=".55" stroke="#c5d9e8" fill="none" stroke-width="1.5" stroke-dasharray="4 9"><path d="M90 210 Q291 105 390 185 T743 149"/><path d="M170 508 Q302 380 480 467 T749 412"/></g>
+    </svg>
+    <div class="map-status"><span class="pill"><i></i><b id="spotCount">14 个去处</b><span>可探索</span></span><span class="pill">讨论热度分档 · 非实时人流量</span></div>
+    <div class="pins" id="spotPins"></div><button type="button" class="map-roll" id="mapRollBtn">🎲 摇一站 ↗</button>
+    <footer class="map-foot"><div class="map-legend"><span><i style="--cc:#de8a43"></i>散步 / 咖啡</span><span><i style="--cc:#2d87d7"></i>逛街</span><span><i style="--cc:#b766df"></i>活动 / 夜游</span><span><i style="--cc:#24ae89"></i>运动 / 亲子</span></div><span class="footnote">探索意象图 <b>≠ 实际地理定位</b></span></footer>
   </div>
+  <div class="list-mode" id="listMode"><div class="place-list" id="placeList"></div></div>
+</section>
+<aside class="right-col" aria-label="今晚去哪玩推荐与信息">
+  <section class="draw"><div class="eyebrow">LET THE CITY DECIDE</div><h3>今晚去哪儿？<br>让城市替你选一站。</h3><p>在公开去处里摇一个，你自己决定去不去。</p><button id="rollBtn" type="button">🎲 摇一站 <span aria-hidden="true">↗</span></button><span class="mini" id="rollStatus">不需要登录</span><span class="sparkle" aria-hidden="true">✳</span></section>
+  <section class="card focus-card" id="detailCard"><div class="section-head"><h3>正在探索</h3><span class="small" id="detailCaption">选择地图光点</span></div><div class="featured"><div class="featured-icon" id="spotEmoji">🌙</div><div><h4 id="spotName">请选择一个去处</h4><div class="badge"><i class="dot"></i><span id="spotLevel">近期公开讨论热度</span></div></div></div><div class="divider"></div><div class="focus-reason"><b>✨ 为什么值得看看</b><p id="spotWhy">点亮城市里的一个光点，发现它的故事。</p></div><div class="focus-info"><div class="info"><strong>有什么</strong><p id="spotDetail">从城市里发现值得探索的好去处。</p></div><div class="info"><strong>风洞观察</strong><p id="spotWatch">把好玩和城市生活联系起来。</p></div></div><div class="focus-actions"><button class="action primary" id="inviteBtn" type="button">✉️ 复制邀约</button><button class="action" id="saveBtn" type="button">☆ 加入清单</button></div><div class="focus-warn">公开去处仅供探索，具体营业、活动、费用与安全信息以现场或官方渠道为准。</div></section>
+  <section class="card rank-card"><div class="section-head"><h3>今晚大家在关注什么？</h3><span class="small">基于公开讨论分档</span></div><div class="rank-list" id="rankList"></div></section>
+  <section class="card whisper"><div class="whisper-title">📡 城市耳语 <em id="updateTime">公开线索 · 每日更新</em></div><div id="storyList"></div></section>
+</aside>
 </div>
-
-<div class="hud">
-  <div class="topbar">
-    <div class="brand"><span class="logo"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="white"/></svg></span>惠城产业风洞</div>
-    <div class="res">
-      <div class="r"><span class="v blue" id="rTotal">14</span><span class="l">今夜去处</span></div>
-      <div class="r"><span class="v" id="rHot">4</span><span class="l">个高热</span></div>
-      <div class="r"><span class="v green" id="rPulse">3</span><span class="l">条市民广播</span></div>
-      <div class="r"><span class="v" id="rSeason">秋</span><span class="l">当前季节</span></div>
-    </div>
-    <div class="clock" title="每日07:27只刷新生活风向话题，不涉及模型参数"><b>夜生活档</b><br>每日 07:27 刷话题</div>
-  </div>
-
-  <div class="mid">
-    <div class="view" id="view-fun">
-      <div class="stage">
-        <div class="stage-h">
-          <h2>惠城夜 · 人气热力</h2>
-          <span class="sub">14 个去处 · 人气越高光点越烫 · 点光点看「风洞看什么」</span>
-          <span class="live" id="funLive">每日更新</span>
-          <span class="side-tab" onclick="openDrawer('cats')">分类</span>
-          <span class="side-tab" onclick="openDrawer('card')">本地点</span>
-        </div>
-        <div class="ticker">
-          <span class="tk-ico">📡</span>
-          <div class="tk-wrap"><div class="tk-track" id="tkTrack">市民广播加载中…</div></div>
-        </div>
-        <div class="stage-body">
-          <div class="radar" id="radar">
-            <div class="rc"></div><div class="rc a"></div><div class="rc b"></div>
-            <div class="cross"></div><div class="sweep"></div><div class="center"></div>
-          </div>
-          <div class="spot-field" id="spotField"></div>
-          <div class="stage-cap"><span class="beat"></span><span id="funCap">入夜后的惠城，人气往哪流 —— 江北服务业占全区近半</span></div>
-        </div>
-        <div class="stage-foot">
-          <span>人气按点评 / 小红书 / 抖音近期公开打卡分档（高 / 较高 / 中），<b>非真实人数统计</b></span>
-          <span>具体营业与门票以现场为准</span>
-        </div>
-      </div>
-
-      <div class="side-mask" id="view-funMask" onclick="closeDrawer()"></div>
-      <div class="side">
-        <div class="panel" id="catsPanel">
-          <h3><span class="dot"></span>想怎么玩</h3>
-          <div class="fgrid" id="fgrid"></div>
-        </div>
-        <div class="panel" id="cardPanel">
-          <h3><span class="dot" style="background:var(--pink)"></span>本地点任务卡</h3>
-          <div class="tcard" id="tcard">
-            <div style="font-size:12px;color:var(--muted);line-height:1.6">点城市里的光点，或让雷达随机锁定一个去处——这里不只告诉你「去哪」，还告诉你它在「风洞」里说明什么。</div>
-          </div>
-        </div>
-        <div class="panel">
-          <button class="roll-btn" id="rollBtn">🎲 摇个周末去处</button>
-          <div class="note">本地随机推荐，数据仍以每日更新的去处清单为准。</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  
+<div class="bottom"><div><strong>真正有意思的，不只是去哪玩。</strong> 更是人为什么聚集、哪些公共空间受欢迎、城市如何留住生活。</div><div class="source" id="sourceNote">数据按公开资料与近期香港公开打卡整理；热度为参考分档，不代表实际到场人数或开放状态。</div></div>
 </div>
-
+<div id="toast" class="toast" hidden role="status"></div>
 <script>
-var SPOTS=[],PULSE=[],UPDATED="",curCat="all";
-var CAT={
-  cafe:{label:"☕ 发呆书店",color:"#f5b942",emo:"☕"},
-  shop:{label:"🛍️ 逛街约会",color:"#38bdf8",emo:"🛍️"},
-  night:{label:"🍻 晚上去哪",color:"#fb7185",emo:"🍻"},
-  kid:{label:"🧒 带娃",color:"#34d399",emo:"🧒"},
-  sport:{label:"🏃 动起来",color:"#4ade80",emo:"🏃"},
-  show:{label:"🎬 演出看展",color:"#a78bfa",emo:"🎬"},
-  food:{label:"🍜 觅食",color:"#fb923c",emo:"🍜"}
-};
-// 按人气从高到低排序后，映射到这些位置（大圆点居中、彼此拉开不重叠）
-var POS=[[25,38],[72,30],[15,68],[85,58],[50,75],[32,52],[60,62],[30,80],[48,48],[78,78],[58,22],[15,48],[90,38],[42,26]];
-function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
-(function(){var s=document.getElementById("stars");for(var i=0;i<70;i++){var st=document.createElement("i");st.style.left=Math.random()*100+"%";st.style.top=Math.random()*72+"%";st.style.animationDelay=(Math.random()*3)+"s";st.style.opacity=(.3+Math.random()*.6);s.appendChild(st);}})();
-(function(){var sk=document.getElementById("skyline");var hs=[50,80,64,100,74,116,58,88,104,66,92,78,120,60,84,100,70,90,108,62,80,96,72,110];hs.forEach(function(h,i){var b=document.createElement("i");if(i%6===0)b.className="tall";if(i%9===0)b.className="wide";b.style.height=h+"%";sk.appendChild(b);});})();
-
-function renderCats(){
-  var g=document.getElementById("fgrid");
-  var cats=["all","cafe","shop","night","kid","sport","show","food"];
-  g.innerHTML=cats.map(function(c){
-    var label=c==="all"?"✨ 全部":CAT[c].label;
-    return '<button class="fchip'+(c==="all"?" on":"")+'" data-c="'+c+'">'+label+'</button>';
-  }).join("");
-  g.querySelectorAll(".fchip").forEach(function(b){
-    b.onclick=function(){
-      g.querySelectorAll(".fchip").forEach(function(x){x.classList.remove("on");});
-      b.classList.add("on");
-      curCat=b.getAttribute("data-c");
-      applyFilter();
-    };
-  });
-}
-function renderSpots(){
-  var field=document.getElementById("spotField");field.innerHTML="";
-  var sorted=SPOTS.slice().sort(function(a,b){return b.hot-a.hot;});
-  sorted.forEach(function(x,i){
-    var ci=CAT[x.c]||{color:"#fbbf24",emo:"📍"};
-    var p=POS[i%POS.length];
-    var diam=2*(13+(x.hot-40)/50*27);
-    var dur=(3.2-x.hot/100*1.3);
-    var d=document.createElement("div");
-    d.className="spot";d.setAttribute("data-n",x.n);d.setAttribute("data-c",x.c);
-    d.style.left=p[0]+"%";d.style.top=p[1]+"%";d.style.width=diam+"px";d.style.height=diam+"px";
-    d.style.setProperty("--cc",ci.color);d.style.zIndex=5+Math.round(x.hot/10);
-    d.innerHTML='<div class="halo" style="animation-duration:'+(dur+.6).toFixed(2)+'s"></div>'
-      +'<div class="core" style="animation-duration:'+dur.toFixed(2)+'s"></div>'
-      +'<div class="ring" style="animation-duration:'+dur.toFixed(2)+'s"></div>'
-      +'<div class="nm">'+esc(x.n)+'</div>';
-    d.onclick=function(){selectSpot(x.n);};
-    field.appendChild(d);
-  });
-}
-function renderCard(x){
-  var ci=CAT[x.c]||{color:"#fbbf24",emo:"📍"};
-  var lvColor={"高":"#fb7185","较高":"#fbbf24","中":"#34d399"}[x.level]||"#34d399";
-  document.getElementById("tcard").innerHTML=
-    '<div class="card-head"><div class="card-emo" style="background:'+ci.color+'22;color:'+ci.color+';border:1px solid '+ci.color+'">'+ci.emo+'</div>'
-    +'<div><div class="card-name">'+esc(x.n)+'</div><div class="card-tag">'+esc(x.tag)+' · 人气 <b style="color:'+lvColor+'">'+esc(x.level)+'（'+x.hot+'）</b></div></div></div>'
-    +'<div class="card-row watch"><b>风洞看什么</b>'+esc(x.watch)+'</div>'
-    +'<div class="card-row"><b>为什么去</b>'+esc(x.why)+'</div>'
-    +'<div class="card-d">'+esc(x.d)+'</div>';
-}
-function applyFilter(){
-  document.querySelectorAll(".spot").forEach(function(el){
-    var ok=curCat==="all"||el.getAttribute("data-c")===curCat;
-    el.classList.toggle("dim",!ok);
-  });
-}
-function selectSpot(n,locked){
-  var x=null;
-  for(var i=0;i<SPOTS.length;i++){if(SPOTS[i].n===n){x=SPOTS[i];break;}}
-  if(!x)return;
-  document.querySelectorAll(".spot").forEach(function(el){
-    el.classList.toggle("sel",el.getAttribute("data-n")===n);
-    if(el.getAttribute("data-n")===n){el.classList.remove("dim");}
-  });
-  renderCard(x);
-  if(window.innerWidth<768){openDrawer("card");}
-  if(locked)toast("雷达锁定："+n);
-}
-function roll(){
-  var pool=curCat==="all"?SPOTS:SPOTS.filter(function(x){return x.c===curCat;});
-  if(!pool.length)return;
-  var btn=document.getElementById("rollBtn");btn.disabled=true;btn.textContent="📡 雷达扫描中…";
-  var radar=document.getElementById("radar");radar.classList.add("scanning");
-  var p=pool[Math.floor(Math.random()*pool.length)];
-  setTimeout(function(){
-    radar.classList.remove("scanning");
-    selectSpot(p.n,true);
-    btn.disabled=false;btn.textContent="🎲 再摇一次";
-  },1600);
-}
-document.getElementById("rollBtn").onclick=roll;
-window.openDrawer=function(k){
-  var sd=document.querySelector("#view-fun .side");
-  var mk=document.getElementById("view-funMask");
-  if(sd)sd.classList.add("open");
-  if(mk)mk.classList.add("on");
-  var target=null;
-  if(k==="cats")target=document.getElementById("catsPanel");
-  else if(k==="card")target=document.getElementById("cardPanel");
-  if(target)target.scrollIntoView({behavior:"smooth",block:"nearest"});
-};
-window.closeDrawer=function(){
-  var sd=document.querySelector("#view-fun .side");
-  var mk=document.getElementById("view-funMask");
-  if(sd)sd.classList.remove("open");
-  if(mk)mk.classList.remove("on");
-};
-function toast(txt){
-  var t=document.getElementById("toast");
-  if(t)t.remove();
-  t=document.createElement("div");t.id="toast";t.textContent=txt;
-  document.body.appendChild(t);
-  setTimeout(function(){t.remove();},1800);
-}
-async function load(){
-  var d;
-  try{var r=await fetch("life.json?ts="+Date.now());d=await r.json();}catch(e){d={spots:[],pulse:[]};}
-  SPOTS=d.spots||[];PULSE=d.pulse||[];UPDATED=d.updated||"";
-  var tk=document.getElementById("tkTrack");
-  if(PULSE.length){
-    var txt=PULSE.map(function(p){return "📡 "+p;}).join("　　　");
-    tk.innerHTML=txt+"　　　"+txt;
-  }else{tk.innerHTML="📡 惠城的周末，不用上热搜也值得去。";}
-  var lv=document.getElementById("funLive");if(lv)lv.textContent=UPDATED?("更新于 "+UPDATED.slice(5,10)):"每日更新";
-  // 顶部人气指标（现算，不抄门户经济指标）
-  function setR(id,t){var e=document.getElementById(id);if(e)e.textContent=t;}
-  setR("rTotal",SPOTS.length);
-  setR("rHot",SPOTS.filter(function(x){return x.level==="高";}).length);
-  setR("rPulse",PULSE.length);
-  setR("rSeason",d.season||"秋");
-  renderCats();renderSpots();
-  var top=SPOTS.slice().sort(function(a,b){return b.hot-a.hot;})[0];
-  if(top){renderCard(top);}
-}
-load();
+(function(){"use strict";
+const BASE_SNAPSHOT={updated:"2026-10-29 07:29",season:"秋",sourceLabel:"公开文旅与近期公开打卡",pulse:["本周末水东街奇幻夜、华贸寻梦灵感集市相关公开信息，具体安排以主办方为准","惠城夜经济与江边休闲的讨论持续受到关注","南方+与本地媒体公开文旅话题可供进一步核查"],spots:[
+{n:"水东街",c:"night",tag:"夜生活",why:"合江市集与老街夜景，近期万圣节主题活动值得关注",d:"骑楼老街、糖水与夜间集市，具体活动以现场公告为准",watch:"夜经济与年轻人回流",hot:90,level:"高"},
+{n:"惠州西湖",c:"show",tag:"夜游",why:"湖边夜色与东坡文化主题受到持续关注",d:"苏堤、泗洲塔、城市景观",watch:"公共景区的人气与承载",hot:87,level:"高"},
+{n:"红花湖绿道",c:"sport",tag:"骑行",why:"秋季骑行与户外休闲体验",d:"18公里环湖绿道，开放情况与租车信息以现场为准",watch:"生态休闲承载力",hot:87,level:"高"},
+{n:"江北华贸天地",c:"shop",tag:"逛街",why:"商圈里的集市、餐饮与文化活动",d:"江北商圈，具体活动日期以公告为准",watch:"江北服务业客流",hot:86,level:"高"},
+{n:"滨江东江边",c:"sport",tag:"散步",why:"入夜散步、沿江观景与慢跑",d:"东江边日常休闲空间",watch:"居住吸引力",hot:74,level:"较高"},
+{n:"祝屋巷",c:"cafe",tag:"文创",why:"老街巷里的手作与咖啡",d:"西湖周边文创街区",watch:"文化街区商业化与本味",hot:73,level:"较高"},
+{n:"野岛文化生活社区",c:"cafe",tag:"文创",why:"旧厂房改造的生活方式空间",d:"小店、咖啡与展览活动",watch:"年轻人愿不愿留下来",hot:68,level:"较高"},
+{n:"市博物馆/科技馆",c:"kid",tag:"遛娃",why:"室内文化场馆适合家庭探索",d:"具体展览与开放时间请核对场馆公告",watch:"家庭公共配套",hot:63,level:"较高"},
+{n:"桥东江边",c:"cafe",tag:"咖啡",why:"江边小店与慢生活",d:"咖啡、小酒馆和老城街巷",watch:"老城更新活过来没有",hot:63,level:"较高"},
+{n:"客家老味道",c:"food",tag:"觅食",why:"试试当地人熟悉的客家风味",d:"盐焗鸡、梅菜扣肉与酿豆腐等",watch:"本地消费循环",hot:60,level:"较高"},
+{n:"惠州文化艺术中心",c:"show",tag:"演出",why:"演出、文化活动与亲子剧值得关注",d:"具体排期、票务以主办方公告为准",watch:"文化消费浓度",hot:54,level:"中"},
+{n:"市民乐园/江北体育馆",c:"kid",tag:"亲子",why:"草坪与球场，适合家庭周末放电",d:"公共活动空间，情况以现场为准",watch:"学龄家庭周末活跃",hot:53,level:"中"},
+{n:"隆生广场/丽日",c:"shop",tag:"逛街",why:"老商圈中的本地生活与消费",d:"餐饮与商圈活动",watch:"老城商业活力",hot:48,level:"中"},
+{n:"佳兆业中心",c:"shop",tag:"逛街",why:"江北的餐饮与购物选择",d:"适合下班后顺路走走",watch:"CBD留不留得住人",hot:44,level:"中"}
+]};
+const CAT={all:{name:"全部",emoji:"✦",color:"#3b7a9e"},night:{name:"夜生活",emoji:"🌙",color:"#b766df"},cafe:{name:"发呆咖啡",emoji:"☕",color:"#d9954b"},shop:{name:"逛街约会",emoji:"🛍️",color:"#2c91d6"},kid:{name:"亲子带娃",emoji:"🧸",color:"#31b79b"},sport:{name:"散步运动",emoji:"🚲",color:"#2caa80"},show:{name:"演出夜游",emoji:"🎭",color:"#9167e5"},food:{name:"觅食",emoji:"🍜",color:"#e87959"}};
+const POS=[[63,41],[26,57],[20,75],[72,28],[53,46],[27,48],[38,78],[75,68],[67,55],[59,78],[79,15],[81,80],[44,71],[55,20]];
+const state={data:BASE_SNAPSHOT,cat:"all",search:"",selected:null,display:"map",wish:new Set(),isRolling:false};
+const $=id=>document.getElementById(id);const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const sorted=()=>state.data.spots.slice().sort((a,b)=>Number(b.hot||0)-Number(a.hot||0));
+function filtered(){return sorted().filter(s=>(state.cat==="all"||s.c===state.cat)&&(!state.search||[s.n,s.tag,s.d,s.why].join(" ").toLowerCase().includes(state.search)));}
+function toast(msg){const el=$("toast");el.textContent=msg;el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>el.hidden=true,2400);}
+function renderFilters(){const el=$("categoryChips");el.replaceChildren();Object.keys(CAT).forEach(k=>{const c=CAT[k];const b=document.createElement("button");b.type="button";b.className="chip"+(k===state.cat?" on":"");b.setAttribute("aria-pressed",String(k===state.cat));b.innerHTML="<em>"+esc(c.emoji)+"</em>"+esc(c.name);b.onclick=()=>{state.cat=k;renderFilters();refresh();};el.appendChild(b);});}
+function renderPins(){const el=$("spotPins");el.replaceChildren();const items=filtered();$("spotCount").textContent=items.length+" 个去处";if(state.selected&&!items.includes(state.selected))state.selected=items[0]||null;sorted().forEach((spot,i)=>{const pos=POS[i%POS.length],button=document.createElement("button");button.type="button";button.className="pin";if(!items.includes(spot))button.classList.add("hidden");if(i<3)button.classList.add("prominent");if(spot===state.selected)button.classList.add("selected");const cat=CAT[spot.c]||CAT.all;button.style.setProperty("--x",pos[0]+"%");button.style.setProperty("--y",pos[1]+"%");button.style.setProperty("--cc",cat.color);button.style.setProperty("--z",String(10+Math.round(Number(spot.hot)||50)/12));button.setAttribute("aria-label",spot.n+"，热度档 "+spot.level);button.innerHTML='<span class="pin-label">'+esc(spot.n)+'</span>';button.onclick=()=>selectSpot(spot);el.appendChild(button);});}
+function renderList(){const el=$("placeList");el.replaceChildren();const items=filtered();if(!items.length){el.innerHTML='<div class="empty">这里暂时没有匹配的公开去处，换个条件试试。</div>';return;}items.forEach(s=>{const cat=CAT[s.c]||CAT.all;const b=document.createElement("button");b.type="button";b.className="place-item"+(s===state.selected?" selected":"");b.style.setProperty("--tint",cat.color+"1d");b.innerHTML='<span class="pic">'+cat.emoji+'</span><span class="text"><span class="name">'+esc(s.n)+'</span><span class="meta">'+esc(s.tag||cat.name)+' · '+esc(s.level)+'热讨论档</span></span><span class="heat">'+esc(s.hot||"—")+'</span>';b.onclick=()=>selectSpot(s);el.appendChild(b);});}
+function renderFocus(){const s=state.selected;if(!s){$("spotName").textContent="这里暂时没有匹配的去处";$("spotEmoji").textContent="🧭";$("spotLevel").textContent="换个筛选条件试试";$("spotWhy").textContent="你的下一站可能就在另一种玩法里。";$("spotDetail").textContent="";$("spotWatch").textContent="";return;}const cat=CAT[s.c]||CAT.all;$("spotEmoji").textContent=cat.emoji;$("spotEmoji").style.background="linear-gradient(130deg,"+cat.color+"26,#eff8fc)";$("spotName").textContent=s.n;$("spotLevel").textContent="公开讨论 · "+s.level+"热档（参考指数 "+s.hot+"）";$("spotWhy").textContent=s.why||"来自公开记录的去处线索";$("spotDetail").textContent=s.d||s.tag||"详见公开来源";$("spotWatch").textContent=s.watch||"城市生活的另一面";$("detailCaption").textContent=s.tag||cat.name;$("saveBtn").textContent=state.wish.has(s.n)?"✓ 已加入清单":"☆ 加入清单";}
+function renderRank(){const el=$("rankList");el.replaceChildren();const list=filtered().slice(0,3);if(!list.length){el.innerHTML='<div class="empty">换个条件看看更多去处。</div>';return;}list.forEach((s,i)=>{const b=document.createElement("button");b.type="button";b.className="rank"+(s===state.selected?" current":"");b.innerHTML='<span class="ord">'+String(i+1).padStart(2,"0")+'</span><span class="text"><strong>'+esc(s.n)+'</strong><span>'+esc(s.tag)+' · '+esc(s.level)+'热讨论档</span></span><span class="score">'+esc(s.hot)+'<small> / 热度参考</small></span>';b.onclick=()=>selectSpot(s);el.appendChild(b);});}
+function selectSpot(s,fromRoll){state.selected=s;renderPins();renderFocus();renderRank();renderList();if(fromRoll){toast("🎲 帮你挑到了："+s.n);$("rollStatus").textContent="已抽中 · "+s.n;}if(window.innerWidth<=650&&state.display==="map"&&fromRoll){$("detailCard").scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion:reduce)").matches?"instant":"smooth",block:"center"});}}
+function refresh(){const items=filtered();if(!items.includes(state.selected))state.selected=items[0]||null;renderPins();renderFocus();renderRank();renderList();}
+function renderPulses(){const el=$("storyList");el.replaceChildren();(state.data.pulse||[]).slice(0,3).forEach(txt=>{const p=document.createElement("p");p.className="story";p.textContent=txt;el.appendChild(p);});if(!el.children.length){el.innerHTML='<p class="story">暂无可用的城市生活线索。</p>';}}
+function renderMeta(){const d=state.data;$("sumCount").textContent=d.spots.length;$("sumHot").textContent=d.spots.filter(s=>s.level==="高").length;$("sumPulse").textContent=(d.pulse||[]).length;$("updateTime").textContent=d.updated?"更新 "+d.updated.slice(5):"每日更新";$("sourceNote").textContent=(d.note||"去处热度来自公开打卡分档，非实时人数统计。")+(d.updated?" · 最近刷新 "+d.updated:"");}
+function normalize(d){if(!d||!Array.isArray(d.spots)||!d.spots.length)return BASE_SNAPSHOT;return {updated:d.updated||"",note:d.note||BASE_SNAPSHOT.note,pulse:Array.isArray(d.pulse)?d.pulse:[],spots:d.spots.map(x=>({n:String(x.n||"未命名"),c:String(x.c||"show"),tag:String(x.tag||""),why:String(x.why||""),d:String(x.d||""),watch:String(x.watch||""),hot:Math.max(0,Number(x.hot||0)),level:String(x.level||"中")})),season:d.season||""};}
+function applyData(d){state.data=normalize(d);state.selected=sorted()[0]||null;renderMeta();renderFilters();refresh();renderPulses();}
+function setMode(k){state.display=k;$("mapToggle").classList.toggle("on",k==="map");$("listToggle").classList.toggle("on",k==="list");$("mapToggle").setAttribute("aria-pressed",String(k==="map"));$("listToggle").setAttribute("aria-pressed",String(k==="list"));$("mapBody").classList.toggle("list-hidden",k!=="map");$("listMode").classList.toggle("show",k==="list");}
+function randomPick(){if(state.isRolling)return;const list=filtered();if(!list.length){toast("这个条件没有去处，换个分类吧");return;}state.isRolling=true;const btn=$("rollBtn");btn.disabled=true;btn.textContent="✦ 正在探索城市…";let i=0;let temp;const duration=window.matchMedia("(prefers-reduced-motion:reduce)").matches?0:760;const tick=setInterval(()=>{temp=list[Math.floor(Math.random()*list.length)];selectSpot(temp);i++;if(i>=7)clearInterval(tick);},95);setTimeout(()=>{clearInterval(tick);const picked=list[Math.floor(Math.random()*list.length)];selectSpot(picked,true);btn.disabled=false;btn.textContent="🎲 再摇一站 ↗";state.isRolling=false;},duration);}
+function invite(){const s=state.selected;if(!s)return;const message="周末要不要一起去「"+s.n+"」？听说这里"+(s.why||"值得逛逛")+"。这是从惠城产业风洞公开去处里挑的，活动和营业时间我们出发前再确认一下～";if(navigator.clipboard?.writeText){navigator.clipboard.writeText(message).then(()=>toast("已复制邀约文案，发给朋友吧 ✨")).catch(()=>fallbackCopy(message));}else fallbackCopy(message);}
+function fallbackCopy(txt){const ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();let ok=false;try{ok=document.execCommand("copy");}catch(e){}ta.remove();toast(ok?"邀约文案已复制":"复制失败，可以手动截图分享");}
+function save(){const s=state.selected;if(!s)return;const had=state.wish.has(s.n);had?state.wish.delete(s.n):state.wish.add(s.n);$("saveBtn").textContent=state.wish.has(s.n)?"✓ 已加入清单":"☆ 加入清单";toast(had?"已从本次清单中移除":"已加入本次探索清单（仅保留在当前页面）");}
+$("spotSearch").addEventListener("input",e=>{state.search=e.target.value.trim().toLowerCase();refresh();});$("rollBtn").addEventListener("click",randomPick);$("mapRollBtn").addEventListener("click",randomPick);$("inviteBtn").addEventListener("click",invite);$("saveBtn").addEventListener("click",save);$("mapToggle").addEventListener("click",()=>setMode("map"));$("listToggle").addEventListener("click",()=>setMode("list"));
+applyData(BASE_SNAPSHOT);
+if(location.protocol!=="file:"){fetch("life.json?ts="+Date.now(),{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("No life.json");return r.json();}).then(applyData).catch(()=>{toast("暂未读取到最新数据，正在显示 10/29 示例快照");});}
+})();
 </script>
 <script src="hc-journey-nav.js" defer></script>
 </body>
