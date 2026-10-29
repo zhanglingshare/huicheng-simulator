@@ -126,7 +126,7 @@ button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:
     </div>
     <div class="group-result" id="groupResult" hidden>
       <strong id="groupResultTitle">适合你们的三站</strong>
-      <ul id="groupRecommendations"></ul>
+      <ul id="groupRecommendations"></ul><div class="group-actions" style="margin-bottom:0"><button type="button" id="shareConsensusBtn">✉️ 复制我们共同选的三站</button></div>
     </div>
     <div class="group-limit" id="groupLimit">组队是纯前端“接力式共选”，不会自动收集其他人的答案。朋友需要把回复链接发回发起者，再由发起者粘贴汇总。所有偏好仅在链接和当前页面里，不代表真实公众投票。</div>
   </section>
@@ -283,12 +283,12 @@ function loadGroupInvite(){
  }catch(e){toast("此邀请链接无法识别，请让朋友重新分享。");}
 }
 function createGroup(){
- const g=makeCode();state.groupId=g;state.groupGuest=false;state.hostPref=null;state.friends=[];
+ const g=makeCode();state.groupId=g;state.groupGuest=false;state.hostPref={role:state.role,time:state.time,intervention:"none"};state.friends=[];
  const invitation=makeShareUrl("hcjoin",{v:1,g,role:state.role,time:state.time});
  $("inviteCard").hidden=false;
  $("inviteTitle").textContent="已创建一次接力组队，复制邀请链接";
  $("inviteLink").value=invitation;$("copyInviteBtn").hidden=false;
- $("groupLimit").textContent="朋友打开邀请链接选择偏好，再通过「复制我的回复」把回复链接发回你；将链接粘贴到下方输入框才会参与本地汇总。没有服务器自动投票或同步。";
+ $("groupLimit").textContent="发起时的偏好已固定在邀请中；如果要改变自己的组队偏好，请重新发起。朋友需把回复链接发回你，由你粘贴汇总。没有服务器自动投票或同步。";
  renderGroupResult();copySafe(invitation,"邀请链接已复制，发给朋友吧 ✨");
 }
 function sendReply(){
@@ -312,8 +312,16 @@ function addFriendReply(){
   $("friendReply").value="";renderGroupResult();toast("已加入一位伙伴的选择");
  }catch(e){toast("回复链接无效，或不是本次组队。请检查后重试。");}
 }
+function shareConsensus(){
+ const el=$("groupRecommendations");
+ if($("groupResult").hidden||!el.children.length){toast("至少收到一个朋友的回复后才能分享结果");return;}
+ const labels=Array.from(el.querySelectorAll("li")).map(x=>x.textContent);
+ const text="我们在惠城《去哪玩》做了一个偏好共选，值得考虑的三站：\n"+labels.join("\n")+"\n这是基于公开地点列表与我们的选择排序，不是营业保障或实时人流。出发前请核对时间、交通、天气和费用。";
+ copySafe(text,"已复制组队建议，可以发给朋友讨论 ✨");
+}
+$("shareConsensusBtn").addEventListener("click",shareConsensus);
 function renderGroupResult(){
- const host=state.groupGuest?state.hostPref:{role:state.role,time:state.time,intervention:"none"};
+ const host=state.hostPref||{role:state.role,time:state.time,intervention:"none"};
  const profiles=[host,...state.friends];
  if(state.groupGuest)profiles.push({role:state.role,time:state.time,intervention:"none"});
  const enough=!!state.groupId&&(state.groupGuest||state.friends.length>0);
