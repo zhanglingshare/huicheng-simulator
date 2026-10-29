@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>惠城全息关系工作区 · 独立预览</title>
+<style>
+:root{--ink:#15243a;--muted:#64748b;--faint:#94a3b8;--line:#e3eaf2;--line2:#eef3f8;--blue:#2563eb;--cyan:#0891b2;--green:#16a34a;--amber:#d97706;--red:#dc2626;--violet:#7c3aed;--bg:#f4f7fb;--card:#fff;--shadow:0 8px 28px rgba(21,36,58,.06);--radius:18px}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:13px/1.55 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #93c5fd;outline-offset:2px}a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+.topbar{height:66px;background:rgba(255,255,255,.92);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:20px;padding:0 24px;position:sticky;top:0;z-index:20;backdrop-filter:blur(16px)}
+.brand{display:flex;align-items:center;gap:11px;min-width:255px}.brand-mark{width:36px;height:36px;border-radius:12px;background:#15243a;display:grid;place-items:center;color:#7dd3fc;box-shadow:0 5px 14px #15243a25}.brand-mark svg{width:23px;height:23px}.brand h1{font-size:15px;line-height:1.2;margin:0;font-weight:850;letter-spacing:.1px}.brand p{font-size:10px;color:var(--muted);margin:4px 0 0;letter-spacing:.4px}
+.topnav{display:flex;align-items:center;gap:3px;padding:4px;background:#f0f4f9;border-radius:12px}.topnav button{border:0;background:transparent;color:#65758a;padding:7px 13px;border-radius:9px;font-size:12px;font-weight:700}.topnav button.active{background:var(--ink);color:#fff;box-shadow:0 3px 9px #15243a24}.topnav button:hover:not(.active){background:#e5edf6;color:var(--ink)}
+.topright{margin-left:auto;display:flex;align-items:center;gap:10px;min-width:0}.searchbox{width:min(250px,22vw);height:37px;display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:#f8fafc;border-radius:11px;padding:0 11px;color:var(--faint)}.searchbox input{width:100%;border:0;outline:0;background:transparent;min-width:0;color:var(--ink);font-size:12px}.searchbox:focus-within{border-color:#93b7ee;background:#fff;box-shadow:0 0 0 3px #dbeafe88}.preview-tag{white-space:nowrap;font-size:10px;font-weight:800;color:#8a4b09;background:#fff7e8;border:1px solid #f7dba8;border-radius:99px;padding:6px 9px}
+.metrics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;padding:16px 22px 0}.metric{position:relative;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:15px;padding:12px 15px;box-shadow:0 2px 5px #15243a05}.metric:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#2563eb)}.metric .label{font-size:11px;color:var(--muted)}.metric .value{font-size:22px;font-weight:850;letter-spacing:-.5px;line-height:1.2;margin-top:5px;font-variant-numeric:tabular-nums}.metric .delta{font-size:10px;color:#15803d;background:#eaf8ef;border-radius:6px;padding:3px 6px;margin-left:5px;white-space:nowrap}.metric .note{font-size:10px;color:var(--faint);margin-top:5px}
+.workspace{display:grid;grid-template-columns:190px minmax(390px,1fr) 340px;gap:14px;padding:14px 22px 0;min-height:560px;height:calc(100vh - 228px);min-height:560px;max-height:900px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 2px 7px #15243a05;min-width:0}
+.leftcol{display:flex;flex-direction:column;gap:12px;min-height:0;overflow:auto;scrollbar-width:thin}.sidecard{padding:14px}.card-title{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:850;margin-bottom:11px}.card-title .tiny-dot{width:7px;height:7px;background:var(--blue);border-radius:50%;box-shadow:0 0 0 4px #dbeafe}.count{margin-left:auto;color:var(--muted);font-size:10px;background:#f1f5f9;padding:2px 7px;border-radius:99px}
+.filter-list{display:flex;flex-direction:column;gap:4px}.filter-btn{display:flex;align-items:center;gap:9px;width:100%;padding:9px 8px;border:1px solid transparent;border-radius:10px;background:transparent;text-align:left;color:#516176;font-size:11.5px;font-weight:700}.filter-btn .swatch{width:9px;height:9px;border-radius:3px;flex:none}.filter-btn .fcount{margin-left:auto;font-size:10px;color:#9aa8b8;font-variant-numeric:tabular-nums}.filter-btn.active{background:#edf4ff;border-color:#d8e6ff;color:#1949a4}.filter-btn:hover:not(.active){background:#f7f9fc}
+.switchrow{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid var(--line2);margin-top:9px;padding-top:10px;font-size:11px;color:#52647a}.switch{width:34px;height:19px;border:0;border-radius:99px;background:#cbd5e1;padding:2px;flex:none;transition:.18s}.switch:after{content:"";display:block;width:15px;height:15px;border-radius:50%;background:#fff;box-shadow:0 1px 3px #0002;transition:.18s}.switch.on{background:var(--blue)}.switch.on:after{transform:translateX(15px)}
+.legend-row{display:flex;align-items:center;gap:8px;color:#607086;font-size:10.5px;margin:8px 0}.legend-line{width:25px;height:0;border-top:2px solid #64748b}.legend-line.b{border-top-style:dashed}.legend-line.c{border-top-style:dotted}.legend-line.broken{border-color:var(--red);border-top-style:dashed}
+.left-note{font-size:10.5px;line-height:1.7;color:#77869a;background:#f7f9fc;border-radius:11px;padding:10px 11px;margin-top:12px}
+.centercol{display:flex;flex-direction:column;min-height:0;gap:10px}.graphcard{position:relative;flex:1;min-height:0;overflow:hidden;background:radial-gradient(ellipse at 50% 35%,#fff 0%,#f9fbfe 52%,#f1f6fb 100%);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.graphcard:before{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(#d6e1ee 1px,transparent 1px);background-size:22px 22px;opacity:.7}
+.graphhead{position:absolute;top:13px;left:14px;right:14px;z-index:4;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;pointer-events:none}.graph-caption,.graph-tools{pointer-events:auto;background:#ffffffdf;border:1px solid #e1e9f3;border-radius:12px;box-shadow:0 4px 15px #15243a0b;backdrop-filter:blur(10px)}.graph-caption{padding:9px 12px}.graph-caption strong{font-size:12px;font-weight:850;display:block}.graph-caption span{font-size:10px;color:var(--muted);display:block;margin-top:2px}.graph-tools{display:flex;align-items:center;gap:2px;padding:4px}.graph-tools button{width:30px;height:29px;border:0;border-radius:8px;background:transparent;color:#4b5e75;font-size:15px;font-weight:800}.graph-tools button:hover{background:#edf3fa}.graph-tools .zoomval{font-size:9px;color:#7b8ba0;min-width:34px;text-align:center}
+#network{width:100%;height:100%;position:absolute;inset:0;touch-action:none;cursor:grab;z-index:2}#network.dragging{cursor:grabbing}.edge-line{stroke-linecap:round;transition:opacity .15s,stroke-width .15s}.edge-label{font-size:11px;font-weight:800;fill:#41546b;paint-order:stroke;stroke:#f9fbfe;stroke-width:4px;stroke-linejoin:round;pointer-events:none}.edge-group{cursor:pointer}.edge-hit{stroke:transparent;stroke-width:15;pointer-events:stroke}.node-group{cursor:grab;outline:none}.node-group:active{cursor:grabbing}.node-circle{stroke:#fff;stroke-width:3;filter:drop-shadow(0 3px 4px #15243a22);transition:r .15s}.node-ring{fill:none;stroke:transparent;stroke-width:2;stroke-dasharray:4 3}.node-group.selected .node-ring{stroke:#14253b}.node-group.selected .node-circle{stroke:#fff;filter:drop-shadow(0 0 7px #60a5fa88)}.node-group .node-name{font-size:12px;font-weight:800;fill:#2d4057;text-anchor:middle;paint-order:stroke;stroke:#f9fbfe;stroke-width:4px;stroke-linejoin:round;pointer-events:none}.node-group.dim,.edge-group.dim{opacity:.14}.node-group.related .node-ring{stroke:#7db4f8;opacity:.9}.node-group.event-node .node-ring{stroke:#f59e0b;stroke-width:3;opacity:1}.edge-group.event-edge .edge-line{stroke-width:4!important;opacity:1!important}.edge-group.selected .edge-line{stroke-width:4!important}.node-group .node-type{font-size:8px;fill:#fff;font-weight:900;text-anchor:middle;pointer-events:none}
+.graphfoot{position:absolute;left:13px;right:13px;bottom:12px;z-index:4;display:flex;align-items:flex-end;justify-content:space-between;gap:10px;pointer-events:none}.graph-hints{display:flex;flex-wrap:wrap;gap:6px}.hint{font-size:10px;color:#62748a;border:1px solid #e2e9f1;background:#ffffffdf;border-radius:99px;padding:5px 9px;backdrop-filter:blur(8px)}.hint b{color:#243b55}.selected-pill{display:none;max-width:55%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px;font-weight:800;color:#fff;background:#17283eeb;border-radius:10px;padding:8px 11px;box-shadow:0 5px 15px #15243a20}.selected-pill.show{display:block}
+.graph-error{position:absolute;z-index:8;inset:70px 20px 50px;display:none;align-items:center;justify-content:center;text-align:center;padding:24px;color:#64748b}.graph-error.show{display:flex}.graph-error strong{display:block;color:#22344a;font-size:15px;margin-bottom:7px}
+.rightcol{display:flex;flex-direction:column;min-height:0;overflow:hidden}.right-head{padding:14px 15px 11px;border-bottom:1px solid var(--line2);display:flex;align-items:center;gap:8px}.right-head h2{font-size:13px;margin:0;font-weight:850}.right-head .live{font-size:9px;color:#16834a;background:#eaf8ef;border-radius:99px;padding:4px 7px;font-weight:800}.right-tabs{display:flex;gap:3px;padding:9px 12px 0}.right-tabs button{border:0;border-radius:8px;padding:6px 10px;background:transparent;color:#718096;font-size:11px;font-weight:750}.right-tabs button.active{background:#edf4ff;color:#1e4ba0}.right-body{padding:12px 14px 16px;overflow:auto;min-height:0;flex:1;scrollbar-width:thin}.section-label{font-size:10px;font-weight:850;color:#8a9ab0;letter-spacing:.5px;margin:14px 0 7px;text-transform:uppercase}.section-label:first-child{margin-top:0}.intel-item{border:1px solid var(--line2);border-radius:12px;padding:10px 11px;margin-bottom:8px;cursor:pointer;transition:.14s;background:#fff}.intel-item:hover{border-color:#bfd4f4;box-shadow:0 4px 14px #1d4ed80b;transform:translateY(-1px)}.intel-meta{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:9.5px;margin-bottom:5px}.event-type{font-size:9px;font-weight:850;border-radius:5px;padding:2px 5px;background:#edf4ff;color:#2457a6}.intel-item strong{font-size:11.5px;line-height:1.45;display:block;color:#263a52}.intel-item p{font-size:10.5px;color:#718096;line-height:1.55;margin:5px 0 0}.detail-hero{background:linear-gradient(135deg,#14243a,#23496a);border-radius:13px;padding:14px;color:#fff;margin-bottom:12px;position:relative;overflow:hidden}.detail-hero:after{content:"";position:absolute;width:150px;height:150px;right:-60px;top:-80px;border-radius:50%;background:#60a5fa20}.detail-kicker{font-size:9px;font-weight:850;letter-spacing:1px;color:#9ed6f6;position:relative}.detail-hero h3{font-size:17px;line-height:1.4;margin:7px 0 5px;position:relative}.detail-hero p{font-size:10.5px;color:#c7d8ea;line-height:1.6;margin:0;position:relative}.grade{display:inline-flex;font-size:9px;font-weight:850;border-radius:6px;padding:4px 7px;margin-top:8px}.grade-A{color:#166534;background:#dcfce7}.grade-B{color:#92400e;background:#fef3c7}.grade-C{color:#475569;background:#e2e8f0}.facts{border:1px solid var(--line2);border-radius:11px;overflow:hidden;margin:8px 0}.fact{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:8px 10px;border-bottom:1px solid var(--line2);font-size:10.5px}.fact:last-child{border-bottom:0}.fact span{color:#7b8ba0;flex:none}.fact b{font-size:10.5px;text-align:right;color:#34465c;max-width:70%;font-weight:750}.source-card{border:1px solid var(--line2);border-radius:10px;padding:9px 10px;margin:6px 0;display:block;color:#34465c;font-size:10.5px;line-height:1.5}.source-card:hover{background:#f8fbff;border-color:#c8d9f0;text-decoration:none}.source-card small{display:block;font-size:9px;color:#94a3b8;margin-top:3px}.rel-row{display:flex;align-items:center;gap:8px;padding:8px 2px;border-bottom:1px solid var(--line2);font-size:10.5px;cursor:pointer}.rel-row:last-child{border-bottom:0}.rel-row:hover{color:var(--blue)}.rel-dot{width:7px;height:7px;border-radius:50%;flex:none}.rel-row span:nth-child(2){flex:1}.rel-row small{color:#94a3b8;font-size:9px}.uncertainty{background:#fff8e8;border:1px solid #f8e3b4;border-radius:10px;padding:10px 11px;color:#805b17;font-size:10.5px;line-height:1.65;margin-top:8px}.empty-detail{text-align:center;padding:35px 12px;color:#8291a5}.empty-detail .symbol{width:45px;height:45px;border-radius:15px;background:#eef4fb;display:grid;place-items:center;font-size:22px;margin:0 auto 11px}.empty-detail strong{display:block;color:#35485f;font-size:12px;margin-bottom:5px}.empty-detail p{font-size:10.5px;line-height:1.7;margin:0}
+.question-box{border-top:1px solid var(--line2);padding:12px;background:#fbfcfe}.question-label{font-size:10px;color:#64748b;font-weight:800;margin-bottom:7px}.question-row{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:11px;padding:6px 7px 6px 10px;background:#fff}.question-row input{min-width:0;flex:1;border:0;outline:0;font-size:10.5px;color:var(--ink)}.question-row button{border:0;background:var(--ink);color:#fff;border-radius:8px;padding:7px 9px;font-size:10px;font-weight:800;white-space:nowrap}.question-note{font-size:9px;color:#9aa7b8;line-height:1.5;margin-top:6px}.discussion-card{display:none;margin-top:8px;padding:10px;border:1px solid #cfe0f5;background:#f5f9ff;border-radius:10px}.discussion-card.show{display:block}.discussion-card strong{font-size:10px}.discussion-card p{font-size:10.5px;line-height:1.6;margin:5px 0;color:#3e536d}.discussion-card button{border:1px solid #d6e4f6;background:#fff;border-radius:7px;padding:5px 8px;font-size:9px;color:#31598c;font-weight:800}
+.timeline-card{margin:14px 22px 22px;padding:12px 15px 13px}.timeline-head{display:flex;align-items:center;gap:9px;margin-bottom:11px}.timeline-head strong{font-size:12px}.timeline-head span{font-size:10px;color:#8a9ab0}.timeline-head .spacer{flex:1}.timeline-head .tip{font-size:9.5px;color:#94a3b8}.timeline{display:flex;gap:0;overflow-x:auto;padding:10px 4px 7px;scrollbar-width:thin}.time-item{position:relative;flex:1;min-width:130px;border:0;background:transparent;text-align:left;padding:16px 10px 0 0}.time-item:before{content:"";position:absolute;left:0;right:0;top:5px;height:2px;background:#e4ebf4}.time-item:after{content:"";position:absolute;top:0;left:0;width:10px;height:10px;border:2px solid #fff;box-shadow:0 0 0 1px #b7c5d6;border-radius:50%;background:#8ba0b9;transition:.15s}.time-item.active:after{background:var(--blue);box-shadow:0 0 0 3px #dbeafe;transform:scale(1.12)}.time-item:hover:after{background:#60a5fa}.time-date{font-size:9px;color:#93a2b5;font-weight:800;font-variant-numeric:tabular-nums}.time-item strong{display:block;font-size:10.5px;line-height:1.45;color:#42556c;margin-top:4px;font-weight:750}.time-item.active strong{color:#1d4ed8}.timeline-empty{font-size:10px;color:#94a3b8;padding:10px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,12px);opacity:0;pointer-events:none;background:#15243a;color:#fff;border-radius:10px;padding:9px 13px;font-size:11px;z-index:99;box-shadow:0 8px 24px #15243a30;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}
+.footer-note{padding:0 24px 22px;text-align:center;color:#9aa7b8;font-size:9.5px}
+@media(max-width:1280px){.workspace{grid-template-columns:175px minmax(330px,1fr) 310px;padding-left:16px;padding-right:16px}.metrics{padding-left:16px;padding-right:16px}.timeline-card{margin-left:16px;margin-right:16px}.topbar{padding:0 16px;gap:13px}.brand{min-width:220px}.topnav button{padding:7px 9px}.metric .value{font-size:19px}}
+@media(max-width:1000px){.topnav{display:none}.workspace{grid-template-columns:155px minmax(0,1fr);height:auto;max-height:none;min-height:0}.leftcol{max-height:680px}.rightcol{grid-column:1/-1;min-height:420px}.graphcard{height:560px;flex:none}.metrics{grid-template-columns:repeat(3,minmax(0,1fr))}.metric:nth-child(n+4){display:none}.searchbox{width:210px}}
+@media(max-width:640px){.topbar{height:auto;min-height:62px;flex-wrap:wrap;padding:10px 12px;gap:9px}.brand{min-width:0;flex:1}.brand h1{font-size:13px}.brand p{font-size:9px}.topright{margin-left:0;width:100%;order:3}.searchbox{width:auto;flex:1}.preview-tag{font-size:9px}.metrics{padding:10px 10px 0;gap:7px;grid-template-columns:repeat(2,minmax(0,1fr))}.metric{padding:10px 11px}.metric:nth-child(n+3){display:none}.metric .value{font-size:19px}.workspace{display:flex;flex-direction:column;gap:10px;padding:10px;min-height:0}.leftcol{overflow:visible;max-height:none;order:1}.leftcol .sidecard:first-child{padding:10px}.leftcol .card-title{margin-bottom:7px}.filter-list{flex-direction:row;overflow-x:auto;padding-bottom:3px}.filter-btn{width:auto;flex:none;white-space:nowrap;padding:7px 9px}.filter-btn .fcount{display:none}.leftcol .sidecard:nth-child(2){display:none}.centercol{order:2}.graphcard{height:440px;min-height:440px}.graph-caption{padding:7px 9px}.graph-caption strong{font-size:11px}.graph-caption span{font-size:9px}.graph-tools button{width:27px;height:27px}.graphfoot{bottom:9px;left:9px;right:9px}.hint{font-size:9px;padding:4px 7px}.rightcol{order:3;min-height:420px}.right-body{max-height:520px}.timeline-card{margin:10px;padding:11px}.timeline-head{align-items:flex-start;flex-wrap:wrap}.timeline-head .tip{width:100%;order:3}.time-item{min-width:145px}.footer-note{padding:0 12px 15px}.selected-pill{max-width:50%}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="2.6"/><circle cx="12" cy="12" r="7" opacity=".7"/><circle cx="12" cy="12" r="10" opacity=".4"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3"/></svg></div>
+    <div><h1>惠城 · 全息关系工作区</h1><p>看见结构变化，而不只是看一张图</p></div>
+  </div>
+  <nav class="topnav" aria-label="关系分类">
+    <button class="active" data-filter="all">全景</button><button data-filter="supply_chain">产业</button><button data-filter="investment">投资</button><button data-filter="regional">区域</button><button data-filter="tourism_consumption">文旅</button><button data-filter="transport">交通</button>
+  </nav>
+  <div class="topright">
+    <label class="searchbox" aria-label="搜索主体或事件"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="search" placeholder="搜索企业、集群、事件…" autocomplete="off"><button id="searchGo" aria-label="搜索" style="border:0;background:transparent;color:#64748b;font-weight:800">↵</button></label>
+    <span class="preview-tag">独立预览 · 原版保留</span>
+  </div>
+</header>
+<section class="metrics" aria-label="惠城核心指标">
+  <div class="metric" style="--accent:#2563eb"><div class="label">地区生产总值 · 亿元</div><div class="value">1,203.33 <span class="delta">+4.3%</span></div><div class="note">现有页面展示口径</div></div>
+  <div class="metric" style="--accent:#0891b2"><div class="label">规上工业总产值 · 亿元</div><div class="value">937.92 <span class="delta">+9.6%</span></div><div class="note">现有页面展示口径</div></div>
+  <div class="metric" style="--accent:#7c3aed"><div class="label">社会消费品零售 · 亿元</div><div class="value">805.68 <span class="delta">+3.7%</span></div><div class="note">现有页面展示口径</div></div>
+  <div class="metric" style="--accent:#d97706"><div class="label">外贸进出口 · 亿元</div><div class="value">383.60 <span class="delta">+7.1%</span></div><div class="note">现有页面展示口径</div></div>
+  <div class="metric" style="--accent:#16a34a"><div class="label">常住人口 · 万人</div><div class="value">159.78</div><div class="note">现有页面展示口径</div></div>
+</section>
+<main class="workspace">
+  <aside class="leftcol">
+    <section class="card sidecard">
+      <div class="card-title"><span class="tiny-dot"></span>关系图层 <span class="count" id="edgeCount">读取中</span></div>
+      <div class="filter-list" id="filterList">
+        <button class="filter-btn active" data-filter="all"><span class="swatch" style="background:#15243a"></span>全部关系</button>
+        <button class="filter-btn" data-filter="supply_chain"><span class="swatch" style="background:#2563eb"></span>供应链配套</button>
+        <button class="filter-btn" data-filter="investment"><span class="swatch" style="background:#0891b2"></span>投资建设</button>
+        <button class="filter-btn" data-filter="regional"><span class="swatch" style="background:#7c3aed"></span>区域协作</button>
+        <button class="filter-btn" data-filter="transport"><span class="swatch" style="background:#dc2626"></span>交通物流</button>
+        <button class="filter-btn" data-filter="tourism_consumption"><span class="swatch" style="background:#d97706"></span>消费文旅</button>
+      </div>
+      <div class="switchrow"><span>只看发生变化的关系</span><button class="switch" id="changedSwitch" aria-label="只看发生变化的关系" aria-pressed="false"></button></div>
+      <div class="switchrow"><span>显示连线标签</span><button class="switch" id="labelSwitch" aria-label="显示连线标签" aria-pressed="false"></button></div>
+    </section>
+    <section class="card sidecard">
+      <div class="card-title"><span class="tiny-dot" style="background:#16a34a;box-shadow:0 0 0 4px #dcfce7"></span>关系与证据</div>
+      <div class="legend-row"><span class="legend-line"></span><span>A · 有公开来源支持</span></div>
+      <div class="legend-row"><span class="legend-line b"></span><span>B · 交叉证据 / 推断</span></div>
+      <div class="legend-row"><span class="legend-line c"></span><span>C · 待验证</span></div>
+      <div class="legend-row"><span class="legend-line broken"></span><span>红色 · 需关注的断裂</span></div>
+      <div class="left-note">关系图用于探索公开信息中的连接与变化。关联不等于因果，签约、竞地、开工和投产是不同阶段。</div>
+    </section>
+  </aside>
+  <section class="centercol">
+    <div class="graphcard">
+      <div class="graphhead">
+        <div class="graph-caption"><strong>惠城 · 产业与城市关系网</strong><span id="graphSub">主体、连接与近期变化联动</span></div>
+        <div class="graph-tools"><button id="zoomOut" aria-label="缩小">−</button><span class="zoomval" id="zoomVal">100%</span><button id="zoomIn" aria-label="放大">＋</button><button id="resetView" aria-label="重置画布">⌂</button></div>
+      </div>
+      <svg id="network" viewBox="0 0 1000 620" role="img" aria-label="可交互的惠城关系网络">
+        <g id="world"><rect id="bg" x="0" y="0" width="1000" height="620" fill="transparent"></rect><g id="edges"></g><g id="nodes"></g></g>
+      </svg>
+      <div class="graph-error" id="graphError"><div><strong>关系数据暂时没有加载成功</strong><span id="graphErrorText">请通过项目网页或本地服务器打开本页，并确认 data 目录中的公开数据文件可访问。</span></div></div>
+      <div class="graphfoot"><div class="graph-hints"><span class="hint"><b>拖动</b> 主体调整位置</span><span class="hint"><b>点击</b> 主体看关系</span><span class="hint"><b>点击</b> 连线看依据</span></div><div class="selected-pill" id="selectedPill"></div></div>
+    </div>
+  </section>
+  <aside class="card rightcol">
+    <div class="right-head"><h2>关系情报</h2><span class="live">公开来源</span><span class="count" id="changeCount">0 条变化</span></div>
+    <div class="right-tabs"><button class="active" data-tab="intel">近期变化</button><button data-tab="detail">选中详情</button></div>
+    <div class="right-body" id="rightBody"><div class="empty-detail"><div class="symbol">◎</div><strong>正在读取关系情报</strong><p>选择一个主体、一条连线或一项变化，查看关联对象、公开依据与尚未确定的部分。</p></div></div>
+    <div class="question-box">
+      <div class="question-label">把一个发现变成值得讨论的问题</div>
+      <form class="question-row" id="questionForm"><input id="questionInput" placeholder="例如：桥通了，人就会留下吗？" maxlength="180"><button type="submit">生成讨论卡</button></form>
+      <div class="question-note">仅生成可复制的本地讨论卡；当前预览不接入在线 AI、账号或投票服务。</div>
+      <div class="discussion-card" id="discussionCard"><strong>惠城关系观察 · 讨论卡</strong><p id="discussionText"></p><button type="button" id="copyDiscussion">复制讨论卡</button></div>
+    </div>
+  </aside>
+</main>
+<section class="card timeline-card">
+  <div class="timeline-head"><strong>关系变化时间线</strong><span id="timelineCount">按公开事件记录</span><span class="spacer"></span><span class="tip">选中事件后，网络会突出相关主体与连接</span></div>
+  <div class="timeline" id="timeline"><div class="timeline-empty">正在读取变化记录…</div></div>
+</section>
+<div class="footer-note">独立预览版 · 不替换现有正式页面 · 数据来源与不确定性可逐项查看</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+"use strict";
+const DATA={
+ evidence:"data/relationship-evidence-v1.json",
+ changes:"data/relationship-changes-v1.json",
+ sources:"data/relationship-sources-v1.json"
+};
+const COLORS={investment:"#0891b2",supply_chain:"#2563eb",regional:"#7c3aed",transport:"#dc2626",tourism_consumption:"#d97706"};
+const REL_LABEL={investment:"投资建设",supply_chain:"供应链配套",regional:"区域协作",transport:"交通物流",tourism_consumption:"消费文旅"};
+const POS={
+ hc:[500,330],gxq:[500,175],dz:[290,190],xcl:[280,365],ai:[700,235],fw:[710,420],
+ jt:[380,505],wh:[165,500],rj:[165,340],jl:[420,85],th:[365,315],sh:[165,100],
+ rz:[90,205],wr:[810,105],lyh:[820,360],sz:[865,210],dg:[45,85]
+};
+const state={nodes:[],edges:[],changes:[],sources:{},activeFilter:"all",onlyChanged:false,showLabels:false,selectedNode:null,selectedEdge:null,selectedChange:null,rightTab:"intel",scale:1,tx:0,ty:0,dragNode:null,pan:null,dragMoved:false,loaded:false};
+const svg=document.getElementById("network"),world=document.getElementById("world"),edgeLayer=document.getElementById("edges"),nodeLayer=document.getElementById("nodes");
+const rightBody=document.getElementById("rightBody"),timeline=document.getElementById("timeline"),toast=document.getElementById("toast");
+const $=id=>document.getElementById(id);
+const NS="http://www.w3.org/2000/svg";
+function esc(v){return String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function el(tag,attrs){const n=document.createElementNS(NS,tag);Object.keys(attrs||{}).forEach(k=>n.setAttribute(k,attrs[k]));return n;}
+function notify(msg){toast.textContent=msg;toast.classList.add("show");window.clearTimeout(notify.timer);notify.timer=window.setTimeout(()=>toast.classList.remove("show"),2200);}
+function gradeText(g){return g==="A"?"A · 有公开来源支持":g==="B"?"B · 交叉证据 / 推断":"C · 待验证";}
+function gradeClass(g){return g==="A"?"grade-A":g==="B"?"grade-B":"grade-C";}
+function nodeRadius(n){if(n.node_type==="core")return 28;if(n.node_type==="anchor")return 23;if(n.node_type==="cluster")return 18;if(n.node_type==="infrastructure")return 16;if(n.node_type==="external")return 15;return 13;}
+function nodeColor(n){if(n.color)return n.color;if(n.node_type==="core")return "#15243a";if(n.node_type==="anchor")return "#2563eb";if(n.node_type==="external")return "#64748b";if(n.node_type==="infrastructure")return "#dc2626";if(n.layer==="新兴产业")return "#7c3aed";return "#0891b2";}
+function sourceList(ids){return (ids||[]).map(id=>state.sources[id]).filter(Boolean);}
+function getNode(id){return state.nodes.find(n=>n.node_id===id);}
+function getEdge(id){return state.edges.find(e=>e.edge_id===id);}
+function isVisibleEdge(e){if(state.activeFilter!=="all"&&e.relation_type!==state.activeFilter)return false;if(state.onlyChanged&&(!e.change_status||e.change_status==="无显著变化"))return false;return true;}
+function connectedIds(id){const set=new Set([id]);state.edges.filter(isVisibleEdge).forEach(e=>{if(e.source_node_id===id)set.add(e.target_node_id);if(e.target_node_id===id)set.add(e.source_node_id);});return set;}
+function activeEventNodeIds(){return state.selectedChange?new Set(state.selectedChange.involved_node_ids||[]):new Set();}
+function activeEventEdgeIds(){return state.selectedChange?new Set(state.selectedChange.involved_edge_ids||[]):new Set();}
+function edgeLabel(e){if(e.metric&&e.metric.metric_value!=null)return String(e.metric.metric_value)+(e.metric.metric_unit==="亿元"?"亿":e.metric.metric_unit||"");return REL_LABEL[e.relation_type]||"关联";}
+function worldPoint(evt){const p=svg.createSVGPoint();p.x=evt.clientX;p.y=evt.clientY;return p.matrixTransform(world.getScreenCTM().inverse());}
+function svgPoint(evt){const p=svg.createSVGPoint();p.x=evt.clientX;p.y=evt.clientY;return p.matrixTransform(svg.getScreenCTM().inverse());}
+function applyTransform(){world.setAttribute("transform","translate("+state.tx+" "+state.ty+") scale("+state.scale+")");$("zoomVal").textContent=Math.round(state.scale*100)+"%";}
+function draw(){
+  if(!state.loaded)return;
+  applyTransform();
+  const selected=state.selectedNode, related=selected?connectedIds(selected.node_id):null;
+  const eventNodes=activeEventNodeIds(),eventEdges=activeEventEdgeIds();
+  state.edges.forEach(e=>{
+    const g=e._g,a=getNode(e.source_node_id),b=getNode(e.target_node_id);if(!g||!a||!b)return;
+    const vis=isVisibleEdge(e);g.style.display=vis?"":"none";
+    e._line.setAttribute("x1",a.x);e._line.setAttribute("y1",a.y);e._line.setAttribute("x2",b.x);e._line.setAttribute("y2",b.y);
+    e._hit.setAttribute("x1",a.x);e._hit.setAttribute("y1",a.y);e._hit.setAttribute("x2",b.x);e._hit.setAttribute("y2",b.y);
+    e._label.setAttribute("x",(a.x+b.x)/2);e._label.setAttribute("y",(a.y+b.y)/2-5);e._label.textContent=edgeLabel(e);
+    e._label.style.display=(state.showLabels||state.selectedEdge===e)?"":"none";
+    let col=COLORS[e.relation_type]||"#94a3b8";if(e.change_status==="断裂")col="#dc2626";else if(e.change_status==="新增")col=COLORS[e.relation_type]||"#3b82f6";
+    e._line.setAttribute("stroke",col);e._line.setAttribute("stroke-width",e.evidence_grade==="A"?2.3:1.7);
+    e._line.setAttribute("stroke-dasharray",e.evidence_grade==="B"?"7 5":e.evidence_grade==="C"?"2 5":"none");
+    const dim=(selected&&!related.has(a.node_id)&&!related.has(b.node_id))||(state.selectedChange&&!eventEdges.has(e.edge_id))||(selected&&state.selectedEdge&&state.selectedEdge!==e);
+    g.classList.toggle("dim",!!dim);g.classList.toggle("event-edge",eventEdges.has(e.edge_id));g.classList.toggle("selected",state.selectedEdge===e);
+  });
+  state.nodes.forEach(n=>{
+    const g=n._g;g.setAttribute("transform","translate("+n.x+" "+n.y+")");
+    const dim=(selected&&related&&!related.has(n.node_id))||(state.selectedChange&&!eventNodes.has(n.node_id));
+    g.classList.toggle("dim",!!dim);g.classList.toggle("selected",state.selectedNode===n);g.classList.toggle("related",!!(selected&&related&&related.has(n.node_id)&&state.selectedNode!==n));g.classList.toggle("event-node",eventNodes.has(n.node_id));
+  });
+  const focus=state.selectedChange?state.selectedChange.title:state.selectedEdge?(getNode(state.selectedEdge.source_node_id).name+" → "+getNode(state.selectedEdge.target_node_id).name):selected?selected.name:"";
+  $("selectedPill").textContent=focus;$("selectedPill").classList.toggle("show",!!focus);
+  $("graphSub").textContent=state.selectedChange?"已突出显示本事件涉及的主体与连接":state.onlyChanged?"正在查看有变化的关系":"主体、连接与近期变化联动";
+}
+function buildGraph(){
+  edgeLayer.innerHTML="";nodeLayer.innerHTML="";
+  state.edges.forEach(e=>{
+    const g=el("g",{class:"edge-group","data-id":e.edge_id});
+    const hit=el("line",{class:"edge-hit"}),line=el("line",{class:"edge-line"}),label=el("text",{class:"edge-label","text-anchor":"middle"});
+    g.append(hit,line,label);edgeLayer.append(g);e._g=g;e._hit=hit;e._line=line;e._label=label;
+    g.addEventListener("pointerdown",evt=>evt.stopPropagation());
+    g.addEventListener("click",evt=>{evt.stopPropagation();if(state.dragMoved)return;selectEdge(e);});
+  });
+  state.nodes.forEach(n=>{
+    const g=el("g",{class:"node-group",tabindex:"0",role:"button","aria-label":n.name});
+    const ring=el("circle",{class:"node-ring",r:nodeRadius(n)+7});
+    const circle=el("circle",{class:"node-circle",r:nodeRadius(n),fill:nodeColor(n)});
+    const type=el("text",{class:"node-type",y:3});
+    type.textContent=n.node_type==="core"?"区":n.node_type==="anchor"?"枢":n.node_type==="cluster"?"集":n.node_type==="external"?"外":"";
+    const name=el("text",{class:"node-name",y:nodeRadius(n)+17});
+    name.textContent=n.name.length>10?n.name.slice(0,9)+"…":n.name;
+    g.append(ring,circle,type,name);nodeLayer.append(g);n._g=g;
+    g.addEventListener("pointerdown",evt=>{evt.stopPropagation();if(evt.button!==0)return;state.dragNode=n;state.dragMoved=false;state.dragStart={x:evt.clientX,y:evt.clientY};svg.classList.add("dragging");try{svg.setPointerCapture(evt.pointerId);}catch(_){}});
+    g.addEventListener("click",evt=>{evt.stopPropagation();if(state.dragMoved)return;selectNode(n);});
+    g.addEventListener("keydown",evt=>{if(evt.key==="Enter"||evt.key===" "){evt.preventDefault();selectNode(n);}});
+  });
+  draw();
+}
+function selectNode(n){state.selectedNode=n;state.selectedEdge=null;state.selectedChange=null;state.rightTab="detail";updateTabs();renderRight();draw();}
+function selectEdge(e){state.selectedNode=null;state.selectedEdge=e;state.selectedChange=null;state.rightTab="detail";updateTabs();renderRight();draw();}
+function selectChange(c){state.selectedNode=null;state.selectedEdge=null;state.selectedChange=c;state.rightTab="detail";updateTabs();renderRight();draw();renderTimeline();}
+function clearSelection(){state.selectedNode=null;state.selectedEdge=null;state.selectedChange=null;renderRight();draw();renderTimeline();}
+function sourceHTML(ids){const arr=sourceList(ids);if(!arr.length)return '<p style="font-size:10px;color:#94a3b8">当前记录未关联可展示的来源条目。</p>';return arr.map(s=>'<a class="source-card" href="'+esc(s.url)+'" target="_blank" rel="noopener noreferrer">'+esc(s.title)+'<small>'+esc(s.publisher||s.source_type||"公开来源")+' · '+esc(s.published_at||"日期未注明")+' · '+esc(s.credibility||"")+'</small></a>').join("");}
+function factRow(label,value){return '<div class="fact"><span>'+esc(label)+'</span><b>'+esc(value||"未提供")+'</b></div>';}
+function relatedRows(n){const arr=state.edges.filter(e=>e.source_node_id===n.node_id||e.target_node_id===n.node_id);if(!arr.length)return '<p style="font-size:10px;color:#94a3b8">当前数据中没有关联连接。</p>';return arr.map(e=>{const other=getNode(e.source_node_id===n.node_id?e.target_node_id:e.source_node_id);return '<div class="rel-row" data-edge="'+esc(e.edge_id)+'"><i class="rel-dot" style="background:'+esc(COLORS[e.relation_type]||"#94a3b8")+'"></i><span>'+esc(other?other.name:"未知主体")+' · '+esc(REL_LABEL[e.relation_type]||e.relation_type)+'</span><small>'+esc(e.evidence_grade||"")+'</small></div>';}).join("");}
+function detailNode(n){
+  const sources=n.source_ids||[];
+  return '<div class="detail-hero"><div class="detail-kicker">'+esc(n.layer||"关系主体")+' · '+esc(n.town||"")+'</div><h3>'+esc(n.name)+'</h3><p>'+esc(n.description||"当前记录未提供详细描述。")+'</p><span class="grade '+gradeClass(n.evidence_grade)+'">'+esc(gradeText(n.evidence_grade))+'</span></div>'+
+    '<div class="section-label">当前公开信息</div><div class="facts">'+factRow("状态",n.change_status||n.node_status||"未标注")+factRow("关键记录",n.stat||"未提供")+factRow("主体类型",n.node_type||"未分类")+'</div>'+
+    '<div class="section-label">相连关系 · '+state.edges.filter(e=>e.source_node_id===n.node_id||e.target_node_id===n.node_id).length+' 条</div><div>'+relatedRows(n)+'</div>'+
+    '<div class="section-label">关联来源</div>'+sourceHTML(sources);
+}
+function detailEdge(e){
+  const a=getNode(e.source_node_id),b=getNode(e.target_node_id);
+  const metric=e.metric?e.metric.metric_name+"："+e.metric.metric_value+" "+e.metric.metric_unit:"当前记录未附独立数值";
+  return '<div class="detail-hero"><div class="detail-kicker">'+esc(REL_LABEL[e.relation_type]||"关系连接")+' · '+esc(e.edge_id)+'</div><h3>'+(esc(a?a.name:e.source_node_id))+' → '+(esc(b?b.name:e.target_node_id))+'</h3><p>'+esc(e.relation_description||"当前记录未提供关系说明。")+'</p><span class="grade '+gradeClass(e.evidence_grade)+'">'+esc(gradeText(e.evidence_grade))+'</span></div>'+
+    '<div class="section-label">关系记录</div><div class="facts">'+factRow("关联指标",metric)+factRow("证据类型",e.evidence_type||"未标注")+factRow("当前置信描述",e.confidence||"未标注")+factRow("变化状态",e.change_status||"未标注")+factRow("记录核对日期",e.last_verified_at||"未标注")+'</div>'+
+    '<div class="section-label">依据与限制</div><div class="facts">'+factRow("强度依据",e.strength_basis||"未提供")+'</div>'+
+    '<div class="uncertainty"><b>需要留意</b><br>'+esc(e.counter_evidence||"当前记录未注明反证或限制；这不代表不存在不确定性。")+'</div>'+
+    '<div class="section-label">公开来源</div>'+sourceHTML(e.source_ids);
+}
+function detailChange(c){
+  const ns=(c.involved_node_ids||[]).map(getNode).filter(Boolean);
+  const es=(c.involved_edge_ids||[]).map(getEdge).filter(Boolean);
+  return '<div class="detail-hero"><div class="detail-kicker">关系变化 · '+esc(c.event_date||"日期未注明")+'</div><h3>'+esc(c.title)+'</h3><p>选择本事件后，中央网络已突出显示涉及的主体与连接。</p></div>'+
+    '<div class="section-label">变化前后</div><div class="facts">'+factRow("变化前后",c.before_after||"未提供")+'</div>'+
+    '<div class="section-label">涉及主体 · '+ns.length+' 个</div><div>'+ns.map(n=>'<div class="rel-row" data-node="'+esc(n.node_id)+'"><i class="rel-dot" style="background:'+esc(nodeColor(n))+'"></i><span>'+esc(n.name)+'</span><small>查看主体</small></div>').join("")+'</div>'+
+    '<div class="section-label">涉及连接 · '+es.length+' 条</div><div>'+es.map(e=>'<div class="rel-row" data-edge="'+esc(e.edge_id)+'"><i class="rel-dot" style="background:'+esc(COLORS[e.relation_type]||"#94a3b8")+'"></i><span>'+esc((getNode(e.source_node_id)||{}).name||e.source_node_id)+' → '+esc((getNode(e.target_node_id)||{}).name||e.target_node_id)+'</span><small>查看依据</small></div>').join("")+'</div>'+
+    '<div class="uncertainty"><b>仍需核实</b><br>'+esc(c.uncertainty||"当前事件未附具体不确定性说明。")+'</div>'+
+    '<div class="section-label">公开来源</div>'+sourceHTML(c.source_ids);
+}
+function detailWelcome(){
+ return '<div class="empty-detail"><div class="symbol">⌁</div><strong>从一处变化开始探索</strong><p>点击中央网络中的主体或连线，或从下方时间线选一项事件。<br>你会看到它连接了谁、依据是什么、还有什么没有被证实。</p></div>'+
+ '<div class="section-label">建议从这些问题开始</div>'+
+ '<div class="intel-item" data-question="一个新项目落地后，本地哪些配套关系可能跟着变化？"><strong>一个新项目落地后，哪些关系可能跟着变化？</strong><p>从项目主体出发，查看它与产业集群、园区和服务体系的连接。</p></div>'+
+ '<div class="intel-item" data-question="交通改善之后，产业和居民生活之间的关系会发生什么变化？"><strong>交通改善之后，谁会先受影响？</strong><p>从交通节点出发，观察它与城市功能和产业网络的联系。</p></div>';
+}
+function renderIntel(){
+ const changes=[...state.changes].sort((a,b)=>String(b.event_date).localeCompare(String(a.event_date)));
+ return '<div class="section-label">最近公开记录 · '+changes.length+' 项</div>'+changes.map(c=>{
+   const type=c.change_type==="new_entity"?"新主体":c.change_type==="new_edge"?"新连接":c.change_type==="strengthen"?"关系增强":c.change_type==="break"?"连接变化":"事件";
+   const summary=c.before_after||c.uncertainty||"选择查看涉及主体、关系和来源。";
+   return '<div class="intel-item" data-change="'+esc(c.change_id)+'"><div class="intel-meta"><span>'+esc(c.event_date||"日期未注明")+'</span><span class="event-type">'+type+'</span></div><strong>'+esc(c.title)+'</strong><p>'+esc(summary)+'</p></div>';
+ }).join("")+'<div class="left-note">只把公开记录中可识别的变化呈现出来。信息未披露时，会明确标记为待核实，而不是补写成确定结论。</div>';
+}
+function renderRight(){
+ if(state.rightTab==="intel"){rightBody.innerHTML=renderIntel();bindRightActions();return;}
+ if(state.selectedChange){rightBody.innerHTML=detailChange(state.selectedChange);bindRightActions();return;}
+ if(state.selectedEdge){rightBody.innerHTML=detailEdge(state.selectedEdge);bindRightActions();return;}
+ if(state.selectedNode){rightBody.innerHTML=detailNode(state.selectedNode);bindRightActions();return;}
+ rightBody.innerHTML=detailWelcome();bindRightActions();
+}
+function bindRightActions(){
+ rightBody.querySelectorAll("[data-change]").forEach(el=>el.addEventListener("click",()=>{const c=state.changes.find(x=>x.change_id===el.dataset.change);if(c)selectChange(c);}));
+ rightBody.querySelectorAll("[data-node]").forEach(el=>el.addEventListener("click",()=>{const n=getNode(el.dataset.node);if(n)selectNode(n);}));
+ rightBody.querySelectorAll("[data-edge]").forEach(el=>el.addEventListener("click",()=>{const e=getEdge(el.dataset.edge);if(e)selectEdge(e);}));
+ rightBody.querySelectorAll("[data-question]").forEach(el=>el.addEventListener("click",()=>{$("questionInput").value=el.dataset.question;$("questionInput").focus();}));
+}
+function updateTabs(){document.querySelectorAll("[data-tab]").forEach(b=>b.classList.toggle("active",b.dataset.tab===state.rightTab));}
+function renderTimeline(){
+ const arr=[...state.changes].sort((a,b)=>String(a.event_date).localeCompare(String(b.event_date)));
+ $("timelineCount").textContent=arr.length+" 项公开变化";
+ timeline.innerHTML=arr.map(c=>'<button class="time-item '+(state.selectedChange===c?"active":"")+'" data-time="'+esc(c.change_id)+'"><span class="time-date">'+esc(c.event_date||"日期未注明")+'</span><strong>'+esc(c.title)+'</strong></button>').join("");
+ timeline.querySelectorAll("[data-time]").forEach(b=>b.addEventListener("click",()=>{const c=state.changes.find(x=>x.change_id===b.dataset.time);if(c)selectChange(c);}));
+}
+function updateFilterButtons(){document.querySelectorAll("[data-filter]").forEach(b=>b.classList.toggle("active",b.dataset.filter===state.activeFilter));}
+function renderCounts(){const visible=state.edges.filter(isVisibleEdge).length;$("edgeCount").textContent=visible+" / "+state.edges.length+" 条";$("changeCount").textContent=state.changes.length+" 条变化";}
+function runSearch(){
+ const q=$("search").value.trim().toLowerCase();if(!q){notify("输入企业、集群或事件名称");return;}
+ const n=state.nodes.find(x=>(x.name+" "+(x.description||"")+" "+(x.stat||"")).toLowerCase().includes(q));
+ if(n){selectNode(n);notify("已定位："+n.name);return;}
+ const c=state.changes.find(x=>(x.title+" "+(x.before_after||"")).toLowerCase().includes(q));
+ if(c){selectChange(c);notify("已定位相关变化");return;}
+ const e=state.edges.find(x=>(x.relation_description+" "+(x.edge_id||"")).toLowerCase().includes(q));
+ if(e){selectEdge(e);notify("已定位相关连接");return;}
+ notify("没有找到匹配主体或事件");
+}
+function setupEvents(){
+ document.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>{state.activeFilter=b.dataset.filter;state.selectedEdge=null;updateFilterButtons();renderCounts();draw();}));
+ $("changedSwitch").addEventListener("click",()=>{state.onlyChanged=!state.onlyChanged;$("changedSwitch").classList.toggle("on",state.onlyChanged);$("changedSwitch").setAttribute("aria-pressed",String(state.onlyChanged));renderCounts();draw();});
+ $("labelSwitch").addEventListener("click",()=>{state.showLabels=!state.showLabels;$("labelSwitch").classList.toggle("on",state.showLabels);$("labelSwitch").setAttribute("aria-pressed",String(state.showLabels));draw();});
+ document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>{state.rightTab=b.dataset.tab;updateTabs();renderRight();}));
+ $("searchGo").addEventListener("click",runSearch);$("search").addEventListener("keydown",e=>{if(e.key==="Enter")runSearch();});
+ $("zoomIn").addEventListener("click",()=>{state.scale=Math.min(1.65,state.scale*1.15);applyTransform();});
+ $("zoomOut").addEventListener("click",()=>{state.scale=Math.max(.65,state.scale/1.15);applyTransform();});
+ $("resetView").addEventListener("click",()=>{state.scale=1;state.tx=0;state.ty=0;state.nodes.forEach(n=>{const p=POS[n.node_id];if(p){n.x=p[0];n.y=p[1];}});draw();notify("画布已复位");});
+ svg.addEventListener("pointerdown",evt=>{if(evt.target.id!=="bg"&&evt.target.id!=="network")return;state.pan={x:evt.clientX,y:evt.clientY,tx:state.tx,ty:state.ty};state.dragMoved=false;svg.classList.add("dragging");try{svg.setPointerCapture(evt.pointerId);}catch(_){}});
+ svg.addEventListener("pointermove",evt=>{
+   if(state.dragNode){const p=worldPoint(evt);state.dragNode.x=Math.max(28,Math.min(972,p.x));state.dragNode.y=Math.max(72,Math.min(580,p.y));if(state.dragStart&&Math.hypot(evt.clientX-state.dragStart.x,evt.clientY-state.dragStart.y)>4)state.dragMoved=true;draw();return;}
+   if(state.pan){const p=svgPoint(evt);const start=svgPoint({clientX:state.pan.x,clientY:state.pan.y});state.tx=state.pan.tx+(p.x-start.x);state.ty=state.pan.ty+(p.y-start.y);if(Math.hypot(evt.clientX-state.pan.x,evt.clientY-state.pan.y)>4)state.dragMoved=true;applyTransform();}
+ });
+ function finishPointer(){state.dragNode=null;state.pan=null;state.dragStart=null;svg.classList.remove("dragging");}
+ svg.addEventListener("pointerup",finishPointer);svg.addEventListener("pointercancel",finishPointer);
+ svg.addEventListener("wheel",evt=>{evt.preventDefault();state.scale=Math.max(.65,Math.min(1.65,state.scale*(evt.deltaY<0?1.08:.92)));applyTransform();},{passive:false});
+ $("questionForm").addEventListener("submit",evt=>{
+   evt.preventDefault();const q=$("questionInput").value.trim();if(!q){notify("先写下你想讨论的问题");return;}
+   const context=state.selectedChange?state.selectedChange.title:state.selectedNode?state.selectedNode.name:state.selectedEdge?((getNode(state.selectedEdge.source_node_id)||{}).name+" 与 "+((getNode(state.selectedEdge.target_node_id)||{}).name)): "惠城产业与城市关系网";
+   $("discussionText").textContent="问题："+q+"\\n观察对象："+context+"\\n讨论提示：哪些公开证据支持这个判断？还有哪些信息缺失？";
+   $("discussionCard").classList.add("show");notify("讨论卡已生成，可复制分享");
+ });
+ $("copyDiscussion").addEventListener("click",async()=>{
+   const text=$("discussionText").textContent;
+   try{await navigator.clipboard.writeText(text);notify("讨论卡已复制");}
+   catch(_){const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();const ok=document.execCommand("copy");ta.remove();notify(ok?"讨论卡已复制":"复制失败，请手动选择文字");}
+ });
+}
+async function loadData(){
+ try{
+  const responses=await Promise.all([fetch(DATA.evidence),fetch(DATA.changes),fetch(DATA.sources)]);
+  if(responses.some(r=>!r.ok))throw new Error("数据文件无法访问");
+  const parsed=await Promise.all(responses.map(r=>r.json()));
+  const evidence=parsed[0],changes=parsed[1],sources=parsed[2];
+  state.nodes=(evidence.nodes||[]).map((n,i)=>{const p=POS[n.node_id]||[500+Math.cos(i*2.4)*250,310+Math.sin(i*2.4)*180];return Object.assign({},n,{x:p[0],y:p[1]});});
+  state.edges=evidence.edges||[];state.changes=changes.changes||[];
+  state.sources=Object.fromEntries((sources.sources||[]).map(s=>[s.source_id,s]));
+  state.loaded=true;
+  $("edgeCount").textContent=state.edges.length+" 条";$("changeCount").textContent=state.changes.length+" 条变化";
+  $("graphSub").textContent="公开数据 · "+(evidence.generated_at||changes.generated_at||"");$("graphError").classList.remove("show");
+  buildGraph();renderTimeline();renderRight();renderCounts();setupEvents();updateTabs();
+ }catch(err){
+  $("graphError").classList.add("show");
+  $("graphErrorText").textContent="无法读取 data/ 下的关系主体、变化与来源文件。请通过项目网页或本地服务器访问；此预览不会用演示数据冒充正式数据。";
+  $("rightBody").innerHTML='<div class="empty-detail"><div class="symbol">!</div><strong>数据未加载</strong><p>请确认公开数据文件可访问后刷新页面。</p></div>';
+  console.error(err);
+ }
+}
+loadData();
+})();
+</script>
+</body>
+</html>
