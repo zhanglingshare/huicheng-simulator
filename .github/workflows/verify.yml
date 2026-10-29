@@ -14,4 +14,6 @@ jobs:
         with:
           node-version: 18
       - name: 发布前质量门（语法+口径+数据+证据）
-        run: node tests/verify_all.js
+        run: |
+          node tests/verify_all.js
+          node tests/choices_v3_check.js
