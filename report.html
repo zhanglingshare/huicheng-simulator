@@ -3,12 +3,13 @@
 <title>惠城区产业分析报告（Demo版）· 张凌</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="model.js"></script>
+<link rel="stylesheet" href="assets/design-tokens.css">
 <style>
 :root{
   --sky1:#04060f; --sky2:#0a0f24; --sky3:#121a30;
   --glass:rgba(255,255,255,.06); --glass-b:rgba(255,255,255,.12);
-  --ink:#f1f5f9; --ink2:#cbd5e1; --muted:#94a3b8;
-  --neon:#38bdf8; --warm:#fbbf24; --ok:#34d399; --bad:#fb7185;
+  --ink:var(--hc-dark-text,#f1f5f9); --ink2:var(--hc-dark-text-soft,#cbd5e1); --muted:var(--hc-dark-muted,#94a3b8);
+  --neon:var(--hc-dark-cyan,#38bdf8); --warm:var(--hc-dark-gold,#fbbf24); --ok:var(--hc-dark-ok,#34d399); --bad:var(--hc-dark-bad,#fb7185);
   --orange:#fb923c; --purple:#8b5cf6;
 }
 *{box-sizing:border-box}
