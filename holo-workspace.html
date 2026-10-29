@@ -632,15 +632,6 @@ footer{margin:0 20px;background:#fff;border:1px solid var(--line);border-radius:
       <div class="view on" id="viewDetail"></div>
     </div>
 
-    <div class="composer">
-      <div class="inp">
-        <input id="questionInput" placeholder="写下你想追问的问题…" aria-label="生成讨论卡">
-        <button class="ib" id="questionSend" title="生成本地讨论卡">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-        </button>
-      </div>
-      <div id="questionResult" class="limit" style="display:none;margin:8px 0 0"></div>
-    </div>
   </aside>
 </main>
 
@@ -1295,9 +1286,7 @@ function renderDetail(kind, data){
       '<div class="sec"><span class="n">4</span>涉及关系与限制</div>'+edgesHtml+
       '<div class="sec"><span class="n">5</span>仍待核实</div>'+ 
       '<div class="limit">'+esc(ev.uncertainty)+'</div>'+
-      '<div class="sec"><span class="n">6</span>值得讨论</div>'+ 
-      '<div class="deb"><div class="dh">可以继续追问</div><div class="dq">'+esc('这项变化会改变哪些主体之间的关系？哪些证据还不足以支持更强的结论？')+'</div></div>'+
-      '<div class="d-note">此处展示公开记录与问题提示，不代表在线 AI 判断或真实用户投票。</div>';
+      '<div class="d-note">关系图展示公开信息中的关联线索，不单独证明因果关系。</div>';
   }
   host.scrollTop=0;
   host.querySelectorAll('.goto').forEach(function(b){b.addEventListener('click',function(){document.getElementById('tabDetail').click();const id=b.getAttribute('data-focus-node');if(id&&byId[id]){select(id);pulseNode(id,3400);}});});
@@ -1560,17 +1549,6 @@ async function boot(){
     }
     search.addEventListener('keydown',function(e){if(e.key==='Enter')runSearch();});
     search.addEventListener('input',function(){if(!search.value.trim())document.getElementById('dataStatus').innerHTML='<i></i>'+esc(date)+' 已更新';});
-    document.getElementById('questionSend').addEventListener('click',function(){
-      const q=document.getElementById('questionInput').value.trim();
-      const out=document.getElementById('questionResult');
-      if(!q){out.textContent='先写下你想追问的问题。';out.style.display='block';return;}
-      const ev=EVENTS.find(function(x){return x.node===S.sel;})||latest;
-      const subject=ev?ev.t:(byId[S.sel]?byId[S.sel].label:'惠城产业关系网');
-      const uncertainty=ev?ev.uncertainty:'请结合对应主体的现有记录进一步核实。';
-      out.textContent='讨论问题：'+q+'。观察对象：'+subject+'。还需核对：'+uncertainty;
-      out.style.display='block';
-    });
-    document.getElementById('questionInput').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();document.getElementById('questionSend').click();}});
     new ResizeObserver(function(){resize();}).observe(stage);
     requestAnimationFrame(loop);
   }catch(err){
