@@ -182,7 +182,7 @@ function buildGraph(){
     const g=el("g",{class:"edge-group","data-id":e.edge_id});
     const hit=el("line",{class:"edge-hit"}),line=el("line",{class:"edge-line"}),label=el("text",{class:"edge-label","text-anchor":"middle"});
     g.append(hit,line,label);edgeLayer.append(g);e._g=g;e._hit=hit;e._line=line;e._label=label;
-    g.addEventListener("pointerdown",evt=>evt.stopPropagation());
+    g.addEventListener("pointerdown",evt=>{evt.stopPropagation();state.dragMoved=false;});
     g.addEventListener("click",evt=>{evt.stopPropagation();if(state.dragMoved)return;selectEdge(e);});
   });
   state.nodes.forEach(n=>{
@@ -299,7 +299,7 @@ function setupEvents(){
  $("questionForm").addEventListener("submit",evt=>{
    evt.preventDefault();const q=$("questionInput").value.trim();if(!q){notify("先写下你想讨论的问题");return;}
    const context=state.selectedChange?state.selectedChange.title:state.selectedNode?state.selectedNode.name:state.selectedEdge?((getNode(state.selectedEdge.source_node_id)||{}).name+" 与 "+((getNode(state.selectedEdge.target_node_id)||{}).name)): "惠城产业与城市关系网";
-   $("discussionText").textContent="问题："+q+"\\n观察对象："+context+"\\n讨论提示：哪些公开证据支持这个判断？还有哪些信息缺失？";
+   $("discussionText").textContent="问题："+q+String.fromCharCode(10)+"观察对象："+context+String.fromCharCode(10)+"讨论提示：哪些公开证据支持这个判断？还有哪些信息缺失？";
    $("discussionCard").classList.add("show");notify("讨论卡已生成，可复制分享");
  });
  $("copyDiscussion").addEventListener("click",async()=>{
