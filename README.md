@@ -157,10 +157,20 @@
 
 在线体验建议使用较新版本的桌面或移动浏览器。如果页面需要读取本地 JSON 数据，请通过本地静态服务器运行，不要仅用 `file://` 直接打开。
 
+## 推荐浏览顺序
+
+**01 今日话题 → 02 全息工作区 → 03 钱去哪了 → 04 风向标**。其中全息工作区仍为网站默认首页；这里的页码表示建议的体验顺序，不代表修改首页地址。
+
+- [01 今日话题](https://zhanglingshare.github.io/huicheng-simulator/today.html)：从生活里的问题进入惠城。
+- [02 全息工作区](https://zhanglingshare.github.io/huicheng-simulator/)：看见主体关系及公开变化。
+- [03 钱去哪了](https://zhanglingshare.github.io/huicheng-simulator/money.html)：观察可能的本地消费、跨城消费、线上交易和供应链路径，识别证据缺口。
+- [04 风向标](https://zhanglingshare.github.io/huicheng-simulator/fun.html)：观察日常城市热度与生活线索。
+
 ## 项目页面导航
 
 | 页面 | 入口 | 主要用途 |
 |---|---|---|
+| **钱去哪了（第三页）** | [打开](https://zhanglingshare.github.io/huicheng-simulator/money.html) | 对资金与消费关系提出问题，不冒充真实资金流量监测 |
 | 全息工作区（默认首页） | [打开](https://zhanglingshare.github.io/huicheng-simulator/) | 浏览关系网络、情报流、变化详情与时间线 |
 | 全息工作区独立入口 | [打开](https://zhanglingshare.github.io/huicheng-simulator/holo-workspace.html) | 独立访问全息工作区 |
 | 看见惠城 · 全息关系版 | [打开](https://zhanglingshare.github.io/huicheng-simulator/holo.html) | 观察主体、连接与公开变化 |
