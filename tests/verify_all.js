@@ -27,9 +27,9 @@ if (!fs.existsSync(holoPath)) {
   bad('缺少全息关系页 holo.html');
 } else {
   const holoHtml = fs.readFileSync(holoPath, 'utf8');
-  if (/href=["']holo\\.html(?:[?#][^"']*)?["']/.test(indexHtml)) ok('首页存在进入全息关系页的站内入口');
+  if (/href=["']holo\.html(?:[?#][^"']*)?["']/.test(indexHtml)) ok('首页存在进入全息关系页的站内入口');
   else bad('首页缺少 holo.html 入口');
-  if (/href=["']index\\.html(?:[?#][^"']*)?["']/.test(holoHtml)) ok('全息关系页存在返回首页的站内路径');
+  if (/href=["']index\.html(?:[?#][^"']*)?["']/.test(holoHtml)) ok('全息关系页存在返回首页的站内路径');
   else bad('全息关系页缺少返回 index.html 的路径');
 }
 
