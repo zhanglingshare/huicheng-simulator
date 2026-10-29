@@ -99,7 +99,7 @@ async function run(){
  assert(elements.kgDetailBody.innerHTML.includes('href='),'Evidence tab links back to original public source');
  elements.kgDate.value='0';
  elements.kgDate.fire('input',{target:elements.kgDate});
- assert.equal(elements.kgNodeCount.textContent,'0','Earlier date filters unavailable newer project evidence');
+ assert.equal(elements.kgNodeCount.textContent,'1','Earlier date keeps only already-published high-tech-zone evidence');
  assert(elements.kgDetailTitle.textContent.includes('找工作'),'Hidden selected fact safely resets to starting question');
  controls['[data-persona]'][3].fire('click');
  assert.equal(elements.kgNodes.children.length,6,'Whole-city view starts with one question + five directions');
