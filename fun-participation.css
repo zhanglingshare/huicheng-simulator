@@ -1,0 +1,66 @@
+/* HUICHENG / CITY CHOICE LAB — progressive, human-first UI */
+.city-lens{position:relative;margin:-4px 0 15px;padding:15px 18px;background:linear-gradient(125deg,#fff,#f2fbff);border:1px solid #cbdfea;border-radius:20px;box-shadow:0 10px 25px #2b608a12;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(245px,.72fr);gap:17px;align-items:center;overflow:hidden}
+.city-lens:before{content:"";position:absolute;right:-52px;top:-90px;width:220px;height:220px;border-radius:50%;border:1px solid #b6dfea;box-shadow:0 0 0 22px #d7eff526,0 0 0 51px #e2f5fd39;pointer-events:none}
+.lens-label{font-size:11px;font-weight:900;color:#1e7897;letter-spacing:.2px;margin-bottom:9px}
+.lens-label em{font-style:normal;color:#9eafbc;font-size:10px;font-weight:650;margin-left:6px}
+.persona-buttons,.time-buttons{display:flex;flex-wrap:wrap;gap:6px;position:relative}
+.persona-buttons button,.time-buttons button{border:1px solid #d7e7f0;background:#fff;color:#4f6d85;border-radius:10px;padding:9px 11px;font-size:11px;font-weight:800;transition:color .2s,background .2s,box-shadow .2s;min-height:37px}
+.persona-buttons button:hover,.time-buttons button:hover{border-color:#81c2df;background:#f0faff}
+.persona-buttons button[aria-pressed="true"],.time-buttons button[aria-pressed="true"]{color:#fff;background:linear-gradient(135deg,#15688e,#0c9aaa);border-color:#198ca9;box-shadow:0 5px 14px #1d9dad38}
+.lens-time{display:grid;align-content:center;gap:7px;position:relative}
+.lens-note{font-size:10px;line-height:1.55;color:#8194a6;margin:6px 0 0}
+.lens-time .lens-label{margin-bottom:0}
+.lens-jump{display:inline-flex;align-items:center;gap:5px;justify-self:start;padding:0;background:transparent;border:0;font-size:11px;font-weight:900;color:#1384a1}
+.city-lens[data-active="true"]{border-color:#aed3e5}
+.pin.preferred:before{opacity:.3;filter:blur(8px);animation:choicePulse 2.4s ease-in-out infinite}
+.pin.preferred:after{box-shadow:0 0 0 4px #fff,0 0 0 7px color-mix(in srgb,var(--cc),#fff 45%),0 2px 12px #215d8448}
+.pin.less-fit{opacity:.49;filter:saturate(.55)}
+.pin.less-fit.selected{opacity:1;filter:none}
+@keyframes choicePulse{0%,100%{transform:scale(.92);opacity:.16}50%{transform:scale(1.5);opacity:.35}}
+.map-scenario-label{position:absolute;right:13px;top:65px;z-index:3;border:1px solid #c4e6ed;background:#fffefeee;color:#29718a;border-radius:11px;padding:7px 11px;font-size:10px;font-weight:850;box-shadow:0 5px 12px #35738a1a;max-width:43%;text-align:right;pointer-events:none}
+.map-scenario-label strong{color:#065d83}
+.focus-lens{background:#f7fbfd;border:1px solid #e2edf4;border-radius:12px;margin-top:10px;padding:9px 11px;color:#627e91;font-size:11px;line-height:1.6}
+.focus-lens strong{color:#2c6e8b}
+.participation-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:17px;margin-top:17px;align-items:start}
+.city-experiment,.group-lab{border-radius:22px;padding:21px;min-width:0;position:relative;box-shadow:var(--shadow)}
+.city-experiment{background:radial-gradient(circle at 92% 4%,#277e9f80,transparent 34%),linear-gradient(135deg,#102b43,#143f5b);color:#fff;border:1px solid #2d6380;overflow:hidden}
+.experiment-eyebrow{font-size:10px;font-weight:900;color:#80dfdf;letter-spacing:2px}
+.participation-grid h3{font-size:22px;letter-spacing:-.6px;line-height:1.25;margin:7px 0 8px}
+.participation-grid p{font-size:11px;line-height:1.65;color:#bfd6e6;margin:0 0 15px}
+.intervention-options{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.intervention-options button{display:flex;flex-direction:column;align-items:flex-start;gap:3px;border:1px solid #52718999;border-radius:12px;padding:10px 12px;background:#ffffff12;color:#d6edfa;font-size:11px;font-weight:800;text-align:left;min-height:54px}
+.intervention-options button small{font-size:9px;color:#abcbdc;font-weight:500}
+.intervention-options button[aria-pressed="true"]{background:#1aa3aa36;border-color:#52dfdf;color:#fff;box-shadow:0 0 0 1px #36c5c94d}
+.intervention-options button:hover{background:#ffffff20}
+.scenario-shift{margin-top:13px;background:#061b3099;border:1px solid #3d657e;border-radius:13px;padding:13px 14px}
+.scenario-shift .headline{font-size:11px;font-weight:850;color:#6ae5d3;margin-bottom:9px}
+.scenario-route{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:12px;font-weight:900;min-height:23px}
+.scenario-route span{border:1px solid #4d7685;background:#ffffff11;color:#d9ebf8;padding:5px 8px;border-radius:7px;max-width:100%}
+.scenario-route b{color:#75e3c6}
+.scenario-explain{font-size:10px;color:#b1cbdc;line-height:1.7;margin-top:9px}
+.city-experiment .limit{font-size:9.5px;color:#91bad2;line-height:1.6;margin-top:11px}
+.group-lab{background:linear-gradient(150deg,#fff,#f9fcff);border:1px solid #d7e7f3}
+.group-lab .experiment-eyebrow{color:#147e9a}
+.group-lab h3{color:#173a56}
+.group-lab p{color:#617e94}
+.group-actions{display:flex;gap:8px;flex-wrap:wrap;margin:11px 0}
+.group-actions button{padding:10px 12px;border:1px solid #d4e3ee;border-radius:11px;background:#fff;color:#2b6388;font-size:11px;font-weight:850;min-height:38px}
+.group-actions button.primary{background:#187c9e;border-color:#187c9e;color:#fff;box-shadow:0 4px 14px #217fa72b}
+.group-actions button:hover{filter:brightness(.97)}
+.group-subcard{background:#f3f9fd;border:1px solid #daeaf2;border-radius:13px;padding:12px;margin:10px 0}
+.group-subcard[hidden],.group-result[hidden]{display:none!important}
+.group-subcard h4{font-size:11px;color:#215e7e;margin:0 0 8px}
+.group-subcard label{display:block;color:#6a8599;font-size:10px;margin:4px 0}
+.group-subcard input{display:block;min-width:0;width:100%;background:#fff;color:#1f4664;border:1px solid #cbdfee;border-radius:9px;padding:10px;font-size:11px}
+.group-subcard .in-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.group-subcard .in-actions button{padding:9px 11px;border-radius:9px}
+.group-participants{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.group-participants span{font-size:10px;color:#447389;border:1px solid #d2e7ef;background:#fff;border-radius:99px;padding:5px 8px}
+.group-result{margin-top:12px;padding:12px;border-radius:13px;background:#e9f6f4;border:1px solid #bde1d8}
+.group-result strong{font-size:11px;color:#136f66}
+.group-result ul{padding-left:17px;margin:8px 0 0;color:#326e69;font-size:11px;line-height:1.85}
+.group-limit{font-size:10px;color:#8ca0ae;line-height:1.65;margin:11px 0 0}
+.group-call{display:inline-flex;align-items:center;font-size:10px;gap:5px;color:#287c9a;font-weight:800}
+@media(max-width:980px){.participation-grid{grid-template-columns:1fr}.city-lens{grid-template-columns:1fr}.lens-time{display:flex;flex-direction:column;align-items:start}}
+@media(max-width:650px){.city-lens{margin:0 0 11px;padding:13px 12px;border-radius:14px;gap:11px}.lens-label{font-size:10px}.lens-label em{font-size:9px}.persona-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.persona-buttons button{font-size:10px;padding:7px 3px;min-height:39px;white-space:nowrap}.time-buttons{width:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.time-buttons button{font-size:10px;padding:8px 4px}.participation-grid{gap:12px;margin-top:12px}.city-experiment,.group-lab{padding:18px 14px;border-radius:15px}.participation-grid h3{font-size:20px}.intervention-options button{padding:9px;font-size:10px}.map-scenario-label{top:50px;right:7px;padding:5px 7px;font-size:9px;max-width:50%}.focus-lens{font-size:10px}.group-actions button{flex:1}}
+@media(prefers-reduced-motion:reduce){.pin.preferred:before{animation:none!important}}
