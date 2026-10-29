@@ -5,12 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='slateblue'/><circle cx='16' cy='16' r='6' fill='none' stroke='white' stroke-width='2.5'/><circle cx='16' cy='16' r='2' fill='white'/></svg>">
 <title>惠城产业风洞 · 模拟沙盘首页</title>
+<link rel="stylesheet" href="assets/design-tokens.css">
 <style>
 :root{
   --sky1:#0b1026; --sky2:#1e1b4b; --sky3:#7c2d12; --horizon:#fbbf24;
   --glass:rgba(255,255,255,.07); --glass-b:rgba(255,255,255,.13);
-  --ink:#f1f5f9; --ink2:#cbd5e1; --muted:#94a3b8;
-  --neon:#38bdf8; --warm:#fbbf24; --ok:#34d399; --bad:#fb7185; --pink:#f472b6;
+  --ink:var(--hc-dark-text,#f1f5f9); --ink2:var(--hc-dark-text-soft,#cbd5e1); --muted:var(--hc-dark-muted,#94a3b8);
+  --neon:var(--hc-dark-cyan,#38bdf8); --warm:var(--hc-dark-gold,#fbbf24); --ok:var(--hc-dark-ok,#34d399); --bad:var(--hc-dark-bad,#fb7185); --pink:var(--hc-dark-pink,#f472b6);
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;overflow:hidden}
