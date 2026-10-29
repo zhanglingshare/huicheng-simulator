@@ -1178,7 +1178,7 @@ function renderDetail(kind, data){
       return '<div class="mkc"><div class="kn">'+esc(m.metric_name||'公开指标')+'</div><div class="kv">'+esc(m.metric_value)+'<small>'+esc(m.metric_unit||'')+'</small></div></div>';
     }).join(''):'<div class="mkc"><div class="kn">关键数字</div><div class="kv" style="font-size:12px">暂无关联的独立数值</div></div>';
     const nodesHtml=relatedNodes.length?relatedNodes.map(function(n){
-      return '<button class="goto" type="button" onclick="focusNode(\\''+esc(n.id)+'\\')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span><span class="tx">'+esc(n.label)+'</span><span class="ar">查看主体</span></button>';
+      return '<button class="goto" type="button" data-focus-node="'+esc(n.id)+'"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span><span class="tx">'+esc(n.label)+'</span><span class="ar">查看主体</span></button>';
     }).join(''):'<div class="txt">当前变化没有关联到具体主体。</div>';
     const edgesHtml=relatedEdges.length?relatedEdges.map(function(e){
       const a=byId[e.s],b=byId[e.t];
@@ -1195,7 +1195,7 @@ function renderDetail(kind, data){
         '</div>'+
       '</div>'+
       '<div class="why">'+esc(ev.before_after||ev.fact)+'</div>'+
-      '<button class="goto" type="button" onclick="focusNode(\\''+esc(ev.node)+'\\')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span><span class="tx">在网络中高亮相关主体</span><span class="ar">查看网络</span></button>'+
+      '<button class="goto" type="button" data-focus-node="'+esc(ev.node)+'"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span><span class="tx">在网络中高亮相关主体</span><span class="ar">查看网络</span></button>'+
       '<div class="sec"><span class="n">1</span>发生了什么</div>'+
       '<div class="txt">'+esc(ev.fact)+'</div>'+
       '<div class="sec"><span class="n">2</span>关键数字（若有公开记录）</div>'+
@@ -1212,7 +1212,7 @@ function renderDetail(kind, data){
       '<div class="d-note">此处展示公开记录与问题提示，不代表在线 AI 判断或真实用户投票。</div>';
   }
   host.scrollTop=0;
-  host.querySelectorAll('.goto').forEach(function(b){b.addEventListener('click',function(){document.getElementById('tabDetail').click();});});
+  host.querySelectorAll('.goto').forEach(function(b){b.addEventListener('click',function(){document.getElementById('tabDetail').click();const id=b.getAttribute('data-focus-node');if(id)focusNode(id);});});
 }
 
 
