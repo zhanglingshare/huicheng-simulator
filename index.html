@@ -3,1753 +3,296 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>惠城产业风洞 · 全息工作区</title>
+<title>惠城产业风洞 · 第一页 · 序章</title>
 <style>
+*{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#f3f6fa; --panel:#fff;
-  --ink:#0d1a2b; --ink2:#26384d; --muted:#5b6e85; --faint:#8194ab;
-  --line:#e4eaf2; --line2:#eef3f9;
-  --blue:#2563eb; --cyan:#0891b2; --violet:#7c3aed; --red:#dc2626; --amber:#d97706; --green:#16a34a;
-  --indigo:#4f46e5;
-  --r-sm:10px; --r:14px; --r-lg:18px;
-  --sh-1:0 1px 2px rgba(13,26,43,.05);
-  --sh-2:0 1px 2px rgba(13,26,43,.04),0 10px 24px rgba(13,26,43,.06);
-  --sh-3:0 2px 6px rgba(13,26,43,.06),0 24px 48px rgba(13,26,43,.10);
+  --bg:#060914;
+  --ink:#F0F4FF;
+  --ink2:#7B8DB0;
+  --muted:#3D4A66;
+  --cyan:#22D3EE;
+  --blue:#3B82F6;
+  --purple:#8B5CF6;
+  --green:#10B981;
+  --amber:#F59E0B;
+  --red:#EF4444;
+  --orange:#F97316;
+  --glass:rgba(255,255,255,.03);
+  --glass-b:rgba(255,255,255,.06);
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{
-  background:var(--bg); color:var(--ink); overflow:hidden;
-  font:13px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
-  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-  display:grid; grid-template-rows:60px auto auto minmax(0,1fr) 106px; gap:12px; padding-bottom:14px;
+html,body{background:var(--bg);color:var(--ink);
+  font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-10%;left:50%;transform:translateX(-50%);
+  width:800px;height:500px;
+  background:radial-gradient(ellipse,rgba(34,211,238,.07) 0%,transparent 70%);
+  pointer-events:none;z-index:0}
+@keyframes pageIn{from{opacity:0}to{opacity:1}}
+.shell{position:relative;z-index:1;min-height:100vh;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);
+  gap:40px;max-width:1280px;margin:0 auto;padding:32px 40px;animation:pageIn .4s ease both}
+.col-text{display:flex;flex-direction:column;justify-content:center}
+.col-visual{display:flex;flex-direction:column;justify-content:center}
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+.top{animation:slideDown .5s ease .2s both;display:flex;align-items:center;gap:10px;margin-bottom:40px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--cyan);
+  box-shadow:0 0 12px var(--cyan);flex:none;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 12px var(--cyan)}50%{opacity:.4;box-shadow:0 0 4px var(--cyan)}}
+.brand h1{font-size:16px;font-weight:800;letter-spacing:.3px}
+.brand h1 span{color:var(--cyan)}
+.brand .en{font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.mode{margin-left:auto;font-size:10.5px;color:var(--cyan);
+  border:1px solid rgba(34,211,238,.25);padding:4px 11px;border-radius:4px;
+  background:rgba(34,211,238,.05);letter-spacing:.5px}
+@keyframes dropIn{
+  0%{opacity:0;transform:translateY(-60px) scale(1.1)}
+  60%{opacity:1;transform:translateY(8px) scale(.98)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
 }
-button{font:inherit;color:inherit}
-:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:8px}
-
-/* ============ 顶部 ============ */
-header{display:flex;align-items:center;gap:20px;padding:0 20px;background:rgba(255,255,255,.86);
-  backdrop-filter:blur(12px);border-bottom:1px solid var(--line);position:relative;z-index:30}
-.brand{display:flex;align-items:center;gap:11px}
-.brand .logo{width:34px;height:34px;border-radius:11px;background:linear-gradient(140deg,#12263f,#2c4a6e);
-  display:grid;place-items:center;box-shadow:0 2px 8px rgba(18,38,63,.22)}
-.brand .logo svg{width:19px;height:19px}
-.brand h1{font-size:15.5px;font-weight:800;letter-spacing:.2px;line-height:1.25}
-.brand .tag{font-size:10.5px;color:var(--faint);letter-spacing:.2px}
-nav.main{display:flex;gap:2px;background:#f0f4f9;border-radius:12px;padding:4px;margin-left:6px}
-nav.main button{border:0;background:transparent;font-size:12.5px;font-weight:650;color:#64748b;
-  padding:7px 15px;border-radius:9px;cursor:pointer;transition:.16s}
-nav.main button:hover{color:var(--ink);background:#e7edf5}
-nav.main button.on{background:var(--ink);color:#fff;box-shadow:0 2px 8px rgba(13,26,43,.25)}
-.head-right{margin-left:auto;display:flex;align-items:center;gap:12px}
-.search{display:flex;align-items:center;gap:8px;background:#f6f8fb;border:1px solid var(--line);
-  border-radius:11px;padding:8px 12px;width:250px;color:var(--faint);font-size:12px;transition:.16s}
-.search:focus-within{background:#fff;border-color:#c7d7ea;box-shadow:0 0 0 3px rgba(37,99,235,.08)}
-.search input{border:0;background:transparent;outline:0;flex:1;font-size:12px;color:var(--ink)}
-.search input::placeholder{color:#9aabbf}
-.status{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);
-  border:1px solid var(--line);border-radius:99px;padding:6px 11px;background:#fff;white-space:nowrap}
-.status i{width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.15)}
-.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(140deg,#dbe7f7,#b9cde8);
-  display:grid;place-items:center;font-size:12px;font-weight:800;color:#2c4a6e;border:2px solid #fff;
-  box-shadow:0 0 0 1px var(--line)}
-
-.mode-switch{display:flex;align-items:center;gap:2px;padding:3px;border-radius:10px;background:#eef3f9;border:1px solid #e3eaf4;white-space:nowrap}
-.mode-switch button{border:0;background:transparent;border-radius:7px;padding:5px 9px;font-size:11px;font-weight:750;color:#64748b;cursor:pointer}
-.mode-switch button.on{background:#fff;color:#174ea6;box-shadow:0 1px 4px rgba(13,26,43,.10)}
-.brief{position:relative;isolation:isolate;display:flex;align-items:center;gap:14px;margin:0 20px;padding:10px 16px;min-height:72px;
-  background:linear-gradient(105deg,#e8f2ff 0%,#f8fbff 54%,#edf7ff 100%);border:1px solid #d9e8fb;border-radius:15px;
-  box-shadow:var(--sh-1);overflow:hidden}
-.brief:after{content:"";position:absolute;z-index:-1;right:-22px;top:-55px;width:330px;height:180px;opacity:.75;pointer-events:none;
-  background:radial-gradient(ellipse at 65% 75%,rgba(96,165,250,.22),transparent 58%),linear-gradient(155deg,transparent 48%,rgba(37,99,235,.06) 49%,transparent 51%)}
-.brief-icon{flex:none;width:42px;height:42px;display:grid;place-items:center;border-radius:12px;color:#fff;
-  background:linear-gradient(145deg,#2878f0,#123f91);box-shadow:0 5px 14px rgba(37,99,235,.22)}
-.brief-copy{flex:1;min-width:0;position:relative;z-index:1}
-.brief-meta{display:flex;align-items:center;gap:8px;color:#58749b;font-size:10px;font-weight:700;margin-bottom:2px}
-.brief-meta .brief-grade{padding:1px 6px;border-radius:5px;background:#e5efff;color:#2756a4}
-.brief h2{font-size:15px;line-height:1.4;color:#122b4d;font-weight:850;letter-spacing:.05px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.brief p{font-size:11px;color:#536b88;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
-.brief-action{flex:none;position:relative;z-index:1;border:0;border-radius:10px;padding:9px 13px;background:#174a9c;color:#fff;font-size:11px;font-weight:750;cursor:pointer;box-shadow:0 4px 12px rgba(23,74,156,.16);transition:.16s}
-.brief-action:hover{background:#103b82;transform:translateY(-1px)}
-.brief-action:disabled{opacity:.45;cursor:not-allowed;transform:none}
-.kpi .note{font-size:10px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.kpi .kv .value-unit{font-size:11px;color:var(--muted);font-weight:650;letter-spacing:0}
-.kpi.date-kpi .kv{font-size:18px}
-.pro-only{display:none}
-body[data-mode="pro"] .pro-only{display:block}
-body[data-mode="pro"] .brief p{white-space:normal}
-/* ============ KPI ============ */
-.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;padding:0 20px}
-.kpi{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:12px 15px 13px;
-  box-shadow:var(--sh-1);position:relative;overflow:hidden;transition:.18s}
-.kpi::after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c,var(--blue));opacity:.9}
-.kpi:hover{transform:translateY(-1px);box-shadow:var(--sh-2)}
-.kpi .kn{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px}
-.kpi .kn .u{color:#a9b8c9;font-size:10px}
-.kpi .kv{font-size:22px;font-weight:800;letter-spacing:-.4px;margin-top:3px;
-  font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:8px;line-height:1.15}
-.kpi .delta{font-size:11px;font-weight:750;padding:2px 7px;border-radius:7px;letter-spacing:0}
-.kpi .delta.up{color:#0f7a44;background:#e8f7ef}
-.kpi .delta.dn{color:#b3261e;background:#fdeceb}
-.kpi .delta.flat{color:#64748b;background:#f1f5f9}
-
-/* ============ 主体三栏 ============ */
-main{display:grid;grid-template-columns:200px minmax(0,1fr) 360px;gap:14px;padding:0 20px;min-height:0}
-
-/* --- 左栏 --- */
-.rail{display:flex;flex-direction:column;gap:12px;min-height:0;overflow-y:auto;scrollbar-width:none}
-.rail::-webkit-scrollbar{display:none}
-.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:13px;box-shadow:var(--sh-1)}
-.card-h{display:flex;align-items:center;gap:7px;margin-bottom:9px}
-.card-h h3{font-size:12px;font-weight:800;letter-spacing:.2px}
-.card-h .cnt{margin-left:auto;font-size:10px;font-weight:750;color:var(--muted);
-  background:#f1f5f9;border-radius:99px;padding:1px 7px}
-.layer{display:flex;align-items:center;gap:9px;width:100%;border:1px solid transparent;background:transparent;
-  font-size:12px;color:#42546b;padding:6px 7px;border-radius:9px;cursor:pointer;text-align:left;transition:.14s}
-.layer:hover{background:#f5f8fc}
-.layer.on{background:#eff4ff;border-color:#dbe6fd;color:#1e3f8f;font-weight:700}
-.layer .sw{width:9px;height:9px;border-radius:3px;flex:none;transition:.14s}
-.layer .nm{flex:1}
-.layer .num{font-size:10px;color:#9aabbf;font-variant-numeric:tabular-nums}
-.layer .ck{width:15px;height:15px;border-radius:5px;border:1.5px solid #cfd9e6;flex:none;
-  display:grid;place-items:center;transition:.14s}
-.layer.on .ck{background:var(--blue);border-color:var(--blue)}
-.layer.on .ck::after{content:"";width:7px;height:4px;border:solid #fff;border-width:0 0 1.8px 1.8px;
-  transform:rotate(-45deg) translateY(-1px)}
-.legend{display:flex;align-items:center;gap:9px;font-size:11.5px;color:#42546b;padding:3px 0}
-.legend .ln{width:24px;flex:none;height:0;border-top-width:2.5px;border-top-style:solid}
-.tog{display:flex;align-items:center;justify-content:space-between;font-size:11.5px;color:#42546b;
-  padding:6px 0;border-top:1px dashed var(--line2);margin-top:6px}
-.switch{width:34px;height:19px;border-radius:99px;background:#cfd9e6;position:relative;cursor:pointer;
-  border:0;padding:0;transition:.2s;flex:none}
-.switch i{position:absolute;top:2px;left:2px;width:15px;height:15px;border-radius:50%;background:#fff;
-  transition:.2s;box-shadow:0 1px 3px rgba(13,26,43,.25)}
-.switch.on{background:var(--blue)}
-.switch.on i{left:17px}
-.sizeley{display:flex;align-items:center;gap:12px;font-size:10.5px;color:var(--faint);
-  border-top:1px dashed var(--line2);margin-top:9px;padding-top:9px}
-.sizeley span{display:flex;align-items:center;gap:5px}
-.sizeley b{border-radius:50%;background:#9fb0c6;display:block}
-
-/* --- 中栏画布 --- */
-.stage{position:relative;background:
-    radial-gradient(120% 100% at 50% 0%,#ffffff 0%,#f7fafd 55%,#f1f6fb 100%);
-  border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-1);overflow:hidden;min-height:0}
-.stage::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
-  background-image:radial-gradient(#d8e3ef 1px,transparent 1px);background-size:22px 22px}
-.stage-bg{position:absolute;inset:0;cursor:grab}
-.stage-bg:active{cursor:grabbing}
-#graph{position:absolute;inset:0;width:100%;height:100%;touch-action:none}
-.toolbar{position:absolute;top:12px;left:12px;right:12px;display:flex;align-items:flex-start;
-  justify-content:space-between;pointer-events:none;z-index:5}
-.tb-left,.tb-right{display:flex;gap:8px;pointer-events:auto}
-.chipbar{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.92);border:1px solid var(--line);
-  border-radius:11px;padding:7px 12px;box-shadow:var(--sh-2);backdrop-filter:blur(8px);font-size:11.5px}
-.chipbar .ttl{font-weight:800;font-size:12px}
-.chipbar .mt{color:var(--faint);font-size:11px;display:flex;align-items:center;gap:6px}
-.chipbar .mt b{color:var(--muted);font-weight:700}
-.vsep{width:1px;height:14px;background:var(--line)}
-.zoomer{display:flex;flex-direction:column;background:rgba(255,255,255,.92);border:1px solid var(--line);
-  border-radius:11px;box-shadow:var(--sh-2);backdrop-filter:blur(8px);overflow:hidden}
-.zoomer button{width:34px;height:32px;border:0;background:transparent;cursor:pointer;color:#51637a;
-  display:grid;place-items:center;font-size:14px;font-weight:700;transition:.14s}
-.zoomer button:hover{background:#f2f6fb;color:var(--ink)}
-.zoomer .zl{font-size:9.5px;color:var(--faint);text-align:center;padding:2px 0 4px;border-top:1px solid var(--line2)}
-.hintbar{position:absolute;left:12px;bottom:12px;display:flex;gap:7px;flex-wrap:wrap;z-index:5;pointer-events:none}
-.hint{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.86);border:1px solid var(--line);
-  border-radius:99px;padding:4px 9px;font-size:10.5px;color:var(--muted);backdrop-filter:blur(6px)}
-.hint b{color:var(--ink2);font-weight:750}
-.selbar{position:absolute;right:12px;bottom:12px;z-index:6;display:none;align-items:center;gap:9px;
-  background:rgba(13,26,43,.92);color:#e6eefb;border-radius:11px;padding:8px 12px;font-size:11.5px;
-  box-shadow:var(--sh-3);backdrop-filter:blur(8px)}
-.selbar.show{display:flex}
-.selbar .dot{width:8px;height:8px;border-radius:50%}
-.selbar .x{color:#9fb0c6;cursor:pointer;margin-left:2px;font-size:14px;line-height:1}
-.selbar b{font-weight:800}
-
-/* --- 图元 --- */
-.edge{transition:opacity .2s}
-.edge line{stroke-linecap:round;transition:stroke-width .18s,opacity .18s}
-.edge .elab{font-size:10.5px;font-weight:750;fill:#41546b;paint-order:stroke;stroke:#fbfdff;
-  stroke-width:4px;stroke-linejoin:round;opacity:0;transition:opacity .18s;pointer-events:none}
-.edge.show .elab{opacity:1}
-.edge.dim{opacity:.13}
-.edge.pulse line{animation:epul 1.5s ease-in-out 2}
-.edge.pause{animation-play-state:paused}
-@keyframes epul{0%,100%{stroke-width:2}50%{stroke-width:5}}
-.node{cursor:grab;outline:none}
-.node:active{cursor:grabbing}
-.node .ring{fill:none;stroke:transparent;stroke-width:2;transition:.18s}
-.node .glow{opacity:0;transition:.25s}
-.node .dot{stroke:#fff;stroke-width:3;transition:filter .2s}
-.node .lab{font-size:11.5px;font-weight:750;fill:#2d4259;text-anchor:middle;
-  paint-order:stroke;stroke:#fbfdff;stroke-width:4px;stroke-linejoin:round;pointer-events:none}
-.node .num{font-size:9.5px;font-weight:800;fill:#fff;text-anchor:middle;pointer-events:none}
-.node:hover .dot{filter:brightness(1.06)}
-.node.sel .ring{stroke:var(--ink);stroke-dasharray:4 3}
-.node.sel .glow{opacity:1}
-.node.focus .ring{stroke:#0d1a2b;stroke-dasharray:4 3;opacity:.6}
-.node.pulse .ring{animation:npul 1.4s ease-out 2}
-@keyframes npul{0%{stroke:#0d1a2b;opacity:1;stroke-width:2}100%{stroke:#0d1a2b;opacity:0;stroke-width:14}}
-
-/* --- 右栏 --- */
-.panel{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);
-  border-radius:var(--r-lg);box-shadow:var(--sh-2);overflow:hidden;min-height:0}
-.p-h{display:flex;align-items:center;gap:10px;padding:11px 12px 10px}
-.p-h .av{width:32px;height:32px;border-radius:10px;background:linear-gradient(140deg,#12263f,#33506f);
-  display:grid;place-items:center;flex:none}
-.p-h .av svg{width:16px;height:16px}
-.p-h .t{font-size:13px;font-weight:800;line-height:1.3}
-.p-h .s{font-size:10.5px;color:var(--muted);display:flex;align-items:center;gap:5px;margin-top:1px}
-.p-h .s i{width:5px;height:5px;border-radius:50%;background:#22c55e}
-.p-h .more{margin-left:auto;border:0;background:transparent;color:var(--faint);cursor:pointer;
-  width:28px;height:28px;border-radius:8px;display:grid;place-items:center}
-.p-h .more:hover{background:#f2f6fb;color:var(--ink)}
-.tabs{display:flex;gap:3px;padding:0 10px;background:#fbfcfe;border-bottom:1px solid var(--line)}
-.tab{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;border:0;background:transparent;
-  cursor:pointer;font-size:11.5px;font-weight:700;color:#8a99ad;padding:10px 6px 11px;border-radius:9px 9px 0 0;
-  border-bottom:2px solid transparent;transition:.16s}
-.tab:hover{color:var(--ink2);background:#f5f8fc}
-.tab svg{width:13px;height:13px}
-.tab.on{color:var(--blue);background:#fff;border-bottom-color:var(--blue)}
-.tab .badge{font-size:9px;font-weight:800;background:#eef2ff;color:#4459c0;padding:1px 6px;border-radius:99px}
-.p-body{flex:1;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain}
-.p-body::-webkit-scrollbar{width:6px}
-.p-body::-webkit-scrollbar-thumb{background:#dae3ee;border-radius:99px}
-.p-body::-webkit-scrollbar-thumb:hover{background:#c3d0e0}
-.view{display:none;padding:14px}
-.view.on{display:block;animation:fade .24s ease}
-@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
-.kind{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:800;
-  background:#eaf7f0;color:#0f7a44;padding:3px 10px;border-radius:99px}
-.kind .d{color:#8fa0b5;font-weight:650}
-.d-title{font-size:17px;font-weight:800;line-height:1.42;margin:9px 0 6px;letter-spacing:-.2px}
-.d-sub{font-size:11.5px;color:var(--muted);line-height:1.65}
-.goto{display:flex;align-items:center;gap:9px;width:100%;border:1px solid #dbe7fe;background:#f5f8ff;
-  border-radius:11px;padding:9px 11px;margin-top:10px;cursor:pointer;text-align:left;transition:.16s}
-.goto:hover{background:#eef4ff;border-color:#c3d7fd}
-.goto .ic{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:var(--blue);
-  color:#fff;flex:none}
-.goto .ic svg{width:13px;height:13px}
-.goto .tx{font-size:11.5px;font-weight:750;color:#24427f;flex:1}
-.goto .ar{color:var(--blue);display:grid;place-items:center}
-.sec{font-size:10.5px;font-weight:800;color:#7c8ea5;letter-spacing:.5px;margin:17px 0 8px;
-  display:flex;align-items:center;gap:7px}
-.sec .n{width:17px;height:17px;border-radius:6px;background:#eef2ff;color:#4157bb;display:grid;
-  place-items:center;font-size:9.5px;font-weight:800}
-.sec::after{content:"";flex:1;height:1px;background:var(--line2)}
-.txt{font-size:12.5px;line-height:1.78;color:#3c4e63}
-.txt b{color:var(--ink);font-weight:750}
-
-/* ===== 主体关系小图：让“它与谁相连”先被看见 ===== */
-.mini-net{margin-top:3px;padding:10px 8px 9px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(180deg,#fff,#f7faff);overflow:hidden}
-.mn-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 3px 4px;font-size:10.5px;font-weight:800;color:var(--ink2)}
-.mn-head .mn-mark{display:inline-flex;align-items:center;gap:6px}
-.mn-mark i{width:7px;height:7px;border-radius:50%;background:#38bdf8;box-shadow:0 0 0 3px #e0f2fe}
-.mn-count{font-size:9.5px;color:var(--muted);font-weight:700;white-space:nowrap}
-.mn-canvas{position:relative;width:100%;height:240px;max-width:320px;margin:0 auto}
-.mn-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.mn-center,.mn-node{position:absolute;z-index:2;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border-radius:11px;box-sizing:border-box}
-.mn-center{left:50%;top:50%;width:104px;min-height:46px;padding:6px 7px;background:linear-gradient(145deg,#12263f,#285071);border:1px solid #365a7d;color:#fff;box-shadow:0 7px 18px rgba(18,38,63,.2)}
-.mn-center .mn-name{font-size:11px;font-weight:850;line-height:1.35;max-width:100%;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
-.mn-center .mn-role{font-size:8.5px;color:#a8d7f4;margin-top:2px;letter-spacing:.4px}
-.mn-node{width:91px;min-height:45px;padding:5px 5px 4px;background:#fff;border:1px solid #dce6f2;box-shadow:0 3px 9px rgba(18,38,63,.07);cursor:pointer;transition:transform .16s,border-color .16s,box-shadow .16s}
-.mn-node:hover{z-index:4;transform:translate(-50%,-50%) scale(1.045);border-color:#8ab5ed;box-shadow:0 6px 15px rgba(37,99,235,.14)}
-.mn-node:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.mn-node .mn-name{width:100%;font-size:10px;font-weight:800;line-height:1.3;color:#26384d;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
-.mn-node .mn-tag{display:block;max-width:100%;margin-top:3px;padding:1px 4px;border-radius:4px;background:#f2f6fb;color:#53677e;font-size:8px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mn-node .mn-tag i{display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:3px;vertical-align:1px}
-.mn-node .mn-more{font-size:8px;color:#8194ab;margin-top:2px;line-height:1.1}
-.mn-relations{display:flex;flex-wrap:wrap;gap:5px;margin:3px 2px 0}
-.mn-rel{display:inline-flex;align-items:center;gap:4px;padding:3px 6px;border:1px solid var(--line);border-radius:7px;background:#fff;color:#52657c;font-size:9px;line-height:1.25}
-.mn-rel i{width:13px;height:0;border-top:2px solid;display:inline-block;flex:none}
-.mn-rel.grade-b i{border-top-style:dashed}
-.mn-rel.grade-c i{border-top-style:dotted}
-.mn-rel b{font-size:8px;color:#60738a}
-.mn-foot{margin:7px 2px 0;font-size:9px;line-height:1.5;color:#8a9bb0}
-@media(max-width:420px){.mn-canvas{height:230px}.mn-node{width:86px}.mn-center{width:100px}.mn-relations{gap:4px}.mn-rel{font-size:8.5px;padding:3px 5px}}
-.mk{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.mkc{border:1px solid var(--line);border-radius:11px;padding:10px 12px;background:linear-gradient(165deg,#fdfefe,#f7fafd)}
-.mkc .kn{font-size:10px;color:var(--muted)}
-.mkc .kv{font-size:17px;font-weight:800;margin-top:2px;font-variant-numeric:tabular-nums}
-.mkc .kv small{font-size:10px;color:var(--faint);font-weight:650;margin-left:2px}
-.mkc .bar{height:4px;border-radius:99px;background:#e9eff7;margin-top:7px;overflow:hidden}
-.mkc .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#34d399,#0d9488)}
-.grade{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:800;
-  background:#eaf7f0;color:#0f7a44;padding:3px 10px;border-radius:99px}
-.src{border:1px solid var(--line);border-radius:11px;background:#fbfcfe;padding:10px 11px;margin-top:8px}
-.src .sn{font-size:10.5px;font-weight:750;color:#37485e;display:flex;align-items:center;gap:6px}
-.src a{font-size:10.5px;color:var(--blue);word-break:break-all;display:block;margin-top:5px;text-decoration:none}
-.src a:hover{text-decoration:underline}
-.limit{border:1px solid #f6d9d5;background:#fef6f5;border-radius:11px;padding:10px 11px;font-size:11.5px;
-  color:#96453d;line-height:1.72;margin-top:8px}
-.limit b{color:#bc4038}
-.deb{border:1px solid #f4e3c2;background:linear-gradient(165deg,#fffaf0,#fdf4e1);border-radius:12px;padding:11px 12px;margin-top:8px}
-.deb .dh{font-size:10.5px;font-weight:800;color:#a85c07;display:flex;align-items:center;gap:6px;margin-bottom:6px}
-.deb .dh svg{width:13px;height:13px}
-.deb .dq{font-size:12px;font-weight:700;color:#7a5216;line-height:1.68}
-.opts{display:flex;gap:7px;margin-top:10px}
-.opt{font-size:11px;font-weight:750;border:1px solid #eddcb6;background:#fff;color:#8c6118;
-  padding:6px 12px;border-radius:99px;cursor:pointer;transition:.14s}
-.opt:hover{border-color:#e0c48c;background:#fffdf7}
-.opt.on{background:var(--ink);border-color:var(--ink);color:#fff}
-.think{border:1px dashed #d5deea;border-radius:11px;background:#fafbfe;overflow:hidden}
-.think .th{display:flex;align-items:center;gap:8px;padding:10px 11px;cursor:pointer;font-size:11.5px;
-  font-weight:750;color:#5b6e85;border:0;background:transparent;width:100%;text-align:left}
-.think .th svg{width:14px;height:14px;flex:none}
-.think .th .ch{margin-left:auto;transition:.2s;display:grid;place-items:center}
-.think .th .ch svg{width:14px;height:14px}
-.think .tb{display:none;padding:0 11px 11px;font-size:11.5px;line-height:1.75;color:#5b6e85}
-.think.open .tb{display:block}
-.think.open .ch{transform:rotate(180deg)}
-/* ===== 右栏：情报流（带冲击力的表达） ===== */
-.fh{position:relative;overflow:hidden;border-radius:14px;padding:12px;color:#eaf2fb;
-  background:linear-gradient(155deg,#0b192b 0%,#163252 55%,#1d4a6d 100%);box-shadow:0 12px 26px rgba(9,24,42,.26)}
-.fh::before{content:"";position:absolute;width:230px;height:230px;right:-80px;top:-100px;border-radius:50%;
-  background:radial-gradient(circle,rgba(56,189,248,.34),transparent 66%)}
-.fh-tag{position:relative;display:inline-flex;align-items:center;gap:6px;font-size:9.5px;font-weight:800;letter-spacing:1.1px;
-  color:#9fd0f5;background:rgba(125,211,252,.12);border:1px solid rgba(125,211,252,.26);padding:3px 9px;border-radius:99px}
-.fh-tag i{width:5px;height:5px;border-radius:50%;background:#38bdf8;box-shadow:0 0 0 3px rgba(56,189,248,.18);animation:blink 1.8s infinite}
-@keyframes blink{50%{opacity:.3}}
-.fh-big{position:relative;font-size:36px;font-weight:900;letter-spacing:-2.2px;line-height:1;margin-top:9px;
-  font-variant-numeric:tabular-nums}
-.fh-big span{font-size:15px;font-weight:750;letter-spacing:0;margin-left:5px;color:#9fc0de}
-.fh h3{position:relative;font-size:14.5px;font-weight:800;line-height:1.4;margin:6px 0 4px;color:#fff}
-.fh p{position:relative;font-size:11px;line-height:1.6;color:#a9c6e0}
-.fh-stats{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:10px;
-  background:rgba(255,255,255,.11);border-radius:10px;overflow:hidden}
-.fh-stats>div{background:rgba(11,25,43,.58);padding:6px 8px;text-align:center}
-.fh-stats b{display:block;font-size:16px;font-weight:900;color:#fff;font-variant-numeric:tabular-nums}
-.fh-stats span{font-size:9.5px;color:#8fb3d6}
-.fh-net{position:relative;display:flex;align-items:center;gap:8px;margin-top:10px;font-size:10.5px;color:#9fc0de}
-.fh-net b{font-size:14px;color:#eaf2fb;font-variant-numeric:tabular-nums}
-.fh-net b.up{color:#4ade80}
-.fh-net .gain{margin-left:auto;font-size:10px;font-weight:800;color:#4ade80;background:rgba(74,222,128,.14);
-  border:1px solid rgba(74,222,128,.3);padding:2px 7px;border-radius:99px}
-.fh-btn{position:relative;display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:10px;
-  border:0;border-radius:10px;background:linear-gradient(135deg,#38bdf8,#2563eb);color:#fff;font-size:12px;font-weight:800;
-  padding:8px;cursor:pointer;box-shadow:0 8px 18px rgba(37,99,235,.4);transition:.16s}
-.fh-btn:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(37,99,235,.5)}
-.ffilters{display:flex;gap:6px;margin:10px 0 2px;overflow-x:auto;scrollbar-width:none}\n.ffilters::-webkit-scrollbar{display:none}
-.ff{border:1px solid var(--line);background:#fff;border-radius:99px;padding:4px 11px;font-size:11px;font-weight:700;white-space:nowrap;
-  color:#64748b;cursor:pointer;transition:.14s}
-.ff:hover{border-color:#c7d7ea;color:var(--ink2)}
-.ff.on{background:var(--ink);border-color:var(--ink);color:#fff}
-.fgrp{font-size:9.5px;font-weight:800;color:var(--faint);letter-spacing:.7px;margin:9px 0 1px}
-.frow{display:grid;grid-template-columns:minmax(0,1fr) 42px;gap:10px;align-items:center;
-  padding:8px 4px;border-bottom:1px solid var(--line2);cursor:pointer;border-radius:8px;transition:.14s}
-.frow:hover{background:#f4f8fd}
-.frow .dt{font-size:9.5px;font-weight:800;color:#94a3b8;line-height:1.3;letter-spacing:-.2px}
-.frow .tt{font-size:11.5px;font-weight:750;color:#2b3f57;line-height:1.42}
-.frow .mm{display:flex;align-items:center;gap:5px;font-size:9.5px;color:#94a3b8;margin-top:3px}
-.frow .mm i{width:4px;height:4px;border-radius:50%;display:inline-block}
-.frow .bar{height:4px;border-radius:99px;background:#eef3f9;overflow:hidden}
-.frow .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#38bdf8,#22c55e)}
-
-/* ===== 右栏：变化详情 ===== */
-.d-hero{margin:-14px -14px 0;padding:13px 14px 12px;border-radius:0 0 16px 16px;color:#eaf2fb;position:relative;overflow:hidden;
-  background:linear-gradient(155deg,#0b192b 0%,#163252 58%,#21506f 100%)}
-.d-hero::before{content:"";position:absolute;width:250px;height:250px;right:-90px;top:-120px;border-radius:50%;
-  background:radial-gradient(circle,rgba(56,189,248,.3),transparent 66%)}
-.d-hero .eyebrow{position:relative;font-size:9.5px;font-weight:800;letter-spacing:1.2px;color:#9fd0f5}
-.d-hero h2{position:relative;font-size:18px;font-weight:800;line-height:1.4;margin:7px 0 0;color:#fff;letter-spacing:-.2px}
-.dh-stats{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:11px;
-  background:rgba(255,255,255,.11);border-radius:10px;overflow:hidden}
-.dh-stats>div{background:rgba(11,25,43,.5);padding:7px 8px}
-.dh-stats .val{font-size:21px;font-weight:900;color:#fff;line-height:1.12;font-variant-numeric:tabular-nums;letter-spacing:-.6px}
-.dh-stats .unit{font-size:10px;font-weight:700;color:#9fc0de;margin-left:2px}
-.dh-stats .lab{display:block;font-size:9.5px;color:#8fb3d6;margin-top:1px}
-.ba{position:relative;display:grid;grid-template-columns:1fr 20px 1fr;gap:5px;align-items:center;margin-top:10px}
-.ba-c{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:5px 4px 4px}
-.ba-c svg{display:block;width:100%;height:54px}
-.ba-c .cap{text-align:center;font-size:9px;color:#9fc0de;font-weight:700;letter-spacing:.3px}
-.ba-arrow{display:grid;place-items:center;color:#7dd3fc;gap:3px}
-.ba-arrow .dl{font-size:9px;font-weight:900;color:#4ade80;background:rgba(74,222,128,.14);border:1px solid rgba(74,222,128,.32);border-radius:99px;padding:0 5px;line-height:14px}
-.why{margin:12px 0 0;padding:11px 13px;border-radius:12px;font-size:13px;font-weight:750;line-height:1.72;color:#17324f;
-  background:linear-gradient(135deg,#eef6ff,#ecfaf3);border-left:3px solid var(--blue)}
-.why b{color:#0b2a4d}
-.d-note{font-size:10.5px;color:var(--faint);margin-top:8px;display:flex;align-items:center;gap:5px}
-.vote-h{display:flex;align-items:center;gap:8px;font-size:10px;color:var(--faint);margin-top:9px}
-.vote-h .bar{flex:1;height:4px;background:#eef3f9;border-radius:99px;overflow:hidden;display:flex}
-.vote-h .bar i{height:100%}
-/* ===== 情报可视化：事件网络与影响结构 ===== */
-.event-viz{margin:12px 0;border:1px solid #dce7f4;border-radius:13px;background:linear-gradient(180deg,#fbfdff,#f4f8fd);overflow:hidden}
-.ev-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border-bottom:1px solid #e4edf7}
-.ev-title{font-size:11.5px;font-weight:850;color:#17324f;display:flex;align-items:center;gap:7px}
-.ev-title i{width:7px;height:7px;border-radius:50%;background:#2563eb;box-shadow:0 0 0 4px #dbeafe}
-.ev-count{font-size:10px;font-weight:750;color:#64748b;background:#fff;border:1px solid #e0e9f4;border-radius:99px;padding:3px 7px;white-space:nowrap}
-.ev-canvas{padding:8px 8px 3px}
-.ev-canvas svg{display:block;width:100%;height:auto;max-height:210px}
-.ev-legend{display:flex;flex-wrap:wrap;gap:6px 11px;padding:4px 12px 10px;font-size:9.5px;color:#64748b}
-.ev-legend span{display:inline-flex;align-items:center;gap:5px}
-.ev-legend i{display:inline-block;width:8px;height:8px;border-radius:50%}
-.ev-bars{padding:0 12px 12px;display:grid;gap:7px}
-.ev-bar-row{display:grid;grid-template-columns:minmax(70px,auto) 1fr 22px;gap:8px;align-items:center;font-size:10px;color:#52657c}
-.ev-bar-track{height:6px;background:#e7eef7;border-radius:99px;overflow:hidden}
-.ev-bar-track i{display:block;height:100%;border-radius:99px}
-.ev-bar-row b{font-size:10px;color:#243b55;text-align:right;font-variant-numeric:tabular-nums}
-.frow .fvisual{display:flex;align-items:center;justify-content:center;width:38px;height:26px;color:#2563eb}
-.frow .fvisual svg{width:34px;height:24px;display:block}
-/* 情报流中的真实事件类型分布 */
-.feed-mix{margin:10px 0 7px;padding:10px 11px 11px;background:#f7faff;border:1px solid #e1eaf6;border-radius:12px}
-.feed-mix-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}
-.feed-mix-title{font-size:10.5px;font-weight:850;color:#334b66}
-.feed-mix-total{font-size:9.5px;color:#8191a6}
-.feed-mix-row{display:grid;grid-template-columns:minmax(58px,78px) 1fr 18px;gap:7px;align-items:center;margin-top:7px}
-.feed-mix-name{font-size:9.5px;color:#61748b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.feed-mix-track{height:6px;background:#e5edf7;border-radius:99px;overflow:hidden}
-.feed-mix-track i{display:block;height:100%;border-radius:99px;transition:width .3s}
-.feed-mix-num{font-size:9.5px;color:#334b66;text-align:right;font-weight:800;font-variant-numeric:tabular-nums}
-/* 输入框 */
-.composer{padding:10px 12px 12px;border-top:1px solid var(--line);background:#fbfcfe}
-.inp{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:12px;background:#fff;
-  padding:8px 10px 8px 12px;transition:.16s}
-.inp:focus-within{border-color:#c7d7ea;box-shadow:0 0 0 3px rgba(37,99,235,.08)}
-.inp input{border:0;outline:0;background:transparent;flex:1;font-size:12px;color:var(--ink);min-width:0}
-.inp input::placeholder{color:#9aabbf}
-.inp .ib{width:28px;height:28px;border-radius:9px;border:0;background:linear-gradient(140deg,#12263f,#33506f);
-  display:grid;place-items:center;cursor:pointer;flex:none;transition:.14s}
-.inp .ib:hover{transform:translateY(-1px);box-shadow:0 4px 10px rgba(18,38,63,.25)}
-.inp .ib svg{width:13px;height:13px}
-
-/* ============ 时间线 ============ */
-footer{margin:0 20px;background:#fff;border:1px solid var(--line);border-radius:var(--r);
-  box-shadow:var(--sh-1);padding:11px 16px 8px;display:flex;flex-direction:column;position:relative;z-index:4}
-.tl-h{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800}
-.tl-h i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(22,163,74,.12)}
-.tl-h .s{font-size:10px;color:var(--faint);font-weight:600;margin-left:auto;letter-spacing:.2px}
-.tl{position:relative;flex:1;margin-top:4px}
-.tl-line{position:absolute;left:10px;right:10px;top:50%;height:2px;border-radius:2px;
-  background:linear-gradient(90deg,#dbe5f0,#eaf0f7)}
-.tl-ev{position:absolute;top:50%;transform:translate(-50%,-50%);background:none;border:0;cursor:pointer;
-  padding:0;display:flex;flex-direction:column;align-items:center;gap:0}
-.tl-ev .l{font-size:10.5px;font-weight:700;color:#42546b;white-space:nowrap;position:absolute;
-  bottom:13px;left:50%;transform:translateX(-50%);background:#fff;padding:0 5px;border-radius:5px;transition:.14s}
-.tl-ev .n{width:10px;height:10px;border-radius:50%;border:2.5px solid #fff;
-  box-shadow:0 0 0 1px rgba(13,26,43,.10),0 1px 4px rgba(13,26,43,.12);transition:.16s}
-.tl-ev .d{font-size:9px;color:var(--faint);position:absolute;top:15px;left:50%;transform:translateX(-50%);
-  white-space:nowrap;font-variant-numeric:tabular-nums}
-.tl-ev:hover .n{transform:scale(1.35)}
-.tl-ev:hover .l{color:var(--blue)}
-.tl-ev.sel .l{color:var(--ink);font-weight:800}
-.tl-ev.sel .n{transform:scale(1.3);box-shadow:0 0 0 1px var(--ink),0 2px 8px rgba(13,26,43,.2)}
-
-/* ============ 自适应 ============ */
-@media (max-width:1420px){
-  main{grid-template-columns:190px minmax(0,1fr) 336px}
-  .search{width:200px}
-  .kpi .kv{font-size:20px}
+.headline{animation:dropIn .7s cubic-bezier(.2,.8,.3,1.2) .4s both;margin-bottom:32px}
+.kicker{display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;color:var(--amber);letter-spacing:2.5px;font-weight:700;
+  text-transform:uppercase;margin-bottom:18px;opacity:0;animation:fadeIn .4s ease .6s both}
+@keyframes fadeIn{to{opacity:1}}
+.headline h2{font-size:clamp(36px,5.5vw,64px);font-weight:900;line-height:1.05;letter-spacing:-1.5px;margin-bottom:20px}
+.headline h2 .line1,.headline h2 .line2{display:block}
+.crack{color:var(--red);position:relative;text-shadow:0 0 30px rgba(239,68,68,.4)}
+.crack::after{content:'';position:absolute;left:0;right:0;top:52%;height:3px;
+  background:var(--red);transform:rotate(-1.2deg);
+  box-shadow:0 0 12px rgba(239,68,68,.6);
+  animation:slashIn .6s ease 1.2s both;transform:scaleX(0);transform-origin:left}
+@keyframes slashIn{to{transform:rotate(-1.2deg) scaleX(1)}}
+.headline p{font-size:clamp(14px,1.2vw,16px);color:var(--ink2);line-height:1.75;max-width:520px;
+  opacity:0;animation:fadeIn .5s ease 1s both}
+.headline p b{color:var(--ink);font-weight:700}
+.headline p .hl{color:var(--orange);font-weight:700;animation:blink 1.5s ease 2.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes stageIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+.relbox{animation:stageIn .8s ease .8s both;margin-bottom:24px}
+.rel-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px;
+  opacity:0;animation:fadeIn .4s ease 1s both}
+.rel-head .t{font-size:11px;font-weight:700;color:var(--ink2);letter-spacing:1.5px}
+.rel-head .d{font-size:10px;color:var(--muted)}
+.rel-svg{width:100%;height:auto;display:block;aspect-ratio:4/3;
+  background:linear-gradient(180deg,rgba(34,211,238,.025),rgba(239,68,68,.035));
+  border-radius:16px;border:1px solid rgba(255,255,255,.05);overflow:visible}
+.nd .lb{font-weight:700;fill:#fff;paint-order:stroke;stroke:rgba(6,9,20,.95);stroke-width:3.5px}
+.nd .sub{fill:var(--ink2);paint-order:stroke;stroke:rgba(6,9,20,.9);stroke-width:3px}
+.local-line{fill:none;stroke:var(--cyan);stroke-width:1.2;stroke-dasharray:3 5;opacity:.22;
+  stroke-dashoffset:200;animation:drawLine 1s ease 1.5s both,tremble .3s ease 2.5s infinite}
+@keyframes drawLine{to{stroke-dashoffset:0}}
+@keyframes tremble{0%,100%{opacity:.22}50%{opacity:.1}}
+.leak-line{fill:none;stroke-linecap:round;filter:drop-shadow(0 0 5px currentColor);
+  stroke-dasharray:600;stroke-dashoffset:600;
+  animation:shootLine .8s cubic-bezier(.4,0,.8,1) 1.8s both,flowDash 1.5s linear 2.6s infinite}
+@keyframes shootLine{to{stroke-dashoffset:0}}
+@keyframes flowDash{to{stroke-dashoffset:-20}}
+.particle{opacity:0;animation:particleIn .4s ease 2s both}
+@keyframes particleIn{to{opacity:1}}
+.leak-target{opacity:0;animation:targetPop .5s cubic-bezier(.2,1.4,.4,1) both}
+.leak-target.sz{animation-delay:2.2s}
+.leak-target.dg{animation-delay:2.4s}
+.leak-target.ec{animation-delay:2.6s}
+@keyframes targetPop{0%{opacity:0;transform:scale(.5)}100%{opacity:1;transform:scale(1)}}
+.leak-target .ring{animation:targetPulse 2s ease-in-out infinite}
+@keyframes targetPulse{0%,100%{opacity:.4}50%{opacity:.8;stroke-width:2}}
+.nd{opacity:0;animation:nodeFade .4s ease both}
+.nd.jb{animation-delay:1.6s}.nd.jsh{animation-delay:1.7s}
+.nd.sdj{animation-delay:1.8s}.nd.hm{animation-delay:1.9s}
+@keyframes nodeFade{to{opacity:1}}
+.annot{opacity:0;animation:fadeIn .5s ease 2.8s both}
+.annot.warn{animation:fadeIn .5s ease 2.8s both,blink 1.5s ease 3s infinite}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.insights{animation:slideUp .6s ease 2.8s both;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
+.insight{position:relative;padding:18px 16px 16px;border-radius:12px;
+  background:var(--glass);border:1px solid var(--glass-b);overflow:hidden}
+.insight::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+.insight.brk::before{background:var(--red)}
+.insight.rvs::before{background:var(--amber)}
+.insight .num{font-size:26px;font-weight:900;line-height:1;margin-bottom:8px;font-variant-numeric:tabular-nums;opacity:.9}
+.insight.brk .num{color:var(--red)}
+.insight.rvs .num{color:var(--amber)}
+.insight .t{font-size:14px;font-weight:800;line-height:1.35;margin-bottom:6px}
+.insight .d{font-size:11.5px;color:var(--ink2);line-height:1.55}
+.cta{animation:slideUp .6s ease 3.2s both;display:flex;align-items:center;justify-content:space-between;
+  width:100%;padding:18px 22px;
+  background:linear-gradient(135deg,rgba(34,211,238,.1),rgba(139,92,246,.1));
+  border:1px solid rgba(34,211,238,.25);border-radius:14px;
+  color:var(--ink);font-size:15px;font-weight:800;cursor:pointer;
+  transition:.2s;text-align:left;text-decoration:none}
+.cta:hover{border-color:rgba(34,211,238,.5);
+  background:linear-gradient(135deg,rgba(34,211,238,.16),rgba(139,92,246,.16))}
+.cta .arrow{font-size:20px;color:var(--cyan);transition:.2s;animation:arrowNudge 2s ease 4s infinite}
+@keyframes arrowNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+.cta:hover .arrow{transform:translateX(5px)}
+.cta .sub{display:block;font-size:11px;font-weight:400;color:var(--ink2);margin-top:3px}
+.foot{animation:fadeIn .5s ease 3.5s both;display:flex;justify-content:space-between;align-items:center;
+  margin-top:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,.04)}
+.foot .disc{font-size:11px;color:var(--ink2)}
+.foot .links{display:flex;gap:16px;font-size:11px;color:var(--ink2)}
+.foot .links a{cursor:pointer;color:var(--ink2);text-decoration:none}
+.foot .links a:hover{color:var(--cyan)}
+@media(max-width:1100px){
+  .shell{grid-template-columns:1fr;gap:24px;padding:24px 28px}
+  .headline{margin-bottom:20px}
+  .headline h2{font-size:clamp(36px,7vw,52px)}
+  .rel-svg{aspect-ratio:16/9}
 }
-@media (max-width:1220px){
-  header{gap:10px}
-  nav.main button{padding:7px 9px}
-  .head-right{gap:7px}
-  .search{width:170px}
-  .mode-switch button{padding:5px 7px}
-  main{grid-template-columns:minmax(0,1fr) 340px}
-  .rail{display:none}
-  .kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .kpi:nth-child(n+4){display:none}
-  .brief-action{padding:8px 10px}
+@media(max-width:640px){
+  .shell{padding:18px 16px 40px;gap:20px}
+  .top{margin-bottom:24px}
+  .headline h2{font-size:clamp(32px,11vw,44px);letter-spacing:-1px}
+  .headline p{max-width:100%}
+  .insights{grid-template-columns:1fr;gap:10px}
+  .insight .num{font-size:22px}
+  .rel-svg{aspect-ratio:1/1;border-radius:12px}
+  .cta{padding:15px 18px;font-size:14px}
+  .foot{flex-direction:column;gap:8px;align-items:flex-start}
 }
-@media (max-height:860px){
-  body{grid-template-rows:56px auto auto minmax(0,1fr) 96px;gap:10px;padding-bottom:12px}
-  .brief{min-height:62px;padding:8px 13px}
-  .brief-icon{width:36px;height:36px}
-  .brief h2{font-size:14px}
-  .kpi{padding:10px 13px 11px}
-  .kpi .kv{font-size:20px}
-  .card{padding:11px}
-  .p-h{padding:9px 11px 8px}
-  .view{padding:12px}
-  footer{padding:9px 14px 6px}
-  .d-title{font-size:16px;margin:7px 0 5px}
-  .sec{margin:13px 0 7px}
-  .tl-h{font-size:11.5px}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01s!important;animation-delay:0s!important}
+  .particle{display:none}
 }
-
-@media (max-width:900px){
-  html,body{height:auto;min-height:100%}
-  body{display:flex;flex-direction:column;overflow:auto;gap:12px;padding:0 0 12px}
-  header{min-height:60px;height:auto;flex-wrap:wrap;padding:10px 14px;gap:10px}
-  nav.main{order:3;width:100%;overflow-x:auto;margin:0}
-  nav.main button{flex:1;min-width:max-content}
-  .head-right{margin-left:auto;gap:7px;flex-wrap:wrap;justify-content:flex-end}
-  .search{width:220px;max-width:100%}
-  .brief{margin:0 12px;min-height:70px}
-  .kpis{padding:0 12px;grid-template-columns:repeat(2,minmax(0,1fr))}
-  .kpi:nth-child(n+4){display:block}
-  main{display:grid;grid-template-columns:minmax(0,1fr);padding:0 12px;min-height:auto}
-  .rail{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible}
-  .stage{min-height:520px}
-  .panel{min-height:520px}
-  footer{margin:0 12px;min-height:140px}
-  .tl{overflow-x:auto}
-}
-@media (max-width:560px){
-  header{align-items:flex-start}
-  .brand h1{font-size:14px}
-  .brand .tag{font-size:9px}
-  .head-right{width:100%;justify-content:space-between}
-  .search{flex:1;width:auto}
-  .avatar{display:none}
-  .brief{align-items:flex-start;flex-wrap:wrap;padding:10px 12px;gap:9px}
-  .brief-icon{width:34px;height:34px}
-  .brief-copy{width:calc(100% - 46px);flex:1}
-  .brief h2{font-size:13px;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-  .brief p{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-  .brief-action{margin-left:auto}
-  .rail{grid-template-columns:minmax(0,1fr)}
-  .stage{min-height:440px}
-  .kpi{padding:10px 11px}
-  .kpi .kv{font-size:20px}
-}
-
-
-/* Cross-page navigation: does not change relation filters */
-.project-links{display:flex;align-items:center;gap:7px;flex:none;position:relative;z-index:2}
-.project-links a{display:inline-flex;align-items:center;justify-content:center;gap:5px;border:1px solid #cbdcf4;background:#fff;color:#174a9c;text-decoration:none;font-size:11px;font-weight:800;border-radius:10px;padding:9px 11px;white-space:nowrap;box-shadow:0 2px 6px rgba(16,65,130,.06);transition:.16s}
-.project-links a:hover{background:#dcecff;border-color:#90baf3;transform:translateY(-1px)}
-@media(max-width:560px){.project-links{width:100%;order:5;flex-wrap:wrap}.project-links a{flex:1}.brief-action{order:6}}
 </style>
 </head>
 <body>
-
-<header>
-  <div class="brand">
-    <span class="logo">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#7dd3fc" stroke-width="1.9">
-        <circle cx="12" cy="12" r="2.6"/><circle cx="12" cy="12" r="7" opacity=".65"/><circle cx="12" cy="12" r="10.4" opacity=".35"/>
-        <path d="M12 1.6v3M12 19.4v3M1.6 12h3M19.4 12h3" opacity=".8"/>
+<div class="shell">
+  <div class="col-text">
+    <div class="top">
+      <div class="dot"></div>
+      <div class="brand">
+        <h1>NEWHC <span>/</span> 惠城服务世界</h1>
+        <div class="en">Regional Service Simulation</div>
+      </div>
+      <div class="mode">项目介绍</div>
+    </div>
+    <div class="headline">
+      <div class="kicker">惠城 · 中心城区</div>
+      <h2>
+        <span class="line1">看见产业关系，</span>
+        <span class="line2"><span class="crack">理解城市变化</span></span>
+      </h2>
+      <p>惠城产业风洞把产业、投资、城市承载与居民生活相关的<span class="hl">公开信息与关系线索</span>组织起来。它不替你宣布答案，而是帮助你发现变化、追问证据，并比较不同情景下值得继续思考的问题。</p>
+    </div>
+    <div class="foot">
+      <span class="disc">基于公开信息的观察工具 · 非官方统计平台</span>
+      <div class="links">
+        <a href="index.html" aria-current="page">01 首页</a><a href="holo-workspace.html">02 全息</a><a href="today.html">03 钱去哪了</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-visual">
+    <div class="relbox">
+      <div class="rel-head">
+        <span class="t">从关系网络观察惠城</span>
+        <span class="d">公开信息 · 关系线索 · 变化记录</span>
+      </div>
+      <svg class="rel-svg" viewBox="0 0 600 450" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="glowStrong"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="#EF4444"/>
+          </marker>
+          <marker id="arrowOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="#F97316"/>
+          </marker>
+          <radialGradient id="coreG" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#67E8F9"/>
+            <stop offset="70%" stop-color="#06B6D4"/>
+            <stop offset="100%" stop-color="#0E7490"/>
+          </radialGradient>
+          <linearGradient id="leakRed" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#EF4444" stop-opacity=".9"/>
+            <stop offset="100%" stop-color="#F97316" stop-opacity=".9"/>
+          </linearGradient>
+          <linearGradient id="leakAmber" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#F59E0B" stop-opacity=".8"/>
+            <stop offset="100%" stop-color="#F97316" stop-opacity=".8"/>
+          </linearGradient>
+        </defs>
+        <path class="local-line" d="M260,220 Q200,140 130,100"/>
+        <path class="local-line" d="M260,220 Q330,130 420,95"/>
+        <path class="local-line" d="M260,220 Q180,310 120,350"/>
+        <path class="local-line" d="M260,220 Q350,310 440,355"/>
+        <path class="leak-line" d="M290,200 Q430,150 540,130" stroke="url(#leakRed)" stroke-width="3" marker-end="url(#arrowRed)" style="color:#EF4444"/>
+        <path class="leak-line" d="M290,230 Q430,235 540,235" stroke="url(#leakRed)" stroke-width="2.5" marker-end="url(#arrowRed)" style="color:#EF4444;opacity:.7"/>
+        <path class="leak-line" d="M280,250 Q390,330 500,365" stroke="url(#leakAmber)" stroke-width="2.5" marker-end="url(#arrowOrange)" style="color:#F97316;opacity:.8"/>
+        <circle class="particle" r="3">
+          <animateMotion dur="2s" repeatCount="indefinite" begin="2.4s" path="M290,200 Q430,150 540,130"/>
+        </circle>
+        <circle class="particle" r="2.5" style="fill:#F59E0B;filter:drop-shadow(0 0 4px #F59E0B)">
+          <animateMotion dur="2.5s" repeatCount="indefinite" begin="2.8s" path="M290,230 Q430,235 540,235"/>
+        </circle>
+        <circle class="particle" r="2.5" style="fill:#FBBF24;filter:drop-shadow(0 0 4px #FBBF24)">
+          <animateMotion dur="3s" repeatCount="indefinite" begin="3.2s" path="M280,250 Q390,330 500,365"/>
+        </circle>
+        <circle class="particle" r="2" style="fill:#F87171;filter:drop-shadow(0 0 3px #F87171)">
+          <animateMotion dur="1.8s" repeatCount="indefinite" begin="3s" path="M290,200 Q430,150 540,130"/>
+        </circle>
+        <g id="coreNode" class="nd">
+          <circle id="coreRing1" cx="260" cy="220" r="46" fill="none" stroke="#22D3EE" stroke-width="1" opacity=".2"/>
+          <circle id="coreRing2" cx="260" cy="220" r="60" fill="none" stroke="#22D3EE" stroke-width=".5" opacity=".1"/>
+          <circle id="coreCircle" cx="260" cy="220" r="32" fill="url(#coreG)" filter="url(#glowStrong)"/>
+          <text class="lb" x="260" y="178" text-anchor="middle" font-size="14">惠城核心</text>
+          <text class="sub" x="260" y="262" text-anchor="middle" font-size="11">楼宇总部群</text>
+        </g>
+        <g class="nd jb">
+          <circle cx="130" cy="100" r="9" fill="#22D3EE" opacity=".4"/>
+          <text class="lb" x="130" y="82" text-anchor="middle" font-size="11" opacity=".7">江北CBD</text>
+        </g>
+        <g class="nd jsh">
+          <circle cx="420" cy="95" r="9" fill="#8B5CF6" opacity=".4"/>
+          <text class="lb" x="420" y="77" text-anchor="middle" font-size="11" opacity=".7">金山湖</text>
+        </g>
+        <g class="nd sdj">
+          <circle cx="120" cy="350" r="8" fill="#10B981" opacity=".4"/>
+          <text class="lb" x="120" y="372" text-anchor="middle" font-size="11" opacity=".7">水东街</text>
+        </g>
+        <g class="nd hm">
+          <circle cx="440" cy="355" r="8" fill="#3B82F6" opacity=".4"/>
+          <text class="lb" x="440" y="377" text-anchor="middle" font-size="11" opacity=".7">华贸天地</text>
+        </g>
+        <g class="leak-target sz">
+          <circle class="ring" cx="540" cy="130" r="26" stroke="#EF4444"/>
+          <circle cx="540" cy="130" r="9" fill="#EF4444" filter="url(#glow)"/>
+          <text class="lb" x="540" y="102" text-anchor="middle" font-size="12" fill="#F87171">深圳</text>
+        </g>
+        <g class="leak-target dg">
+          <circle class="ring" cx="540" cy="235" r="20" stroke="#EF4444"/>
+          <circle cx="540" cy="235" r="7" fill="#EF4444" opacity=".7" filter="url(#glow)"/>
+          <text class="lb" x="540" y="265" text-anchor="middle" font-size="10" fill="#F87171">东莞</text>
+        </g>
+        <g class="leak-target ec">
+          <circle class="ring" cx="500" cy="365" r="18" stroke="#F59E0B"/>
+          <circle cx="500" cy="365" r="6" fill="#F59E0B" opacity=".75" filter="url(#glow)"/>
+          <text class="lb" x="500" y="392" text-anchor="middle" font-size="10" fill="#FBBF24">电商</text>
+        </g>
+        <text class="annot warn" x="400" y="175" font-size="11" fill="#F87171">钱在往外流 →</text>
+        <text class="annot" x="140" y="230" font-size="10" fill="#3D4A66">本地关系断裂</text>
       </svg>
-    </span>
-    <div>
-      <h1>惠城区产业关系情报</h1>
-      <div class="tag">产业脉动 · 关系变化 · 城市观察</div>
     </div>
-  </div>
-
-  <nav class="main" aria-label="关系筛选">
-    <button class="on" data-fam="all">全景</button><button data-fam="supply">产业</button><button data-fam="invest">投资</button>
-    <button data-fam="region">区域</button><button data-fam="consume">文旅</button><button data-fam="transit">交通</button>
-  </nav>
-
-  <div class="head-right">
-    <div class="search">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
-      <input id="searchInput" placeholder="搜索企业、集群或事件…" aria-label="搜索">
-    </div>
-    <div class="mode-switch" role="group" aria-label="阅读模式">
-      <button id="modePlain" type="button" class="on" aria-pressed="true">通俗</button>
-      <button id="modePro" type="button" aria-pressed="false">专业</button>
-    </div>
-    <div class="status" id="dataStatus" title="公开关系数据状态"><i></i>正在读取公开数据</div>
-    <div class="avatar" title="张凌">张</div>
-  </div>
-</header>
-
-<section class="brief" aria-label="最近变化看点">
-  <div class="brief-icon" aria-hidden="true">
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.5 13h6L10 22l9.5-12h-6z"/></svg>
-  </div>
-  <div class="brief-copy">
-    <div class="brief-meta"><span>最近变化</span><span id="briefDate">正在读取日期</span><span class="brief-grade" id="briefGrade">公开记录</span></div>
-    <h2 id="briefTitle">正在读取惠城最新公开变化…</h2>
-    <p id="briefSummary">这里呈现项目现有公开变化记录；关系关联不等于因果。</p>
-  </div>
-  <nav class="project-links" aria-label="项目页面顺序"><a href="today.html">01 今日话题</a><a href="index.html" aria-current="page">02 全息</a><a href="money.html" title="全息之后的第三页">03 钱去哪了 →</a><a href="fun.html">04 风向标</a></nav>
-  <button class="brief-action" id="briefAction" type="button">看看它连到谁 <span aria-hidden="true">→</span></button>
-</section>
-
-<section class="kpis" aria-label="关系数据概览">
-  <div class="kpi" style="--c:#2563eb">
-    <div class="kn">关系主体<span class="u">个</span></div>
-    <div class="kv"><span id="kpiNodes">—</span></div>
-    <div class="note">公开关系底座中的主体</div>
-  </div>
-  <div class="kpi" style="--c:#0891b2">
-    <div class="kn">关系连接<span class="u">条</span></div>
-    <div class="kv"><span id="kpiEdges">—</span></div>
-    <div class="note">当前记录的主体关联</div>
-  </div>
-  <div class="kpi" style="--c:#7c3aed">
-    <div class="kn">变化记录<span class="u">项</span></div>
-    <div class="kv"><span id="kpiChanges">—</span></div>
-    <div class="note">可追踪的公开变化</div>
-  </div>
-  <div class="kpi" style="--c:#d97706">
-    <div class="kn">待核实关系<span class="u">条</span></div>
-    <div class="kv"><span id="kpiReview">—</span></div>
-    <div class="note">仍需进一步确认的关联</div>
-  </div>
-  <div class="kpi date-kpi" style="--c:#16a34a">
-    <div class="kn">数据整理日</div>
-    <div class="kv"><span id="kpiDate">—</span></div>
-    <div class="note">以关系数据文件标注为准</div>
-  </div>
-</section>
-
-<main>
-  <!-- 左栏 -->
-  <aside class="rail">
-    <div class="card">
-      <div class="card-h"><h3>关系图层</h3><span class="cnt" id="layerCount">读取中</span></div>
-      <div id="layerList"></div>
-      <div class="sizeley">
-        <span><b style="width:13px;height:13px"></b>核心</span>
-        <span><b style="width:9px;height:9px"></b>枢纽</span>
-        <span><b style="width:6px;height:6px"></b>主体</span>
+    <div class="insights">
+      <div class="insight brk">
+        <div class="num">01</div>
+        <div class="t">数字中国，不止于数据汇集</div>
+        <div class="d">把分散的公开信息放进关系中观察，让数据更容易被理解、核查，并用于提出公共问题。</div>
+      </div>
+      <div class="insight rvs">
+        <div class="num">02</div>
+        <div class="t">数据不足，更要把未知说清</div>
+        <div class="d">公开资料不完整时，区分已知、推断与待核实事项；不替代决策，而是引出问题、支撑判断。</div>
       </div>
     </div>
-
-    <div class="card">
-      <div class="card-h"><h3>证据分级</h3></div>
-      <div class="legend"><span class="ln" style="border-top-style:solid;border-color:#3b4b60"></span>A 已证实</div>
-      <div class="legend"><span class="ln" style="border-top-style:dashed;border-color:#8a99ad"></span>B 证据推断</div>
-      <div class="legend"><span class="ln" style="border-top-style:dotted;border-color:#a9b8c9"></span>C 待验证</div>
-      <div class="tog"><span>连线标签</span><button class="switch" id="swLab" aria-label="显示连线标签"><i></i></button></div>
-      <div class="tog"><span>只看近期变化</span><button class="switch" id="swNew" aria-label="只看近期变化"><i></i></button></div>
-    </div>
-  </aside>
-
-  <!-- 画布 -->
-  <section class="stage" id="stage">
-    <div class="stage-bg" id="stageBg"></div>
-    <svg id="graph" role="img" aria-label="惠城产业关系图：可拖拽节点查看关系变化">
-      <defs>
-        <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#2563eb" stop-opacity=".16"/>
-          <stop offset="100%" stop-color="#2563eb" stop-opacity="0"/>
-        </radialGradient>
-        <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
-          <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0d1a2b" flood-opacity=".18"/>
-        </filter>
-      </defs>
-      <g id="vp">
-        <g id="edges"></g>
-        <g id="nodes"></g>
-      </g>
-    </svg>
-
-    <div class="toolbar">
-      <div class="tb-left">
-        <div class="chipbar">
-          <span class="ttl">全景视图</span>
-          <span class="vsep"></span>
-          <span class="mt"><b id="nNode">—</b> 主体 · <b id="nEdge">—</b> 关系</span>
-          <span class="vsep"></span>
-          <span class="mt" id="gradeCount" style="color:#0f7a44"><b style="color:#0f7a44">A 级</b> — 条</span>
-        </div>
-      </div>
-      <div class="tb-right">
-        <div class="zoomer">
-          <button id="zIn" title="放大">＋</button>
-          <div class="zl" id="zLv">100%</div>
-          <button id="zOut" title="缩小">－</button>
-          <button id="zReset" title="复位视图与布局" style="font-size:11px">⟲</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="hintbar">
-      <span class="hint"><b>拖拽</b> 移动节点 · 连线实时重算</span>
-      <span class="hint"><b>点击</b> 节点看关系与证据</span>
-      <span class="hint"><b>滚轮</b> 缩放 · <b>空白拖拽</b> 平移</span>
-    </div>
-
-    <div class="selbar" id="selbar">
-      <span class="dot" id="selDot" style="background:#2563eb"></span>
-      <span>已选 <b id="selName">—</b> · 关联关系 <b id="selDeg">0</b> 条</span>
-      <span class="x" id="selX" title="取消选择">×</span>
-    </div>
-  </section>
-
-  <!-- 右栏 -->
-  <aside class="panel">
-    <div class="p-h">
-      <span class="av">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#7dd3fc" stroke-width="1.9">
-          <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
-        </svg>
-      </span>
+    <a href="holo-workspace.html" class="cta">
       <div>
-        <div class="t" id="p-title">惠城区产业关系情报</div>
-        <div class="s"><i></i><span id="p-sub">点击事件查看公开依据与待核实事项</span></div>
+        进入全息工作区，开始探索
+        <span class="sub">浏览关系网络 · 查看情报变化 · 追溯公开来源</span>
       </div>
-      <button class="more" title="更多">⋯</button>
-    </div>
-
-    <div class="tabs" role="tablist">
-      <button class="tab" id="tabFeed" role="tab" aria-selected="false">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 21l1.8-5.5A8 8 0 1 1 21 12z"/></svg>
-        情报流 <span class="badge">4</span>
-      </button>
-      <button class="tab on" id="tabDetail" role="tab" aria-selected="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-        变化详情
-      </button>
-    </div>
-
-    <div class="p-body">
-      <div class="view" id="viewFeed"></div>
-      <div class="view on" id="viewDetail"></div>
-    </div>
-
-  </aside>
-</main>
-
-<footer>
-  <div class="tl-h">
-    <i></i>关系变化时间线 · 公开事件记录
-    <span class="s">只呈现已记录的变化 · 关联 ≠ 因果 · 签约 ≠ 投产</span>
+      <span class="arrow">→</span>
+    </a>
   </div>
-  <div class="tl" id="tl"><div class="tl-line"></div></div>
-</footer>
-
-<script>
-/* =========================================================
-   数据
-   ========================================================= */
-const FAM = {
-  supply:  {name:'供应链配套', color:'#2563eb'},
-  invest:  {name:'投资建设',   color:'#0891b2'},
-  region:  {name:'区域协作',   color:'#7c3aed'},
-  transit: {name:'交通物流',   color:'#dc2626'},
-  consume: {name:'消费文旅',   color:'#d97706'}
-};
-let NODES = [];
-let EDGES = [];
-let EVENTS = [];
-let FEED = [];
-let SOURCES = {};
-let byId = {};
-const REL_TO_FAM = {supply_chain:'supply',investment:'invest',regional:'region',transport:'transit',tourism_consumption:'consume'};
-const REL_NAME = {supply_chain:'供应链配套',investment:'投资建设',regional:'区域协作',transport:'交通物流',tourism_consumption:'消费文旅'};
-const POS = {
-  hc:[450,300],gxq:[655,306],dz:[285,190],xcl:[210,430],ai:[600,492],
-  fw:[572,106],jt:[138,188],wh:[148,502],rj:[90,345],jl:[600,232],
-  th:[452,196],sh:[804,210],rz:[80,240],wr:[742,136],lyh:[618,572],
-  sz:[105,105],dg:[310,80]
-};
-function esc(v){
-  return String(v==null?'':v).replace(/[&<>"']/g,function(c){
-    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
-  });
-}
-function safeHref(v){return /^https?:\/\//i.test(String(v||''))?String(v):'';}
-function nodeFam(n){
-  const t=(String(n.layer||'')+' '+String(n.name||'')+' '+String(n.description||'')).toLowerCase();
-  if(n.node_type==='infrastructure'||/交通|通勤|大桥|枢纽|道路|铁路/.test(t))return 'transit';
-  if(n.node_type==='external'||/区域协作|深圳|东莞|外部区域|融深|融湾/.test(t))return 'region';
-  if(/文旅|旅游|消费|人居|居民生活|商业服务/.test(t))return 'consume';
-  if(n.node_type==='enterprise'||/投资|项目|企业|公司|新材料|人工智能|机器人/.test(t))return 'invest';
-  return 'supply';
-}
-function nodeKind(n){
-  if(n.node_type==='core')return 'core';
-  if(n.node_type==='anchor')return 'hub';
-  if(n.node_type==='infrastructure')return 'hub';
-  if(n.node_type==='enterprise')return 'firm';
-  if(n.node_type==='external')return 'hub';
-  return 'cluster';
-}
-function kindLabel(k){
-  const m={new_entity:'新主体',new_edge:'新连接',strengthen:'关系增强',break:'关系变化',weaken:'关系减弱',update:'信息更新'};
-  return m[k]||'结构变化';
-}
-function gradeLabel(g){return g==='A'?'A · 公开记录明确':g==='B'?'B · 多项信息指向':'C · 尚待核实';}
-function sourceCards(ids){
-  const list=(ids||[]).map(id=>SOURCES[id]).filter(Boolean);
-  if(!list.length)return '<div class="src"><div class="sn">当前记录未关联可展示的来源条目。</div></div>';
-  return list.map(function(s){
-    const href=safeHref(s.url);
-    const title=esc(s.title||'公开来源');
-    const meta=esc(s.publisher||s.source_type||'公开来源')+' · '+esc(s.published_at||'日期未注明');
-    return '<div class="src"><div class="sn">'+meta+'</div>'+(href?'<a href="'+esc(href)+'" target="_blank" rel="noopener noreferrer">'+title+'</a>':'<span>'+title+'</span>')+(s.summary?'<div class="limit">'+esc(s.summary)+'</div>':'')+'</div>';
-  }).join('');
-}
-function isChangedEdge(e){
-  return (e.change_status&&e.change_status!=='无显著变化')||(EVENTS||[]).some(function(ev){return (ev.involved_edge_ids||[]).indexOf(e.id)>=0;});
-}
-function isChangedNode(id){
-  return (EVENTS||[]).some(function(ev){return (ev.involved_node_ids||[]).indexOf(id)>=0;});
-}
-function edgeLabelFor(e){
-  if(e.metric&&e.metric.metric_value!=null)return String(e.metric.metric_name||'指标')+': '+String(e.metric.metric_value)+(e.metric.metric_unit||'');
-  const label=REL_NAME[e.relation_type]||'关系';
-  return label;
-}
-function makeData(evidence,changes,sources){
-  SOURCES=Object.fromEntries((sources.sources||[]).map(function(s){return [s.source_id,s];}));
-  NODES=(evidence.nodes||[]).map(function(n,i){
-    const p=POS[n.node_id]||[450+Math.cos(i*2.4)*240,300+Math.sin(i*2.4)*190];
-    const kind=nodeKind(n);
-    const r=kind==='core'?27:kind==='hub'?17:kind==='cluster'?14:10;
-    return {
-      id:n.node_id,label:n.name,kind:kind,fam:nodeFam(n),r:r,x:p[0],y:p[1],
-      desc:n.description||'当前公开记录未提供详细描述。',
-      stat:n.stat||'当前记录未提供独立统计值。',
-      k1:['公开记录',n.stat||'未提供','',0],
-      k2:['关联关系',0,'条',0],
-      grade:n.evidence_grade||'C',source_ids:n.source_ids||[],
-      src:'',url:'',limit:'公开资料可能存在口径、时效或披露范围限制。',
-      debate:'哪些公开证据支持这项判断？还有哪些信息尚未披露？',
-      town:n.town||'',layer:n.layer||'',change_status:n.change_status||''
-    };
-  });
-  byId=Object.fromEntries(NODES.map(function(n){return [n.id,n];}));
-  EDGES=(evidence.edges||[]).map(function(e){
-    return {
-      id:e.edge_id,s:e.source_node_id,t:e.target_node_id,
-      fam:REL_TO_FAM[e.relation_type]||'supply',grade:e.evidence_grade||'C',
-      label:edgeLabelFor(e),relation_type:e.relation_type,
-      relation_description:e.relation_description||'',evidence_type:e.evidence_type||'',
-      confidence:e.confidence||'',metric:e.metric||null,
-      strength_basis:e.strength_basis||'',source_ids:e.source_ids||[],
-      counter_evidence:e.counter_evidence||'',last_verified_at:e.last_verified_at||'',
-      change_status:e.change_status||'无显著变化',valid_period:e.valid_period||''
-    };
-  });
-  NODES.forEach(function(n){
-    const connected=EDGES.filter(function(e){return e.s===n.id||e.t===n.id;});
-    n.k2=['关联关系',connected.length,'条',0];
-    const limits=connected.map(function(e){return e.counter_evidence;}).filter(Boolean);
-    n.limit=limits.length?limits.slice(0,3).join('；'):'当前公开关系记录未覆盖该主体的全部业务与实际往来，需结合来源核对。';
-    const src=(n.source_ids||[]).map(function(id){return SOURCES[id];}).filter(Boolean);
-    n.src=src.length?(src[0].publisher||src[0].title):'来源待补充';
-    n.url=src.length?(src[0].url||''):'';
-    n.debate='它与哪些主体存在可核对的联系？哪些关键环节仍缺少公开证据？';
-  });
-  EVENTS=(changes.changes||[]).map(function(c){
-    const relatedEdges=EDGES.filter(function(e){return (c.involved_edge_ids||[]).indexOf(e.id)>=0;});
-    const grades=relatedEdges.map(function(e){return e.grade;});
-    const grade=grades.length&&grades.every(function(g){return g==='A';})?'A':grades.indexOf('C')>=0?'C':grades.indexOf('B')>=0?'B':'C';
-    const ids=c.involved_node_ids||[];
-    const focus=ids.find(function(id){return id!=='hc'&&byId[id];})||(ids.find(function(id){return byId[id];})||'hc');
-    return {
-      id:c.change_id,d:c.event_date||'',t:c.title||'未命名变化',node:focus,
-      kind:kindLabel(c.change_type),grade:grade,
-      fact:c.before_after||c.title||'当前记录未提供变化说明。',
-      before_after:c.before_after||'',uncertainty:c.uncertainty||'当前记录未注明具体不确定性；不代表不存在不确定性。',
-      source_ids:c.source_ids||[],involved_node_ids:ids,involved_edge_ids:c.involved_edge_ids||[],
-      metrics:relatedEdges.map(function(e){return e.metric;}).filter(function(m){return m&&m.metric_value!=null;}),
-      edge_summaries:relatedEdges.map(function(e){return e.relation_description;}).filter(Boolean)
-    };
-  }).sort(function(a,b){return String(b.d).localeCompare(String(a.d));});
-  FEED=EVENTS.map(function(e){return {d:e.d,t:e.t,b:e.before_after||e.fact,node:e.node,kind:e.kind,grade:e.grade,id:e.id};});
-}
-
-/* =========================================================
-   状态
-   ========================================================= */
-const S = {
-  family:{supply:true, invest:true, region:true, transit:true, consume:true},
-  showLabels:false, onlyNew:false,
-  sel:null, hoverId:null, dragId:null, k:1, tx:0, ty:0,
-  alpha:0, drag:null, pan:null,
-  W:900, H:600, dirty:true
-};
-
-const SVGNS = 'http://www.w3.org/2000/svg';
-const svg = document.getElementById('graph');
-const vp = document.getElementById('vp');
-const gEdges = document.getElementById('edges');
-const gNodes = document.getElementById('nodes');
-const stage = document.getElementById('stage');
-const el = (tag, attrs = {}) => { const n = document.createElementNS(SVGNS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); return n; };
-byId = Object.fromEntries(NODES.map(n => [n.id, n]));
-
-/* 节点按设计坐标初始化 */
-NODES.forEach(n => { n.vx = 0; n.vy = 0; n.fixed = false; n.hx = n.x; n.hy = n.y; });
-const VIEW = {x:0, y:0, w:900, h:600};
-
-/* =========================================================
-   尺寸与坐标映射
-   ========================================================= */
-function resize(){
-  const r = stage.getBoundingClientRect();
-  S.W = Math.max(320, r.width);
-  S.H = Math.max(280, r.height);
-  svg.setAttribute('viewBox', `0 0 ${S.W} ${S.H}`);
-  // 设计坐标 -> 实际像素（等比缩放并居中）
-  const pad = 30;
-  const sc = Math.min((S.W - pad*2) / 900, (S.H - pad*2) / 600);
-  VIEW.scale = sc;
-  VIEW.ox = (S.W - 900*sc) / 2;
-  VIEW.oy = (S.H - 600*sc) / 2;
-  NODES.forEach(n => {
-    if (n.px == null) { n.px = n.x; n.py = n.y; }
-  });
-  applyView();
-  S.dirty = true;
-}
-
-function toWorld(clientX, clientY){
-  const r = svg.getBoundingClientRect();
-  const sx = clientX - r.left, sy = clientY - r.top;
-  // 先反平移缩放，再到设计坐标
-  const dx = (sx - S.tx) / S.k, dy = (sy - S.ty) / S.k;
-  return { x: (dx - VIEW.ox) / VIEW.scale, y: (dy - VIEW.oy) / VIEW.scale };
-}
-function toScreen(x, y){
-  const dx = VIEW.ox + x * VIEW.scale, dy = VIEW.oy + y * VIEW.scale;
-  return { x: dx * S.k + S.tx, y: dy * S.k + S.ty };
-}
-
-const edgeEls = [], nodeEls = {};
-function buildGraph(){
-  gEdges.innerHTML=''; gNodes.innerHTML=''; edgeEls.length=0;
-  Object.keys(nodeEls).forEach(function(k){delete nodeEls[k];});
-  byId=Object.fromEntries(NODES.map(function(n){return [n.id,n];}));
-  NODES.forEach(function(n){n.vx=0;n.vy=0;n.fixed=false;n.hx=n.x;n.hy=n.y;n.px=n.x;n.py=n.y;});
-EDGES.forEach((e, i) => {
-  const g = el('g', {class:'edge', 'data-i':i});
-  const line = el('line', {stroke:FAM[e.fam].color, 'stroke-width': e.grade === 'A' ? 2.4 : 1.8});
-  if (e.grade === 'B') line.setAttribute('stroke-dasharray', '7 5');
-  if (e.grade === 'C') line.setAttribute('stroke-dasharray', '1.5 5');
-  line.setAttribute('stroke-opacity', e.grade === 'A' ? .95 : .8);
-  const t = el('text', {class:'elab'});
-  t.textContent = e.label;
-  g.appendChild(line); g.appendChild(t);
-  gEdges.appendChild(g);
-  e.el = g; e.line = line; e.text = t; e.visible = true;
-});
-
-NODES.forEach(n => {
-  const g = el('g', {class:'node', 'data-id':n.id, tabindex:'0', role:'button', 'aria-label':`${n.label}，${FAM[n.fam].name}`});
-  const glow = el('circle', {class:'glow', r:n.r*2.1, fill:'url(#glow)'});
-  const ring = el('circle', {class:'ring', r:n.r + 7});
-  const dot = el('circle', {class:'dot', r:n.r, fill: n.kind === 'core' ? '#12263f' : FAM[n.fam].color, filter:'url(#soft)'});
-  const lab = el('text', {class:'lab', y:n.r + 19});
-  lab.textContent = n.label;
-  g.appendChild(glow); g.appendChild(ring); g.appendChild(dot); g.appendChild(lab);
-  if (n.kind === 'core') {
-    const num = el('text', {class:'num', y:5});
-    num.textContent = '区';
-    g.appendChild(num);
-  }
-  gNodes.appendChild(g);
-  n.el = g; n.dot = dot; n.lab = lab;
-  nodeEls[n.id] = g;
-});
-}
-
-/* =========================================================
-   渲染
-   ========================================================= */
-const overlap = (a, b) => !(a.x + a.w + 7 < b.x || b.x + b.w + 7 < a.x || a.y + a.h + 6 < b.y || b.y + b.h + 6 < a.y);
-
-function render(){
-  if (!S.dirty) return;
-  S.dirty = false;
-  const focus = S.dragId || S.hoverId || S.sel;
-  const dimMode = !!(S.dragId || S.hoverId);      // 只有拖拽/悬停时才压低其他节点
-  const nbr = new Set();
-  if (focus) EDGES.forEach(e => { if (e.s === focus || e.t === focus) { nbr.add(e.s); nbr.add(e.t); } });
-
-  // 节点先落位，同时收集"节点标签"占位盒，供连线标签避让
-  const boxes = [];
-  NODES.forEach(n => {
-    const p = toScreen(n.px, n.py);
-    n.sx = p.x; n.sy = p.y;
-    const w = n.label.length * 11 + 12;
-    const up = S.dragId === n.id;                 // 拖动中的节点，标签移到上方
-    boxes.push({ x: p.x - w / 2, y: up ? p.y - n.r - 21 : p.y + n.r + 5, w, h: 16 });
-    n.lab.setAttribute('y', up ? -(n.r + 13) : n.r + 19);
-  });
-
-  const placed = [];
-  EDGES.forEach(e => {
-    const a = byId[e.s], b = byId[e.t];
-    const pa = toScreen(a.px, a.py), pb = toScreen(b.px, b.py);
-    e.line.setAttribute('x1', pa.x); e.line.setAttribute('y1', pa.y);
-    e.line.setAttribute('x2', pb.x); e.line.setAttribute('y2', pb.y);
-
-    const dx = pb.x - pa.x, dy = pb.y - pa.y;
-    const len = Math.hypot(dx, dy);
-    const nx = -dy / (len || 1), ny = dx / (len || 1);
-
-    const famOn = S.family[e.fam] && (!S.onlyNew || isChangedEdge(e));
-    e.el.style.display = famOn ? '' : 'none';
-    e.visible = famOn;
-    const inFocus = focus && (e.s === focus || e.t === focus);
-    e.el.classList.toggle('dim', dimMode && !inFocus);
-
-    // 标签：沿连线取多个候选点，避开节点标签与已放置标签
-    const want = S.showLabels || inFocus;
-    let shown = false;
-    if (want && famOn && len > 62) {
-      const w = e.label.length * 9.9 + 12, h = 15;
-      for (const t of [.5, .36, .64, .26, .74]) {
-        const cx = pa.x + dx * t + nx * 10;
-        const cy = pa.y + dy * t + ny * 10;
-        const box = { x: cx - w / 2, y: cy - h / 2, w, h };
-        if (boxes.some(b => overlap(b, box)) || placed.some(b => overlap(b, box))) continue;
-        e.text.setAttribute('x', cx);
-        e.text.setAttribute('y', cy + 4);
-        placed.push(box);
-        shown = true;
-        break;
-      }
-    }
-    e.el.classList.toggle('show', shown);
-  });
-
-  NODES.forEach(n => {
-    n.el.setAttribute('transform', `translate(${n.sx},${n.sy})`);
-    const famOn = (S.family[n.fam] || n.kind === 'core') && (!S.onlyNew || isChangedNode(n.id));
-    let op = 1;
-    if (!famOn) op = .1;
-    else if (dimMode && !nbr.has(n.id) && n.id !== focus) op = .3;
-    else if (!dimMode && S.sel && !nbr.has(n.id) && n.id !== S.sel) op = .68;
-    n.el.style.opacity = op;
-    n.el.classList.toggle('sel', n.id === S.sel);
-  });
-}
-
-/* =========================================================
-   简易力导向：拖拽时邻居受力微调，松手后自然收敛
-   ========================================================= */
-const REST = (e) => (e.s === 'hc' || e.t === 'hc') ? 165 : 120;
-
-function step(){
-  if (S.alpha <= 0.004) return;
-  const nodes = NODES.filter(n => S.family[n.fam] || n.kind === 'core');
-  // 斥力
-  for (let i = 0; i < nodes.length; i++) {
-    for (let j = i + 1; j < nodes.length; j++) {
-      const a = nodes[i], b = nodes[j];
-      let dx = b.px - a.px, dy = b.py - a.py;
-      let d2 = dx*dx + dy*dy;
-      if (d2 < 1) { dx = Math.random() - .5; dy = Math.random() - .5; d2 = 1; }
-      const d = Math.sqrt(d2);
-      const min = a.r + b.r + 26;
-      const f = (min * min * 2.6) / d2 * S.alpha;
-      const ux = dx / d, uy = dy / d;
-      if (!a.fixed) { a.vx -= ux * f; a.vy -= uy * f; }
-      if (!b.fixed) { b.vx += ux * f; b.vy += uy * f; }
-    }
-  }
-  // 弹簧
-  EDGES.forEach(e => {
-    const a = byId[e.s], b = byId[e.t];
-    if (!S.family[e.fam]) return;
-    const dx = b.px - a.px, dy = b.py - a.py;
-    const d = Math.hypot(dx, dy) || 1;
-    const rest = REST(e);
-    const f = (d - rest) * 0.004 * S.alpha;
-    const ux = dx / d, uy = dy / d;
-    if (!a.fixed) { a.vx += ux * f; a.vy += uy * f; }
-    if (!b.fixed) { b.vx -= ux * f; b.vy -= uy * f; }
-  });
-  // 回中 + 阻尼 + 边界
-  nodes.forEach(n => {
-    n.vx += (450 - n.px) * 0.0009 * S.alpha;
-    n.vy += (300 - n.py) * 0.0009 * S.alpha;
-    n.vx *= .86; n.vy *= .86;
-    if (!n.fixed) {
-      n.px += n.vx; n.py += n.vy;
-      n.px = Math.max(30, Math.min(870, n.px));
-      n.py = Math.max(30, Math.min(570, n.py));
-    }
-    n.vx = 0; n.vy = 0;
-  });
-  S.alpha *= 0.985;
-  if (S.alpha < 0.004) NODES.forEach(n => n.fixed = false);
-  S.dirty = true;
-}
-
-function loop(){
-  step();
-  render();
-  requestAnimationFrame(loop);
-}
-
-/* =========================================================
-   交互：拖拽节点 / 平移 / 缩放
-   ========================================================= */
-let pointer = {id:null, mode:null, moved:false, startX:0, startY:0, node:null, ox:0, oy:0};
-
-function nodeAt(target){
-  let p = target;
-  while (p && p !== svg) {
-    if (p.classList && p.classList.contains('node')) return p.getAttribute('data-id');
-    p = p.parentNode;
-  }
-  return null;
-}
-
-svg.addEventListener('pointerdown', (ev) => {
-  const id = nodeAt(ev.target);
-  pointer.moved = false;
-  pointer.startX = ev.clientX; pointer.startY = ev.clientY;
-  if (id) {
-    const n = byId[id];
-    const w = toWorld(ev.clientX, ev.clientY);
-    pointer.mode = 'node'; pointer.node = n;
-    n.fixed = true;
-    pointer.ox = n.px - w.x; pointer.oy = n.py - w.y;
-    n.el.classList.add('grabbing');
-    // 拖动期间：与该节点相关的连线标签自动亮起并实时跟随
-    S.dragId = id;
-    S.alpha = Math.max(S.alpha, .55);
-    svg.setPointerCapture(ev.pointerId);
-  } else {
-    pointer.mode = 'pan';
-    pointer.ox = S.tx - ev.clientX; pointer.oy = S.ty - ev.clientY;
-    svg.setPointerCapture(ev.pointerId);
-  }
-});
-
-svg.addEventListener('pointermove', (ev) => {
-  if (!pointer.mode) return;
-  if (Math.abs(ev.clientX - pointer.startX) + Math.abs(ev.clientY - pointer.startY) > 3) pointer.moved = true;
-  if (pointer.mode === 'node') {
-    const w = toWorld(ev.clientX, ev.clientY);
-    const n = pointer.node;
-    n.px = Math.max(24, Math.min(876, w.x + pointer.ox));
-    n.py = Math.max(24, Math.min(576, w.y + pointer.oy));
-    // 拖动时把挨得太近的邻居顶开：节点一动，周边关系和标签跟着重排
-    NODES.forEach(o => {
-      if (o === n) return;
-      let dx = o.px - n.px, dy = o.py - n.py;
-      let d = Math.hypot(dx, dy) || 1;
-      const min = n.r + o.r + 36;
-      if (d < min) {
-        const push = (min - d) * .82;
-        o.px += dx / d * push; o.py += dy / d * push;
-        o.px = Math.max(24, Math.min(876, o.px));
-        o.py = Math.max(24, Math.min(576, o.py));
-      }
-    });
-    S.alpha = Math.max(S.alpha, .3);
-    S.dirty = true;
-  } else if (pointer.mode === 'pan') {
-    S.tx = pointer.ox + ev.clientX;
-    S.ty = pointer.oy + ev.clientY;    applyView();
-    S.dirty = true;
-  }
-});
-
-function endPointer(ev){
-  if (pointer.mode === 'node') {
-    if (!pointer.moved) select(pointer.node.id);
-    pointer.node.el.classList.remove('grabbing');
-    // 松手后允许布局收敛，但保留用户摆放位置
-    S.alpha = Math.max(S.alpha, .06);
-  } else if (pointer.mode === 'pan' && !pointer.moved) {
-    select(null);
-  }
-  pointer.mode = null; pointer.node = null;
-  S.dragId = null;
-  try { svg.releasePointerCapture(ev.pointerId); } catch (e) {}
-  S.dirty = true;
-}
-svg.addEventListener('pointerup', endPointer);
-svg.addEventListener('pointercancel', endPointer);
-
-svg.addEventListener('wheel', (ev) => {
-  ev.preventDefault();
-  const r = svg.getBoundingClientRect();
-  const px = ev.clientX - r.left, py = ev.clientY - r.top;
-  const k2 = Math.min(2.2, Math.max(.55, S.k * (ev.deltaY > 0 ? .92 : 1.08)));
-  S.tx = px - (px - S.tx) * (k2 / S.k);
-  S.ty = py - (py - S.ty) * (k2 / S.k);
-  S.k = k2;
-  applyView(); updateZoomLabel(); S.dirty = true;
-}, {passive:false});
-
-function applyView(){ vp.setAttribute('transform', `translate(${S.tx},${S.ty}) scale(${S.k})`); }
-function updateZoomLabel(){ document.getElementById('zLv').textContent = Math.round(S.k * 100) + '%'; }
-
-function zoomBy(f){
-  const r = svg.getBoundingClientRect();
-  const px = r.width / 2, py = r.height / 2;
-  const k2 = Math.min(2.2, Math.max(.55, S.k * f));
-  S.tx = px - (px - S.tx) * (k2 / S.k);
-  S.ty = py - (py - S.ty) * (k2 / S.k);
-  S.k = k2; applyView(); updateZoomLabel(); S.dirty = true;
-}
-document.getElementById('zIn').onclick = () => zoomBy(1.18);
-document.getElementById('zOut').onclick = () => zoomBy(1/1.18);
-document.getElementById('zReset').onclick = () => {
-  // 复位视图 + 把被拖动的节点放回初始位置
-  S.k = 1; S.tx = 0; S.ty = 0; applyView(); updateZoomLabel();
-  NODES.forEach(n => { n.px = n.hx; n.py = n.hy; n.vx = 0; n.vy = 0; n.fixed = false; });
-  S.alpha = .28; select(null); S.dirty = true;
-};
-
-/* =========================================================
-   选择 / 焦点 / 标签
-   ========================================================= */
-function select(id){
-  S.sel = id;
-  const bar = document.getElementById('selbar');
-  if (id) {
-    const n = byId[id];
-    const deg = EDGES.filter(e => e.s === id || e.t === id).length;
-    bar.classList.add('show');
-    document.getElementById('selName').textContent = n.label;
-    document.getElementById('selDeg').textContent = deg;
-    document.getElementById('selDot').style.background = n.kind === 'core' ? '#12263f' : FAM[n.fam].color;
-    renderDetail('node', n);
-  } else {
-    bar.classList.remove('show');
-  }
-  S.dirty = true;
-  S.alpha = Math.max(S.alpha, .12);
-}
-
-document.getElementById('selX').onclick = () => select(null);
-
-/* 关键变化：节点脉冲 + 相关连线亮标签 */
-function pulseNode(id, ms = 3200){
-  const n = byId[id];
-  if (!n) return;
-  n.el.classList.add('pulse');
-  EDGES.filter(e => e.s === id || e.t === id).forEach(e => {
-    e.el.classList.add('show', 'pulse');
-  });
-  setTimeout(() => {
-    n.el.classList.remove('pulse');
-    EDGES.forEach(e => e.el.classList.remove('pulse'));
-  }, ms);
-}
-
-/* =========================================================
-   右栏渲染
-   ========================================================= */
-const WHY = {
-  shk:'这条产线决定电子集群的天花板：AI 服务器 PCB 的订单，会不会把本地供应商一起拉上去。',
-  wol:'二期扩产把“材料龙头”钉在惠城；但如果配套还在东莞，产能越大，外溢越多。',
-  th:'中试项目最容易被高估——技术路线没定型之前，它只是给园区加了一个待验证的变量。',
-  jy:'10.5 亿是签约数，不是产值。真正的观察点是 18 个月后有没有第二条产线。',
-  jt:'合龙只是物理连通。要变成“半小时通勤圈”，还差班次、接驳和本地的产业岗位。',
-  ps:'300 家企业从“各自对接”变成“共用一个入口”——网络的中心位移，比数字本身更重要。',
-  hc:'规划带能不能变成产值，取决于链主愿不愿意把供应商带进来。'
-};
-const KIND = {ps:'新主体', hc:'方向指引', jt:'基础设施', jy:'项目落地', shk:'扩产', wol:'扩产', th:'新建'};
-
-/* 每类变化最该被看到的三个数：值 / 单位 / 标签 / 是否滚动 */
-const HS = {
-  ps: [['300', '家', '覆盖企业', 1], ['+1', '条', '新增关系', 0], ['A', '级', '证据等级', 0]],
-  jy: [['10.5', '亿', '总投资', 1], ['+1', '条', '新增关系', 0], ['A', '级', '证据等级', 0]],
-  jt: [['6', '车道', '双向通行', 1], ['+1', '条', '新增关系', 0], ['A', '级', '证据等级', 0]],
-  shk: [['15', '亿', '项目投资', 1], ['+1', '条', '新增关系', 0], ['A', '级', '证据等级', 0]],
-  wol: [['6', '亿', '二期投资', 1], ['+1', '条', '新增关系', 0], ['B', '级', '证据等级', 0]],
-  th: [['5', '亿', '项目投资', 1], ['+1', '条', '新增关系', 0], ['B', '级', '证据等级', 0]],
-  hc: [['9', '个', '影响节点', 1], ['+1', '条', '新增关系', 0], ['A', '级', '证据等级', 0]]
-};
-
-function deg(id){ return EDGES.filter(e => e.s === id || e.t === id).length; }
-
-/* 迷你关系图：before = 缺这条边，after = 边已连上 */
-function miniGraph(id, mode){
-  const links = EDGES.filter(e => e.s === id || e.t === id).slice(0, 4);
-  const W = 132, H = 62, cx = W / 2, cy = H / 2 + 3;
-  let s = '';
-  links.forEach((e, i) => {
-    const a = -Math.PI / 2 + (i - (links.length - 1) / 2) * 0.98;
-    const x = cx + Math.cos(a) * 40, y = cy + Math.sin(a) * 22;
-    const isNew = i === 0, col = FAM[e.fam].color;
-    if (mode === 'before') {
-      s += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="#5c7d9d" stroke-width="${isNew ? 1 : 1.2}"
-        stroke-dasharray="${isNew ? '2 3' : ''}" opacity="${isNew ? .28 : .72}"/>`;
-      s += `<circle cx="${x}" cy="${y}" r="${isNew ? 4 : 3}" fill="${isNew ? '#3f5f7f' : '#7c9ab5'}"/>`;
-    } else {
-      s += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="${col}" stroke-width="${isNew ? 2.4 : 1.2}"
-        opacity="${isNew ? 1 : .65}"/>`;
-      s += `<circle cx="${x}" cy="${y}" r="${isNew ? 4.2 : 3}" fill="${isNew ? col : '#9fc0de'}"/>`;
-    }
-  });
-  s += `<circle cx="${cx}" cy="${cy}" r="6.5" fill="#eaf2fb"/>
-        <circle cx="${cx}" cy="${cy}" r="9.5" fill="none" stroke="#7dd3fc" stroke-width="1" opacity=".45"/>`;
-  return `<svg viewBox="0 0 ${W} ${H}">${s}</svg>`;
-}
-
-/* 大数字滚动，强化“变化”的冲击感 */
-function countUp(root){
-  root.querySelectorAll('[data-to]').forEach(el => {
-    const raw = el.dataset.to, to = +raw, pre = el.dataset.prefix || '', suf = el.dataset.suffix || '';
-    const dec = (String(raw).split('.')[1] || '').length;   // 保留小数位（如 10.5 亿）
-    const t0 = performance.now(), dur = 560;
-    const tick = now => {
-      const p = Math.min(1, (now - t0) / dur);
-      const v = to * (1 - Math.pow(1 - p, 3));
-      el.textContent = pre + (dec ? v.toFixed(dec) : Math.round(v)) + suf;
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  });
-}
-
-function renderEventViz(ev){
-  const ids=Array.from(new Set([...(ev.involved_node_ids||[])]));
-  const relatedEdges=EDGES.filter(function(e){return (ev.involved_edge_ids||[]).indexOf(e.id)>=0;});
-  relatedEdges.forEach(function(e){if(byId[e.s]&&ids.indexOf(e.s)<0)ids.push(e.s);if(byId[e.t]&&ids.indexOf(e.t)<0)ids.push(e.t);});
-  const visible=ids.filter(function(id){return !!byId[id];}).slice(0,9);
-  const width=320,height=154,cx=160,cy=76,rx=112,ry=48;
-  const points={};
-  visible.forEach(function(id,i){const a=(-90+i*360/Math.max(visible.length,1))*Math.PI/180;points[id]={x:cx+rx*Math.cos(a),y:cy+ry*Math.sin(a)};});
-  let lines='',dots='';
-  relatedEdges.forEach(function(e){
-    const a=points[e.s],b=points[e.t];if(!a||!b)return;
-    const col=(FAM[e.fam]||FAM.supply).color;
-    const dash=e.grade==='A'?'':e.grade==='B'?' stroke-dasharray="5 3"':' stroke-dasharray="1.5 3"';
-    lines+='<line x1="'+a.x.toFixed(1)+'" y1="'+a.y.toFixed(1)+'" x2="'+b.x.toFixed(1)+'" y2="'+b.y.toFixed(1)+'" stroke="'+col+'" stroke-width="'+(e.grade==='A'?2.8:1.7)+'" opacity=".78"'+dash+'/>';
-  });
-  visible.forEach(function(id){
-    const p=points[id],n=byId[id],isFocus=id===ev.node;
-    const col=(FAM[n.fam]||FAM.supply).color;
-    const label=String(n.label||id);
-    dots+='<g><circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="'+(isFocus?10:7)+'" fill="'+col+'" fill-opacity="'+(isFocus?1:.88)+'" stroke="#fff" stroke-width="2"/>'+
-      (isFocus?'<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="14" fill="none" stroke="'+col+'" stroke-opacity=".35" stroke-width="3"/>':'')+
-      '<text x="'+p.x.toFixed(1)+'" y="'+(p.y+19).toFixed(1)+'" text-anchor="middle" font-size="9" font-weight="'+(isFocus?800:650)+'" fill="#334b66">'+esc(label.length>8?label.slice(0,8)+'…':label)+'</text></g>';
-  });
-  const families={};
-  relatedEdges.forEach(function(e){const f=e.fam||'supply';families[f]=(families[f]||0)+1;});
-  const fams=Object.keys(families).sort(function(a,b){return families[b]-families[a];});
-  const max=Math.max(1,...fams.map(function(f){return families[f];}));
-  const bars=fams.length?'<div class="ev-bars">'+fams.map(function(f){
-    const fam=FAM[f]||FAM.supply;
-    return '<div class="ev-bar-row"><span>'+esc(fam.name)+'</span><span class="ev-bar-track"><i style="width:'+(families[f]/max*100)+'%;background:'+fam.color+'"></i></span><b>'+families[f]+'</b></div>';
-  }).join('')+'</div>':'';
-  const empty=visible.length?'<svg viewBox="0 0 '+width+' '+height+'" role="img" aria-label="本次事件涉及主体和关系网络">'+lines+dots+'</svg>':'<div class="txt">当前事件尚未关联可绘制的主体。</div>';
-  return '<div class="event-viz"><div class="ev-head"><div class="ev-title"><i></i>本次变化的关系结构</div><span class="ev-count">'+visible.length+' 个主体 · '+relatedEdges.length+' 条关系</span></div>'+
-    '<div class="ev-canvas">'+empty+'</div>'+
-    (fams.length?'<div class="ev-legend">'+fams.map(function(f){return '<span><i style="background:'+(FAM[f]||FAM.supply).color+'"></i>'+esc((FAM[f]||FAM.supply).name)+'</span>';}).join('')+'</div>':'')+bars+
-    '<div class="d-note" style="padding:0 12px 10px;margin-top:0">图形仅呈现已关联的公开记录；连线不代表因果关系。</div></div>';
-}
-
-function renderDetail(kind, data){
-  const host=document.getElementById('viewDetail');
-  const title=document.getElementById('p-title');
-  const sub=document.getElementById('p-sub');
-  if(kind==='node'){
-    const d=deg(data.id);
-    title.textContent=data.label;
-    sub.textContent='主体档案 · 关联关系与变化状态';
-    host.innerHTML=
-      '<div class="d-hero">'+
-        '<div class="eyebrow">'+esc(data.layer||'关系主体')+' · '+esc(data.town||'惠城区')+'</div>'+
-        '<h2>'+esc(data.label)+'</h2>'+
-        '<div class="dh-stats">'+
-          '<div><span class="val">'+d+'</span><span class="unit">条</span><span class="lab">关联关系</span></div>'+
-          '<div><span class="val">'+esc(data.grade)+'</span><span class="unit">级</span><span class="lab">可靠程度</span></div>'+
-          '<div><span class="val" style="font-size:13px">'+esc(data.change_status||'记录中')+'</span><span class="lab">变化状态</span></div>'+
-        '</div>'+
-      '</div>'+
-      '<div class="why">'+esc(data.desc)+'<b> 需要追问：</b>'+esc(data.debate)+'</div>'+
-      '<div class="sec"><span class="n">1</span>它与谁相连</div>'+
-      renderMiniNetwork(data.id)+
-      '<div class="sec"><span class="n">2</span>当前公开记录</div>'+
-      '<div class="mk">'+
-        '<div class="mkc"><div class="kn">公开摘要</div><div class="kv" style="font-size:12px;line-height:1.55">'+esc(data.stat||'未提供')+'</div></div>'+
-        '<div class="mkc"><div class="kn">关联关系</div><div class="kv">'+d+'<small>条</small></div></div>'+
-      '</div>'+
-      '<div class="sec"><span class="n">3</span>需要留意</div>'+
-      '<span class="grade">'+esc(gradeLabel(data.grade))+'</span>'+
-      '<div class="limit"><b>限制 / 反证：</b>'+esc(data.limit)+'</div>'+ 
-      '<div class="d-note">关系图展示公开信息中的关联线索，不单独证明因果关系。</div>';
-  }else{
-    const ev=data;
-    const relatedNodes=(ev.involved_node_ids||[]).map(function(id){return byId[id];}).filter(Boolean);
-    const relatedEdges=EDGES.filter(function(e){return (ev.involved_edge_ids||[]).indexOf(e.id)>=0;});
-    title.textContent='惠城区产业关系情报';
-    sub.textContent='变化详情 · 关联影响与待核实事项';
-    const metricHtml=ev.metrics&&ev.metrics.length?ev.metrics.map(function(m){
-      return '<div class="mkc"><div class="kn">'+esc(m.metric_name||'公开指标')+'</div><div class="kv">'+esc(m.metric_value)+'<small>'+esc(m.metric_unit||'')+'</small></div></div>';
-    }).join(''):'<div class="mkc"><div class="kn">关键数字</div><div class="kv" style="font-size:12px">暂无关联的独立数值</div></div>';
-    const nodesHtml=relatedNodes.length?relatedNodes.map(function(n){
-      return '<button class="goto" type="button" data-focus-node="'+esc(n.id)+'"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span><span class="tx">'+esc(n.label)+'</span><span class="ar">查看主体</span></button>';
-    }).join(''):'<div class="txt">当前变化没有关联到具体主体。</div>';
-    const edgesHtml=relatedEdges.length?relatedEdges.map(function(e){
-      const a=byId[e.s],b=byId[e.t];
-      return '<div class="src"><div class="sn">'+esc((a?a.label:e.s)+' → '+(b?b.label:e.t))+' · '+esc(REL_NAME[e.relation_type]||'关系')+' · '+esc(e.grade)+' 级</div><div>'+esc(e.relation_description||e.label)+'</div><div class="limit">限制：'+esc(e.counter_evidence||'当前记录未注明具体限制。')+'</div><div class="pro-only"><div class="limit">记录类型：'+esc(e.evidence_type||'未注明')+' · 记录标记：'+esc(e.confidence||'未注明')+' · 关系依据：'+esc(e.strength_basis||'未注明')+' · 有效期：'+esc(e.valid_period||'未注明')+' · 最近核验：'+esc(e.last_verified_at||'未注明')+'</div></div></div>';
-    }).join(''):'<div class="txt">当前事件没有关联到具体关系边。</div>';
-    host.innerHTML=
-      '<div class="d-hero">'+
-        '<div class="eyebrow">'+esc(ev.d||'日期未注明')+' · '+esc(ev.kind)+'</div>'+
-        '<h2>'+esc(ev.t)+'</h2>'+
-        '<div class="dh-stats">'+
-          '<div><span class="val">'+relatedNodes.length+'</span><span class="unit">个</span><span class="lab">涉及主体</span></div>'+
-          '<div><span class="val">'+relatedEdges.length+'</span><span class="unit">条</span><span class="lab">涉及关系</span></div>'+
-          '<div><span class="val">'+esc(ev.grade)+'</span><span class="unit">级</span><span class="lab">可靠程度</span></div>'+
-        '</div>'+
-      '</div>'+
-      '<div class="why">'+esc(ev.before_after||ev.fact)+'</div>'+
-      renderEventViz(ev)+
-      '<button class="goto" type="button" data-focus-node="'+esc(ev.node)+'" data-event-id="'+esc(ev.id)+'"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span><span class="tx">在关系图里高亮</span><span class="ar">查看网络</span></button>'+
-      '<div class="sec"><span class="n">1</span>发生了什么</div>'+
-      '<div class="txt">'+esc(ev.fact)+'</div>'+
-      '<div class="sec"><span class="n">2</span>关键数字（若有公开记录）</div>'+
-      '<div class="mk">'+metricHtml+'</div>'+
-      '<div class="sec"><span class="n">3</span>涉及主体</div>'+nodesHtml+
-      '<div class="sec"><span class="n">4</span>涉及关系与限制</div>'+edgesHtml+
-      '<div class="sec"><span class="n">5</span>仍待核实</div>'+ 
-      '<div class="limit">'+esc(ev.uncertainty)+'</div>'+
-      '<div class="d-note">关系图展示公开信息中的关联线索，不单独证明因果关系。</div>';
-  }
-  host.scrollTop=0;
-  host.querySelectorAll('.goto').forEach(function(b){b.addEventListener('click',function(){
-    const id=b.getAttribute('data-focus-node');
-    const eventId=b.getAttribute('data-event-id');
-    if(!id||!byId[id])return;
-    if(eventId){focusNode(id,eventId);return;}
-    switchTab('detail');
-    S.hoverId=null;
-    select(id);
-    pulseNode(id,3400);
-  });});
-  host.querySelectorAll('.mn-node').forEach(function(b){b.addEventListener('click',function(){
-    const id=b.getAttribute('data-focus-node');
-    if(!id||!byId[id])return;
-    S.hoverId=null;
-    select(id);
-    pulseNode(id,3400);
-  });});
-}
-
-
-function renderMiniNetwork(id){
-  const current=byId[id];
-  if(!current)return '<div class="txt">当前主体不存在。</div>';
-  const allEdges=EDGES.filter(function(e){return e.s===id||e.t===id;});
-  if(!allEdges.length)return '<div class="mini-net"><div class="mn-foot">当前图层下没有显示的关联关系。</div></div>';
-  const grouped={};
-  const groups=[];
-  allEdges.forEach(function(e){
-    const otherId=e.s===id?e.t:e.s;
-    if(!byId[otherId])return;
-    if(!grouped[otherId]){
-      grouped[otherId]={id:otherId,node:byId[otherId],edges:[]};
-      groups.push(grouped[otherId]);
-    }
-    grouped[otherId].edges.push(e);
-  });
-  const visible=groups.slice(0,6);
-  const positionsByCount={
-    1:[[160,40]],
-    2:[[160,40],[160,200]],
-    3:[[160,40],[248,171],[72,171]],
-    4:[[72,70],[248,70],[248,170],[72,170]]
-  };
-  const positions=positionsByCount[visible.length]||visible.map(function(_,i){
-    const angle=(-90+i*360/visible.length)*Math.PI/180;
-    return [160+105*Math.cos(angle),120+86*Math.sin(angle)];
-  });
-  const cx=160,cy=120;
-  let paths='',buttons='',legend='';
-  let shownEdges=0;
-  visible.forEach(function(g,i){
-    const p=positions[i];
-    const dx=p[0]-cx,dy=p[1]-cy,dist=Math.sqrt(dx*dx+dy*dy)||1;
-    const nx=-dy/dist,ny=dx/dist;
-    g.edges.forEach(function(e,j){
-      const offset=(j-(g.edges.length-1)/2)*7;
-      const qx=(cx+p[0])/2+nx*offset,qy=(cy+p[1])/2+ny*offset;
-      const color=(FAM[e.fam]||FAM.supply).color;
-      const dash=e.grade==='B'?' stroke-dasharray="5 4"':e.grade==='C'?' stroke-dasharray="1.5 4"':'';
-      const width=e.grade==='A'?2.6:e.grade==='B'?1.9:1.35;
-      paths+='<path d="M '+cx+' '+cy+' Q '+qx.toFixed(1)+' '+qy.toFixed(1)+' '+p[0]+' '+p[1]+'" fill="none" stroke="'+color+'" stroke-width="'+width+'" stroke-linecap="round" opacity=".86"'+dash+'/>';
-      shownEdges++;
-      legend+='<span class="mn-rel grade-'+esc(e.grade.toLowerCase())+'"><i style="border-top-color:'+color+'"></i>'+esc((FAM[e.fam]||FAM.supply).name)+' <b>'+esc(e.grade)+'</b></span>';
-    });
-    const first=g.edges[0];
-    const fam=FAM[first.fam]||FAM.supply;
-    const gradeSet=Array.from(new Set(g.edges.map(function(e){return e.grade;}))).join('/');
-    const extra=g.edges.length>1?'<span class="mn-more">'+g.edges.length+' 条关联</span>':'';
-    buttons+='<button class="mn-node" type="button" data-focus-node="'+esc(g.id)+'" title="在关系图中查看 '+esc(g.node.label)+'" aria-label="查看关联主体 '+esc(g.node.label)+'" style="left:'+(p[0]/320*100)+'%;top:'+(p[1]/240*100)+'%;border-bottom:2px solid '+fam.color+'">'+
-      '<span class="mn-name">'+esc(g.node.label)+'</span>'+
-      '<span class="mn-tag"><i style="background:'+fam.color+'"></i>'+esc(fam.name)+' · '+esc(gradeSet)+'</span>'+extra+'</button>';
-  });
-  const more=groups.length>visible.length?'<div class="mn-foot">图中展示 '+visible.length+' 个关联主体；另有 '+(groups.length-visible.length)+' 个主体，可在左侧完整关系图中查看。</div>':'';
-  return '<div class="mini-net">'+
-    '<div class="mn-head"><span class="mn-mark"><i></i>关系网络</span><span class="mn-count">'+allEdges.length+' 条关系 · '+groups.length+' 个主体</span></div>'+
-    '<div class="mn-canvas"><svg class="mn-lines" viewBox="0 0 320 240" preserveAspectRatio="none" aria-hidden="true">'+paths+'</svg>'+
-      '<div class="mn-center"><span class="mn-name">'+esc(current.label)+'</span><span class="mn-role">当前主体</span></div>'+buttons+
-    '</div>'+
-    '<div class="mn-relations">'+legend+'</div>'+
-    '<div class="mn-foot">线条颜色表示关系类型；实线为 A 级、虚线为 B 级、点线为 C 级。点击外围主体可同步定位左侧关系图。</div>'+more+
-  '</div>';
-}
-
-function renderFeed(){
-  const host=document.getElementById('viewFeed');
-  const list=[...FEED].sort(function(a,b){return String(b.d).localeCompare(String(a.d));});
-  if(!list.length){host.innerHTML='<div class="txt">当前没有可展示的公开变化记录。</div>';return;}
-  const top=list[0];
-  const topEvent=EVENTS.find(function(e){return e.id===top.id;})||EVENTS[0];
-  const types=Array.from(new Set(list.map(function(f){return f.kind;})));
-  const typeCounts=types.map(function(k){return {kind:k,count:list.filter(function(f){return f.kind===k;}).length};}).sort(function(a,b){return b.count-a.count;});
-  const maxType=Math.max(1,...typeCounts.map(function(x){return x.count;}));
-  const mixHtml='<div class="feed-mix"><div class="feed-mix-head"><span class="feed-mix-title">公开变化类型分布</span><span class="feed-mix-total">共 '+list.length+' 条事件</span></div>'+
-    typeCounts.map(function(x){const colors={'新主体':'#2563eb','新连接':'#0d9488','关系增强':'#16a34a','关系变化':'#d97706','关系减弱':'#ea580c','信息更新':'#7c3aed'};const color=colors[x.kind]||'#64748b';return '<div class="feed-mix-row"><span class="feed-mix-name">'+esc(x.kind)+'</span><span class="feed-mix-track"><i style="width:'+(x.count/maxType*100)+'%;background:'+color+'"></i></span><b class="feed-mix-num">'+x.count+'</b></div>';}).join('')+
-    '</div>';
-  let rows='',lastDate='';
-  list.slice(1).forEach(function(f){
-    const n=byId[f.node];
-    if(f.d!==lastDate){rows+='<div class="fgrp">'+esc(f.d||'日期未注明')+'</div>';lastDate=f.d;}
-    rows+='<div class="frow" role="button" tabindex="0" aria-label="'+esc(f.t+'，查看变化详情')+'" data-node="'+esc(f.node)+'" data-event="'+esc(f.id)+'" data-kind="'+esc(f.kind)+'">'+
-      '<span><span class="tt">'+esc(f.t)+'</span>'+
-      '<span class="mm"><i style="background:'+(f.grade==='A'?'#16a34a':f.grade==='B'?'#d97706':'#94a3b8')+'"></i>'+
-      esc(f.kind)+' · 涉及 '+((topEvent&&f.id===topEvent.id?topEvent.involved_node_ids:list.find(function(x){return x.id===f.id;})?.involved_node_ids)||[]).length+' 个主体 · '+esc(f.grade)+' 级</span></span>'+
-      '<span class="fvisual" aria-label="关系网络示意"><svg viewBox="0 0 36 24" fill="none" aria-hidden="true"><path d="M6 7L17 4L29 9L23 20L10 18Z" stroke="#93c5fd" stroke-width="1.5"/><path d="M6 7L10 18M17 4L23 20" stroke="#bfdbfe" stroke-width="1.2"/><circle cx="6" cy="7" r="3" fill="#2563eb"/><circle cx="17" cy="4" r="3" fill="#60a5fa"/><circle cx="29" cy="9" r="3" fill="#0d9488"/><circle cx="23" cy="20" r="3" fill="#7c3aed"/><circle cx="10" cy="18" r="3" fill="#f59e0b"/></svg></span></div>';
-  });
-  const nodesCount=(topEvent.involved_node_ids||[]).length;
-  const edgesCount=(topEvent.involved_edge_ids||[]).length;
-  host.innerHTML=
-    '<div class="fh">'+
-      '<span class="fh-tag"><i></i>'+esc(top.d||'日期未注明')+' · 最近公开变化</span>'+
-      '<div class="fh-big">'+nodesCount+'<span>个主体</span></div>'+
-      '<h3>'+esc(top.t)+'</h3>'+
-      '<p>'+esc(topEvent.before_after||topEvent.fact)+'</p>'+
-      '<div class="fh-stats"><div><b>'+nodesCount+'</b><span>涉及主体</span></div><div><b>'+edgesCount+'</b><span>涉及关系</span></div><div><b>'+esc(top.grade)+'</b><span>证据标记</span></div></div>'+
-      '<button class="fh-btn" data-id="'+esc(top.node)+'">查看这条变化 <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" width="14" height="14"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button>'+
-    '</div>'+
-    '<div class="ffilters"><button class="ff on" data-k="all">全部 '+list.length+'</button>'+
-      types.map(function(k){return '<button class="ff" data-k="'+esc(k)+'">'+esc(k)+' '+list.filter(function(f){return f.kind===k;}).length+'</button>';}).join('')+
-    '</div>'+mixHtml+rows+
-    '<div class="d-note" style="justify-content:center;margin-top:10px">类型统计来自当前公开变化记录；点击任一事件查看关联主体、变化和待核实事项</div>';
-  host.querySelectorAll('.frow').forEach(function(x){
-    function openEvent(){
-      const nodeId=x.getAttribute('data-node');
-      const eventId=x.getAttribute('data-event');
-      if(nodeId&&eventId)focusNode(nodeId,eventId);
-    }
-    x.onclick=openEvent;
-    x.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openEvent();}};
-  });
-  const topBtn=host.querySelector('.fh-btn');
-  if(topBtn)topBtn.onclick=function(){focusNode(top.node,top.id);};
-  host.querySelectorAll('.ff').forEach(function(b){
-    b.onclick=function(){
-      host.querySelectorAll('.ff').forEach(function(x){x.classList.remove('on');});
-      b.classList.add('on');
-      const k=b.getAttribute('data-k');
-      host.querySelectorAll('.frow').forEach(function(r){r.style.display=(k==='all'||r.getAttribute('data-kind')===k)?'':'none';});
-    };
-  });
-}
-
-
-/* =========================================================
-   图层 / 开关 / 时间线
-   ========================================================= */
-function renderLayers(){
-  const host = document.getElementById('layerList');
-  const all = Object.keys(FAM);
-  host.innerHTML = `
-    <button class="layer ${all.every(k=>S.family[k]) ? 'on' : ''}" data-fam="all">
-      <span class="sw" style="background:#0d1a2b"></span><span class="nm">全部关系</span>
-      <span class="num">${EDGES.length}</span><span class="ck"></span>
-    </button>` + all.map(k => {
-      const c = EDGES.filter(e => e.fam === k).length;
-      return `<button class="layer ${S.family[k] ? 'on' : ''}" data-fam="${k}">
-        <span class="sw" style="background:${FAM[k].color}"></span><span class="nm">${FAM[k].name}</span>
-        <span class="num">${c}</span><span class="ck"></span></button>`;
-    }).join('');
-
-  host.querySelectorAll('.layer').forEach(b => b.onclick = () => {
-    const f = b.getAttribute('data-fam');
-    if (f === 'all') {
-      const on = Object.keys(FAM).every(k => S.family[k]);
-      Object.keys(FAM).forEach(k => S.family[k] = !on);
-    } else {
-      S.family[f] = !S.family[f];
-    }
-    renderLayers();
-    document.getElementById('layerCount').textContent = EDGES.filter(e => S.family[e.fam]).length + ' 条';
-    S.dirty = true;
-  });
-  document.getElementById('layerCount').textContent = EDGES.filter(e => S.family[e.fam]).length + ' 条';
-}
-
-document.getElementById('swLab').onclick = function(){
-  S.showLabels = !S.showLabels;
-  this.classList.toggle('on', S.showLabels);
-  S.dirty = true;
-};
-document.getElementById('swNew').onclick = function(){
-  S.onlyNew = !S.onlyNew;
-  this.classList.toggle('on', S.onlyNew);
-  S.dirty = true;
-};
-
-function renderTimeline(){
-  const host = document.getElementById('tl');
-  EVENTS.forEach((ev, i) => {
-    const b = document.createElement('button');
-    b.className = 'tl-ev';
-    b.style.left = (6 + (88 / (EVENTS.length - 1)) * i) + '%';
-    b.innerHTML = `<span class="l">${esc(ev.t)}</span><span class="n" style="background:${ev.kind === '新主体' ? '#16a34a' : ev.kind === '新连接' ? '#2563eb' : ev.kind === '关系增强' ? '#d97706' : ev.kind === '关系减弱' ? '#dc2626' : ev.kind === '信息更新' ? '#0891b2' : '#7c3aed'}"></span><span class="d">${esc(ev.d)}</span>`;
-    b.onclick = () => {
-      document.querySelectorAll('.tl-ev').forEach(x => x.classList.remove('sel'));
-      b.classList.add('sel');
-      focusNode(ev.node, ev.id);
-    };
-    host.appendChild(b);
-  });
-}
-
-function focusNode(id, eventRef){
-  const n=byId[id];
-  if(!n)return;
-  const ev=typeof eventRef==='string' ? EVENTS.find(e=>e.id===eventRef) : eventRef;
-  S.hoverId=null;
-  S.dragId=null;
-  select(id);
-  pulseNode(id,3400);
-  switchTab('detail');
-  if(ev) renderDetail('event',ev);
-  else {
-    const found=EVENTS.find(e=>e.node===id);
-    if(found) renderDetail('event',found);
-    else renderDetail('node',n);
-  }
-}
-window.focusNode = focusNode;
-
-/* tab 切换 */
-function switchTab(which){
-  const isDetail = which === 'detail';
-  document.getElementById('tabDetail').classList.toggle('on', isDetail);
-  document.getElementById('tabFeed').classList.toggle('on', !isDetail);
-  document.getElementById('tabDetail').setAttribute('aria-selected', isDetail);
-  document.getElementById('tabFeed').setAttribute('aria-selected', !isDetail);
-  document.getElementById('viewDetail').classList.toggle('on', isDetail);
-  document.getElementById('viewFeed').classList.toggle('on', !isDetail);
-  if(!isDetail){
-    S.hoverId=null;
-    S.dragId=null;
-    select(null);
-    S.dirty=true;
-  }
-}
-document.getElementById('tabDetail').onclick = () => switchTab('detail');
-document.getElementById('tabFeed').onclick = () => switchTab('feed');
-
-function setReadingMode(mode){
-  const pro=mode==='pro';
-  document.body.dataset.mode=pro?'pro':'plain';
-  document.getElementById('modePlain').classList.toggle('on',!pro);
-  document.getElementById('modePro').classList.toggle('on',pro);
-  document.getElementById('modePlain').setAttribute('aria-pressed',String(!pro));
-  document.getElementById('modePro').setAttribute('aria-pressed',String(pro));
-}
-document.getElementById('modePlain').addEventListener('click',function(){setReadingMode('plain');});
-document.getElementById('modePro').addEventListener('click',function(){setReadingMode('pro');});
-setReadingMode('plain');
-
-/* 键盘：Esc 取消选择，+/- 缩放 */
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') select(null);
-  if (e.key === '+' || e.key === '=') zoomBy(1.15);
-  if (e.key === '-') zoomBy(1/1.15);
-});
-
-function bindNodeEvents(){
-NODES.forEach(n => {
-  n.el.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(n.id); pulseNode(n.id, 2400); }
-  });
-  n.el.addEventListener('pointerenter', () => {
-    if (pointer.mode) return;
-    S.hoverId = n.id; S.dirty = true;
-  });
-  n.el.addEventListener('pointerleave', () => {
-    if (S.hoverId === n.id) { S.hoverId = null; S.dirty = true; }
-  });
-});
-}
-
-/* =========================================================
-   启动
-   ========================================================= */
-async function boot(){
-  try{
-    const responses=await Promise.all([
-      fetch('data/relationship-evidence-v1.json'),
-      fetch('data/relationship-changes-v1.json'),
-      fetch('data/relationship-sources-v1.json')
-    ]);
-    if(responses.some(function(r){return !r.ok;}))throw new Error('公开数据文件读取失败');
-    const payload=await Promise.all(responses.map(function(r){return r.json();}));
-    makeData(payload[0],payload[1],payload[2]);
-    Object.keys(FAM).forEach(function(k){S.family[k]=true;});
-    buildGraph();
-    resize();
-    renderLayers();
-    renderTimeline();
-    renderFeed();
-    document.getElementById('nNode').textContent=NODES.length;
-    document.getElementById('nEdge').textContent=EDGES.length;
-    document.getElementById('gradeCount').innerHTML='<b style="color:#0f7a44">A 级</b> '+EDGES.filter(function(e){return e.grade==='A';}).length+' 条';
-    document.getElementById('layerCount').textContent=EDGES.length+' 条';
-    const date=payload[0].generated_at||payload[1].generated_at||'公开数据';
-    document.getElementById('dataStatus').innerHTML='<i></i>'+esc(date)+' 已更新';
-    document.getElementById('kpiNodes').textContent=NODES.length;
-    document.getElementById('kpiEdges').textContent=EDGES.length;
-    document.getElementById('kpiChanges').textContent=EVENTS.length;
-    document.getElementById('kpiReview').textContent=EDGES.filter(function(e){return e.grade==='C';}).length;
-    document.getElementById('kpiDate').textContent=date;
-    bindNodeEvents();
-    const latest=EVENTS[0];
-    const briefAction=document.getElementById('briefAction');
-    if(latest){
-      document.getElementById('briefDate').textContent=latest.d||'日期未注明';
-      document.getElementById('briefTitle').textContent=latest.t;
-      document.getElementById('briefSummary').textContent=latest.before_after||latest.fact;
-      document.getElementById('briefGrade').textContent=gradeLabel(latest.grade);
-      briefAction.onclick=function(){document.getElementById('tabDetail').click();focusNode(latest.node,latest);};
-    }else{
-      document.getElementById('briefDate').textContent='暂无记录';
-      document.getElementById('briefTitle').textContent='当前没有可展示的公开变化';
-      document.getElementById('briefSummary').textContent='后续有新的可核对记录时，会在此处显示。';
-      document.getElementById('briefGrade').textContent='等待数据';
-      briefAction.disabled=true;
-    }
-    if(latest){
-      document.querySelectorAll('.tl-ev').forEach(function(x){x.classList.remove('sel');});
-      const idx=EVENTS.findIndex(function(e){return e.id===latest.id;});
-      const tl=document.querySelectorAll('.tl-ev')[idx];
-      if(tl)tl.classList.add('sel');
-      S.sel=latest.node;
-      renderDetail('event',latest);
-      pulseNode(latest.node,2600);
-    }else{
-      renderDetail('node',NODES[0]);
-    }
-    document.querySelectorAll('nav.main button[data-fam]').forEach(function(b){
-      b.addEventListener('click',function(){
-        const fam=b.getAttribute('data-fam');
-        Object.keys(FAM).forEach(function(k){S.family[k]=fam==='all'||k===fam;});
-        document.querySelectorAll('nav.main button[data-fam]').forEach(function(x){x.classList.toggle('on',x===b);});
-        renderLayers();S.dirty=true;
-      });
-    });
-    const search=document.getElementById('searchInput');
-    function runSearch(){
-      const q=search.value.trim().toLowerCase();
-      if(!q)return;
-      const n=NODES.find(function(x){return (x.label+' '+x.desc+' '+x.stat).toLowerCase().indexOf(q)>=0;});
-      if(n){document.getElementById('tabDetail').click();focusNode(n.id);return;}
-      const ev=EVENTS.find(function(x){return (x.t+' '+x.fact+' '+x.uncertainty).toLowerCase().indexOf(q)>=0;});
-      if(ev){document.getElementById('tabDetail').click();focusNode(ev.node,ev);return;}
-      const status=document.getElementById('dataStatus');status.innerHTML='<i></i>没有找到匹配项';
-    }
-    search.addEventListener('keydown',function(e){if(e.key==='Enter')runSearch();});
-    search.addEventListener('input',function(){if(!search.value.trim())document.getElementById('dataStatus').innerHTML='<i></i>'+esc(date)+' 已更新';});
-    new ResizeObserver(function(){resize();}).observe(stage);
-    requestAnimationFrame(loop);
-  }catch(err){
-    document.getElementById('dataStatus').innerHTML='<i style="background:#dc2626"></i>公开数据读取失败';
-    document.getElementById('viewDetail').innerHTML='<div class="d-hero"><h2>关系情报暂时无法加载</h2><p>请确认 data/ 下的公开数据文件可以访问后刷新页面。</p></div><div class="limit">'+esc(err&&err.message?err.message:'数据读取失败')+'</div>';
-    console.error(err);
-  }
-}
-
-boot();
-</script>
+</div>
 </body>
 </html>
