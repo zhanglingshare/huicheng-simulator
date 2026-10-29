@@ -94,9 +94,9 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
 
 <div class="hud">
   <div class="top">
-    <a class="back" href="future.html">←</a>
+    <a class="back" href="fun.html">←</a>
     <div class="ttl">
-      <h1>搭你的惠城 2030</h1>
+      <h1>05 · 搭你的惠城 2030</h1>
       <span>6 块积木，搭到模型参考刻度 1500 亿</span>
     </div>
   </div>
@@ -126,7 +126,7 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
     <div class="r-gap" id="gap">离参考刻度 1500 亿还差 867.3 亿</div>
   </div>
 
-  <button class="next-btn" id="nextBtn" onclick="goNext()">进入第七页 · 风洞测试 →</button>
+  <button class="next-btn" id="nextBtn" onclick="goNext()">进入第六页 · 看未来模拟 →</button>
 </div>
 
 <script>
@@ -236,7 +236,7 @@ function goNext(){
   // 把选择存下来，传给 future.html
   var active=placed.map(function(i){return i;});
   localStorage.setItem('hcChoices',JSON.stringify(active));
-  location.href='windtunnel.html?from=choices';
+  location.href='future.html?from=choices';
 }
 
 render();
