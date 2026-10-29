@@ -10,7 +10,7 @@
 
 一套以惠城区为观察样本、基于公开信息的区域经济关系观察与情景推演工具。
 
-[![在线体验](https://img.shields.io/badge/在线体验-进入全息工作区-2563eb?style=for-the-badge)](https://zhanglingshare.github.io/huicheng-simulator/)
+[![在线体验](https://img.shields.io/badge/在线体验-从第一页开始-2563eb?style=for-the-badge)](https://zhanglingshare.github.io/huicheng-simulator/)
 [![MIT License](https://img.shields.io/badge/License-MIT-orange?style=for-the-badge)](./LICENSE)
 
 </div>
@@ -23,6 +23,7 @@
 
 - **在线首页：** https://zhanglingshare.github.io/huicheng-simulator/
 - **全息工作区：** https://zhanglingshare.github.io/huicheng-simulator/holo-workspace.html
+- **第三页 · 钱去哪了：** https://zhanglingshare.github.io/huicheng-simulator/today.html
 - **项目介绍页：** https://zhanglingshare.github.io/huicheng-simulator/home.html
 - **代码仓库：** https://github.com/zhanglingshare/huicheng-simulator
 - **许可协议：** MIT License
@@ -39,11 +40,11 @@
 <!-- 图片准备好后，取消下一行注释 -->
 <!-- ![全息工作区总览：关系网络、情报流、变化详情与时间线](./assets/screenshots/01-holo-workspace.png) -->
 
-**这张图要展示：** 中央关系网络、右侧情报流/变化详情、底部时间线，以及它们共同构成的工作区。
+**这张图要展示：** 第二页全息工作区的中央关系网络、右侧情报流/变化详情和底部时间线。
 
 **它说明什么：** 项目不只呈现单个指标，而是把主体、关系、事件与时间放进同一观察界面。用户可以从全景入手，再逐步聚焦自己关心的变化。
 
-[进入全息工作区 →](https://zhanglingshare.github.io/huicheng-simulator/)
+[进入第二页 · 全息工作区 →](https://zhanglingshare.github.io/huicheng-simulator/holo-workspace.html)
 
 ### 02 · 情报流：从公开变化中发现问题
 
@@ -157,36 +158,26 @@
 
 在线体验建议使用较新版本的桌面或移动浏览器。如果页面需要读取本地 JSON 数据，请通过本地静态服务器运行，不要仅用 `file://` 直接打开。
 
-## 推荐浏览顺序
+## 正式十页体验路线
 
-**01 今日话题 → 02 全息工作区 → 03 钱去哪了 → 04 风向标**。其中全息工作区仍为网站默认首页；这里的页码表示建议的体验顺序，不代表修改首页地址。
+本项目现仅将以下十页作为正式体验流程。其他旧版实验页面仍存档保留，**不再出现在主要导航中**；这一调整不会删除模型代码或后台数据文件。
 
-- [01 今日话题](https://zhanglingshare.github.io/huicheng-simulator/today.html)：从生活里的问题进入惠城。
-- [02 全息工作区](https://zhanglingshare.github.io/huicheng-simulator/)：看见主体关系及公开变化。
-- [03 钱去哪了](https://zhanglingshare.github.io/huicheng-simulator/money.html)：观察可能的本地消费、跨城消费、线上交易和供应链路径，识别证据缺口。
-- [04 风向标](https://zhanglingshare.github.io/huicheng-simulator/fun.html)：观察日常城市热度与生活线索。
+| 顺序 | 页面 | 在线入口 | 主要任务 |
+|:---:|---|---|---|
+| **01** | **序章 · 看见产业关系，理解城市变化** | [进入首页](https://zhanglingshare.github.io/huicheng-simulator/) | 了解为什么做这个项目 |
+| **02** | **全息工作区** | [打开全息](https://zhanglingshare.github.io/huicheng-simulator/holo-workspace.html) | 发现变化、看见网络、追溯证据 |
+| **03** | **钱去哪了** | [打开钱去哪了](https://zhanglingshare.github.io/huicheng-simulator/today.html) | 从消费与资金去向问题探索关系和证据缺口 |
+| **04** | **风向标 · 去哪玩** | [打开风向标](https://zhanglingshare.github.io/huicheng-simulator/fun.html) | 了解惠城日常热点与生活场景 |
+| **05** | **未来** | [打开未来](https://zhanglingshare.github.io/huicheng-simulator/future.html) | 查看在不同假设下的可能结果 |
+| **06** | **路径** | [打开路径](https://zhanglingshare.github.io/huicheng-simulator/choices.html) | 比较区域发展的不同方向 |
+| **07** | **风洞测试** | [打开风洞](https://zhanglingshare.github.io/huicheng-simulator/windtunnel.html) | 观察条件变化与外部冲击 |
+| **08** | **忽略了什么** | [打开盲点](https://zhanglingshare.github.io/huicheng-simulator/blindspot.html) | 发现居民生活与城市承载等盲点 |
+| **09** | **报告** | [打开报告](https://zhanglingshare.github.io/huicheng-simulator/report.html) | 汇总观察和讨论依据 |
+| **10** | **结语** | [打开结语](https://zhanglingshare.github.io/huicheng-simulator/ending.html) | 回到人、城市与决策责任 |
 
-## 项目页面导航
+> **导航边界：** 网站根目录 `index.html` 为第一页面；`home.html` 保留作为同一序章的介绍入口；`holo-workspace.html` 是第二页。原来的 `money.html` 不再是正式第三页，第三页统一使用已包含漏斗图的 `today.html`。
 
-| 页面 | 入口 | 主要用途 |
-|---|---|---|
-| **钱去哪了（第三页）** | [打开](https://zhanglingshare.github.io/huicheng-simulator/money.html) | 对资金与消费关系提出问题，不冒充真实资金流量监测 |
-| 全息工作区（默认首页） | [打开](https://zhanglingshare.github.io/huicheng-simulator/) | 浏览关系网络、情报流、变化详情与时间线 |
-| 全息工作区独立入口 | [打开](https://zhanglingshare.github.io/huicheng-simulator/holo-workspace.html) | 独立访问全息工作区 |
-| 看见惠城 · 全息关系版 | [打开](https://zhanglingshare.github.io/huicheng-simulator/holo.html) | 观察主体、连接与公开变化 |
-| 项目介绍页 | [打开](https://zhanglingshare.github.io/huicheng-simulator/home.html) | 了解项目定位、使用方式与边界 |
-| 风向标 · 入夜人气 | [打开](https://zhanglingshare.github.io/huicheng-simulator/fun.html) | 从城市热点与日常变化寻找观察线索 |
-| 建构世界 | [打开](https://zhanglingshare.github.io/huicheng-simulator/network.html) | 探索产业主体和城市关联 |
-| 掂量 | [打开](https://zhanglingshare.github.io/huicheng-simulator/who.html) | 观察区域基本面与相关指标 |
-| 五条路 | [打开](https://zhanglingshare.github.io/huicheng-simulator/choices.html) | 比较不同发展路径 |
-| 把未来反复扔 | [打开](https://zhanglingshare.github.io/huicheng-simulator/future.html) | 在不同假设下探索情景差异 |
-| 风洞测试 | [打开](https://zhanglingshare.github.io/huicheng-simulator/windtunnel.html) | 对特定事件或外部冲击进行情景比较 |
-| 我们可能忽略了什么 | [打开](https://zhanglingshare.github.io/huicheng-simulator/blindspot.html) | 提醒关注居民生活、通勤与城市承载 |
-| 分析报告 | [打开](https://zhanglingshare.github.io/huicheng-simulator/report.html) | 汇总观察与讨论材料 |
-| 你在网里哪个位置 | [打开](https://zhanglingshare.github.io/huicheng-simulator/role.html) | 从不同参与者视角理解关系网络 |
-| 结语 | [打开](https://zhanglingshare.github.io/huicheng-simulator/ending.html) | 回到城市、居民与发展选择 |
-
-原有业务页面继续保留。首页切换为全息工作区，并不意味着其他页面被删除或其功能被替换。
+---
 
 ## 数据来源、证据与使用边界
 
