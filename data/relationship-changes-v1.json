@@ -1,0 +1,156 @@
+{
+  "schema_version": "relationship-changes-v1",
+  "region": "huicheng",
+  "generated_at": "2026-10-29",
+  "count": 7,
+  "change_type_legend": {
+    "new_entity": "新主体接入",
+    "new_edge": "新连接形成",
+    "strengthen": "增强",
+    "weaken": "减弱",
+    "exit": "主体退出",
+    "break": "连接失效",
+    "alternative": "替代路径"
+  },
+  "note": "仅收录会改变网络结构或连接状态的事件；签约≠投产，规划/在建均标注不确定性。",
+  "changes": [
+    {
+      "change_id": "C001",
+      "change_type": "new_entity",
+      "title": "金澜新材料竞地落子惠城高新区（总投资不低于10.5亿）",
+      "event_date": "2026-10-13",
+      "involved_node_ids": [
+        "gxq",
+        "jl"
+      ],
+      "involved_edge_ids": [
+        "E001"
+      ],
+      "before_after": "此前：项目未落地；此后：竞地成功进入建设准备",
+      "source_ids": [
+        "S006"
+      ],
+      "uncertainty": "实际投资完成额与投产时间未公开",
+      "last_verified_at": "2026-10-29"
+    },
+    {
+      "change_id": "C002",
+      "change_type": "new_entity",
+      "title": "天濠半固态镁合金制造基地奠基（4.84亿，达产年产值超10亿）",
+      "event_date": "2026-06-04",
+      "involved_node_ids": [
+        "gxq",
+        "th"
+      ],
+      "involved_edge_ids": [
+        "E002",
+        "E003"
+      ],
+      "before_after": "此前：镁合金产能空白；此后：在建，与海天智胜签装备合作",
+      "source_ids": [
+        "S007",
+        "S008"
+      ],
+      "uncertainty": "投产时间待定",
+      "last_verified_at": "2026-10-29"
+    },
+    {
+      "change_id": "C003",
+      "change_type": "new_entity",
+      "title": "胜宏AI高端电路智造产业园摘牌落户（30亿，百亿级规模）",
+      "event_date": "2026-06",
+      "involved_node_ids": [
+        "gxq",
+        "sh"
+      ],
+      "involved_edge_ids": [
+        "E004",
+        "E005"
+      ],
+      "before_after": "此前：AI硬件制造本地空白；此后：AI算力电路板产能布局惠城",
+      "source_ids": [
+        "S009",
+        "S010"
+      ],
+      "uncertainty": "投产与达产时间未公开",
+      "last_verified_at": "2026-10-29"
+    },
+    {
+      "change_id": "C004",
+      "change_type": "new_entity",
+      "title": "沃尔核材粤港澳大湾区制造中心落户惠城（AI算力/高速通讯）",
+      "event_date": "2026-06",
+      "involved_node_ids": [
+        "gxq",
+        "wr"
+      ],
+      "involved_edge_ids": [
+        "E007"
+      ],
+      "before_after": "此前：无对应主体；此后：落户惠城高新区",
+      "source_ids": [
+        "S010"
+      ],
+      "uncertainty": "投资额未公开",
+      "last_verified_at": "2026-10-29"
+    },
+    {
+      "change_id": "C005",
+      "change_type": "new_edge",
+      "title": "东江特大桥全桥合龙，惠霞高速冲刺年内通车",
+      "event_date": "2026-10-21",
+      "involved_node_ids": [
+        "jt"
+      ],
+      "involved_edge_ids": [
+        "E011"
+      ],
+      "before_after": "此前：跨江通道未贯通；此后：南北大动脉关键节点打通",
+      "source_ids": [
+        "S005"
+      ],
+      "uncertainty": "年内通车为目标",
+      "last_verified_at": "2026-10-29"
+    },
+    {
+      "change_id": "C006",
+      "change_type": "new_entity",
+      "title": "惠城企业会客厅揭牌启用（首批约300家重点企业）",
+      "event_date": "2026-10-27",
+      "involved_node_ids": [
+        "fw"
+      ],
+      "involved_edge_ids": [
+        "E014"
+      ],
+      "before_after": "此前：无统一企业服务入口；此后：专人帮办涉企业务",
+      "source_ids": [
+        "S013"
+      ],
+      "uncertainty": "服务效能未量化",
+      "last_verified_at": "2026-10-29"
+    },
+    {
+      "change_id": "C007",
+      "change_type": "new_edge",
+      "title": "区第十次党代会：三地五城+南部人工智能产业经济带（利元亨链主）",
+      "event_date": "2026-10-27",
+      "involved_node_ids": [
+        "hc",
+        "ai",
+        "lyh"
+      ],
+      "involved_edge_ids": [
+        "E009",
+        "E017"
+      ],
+      "before_after": "此前：AI布局分散；此后：明确南部AI产业经济带方向",
+      "source_ids": [
+        "S003",
+        "S017"
+      ],
+      "uncertainty": "方向指引，落地待政策细化",
+      "last_verified_at": "2026-10-29"
+    }
+  ]
+}

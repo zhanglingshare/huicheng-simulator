@@ -1,0 +1,309 @@
+{
+  "schema_version": "relationship-sources-v1",
+  "region": "huicheng",
+  "generated_at": "2026-10-29",
+  "count": 17,
+  "note": "转载不视为独立来源；可信度按发布机构与可核验性评定。",
+  "sources": [
+    {
+      "source_id": "S001",
+      "title": "2026年惠城区政府工作报告（GDP1203.33亿/工业937.92亿/固投-37.1%等基线）",
+      "publisher": "惠城区人民政府",
+      "source_type": "政府文件",
+      "url": "http://www.hcq.gov.cn/zfxxgkml/hzshcqzf/zfgzbg/content/mpost_5732355.html",
+      "published_at": "2026-03-17",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "hc",
+        "dz",
+        "gxq"
+      ],
+      "summary": "2026年惠城区政府工作报告（GDP1203.33亿/工业937.92亿/固投-37.1%等基线）",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S002",
+      "title": "2026年1-8月惠城区经济运行简况（工业+1.4%/固投-45.4%/外贸+10.5%/社消+1.0%）",
+      "publisher": "惠城区统计局",
+      "source_type": "官方统计",
+      "url": "https://www.hcq.gov.cn/zwgk/sjfb/tjfx/content/post_5864155.html",
+      "published_at": "2026-10-08",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "hc",
+        "dz"
+      ],
+      "summary": "2026年1-8月惠城区经济运行简况（工业+1.4%/固投-45.4%/外贸+10.5%/社消+1.0%）",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S003",
+      "title": "惠城区第十次党代会：三地五城、南部AI产业经济带",
+      "publisher": "南方+",
+      "source_type": "媒体报道",
+      "url": "https://www.nfnews.com/content/K3BDZ141oY.html",
+      "published_at": "2026-10-27",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "hc",
+        "ai"
+      ],
+      "summary": "惠城区第十次党代会：三地五城、南部AI产业经济带",
+      "credibility": "媒体报道，中高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S004",
+      "title": "2026年1-9月惠城138宗重点项目完成投资103.05亿元",
+      "publisher": "惠城区政府·重点建设项目",
+      "source_type": "政府文件",
+      "url": "http://www.hcq.gov.cn/hcqzdlyxxgk/zdjsxm/ssqk/content/post_5872769.html",
+      "published_at": "2026-10-16",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "gxq"
+      ],
+      "summary": "2026年1-9月惠城138宗重点项目完成投资103.05亿元",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S005",
+      "title": "惠州第一高桥东江特大桥全桥合龙，惠霞高速冲刺年内通车",
+      "publisher": "广东省交通运输厅",
+      "source_type": "政府文件",
+      "url": "https://td.gd.gov.cn/gkmlpt/content/4/4963/mpost_4963897.html",
+      "published_at": "2026-10-21",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "jt"
+      ],
+      "summary": "惠州第一高桥东江特大桥全桥合龙，惠霞高速冲刺年内通车",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S006",
+      "title": "金澜新材料竞地落子惠城高新区（10.5亿）",
+      "publisher": "惠州市人民政府/惠州日报",
+      "source_type": "媒体报道",
+      "url": "https://www.huizhou.gov.cn/zwgk/hzsz/zwyw/content/mpost_5870128.html",
+      "published_at": "2026-10-13",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "jl",
+        "gxq"
+      ],
+      "summary": "金澜新材料竞地落子惠城高新区（10.5亿）",
+      "credibility": "媒体报道，中高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S007",
+      "title": "天濠新材料半固态镁合金项目在惠城高新区奠基开工（4.84亿）",
+      "publisher": "惠城高新区管委会",
+      "source_type": "政府文件",
+      "url": "http://www.hcq.gov.cn/hzhckjyglw/gkmlpt/content/5/5785/post_5785894.html",
+      "published_at": "2026-06-09",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "th",
+        "gxq"
+      ],
+      "summary": "天濠新材料半固态镁合金项目在惠城高新区奠基开工（4.84亿）",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S008",
+      "title": "天濠新材料与海天智胜签署战略合作（镁合金成型装备）",
+      "publisher": "贤集网/压铸行业",
+      "source_type": "媒体报道",
+      "url": "https://wtt.xianjichina.com/forum/details_642661",
+      "published_at": "2026-09-14",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "th"
+      ],
+      "summary": "天濠新材料与海天智胜签署战略合作（镁合金成型装备）",
+      "credibility": "媒体报道，单源",
+      "corroborated": false
+    },
+    {
+      "source_id": "S009",
+      "title": "胜宏AI高端智造产业园项目落户惠城区（摘牌）",
+      "publisher": "惠城区政府·投资促进",
+      "source_type": "政府文件",
+      "url": "http://www.hcq.gov.cn/hzhctczx/gkmlpt/content/5/5831/mpost_5831203.html",
+      "published_at": "2026-08-13",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "sh",
+        "gxq"
+      ],
+      "summary": "胜宏AI高端智造产业园项目落户惠城区（摘牌）",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S010",
+      "title": "惠城五年经济之变：胜宏30亿AI高端电路智造摘牌、沃尔核材大湾区制造中心落户",
+      "publisher": "南方+",
+      "source_type": "媒体报道",
+      "url": "http://m.toutiao.com/group/7698303822905360934/",
+      "published_at": "2026-10-19",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "sh",
+        "wr",
+        "dz"
+      ],
+      "summary": "惠城五年经济之变：胜宏30亿AI高端电路智造摘牌、沃尔核材大湾区制造中心落户",
+      "credibility": "媒体报道，中高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S011",
+      "title": "润众高精密度线路板智能化技术改造项目节能审查意见（4256.6万，12月投产）",
+      "publisher": "惠城区发改局",
+      "source_type": "项目公示",
+      "url": "http://www.hcq.gov.cn/zfxxgkml/hcqfzggj/bmwj/content/post_5840202.html",
+      "published_at": "2026-08-27",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "rz",
+        "dz"
+      ],
+      "summary": "润众高精密度线路板智能化技术改造项目节能审查意见（4256.6万，12月投产）",
+      "credibility": "媒体报道，中高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S012",
+      "title": "下良人才社区300套投用、荔枝城邻里中心890套保障房封顶",
+      "publisher": "南方+",
+      "source_type": "媒体报道",
+      "url": "https://www.nfnews.com/content/1y0lxOAMyB.html",
+      "published_at": "2026-10-24",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "rj"
+      ],
+      "summary": "下良人才社区300套投用、荔枝城邻里中心890套保障房封顶",
+      "credibility": "媒体报道，单源",
+      "corroborated": false
+    },
+    {
+      "source_id": "S013",
+      "title": "惠城企业会客厅揭牌启用（首批约300家重点企业）",
+      "publisher": "惠州市人民政府",
+      "source_type": "政府文件",
+      "url": "https://www.huizhou.gov.cn/zwgk/hzsz/xqyw/content/post_5880050.html",
+      "published_at": "2026-10-27",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "fw"
+      ],
+      "summary": "惠城企业会客厅揭牌启用（首批约300家重点企业）",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S014",
+      "title": "惠州市人工智能与机器人产业创新发展实施方案（2026-2030）已印发",
+      "publisher": "惠州市人民政府（提案答复引用）",
+      "source_type": "政府文件",
+      "url": "https://www.huizhou.gov.cn/zfxxgkml/hzsnyhzdxmj/jytagk/content/mpost_5834858.html",
+      "published_at": "2026-08-19",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "ai"
+      ],
+      "summary": "惠州市人工智能与机器人产业创新发展实施方案（2026-2030）已印发",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S015",
+      "title": "惠城区人工智能与机器人产业创新发展实施方案（2026-2030）制定中（提案答复）",
+      "publisher": "惠城区发改局",
+      "source_type": "政府文件",
+      "url": "http://www.hcq.gov.cn/hzhcfgj/gkmlpt/content/5/5878/post_5878490.html",
+      "published_at": "2026-10-23",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "ai"
+      ],
+      "summary": "惠城区人工智能与机器人产业创新发展实施方案（2026-2030）制定中（提案答复）",
+      "credibility": "官方发布，高",
+      "corroborated": false
+    },
+    {
+      "source_id": "S016",
+      "title": "第六届粤港澳大湾区文化艺术节10/31开幕，惠州承办吉他展演",
+      "publisher": "惠州文明网/惠州日报",
+      "source_type": "媒体报道",
+      "url": "http://hz.wenming.cn/ecjj/202610/t20261014_9379785.htm",
+      "published_at": "2026-10-14",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "wh"
+      ],
+      "summary": "第六届粤港澳大湾区文化艺术节10/31开幕，惠州承办吉他展演",
+      "credibility": "媒体报道，单源",
+      "corroborated": false
+    },
+    {
+      "source_id": "S017",
+      "title": "惠城区第十次党代会报告：以利元亨为龙头培育AI/机器人链属",
+      "publisher": "惠州日报",
+      "source_type": "媒体报道",
+      "url": "http://e.hznews.com/hzrb/pc/content/202610/28/content_1134303.html",
+      "published_at": "2026-10-28",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "ai",
+        "lyh"
+      ],
+      "summary": "惠城区第十次党代会报告：以利元亨为龙头培育AI/机器人链属",
+      "credibility": "媒体报道，中高",
+      "corroborated": true
+    }
+  ]
+}
