@@ -505,6 +505,12 @@ footer{margin:0 20px;background:#fff;border:1px solid var(--line);border-radius:
   .kpi .kv{font-size:20px}
 }
 
+
+/* Cross-page navigation: does not change relation filters */
+.project-links{display:flex;align-items:center;gap:7px;flex:none;position:relative;z-index:2}
+.project-links a{display:inline-flex;align-items:center;justify-content:center;gap:5px;border:1px solid #cbdcf4;background:#fff;color:#174a9c;text-decoration:none;font-size:11px;font-weight:800;border-radius:10px;padding:9px 11px;white-space:nowrap;box-shadow:0 2px 6px rgba(16,65,130,.06);transition:.16s}
+.project-links a:hover{background:#dcecff;border-color:#90baf3;transform:translateY(-1px)}
+@media(max-width:560px){.project-links{width:100%;order:5;flex-wrap:wrap}.project-links a{flex:1}.brief-action{order:6}}
 </style>
 </head>
 <body>
@@ -551,6 +557,7 @@ footer{margin:0 20px;background:#fff;border:1px solid var(--line);border-radius:
     <h2 id="briefTitle">正在读取惠城最新公开变化…</h2>
     <p id="briefSummary">这里呈现项目现有公开变化记录；关系关联不等于因果。</p>
   </div>
+  <nav class="project-links" aria-label="项目页面入口"><a href="today.html">☀ 今日话题</a><a href="fun.html">✦ 风向标</a></nav>
   <button class="brief-action" id="briefAction" type="button">看看它连到谁 <span aria-hidden="true">→</span></button>
 </section>
 
