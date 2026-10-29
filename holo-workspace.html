@@ -388,10 +388,8 @@ main{display:grid;grid-template-columns:200px minmax(0,1fr) 360px;gap:14px;paddi
 .ev-bar-track{height:6px;background:#e7eef7;border-radius:99px;overflow:hidden}
 .ev-bar-track i{display:block;height:100%;border-radius:99px}
 .ev-bar-row b{font-size:10px;color:#243b55;text-align:right;font-variant-numeric:tabular-nums}
-.frow .fvisual{display:flex;align-items:center;gap:3px;height:22px;justify-content:center}
-.frow .fvisual i{display:block;width:5px;border-radius:4px;background:#60a5fa}
-.frow .fvisual i:nth-child(1){height:8px}.frow .fvisual i:nth-child(2){height:15px}.frow .fvisual i:nth-child(3){height:11px}
-.frow .fvisual i:nth-child(4){height:19px;background:#2563eb}.frow .fvisual i:nth-child(5){height:6px;background:#34d399}
+.frow .fvisual{display:flex;align-items:center;justify-content:center;width:38px;height:26px;color:#2563eb}
+.frow .fvisual svg{width:34px;height:24px;display:block}
 /* 输入框 */
 .composer{padding:10px 12px 12px;border-top:1px solid var(--line);background:#fbfcfe}
 .inp{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:12px;background:#fff;
@@ -1474,7 +1472,7 @@ function renderFeed(){
       '<span><span class="tt">'+esc(f.t)+'</span>'+
       '<span class="mm"><i style="background:'+(f.grade==='A'?'#16a34a':f.grade==='B'?'#d97706':'#94a3b8')+'"></i>'+
       esc(f.kind)+' · 涉及 '+((topEvent&&f.id===topEvent.id?topEvent.involved_node_ids:list.find(function(x){return x.id===f.id;})?.involved_node_ids)||[]).length+' 个主体 · '+esc(f.grade)+' 级</span></span>'+
-      '<span class="fvisual" aria-label="关联程度示意"><i></i><i></i><i></i><i></i><i></i></span></div>';
+      '<span class="fvisual" aria-label="关系网络示意"><svg viewBox="0 0 36 24" fill="none" aria-hidden="true"><path d="M6 7L17 4L29 9L23 20L10 18Z" stroke="#93c5fd" stroke-width="1.5"/><path d="M6 7L10 18M17 4L23 20" stroke="#bfdbfe" stroke-width="1.2"/><circle cx="6" cy="7" r="3" fill="#2563eb"/><circle cx="17" cy="4" r="3" fill="#60a5fa"/><circle cx="29" cy="9" r="3" fill="#0d9488"/><circle cx="23" cy="20" r="3" fill="#7c3aed"/><circle cx="10" cy="18" r="3" fill="#f59e0b"/></svg></span></div>';
   });
   const nodesCount=(topEvent.involved_node_ids||[]).length;
   const edgesCount=(topEvent.involved_edge_ids||[]).length;
