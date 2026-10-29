@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>惠城区产业关系情报 · DSH 设计版预览</title>
+<title>惠城产业风洞 · 第二页 · 全息工作区</title>
 <style>
 :root{
   --bg:#f3f6fa; --panel:#fff;
@@ -557,7 +557,7 @@ footer{margin:0 20px;background:#fff;border:1px solid var(--line);border-radius:
     <h2 id="briefTitle">正在读取惠城最新公开变化…</h2>
     <p id="briefSummary">这里呈现项目现有公开变化记录；关系关联不等于因果。</p>
   </div>
-  <nav class="project-links" aria-label="项目页面顺序"><a href="today.html">01 今日话题</a><a href="index.html" aria-current="page">02 全息</a><a href="money.html" title="全息之后的第三页">03 钱去哪了 →</a><a href="fun.html">04 风向标</a></nav>
+  <nav class="project-links" aria-label="项目页面顺序"><a href="index.html">01 首页</a><a href="holo-workspace.html" aria-current="page">02 全息</a><a href="today.html">03 钱去哪了 →</a><a href="fun.html">04 风向标</a></nav>
   <button class="brief-action" id="briefAction" type="button">看看它连到谁 <span aria-hidden="true">→</span></button>
 </section>
 
@@ -1751,5 +1751,12 @@ async function boot(){
 
 boot();
 </script>
-</body>
+<style>
+.hc-route-quick{position:fixed;right:16px;bottom:18px;z-index:90;color:#17324f;font:700 12px/1.4 -apple-system,"PingFang SC",sans-serif}
+.hc-route-quick summary{cursor:pointer;list-style:none;border-radius:99px;padding:12px 18px;background:#fff;border:1px solid #c9ddf0;box-shadow:0 6px 24px #223d5e38}
+.hc-route-quick summary::-webkit-details-marker{display:none}
+.hc-route-quick nav{position:absolute;right:0;bottom:52px;width:170px;max-height:62vh;overflow-y:auto;display:grid;gap:3px;padding:8px;border-radius:12px;background:#fff;border:1px solid #d2e4f5;box-shadow:0 10px 32px #1b39505c}
+.hc-route-quick nav a{color:#243c5b;display:block;text-decoration:none;padding:8px 10px;border-radius:8px}
+.hc-route-quick nav a:hover{background:#edf5ff}
+</style><details class="hc-route-quick"><summary>全部10页 ▾</summary><nav aria-label="项目十页导航"><a href="index.html">01 序章</a><a href="holo-workspace.html">02 全息</a><a href="today.html">03 钱去哪了</a><a href="fun.html">04 去哪玩</a><a href="future.html">05 未来</a><a href="choices.html">06 路径</a><a href="windtunnel.html">07 风洞</a><a href="blindspot.html">08 忽略了什么</a><a href="report.html">09 报告</a><a href="ending.html">10 结语</a></nav></details></body>
 </html>
