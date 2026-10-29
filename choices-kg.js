@@ -21,7 +21,7 @@ const DATES=["2026-03-31","2026-06-30","2026-08-31","2026-10-15","2026-10-30"];
 const NAMES={investment:"项目投资",supply_chain:"产业与配套",transport:"交通",regional:"区域联系",tourism_consumption:"文旅消费",commute:"通勤",eco_constraint:"生态约束"};
 let raw=null,nodes=new Map(),sources=new Map();
 let persona="job",selected="q:job",tab="what",grade="A",date=DATES[4],expanded=new Set(),paths=new Set(),history=[];
-let visible=[],links=[],points=new Map(),scale=1,shift={x:0,y:0},drag=null;
+let visible=[],links=[],points=new Map(),scale=1,shift={x:0,y:0},drag=null,seenNodes=new Set(),seenEdges=new Set();
 function say(msg){$("kgToast").textContent=msg;$("kgToast").hidden=false;clearTimeout(say.timer);say.timer=setTimeout(()=>$("kgToast").hidden=true,2300);}
 function hint(msg){$("kgHint").textContent=msg;$("kgHint").classList.add("show");clearTimeout(hint.timer);hint.timer=setTimeout(()=>$("kgHint").classList.remove("show"),3200);}
 function record(){history.push({persona,selected,tab,grade,date,expanded:[...expanded],paths:[...paths]});if(history.length>30)history.shift();}
@@ -79,14 +79,16 @@ function paint(){
  $("kgEdges").replaceChildren();$("kgNodes").replaceChildren();
  links.forEach(e=>{
   const a=points.get(e.from),b=points.get(e.to),path=geometry(a,b),focus=selected===e.id||selected===e.from||selected===e.to;
-  const g=elem("g",{"data-edge":e.id,tabindex:0,role:"button","aria-label":"查看关系："+e.title},$("kgEdges"));
+  const isNew=!seenEdges.has(e.id);seenEdges.add(e.id);
+  const g=elem("g",{"data-edge":e.id,"class":"kg-edge-group"+(isNew?" new-edge":""),tabindex:0,role:"button","aria-label":"查看关系："+e.title},$("kgEdges"));
   elem("path",{d:path,"class":"kg-edge "+(e.type==="guide"?"illustrative ":"")+(focus?"active":""),stroke:e.color,"stroke-opacity":focus?.94:e.type==="guide"?.32:.54},g);
   elem("path",{d:path,"class":"kg-edge flow",stroke:e.color,"stroke-opacity":focus?.68:.25},g);
   elem("path",{d:path,"class":"kg-edge hit"},g);
  });
  visible.forEach(n=>{
   const p=points.get(n.id),r=n.type==="question"?43:n.type==="path"?35:26,focus=n.id===selected;
-  const g=elem("g",{"data-node":n.id,"class":"kg-node "+(focus?"active":""),tabindex:0,role:"button","aria-label":"查看："+n.name,transform:"translate("+p.x+" "+p.y+")"},$("kgNodes"));
+  const isNew=!seenNodes.has(n.id);seenNodes.add(n.id);
+  const g=elem("g",{"data-node":n.id,"class":"kg-node "+(focus?"active ":"")+(isNew?"new-node":""),tabindex:0,role:"button","aria-label":"查看："+n.name,transform:"translate("+p.x+" "+p.y+")"},$("kgNodes"));
   elem("circle",{r:r+17,fill:n.color,"class":"kg-node-halo"},g);
   elem("circle",{r,stroke:n.color,"class":"kg-node-circle"},g);
   elem("text",{x:0,y:5,fill:n.color,"class":"kg-node-icon"},g,n.icon);
@@ -100,6 +102,17 @@ function paint(){
  });
  $("kgNodeCount").textContent=String(visible.filter(n=>n.type==="entity").length);
  $("kgEdgeCount").textContent=String(links.filter(e=>e.type==="fact").length);
+ const rail=$("kgMobileNodes");
+ rail.replaceChildren();
+ visible.forEach(n=>{
+  const b=document.createElement("button");
+  b.type="button";
+  b.textContent=n.name;
+  b.className=n.type==="entity"?"fact":"";
+  b.setAttribute("aria-pressed",String(selected===n.id));
+  b.addEventListener("click",()=>focus(n.id));
+  rail.appendChild(b);
+ });
  transform();
 }
 function sourceCards(ids){
@@ -184,7 +197,15 @@ function controls(){
  $("kgDate").value=String(DATES.indexOf(date));$("kgDateLabel").textContent="截至 "+date;
  $("kgBack").disabled=!history.length;
 }
-function render(){paint();inspect();controls();}
+function render(){
+ paint();
+ // The selected edge/entity may disappear when evidence tier or source cutoff changes.
+ // Never render an inspector for a filtered-out relation.
+ if(!visible.some(n=>n.id===selected)&&!links.some(e=>e.id===selected)){
+  selected="q:"+persona;tab="what";paint();
+ }
+ inspect();controls();
+}
 function expand(id){
  const n=getNode(id);if(!n||n.type==="question"){hint("请点一条发光的规划路径");return}
  if(n.type==="path")paths.add(+id.slice(2));
@@ -205,7 +226,7 @@ function focus(id){
 function focusEdge(id){if(!links.some(l=>l.id===id))return;record();selected=id;tab="what";render();}
 function changePersona(key){
  if(!PEOPLE[key]||key===persona)return;
- persona=key;selected="q:"+key;tab="what";expanded.clear();paths.clear();points.clear();history=[];scale=1;shift={x:0,y:0};render();hint("选择发光的路径，图谱就会生长");
+ persona=key;selected="q:"+key;tab="what";expanded.clear();paths.clear();points.clear();seenNodes.clear();seenEdges.clear();history=[];scale=1;shift={x:0,y:0};render();hint("选择发光的路径，图谱就会生长");
 }
 function undo(){
  if(!history.length)return;const prev=history.pop();
@@ -244,7 +265,7 @@ document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()
 $("kgDate").addEventListener("input",e=>{const value=DATES[+e.target.value];if(value===date)return;record();date=value;render();hint("此处按来源发布日期筛选，不等于历史快照");});
 $("kgExpand").addEventListener("click",()=>{record();expand(selected);});
 $("kgBack").addEventListener("click",undo);
-$("kgHome").addEventListener("click",()=>{expanded.clear();paths.clear();history=[];points.clear();selected="q:"+persona;tab="what";scale=1;shift={x:0,y:0};render();hint("已重新开始探索");});
+$("kgHome").addEventListener("click",()=>{expanded.clear();paths.clear();history=[];points.clear();seenNodes.clear();seenEdges.clear();selected="q:"+persona;tab="what";scale=1;shift={x:0,y:0};render();hint("已重新开始探索");});
 $("kgFit").addEventListener("click",()=>{scale=1;shift={x:0,y:0};transform();say("视图已居中");});
 $("kgPlus").addEventListener("click",()=>zoomTo(scale*1.2));
 $("kgMinus").addEventListener("click",()=>zoomTo(scale/1.2));
