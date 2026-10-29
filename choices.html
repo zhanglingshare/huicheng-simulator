@@ -85,7 +85,11 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
   font-size:15px;font-weight:800;cursor:pointer;transition:.2s;font-family:inherit}
 .next-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(240,199,94,.3)}
 .next-btn:disabled{opacity:.4;cursor:default;transform:none;box-shadow:none}
-</style></head><body>
+</style><style>
+.hc-route-bar{position:sticky;top:0;z-index:60;display:flex;gap:6px;align-items:center;overflow-x:auto;white-space:nowrap;padding:10px 12px;background:#081426f2;border-bottom:1px solid #31415d;scrollbar-width:thin;font:600 12px/1.4 -apple-system,"PingFang SC",sans-serif}
+.hc-route-bar a{flex:none;border:1px solid #2c4568;background:#142842;border-radius:20px;color:#b9c9e1;padding:7px 12px;text-decoration:none}
+.hc-route-bar a.on{color:#fff;background:#245fba;border-color:#5598ff}
+</style></head><body><nav class="hc-route-bar" aria-label="项目十页导航"><a href="index.html">01 首页</a><a href="holo-workspace.html">02 全息</a><a href="today.html">03 钱去哪了</a><a href="fun.html">04 风向标 · 去哪玩</a><a href="future.html">05 未来</a><a href="choices.html" class="on" aria-current="page">06 路径</a><a href="windtunnel.html">07 风洞</a><a href="blindspot.html">08 忽略了什么</a><a href="report.html">09 报告</a><a href="ending.html">10 结语</a></nav>
 
 <div class="hud">
   <div class="top">
@@ -121,7 +125,7 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
     <div class="r-gap" id="gap">离参考刻度 1500 亿还差 867.3 亿</div>
   </div>
 
-  <button class="next-btn" id="nextBtn" onclick="goNext()">就这么着，跑模型 →</button>
+  <button class="next-btn" id="nextBtn" onclick="goNext()">进入第七页 · 风洞测试 →</button>
 </div>
 
 <script>
@@ -231,7 +235,7 @@ function goNext(){
   // 把选择存下来，传给 future.html
   var active=placed.map(function(i){return i;});
   localStorage.setItem('hcChoices',JSON.stringify(active));
-  location.href='future.html?from=choices';
+  location.href='windtunnel.html?from=choices';
 }
 
 render();
