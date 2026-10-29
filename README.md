@@ -152,7 +152,7 @@
 1. **先看全景：** 从首页关系网络了解主要主体与连接。
 2. **发现变化：** 浏览情报流与变化类型分布，选择值得关注的事件。
 3. **追踪关联：** 在变化详情中查看关联主体、关系结构与公开来源。
-4. **提出假设：** 进入发展路径或风洞测试页面，比较不同条件下的情景。
+4. **先选路径，再看未来：** 在路径页提出发展设想，再到未来页观察模拟区间，最后进入风洞页面比较冲击情景。
 5. **检查盲点：** 查看尚未充分考虑的因素与证据缺口。
 6. **回到现实：** 对重要结论查阅原始来源，并通过调研、核实或专业讨论进一步验证。
 
@@ -168,8 +168,8 @@
 | **02** | **全息工作区** | [打开全息](https://zhanglingshare.github.io/huicheng-simulator/holo-workspace.html) | 发现变化、看见网络、追溯证据 |
 | **03** | **钱去哪了** | [打开钱去哪了](https://zhanglingshare.github.io/huicheng-simulator/today.html) | 从消费与资金去向问题探索关系和证据缺口 |
 | **04** | **风向标 · 去哪玩** | [打开风向标](https://zhanglingshare.github.io/huicheng-simulator/fun.html) | 了解惠城日常热点与生活场景 |
-| **05** | **未来** | [打开未来](https://zhanglingshare.github.io/huicheng-simulator/future.html) | 查看在不同假设下的可能结果 |
-| **06** | **路径** | [打开路径](https://zhanglingshare.github.io/huicheng-simulator/choices.html) | 比较区域发展的不同方向 |
+| **05** | **路径** | [打开路径](https://zhanglingshare.github.io/huicheng-simulator/choices.html) | 先选择区域发展的路径方向 |
+| **06** | **未来** | [打开未来](https://zhanglingshare.github.io/huicheng-simulator/future.html) | 再观察不同情景下的可能结果 |
 | **07** | **风洞测试** | [打开风洞](https://zhanglingshare.github.io/huicheng-simulator/windtunnel.html) | 观察条件变化与外部冲击 |
 | **08** | **忽略了什么** | [打开盲点](https://zhanglingshare.github.io/huicheng-simulator/blindspot.html) | 发现居民生活与城市承载等盲点 |
 | **09** | **报告** | [打开报告](https://zhanglingshare.github.io/huicheng-simulator/report.html) | 汇总观察和讨论依据 |
