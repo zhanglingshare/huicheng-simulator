@@ -3,137 +3,163 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="color-scheme" content="light">
-<title>04 · 风向标｜今晚惠城去哪玩？</title>
-<style>
-:root{--bg:#edf4f7;--paper:#fff;--ink:#12243b;--secondary:#62788e;--soft:#8aa0b2;--line:#e0e9f1;--blue:#2786ec;--teal:#0b9aab;--amber:#f19b41;--purple:#8b62de;--green:#16a47c;--shadow:0 12px 36px rgba(39,73,109,.07);--panelrad:23px}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font:14px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:radial-gradient(circle at 80% 0%,#d9eef8 0,transparent 34%),radial-gradient(circle at 0 60%,#e9f0ff 0,transparent 30%),var(--bg);-webkit-font-smoothing:antialiased}
-button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #93c5fd;outline-offset:3px}svg{display:block}::selection{background:#c9e7ff}
-.page{max-width:1536px;margin:auto;padding:25px clamp(16px,3.1vw,48px) 112px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 0 28px;border-bottom:1px solid rgba(105,143,177,.14)}.brand{display:flex;align-items:center;gap:11px;font-size:13px;font-weight:850;letter-spacing:.2px}.brandmark{width:38px;height:38px;display:grid;place-items:center;background:linear-gradient(145deg,#0f5b9a,#2f9bd5);border-radius:13px;color:white;box-shadow:0 8px 20px #318ad32e;font-size:19px}.brand-sub{font-size:10px;color:#8296a8;font-weight:600;letter-spacing:1px;margin-top:2px}.toplinks{display:flex;align-items:center;gap:12px;color:#647b94;font-size:11px;font-weight:650}.toplinks a{padding:8px 12px;border:1px solid #cfdfec;background:#f9fcff;border-radius:999px}.toplinks a:hover{border-color:#9bc5e8;background:#edf8ff}.source-dot{width:7px;height:7px;display:inline-block;background:#2cc8a6;border-radius:50%;margin-right:5px;box-shadow:0 0 0 4px #2cc8a618}
-.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:26px;align-items:end;padding:28px 0 22px}.kicker{font-size:11px;font-weight:900;color:#1686ac;letter-spacing:2.5px}.hero h1{font-size:clamp(32px,4.1vw,54px);line-height:1.18;letter-spacing:-1.8px;margin:10px 0 12px;font-weight:920}.hero h1 em{color:#0b8fa9;font-style:normal;position:relative}.hero h1 em:after{content:"";position:absolute;left:2%;right:0;bottom:-3px;height:9px;background:#9de1ee83;border-radius:10px;z-index:-1}.lead{color:#6e8096;font-size:13px;line-height:1.8;margin:0;max-width:720px}.lead b{color:#2b557a}.summary{display:flex;align-items:center;gap:14px;white-space:nowrap;background:#fff;border:1px solid #dbe9f3;box-shadow:var(--shadow);padding:13px 18px;border-radius:18px}.summary .num{font-size:28px;font-weight:900;line-height:1;color:#183d62;letter-spacing:-1px}.summary .lab{font-size:10px;color:#748ba2;margin-top:5px}.summary .vline{height:34px;width:1px;background:#e1ebf3}.summary .num.hot{color:#ee784b}
-.explorer{background:rgba(255,255,255,.8);border:1px solid #dae8f2;box-shadow:0 6px 22px #3b6b9022;border-radius:17px;padding:11px 13px;display:flex;align-items:center;gap:12px;margin:0 0 18px;min-height:62px}.find-label{font-size:11px;color:#6c7e92;font-weight:850;white-space:nowrap}.chips{display:flex;gap:7px;align-items:center;flex:1;overflow-x:auto;scrollbar-width:none;padding:2px 0}.chips::-webkit-scrollbar{display:none}.chip{border:1px solid #e2eaf2;background:#f4f7fb;border-radius:11px;color:#567187;padding:10px 12px;white-space:nowrap;font-weight:730;font-size:11.5px;transition:.18s}.chip:hover{border-color:#9bc5e7;color:#165b96}.chip.on{background:#123e66;color:#fff;border-color:#123e66;box-shadow:0 5px 14px #154b7d25}.chip em{font-style:normal;margin-right:5px}.search{display:flex;align-items:center;border-left:1px solid #dce7f0;gap:7px;padding-left:13px;min-width:180px;max-width:250px}.search svg{flex:none;color:#8aa0b2}.search input{width:100%;border:0;outline:0;background:transparent;color:#273b52;font-size:11.5px}.search input::placeholder{color:#91a1b0}
-.main-grid{display:grid;grid-template-columns:minmax(0,1.76fr) minmax(335px,.83fr);gap:17px;align-items:start}.card{background:#fff;border:1px solid #dce9f2;border-radius:var(--panelrad);box-shadow:var(--shadow);min-width:0}.map-card{overflow:hidden;position:relative}.map-top{display:flex;align-items:center;gap:11px;padding:19px 22px 13px;justify-content:space-between}.headleft h2{font-size:16px;margin:0;font-weight:900;letter-spacing:-.2px}.headleft p{margin:3px 0 0;color:#8aa0b0;font-size:10.5px}.mode{display:flex;background:#edf4fa;padding:4px;border-radius:12px;gap:2px}.mode button{border:0;background:transparent;color:#6f879e;font-size:11px;font-weight:750;padding:7px 13px;border-radius:9px}.mode button.on{background:white;color:#21466b;box-shadow:0 2px 8px #30658a20}
-.map-body{height:570px;position:relative;margin:0 14px 14px;border-radius:17px;background:linear-gradient(145deg,#edf7fb,#f1f8f9 48%,#e7f1f5);border:1px solid #d9eaf4;overflow:hidden;isolation:isolate}.map-body:after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 35% 24%,#d9effe80,transparent 30%),radial-gradient(circle at 80% 80%,#cdecea66,transparent 32%)}.map-art{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.map-art .district{fill:#e5eef5;stroke:#d5e4f0;stroke-width:2}.map-art .zone{opacity:.7}.map-art .river-border{fill:none;stroke:#cae7f7;stroke-width:70;stroke-linecap:round}.map-art .river{fill:none;stroke:#a0dafa;stroke-width:60;stroke-linecap:round}.map-art .river-core{fill:none;stroke:#b9e8fe;stroke-width:25;stroke-linecap:round}.map-art .river-wave{fill:none;stroke:#f5fcff;stroke-width:2;stroke-dasharray:4 26;opacity:.85;animation:water 17s linear infinite}@keyframes water{to{stroke-dashoffset:-250}}.map-art text{font-family:inherit;fill:#97aabb;font-size:12px;font-weight:700;letter-spacing:2px}.map-art .place-hint{font-size:10px;letter-spacing:1px;fill:#a1b4c4}
-.map-status{position:absolute;top:17px;left:17px;right:16px;display:flex;align-items:flex-start;justify-content:space-between;gap:6px;pointer-events:none}.map-status .pill{display:inline-flex;gap:6px;align-items:center;border:1px solid #d6e8ef;border-radius:99px;background:#fffffff0;box-shadow:0 4px 14px #1b5c8320;padding:8px 10px;font-size:10px;font-weight:800;color:#58758b}.map-status .pill b{color:#136fa0}.map-status .pill:last-child{font-weight:650;color:#7b91a2}.map-status i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#1bb99b;box-shadow:0 0 0 3px #42c8a126}
-.pins{position:absolute;inset:0;z-index:2}.pin{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);border:0;background:transparent;padding:0;width:34px;height:34px;display:grid;place-items:center;transition:opacity .2s,filter .2s;z-index:var(--z);color:#154565;touch-action:manipulation}.pin:before{content:"";position:absolute;inset:-9px;background:var(--cc);border-radius:50%;opacity:.1;filter:blur(4px);animation:breath 3s ease-in-out infinite}@keyframes breath{50%{opacity:.22;transform:scale(1.2)}}.pin:after{content:"";position:absolute;width:19px;height:19px;border-radius:50%;background:var(--cc);border:3px solid #fff;box-shadow:0 2px 10px #1b5b7d55;transition:.2s}.pin .pin-label{position:absolute;top:27px;left:50%;transform:translateX(-50%);font-size:10.5px;font-weight:900;white-space:nowrap;color:#1d3e55;background:#fffffff2;border:1px solid #d9e8f0;border-radius:7px;padding:4px 8px;box-shadow:0 4px 12px #2f688a19;opacity:0;visibility:hidden;transition:.2s;pointer-events:none}.pin.prominent .pin-label,.pin.selected .pin-label,.pin:hover .pin-label,.pin:focus-visible .pin-label{opacity:1;visibility:visible}.pin.selected{z-index:40;filter:drop-shadow(0 0 4px var(--cc))}.pin.selected:after{width:23px;height:23px;border:4px solid #fff;box-shadow:0 0 0 3px var(--cc),0 0 0 9px color-mix(in srgb,var(--cc),transparent 85%)}.pin.dim{opacity:.13}.pin.hidden{display:none}.pin.selected:before{opacity:.22;animation:activeHalo 2.1s infinite}@keyframes activeHalo{50%{transform:scale(1.6);opacity:.1}}
-.map-foot{position:absolute;bottom:14px;left:16px;right:16px;display:flex;align-items:end;justify-content:space-between;gap:10px;pointer-events:none}.map-legend{display:flex;flex-wrap:wrap;gap:7px;max-width:76%;padding:9px 12px;background:#fffef4f2;border:1px solid #e1e7e4;border-radius:10px;font-size:9px;color:#64819a}.map-legend span{display:flex;align-items:center;gap:4px}.map-legend i{display:inline-block;width:7px;height:7px;background:var(--cc);border-radius:50%}.map-foot .footnote{font-size:9px;max-width:38%;text-align:right;color:#7590a5;background:#fffffff0;border-radius:8px;padding:6px 8px}.map-foot .footnote b{color:#597994}
-.list-mode{display:none;min-height:570px;padding:4px 19px 18px}.list-mode.show{display:block}.map-body.list-hidden{display:none}.place-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:4px}.place-item{display:flex;gap:10px;align-items:center;text-align:left;border:1px solid #e2eaf3;border-radius:13px;padding:13px;background:#f9fbfd;transition:.18s;min-width:0}.place-item:hover,.place-item:focus-visible{border-color:#99c9ef;background:#eef8ff}.place-item.selected{border-color:#67b7eb;background:#eff9ff}.place-item .pic{width:42px;height:42px;display:grid;place-items:center;background:var(--tint);border-radius:12px;font-size:22px;flex:none}.place-item .name{font-size:12px;font-weight:900;color:#19364e}.place-item .meta{font-size:10px;color:#7790a5;margin-top:4px}.place-item .heat{margin-left:auto;font-size:11px;color:#ed7b60;font-weight:850}
-.right-col{display:flex;flex-direction:column;gap:14px}.draw{position:relative;overflow:hidden;padding:20px;background:linear-gradient(135deg,#103b58,#145979 60%,#0b7c8c);color:#fff;border:1px solid #184d6a;border-radius:var(--panelrad);min-height:142px;box-shadow:0 13px 28px #25547724}.draw:before{content:"";position:absolute;width:220px;height:220px;right:-65px;top:-90px;border-radius:50%;border:1px solid #a1dcee55;box-shadow:0 0 0 25px #b4e7f010,0 0 0 53px #b4e7f012}.draw .eyebrow{color:#81e3d9;font-size:10px;font-weight:800;letter-spacing:2px}.draw h3{font-size:23px;line-height:1.25;margin:7px 0 7px;letter-spacing:-.5px}.draw p{font-size:11.5px;color:#c2e1ef;margin:0 0 13px;max-width:280px}.draw button{display:inline-flex;align-items:center;gap:10px;border:0;background:#fff;color:#115070;font-size:12px;font-weight:900;padding:10px 16px;border-radius:11px;box-shadow:0 5px 18px #112f4455;transition:transform .15s}.draw button:hover{transform:translateY(-1px)}.draw button:disabled{opacity:.7}.draw .sparkle{position:absolute;right:19px;bottom:7px;font-size:49px;opacity:.62;transform:rotate(-19deg);pointer-events:none}.draw .mini{font-size:10px;color:#b7d9e4;margin-left:9px}
-.focus-card{padding:19px 20px 18px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}.section-head h3{margin:0;font-size:12px;font-weight:900;letter-spacing:.3px}.section-head .small{font-size:10px;color:#91a5b5}.featured{display:flex;align-items:center;gap:13px}.featured .featured-icon{width:61px;height:61px;display:grid;place-items:center;border-radius:17px;background:linear-gradient(140deg,#e0f6f8,#e4edff);font-size:32px;flex:none}.featured h4{margin:0;font-size:24px;letter-spacing:-.7px;line-height:1.2}.featured .badge{display:inline-flex;align-items:center;gap:5px;margin-top:7px;border-radius:99px;background:#f2f7fd;padding:5px 9px;font-size:10px;font-weight:740;color:#54798e}.featured .heat{font-weight:900;color:#e87859}.featured .dot{height:5px;width:5px;background:#f09665;border-radius:50%;display:inline-block}.divider{height:1px;background:#e6eef4;margin:15px 0}.focus-reason{padding:11px 13px;border-radius:13px;border:1px solid #d5eaf3;background:#f1f9fe}.focus-reason b{font-size:10px;color:#238ba8;display:block;margin-bottom:4px}.focus-reason p{font-size:12px;color:#25485f;font-weight:700;margin:0;line-height:1.55}.focus-info{display:grid;gap:8px;margin-top:11px}.focus-info .info{display:flex;align-items:flex-start;gap:8px;color:#71889a;font-size:11px;line-height:1.65}.focus-info .info strong{flex:none;color:#345b73;font-size:10px;background:#ecf3f8;padding:4px 7px;border-radius:6px}.focus-info p{margin:0}.focus-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.action{border:1px solid #d2e4f0;padding:12px 7px;border-radius:11px;background:#f4f9fd;color:#28638a;font-size:11px;font-weight:850}.action.primary{background:linear-gradient(120deg,#177bab,#1e95be);color:#fff;border-color:#1e8eb9}.action:hover{filter:brightness(.97)}.focus-warn{font-size:9.5px;color:#91a2b2;margin-top:9px;line-height:1.5}.my-plan{margin-top:12px;padding:12px;border:1px solid #f0dfb6;background:#fffcf4;border-radius:12px}
-.my-plan[hidden]{display:none}.my-plan-head{display:flex;align-items:center;justify-content:space-between;gap:7px;font-size:11px;font-weight:850;color:#805d21}.my-plan-items{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0}.my-plan-items span{display:inline-block;background:#fff;border:1px solid #eddcb8;border-radius:7px;font-size:10px;padding:5px 7px;color:#82662a}.my-plan button{border:0;border-radius:8px;background:#f2d99a;color:#694b16;padding:8px 11px;font-size:11px;font-weight:850}
-
-.rank-card{padding:18px 19px 12px}.rank-list{display:grid;gap:7px}.rank{display:flex;align-items:center;width:100%;gap:11px;padding:10px;border:1px solid #e8eff4;border-radius:11px;background:#fafcfe;text-align:left;transition:.16s}.rank:hover{background:#eff8fd;border-color:#b9dbea}.rank.current{background:#edf9fc;border-color:#9ed4e5}.rank .ord{height:28px;width:28px;display:grid;place-items:center;border-radius:9px;background:#f2f5fb;color:#7691a5;font-size:11px;font-weight:900}.rank:first-child .ord{background:#fef1d5;color:#c88725}.rank .text strong{display:block;font-size:11.5px;color:#263f56}.rank .text span{display:block;color:#8a9eae;font-size:9.5px;margin-top:1px}.rank .score{margin-left:auto;font-size:14px;font-weight:900;color:#ec8d52}.rank .score small{font-size:9px;font-weight:600;color:#a1b0bb}
-.whisper{padding:17px 19px 15px}.whisper-title{display:flex;align-items:center;gap:7px;font-weight:900;font-size:12px;margin-bottom:9px}.whisper-title em{font-size:9px;color:#7a99ac;font-weight:700;font-style:normal;margin-left:auto}.story{font-size:11px;line-height:1.6;color:#607e93;border-left:3px solid #86c9dd;padding:4px 0 4px 11px;margin:9px 0}.story:last-child{margin-bottom:0}
-.bottom{margin-top:18px;border-radius:16px;border:1px solid #d9e7f0;background:#ffffffbc;display:flex;justify-content:space-between;gap:13px;padding:15px 20px;font-size:11px;color:#6c8296;line-height:1.65}.bottom strong{color:#2d536f}.bottom .source{max-width:500px;text-align:right;color:#8598a7}.empty{padding:60px 15px;text-align:center;color:#829bb0;font-size:12px}.toast{position:fixed;z-index:100;left:50%;bottom:85px;transform:translateX(-50%);color:#fff;background:#14324b;border-radius:12px;padding:12px 20px;box-shadow:0 12px 25px #294d7050;font-size:12px;max-width:min(95vw,410px);text-align:center}
-@media(max-width:1230px){.main-grid{grid-template-columns:minmax(0,1.3fr) minmax(305px,.85fr)}.map-body{height:525px}.summary{gap:11px;padding:12px}.hero h1{font-size:41px}.right-col{gap:12px}.focus-card{padding:16px}.whisper{display:none}}
-@media(max-width:980px){.page{padding:17px 18px 110px}.main-grid{grid-template-columns:minmax(0,1fr)}.right-col{display:grid;grid-template-columns:1fr 1fr;gap:13px}.draw{grid-column:1/-1;min-height:132px}.focus-card,.rank-card{min-height:300px}.map-body{height:475px}.whisper{display:block;grid-column:1/-1}.hero{grid-template-columns:1fr}.summary{justify-self:start}}
-@media(max-width:650px){.page{padding:13px 11px 106px}.top{padding-bottom:18px}.brand{font-size:12px}.brandmark{height:34px;width:34px}.toplinks{gap:4px}.toplinks .extra{display:none}.toplinks a{padding:7px 9px;font-size:10px}.hero{padding:23px 3px 16px;gap:15px}.hero h1{font-size:36px;letter-spacing:-1.5px;margin:8px 0}.lead{font-size:12px;line-height:1.7}.summary{width:100%;justify-content:space-around;border-radius:14px;box-shadow:none}.summary .num{font-size:23px}.summary .lab{font-size:10px}.explorer{padding:11px;flex-wrap:wrap;gap:8px;margin-bottom:12px}.find-label{display:none}.chips{order:1;flex-basis:100%;gap:5px}.chip{font-size:10.5px;padding:9px 10px}.search{order:0;width:100%;max-width:none;border-left:0;border-bottom:1px solid #e5eef5;padding:2px 4px 10px}.main-grid{gap:12px}.map-top{padding:16px 15px 13px}.headleft h2{font-size:14px}.mode button{font-size:10px;padding:6px 8px}.map-body{height:410px;margin:0 9px 9px;border-radius:13px}.map-status{top:8px;left:8px;right:8px}.map-status .pill{font-size:9px;padding:6px 7px}.map-status .pill:last-child{max-width:52%;text-align:right}.pin{width:26px;height:26px}.pin:after{width:13px;height:13px;border-width:2px}.pin.selected:after{width:19px;height:19px;border-width:3px}.pin .pin-label{font-size:9px;max-width:105px;overflow:hidden;text-overflow:ellipsis}.pin.prominent .pin-label{opacity:0;visibility:hidden}.pin.selected .pin-label{opacity:1;visibility:visible}.map-foot{left:7px;right:7px;bottom:7px}.map-legend{gap:5px;padding:7px;font-size:8px;max-width:78%}.map-foot .footnote{font-size:8px;max-width:40%}.right-col{display:flex;flex-direction:column;gap:11px}.draw{padding:18px;min-height:0}.draw h3{font-size:20px}.draw p{font-size:11px}.focus-card,.rank-card{min-height:0}.featured h4{font-size:21px}.bottom{flex-direction:column;font-size:10px;margin-top:12px;padding:14px}.bottom .source{text-align:left}.list-mode{min-height:405px;padding:0 10px 12px}.place-list{grid-template-columns:1fr;gap:7px}.place-item{padding:10px}.map-art text{font-size:10px}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
-.map-roll{position:absolute;bottom:56px;right:17px;z-index:8;border:1px solid #f6d79c;background:linear-gradient(145deg,#fffaf0,#fff2d8);color:#96611c;font-size:11px;font-weight:900;padding:11px 15px;border-radius:999px;box-shadow:0 7px 18px #a9702d25;transition:transform .18s}
-.map-roll:hover{transform:translateY(-2px)}
-@media(max-width:650px){.map-roll{bottom:55px;right:9px;font-size:10px;padding:10px 12px}}
-</style>
+<meta name="theme-color" content="#071120">
+<meta name="color-scheme" content="dark">
+<title>04 · 今晚谁能把你留在惠城？｜惠城产业风洞</title>
+<link rel="stylesheet" href="fun-v3.css">
 <link rel="stylesheet" href="hc-journey-nav.css">
-<link rel="stylesheet" href="fun-participation.css">
 </head>
 <body>
-<div class="page">
+<div class="v3-app">
 <header class="top">
-  <div class="brand"><span class="brandmark">✦</span><div>惠城产业风洞<div class="brand-sub">HUICHENG · CITY EXPLORER</div></div></div>
-  <div class="toplinks"><span class="extra"><i class="source-dot"></i>公开去处 · 每日更新</span><a href="index.html">返回序章</a><a href="holo-workspace.html">看全息</a></div>
+  <div class="brand"><span class="brandmark">✧</span><div>惠城产业风洞<div class="brand-sub">THE LIVING CITY · CH 04</div></div></div>
+  <div class="toplinks"><span class="live">公开去处 · 定期更新</span><a href="today.html">← 钱去哪了</a><a href="future.html">第五页 →</a></div>
 </header>
-<section class="hero">
-  <div><div class="kicker">CHAPTER 04 / 风向标 · 去哪玩</div><h1>今晚，<em>谁能把你<br class="m-break">留在惠城？</em></h1><p class="lead">第三页问钱可能去了哪儿，这一页问：<b>什么样的城市生活，会让你愿意留下来？</b> 选一种身份、叫上朋友、改变一种城市条件，亲手探索你的答案。</p></div>
-  <div class="summary"><div><div class="num" id="sumCount">14</div><div class="lab">公开去处</div></div><span class="vline"></span><div><div class="num hot" id="sumHot">4</div><div class="lab">高热讨论档</div></div><span class="vline"></span><div><div class="num" id="sumPulse">3</div><div class="lab">公开生活线索</div></div></div>
-</section>
-<section class="city-lens" id="cityLens" aria-label="今晚的城市由你选择">
-  <div class="lens-roles">
-    <div class="lens-label">你今晚是谁？ <em>换身份，地图就换一个视角</em></div>
-    <div class="persona-buttons" id="personaButtons" role="group" aria-label="选择游玩身份"></div>
-  </div>
-  <div class="lens-time">
-    <div class="lens-label">今晚几点出发？ <em>主题偏好，不推断营业时间</em></div>
-    <div class="time-buttons" id="timeButtons" role="group" aria-label="选择出发时段"></div>
-    <button class="lens-jump" id="groupJump" type="button">👥 叫朋友一起来决定 ↗</button>
-  </div>
-  <p class="lens-note" style="grid-column:1/-1">不同身份、时段会改变推荐亮度和排序；只做偏好情景，不代表实时人数、开放状态或真实出行预测。</p>
-</section>
-<section class="explorer" aria-label="筛选去哪玩"><span class="find-label">今天想怎么过？</span><div class="chips" id="categoryChips"></div><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg><input type="search" id="spotSearch" aria-label="搜索去处" placeholder="搜去处、夜景、咖啡、遛娃…" autocomplete="off"></label></section>
-<div class="main-grid">
-<section class="card map-card" aria-label="惠城去处探索图">
-  <header class="map-top"><div class="headleft"><h2>在惠城，找到你的今晚</h2><p>点击光点探索 · 河流与点位为概念示意，不是导航坐标</p></div><div class="mode" role="group" aria-label="切换查看模式"><button type="button" class="on" id="mapToggle" aria-pressed="true">探索图</button><button type="button" id="listToggle" aria-pressed="false">清单</button></div></header>
-  <div class="map-body" id="mapBody">
-    <svg class="map-art" viewBox="0 0 840 610" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <path class="district" d="M62 66 Q330 -5 600 65 Q772 88 793 245 L765 474 Q676 566 478 561 L145 525 Q65 423 53 253 Z"/>
-      <path class="zone" fill="#e3eefd" d="M345 63 Q561 50 689 168 L604 276 Q498 254 391 232 Q331 168 345 63Z"/>
-      <path class="zone" fill="#e8f4e9" d="M495 297 Q632 262 764 333 L739 461 Q653 526 553 487 Q500 426 495 297Z"/>
-      <path class="zone" fill="#f8f2df" d="M170 330 Q313 311 420 390 L460 500 Q288 551 142 479 Q128 400 170 330Z"/>
-      <path class="river-border" d="M-80 368 Q140 348 324 314 T684 267 T925 302"/>
-      <path class="river" d="M-80 368 Q140 348 324 314 T684 267 T925 302"/>
-      <path class="river-core" d="M-80 368 Q140 348 324 314 T684 267 T925 302"/>
-      <path class="river-wave" d="M-80 368 Q140 348 324 314 T684 267 T925 302"/>
-      <text x="668" y="190">江 北</text><text x="134" y="448">西 湖 周 边</text><text x="600" y="443">老 城 活 力</text><text x="359" y="287" transform="rotate(-9 359 287)">东 江 · 探 索 意 象</text>
-      <g opacity=".55" stroke="#c5d9e8" fill="none" stroke-width="1.5" stroke-dasharray="4 9"><path d="M90 210 Q291 105 390 185 T743 149"/><path d="M170 508 Q302 380 480 467 T749 412"/></g>
-    </svg>
-    <div class="map-status"><span class="pill"><i></i><b id="spotCount">14 个去处</b><span>可探索</span></span><span class="pill">讨论热度分档 · 非实时人流量</span></div>
-    <div class="map-scenario-label" id="mapScenarioLabel" aria-live="polite">✦ 公开热度视角</div>
-          <div class="pins" id="spotPins"></div><button type="button" class="map-roll" id="mapRollBtn">🎲 摇一站 ↗</button>
-    <footer class="map-foot"><div class="map-legend"><span><i style="--cc:#de8a43"></i>散步 / 咖啡</span><span><i style="--cc:#2d87d7"></i>逛街</span><span><i style="--cc:#b766df"></i>活动 / 夜游</span><span><i style="--cc:#24ae89"></i>运动 / 亲子</span></div><span class="footnote">探索意象图 <b>≠ 实际地理定位</b></span></footer>
-  </div>
-  <div class="list-mode" id="listMode"><div class="place-list" id="placeList"></div></div>
-</section>
-<aside class="right-col" aria-label="今晚去哪玩推荐与信息">
-  <section class="draw"><div class="eyebrow">LET THE CITY DECIDE</div><h3>今晚去哪儿？<br>让城市替你选一站。</h3><p>在公开去处里摇一个，你自己决定去不去。</p><button id="rollBtn" type="button">🎲 摇一站 <span aria-hidden="true">↗</span></button><span class="mini" id="rollStatus">不需要登录</span><span class="sparkle" aria-hidden="true">✳</span></section>
-  <section class="card focus-card" id="detailCard"><div class="section-head"><h3>正在探索</h3><span class="small" id="detailCaption">选择地图光点</span></div><div class="featured"><div class="featured-icon" id="spotEmoji">🌙</div><div><h4 id="spotName">请选择一个去处</h4><div class="badge"><i class="dot"></i><span id="spotLevel">近期公开讨论热度</span></div></div></div><div class="divider"></div><div class="focus-reason"><b>✨ 为什么值得看看</b><p id="spotWhy">点亮城市里的一个光点，发现它的故事。</p></div><div class="focus-lens" id="focusLens" aria-live="polite">选择身份与时段，看看这站和你的今晚有什么关系。</div><div class="focus-info"><div class="info"><strong>有什么</strong><p id="spotDetail">从城市里发现值得探索的好去处。</p></div><div class="info"><strong>风洞观察</strong><p id="spotWatch">把好玩和城市生活联系起来。</p></div></div><div class="focus-actions"><button class="action primary" id="inviteBtn" type="button">✉️ 复制邀约</button><button class="action" id="saveBtn" type="button">☆ 加入清单</button></div><div class="my-plan" id="myPlan" hidden><div class="my-plan-head"><span>⭐ 我的今晚清单</span><span id="planCount">0处</span></div><div class="my-plan-items" id="myPlanItems"></div><button type="button" id="planShare">✉️ 复制清单，约朋友一起去</button></div><div class="focus-warn">公开去处仅供探索，具体营业、活动、费用与安全信息以现场或官方渠道为准。</div></section>
-  <section class="card rank-card"><div class="section-head"><h3 id="rankTitle">今晚大家在关注什么？</h3><span class="small" id="rankHint">基于公开讨论分档</span></div><div class="rank-list" id="rankList"></div></section>
-  <section class="card whisper"><div class="whisper-title">📡 城市耳语 <em id="updateTime">公开线索 · 每日更新</em></div><div id="storyList"></div></section>
-</aside>
-</div>
-<div class="participation-grid" id="participation">
-  <section class="city-experiment" id="cityExperiment" aria-label="城市条件变化的情景实验">
-    <div class="experiment-eyebrow">CITY WHAT-IF · 一分钟城市实验</div>
-    <h3>如果你是区长，<br>今晚先改善什么？</h3>
-    <p>不是给城市打分，而是试着放松一种出行约束。看推荐网络如何重新排序，再回到现实寻找证据。</p>
-    <div class="intervention-options" id="interventionOptions" role="group" aria-label="选择一个情景条件"></div>
-    <div class="scenario-shift">
-      <div class="headline" id="scenarioHeadline">条件不变 · 当前城市偏好</div>
-      <div class="scenario-route" id="scenarioRoute" aria-live="polite"></div>
-      <div class="scenario-explain" id="scenarioExplain">选择一种条件，观察推荐如何变动。</div>
+<div class="v3-inner">
+  <section class="hero">
+    <div>
+      <div class="kicker">CHAPTER 04 / THE CITY AFTER DARK</div>
+      <h1>今晚，<em>谁能把你留在惠城？</em></h1>
+      <p class="lead">选一个身份。看这座城市，为你亮起哪些地方。</p>
     </div>
-    <div class="limit">说明：此处只有公开地点热度和体验偏好，变化是教学性质的情景权重排序；不构成交通、营收、客流或政策成效预测。</div>
+    <div class="hero-side" aria-label="今日公开数据概览">
+      <div class="stat"><strong id="sumCount">14</strong><small>公开去处</small></div><span class="line"></span>
+      <div class="stat"><strong id="sumHot">4</strong><small>高热讨论档</small></div><span class="line"></span>
+      <div class="stat"><strong id="sumPulse">3</strong><small>公开线索</small></div>
+    </div>
   </section>
-  <section class="group-lab" id="groupLab" aria-label="叫上朋友一起决定">
-    <div class="experiment-eyebrow">SOCIAL CHOICE · 组队协商</div>
-    <h3>今晚听谁的？<br>别让一个人拍板。</h3>
-    <p>你想散步，朋友想吃饭？各自选身份与时段，收集伙伴回复后，帮你找大家都可能接受的去处。</p>
-    <span class="group-call">✓ 不需登录 · 不上传答案 · 通过分享链接接力</span>
-    <div class="group-actions">
-      <button class="primary" type="button" id="createGroupBtn">👥 发起一场组队</button>
-      <button type="button" id="shareVoteBtn">✉️ 复制我的回复</button>
+  <section class="city-lens" id="cityLens" aria-label="身份和出发时段">
+    <div class="lens-roles">
+      <div class="lens-label">今晚，你是谁？</div>
+      <div class="persona-buttons" id="personaButtons" role="group" aria-label="选择今晚的身份"></div>
     </div>
+    <div class="lens-time">
+      <div class="lens-label">出发时间</div>
+      <div class="time-buttons" id="timeButtons" role="group" aria-label="选择偏好出发时段"></div>
+      <button id="groupJump" class="lens-jump" type="button" aria-hidden="true" tabindex="-1">组队</button>
+    </div>
+  </section>
+  <main class="world" aria-label="城市探索舞台">
+    <section class="map-stage" aria-label="惠城夜间城市探索意象图">
+      <div class="map-mode" role="group" aria-label="展示模式">
+        <button type="button" id="mapToggle" class="on" aria-pressed="true">城市</button>
+        <button type="button" id="listToggle" aria-pressed="false">清单</button>
+      </div>
+      <div class="map-body" id="mapBody">
+        <svg class="map-art" viewBox="0 0 840 610" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="v3river" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1a506c"/><stop offset=".5" stop-color="#62eee5"/><stop offset="1" stop-color="#1e5777"/></linearGradient>
+            <radialGradient id="v3sky"><stop offset="0" stop-color="#256079" stop-opacity=".55"/><stop offset="1" stop-color="#0b1831" stop-opacity="0"/></radialGradient>
+            <pattern id="v3grid" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M25 0H0V25" stroke="#80c3cd" stroke-opacity=".13" stroke-width=".6" fill="none"/></pattern>
+          </defs>
+          <ellipse cx="365" cy="314" rx="360" ry="240" fill="url(#v3sky)"/>
+          <path class="district" d="M50 70 Q333 -6 606 66 Q775 104 796 244 L760 478 Q636 582 450 561 L134 524 Q56 405 48 248Z"/>
+          <path class="zone" fill="#7baedb" d="M344 70Q559 41 682 155L599 280Q500 251 396 229Z"/>
+          <path class="zone" fill="#3af3ce" d="M490 298Q648 256 763 331L740 467Q626 540 542 469Z"/>
+          <path class="zone" fill="#e3b37a" d="M154 343Q309 312 425 388L454 505Q277 551 134 478Z"/>
+          <path d="M50 70 Q333 -6 606 66 Q775 104 796 244 L760 478 Q636 582 450 561 L134 524 Q56 405 48 248Z" fill="url(#v3grid)" opacity=".52"/>
+          <g fill="none" stroke="#6296a9" stroke-opacity=".21" stroke-width="1.2">
+            <path d="M100 148Q250 128 351 171T675 169"/><path d="M93 212Q235 237 367 204T716 230"/>
+            <path d="M140 500Q300 441 408 483T745 417"/><path d="M201 100Q218 296 236 501"/>
+            <path d="M380 74Q402 297 435 535"/><path d="M577 117Q530 308 560 489"/>
+            <path d="M702 179Q622 293 689 444"/>
+          </g>
+          <path class="river-border" d="M-90 362 Q146 345 326 311 T683 270 T947 299"/>
+          <path class="river" d="M-90 362 Q146 345 326 311 T683 270 T947 299"/>
+          <path class="river-core" d="M-90 362 Q146 345 326 311 T683 270 T947 299"/>
+          <path class="river-wave" d="M-90 362 Q146 345 326 311 T683 270 T947 299"/>
+          <g fill="none" stroke="#4dc9c7" stroke-width="1" stroke-opacity=".22" stroke-dasharray="2 14">
+            <path d="M132 412Q266 284 451 216T698 152"/>
+            <path d="M94 209Q306 280 499 448T711 487"/>
+            <path d="M165 118Q350 218 611 237T748 366"/>
+          </g>
+          <g fill="#e2fdfa" opacity=".5"><circle cx="150" cy="344" r="2"/><circle cx="323" cy="312" r="2"/><circle cx="683" cy="271" r="2"/></g>
+          <text x="595" y="180">江 北</text><text x="147" y="453">西 湖 周 边</text><text x="569" y="459">老 城 活 力</text><text x="355" y="287" transform="rotate(-8 355 287)">东 江 · 夜 间 城 市</text>
+        </svg>
+        <div class="map-overlay"><div><div class="overline">HUI CHENG / LIVE EXPLORATION</div><div class="subtitle">点击一颗光点，发现今晚的另一种可能</div></div></div>
+        <div class="map-scenario-label" id="mapScenarioLabel" aria-live="polite">✦ 公共讨论视角</div>
+        <svg class="network-links" id="networkLinks" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <div class="pins" id="spotPins"></div>
+        <button class="map-roll" id="mapRollBtn" type="button">✧ 帮我选一站</button>
+        <div class="stage-actions">
+          <button type="button" id="openGroupBtn">◎ 今晚听谁的</button>
+          <button type="button" id="openCityBtn">◇ 改变城市条件</button>
+        </div>
+        <div class="map-status">
+          <span class="pill"><i></i><b id="spotCount">14 个去处</b> <span>可探索</span></span>
+          <span class="pill">公开讨论参考 · 非实时客流</span>
+        </div>
+        <div class="map-foot"><span class="rule"></span><span>城市探索意象图 <strong>非导航坐标</strong> · 时段仅为偏好情景，营业请核实</span></div>
+      </div>
+      <div class="list-mode" id="listMode"><div class="place-list" id="placeList"></div></div>
+    </section>
+    <aside class="focus-pane" id="detailCard" aria-label="当前地点的探索信息">
+      <div class="pane-eyebrow"><span>✦ TONIGHT'S DISCOVERY</span><em id="detailCaption">正在探索</em></div>
+      <div class="featured"><div class="featured-icon" id="spotEmoji">🌙</div>
+        <div><h4 id="spotName">选择一个地方</h4><div class="badge" id="spotLevel">公开讨论热度</div></div>
+      </div>
+      <div class="focus-reason"><b>WHY THIS PLACE</b><p id="spotWhy">点击一颗光点，让城市给你一个新的理由。</p></div>
+      <div class="focus-lens" id="focusLens">不同身份，会让城市亮起不同的去处。</div>
+      <button type="button" class="focus-toggle" id="focusToggle">＋ 看更多线索</button>
+      <div class="focus-info">
+        <div class="info"><strong>怎么玩</strong><p id="spotDetail">探访公开去处</p></div>
+        <div class="info"><strong>风洞观察</strong><p id="spotWatch">城市生活如何变化</p></div>
+      </div>
+      <div class="focus-actions"><button class="action primary" id="inviteBtn" type="button">↗ 约朋友</button><button class="action" id="saveBtn" type="button">☆ 收藏</button></div>
+      <div class="my-plan" id="myPlan" hidden><div class="my-plan-head"><span>今晚收藏</span><span id="planCount">0处</span></div><div class="my-plan-items" id="myPlanItems"></div><button id="planShare" type="button">↗ 复制清单</button></div>
+      <div class="focus-warn">来自公开讨论，不代表营业保证、现场人流或票务情况。</div>
+    </aside>
+    <section class="explorer" aria-label="按主题探索地点">
+      <div class="chips" id="categoryChips"></div>
+      <label class="search" aria-label="搜索去处"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg><input id="spotSearch" type="search" aria-label="搜索去处" placeholder="搜索去处..." autocomplete="off"></label>
+    </section>
+  </main>
+  <div class="bottom-link"><span>你看到的不是实时热力地图，而是 <b>公开去处 + 你的偏好选择</b>。</span><a href="today.html">上一页 · 钱去哪了 →</a></div>
+  <details class="under-notes" id="cityDataNotes">
+    <summary>数据来源与推荐依据 · 展开查看</summary>
+    <div class="note-inner">
+      <div><h3 id="rankTitle">公开讨论热度参考</h3><p id="rankHint" class="source-note">公开讨论分档</p><div id="rankList"></div></div>
+      <div><h3>公开生活线索 <span id="updateTime"></span></h3><div id="storyList"></div><p id="sourceNote" class="source-note"></p></div>
+    </div>
+  </details>
+</div>
+</div>
+<div class="hidden-support" aria-hidden="true"><button id="rollBtn" type="button" tabindex="-1">备用随机</button><span id="rollStatus">探索中</span></div>
+<div class="overlay-stack" id="overlayStack" hidden role="presentation">
+  <button type="button" class="overlay-backdrop" id="overlayBackdrop" aria-label="关闭浮层"></button>
+  <section class="sheet city-experiment" id="cityExperiment" role="dialog" aria-modal="true" aria-labelledby="cityExperimentTitle" data-active="false">
+    <div class="sheet-head"><div><div class="eyebrow">CITY WHAT-IF / CHOOSE ONE</div><h3 id="cityExperimentTitle">如果你能改变<br>这座城市的一件事？</h3></div><button type="button" class="sheet-close" data-close-sheet aria-label="关闭实验">×</button></div>
+    <p>选一种变化。看哪些去处重新亮起，哪些选择依然受限。</p>
+    <div class="intervention-options" id="interventionOptions" role="group" aria-label="选择城市条件情景"></div>
+    <div class="scenario-shift">
+      <div class="headline" id="scenarioHeadline">改变一个条件</div>
+      <div class="scenario-route" id="scenarioRoute" aria-live="polite"></div>
+      <div class="scenario-explain" id="scenarioExplain">尝试不同选项，看推荐变化。</div>
+    </div>
+    <div class="sheet-limit">仅为互动偏好排序实验，不是实际交通模型、客流预测或政策成效评估。城市地图亮度变化不代表真实人流变化。</div>
+  </section>
+  <section class="sheet group-lab" id="groupLab" role="dialog" aria-modal="true" aria-labelledby="groupLabTitle" data-active="false">
+    <div class="sheet-head"><div><div class="eyebrow">SOCIAL CHOICE / TOGETHER</div><h3 id="groupLabTitle">今晚听谁的？</h3></div><button type="button" class="sheet-close" data-close-sheet aria-label="关闭组队">×</button></div>
+    <p>你想散步，他想吃饭。一起挑三站，不用谁迁就谁。</p>
+    <span class="group-call">无需登录 · 链接接力 · 不伪装实时在线</span>
+    <div class="group-actions"><button id="createGroupBtn" class="primary" type="button">◎ 发起组队</button><button id="shareVoteBtn" type="button">↗ 复制我的回复</button></div>
     <div class="group-subcard" id="inviteCard" hidden>
-      <h4 id="inviteTitle">把邀请链接发给朋友</h4>
-      <label for="inviteLink">每个人可独立打开链接选择偏好</label>
-      <input id="inviteLink" type="text" readonly aria-label="组队邀请链接">
-      <div class="in-actions"><button type="button" id="copyInviteBtn">复制邀请链接</button></div>
+      <h4 id="inviteTitle">复制链接，发给朋友</h4>
+      <label for="inviteLink">朋友打开后选身份与出发时段</label>
+      <input id="inviteLink" type="text" readonly><div class="in-actions"><button type="button" id="copyInviteBtn">复制邀请链接</button></div>
     </div>
     <div class="group-subcard" id="replyCard">
       <h4 id="replyTitle">收到朋友的回复了吗？</h4>
-      <label for="friendReply">把朋友发回的“回复链接”粘贴到这里（最多 8 份）</label>
-      <input id="friendReply" type="text" placeholder="粘贴朋友的链接或回复码" autocomplete="off">
+      <label for="friendReply">粘贴朋友回传的匿名回复链接</label>
+      <input id="friendReply" type="text" placeholder="粘贴回复链接或回复码" autocomplete="off">
       <div class="in-actions"><button type="button" id="addReplyBtn">加入伙伴选择</button></div>
       <div class="group-participants" id="groupParticipants" aria-live="polite"></div>
     </div>
-    <div class="group-result" id="groupResult" hidden>
-      <strong id="groupResultTitle">适合你们的三站</strong>
-      <ul id="groupRecommendations"></ul><div class="group-actions" style="margin-bottom:0"><button type="button" id="shareConsensusBtn">✉️ 复制我们共同选的三站</button></div>
-    </div>
-    <div class="group-limit" id="groupLimit">组队是纯前端“接力式共选”，不会自动收集其他人的答案。朋友需要把回复链接发回发起者，再由发起者粘贴汇总。所有偏好仅在链接和当前页面里（用网址 # 片段传递），不代表真实公众投票；拿到链接的人可以看到你的偏好。</div>
+    <div class="group-result" id="groupResult" hidden><strong id="groupResultTitle">共同选择</strong><ul id="groupRecommendations"></ul><div class="group-actions"><button id="shareConsensusBtn" type="button">↗ 分享共同三站</button></div></div>
+    <div class="group-limit" id="groupLimit">当前采用无后端的分享链接接力，发起人需手动粘贴朋友的回复。偏好使用网址 # 片段传递；拥有链接的人能看见偏好。没有真实在线人数、投票或用户账户。</div>
   </section>
 </div>
-<div class="bottom"><div><strong>真正有意思的，不只是去哪玩。</strong> 更是人为什么聚集、哪些公共空间受欢迎、城市如何留住生活。</div><div class="source" id="sourceNote">数据按公开资料与近期香港公开打卡整理；热度为参考分档，不代表实际到场人数或开放状态。</div></div>
-</div>
-<div id="toast" class="toast" hidden role="status"></div>
+<div class="toast" id="toast" hidden role="status"></div>
 <script>
 (function(){"use strict";
 const BASE_SNAPSHOT={updated:"2026-10-29 07:29",season:"秋",sourceLabel:"公开文旅与近期公开打卡",pulse:["本周末水东街奇幻夜、华贸寻梦灵感集市相关公开信息，具体安排以主办方为准","惠城夜经济与江边休闲的讨论持续受到关注","南方+与本地媒体公开文旅话题可供进一步核查"],spots:[
@@ -153,7 +179,7 @@ const BASE_SNAPSHOT={updated:"2026-10-29 07:29",season:"秋",sourceLabel:"公开
 {n:"佳兆业中心",c:"shop",tag:"逛街",why:"江北的餐饮与购物选择",d:"适合下班后顺路走走",watch:"CBD留不留得住人",hot:44,level:"中"}
 ]};
 const CAT={all:{name:"全部",emoji:"✦",color:"#3b7a9e"},night:{name:"夜生活",emoji:"🌙",color:"#b766df"},cafe:{name:"发呆咖啡",emoji:"☕",color:"#d9954b"},shop:{name:"逛街约会",emoji:"🛍️",color:"#2c91d6"},kid:{name:"亲子带娃",emoji:"🧸",color:"#31b79b"},sport:{name:"散步运动",emoji:"🚲",color:"#2caa80"},show:{name:"演出夜游",emoji:"🎭",color:"#9167e5"},food:{name:"觅食",emoji:"🍜",color:"#e87959"}};
-const POS=[[63,41],[26,57],[20,75],[72,28],[53,46],[27,48],[38,78],[75,68],[67,55],[59,78],[79,15],[81,80],[44,71],[55,20]];
+const POS=[[55,44],[20,54],[36,69],[62,25],[42,48],[18,38],[56,73],[66,55],[30,47],[47,80],[63,19],[22,74],[39,28],[16,23]];
 const state={data:BASE_SNAPSHOT,cat:"all",search:"",selected:null,display:"map",wish:new Set(),isRolling:false,role:"any",time:"20",intervention:"none",groupId:"",groupGuest:false,hostPref:null,friends:[],replyId:""};
 const $=id=>document.getElementById(id);const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const PERSONAS={
@@ -188,11 +214,27 @@ function filtered(){return sorted().filter(s=>(state.cat==="all"||s.c===state.ca
 function toast(msg){const el=$("toast");el.textContent=msg;el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>el.hidden=true,2400);}
 function renderFilters(){const el=$("categoryChips");el.replaceChildren();Object.keys(CAT).forEach(k=>{const c=CAT[k];const b=document.createElement("button");b.type="button";b.className="chip"+(k===state.cat?" on":"");b.setAttribute("aria-pressed",String(k===state.cat));b.innerHTML="<em>"+esc(c.emoji)+"</em>"+esc(c.name);b.onclick=()=>{state.cat=k;renderFilters();refresh();};el.appendChild(b);});}
 function renderPins(){const el=$("spotPins");el.replaceChildren();const items=filtered();$("spotCount").textContent=items.length+" 个去处";if(state.selected&&!items.includes(state.selected))state.selected=items[0]||null;fixedPositions().forEach((spot,i)=>{const pos=POS[i%POS.length],button=document.createElement("button");button.type="button";button.className="pin";if(!items.includes(spot))button.classList.add("hidden");if(items.slice(0,3).includes(spot)){button.classList.add("prominent");button.classList.add("preferred");}else if(state.role!=="any"||state.intervention!=="none")button.classList.add("less-fit");if(spot===state.selected)button.classList.add("selected");const cat=CAT[spot.c]||CAT.all;button.style.setProperty("--x",pos[0]+"%");button.style.setProperty("--y",pos[1]+"%");button.style.setProperty("--cc",cat.color);button.style.setProperty("--z",String(10+Math.round(Number(spot.hot)||50)/12));button.setAttribute("aria-label",spot.n+"，热度档 "+spot.level);button.innerHTML='<span class="pin-label">'+esc(spot.n)+'</span>';button.onclick=()=>selectSpot(spot);el.appendChild(button);});}
+/* Visual-only animated city connections; never change hot data or ranking. */
+function renderNetworkLines(){
+ const board=$("networkLinks");if(!board)return;
+ board.replaceChildren();const items=filtered();const primary=state.selected||items[0];if(!primary)return;
+ const ordered=fixedPositions(), ns="http://www.w3.org/2000/svg";
+ const point=s=>POS[ordered.indexOf(s)%POS.length];
+ const a=point(primary);
+ const targets=items.filter(s=>s!==primary).slice(0,4);
+ for(const [i,s] of targets.entries()){
+   const b=point(s),midX=(a[0]+b[0])/2,midY=Math.min(a[1],b[1])-7-i*1.3;
+   const route=document.createElementNS(ns,"path");route.setAttribute("d","M "+a[0]+" "+a[1]+" Q "+midX+" "+midY+" "+b[0]+" "+b[1]);
+   route.setAttribute("class","network-route");route.style.animationDelay=(-i*1.7)+"s";board.appendChild(route);
+   const trace=document.createElementNS(ns,"path");trace.setAttribute("d",route.getAttribute("d"));
+   trace.setAttribute("class","network-trace");trace.style.animationDelay=(-i*1.35)+"s";board.appendChild(trace);
+ }
+}
 function renderList(){const el=$("placeList");el.replaceChildren();const items=filtered();if(!items.length){el.innerHTML='<div class="empty">这里暂时没有匹配的公开去处，换个条件试试。</div>';return;}items.forEach(s=>{const cat=CAT[s.c]||CAT.all;const b=document.createElement("button");b.type="button";b.className="place-item"+(s===state.selected?" selected":"");b.style.setProperty("--tint",cat.color+"1d");b.innerHTML='<span class="pic">'+cat.emoji+'</span><span class="text"><span class="name">'+esc(s.n)+'</span><span class="meta">'+esc(s.tag||cat.name)+' · '+esc(s.level)+'热讨论档</span></span><span class="heat">'+esc(s.hot||"—")+'</span>';b.onclick=()=>selectSpot(s);el.appendChild(b);});}
 function renderFocus(){const s=state.selected;if(!s){$("spotName").textContent="这里暂时没有匹配的去处";$("spotEmoji").textContent="🧭";$("spotLevel").textContent="换个筛选条件试试";$("spotWhy").textContent="你的下一站可能就在另一种玩法里。";$("spotDetail").textContent="";$("spotWatch").textContent="";return;}const cat=CAT[s.c]||CAT.all;$("spotEmoji").textContent=cat.emoji;$("spotEmoji").style.background="linear-gradient(130deg,"+cat.color+"26,#eff8fc)";$("spotName").textContent=s.n;$("spotLevel").textContent="公开讨论 · "+s.level+"热档（参考指数 "+s.hot+"）";$("spotWhy").textContent=s.why||"来自公开记录的去处线索";$("spotDetail").textContent=s.d||s.tag||"详见公开来源";$("spotWatch").textContent=s.watch||"城市生活的另一面";$("detailCaption").textContent=s.tag||cat.name;$("saveBtn").textContent=state.wish.has(s.n)?"✓ 已加入清单":"☆ 加入清单";}
 function renderRank(){const el=$("rankList");el.replaceChildren();const list=filtered().slice(0,3);if($("rankTitle"))$("rankTitle").textContent=(state.role==="any"&&state.intervention==="none")?"今晚大家在关注什么？":"这组偏好值得先看哪三站？";if($("rankHint"))$("rankHint").textContent=(state.role==="any"&&state.intervention==="none")?"公开讨论分档 · 结合出发时段":"按偏好情景排序 · 右侧数字仍是公开热度参考";if(!list.length){el.innerHTML='<div class="empty">换个条件看看更多去处。</div>';return;}list.forEach((s,i)=>{const b=document.createElement("button");b.type="button";b.className="rank"+(s===state.selected?" current":"");b.innerHTML='<span class="ord">'+String(i+1).padStart(2,"0")+'</span><span class="text"><strong>'+esc(s.n)+'</strong><span>'+esc(s.tag)+' · '+esc(s.level)+'热讨论档</span></span><span class="score">'+esc(s.hot)+'<small> / 热度参考</small></span>';b.onclick=()=>selectSpot(s);el.appendChild(b);});}
-function selectSpot(s,fromRoll){state.selected=s;renderPins();renderFocus();renderRank();renderList();renderLensNarrative();if(fromRoll){toast("🎲 帮你挑到了："+s.n);$("rollStatus").textContent="已抽中 · "+s.n;}if(window.innerWidth<=650&&state.display==="map"&&fromRoll){$("detailCard").scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion:reduce)").matches?"instant":"smooth",block:"center"});}}
-function refresh(){const items=filtered();if(!items.includes(state.selected))state.selected=items[0]||null;renderPins();renderFocus();renderRank();renderList();renderLensNarrative();}
+function selectSpot(s,fromRoll){state.selected=s;renderPins();renderNetworkLines();renderFocus();renderRank();renderList();renderLensNarrative();if(fromRoll){toast("🎲 帮你挑到了："+s.n);$("rollStatus").textContent="已抽中 · "+s.n;}if(window.innerWidth<=650&&state.display==="map"&&fromRoll){$("detailCard").scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion:reduce)").matches?"instant":"smooth",block:"center"});}}
+function refresh(){const items=filtered();if(!items.includes(state.selected))state.selected=items[0]||null;renderPins();renderNetworkLines();renderFocus();renderRank();renderList();renderLensNarrative();}
 function renderPulses(){const el=$("storyList");el.replaceChildren();(state.data.pulse||[]).slice(0,3).forEach(txt=>{const p=document.createElement("p");p.className="story";p.textContent=txt;el.appendChild(p);});if(!el.children.length){el.innerHTML='<p class="story">暂无可用的城市生活线索。</p>';}}
 function renderMeta(){const d=state.data;$("sumCount").textContent=d.spots.length;$("sumHot").textContent=d.spots.filter(s=>s.level==="高").length;$("sumPulse").textContent=(d.pulse||[]).length;$("updateTime").textContent=d.updated?"更新 "+d.updated.slice(5):"每日更新";$("sourceNote").textContent=(d.note||"去处热度来自公开打卡分档，非实时人数统计。")+(d.updated?" · 最近刷新 "+d.updated:"");}
 function normalize(d){if(!d||!Array.isArray(d.spots)||!d.spots.length)return BASE_SNAPSHOT;return {updated:d.updated||"",note:d.note||BASE_SNAPSHOT.note,pulse:Array.isArray(d.pulse)?d.pulse:[],spots:d.spots.map(x=>({n:String(x.n||"未命名"),c:String(x.c||"show"),tag:String(x.tag||""),why:String(x.why||""),d:String(x.d||""),watch:String(x.watch||""),hot:Math.max(0,Number(x.hot||0)),level:String(x.level||"中")})),season:d.season||""};}
@@ -353,7 +395,39 @@ $("spotSearch").addEventListener("input",e=>{state.search=e.target.value.trim().
 applyData(BASE_SNAPSHOT);renderPlan();
 if(location.protocol!=="file:"){fetch("life.json?ts="+Date.now(),{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("No life.json");return r.json();}).then(applyData).catch(()=>{toast("暂未读取到最新数据，正在显示 10/29 示例快照");});}
 })();
+
+</script>
+<script>
+(function(){
+"use strict";
+const overlay=document.getElementById("overlayStack"),city=document.getElementById("cityExperiment"),group=document.getElementById("groupLab");
+let opener=null;
+function openSheet(which){
+ opener=document.activeElement;
+ overlay.hidden=false;
+ city.dataset.active=String(which==="city");
+ group.dataset.active=String(which==="group");
+ document.body.style.overflow="hidden";
+ const target=(which==="city"?city:group).querySelector("[data-close-sheet]");
+ if(target)target.focus();
+}
+function closeSheet(){
+ overlay.hidden=true;city.dataset.active="false";group.dataset.active="false";
+ document.body.style.overflow="";
+ if(opener&&typeof opener.focus==="function")opener.focus();
+}
+document.getElementById("openCityBtn").addEventListener("click",()=>openSheet("city"));
+document.getElementById("openGroupBtn").addEventListener("click",()=>openSheet("group"));
+document.getElementById("overlayBackdrop").addEventListener("click",closeSheet);
+overlay.querySelectorAll("[data-close-sheet]").forEach(x=>x.addEventListener("click",closeSheet));
+document.addEventListener("keydown",e=>{if(!overlay.hidden&&e.key==="Escape")closeSheet()});
+document.getElementById("focusToggle").addEventListener("click",e=>{
+ const panel=document.getElementById("detailCard");const show=panel.classList.toggle("show-info");
+ e.currentTarget.textContent=show?"− 收起线索":"＋ 看更多线索";
+});
+document.getElementById("groupJump").addEventListener("click",()=>openSheet("group"));
+if(new URLSearchParams(location.hash.slice(1)).has("hcjoin"))openSheet("group");
+})();
 </script>
 <script src="hc-journey-nav.js" defer></script>
-</body>
-</html>
+</body></html>
