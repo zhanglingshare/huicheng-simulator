@@ -372,6 +372,26 @@ main{display:grid;grid-template-columns:200px minmax(0,1fr) 360px;gap:14px;paddi
 .vote-h{display:flex;align-items:center;gap:8px;font-size:10px;color:var(--faint);margin-top:9px}
 .vote-h .bar{flex:1;height:4px;background:#eef3f9;border-radius:99px;overflow:hidden;display:flex}
 .vote-h .bar i{height:100%}
+/* ===== 情报可视化：事件网络与影响结构 ===== */
+.event-viz{margin:12px 0;border:1px solid #dce7f4;border-radius:13px;background:linear-gradient(180deg,#fbfdff,#f4f8fd);overflow:hidden}
+.ev-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border-bottom:1px solid #e4edf7}
+.ev-title{font-size:11.5px;font-weight:850;color:#17324f;display:flex;align-items:center;gap:7px}
+.ev-title i{width:7px;height:7px;border-radius:50%;background:#2563eb;box-shadow:0 0 0 4px #dbeafe}
+.ev-count{font-size:10px;font-weight:750;color:#64748b;background:#fff;border:1px solid #e0e9f4;border-radius:99px;padding:3px 7px;white-space:nowrap}
+.ev-canvas{padding:8px 8px 3px}
+.ev-canvas svg{display:block;width:100%;height:auto;max-height:210px}
+.ev-legend{display:flex;flex-wrap:wrap;gap:6px 11px;padding:4px 12px 10px;font-size:9.5px;color:#64748b}
+.ev-legend span{display:inline-flex;align-items:center;gap:5px}
+.ev-legend i{display:inline-block;width:8px;height:8px;border-radius:50%}
+.ev-bars{padding:0 12px 12px;display:grid;gap:7px}
+.ev-bar-row{display:grid;grid-template-columns:minmax(70px,auto) 1fr 22px;gap:8px;align-items:center;font-size:10px;color:#52657c}
+.ev-bar-track{height:6px;background:#e7eef7;border-radius:99px;overflow:hidden}
+.ev-bar-track i{display:block;height:100%;border-radius:99px}
+.ev-bar-row b{font-size:10px;color:#243b55;text-align:right;font-variant-numeric:tabular-nums}
+.frow .fvisual{display:flex;align-items:center;gap:3px;height:22px;justify-content:center}
+.frow .fvisual i{display:block;width:5px;border-radius:4px;background:#60a5fa}
+.frow .fvisual i:nth-child(1){height:8px}.frow .fvisual i:nth-child(2){height:15px}.frow .fvisual i:nth-child(3){height:11px}
+.frow .fvisual i:nth-child(4){height:19px;background:#2563eb}.frow .fvisual i:nth-child(5){height:6px;background:#34d399}
 /* 输入框 */
 .composer{padding:10px 12px 12px;border-top:1px solid var(--line);background:#fbfcfe}
 .inp{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:12px;background:#fff;
@@ -1248,6 +1268,44 @@ function countUp(root){
   });
 }
 
+function renderEventViz(ev){
+  const ids=Array.from(new Set([...(ev.involved_node_ids||[])]));
+  const relatedEdges=EDGES.filter(function(e){return (ev.involved_edge_ids||[]).indexOf(e.id)>=0;});
+  relatedEdges.forEach(function(e){if(byId[e.s]&&ids.indexOf(e.s)<0)ids.push(e.s);if(byId[e.t]&&ids.indexOf(e.t)<0)ids.push(e.t);});
+  const visible=ids.filter(function(id){return !!byId[id];}).slice(0,9);
+  const width=320,height=154,cx=160,cy=76,rx=112,ry=48;
+  const points={};
+  visible.forEach(function(id,i){const a=(-90+i*360/Math.max(visible.length,1))*Math.PI/180;points[id]={x:cx+rx*Math.cos(a),y:cy+ry*Math.sin(a)};});
+  let lines='',dots='';
+  relatedEdges.forEach(function(e){
+    const a=points[e.s],b=points[e.t];if(!a||!b)return;
+    const col=(FAM[e.fam]||FAM.supply).color;
+    const dash=e.grade==='A'?'':e.grade==='B'?' stroke-dasharray="5 3"':' stroke-dasharray="1.5 3"';
+    lines+='<line x1="'+a.x.toFixed(1)+'" y1="'+a.y.toFixed(1)+'" x2="'+b.x.toFixed(1)+'" y2="'+b.y.toFixed(1)+'" stroke="'+col+'" stroke-width="'+(e.grade==='A'?2.8:1.7)+'" opacity=".78"'+dash+'/>';
+  });
+  visible.forEach(function(id){
+    const p=points[id],n=byId[id],isFocus=id===ev.node;
+    const col=(FAM[n.fam]||FAM.supply).color;
+    const label=String(n.label||id);
+    dots+='<g><circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="'+(isFocus?10:7)+'" fill="'+col+'" fill-opacity="'+(isFocus?1:.88)+'" stroke="#fff" stroke-width="2"/>'+
+      (isFocus?'<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="14" fill="none" stroke="'+col+'" stroke-opacity=".35" stroke-width="3"/>':'')+
+      '<text x="'+p.x.toFixed(1)+'" y="'+(p.y+19).toFixed(1)+'" text-anchor="middle" font-size="9" font-weight="'+(isFocus?800:650)+'" fill="#334b66">'+esc(label.length>8?label.slice(0,8)+'…':label)+'</text></g>';
+  });
+  const families={};
+  relatedEdges.forEach(function(e){const f=e.fam||'supply';families[f]=(families[f]||0)+1;});
+  const fams=Object.keys(families).sort(function(a,b){return families[b]-families[a];});
+  const max=Math.max(1,...fams.map(function(f){return families[f];}));
+  const bars=fams.length?'<div class="ev-bars">'+fams.map(function(f){
+    const fam=FAM[f]||FAM.supply;
+    return '<div class="ev-bar-row"><span>'+esc(fam.name)+'</span><span class="ev-bar-track"><i style="width:'+(families[f]/max*100)+'%;background:'+fam.color+'"></i></span><b>'+families[f]+'</b></div>';
+  }).join('')+'</div>':'';
+  const empty=visible.length?'<svg viewBox="0 0 '+width+' '+height+'" role="img" aria-label="本次事件涉及主体和关系网络">'+lines+dots+'</svg>':'<div class="txt">当前事件尚未关联可绘制的主体。</div>';
+  return '<div class="event-viz"><div class="ev-head"><div class="ev-title"><i></i>本次变化的关系结构</div><span class="ev-count">'+visible.length+' 个主体 · '+relatedEdges.length+' 条关系</span></div>'+
+    '<div class="ev-canvas">'+empty+'</div>'+
+    (fams.length?'<div class="ev-legend">'+fams.map(function(f){return '<span><i style="background:'+(FAM[f]||FAM.supply).color+'"></i>'+esc((FAM[f]||FAM.supply).name)+'</span>';}).join('')+'</div>':'')+bars+
+    '<div class="d-note" style="padding:0 12px 10px;margin-top:0">图形仅呈现已关联的公开记录；连线不代表因果关系。</div></div>';
+}
+
 function renderDetail(kind, data){
   const host=document.getElementById('viewDetail');
   const title=document.getElementById('p-title');
@@ -1305,6 +1363,7 @@ function renderDetail(kind, data){
         '</div>'+
       '</div>'+
       '<div class="why">'+esc(ev.before_after||ev.fact)+'</div>'+
+      renderEventViz(ev)+
       '<button class="goto" type="button" data-focus-node="'+esc(ev.node)+'" data-event-id="'+esc(ev.id)+'"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span><span class="tx">在关系图里高亮</span><span class="ar">查看网络</span></button>'+
       '<div class="sec"><span class="n">1</span>发生了什么</div>'+
       '<div class="txt">'+esc(ev.fact)+'</div>'+
@@ -1415,7 +1474,7 @@ function renderFeed(){
       '<span><span class="tt">'+esc(f.t)+'</span>'+
       '<span class="mm"><i style="background:'+(f.grade==='A'?'#16a34a':f.grade==='B'?'#d97706':'#94a3b8')+'"></i>'+
       esc(f.kind)+' · 涉及 '+((topEvent&&f.id===topEvent.id?topEvent.involved_node_ids:list.find(function(x){return x.id===f.id;})?.involved_node_ids)||[]).length+' 个主体 · '+esc(f.grade)+' 级</span></span>'+
-      '<span class="bar"><i style="width:'+Math.min(100,((n?deg(n.id):0)/Math.max(1,NODES.length))*100)+'%"></i></span></div>';
+      '<span class="fvisual" aria-label="关联程度示意"><i></i><i></i><i></i><i></i><i></i></span></div>';
   });
   const nodesCount=(topEvent.involved_node_ids||[]).length;
   const edgesCount=(topEvent.involved_edge_ids||[]).length;
