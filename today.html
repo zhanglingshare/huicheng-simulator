@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='slateblue'/><circle cx='16' cy='16' r='6' fill='none' stroke='white' stroke-width='2.5'/><circle cx='16' cy='16' r='2' fill='white'/></svg>">
-<title>惠城产业风洞 · 今日话题</title>
+<title>惠城产业风洞 · 今日话题：钱去哪了</title>
 <style>
 :root{
   --sky1:#0b1026; --sky2:#1e1b4b; --sky3:#7c2d12; --horizon:#fbbf24;
@@ -198,10 +198,25 @@ body.moff #net .heart .core{transform:none}
 .cmp2 .c.b .v{color:var(--ok)}
 .cmp2 .c .k{font-size:9px;color:var(--muted);line-height:1.3}
 .cmp2 .vs{font-size:11px;color:var(--muted);font-weight:700}
-.blist{margin:0;padding:0;list-style:none}
-.blist li{display:flex;gap:8px;align-items:flex-start;font-size:11.5px;color:var(--ink2);padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06)}
-.blist li:last-child{border-bottom:0}
-.blist li .n{flex:none;width:18px;height:18px;border-radius:50%;background:rgba(251,113,133,.18);border:1px solid var(--bad);color:var(--bad);font-size:11px;font-weight:900;line-height:15px;text-align:center}
+/* ===== 三个断点：SVG 情景流向漏斗 ===== */
+.fn-wrap{position:relative;width:100%;height:210px;margin-top:10px}
+.fn-svg{width:100%;height:100%;overflow:visible;display:block}
+.fn-layer{cursor:pointer;transition:opacity .18s}
+.fn-wrap.hot .fn-layer{opacity:.3}
+.fn-wrap.hot .fn-layer.on{opacity:1}
+.fn-poly{transition:transform .18s cubic-bezier(.22,.8,.3,1);transform-origin:center;transform-box:fill-box}
+.fn-txt{font-family:inherit;pointer-events:none}
+.fn-name{font-size:11px;font-weight:800;fill:#fff}
+.fn-val{font-size:12px;font-weight:900;fill:#fff;font-variant-numeric:tabular-nums}
+.fn-layer.on .fn-val{fill:#fff3d6}
+.fn-layer:focus{outline:none}
+.fn-layer:focus .fn-poly{stroke:#fff;stroke-width:2}
+.fn-tip{position:absolute;z-index:4;left:50%;bottom:0;transform:translate(-50%,calc(100% + 5px));min-width:210px;max-width:min(290px,95vw);padding:10px 12px;background:#080d18;color:#fff;border:1px solid #42536e;border-radius:10px;box-shadow:0 9px 28px rgba(0,0,0,.46);font-size:11px;line-height:1.65;pointer-events:none}
+.fn-tip[hidden]{display:none}
+.fn-tip b{font-size:12px;display:block;margin-bottom:3px}
+.fn-disclaimer{margin:5px 0 2px;font-size:10px;line-height:1.5;color:var(--muted)}
+@media(prefers-reduced-motion:reduce){.fn-poly{transition:none!important}}
+
 .cta2{display:flex;justify-content:center}
 .cta2 .go{background:linear-gradient(135deg,rgba(56,189,248,.25),rgba(139,92,246,.25));border:1px solid rgba(56,189,248,.55);color:var(--ink);font-size:14px;font-weight:800;padding:10px 18px;border-radius:11px;cursor:pointer;letter-spacing:.5px}
 .cta2 .go:hover{background:linear-gradient(135deg,rgba(56,189,248,.4),rgba(139,92,246,.4));box-shadow:0 0 22px rgba(56,189,248,.3)}
@@ -283,7 +298,7 @@ body.moff #net .heart .core{transform:none}
     <div class="view" id="view-consume">
       <div class="stage">
         <div class="stage-h">
-          <h2>惠城人的钱，去了哪里？</h2>
+          <h2>今日话题 · 钱去哪了？</h2>
           <span class="sub">每100元消费约38元流向城区外（合理估算）</span>
           <span class="live">估算</span>
           <span class="side-tab" onclick="openDrawer('view-consume','ret')">留存对比</span>
@@ -309,12 +324,12 @@ body.moff #net .heart .core{transform:none}
           </div>
         </div>
         <div class="panel">
-          <h3><span class="dot" style="background:var(--bad)"></span>三个断点</h3>
-          <ul class="blist">
-            <li><span class="n">✗</span><span><b>高端零售不足</b>——高端消费去深圳</span></li>
-            <li><span class="n">✗</span><span><b>总部员工跨城消费</b>——日常消费去东莞</span></li>
-            <li><span class="n">✗</span><span><b>文旅留不住过夜</b>——线上订单外溢</span></li>
-          </ul>
+          <h3><span class="dot" style="background:var(--bad)"></span>三个断点 · 钱从哪漏走</h3>
+          <div class="fn-wrap" id="funnelWrap">
+            <svg class="fn-svg" viewBox="0 0 260 210" id="funnelSvg" role="img" aria-label="深圳、线上、东莞三类消费外流情景示意，非真实流量"></svg>
+            <div class="fn-tip" id="funnelTip" role="status" aria-live="polite" hidden></div>
+          </div>
+          <div class="fn-disclaimer">金额均为原页面的情景估算示意，不是官方资金流量或经核验的去向统计。三层按估算值排序，不代表依次流失。</div>
         </div>
         <div class="panel">
           <div class="cta2"><button class="go" onclick="toast('进入实验：留住10%情景，风洞正文接入中')">进入实验，看看留住10%会怎样 →</button></div>
@@ -684,6 +699,71 @@ body.moff #net .heart .core{transform:none}
   });
   document.head.insertAdjacentHTML("beforeend","<style>@keyframes cnflow{from{stroke-dashoffset:0}to{stroke-dashoffset:-40}}</style>");
 })();
+/* ===== 三个断点：独立的情景示意，不与模型输出混同 ===== */
+function renderFunnel(items, outVal){
+  var svg=document.getElementById("funnelSvg");
+  var wrap=document.getElementById("funnelWrap");
+  var tip=document.getElementById("funnelTip");
+  if(!svg||!wrap||!tip)return;
+  var NS="http://www.w3.org/2000/svg";
+  svg.replaceChildren();
+  wrap.classList.remove("hot");
+  var pts=items.slice(0,3).map(function(it){
+    return {name:String(it.to||""),value:Number(it.value),reason:String(it.reason||"信息尚待核实")};
+  }).filter(function(p){return Number.isFinite(p.value)&&p.value>=0;}).sort(function(a,b){return b.value-a.value;});
+  if(!pts.length){svg.setAttribute("aria-label","暂无足够数据可生成漏斗");return;}
+  var centerX=130, W_top=220,W_bottom=120,gap=3,h=54;
+  var defs=document.createElementNS(NS,"defs");
+  ["#dc2626|#b91c1c","#ea580c|#c2410c","#7c3aed|#6d28d9"].forEach(function(pair,i){
+    var colors=pair.split("|"),grad=document.createElementNS(NS,"linearGradient");
+    grad.setAttribute("id","fn-grad-"+i);
+    grad.setAttribute("x1","0");grad.setAttribute("y1","0");grad.setAttribute("x2","0");grad.setAttribute("y2","1");
+    colors.forEach(function(color,j){var stop=document.createElementNS(NS,"stop");stop.setAttribute("offset",j?"100%":"0%");stop.setAttribute("stop-color",color);grad.appendChild(stop);});
+    defs.appendChild(grad);
+  });
+  svg.appendChild(defs);
+  function hideTip(){tip.hidden=true;tip.textContent="";}
+  function showTip(pt){tip.replaceChildren();var b=document.createElement("b");b.textContent=pt.name+" · "+pt.value+" 亿（情景估算）";tip.appendChild(b);tip.appendChild(document.createTextNode(pt.reason));tip.hidden=false;}
+  var reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  pts.forEach(function(pt,i){
+    var w1=W_top-(W_top-W_bottom)*(i/3);
+    var w2=W_top-(W_top-W_bottom)*((i+1)/3);
+    var y1=i*(h+gap),y2=y1+h;
+    var p1=[centerX-w1/2,y1],p2=[centerX+w1/2,y1],p3=[centerX+w2/2,y2],p4=[centerX-w2/2,y2];
+    var g=document.createElementNS(NS,"g");
+    g.setAttribute("class","fn-layer");g.setAttribute("tabindex","0");
+    g.setAttribute("role","button");
+    g.setAttribute("aria-label",pt.name+"，情景估算"+pt.value+"亿元。"+pt.reason);
+    var poly=document.createElementNS(NS,"polygon");
+    poly.setAttribute("points",[p1,p2,p3,p4].map(function(p){return p.join(",");}).join(" "));
+    poly.setAttribute("fill","url(#fn-grad-"+i+")");
+    poly.setAttribute("class","fn-poly");g.appendChild(poly);
+    var left=document.createElementNS(NS,"text");left.setAttribute("x","36");left.setAttribute("y",String(y1+h/2+4));left.setAttribute("class","fn-txt fn-name");left.textContent=pt.name;g.appendChild(left);
+    var right=document.createElementNS(NS,"text");right.setAttribute("x","226");right.setAttribute("y",String(y1+h/2+4));right.setAttribute("text-anchor","end");right.setAttribute("class","fn-txt fn-val");right.textContent=pt.value+" 亿";g.appendChild(right);
+    function enter(){wrap.classList.add("hot");g.classList.add("on");showTip(pt);}
+    function leave(){wrap.classList.remove("hot");g.classList.remove("on");hideTip();}
+    g.addEventListener("mouseenter",enter);g.addEventListener("mouseleave",leave);
+    g.addEventListener("focus",enter);g.addEventListener("blur",leave);
+    g.addEventListener("click",function(){if(g.classList.contains("on"))leave();else enter();});
+    g.addEventListener("keydown",function(e){if(e.key==="Escape"){leave();g.blur();}if(e.key==="Enter"||e.key===" "){e.preventDefault();enter();}});
+    svg.appendChild(g);
+    if(!reduced&&!document.body.classList.contains("moff")){
+      poly.style.transform="scaleY(0)";poly.style.opacity="0";
+      setTimeout(function(){poly.style.transition="transform .4s cubic-bezier(.2,.8,.3,1),opacity .4s";poly.style.transform="scaleY(1)";poly.style.opacity="1";},120+i*100);
+    }
+  });
+}
+// 仅复用原页面已明示的估算数值，不表示资金真实追踪。
+function renderTodayMoneyFunnel(){
+  var items=[
+    {to:"深圳",value:52,reason:"高端零售不足等因素属于待核实的解释线索。"},
+    {to:"线上",value:42,reason:"线上交易不必然构成本地价值外流，平台、商家和结算所在地仍需核对。"},
+    {to:"东莞",value:34,reason:"总部员工跨城消费为原页面情景假设，缺少同口径流向证据。"}
+  ];
+  renderFunnel(items,128);
+}
+renderTodayMoneyFunnel();
+
 // 视角切换
 window.setView=function(v){
   document.getElementById("view-consume").style.display=v==="consume"?"grid":"none";
