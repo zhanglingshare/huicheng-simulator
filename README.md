@@ -35,7 +35,7 @@
 
 ### 01 · 全息工作区：一眼看见产业与城市的关系
 
-<!-- 截图位：保存真实线上首页截图至 assets/screenshots/01-holo-workspace.png -->
+**📸 截图位：** `assets/screenshots/01-holo-workspace.png`（全息工作区总览）
 <!-- 图片准备好后，取消下一行注释 -->
 <!-- ![全息工作区总览：关系网络、情报流、变化详情与时间线](./assets/screenshots/01-holo-workspace.png) -->
 
@@ -47,7 +47,7 @@
 
 ### 02 · 情报流：从公开变化中发现问题
 
-<!-- 截图位：保存情报流与变化类型分布截图至 assets/screenshots/02-intelligence-feed.png -->
+**📸 截图位：** `assets/screenshots/02-intelligence-feed.png`（情报流与变化类型分布）
 <!-- ![情报流与变化类型分布](./assets/screenshots/02-intelligence-feed.png) -->
 
 **这张图要展示：** 真实事件列表、日期、变化类型分布与事件入口。
@@ -56,7 +56,7 @@
 
 ### 03 · 变化详情：把事件放回关系网络中
 
-<!-- 截图位：保存选中事件后的详情与关系结构图至 assets/screenshots/03-change-detail.png -->
+**📸 截图位：** `assets/screenshots/03-change-detail.png`（变化详情与关系结构图）
 <!-- ![变化详情与事件关系结构图](./assets/screenshots/03-change-detail.png) -->
 
 **这张图要展示：** 事件说明、关联主体、关系连线、关系类型和可追溯的公开来源。
@@ -65,7 +65,7 @@
 
 ### 04 · 风洞测试：比较不同假设下的情景
 
-<!-- 截图位：保存风洞测试真实页面截图至 assets/screenshots/04-wind-tunnel.png -->
+**📸 截图位：** `assets/screenshots/04-wind-tunnel.png`（风洞测试与情景比较）
 <!-- ![风洞测试与情景比较](./assets/screenshots/04-wind-tunnel.png) -->
 
 **这张图要展示：** 用户可见的情景条件、对比区域和结果呈现。请以线上当前实际页面为准。
@@ -76,7 +76,7 @@
 
 ### 05 · 发展路径：把不同选择放在一起比较
 
-<!-- 截图位：保存路径比较页面截图至 assets/screenshots/05-pathways.png -->
+**📸 截图位：** `assets/screenshots/05-pathways.png`（发展路径比较）
 <!-- ![发展路径比较](./assets/screenshots/05-pathways.png) -->
 
 **这张图要展示：** 路径选项、比较维度与实际页面提供的差异信息。
@@ -87,7 +87,7 @@
 
 ### 06 · 盲点与报告：把疑问带回现实核实
 
-<!-- 截图位：保存盲点页面或报告页面截图至 assets/screenshots/06-blindspots-and-report.png -->
+**📸 截图位：** `assets/screenshots/06-blindspots-and-report.png`（盲点提示或分析报告）
 <!-- ![盲点提示与分析报告](./assets/screenshots/06-blindspots-and-report.png) -->
 
 **这张图要展示：** 盲点提示或报告页面中的实际内容、可读图表与解释说明。
