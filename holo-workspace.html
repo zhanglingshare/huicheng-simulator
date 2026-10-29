@@ -1277,7 +1277,7 @@ function renderDetail(kind, data){
         '</div>'+
       '</div>'+
       '<div class="why">'+esc(ev.before_after||ev.fact)+'</div>'+
-      '<button class="goto" type="button" data-focus-node="'+esc(ev.node)+'"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span><span class="tx">在网络中高亮相关主体</span><span class="ar">查看网络</span></button>'+
+      '<button class="goto" type="button" data-focus-node="'+esc(ev.node)+'" data-event-id="'+esc(ev.id)+'"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span><span class="tx">在关系图里高亮</span><span class="ar">查看网络</span></button>'+
       '<div class="sec"><span class="n">1</span>发生了什么</div>'+
       '<div class="txt">'+esc(ev.fact)+'</div>'+
       '<div class="sec"><span class="n">2</span>关键数字（若有公开记录）</div>'+
@@ -1289,7 +1289,16 @@ function renderDetail(kind, data){
       '<div class="d-note">关系图展示公开信息中的关联线索，不单独证明因果关系。</div>';
   }
   host.scrollTop=0;
-  host.querySelectorAll('.goto').forEach(function(b){b.addEventListener('click',function(){document.getElementById('tabDetail').click();const id=b.getAttribute('data-focus-node');if(id&&byId[id]){select(id);pulseNode(id,3400);}});});
+  host.querySelectorAll('.goto').forEach(function(b){b.addEventListener('click',function(){
+    const id=b.getAttribute('data-focus-node');
+    const eventId=b.getAttribute('data-event-id');
+    if(!id||!byId[id])return;
+    if(eventId){focusNode(id,eventId);return;}
+    switchTab('detail');
+    S.hoverId=null;
+    select(id);
+    pulseNode(id,3400);
+  });});
 }
 
 
@@ -1313,7 +1322,7 @@ function renderFeed(){
   list.slice(1).forEach(function(f){
     const n=byId[f.node];
     if(f.d!==lastDate){rows+='<div class="fgrp">'+esc(f.d||'日期未注明')+'</div>';lastDate=f.d;}
-    rows+='<div class="frow" data-node="'+esc(f.node)+'" data-event="'+esc(f.id)+'" data-kind="'+esc(f.kind)+'">'+
+    rows+='<div class="frow" role="button" tabindex="0" aria-label="'+esc(f.t+'，查看变化详情')+'" data-node="'+esc(f.node)+'" data-event="'+esc(f.id)+'" data-kind="'+esc(f.kind)+'">'+
       '<span><span class="tt">'+esc(f.t)+'</span>'+
       '<span class="mm"><i style="background:'+(f.grade==='A'?'#16a34a':f.grade==='B'?'#d97706':'#94a3b8')+'"></i>'+
       esc(f.kind)+' · 涉及 '+((topEvent&&f.id===topEvent.id?topEvent.involved_node_ids:list.find(function(x){return x.id===f.id;})?.involved_node_ids)||[]).length+' 个主体 · '+esc(f.grade)+' 级</span></span>'+
@@ -1335,13 +1344,16 @@ function renderFeed(){
     '</div>'+rows+
     '<div class="d-note" style="justify-content:center;margin-top:10px">公开变化记录共 '+list.length+' 项 · 点击任一事件查看关联主体、变化和待核实事项</div>';
   host.querySelectorAll('.frow').forEach(function(x){
-    x.onclick=function(){
-      const ev=EVENTS.find(function(e){return e.id===x.getAttribute('data-event');});
-      if(ev){document.getElementById('tabDetail').click();focusNode(ev.node,ev);}
-    };
+    function openEvent(){
+      const nodeId=x.getAttribute('data-node');
+      const eventId=x.getAttribute('data-event');
+      if(nodeId&&eventId)focusNode(nodeId,eventId);
+    }
+    x.onclick=openEvent;
+    x.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openEvent();}};
   });
   const topBtn=host.querySelector('.fh-btn');
-  if(topBtn)topBtn.onclick=function(){document.getElementById('tabDetail').click();focusNode(top.node,topEvent);};
+  if(topBtn)topBtn.onclick=function(){focusNode(top.node,top.id);};
   host.querySelectorAll('.ff').forEach(function(b){
     b.onclick=function(){
       host.querySelectorAll('.ff').forEach(function(x){x.classList.remove('on');});
@@ -1406,21 +1418,26 @@ function renderTimeline(){
     b.onclick = () => {
       document.querySelectorAll('.tl-ev').forEach(x => x.classList.remove('sel'));
       b.classList.add('sel');
-      focusNode(ev.node, ev);
+      focusNode(ev.node, ev.id);
     };
     host.appendChild(b);
   });
 }
 
-function focusNode(id, ev){
+function focusNode(id, eventRef){
+  const n=byId[id];
+  if(!n)return;
+  const ev=typeof eventRef==='string' ? EVENTS.find(e=>e.id===eventRef) : eventRef;
+  S.hoverId=null;
+  S.dragId=null;
   select(id);
-  pulseNode(id, 3400);
-  if (ev) {
-    document.getElementById('tabDetail').click();
-    renderDetail('event', ev);
-  } else {
-    const found = EVENTS.find(e => e.node === id);
-    if (found) renderDetail('event', found); else renderDetail('node', byId[id]);
+  pulseNode(id,3400);
+  switchTab('detail');
+  if(ev) renderDetail('event',ev);
+  else {
+    const found=EVENTS.find(e=>e.node===id);
+    if(found) renderDetail('event',found);
+    else renderDetail('node',n);
   }
 }
 window.focusNode = focusNode;
@@ -1434,6 +1451,12 @@ function switchTab(which){
   document.getElementById('tabFeed').setAttribute('aria-selected', !isDetail);
   document.getElementById('viewDetail').classList.toggle('on', isDetail);
   document.getElementById('viewFeed').classList.toggle('on', !isDetail);
+  if(!isDetail){
+    S.hoverId=null;
+    S.dragId=null;
+    select(null);
+    S.dirty=true;
+  }
 }
 document.getElementById('tabDetail').onclick = () => switchTab('detail');
 document.getElementById('tabFeed').onclick = () => switchTab('feed');
