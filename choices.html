@@ -1,245 +1,103 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>惠城产业风洞 · 五条路</title>
-<script src="model.js"></script>
-<style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;height:100%;overflow:hidden}
-body{background:linear-gradient(180deg,#0a1830 0%,#14294d 45%,#0c1e38 100%);
-  color:#f0f4fa;font:15px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
-  -webkit-font-smoothing:antialiased;position:relative}
-body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(800px 400px at 50% 0%,rgba(59,130,246,.18),transparent 60%),
-             radial-gradient(600px 300px at 50% 100%,rgba(240,199,94,.06),transparent 60%)}
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#050e1d">
+<title>05 · 惠城2030 五条发展路径｜惠城产业风洞</title>
+<meta name="description" content="交互探索惠城规划中的重点产业发展方向及其可能的协同关系。公开规划与模型情景分层呈现，不构成预测。">
+<link rel="stylesheet" href="choices-v3.css">
+<link rel="stylesheet" href="hc-journey-nav.css">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <a class="identity" href="index.html" aria-label="返回惠城产业风洞首页">
+      <span class="identity-mark" aria-hidden="true">◈</span>
+      <span>惠城产业风洞<small>HUICHENG · FUTURE PATHWAYS</small></span>
+    </a>
+    <div class="top-links"><span class="chapter">CHAPTER 05 / 10</span><a href="fun.html">← 城市生活</a><a href="future.html">未来 →</a></div>
+  </header>
 
-.hud{position:relative;z-index:10;height:100vh;display:flex;flex-direction:column;padding:16px 18px;max-width:640px;margin:0 auto}
-
-.top{display:flex;align-items:center;gap:12px;flex:none}
-.back{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;
-  color:#b8c5d9;text-decoration:none;font-size:18px;flex:none;backdrop-filter:blur(10px)}
-.ttl{flex:1;min-width:0}
-.ttl h1{font-size:20px;margin:0;font-weight:800;letter-spacing:.3px}
-.ttl span{font-size:12.5px;color:#7a8ba3;display:block;line-height:1.4;margin-top:2px}
-
-/* 塔身区 */
-.stage{flex:1;min-height:0;position:relative;display:flex;align-items:flex-end;justify-content:center;margin:20px 0}
-.tower-wrap{position:relative;display:flex;align-items:flex-end;gap:20px;height:100%}
-.tower{display:flex;flex-direction:column-reverse;gap:6px;align-items:center;justify-content:flex-end}
-.block{width:180px;max-width:40vw;padding:16px 12px;border-radius:16px;
-  background:linear-gradient(145deg,rgba(255,255,255,.18) 0%,rgba(125,211,252,.08) 100%);
-  border:1px solid rgba(255,255,255,.25);
-  box-shadow:0 4px 20px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.3);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  text-align:center;cursor:pointer;transition:all .4s cubic-bezier(.34,1.56,.64,1);
-  position:relative;overflow:hidden}
-.block::before{content:"";position:absolute;top:0;left:0;right:0;height:40%;
-  background:linear-gradient(180deg,rgba(255,255,255,.15),transparent)}
-.block .b-name{font-size:13.5px;font-weight:700;color:#fff;line-height:1.3;position:relative}
-.block .b-val{font-size:11px;color:#7dd3fc;margin-top:4px;font-variant-numeric:tabular-nums;position:relative}
-.block.placed{background:linear-gradient(145deg,rgba(125,211,252,.25) 0%,rgba(59,130,246,.15) 100%);
-  border-color:rgba(125,211,252,.5);
-  box-shadow:0 4px 24px rgba(125,211,252,.2),inset 0 1px 0 rgba(255,255,255,.3)}
-.block:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.4)}
-.block.shake{animation:shake .4s}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
-
-/* 刻度线 */
-.scale{position:relative;width:3px;height:100%;background:linear-gradient(180deg,rgba(240,199,94,.4),rgba(255,255,255,.15));flex:none;border-radius:2px}
-.scale .mark{position:absolute;left:12px;transform:translateY(-50%);font-size:11.5px;color:#b8c5d9;white-space:nowrap;font-weight:600}
-.scale .mark.target{color:#f0c75e;font-weight:700}
-.scale .mark.base{color:#7a8ba3;font-weight:400}
-.scale .target-line{position:absolute;left:-8px;right:-8px;height:2px;background:linear-gradient(90deg,transparent,rgba(240,199,94,.7),transparent);box-shadow:0 0 12px rgba(240,199,94,.4)}
-.scale .cur-line{position:absolute;left:-14px;right:-14px;height:3px;background:#7dd3fc;border-radius:2px;
-  box-shadow:0 0 16px rgba(125,211,252,.8),0 0 4px #fff;transition:bottom .6s cubic-bezier(.34,1.56,.64,1)}
-.scale .cur-line::after{content:"";position:absolute;right:-8px;top:50%;transform:translateY(-50%);
-  width:8px;height:8px;border-radius:50%;background:#7dd3fc;box-shadow:0 0 8px rgba(125,211,252,.8)}
-
-/* 底部未放积木 */
-.pool{flex:none;padding:10px 0 16px}
-.pool-label{font-size:11.5px;color:#7a8ba3;text-align:center;margin-bottom:10px}
-.pool-blocks{display:flex;gap:8px;overflow-x:auto;padding:4px;scrollbar-width:none}
-.pool-blocks::-webkit-scrollbar{display:none}
-.pool-block{flex:none;width:120px;padding:12px;border-radius:14px;
-  background:linear-gradient(145deg,rgba(255,255,255,.1) 0%,rgba(255,255,255,.04) 100%);
-  border:1px solid rgba(255,255,255,.15);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
-  text-align:center;cursor:pointer;transition:.25s;backdrop-filter:blur(10px)}
-.pool-block:hover{background:linear-gradient(145deg,rgba(125,211,252,.2) 0%,rgba(125,211,252,.08) 100%);
-  border-color:rgba(125,211,252,.4);transform:translateY(-2px)}
-.pool-block .pb-name{font-size:11.5px;font-weight:600;color:#e2e8f0;line-height:1.3}
-.pool-block .pb-val{font-size:10px;color:#7dd3fc;margin-top:2px}
-
-/* 底部结果 */
-.result-bar{flex:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
-  border-radius:18px;padding:14px 18px;backdrop-filter:blur(12px);margin-bottom:12px}
-.result-bar .r-top{display:flex;justify-content:space-between;align-items:baseline}
-.result-bar .r-label{font-size:12px;color:#7a8ba3}
-.result-bar .r-val{font-size:26px;font-weight:800;color:#f0f4fa;font-variant-numeric:tabular-nums}
-.result-bar .r-val small{font-size:14px;color:#7a8ba3;font-weight:400}
-.result-bar .r-gap{font-size:12.5px;margin-top:6px;color:#f0c75e;font-weight:600}
-.result-bar .r-gap.over{color:#34d399}
-
-.next-btn{flex:none;width:100%;padding:15px;border:none;border-radius:16px;
-  background:linear-gradient(135deg,#f0c75e,#d4a843);color:#1a1a2e;
-  font-size:15px;font-weight:800;cursor:pointer;transition:.2s;font-family:inherit}
-.next-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(240,199,94,.3)}
-.next-btn:disabled{opacity:.4;cursor:default;transform:none;box-shadow:none}
-</style><style>
-.hc-route-bar{position:sticky;top:0;z-index:60;display:flex;gap:6px;align-items:center;overflow-x:auto;white-space:nowrap;padding:10px 12px;background:#081426f2;border-bottom:1px solid #31415d;scrollbar-width:thin;font:600 12px/1.4 -apple-system,"PingFang SC",sans-serif}
-.hc-route-bar a{flex:none;border:1px solid #2c4568;background:#142842;border-radius:20px;color:#b9c9e1;padding:7px 12px;text-decoration:none}
-.hc-route-bar a.on{color:#fff;background:#245fba;border-color:#5598ff}
-</style><link rel="stylesheet" href="hc-journey-nav.css">
-</head><body>
-
-<div class="hud">
-  <div class="top">
-    <a class="back" href="fun.html">←</a>
-    <div class="ttl">
-      <h1>05 · 搭你的惠城 2030</h1>
-      <span>6 块积木，搭到模型参考刻度 1500 亿</span>
-    </div>
-  </div>
-
-  <div class="stage">
-    <div class="tower-wrap">
-      <div class="tower" id="tower"></div>
-      <div class="scale" id="scale">
-        <div class="target-line" style="top:0"></div>
-        <div class="mark target" style="top:0">1500亿 参考刻度</div>
-        <div class="mark base" style="bottom:0">632.7亿 高新区现状</div>
-        <div class="cur-line" id="curLine" style="bottom:0"></div>
+  <main class="main">
+    <header class="intro">
+      <div>
+        <div class="eyebrow"><i></i> THE CITY WE BUILD · 2030</div>
+        <h1>惠城2030<span class="dot">.</span> <em>五条路径如何协同？</em></h1>
+        <p>不是五块积木的简单相加。点亮一个方向，看它与其他路径怎样联系。</p>
       </div>
+      <div class="intro-stat" aria-label="规划路径数量">
+        <strong>05</strong><span>发展方向<small>基于公开规划与政策报道整理</small></span>
+      </div>
+    </header>
+
+    <div class="workspace">
+      <section class="world" aria-label="五条发展路径关系网络">
+        <canvas id="cityCanvas" aria-hidden="true"></canvas>
+        <div class="stage-vignette" aria-hidden="true"></div>
+        <div class="map-title">
+          <span class="eyebrow">HUI CHENG / CONNECTED FUTURE</span>
+          <p id="sceneCaption">五条路并行推进，关联只是可探索的规划关系示意。</p>
+        </div>
+        <div class="mode-switch" role="group" aria-label="网络视角">
+          <button type="button" data-view="all" aria-pressed="false">整体视图</button>
+          <button type="button" data-view="network" aria-pressed="true">产业关系</button>
+          <button type="button" data-view="space" aria-pressed="false">空间视角</button>
+        </div>
+        <svg id="network" class="network" viewBox="0 0 1000 680" preserveAspectRatio="xMidYMid meet" aria-label="五条路径的可交互关系示意图" role="img">
+          <defs>
+            <filter id="glow"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <radialGradient id="aura"><stop offset="0" stop-color="#74f0e6" stop-opacity=".28"/><stop offset=".65" stop-color="#3d8fbd" stop-opacity=".1"/><stop offset="1" stop-color="#174263" stop-opacity="0"/></radialGradient>
+          </defs>
+          <g id="graphRoot"></g>
+        </svg>
+        <div class="world-bottom">
+          <div class="world-hint"><span class="pulse-dot"></span><strong>点击节点，观察五条路的联系</strong><small>概念关系图 · 并非精确地理位置或企业实测网络</small></div>
+          <div class="world-tools">
+            <button id="resetScene" type="button" title="恢复整体关系">↺ <span>复位视图</span></button>
+            <button id="shareFocus" type="button" title="复制当前路径分享链接">↗ <span>分享这一条</span></button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="inspector" aria-label="当前路径的公开规划与解读">
+        <div class="inspect-top"><span class="inspect-heading">PATH INTELLIGENCE</span><span id="pathIndex" class="path-index">01 / 05</span></div>
+        <div class="inspect-art" id="inspectorArt" aria-hidden="true"></div>
+        <div class="inspect-title">
+          <div class="icon-wrap" id="detailIcon">▣</div>
+          <div><h2 id="detailName">新投产项目</h2><span class="policy-pill"><span class="tiny-dot"></span>公开政策方向</span></div>
+        </div>
+        <p id="detailLead" class="detail-lead"></p>
+        <div class="inspect-tabs" role="tablist" aria-label="路径详情">
+          <button role="tab" aria-selected="true" data-tab="planning" type="button">规划要点</button>
+          <button role="tab" aria-selected="false" data-tab="evidence" type="button">公开线索</button>
+          <button role="tab" aria-selected="false" data-tab="links" type="button">相关联系</button>
+        </div>
+        <div class="inspect-content" id="inspectContent" role="tabpanel" aria-live="polite"></div>
+        <div class="inspect-footer">
+          <div class="policy-note"><span>⊙</span><span>规划方向不等于模型参数。连线表示解读性联系，不代表已证实因果。</span></div>
+          <a id="sourceLink" href="https://www.hcq.gov.cn/" target="_blank" rel="noopener noreferrer">查看公开依据 <span>↗</span></a>
+        </div>
+      </aside>
     </div>
-  </div>
 
-  <div class="pool">
-    <div class="pool-label">点一块积木放到塔上 · 点塔上的积木拿掉</div>
-    <div class="pool-blocks" id="pool"></div>
-  </div>
+    <section class="path-deck" aria-label="五条规划路径">
+      <div class="deck-heading"><span><i></i> 选择一条发展路径</span><p>点击卡片 · 点亮关联 · 阅读依据</p></div>
+      <div class="cards" id="pathCards"></div>
+    </section>
 
-  <div class="result-bar">
-    <div class="r-top">
-      <span class="r-label">你的塔高</span>
-      <span class="r-val"><span id="curVal">632.7</span><small> 亿</small></span>
-    </div>
-    <div class="r-gap" id="gap">离参考刻度 1500 亿还差 867.3 亿</div>
-  </div>
-
-  <button class="next-btn" id="nextBtn" onclick="goNext()">进入第六页 · 看未来模拟 →</button>
+    <section class="bridge" aria-label="进入未来页">
+      <div class="bridge-copy"><span class="bridge-eyebrow">NEXT / CHAPTER 06</span><h3>路径看清了，<em>未来会怎样？</em></h3><p>下一页沿用现有模拟内核。这里的关系探索不修改第六页模型参数或预测结果。</p></div>
+      <a href="future.html" class="continue">进入未来模拟 <span>↗</span></a>
+    </section>
+    <footer class="foot">
+      <div><strong>重要口径</strong> 五条方向据公开政府规划、工作部署及政策报道归类，页面中的路径联系为教学与观察示意。项目进展以原始公告为准。此页不输出投资回报、产值增量或未经检验的模型概率。</div>
+      <a href="https://www.hcq.gov.cn/" target="_blank" rel="noopener noreferrer">惠城区人民政府门户 ↗</a>
+    </footer>
+  </main>
+  <div class="toast" id="toast" role="status" hidden></div>
 </div>
-
-<script>
-// 6块积木：按mu值定大小和颜色
-var BLOCKS=[
-  {mu:500,name:'新投产项目',desc:'15宗开工/18宗投产',color:'#fbbf24',icon:'🏭'},
-  {mu:200,name:'三大集群',desc:'电子/装备/新能源',color:'#60a5fa',icon:'⚙️'},
-  {mu:100,name:'AI机器人',desc:'新赛道',color:'#a78bfa',icon:'🤖'},
-  {mu:100,name:'生产性服务业',desc:'双轮驱动',color:'#34d399',icon:'☕'},
-  {mu:50, name:'融深融湾',desc:'外部变量',color:'#f87171',icon:'🚄'},
-  {mu:30, name:'跨江深惠',desc:'半小时通勤圈',color:'#94a3b8',icon:'🌉'}
-];
-
-// mu=500 → 220px宽，mu=30 → 120px宽
-function blockWidth(mu){return Math.round(120 + (mu-30)/(500-30)*(220-120));}
-
-var BASE=632.7, TARGET=1500;
-var placed=[]; // 已放的索引
-
-function total(){return BASE + placed.reduce(function(s,i){return s+BLOCKS[i].mu;},0);}
-
-function render(){
-  // 塔
-  var tw=document.getElementById('tower');
-  tw.innerHTML='';
-  // 从下到上：已放的按放入顺序
-  placed.forEach(function(idx){
-    var b=BLOCKS[idx];
-    var w=blockWidth(b.mu);
-    var d=document.createElement('div');
-    d.className='block placed';
-    d.style.width=w+'px';
-    d.style.background='linear-gradient(145deg,'+b.color+'44 0%,'+b.color+'22 100%)';
-    d.style.borderColor=b.color+'88';
-    d.innerHTML='<div class="b-name">'+b.icon+' '+b.name+'</div><div class="b-val">+'+b.mu+'亿</div>';
-    d.onclick=function(){removeBlock(idx);};
-    tw.appendChild(d);
-  });
-  // 底部地基
-  var base=document.createElement('div');
-  base.style.cssText='width:210px;max-width:52vw;height:14px;border-radius:7px;'+
-    'background:linear-gradient(180deg,rgba(255,255,255,.25),rgba(255,255,255,.08));'+
-    'box-shadow:0 4px 16px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.3)';
-  tw.appendChild(base);
-
-  // 池
-  var pool=document.getElementById('pool');
-  pool.innerHTML='';
-  BLOCKS.forEach(function(b,i){
-    if(placed.indexOf(i)>=0)return;
-    var w=Math.max(90,blockWidth(b.mu)*0.7);
-    var d=document.createElement('div');
-    d.className='pool-block';
-    d.style.width=w+'px';
-    d.style.borderColor=b.color+'55';
-    d.innerHTML='<div class="pb-name">'+b.icon+' '+b.name+'</div><div class="pb-val">+'+b.mu+'亿</div>';
-    d.onclick=function(){placeBlock(i);};
-    pool.appendChild(d);
-  });
-
-  // 数字
-  var t=total();
-  animateVal(t);
-
-  // 刻度线位置：塔高对应在 0~100%（target在0%，base在100%）
-  var pct=Math.max(0,Math.min(100,(t-TARGET)/(BASE-TARGET)*100));
-  document.getElementById('curLine').style.bottom=pct+'%';
-
-  // gap
-  var gapEl=document.getElementById('gap');
-  var diff=TARGET-t;
-  if(diff>0){
-    gapEl.textContent='离参考刻度 1500 亿还差 '+diff.toFixed(0)+' 亿';
-    gapEl.className='r-gap';
-  }else{
-    gapEl.textContent='已过参考刻度 1500 亿 '+( -diff).toFixed(0)+' 亿';
-    gapEl.className='r-gap over';
-  }
-}
-
-function placeBlock(i){
-  if(placed.indexOf(i)>=0)return;
-  placed.push(i);
-  render();
-}
-function removeBlock(i){
-  placed=placed.filter(function(x){return x!==i;});
-  render();
-}
-
-// 数字滚动
-function animateVal(target){
-  var el=document.getElementById('curVal');
-  var start=parseFloat(el.textContent)||BASE;
-  var dur=600,t0=null;
-  function step(ts){
-    if(!t0)t0=ts;
-    var p=Math.min(1,(ts-t0)/dur);
-    var e=1-Math.pow(1-p,3);
-    el.textContent=(start+(target-start)*e).toFixed(1);
-    if(p<1)requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
-
-function goNext(){
-  // 把选择存下来，传给 future.html
-  var active=placed.map(function(i){return i;});
-  localStorage.setItem('hcChoices',JSON.stringify(active));
-  location.href='future.html?from=choices';
-}
-
-render();
-</script>
+<script src="choices-v3.js"></script>
 <script src="hc-journey-nav.js" defer></script>
 </body></html>
