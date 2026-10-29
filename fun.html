@@ -34,6 +34,7 @@ button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:
 @media(max-width:650px){.map-roll{bottom:55px;right:9px;font-size:10px;padding:10px 12px}}
 </style>
 <link rel="stylesheet" href="hc-journey-nav.css">
+<link rel="stylesheet" href="fun-participation.css">
 </head>
 <body>
 <div class="page">
@@ -44,6 +45,18 @@ button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:
 <section class="hero">
   <div><div class="kicker">CHAPTER 04 / CITY IN MOTION</div><h1>今晚，惠城<em>去哪玩？</em></h1><p class="lead">不想做攻略，就在城市里随手点一个。<b>找去处、问朋友、看见夜晚的人气线索。</b> 这里是探索游戏，不是实时拥挤地图。</p></div>
   <div class="summary"><div><div class="num" id="sumCount">14</div><div class="lab">公开去处</div></div><span class="vline"></span><div><div class="num hot" id="sumHot">4</div><div class="lab">高热讨论档</div></div><span class="vline"></span><div><div class="num" id="sumPulse">3</div><div class="lab">公开生活线索</div></div></div>
+</section>
+<section class="city-lens" id="cityLens" aria-label="今晚的城市由你选择">
+  <div class="lens-roles">
+    <div class="lens-label">你今晚是谁？ <em>换身份，地图就换一个视角</em></div>
+    <div class="persona-buttons" id="personaButtons" role="group" aria-label="选择游玩身份"></div>
+  </div>
+  <div class="lens-time">
+    <div class="lens-label">今晚几点出发？ <em>主题偏好，不推断营业时间</em></div>
+    <div class="time-buttons" id="timeButtons" role="group" aria-label="选择出发时段"></div>
+    <button class="lens-jump" id="groupJump" type="button">👥 叫朋友一起来决定 ↗</button>
+  </div>
+  <p class="lens-note" style="grid-column:1/-1">不同身份、时段会改变推荐亮度和排序；只做偏好情景，不代表实时人数、开放状态或真实出行预测。</p>
 </section>
 <section class="explorer" aria-label="筛选去哪玩"><span class="find-label">今天想怎么过？</span><div class="chips" id="categoryChips"></div><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg><input type="search" id="spotSearch" aria-label="搜索去处" placeholder="搜去处、夜景、咖啡、遛娃…" autocomplete="off"></label></section>
 <div class="main-grid">
@@ -63,17 +76,60 @@ button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:
       <g opacity=".55" stroke="#c5d9e8" fill="none" stroke-width="1.5" stroke-dasharray="4 9"><path d="M90 210 Q291 105 390 185 T743 149"/><path d="M170 508 Q302 380 480 467 T749 412"/></g>
     </svg>
     <div class="map-status"><span class="pill"><i></i><b id="spotCount">14 个去处</b><span>可探索</span></span><span class="pill">讨论热度分档 · 非实时人流量</span></div>
-    <div class="pins" id="spotPins"></div><button type="button" class="map-roll" id="mapRollBtn">🎲 摇一站 ↗</button>
+    <div class="map-scenario-label" id="mapScenarioLabel" aria-live="polite">✦ 公开热度视角</div>
+          <div class="pins" id="spotPins"></div><button type="button" class="map-roll" id="mapRollBtn">🎲 摇一站 ↗</button>
     <footer class="map-foot"><div class="map-legend"><span><i style="--cc:#de8a43"></i>散步 / 咖啡</span><span><i style="--cc:#2d87d7"></i>逛街</span><span><i style="--cc:#b766df"></i>活动 / 夜游</span><span><i style="--cc:#24ae89"></i>运动 / 亲子</span></div><span class="footnote">探索意象图 <b>≠ 实际地理定位</b></span></footer>
   </div>
   <div class="list-mode" id="listMode"><div class="place-list" id="placeList"></div></div>
 </section>
 <aside class="right-col" aria-label="今晚去哪玩推荐与信息">
   <section class="draw"><div class="eyebrow">LET THE CITY DECIDE</div><h3>今晚去哪儿？<br>让城市替你选一站。</h3><p>在公开去处里摇一个，你自己决定去不去。</p><button id="rollBtn" type="button">🎲 摇一站 <span aria-hidden="true">↗</span></button><span class="mini" id="rollStatus">不需要登录</span><span class="sparkle" aria-hidden="true">✳</span></section>
-  <section class="card focus-card" id="detailCard"><div class="section-head"><h3>正在探索</h3><span class="small" id="detailCaption">选择地图光点</span></div><div class="featured"><div class="featured-icon" id="spotEmoji">🌙</div><div><h4 id="spotName">请选择一个去处</h4><div class="badge"><i class="dot"></i><span id="spotLevel">近期公开讨论热度</span></div></div></div><div class="divider"></div><div class="focus-reason"><b>✨ 为什么值得看看</b><p id="spotWhy">点亮城市里的一个光点，发现它的故事。</p></div><div class="focus-info"><div class="info"><strong>有什么</strong><p id="spotDetail">从城市里发现值得探索的好去处。</p></div><div class="info"><strong>风洞观察</strong><p id="spotWatch">把好玩和城市生活联系起来。</p></div></div><div class="focus-actions"><button class="action primary" id="inviteBtn" type="button">✉️ 复制邀约</button><button class="action" id="saveBtn" type="button">☆ 加入清单</button></div><div class="my-plan" id="myPlan" hidden><div class="my-plan-head"><span>⭐ 我的今晚清单</span><span id="planCount">0处</span></div><div class="my-plan-items" id="myPlanItems"></div><button type="button" id="planShare">✉️ 复制清单，约朋友一起去</button></div><div class="focus-warn">公开去处仅供探索，具体营业、活动、费用与安全信息以现场或官方渠道为准。</div></section>
+  <section class="card focus-card" id="detailCard"><div class="section-head"><h3>正在探索</h3><span class="small" id="detailCaption">选择地图光点</span></div><div class="featured"><div class="featured-icon" id="spotEmoji">🌙</div><div><h4 id="spotName">请选择一个去处</h4><div class="badge"><i class="dot"></i><span id="spotLevel">近期公开讨论热度</span></div></div></div><div class="divider"></div><div class="focus-reason"><b>✨ 为什么值得看看</b><p id="spotWhy">点亮城市里的一个光点，发现它的故事。</p></div><div class="focus-lens" id="focusLens" aria-live="polite">选择身份与时段，看看这站和你的今晚有什么关系。</div><div class="focus-info"><div class="info"><strong>有什么</strong><p id="spotDetail">从城市里发现值得探索的好去处。</p></div><div class="info"><strong>风洞观察</strong><p id="spotWatch">把好玩和城市生活联系起来。</p></div></div><div class="focus-actions"><button class="action primary" id="inviteBtn" type="button">✉️ 复制邀约</button><button class="action" id="saveBtn" type="button">☆ 加入清单</button></div><div class="my-plan" id="myPlan" hidden><div class="my-plan-head"><span>⭐ 我的今晚清单</span><span id="planCount">0处</span></div><div class="my-plan-items" id="myPlanItems"></div><button type="button" id="planShare">✉️ 复制清单，约朋友一起去</button></div><div class="focus-warn">公开去处仅供探索，具体营业、活动、费用与安全信息以现场或官方渠道为准。</div></section>
   <section class="card rank-card"><div class="section-head"><h3>今晚大家在关注什么？</h3><span class="small">基于公开讨论分档</span></div><div class="rank-list" id="rankList"></div></section>
   <section class="card whisper"><div class="whisper-title">📡 城市耳语 <em id="updateTime">公开线索 · 每日更新</em></div><div id="storyList"></div></section>
 </aside>
+</div>
+<div class="participation-grid" id="participation">
+  <section class="city-experiment" id="cityExperiment" aria-label="城市条件变化的情景实验">
+    <div class="experiment-eyebrow">CITY WHAT-IF · 一分钟城市实验</div>
+    <h3>如果你是区长，<br>今晚先改善什么？</h3>
+    <p>不是给城市打分，而是试着放松一种出行约束。看推荐网络如何重新排序，再回到现实寻找证据。</p>
+    <div class="intervention-options" id="interventionOptions" role="group" aria-label="选择一个情景条件"></div>
+    <div class="scenario-shift">
+      <div class="headline" id="scenarioHeadline">条件不变 · 当前城市偏好</div>
+      <div class="scenario-route" id="scenarioRoute" aria-live="polite"></div>
+      <div class="scenario-explain" id="scenarioExplain">选择一种条件，观察推荐如何变动。</div>
+    </div>
+    <div class="limit">说明：此处只有公开地点热度和体验偏好，变化是教学性质的情景权重排序；不构成交通、营收、客流或政策成效预测。</div>
+  </section>
+  <section class="group-lab" id="groupLab" aria-label="叫上朋友一起决定">
+    <div class="experiment-eyebrow">SOCIAL CHOICE · 组队协商</div>
+    <h3>今晚听谁的？<br>别让一个人拍板。</h3>
+    <p>你想散步，朋友想吃饭？各自选身份与时段，收集伙伴回复后，帮你找大家都可能接受的去处。</p>
+    <span class="group-call">✓ 不需登录 · 不上传答案 · 通过分享链接接力</span>
+    <div class="group-actions">
+      <button class="primary" type="button" id="createGroupBtn">👥 发起一场组队</button>
+      <button type="button" id="shareVoteBtn">✉️ 复制我的回复</button>
+    </div>
+    <div class="group-subcard" id="inviteCard" hidden>
+      <h4 id="inviteTitle">把邀请链接发给朋友</h4>
+      <label for="inviteLink">每个人可独立打开链接选择偏好</label>
+      <input id="inviteLink" type="text" readonly aria-label="组队邀请链接">
+      <div class="in-actions"><button type="button" id="copyInviteBtn">复制邀请链接</button></div>
+    </div>
+    <div class="group-subcard" id="replyCard">
+      <h4 id="replyTitle">收到朋友的回复了吗？</h4>
+      <label for="friendReply">把朋友发回的“回复链接”粘贴到这里（最多 8 份）</label>
+      <input id="friendReply" type="text" placeholder="粘贴朋友的链接或回复码" autocomplete="off">
+      <div class="in-actions"><button type="button" id="addReplyBtn">加入伙伴选择</button></div>
+      <div class="group-participants" id="groupParticipants" aria-live="polite"></div>
+    </div>
+    <div class="group-result" id="groupResult" hidden>
+      <strong id="groupResultTitle">适合你们的三站</strong>
+      <ul id="groupRecommendations"></ul>
+    </div>
+    <div class="group-limit" id="groupLimit">组队是纯前端“接力式共选”，不会自动收集其他人的答案。朋友需要把回复链接发回发起者，再由发起者粘贴汇总。所有偏好仅在链接和当前页面里，不代表真实公众投票。</div>
+  </section>
 </div>
 <div class="bottom"><div><strong>真正有意思的，不只是去哪玩。</strong> 更是人为什么聚集、哪些公共空间受欢迎、城市如何留住生活。</div><div class="source" id="sourceNote">数据按公开资料与近期香港公开打卡整理；热度为参考分档，不代表实际到场人数或开放状态。</div></div>
 </div>
