@@ -152,6 +152,54 @@ function sourceCards(ids){
     (url?'<a href="'+h(url)+'" target="_blank" rel="noopener noreferrer">打开原文 ↗</a>':"")+'</div>';
  }).join("");
 }
+
+function eventDate(c){let d=String(c.event_date||"");return /^\d{4}-\d{2}$/.test(d)?d+"-30":d.slice(0,10);}
+function eventType(t){return ({new_entity:"主体出现",new_edge:"关系出现",strengthen:"关系增强",weaken:"关系减弱",exit:"退出",break:"关系断裂",alternative:"替代关系"})[t]||"结构变化";}
+function eventAnchor(c){
+ const edge=(c.involved_edge_ids||[]).map(id=>links.find(x=>x.id==="fact:"+id)).find(Boolean);
+ if(edge)return edge.id;
+ return (c.involved_node_ids||[]).map(x=>"e:"+x).find(id=>visible.some(n=>n.id===id))||"q:"+persona;
+}
+function renderEvents(){
+ $("kgEventTotal").textContent=String(eventRecords.length);
+ const rail=$("kgEventList");rail.replaceChildren();
+ for(const c of eventRecords.slice().sort((a,b)=>eventDate(b).localeCompare(eventDate(a)))){
+  const b=document.createElement("button");b.type="button";b.className="kg-event-card";
+  b.disabled=eventDate(c)>date;b.setAttribute("aria-pressed",String(activeEvent?.change_id===c.change_id));
+  b.innerHTML='<span class="kg-event-date">'+h(c.event_date)+' · '+h(eventType(c.change_type))+'</span>'+
+    '<strong>'+h(c.title)+'</strong><span class="kg-event-foot"><span>公开变化记录</span><em>'+(b.disabled?"超出当前日期":"查看变化 ↗")+'</em></span>';
+  b.addEventListener("click",()=>playEvent(c));rail.appendChild(b);
+ }
+ const panel=$("kgEventStory");
+ if(!activeEvent||eventDate(activeEvent)>date){panel.hidden=true;panel.replaceChildren();return;}
+ panel.hidden=false;
+ const c=activeEvent,parts=String(c.before_after||"").split(/[；;]/),before=parts.find(p=>p.includes("此前"))||parts[0]||"原记录未注明",after=parts.find(p=>p.includes("此后"))||parts[1]||"查看原报道";
+ const filtered=(c.involved_edge_ids||[]).map(id=>raw.edges.find(e=>e.edge_id===id)).filter(x=>x&&!permittedEdge(x)).length;
+ const source=(c.source_ids||[]).map(id=>sources.get(id)).find(s=>s?.url);
+ let link="";if(source){try{let u=new URL(source.url);if(["https:","http:"].includes(u.protocol))link='<a target="_blank" rel="noopener noreferrer" href="'+h(u.href)+'">查看原文 ↗</a>'}catch(e){}}
+ panel.innerHTML='<div><h4>'+h(c.title)+'</h4><div class="kg-event-story-grid">'+
+  '<div class="kg-event-step"><b>变化之前</b><p>'+h(before.replace(/^此前[:：]?/,""))+'</p></div>'+
+  '<div class="kg-event-step"><b>公开记录的新状态</b><p>'+h(after.replace(/^此后[:：]?/,""))+'</p></div>'+
+  '<div class="kg-event-step"><b>仍有不确定性</b><p>'+h(c.uncertainty||"后续进展需核实")+(filtered?"；"+filtered+" 条关联不符合当前证据等级。":"")+'</p></div></div></div>'+
+  '<div class="kg-event-story-actions">'+link+'<button type="button" id="kgInspectEvent">追踪图中关系 ↗</button></div>';
+ $("kgInspectEvent").addEventListener("click",()=>{
+  tab="proof";inspect();
+  if(window.matchMedia?.("(max-width:875px)").matches&&$("kgDetailTitle").scrollIntoView)$("kgDetailTitle").scrollIntoView({behavior:"smooth",block:"center"});
+ });
+}
+function playEvent(c){
+ if(eventDate(c)>date)return say("该事件超出当前日期");
+ record();activeEvent=c;
+ // Reveal only already recorded entities. Do not create new edges from event descriptions.
+ let added=0;
+ for(const id of c.involved_node_ids||[]){if(added>=2)break;if(!expanded.has(id)&&permitted(nodes.get(id))){expanded.add(id);added++;}}
+ const edge=(c.involved_edge_ids||[]).map(id=>raw.edges.find(e=>e.edge_id===id)).find(e=>permittedEdge(e));
+ if(edge){for(const id of [edge.source_node_id,edge.target_node_id])if(permitted(nodes.get(id)))expanded.add(id);}
+ selected="q:"+persona;tab="what";render();
+ selected=eventAnchor(c);render();
+ hint("定位事件："+c.title+"。亮起的关系仅代表公开记录，不代表因果推断。");
+}
+
 function selectedItem(){
  return {edge:links.find(e=>e.id===selected),node:getNode(selected)};
 }
@@ -232,7 +280,7 @@ function render(){
  if(!visible.some(n=>n.id===selected)&&!links.some(e=>e.id===selected)){
   selected="q:"+persona;tab="what";paint();
  }
- inspect();controls();
+ inspect();controls();renderEvents();
 }
 function expand(id){
  const n=getNode(id);if(!n||n.type==="question"){hint("请点一条发光的规划路径");return}
@@ -329,11 +377,11 @@ async function load(){
  $("kgEmpty").hidden=true;$("kgExpand").disabled=true;
  try{
   const filenames=["data/relationship-evidence-v1.json","data/relationship-sources-v1.json","data/relationship-changes-v1.json"];
-  const requests=await Promise.all(filenames.map(f=>fetch(f+"?kg=v4",{cache:"no-store"})));
+  const requests=await Promise.all(filenames.map(f=>fetch(f+"?kg=v41",{cache:"no-store"})));
   if(requests.some(r=>!r.ok))throw Error("证据文件读取失败");
   const [e,s,c]=await Promise.all(requests.map(r=>r.json()));
   if(!Array.isArray(e.nodes)||!Array.isArray(e.edges)||!Array.isArray(s.sources)||!Array.isArray(c.changes))throw Error("证据结构不符合预期");
-  raw=e;nodes=new Map(e.nodes.map(n=>[n.node_id,n]));sources=new Map(s.sources.map(x=>[x.source_id,x]));
+  raw=e;eventRecords=c.changes;nodes=new Map(e.nodes.map(n=>[n.node_id,n]));sources=new Map(s.sources.map(x=>[x.source_id,x]));
   shareState();render();hint("点击发光的规划路径，让已有证据主体逐层出现");
  }catch(err){
   $("kgEmpty").hidden=false;$("kgDetailTitle").textContent="证据暂不可用";$("kgDetailLead").textContent="无法读取公开数据，请检查网络后重试。";$("kgDetailBody").textContent=String(err.message||err);$("kgExpand").disabled=true;
