@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='slateblue'/><circle cx='16' cy='16' r='6' fill='none' stroke='white' stroke-width='2.5'/><circle cx='16' cy='16' r='2' fill='white'/></svg>">
+<title>惠城产业风洞 · 第四页 · 风向标去哪玩</title>
+<style>
+:root{
+  --sky1:#04060f; --sky2:#0a0f24; --sky3:#1e1b4b;
+  --glass:rgba(255,255,255,.07); --glass-b:rgba(255,255,255,.13);
+  --ink:#f1f5f9; --ink2:#cbd5e1; --muted:#94a3b8;
+  --neon:#38bdf8; --warm:#fbbf24; --ok:#34d399; --bad:#fb7185; --pink:#f472b6;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden}
+body{background:var(--sky1);color:var(--ink);font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased;position:relative}
+
+/* ===== 场景：入夜城市 ===== */
+.scene{position:fixed;inset:0;z-index:0;overflow:hidden}
+.sky{position:absolute;inset:0;background:linear-gradient(180deg,#04060f 0%,#0a0f24 40%,#1e1b4b 66%,#3b1d4a 85%,#6b2a4a 96%)}
+.moon{position:absolute;left:72%;top:11%;width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 38% 38%,#fdf6e3,#e2e8f5 62%,#cbd5e1);box-shadow:0 0 40px rgba(226,232,245,.32),0 0 90px rgba(226,232,245,.16)}
+.stars{position:absolute;inset:0 0 30% 0}
+.stars i{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:.7;animation:tw 3s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.25}50%{opacity:.95}}
+.mountains{position:absolute;left:0;right:0;bottom:22%;height:120px;background:linear-gradient(180deg,transparent,#0a0f24);clip-path:polygon(0 100%,8% 55%,18% 75%,28% 40%,40% 70%,52% 35%,64% 65%,76% 45%,88% 70%,100% 50%,100% 100%)}
+.skyline{position:absolute;left:0;right:0;bottom:18%;height:180px;display:flex;align-items:flex-end;gap:3px;padding:0 20px}
+.b{flex:1;background:linear-gradient(180deg,#161d33,#0a0f1f);border-radius:2px 2px 0 0;position:relative}
+.b::after{content:"";position:absolute;inset:8px 4px 4px;background-image:radial-gradient(circle,rgba(251,191,36,.9) 1px,transparent 1.5px),radial-gradient(circle,rgba(186,230,253,.6) 1px,transparent 1.5px);background-size:10px 12px,14px 16px;opacity:.8}
+.b.tall{flex:1.4}.b.wide{flex:2}
+.road{position:absolute;left:0;right:0;bottom:0;height:18%;background:linear-gradient(180deg,#0a0f1f,#020617);border-top:1px solid rgba(255,255,255,.06)}
+.road::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:repeating-linear-gradient(90deg,#fbbf24 0 30px,transparent 30px 60px);opacity:.5}
+.car{position:absolute;top:42%;width:8px;height:4px;border-radius:2px;background:#38bdf8;box-shadow:0 0 8px #38bdf8;animation:drive 6s linear infinite}
+.car.r{background:#f472b6;box-shadow:0 0 8px #f472b6;animation-duration:8s;animation-delay:-2s;top:58%}
+@keyframes drive{from{left:-5%}to{left:105%}}
+
+/* ===== HUD ===== */
+.hud{position:relative;z-index:10;height:100vh;display:flex;flex-direction:column;padding:12px}
+.topbar{display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:14px;padding:8px 14px;flex:none}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:14px;letter-spacing:.3px;flex:none}
+.brand .logo{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#38bdf8,#6366f1);display:flex;align-items:center;justify-content:center}
+.res{display:flex;gap:14px;flex:1;justify-content:center;flex-wrap:wrap}
+.res .r{display:flex;flex-direction:column;align-items:center;min-width:70px}
+.res .r .v{font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--warm)}
+.res .r .v.blue{color:var(--neon)}.res .r .v.green{color:var(--ok)}
+.res .r .l{font-size:10px;color:var(--muted);letter-spacing:.5px}
+.clock{font-size:11px;color:var(--muted);text-align:right;flex:none;line-height:1.4}
+.clock b{color:var(--ink2);font-size:13px}
+.mid{flex:1;margin-top:10px;min-height:0;position:relative}
+.view{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:12px}
+.stage{position:relative;background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--glass-b);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.stage-h{padding:12px 16px 0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.stage-h h2{font-size:16px;margin:0;font-weight:800}
+.stage-h .sub{font-size:11px;color:var(--muted)}
+.stage-h .live{margin-left:auto;font-size:10px;color:var(--ok);display:flex;align-items:center;gap:5px}
+.stage-h .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ok);animation:pulse2 1.5s infinite}
+@keyframes pulse2{0%,100%{opacity:1}50%{opacity:.3}}
+.stage-body{flex:1;position:relative;min-height:0;overflow:hidden;background:linear-gradient(180deg,rgba(6,10,24,.05),rgba(6,10,24,.32))}
+
+/* 市民广播滚动条 */
+.ticker{display:flex;align-items:center;gap:8px;margin:8px 16px 0;flex:none;background:rgba(255,255,255,.06);border:1px solid var(--glass-b);border-radius:9px;padding:6px 10px;overflow:hidden}
+.ticker .tk-ico{flex:none;font-size:12px}
+.tk-wrap{flex:1;overflow:hidden;position:relative;height:18px}
+.tk-track{position:absolute;left:0;top:0;white-space:nowrap;font-size:11px;color:var(--ink2);line-height:18px;animation:tkScroll 36s linear infinite}
+@keyframes tkScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* 热力点 */
+.spot-field{position:absolute;inset:0;z-index:5}
+.spot{position:absolute;transform:translate(-50%,-50%);cursor:pointer;text-align:center;transition:opacity .25s,filter .25s}
+.spot .halo{position:absolute;inset:-45%;border-radius:50%;background:radial-gradient(circle,var(--cc) 0%,transparent 68%);opacity:.5;animation:halo 2.6s ease-in-out infinite}
+.spot .core{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,#fff 0 10%,var(--cc) 42%,rgba(255,255,255,.06) 100%);box-shadow:0 0 12px var(--cc),0 0 26px var(--cc);border:1.5px solid rgba(255,255,255,.55);animation:spotPulse 2.6s ease-in-out infinite}
+.spot .ring{position:absolute;inset:0;border-radius:50%;border:2px solid var(--cc);opacity:0;animation:ringOut 2.6s ease-out infinite}
+.spot .nm{position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:3px;font-size:11px;font-weight:700;color:var(--ink);white-space:nowrap;background:rgba(13,20,38,.66);padding:0 6px;border-radius:5px;text-shadow:0 1px 3px #000}
+.spot.dim{opacity:.13;filter:saturate(.3)}
+.spot.sel .core{box-shadow:0 0 0 3px #fff,0 0 24px var(--cc),0 0 50px var(--cc)}
+@keyframes halo{0%,100%{transform:scale(.92);opacity:.32}50%{transform:scale(1.18);opacity:.62}}
+@keyframes spotPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes ringOut{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.3);opacity:0}}
+
+/* 雷达 */
+.radar{position:absolute;left:50%;top:56%;width:290px;height:290px;transform:translate(-50%,-50%);z-index:2;opacity:.45;pointer-events:none;transition:opacity .3s}
+.radar .rc{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(251,191,36,.15)}
+.radar .rc.a{inset:18%}.radar .rc.b{inset:36%}
+.radar .cross{position:absolute;inset:0;border-radius:50%;background:linear-gradient(rgba(251,191,36,.1) 1px,transparent 1px) 0 50%/100% 1px no-repeat,linear-gradient(90deg,rgba(251,191,36,.1) 1px,transparent 1px) 50% 0/1px 100% no-repeat}
+.radar .sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(251,191,36,.3),transparent 22%,transparent);animation:rsweep 4.5s linear infinite}
+@keyframes rsweep{to{transform:rotate(360deg)}}
+.radar .center{position:absolute;left:50%;top:50%;width:9px;height:9px;transform:translate(-50%,-50%);border-radius:50%;background:var(--warm);box-shadow:0 0 12px var(--warm)}
+.radar.scanning{opacity:1}
+.radar.scanning .sweep{animation-duration:.6s;background:conic-gradient(from 0deg,rgba(251,191,36,.6),transparent 30%,transparent)}
+.stage-cap{position:absolute;top:9px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:7px;background:rgba(13,20,38,.74);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(8px);padding:5px 14px;border-radius:20px;font-size:11.5px;color:#e2eaf7;white-space:nowrap;max-width:94%;z-index:9}
+.stage-cap .beat{width:9px;height:9px;border-radius:50%;background:var(--warm);box-shadow:0 0 7px var(--warm);animation:halo 1.4s ease-in-out infinite;flex:none}
+.stage-foot{padding:8px 16px 11px;font-size:10.5px;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);display:flex;gap:14px;flex-wrap:wrap}
+.stage-foot b{color:var(--ink2)}
+
+/* 右侧 */
+.side{display:flex;flex-direction:column;gap:10px;min-height:0;overflow-y:auto;scrollbar-width:none}
+.side::-webkit-scrollbar{display:none}
+.side-tab{display:none}
+.side-mask{display:none}
+.panel{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:14px;padding:12px 14px}
+.panel h3{font-size:12px;margin:0 0 10px;font-weight:700;letter-spacing:1px;color:var(--muted);text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.panel h3 .dot{width:6px;height:6px;border-radius:50%;background:var(--warm)}
+.fgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.fchip{display:flex;align-items:center;gap:5px;justify-content:center;font-size:11px;font-weight:700;padding:7px 4px;border-radius:9px;background:rgba(255,255,255,.06);border:1px solid var(--glass-b);color:var(--muted);cursor:pointer;transition:.15s}
+.fchip.on{background:rgba(251,191,36,.16);border-color:rgba(251,191,36,.5);color:var(--warm)}
+.tcard{background:rgba(255,255,255,.05);border:1px solid var(--glass-b);border-radius:12px;padding:12px;min-height:150px}
+.card-head{display:flex;gap:10px;align-items:center;margin-bottom:4px}
+.card-emo{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;flex:none}
+.card-name{font-size:15px;font-weight:800;line-height:1.3}
+.card-tag{font-size:10.5px;color:var(--muted);margin-top:2px}
+.card-row{font-size:11.5px;color:var(--ink2);margin-top:7px;line-height:1.55}
+.card-row b{display:block;color:var(--neon);font-size:10px;letter-spacing:.5px;margin-bottom:2px}
+.card-row.watch{background:rgba(251,191,36,.09);border:1px solid rgba(251,191,36,.28);border-radius:9px;padding:8px 10px;margin-top:9px}
+.card-row.watch b{color:var(--warm)}
+.card-d{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.6;padding-top:8px;border-top:1px dashed rgba(255,255,255,.08)}
+.roll-btn{width:100%;background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#1a1206;border:0;border-radius:11px;padding:12px;font-size:14px;font-weight:800;cursor:pointer;letter-spacing:.5px;box-shadow:0 0 18px rgba(251,191,36,.28);transition:.15s}
+.roll-btn:active{transform:scale(.97)}
+.roll-btn:disabled{opacity:.6}
+.note{font-size:10px;color:var(--muted);line-height:1.6;margin-top:8px}
+
+/* 底部 dock */
+.dock{flex:none;margin-top:12px;display:flex;gap:8px;background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:16px;padding:10px 12px;overflow-x:auto;scrollbar-width:none}
+.dock::-webkit-scrollbar{display:none}
+.dock a{flex:1;min-width:72px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;border-radius:10px;font-size:11px;color:var(--ink2);text-decoration:none;transition:.15s;cursor:pointer}
+.dock a:hover{background:rgba(255,255,255,.08);color:var(--ink)}
+.dock a.on{background:rgba(56,189,248,.18);color:var(--neon)}
+.dock a .ic{width:22px;height:22px;display:flex;align-items:center;justify-content:center}
+.dock a .ic svg{width:20px;height:20px}
+#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:rgba(15,23,42,.95);color:#fff;padding:9px 16px;border-radius:10px;font-size:12px;z-index:99;white-space:nowrap;border:1px solid var(--glass-b);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+
+@media(min-width:768px) and (max-width:1179px){
+  .view{grid-template-columns:minmax(0,1fr) 285px}
+  .res{gap:10px}
+  .dock a{min-width:64px}
+  .radar{width:240px;height:240px}
+  .spot{transform:translate(-50%,-50%) scale(.82)}
+  .spot .nm{font-size:10px}
+}
+@media(max-width:767px){
+  .view{grid-template-columns:1fr;grid-template-rows:1fr;overflow:hidden}
+  .stage{min-height:0}
+  .side{position:fixed;left:8px;right:8px;bottom:0;z-index:40;max-height:72vh;overflow-y:auto;border-radius:18px 18px 0 0;background:rgba(9,14,28,.97);border:1px solid rgba(255,255,255,.14);border-bottom:0;box-shadow:0 -10px 34px rgba(0,0,0,.5);transform:translateY(110%);transition:transform .28s ease;padding:12px 14px calc(env(safe-area-inset-bottom,0px) + 14px);scrollbar-width:none}
+  .side.open{transform:translateY(0)}
+  .side-mask{display:block;position:fixed;inset:0;z-index:35;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .25s}
+  .side-mask.on{opacity:1;pointer-events:auto}
+  .side-tab{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:99px;background:rgba(56,189,248,.13);border:1px solid rgba(56,189,248,.32);color:#7dd3fc;cursor:pointer;margin-left:4px}
+  .stage-h .sub{display:none}
+  .radar{width:210px;height:210px}
+  .res{gap:8px}.res .r{min-width:54px}.res .r .v{font-size:13px}
+  .brand{font-size:12px}.clock{display:none}
+  .dock a{min-width:60px;font-size:10px}
+  /* 窄屏缩小热力点，避免大圆互叠 */
+  .spot{transform:translate(-50%,-50%) scale(.58)}
+  .spot .nm{font-size:9px;margin-top:2px;white-space:nowrap}
+  .stage-h{gap:6px}.stage-h .live{font-size:9.5px}
+}
+</style>
+<link rel="stylesheet" href="hc-journey-nav.css">
+</head>
+<body>
+
+<div class="scene">
+  <div class="sky"></div>
+  <div class="stars" id="stars"></div>
+  <div class="moon"></div>
+  <div class="mountains"></div>
+  <div class="skyline" id="skyline"></div>
+  <div class="road">
+    <div class="car"></div><div class="car r"></div>
+    <div class="car" style="animation-delay:-3s;top:30%"></div>
+    <div class="car r" style="animation-delay:-5s;top:70%"></div>
+  </div>
+</div>
+
+<div class="hud">
+  <div class="topbar">
+    <div class="brand"><span class="logo"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="white"/></svg></span>惠城产业风洞</div>
+    <div class="res">
+      <div class="r"><span class="v blue" id="rTotal">14</span><span class="l">今夜去处</span></div>
+      <div class="r"><span class="v" id="rHot">4</span><span class="l">个高热</span></div>
+      <div class="r"><span class="v green" id="rPulse">3</span><span class="l">条市民广播</span></div>
+      <div class="r"><span class="v" id="rSeason">秋</span><span class="l">当前季节</span></div>
+    </div>
+    <div class="clock" title="每日07:27只刷新生活风向话题，不涉及模型参数"><b>夜生活档</b><br>每日 07:27 刷话题</div>
+  </div>
+
+  <div class="mid">
+    <div class="view" id="view-fun">
+      <div class="stage">
+        <div class="stage-h">
+          <h2>惠城夜 · 人气热力</h2>
+          <span class="sub">14 个去处 · 人气越高光点越烫 · 点光点看「风洞看什么」</span>
+          <span class="live" id="funLive">每日更新</span>
+          <span class="side-tab" onclick="openDrawer('cats')">分类</span>
+          <span class="side-tab" onclick="openDrawer('card')">本地点</span>
+        </div>
+        <div class="ticker">
+          <span class="tk-ico">📡</span>
+          <div class="tk-wrap"><div class="tk-track" id="tkTrack">市民广播加载中…</div></div>
+        </div>
+        <div class="stage-body">
+          <div class="radar" id="radar">
+            <div class="rc"></div><div class="rc a"></div><div class="rc b"></div>
+            <div class="cross"></div><div class="sweep"></div><div class="center"></div>
+          </div>
+          <div class="spot-field" id="spotField"></div>
+          <div class="stage-cap"><span class="beat"></span><span id="funCap">入夜后的惠城，人气往哪流 —— 江北服务业占全区近半</span></div>
+        </div>
+        <div class="stage-foot">
+          <span>人气按点评 / 小红书 / 抖音近期公开打卡分档（高 / 较高 / 中），<b>非真实人数统计</b></span>
+          <span>具体营业与门票以现场为准</span>
+        </div>
+      </div>
+
+      <div class="side-mask" id="view-funMask" onclick="closeDrawer()"></div>
+      <div class="side">
+        <div class="panel" id="catsPanel">
+          <h3><span class="dot"></span>想怎么玩</h3>
+          <div class="fgrid" id="fgrid"></div>
+        </div>
+        <div class="panel" id="cardPanel">
+          <h3><span class="dot" style="background:var(--pink)"></span>本地点任务卡</h3>
+          <div class="tcard" id="tcard">
+            <div style="font-size:12px;color:var(--muted);line-height:1.6">点城市里的光点，或让雷达随机锁定一个去处——这里不只告诉你「去哪」，还告诉你它在「风洞」里说明什么。</div>
+          </div>
+        </div>
+        <div class="panel">
+          <button class="roll-btn" id="rollBtn">🎲 摇个周末去处</button>
+          <div class="note">本地随机推荐，数据仍以每日更新的去处清单为准。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+</div>
+
+<script>
+var SPOTS=[],PULSE=[],UPDATED="",curCat="all";
+var CAT={
+  cafe:{label:"☕ 发呆书店",color:"#f5b942",emo:"☕"},
+  shop:{label:"🛍️ 逛街约会",color:"#38bdf8",emo:"🛍️"},
+  night:{label:"🍻 晚上去哪",color:"#fb7185",emo:"🍻"},
+  kid:{label:"🧒 带娃",color:"#34d399",emo:"🧒"},
+  sport:{label:"🏃 动起来",color:"#4ade80",emo:"🏃"},
+  show:{label:"🎬 演出看展",color:"#a78bfa",emo:"🎬"},
+  food:{label:"🍜 觅食",color:"#fb923c",emo:"🍜"}
+};
+// 按人气从高到低排序后，映射到这些位置（大圆点居中、彼此拉开不重叠）
+var POS=[[25,38],[72,30],[15,68],[85,58],[50,75],[32,52],[60,62],[30,80],[48,48],[78,78],[58,22],[15,48],[90,38],[42,26]];
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+(function(){var s=document.getElementById("stars");for(var i=0;i<70;i++){var st=document.createElement("i");st.style.left=Math.random()*100+"%";st.style.top=Math.random()*72+"%";st.style.animationDelay=(Math.random()*3)+"s";st.style.opacity=(.3+Math.random()*.6);s.appendChild(st);}})();
+(function(){var sk=document.getElementById("skyline");var hs=[50,80,64,100,74,116,58,88,104,66,92,78,120,60,84,100,70,90,108,62,80,96,72,110];hs.forEach(function(h,i){var b=document.createElement("i");if(i%6===0)b.className="tall";if(i%9===0)b.className="wide";b.style.height=h+"%";sk.appendChild(b);});})();
+
+function renderCats(){
+  var g=document.getElementById("fgrid");
+  var cats=["all","cafe","shop","night","kid","sport","show","food"];
+  g.innerHTML=cats.map(function(c){
+    var label=c==="all"?"✨ 全部":CAT[c].label;
+    return '<button class="fchip'+(c==="all"?" on":"")+'" data-c="'+c+'">'+label+'</button>';
+  }).join("");
+  g.querySelectorAll(".fchip").forEach(function(b){
+    b.onclick=function(){
+      g.querySelectorAll(".fchip").forEach(function(x){x.classList.remove("on");});
+      b.classList.add("on");
+      curCat=b.getAttribute("data-c");
+      applyFilter();
+    };
+  });
+}
+function renderSpots(){
+  var field=document.getElementById("spotField");field.innerHTML="";
+  var sorted=SPOTS.slice().sort(function(a,b){return b.hot-a.hot;});
+  sorted.forEach(function(x,i){
+    var ci=CAT[x.c]||{color:"#fbbf24",emo:"📍"};
+    var p=POS[i%POS.length];
+    var diam=2*(13+(x.hot-40)/50*27);
+    var dur=(3.2-x.hot/100*1.3);
+    var d=document.createElement("div");
+    d.className="spot";d.setAttribute("data-n",x.n);d.setAttribute("data-c",x.c);
+    d.style.left=p[0]+"%";d.style.top=p[1]+"%";d.style.width=diam+"px";d.style.height=diam+"px";
+    d.style.setProperty("--cc",ci.color);d.style.zIndex=5+Math.round(x.hot/10);
+    d.innerHTML='<div class="halo" style="animation-duration:'+(dur+.6).toFixed(2)+'s"></div>'
+      +'<div class="core" style="animation-duration:'+dur.toFixed(2)+'s"></div>'
+      +'<div class="ring" style="animation-duration:'+dur.toFixed(2)+'s"></div>'
+      +'<div class="nm">'+esc(x.n)+'</div>';
+    d.onclick=function(){selectSpot(x.n);};
+    field.appendChild(d);
+  });
+}
+function renderCard(x){
+  var ci=CAT[x.c]||{color:"#fbbf24",emo:"📍"};
+  var lvColor={"高":"#fb7185","较高":"#fbbf24","中":"#34d399"}[x.level]||"#34d399";
+  document.getElementById("tcard").innerHTML=
+    '<div class="card-head"><div class="card-emo" style="background:'+ci.color+'22;color:'+ci.color+';border:1px solid '+ci.color+'">'+ci.emo+'</div>'
+    +'<div><div class="card-name">'+esc(x.n)+'</div><div class="card-tag">'+esc(x.tag)+' · 人气 <b style="color:'+lvColor+'">'+esc(x.level)+'（'+x.hot+'）</b></div></div></div>'
+    +'<div class="card-row watch"><b>风洞看什么</b>'+esc(x.watch)+'</div>'
+    +'<div class="card-row"><b>为什么去</b>'+esc(x.why)+'</div>'
+    +'<div class="card-d">'+esc(x.d)+'</div>';
+}
+function applyFilter(){
+  document.querySelectorAll(".spot").forEach(function(el){
+    var ok=curCat==="all"||el.getAttribute("data-c")===curCat;
+    el.classList.toggle("dim",!ok);
+  });
+}
+function selectSpot(n,locked){
+  var x=null;
+  for(var i=0;i<SPOTS.length;i++){if(SPOTS[i].n===n){x=SPOTS[i];break;}}
+  if(!x)return;
+  document.querySelectorAll(".spot").forEach(function(el){
+    el.classList.toggle("sel",el.getAttribute("data-n")===n);
+    if(el.getAttribute("data-n")===n){el.classList.remove("dim");}
+  });
+  renderCard(x);
+  if(window.innerWidth<768){openDrawer("card");}
+  if(locked)toast("雷达锁定："+n);
+}
+function roll(){
+  var pool=curCat==="all"?SPOTS:SPOTS.filter(function(x){return x.c===curCat;});
+  if(!pool.length)return;
+  var btn=document.getElementById("rollBtn");btn.disabled=true;btn.textContent="📡 雷达扫描中…";
+  var radar=document.getElementById("radar");radar.classList.add("scanning");
+  var p=pool[Math.floor(Math.random()*pool.length)];
+  setTimeout(function(){
+    radar.classList.remove("scanning");
+    selectSpot(p.n,true);
+    btn.disabled=false;btn.textContent="🎲 再摇一次";
+  },1600);
+}
+document.getElementById("rollBtn").onclick=roll;
+window.openDrawer=function(k){
+  var sd=document.querySelector("#view-fun .side");
+  var mk=document.getElementById("view-funMask");
+  if(sd)sd.classList.add("open");
+  if(mk)mk.classList.add("on");
+  var target=null;
+  if(k==="cats")target=document.getElementById("catsPanel");
+  else if(k==="card")target=document.getElementById("cardPanel");
+  if(target)target.scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+window.closeDrawer=function(){
+  var sd=document.querySelector("#view-fun .side");
+  var mk=document.getElementById("view-funMask");
+  if(sd)sd.classList.remove("open");
+  if(mk)mk.classList.remove("on");
+};
+function toast(txt){
+  var t=document.getElementById("toast");
+  if(t)t.remove();
+  t=document.createElement("div");t.id="toast";t.textContent=txt;
+  document.body.appendChild(t);
+  setTimeout(function(){t.remove();},1800);
+}
+async function load(){
+  var d;
+  try{var r=await fetch("life.json?ts="+Date.now());d=await r.json();}catch(e){d={spots:[],pulse:[]};}
+  SPOTS=d.spots||[];PULSE=d.pulse||[];UPDATED=d.updated||"";
+  var tk=document.getElementById("tkTrack");
+  if(PULSE.length){
+    var txt=PULSE.map(function(p){return "📡 "+p;}).join("　　　");
+    tk.innerHTML=txt+"　　　"+txt;
+  }else{tk.innerHTML="📡 惠城的周末，不用上热搜也值得去。";}
+  var lv=document.getElementById("funLive");if(lv)lv.textContent=UPDATED?("更新于 "+UPDATED.slice(5,10)):"每日更新";
+  // 顶部人气指标（现算，不抄门户经济指标）
+  function setR(id,t){var e=document.getElementById(id);if(e)e.textContent=t;}
+  setR("rTotal",SPOTS.length);
+  setR("rHot",SPOTS.filter(function(x){return x.level==="高";}).length);
+  setR("rPulse",PULSE.length);
+  setR("rSeason",d.season||"秋");
+  renderCats();renderSpots();
+  var top=SPOTS.slice().sort(function(a,b){return b.hot-a.hot;})[0];
+  if(top){renderCard(top);}
+}
+load();
+</script>
+<script src="hc-journey-nav.js" defer></script>
+</body>
+</html>
