@@ -9,7 +9,7 @@ const ok = m => console.log('  ✓ ' + m);
 const bad = m => { fails++; console.log('  ✗ ' + m); };
 
 console.log('── 1) HTML 内联 script 语法 ──');
-const htmlFiles = ['index.html','future.html','windtunnel.html','fun.html','choices.html','network.html','report.html','blindspot.html','ending.html','who.html','home.html','role.html','holo.html'];
+const htmlFiles = ['index.html','future.html','windtunnel.html','fun.html','choices.html','network.html','report.html','blindspot.html','ending.html','who.html'];
 for (const f of htmlFiles) {
   const fp = path.join(root, f);
   if (!fs.existsSync(fp)) { bad('缺少页面文件 ' + f); continue; }
@@ -17,38 +17,6 @@ for (const f of htmlFiles) {
   const blocks = [...html.matchAll(/<script(?![^>]*src=)[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]);
   blocks.forEach((code, i) => { try { new Function(code); } catch (e) { bad(f + ' 第' + (i + 1) + '个script块语法错误: ' + e.message); } });
   ok(f + '（' + blocks.length + ' 块）');
-}
-
-
-console.log('── 1b) 全息页入口与返回路径 ──');
-const indexHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-const holoPath = path.join(root, 'holo.html');
-if (!fs.existsSync(holoPath)) {
-  bad('缺少全息关系页 holo.html');
-} else {
-  const holoHtml = fs.readFileSync(holoPath, 'utf8');
-  if (/href=["']holo\.html(?:[?#][^"']*)?["']/.test(indexHtml)) ok('首页存在进入全息关系页的站内入口');
-  else bad('首页缺少 holo.html 入口');
-  if (/href=["']index\.html(?:[?#][^"']*)?["']/.test(holoHtml)) ok('全息关系页存在返回首页的站内路径');
-  else bad('全息关系页缺少返回 index.html 的路径');
-}
-
-
-console.log('── 1c) 共享设计令牌接入 ──');
-const tokenPath = path.join(root, 'assets', 'design-tokens.css');
-if (!fs.existsSync(tokenPath)) {
-  bad('缺少 assets/design-tokens.css');
-} else {
-  const tokenCss = fs.readFileSync(tokenPath, 'utf8');
-  for (const token of ['--hc-space-1', '--hc-radius-md', '--hc-dark-text', '--hc-light-ink', '--hc-focus-ring']) {
-    if (tokenCss.includes(token)) ok('设计令牌存在 ' + token);
-    else bad('设计令牌缺失 ' + token);
-  }
-  for (const page of ['index.html', 'holo.html', 'report.html']) {
-    const html = fs.readFileSync(path.join(root, page), 'utf8');
-    if (html.includes('href="assets/design-tokens.css"')) ok(page + ' 已接入共享设计令牌');
-    else bad(page + ' 未接入共享设计令牌');
-  }
 }
 
 console.log('── 2) 模型口径断言（model.js 同源，SEED=42 N=20000，与页面全站统一口径）──');

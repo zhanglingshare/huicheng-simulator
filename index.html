@@ -5,13 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='slateblue'/><circle cx='16' cy='16' r='6' fill='none' stroke='white' stroke-width='2.5'/><circle cx='16' cy='16' r='2' fill='white'/></svg>">
 <title>惠城产业风洞 · 模拟沙盘首页</title>
-<link rel="stylesheet" href="assets/design-tokens.css">
 <style>
 :root{
   --sky1:#0b1026; --sky2:#1e1b4b; --sky3:#7c2d12; --horizon:#fbbf24;
   --glass:rgba(255,255,255,.07); --glass-b:rgba(255,255,255,.13);
-  --ink:var(--hc-dark-text,#f1f5f9); --ink2:var(--hc-dark-text-soft,#cbd5e1); --muted:var(--hc-dark-muted,#94a3b8);
-  --neon:var(--hc-dark-cyan,#38bdf8); --warm:var(--hc-dark-gold,#fbbf24); --ok:var(--hc-dark-ok,#34d399); --bad:var(--hc-dark-bad,#fb7185); --pink:var(--hc-dark-pink,#f472b6);
+  --ink:#f1f5f9; --ink2:#cbd5e1; --muted:#94a3b8;
+  --neon:#38bdf8; --warm:#fbbf24; --ok:#34d399; --bad:#fb7185; --pink:#f472b6;
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;overflow:hidden}
@@ -134,9 +133,6 @@ body.moff #net .heart .core{transform:none}
 .mini-node:hover .tip{opacity:1}
 .stage-foot{padding:8px 16px 12px;font-size:11px;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);display:flex;gap:14px;flex-wrap:wrap}
 .stage-foot b{color:var(--ink2)}
-.stage-foot .holo-entry{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border:1px solid rgba(56,189,248,.28);border-radius:999px;color:var(--neon);background:rgba(56,189,248,.08);font-size:11px;font-weight:800;text-decoration:none;white-space:nowrap;transition:background .16s,border-color .16s,transform .16s}
-.stage-foot .holo-entry:hover{background:rgba(56,189,248,.16);border-color:rgba(56,189,248,.55);transform:translateY(-1px)}
-.stage-foot .holo-entry:focus-visible{outline:3px solid rgba(56,189,248,.45);outline-offset:2px}
 
 /* 右侧事件播报 */
 .side{display:flex;flex-direction:column;gap:10px;min-height:0}
@@ -352,7 +348,6 @@ body.moff #net .heart .core{transform:none}
         <span><b>高新区规上工业</b> 632.7亿 · 占全区约67%（2025）</span>
         <span><b>固定资产投资</b> 2025年 −37.1% · 调整期</span>
         <span><b>完整 26 主体</b>见 network</span>
-        <a class="holo-entry" href="holo.html" aria-label="打开惠城全息关系版">打开全息关系版 ↗</a>
       </div>
       </div>
 
@@ -410,9 +405,6 @@ body.moff #net .heart .core{transform:none}
     </a>
     <a href="choices.html">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20l4-10 4 6 4-8 4 4"/></svg></span>五条路
-    </a>
-    <a href="holo.html" title="打开全息关系版">
-      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M10.8 7.2 6.2 15.8M13.2 7.2l4.6 8.6M7.5 18h9"/></svg></span>全息关系
     </a>
     <a href="windtunnel.html">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v3m0 12v3m9-9h-3M6 12H3m14.5-6.5l-2 2m-7 7l-2 2m11 0l-2-2m-7-7l-2-2"/><circle cx="12" cy="12" r="3"/></svg></span>风洞
