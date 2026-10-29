@@ -3,166 +3,154 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>看见惠城 · 全息版</title>
-<meta name="description" content="在同一全息空间内，沿高新产业、城市消费、服务、文旅、人居与交通，发现惠城这座中心城区的关系与流动；真实数据、研究推断、假设实验分层呈现。">
+<title>看见惠城 · 全息关系版</title>
+<meta name="description" content="用关系网络看惠城：产业、企业、投资、交通、文旅、人居与区域协作之间的有证据关系及其变化；已证实/推断/假设分层呈现，变化由动画与高亮凸显。">
 <style>
   :root{
     --ink:#1e2b3a; --sub:#64748b; --line:#e2e8f0;
-    --blue:#2563eb; --orange:#ea580c; --teal:#0d9488;
-    --red:#dc2626; --purple:#7c3aed; --green:#16a34a;
+    --blue:#2563eb; --cyan:#0891b2; --teal:#0d9488;
+    --red:#dc2626; --purple:#7c3aed; --green:#16a34a; --amber:#d97706;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
   body{
     font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei','Segoe UI',sans-serif;
     color:var(--ink); overflow:hidden;
-    background:
-      radial-gradient(1200px 700px at 50% 38%, #fbf7f0 0%, #f6f1e9 45%, #efe9df 100%);
+    background:radial-gradient(1100px 680px at 50% 30%, #f8fafc 0%, #f1f5f9 55%, #e9eef4 100%);
   }
   #app{position:relative;width:100%;height:100%}
 
-  /* ===== 顶部 ===== */
-  header{position:absolute;top:0;left:0;right:0;height:60px;display:flex;align-items:center;padding:0 22px;z-index:30;gap:10px}
-  .burger{display:none;align-items:center;justify-content:center;width:38px;height:38px;border:none;background:rgba(255,255,255,.7);border-radius:10px;cursor:pointer;flex-shrink:0}
-  .overlay{display:none;position:fixed;inset:0;background:rgba(30,43,58,.38);z-index:65}
+  /* 顶部 */
+  header{position:absolute;top:0;left:0;right:0;height:56px;display:flex;align-items:center;padding:0 20px;z-index:30;gap:10px}
+  .burger{display:none;align-items:center;justify-content:center;width:38px;height:38px;border:none;background:rgba(255,255,255,.8);border-radius:10px;cursor:pointer;flex-shrink:0}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(30,43,58,.35);z-index:65}
   .overlay.show{display:block}
   .brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
-  .brand .logo{width:36px;height:36px}
-  .brand h1{font-size:18px;font-weight:800;letter-spacing:1px}
-  .brand .tag{font-size:10px;color:var(--sub);letter-spacing:2px}
-  nav.top{display:flex;gap:2px;margin-left:14px}
-  nav.top button{
-    border:none;background:transparent;cursor:pointer;font:inherit;
-    display:flex;align-items:center;gap:5px;color:#475569;font-size:13.5px;font-weight:600;
-    padding:8px 12px;border-radius:20px;transition:.18s;
-  }
-  nav.top button:hover{background:rgba(255,255,255,.7)}
-  nav.top button.active{background:var(--ink);color:#fff;box-shadow:0 6px 16px rgba(30,43,58,.25)}
-  .search{margin-left:auto;display:flex;align-items:center;width:250px;height:36px;background:rgba(255,255,255,.82);border:1px solid var(--line);border-radius:20px;padding:0 14px;gap:8px;flex-shrink:0}
-  .search input{border:none;background:transparent;outline:none;font:inherit;font-size:13px;color:var(--ink);width:100%}
+  .brand .logo{width:34px;height:34px}
+  .brand h1{font-size:17px;font-weight:800;letter-spacing:.5px}
+  .brand .tag{font-size:10px;color:var(--sub);letter-spacing:1.5px}
+  nav.top{display:flex;gap:2px;margin-left:12px}
+  nav.top button{border:none;background:transparent;cursor:pointer;font:inherit;color:#475569;font-size:13px;font-weight:600;padding:7px 12px;border-radius:18px;transition:.16s}
+  nav.top button:hover{background:rgba(255,255,255,.8)}
+  nav.top button.active{background:var(--ink);color:#fff;box-shadow:0 5px 14px rgba(30,43,58,.22)}
+  .search{margin-left:auto;display:flex;align-items:center;width:220px;height:34px;background:rgba(255,255,255,.85);border:1px solid var(--line);border-radius:18px;padding:0 13px;gap:7px;flex-shrink:0}
+  .search input{border:none;background:transparent;outline:none;font:inherit;font-size:12.5px;width:100%}
 
-  /* ===== 指标卡 ===== */
-  #metrics{position:absolute;top:66px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:25}
-  .metric{
-    width:158px;height:62px;background:rgba(255,255,255,.84);border:1px solid rgba(255,255,255,.95);
-    border-radius:13px;box-shadow:0 8px 20px rgba(100,116,139,.13);padding:9px 13px;
-  }
-  .metric .k{font-size:11px;color:var(--sub);white-space:nowrap}
-  .metric .v{font-size:20px;font-weight:800;line-height:1.1;margin-top:2px}
-  .metric .v small{font-size:11px;font-weight:700;margin-left:2px}
-  .up{color:#16a34a}.warm{color:#d97706}
+  /* 指标条 */
+  #metrics{position:absolute;top:60px;left:50%;transform:translateX(-50%);display:flex;gap:9px;z-index:25}
+  .metric{width:150px;height:56px;background:rgba(255,255,255,.86);border:1px solid rgba(255,255,255,.95);border-radius:12px;box-shadow:0 6px 16px rgba(100,116,139,.12);padding:8px 12px}
+  .metric .k{font-size:10.5px;color:var(--sub);white-space:nowrap}
+  .metric .v{font-size:18px;font-weight:800;line-height:1.1;margin-top:2px}
+  .metric .v small{font-size:10.5px;font-weight:700;margin-left:2px}
+  .up{color:#16a34a}.down{color:#dc2626}
 
-  /* ===== 沙盘舞台 ===== */
-  #stageWrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:5}
-  #stage{position:relative;width:min(96vw, calc((100vh - 200px) * 1.5));aspect-ratio:3/2;transition:filter .4s, opacity .4s}
-  #stage .base{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;
-    border-radius:18px;
-    transition:transform .3s ease-out;will-change:transform}
-  .plate{position:absolute;transform:translate(-50%,-50%);cursor:pointer;z-index:10;background:none;border:none;padding:0}
-  .plate .chip{
-    display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.95);border:1px solid var(--line);
-    border-radius:11px;box-shadow:0 8px 18px rgba(100,116,139,.18);padding:6px 8px 6px 10px;white-space:nowrap;
-  }
-  .plate .ic{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-  .plate .tt{font-size:12.5px;font-weight:800;line-height:1.1}
-  .plate .ss{font-size:9.5px;color:var(--sub);margin-top:1px}
-  .plate .badge{border-radius:9px;padding:2px 6px;font-size:10px;font-weight:800;color:#fff;flex-shrink:0}
-  .plate .core{background:rgba(30,43,58,.93);color:#fff;border-radius:11px;padding:7px 16px;text-align:center;box-shadow:0 8px 20px rgba(30,43,58,.3)}
-  .plate .core .tt{font-size:14px;font-weight:800}.plate .core .ss{font-size:10px;color:#c3d2e2}
-  .plate:hover .chip{transform:translateY(-2px);transition:.18s}
-  .plate .chip,.plate .core{transition:.18s}
-  #stage.dim .plate{opacity:.28;filter:grayscale(.5)}
-  #stage .plate.focus{opacity:1;z-index:20}
-  #stage .plate.focus .chip{transform:scale(1.08)}
-  #stage .plate.focus .core{transform:scale(1.08)}
+  /* 网络舞台 */
+  #stageWrap{position:absolute;inset:0;z-index:5}
+  #net{position:absolute;inset:0;width:100%;height:100%;cursor:grab}
+  #net.drag{cursor:grabbing}
+  #netHint{position:absolute;top:124px;left:50%;transform:translateX(-50%);font-size:11px;color:#94a3b8;background:rgba(255,255,255,.7);padding:4px 12px;border-radius:12px;pointer-events:none;z-index:6}
 
-  /* ===== 侧栏 ===== */
-  .side{position:absolute;top:148px;width:150px;z-index:24}
-  .side.left{left:18px}
-  .side.right{right:18px}
-  .card{background:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.95);border-radius:13px;box-shadow:0 8px 20px rgba(100,116,139,.14);padding:11px}
-  .card + .card{margin-top:10px}
-  .allhc{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:800;cursor:pointer}
-  .menu button{width:100%;border:none;background:none;cursor:pointer;font:inherit;display:flex;align-items:center;gap:9px;color:#475569;font-size:12.5px;font-weight:600;padding:7px 5px;border-radius:8px;text-align:left}
-  .menu button:hover{background:rgba(255,255,255,.7)}
-  .menu button.active{color:var(--ink);background:rgba(255,255,255,.8);font-weight:800}
-  .card h3{font-size:12.5px;font-weight:800;margin-bottom:7px}
-  .scen button{width:100%;border:none;background:none;cursor:pointer;font:inherit;display:flex;align-items:center;gap:9px;padding:6px 0;font-size:12px;color:#64748b;font-weight:600;text-align:left}
-  .radio{width:14px;height:14px;border-radius:50%;border:2px solid #cbd5e1;flex-shrink:0}
-  .scen button.active{color:var(--ink);font-weight:700}.scen button.active .radio{border-color:var(--ink);background:radial-gradient(circle,var(--ink) 40%,transparent 45%)}
-  .legend .row{display:flex;align-items:center;gap:9px;margin-bottom:8px;font-size:11.5px;color:#475569;font-weight:600}
+  /* 左栏 */
+  .side{position:absolute;z-index:24}
+  .side.left{top:128px;left:16px;width:158px}
+  .side.right{top:124px;right:16px;bottom:118px;width:288px;display:flex;flex-direction:column}
+  .card{background:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.95);border-radius:13px;box-shadow:0 6px 16px rgba(100,116,139,.13);padding:11px}
+  .card + .card{margin-top:9px}
+  .card h3{font-size:12px;font-weight:800;margin-bottom:7px;display:flex;align-items:center;gap:6px}
+  .card h3 .dot{width:7px;height:7px;border-radius:50%;background:var(--blue)}
+  .filter button{width:100%;border:none;background:none;cursor:pointer;font:inherit;display:flex;align-items:center;gap:8px;color:#475569;font-size:11.5px;font-weight:600;padding:6px 6px;border-radius:8px;text-align:left}
+  .filter button:hover{background:rgba(255,255,255,.8)}
+  .filter button.active{color:var(--ink);background:rgba(37,99,235,.08);font-weight:800}
+  .filter button .swatch{width:14px;height:14px;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+  .legend .row{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:11px;color:#475569;font-weight:600}
   .legend .ln{width:26px;height:0}
-  .toggle-row{display:flex;align-items:center;justify-content:space-between;font-size:11.5px;color:#475569;font-weight:600;margin-top:9px}
-  .switch{width:34px;height:19px;border-radius:10px;background:var(--ink);position:relative;cursor:pointer}
-  .switch i{position:absolute;right:2px;top:2px;width:15px;height:15px;background:#fff;border-radius:50%}
+  .toggle-row{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:#475569;font-weight:600;margin-top:8px}
+  .switch{width:32px;height:18px;border-radius:10px;background:var(--ink);position:relative;cursor:pointer;flex-shrink:0}
+  .switch i{position:absolute;right:2px;top:2px;width:14px;height:14px;background:#fff;border-radius:50%}
   .switch.off{background:#cbd5e1}.switch.off i{right:auto;left:2px}
 
-  /* ===== 底部 ===== */
-  footer{position:absolute;left:0;right:0;bottom:0;height:104px;z-index:30;display:flex;align-items:center;gap:14px;padding:0 18px}
-  .go{display:flex;align-items:center;gap:13px;background:var(--ink);border-radius:15px;padding:16px 22px;color:#fff;box-shadow:0 12px 26px rgba(30,43,58,.3);cursor:pointer;border:none;font:inherit}
-  .go .play{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center}
-  .go .t{font-size:15px;font-weight:800}.go .s{font-size:10.5px;color:#aebfd0;margin-top:2px}
-  .ops{display:flex;gap:8px}
-  .ops button{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.86);border:1px solid rgba(255,255,255,.95);border-radius:12px;padding:11px 15px;box-shadow:0 6px 15px rgba(100,116,139,.13);font:inherit;font-size:12.5px;font-weight:700;color:#334155;cursor:pointer}
-  .scenes{margin-left:auto;background:rgba(255,255,255,.84);border:1px solid rgba(255,255,255,.95);border-radius:15px;padding:9px 15px;box-shadow:0 8px 20px rgba(100,116,139,.13)}
-  .scenes .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;font-size:12.5px;font-weight:800}
-  .scenes .hd span{font-size:10.5px;color:#94a3b8;font-weight:600}
-  .scenes .grid{display:flex;gap:9px}
-  .scenes .it{text-align:center;cursor:pointer}
-  .scenes .thumb{width:70px;height:42px;border-radius:9px;display:flex;align-items:center;justify-content:center}
-  .scenes .lb{font-size:10px;color:#475569;font-weight:600;margin-top:4px}
+  /* 右侧 AI 情报区 */
+  .intel-head{display:flex;align-items:center;gap:9px;padding:11px 13px;background:rgba(255,255,255,.92);border:1px solid rgba(255,255,255,.95);border-radius:13px 13px 0 0;box-shadow:0 6px 16px rgba(100,116,139,.13)}
+  .ai-avatar{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#1e2b3a,#334155);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .intel-head .t{font-size:13px;font-weight:800}
+  .intel-head .s{font-size:10px;color:#16a34a;font-weight:700;display:flex;align-items:center;gap:4px}
+  .intel-head .s .pulse-dot{width:6px;height:6px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 0 rgba(22,163,74,.5);animation:pd 1.8s infinite}
+  @keyframes pd{0%{box-shadow:0 0 0 0 rgba(22,163,74,.5)}70%{box-shadow:0 0 0 7px rgba(22,163,74,0)}100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}}
+  #intelBody{flex:1;overflow-y:auto;background:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.95);border-top:none;border-radius:0 0 13px 13px;box-shadow:0 6px 16px rgba(100,116,139,.13);padding:12px;display:flex;flex-direction:column;gap:13px}
+  #intelBody::-webkit-scrollbar{width:5px}#intelBody::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px}
+  .msg{display:flex;gap:8px;cursor:pointer}
+  .msg .ma{width:24px;height:24px;border-radius:8px;background:linear-gradient(135deg,#1e2b3a,#334155);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+  .msg .bubble{background:#f1f5f9;border-radius:3px 12px 12px 12px;padding:9px 11px;flex:1;transition:.16s;border:1px solid transparent}
+  .msg:hover .bubble{background:#e8eef5;border-color:#dbe4ee}
+  .msg .bubble .tag{display:inline-block;font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:9px;margin-bottom:6px}
+  .msg .bubble .h{font-size:12px;font-weight:800;line-height:1.45}
+  .msg .bubble .q{font-size:11px;color:#475569;line-height:1.6;margin-top:5px;padding-top:6px;border-top:1px dashed #d8e0ea}
+  .msg .bubble .q b{color:var(--ink)}
+  .msg .bubble .go-link{font-size:10.5px;color:var(--blue);font-weight:700;margin-top:6px;display:flex;align-items:center;gap:3px}
 
-  /* ===== 详情浮卡 ===== */
-  #detailMask{position:fixed;inset:0;z-index:75;background:rgba(30,43,58,.34);opacity:0;pointer-events:none;transition:.22s}
-  #detailMask.show{opacity:1;pointer-events:auto}
-  #detail{position:fixed;z-index:80;left:50%;top:50%;width:340px;max-width:92vw;max-height:86vh;overflow-y:auto;background:rgba(255,255,255,.98);border:1px solid #fff;border-radius:16px;box-shadow:0 18px 44px rgba(30,43,58,.3);padding:18px;opacity:0;pointer-events:none;transform:translate(-50%,-46%) scale(.97);transition:.22s}
-  #detail.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
-  #detail .dh{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-  #detail .dh .ic{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center}
-  #detail .dh .t{font-size:16px;font-weight:800}
-  #detail .dh .s{font-size:11px;color:var(--sub)}
-  #detail .close{margin-left:auto;border:none;background:#f1f5f9;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:15px;color:#64748b}
-  #detail p{font-size:12.5px;line-height:1.7;color:#334155}
-  #detail .facts{margin:11px 0;display:flex;flex-direction:column;gap:7px}
-  #detail .fact{display:flex;justify-content:space-between;align-items:center;background:#f8fafc;border-radius:10px;padding:8px 12px;font-size:12px}
-  #detail .fact b{font-size:13px;font-weight:800}
-  #detail .ev{font-size:10.5px;color:#94a3b8;line-height:1.6;border-top:1px dashed #e2e8f0;padding-top:9px}
-  #detail .ev b{color:#64748b}
+  /* 底部时间线 */
+  footer{position:absolute;left:0;right:0;bottom:0;height:104px;z-index:30;padding:0 16px}
+  .tl-wrap{height:100%;background:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.95);border-radius:13px;box-shadow:0 6px 16px rgba(100,116,139,.13);padding:10px 16px;display:flex;flex-direction:column}
+  .tl-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .tl-head .t{font-size:12px;font-weight:800;display:flex;align-items:center;gap:7px}
+  .tl-head .t .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+  .tl-head .s{font-size:10px;color:var(--sub)}
+  .tl-track{position:relative;flex:1;display:flex;align-items:center}
+  .tl-line{position:absolute;left:0;right:0;top:50%;height:2px;background:#e2e8f0;transform:translateY(-50%)}
+  .tl-node{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;cursor:pointer;z-index:2}
+  .tl-node .n{width:13px;height:13px;border-radius:50%;background:#fff;border:2.5px solid #94a3b8;transition:.16s}
+  .tl-node:hover .n{transform:scale(1.25)}
+  .tl-node .d{font-size:9.5px;color:var(--sub);font-weight:700;margin-top:5px;white-space:nowrap}
+  .tl-node .l{font-size:10px;color:#334155;font-weight:700;white-space:nowrap;max-width:110px;overflow:hidden;text-overflow:ellipsis;position:absolute;bottom:24px}
+  .tl-node.active .n{border-color:var(--blue);background:var(--blue);box-shadow:0 0 0 4px rgba(37,99,235,.15)}
+  .tl-node.new .n{border-color:var(--green);background:var(--green)}
+  .tl-node.edge .n{border-color:var(--amber);background:var(--amber)}
 
-  /* ===== 手机 ===== */
+  /* 浮卡 */
+  #popMask{position:fixed;inset:0;z-index:70;background:rgba(30,43,58,.3);opacity:0;pointer-events:none;transition:.2s}
+  #popMask.show{opacity:1;pointer-events:auto}
+  #pop{position:fixed;z-index:75;left:50%;top:50%;width:340px;max-width:92vw;max-height:84vh;overflow-y:auto;background:rgba(255,255,255,.98);border:1px solid #fff;border-radius:16px;box-shadow:0 16px 40px rgba(30,43,58,.28);padding:17px;opacity:0;pointer-events:none;transform:translate(-50%,-46%) scale(.97);transition:.2s}
+  #pop.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+  #pop .ph{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  #pop .ph .ic{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center}
+  #pop .ph .t{font-size:15px;font-weight:800}
+  #pop .ph .s{font-size:10.5px;color:var(--sub)}
+  #pop .close{margin-left:auto;border:none;background:#f1f5f9;width:27px;height:27px;border-radius:50%;cursor:pointer;font-size:14px;color:#64748b}
+  #pop p{font-size:12px;line-height:1.7;color:#334155}
+  #pop .grade-chip{display:inline-block;font-size:10px;font-weight:800;padding:2px 8px;border-radius:9px;margin:8px 0}
+  #pop .facts{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+  #pop .fact{display:flex;justify-content:space-between;background:#f8fafc;border-radius:9px;padding:7px 11px;font-size:11.5px}
+  #pop .fact b{font-size:12px;font-weight:800}
+  #pop .src{font-size:10px;color:#94a3b8;line-height:1.6;border-top:1px dashed #e2e8f0;padding-top:9px;word-break:break-all}
+  #pop .src a{color:var(--blue)}
+
+  /* 移动端情报浮动按钮 + 抽屉 */
+  #intelFab{display:none;position:fixed;right:14px;bottom:112px;z-index:60;align-items:center;gap:6px;background:var(--ink);color:#fff;border:none;border-radius:24px;padding:11px 16px;font:inherit;font-size:12px;font-weight:800;box-shadow:0 10px 24px rgba(30,43,58,.3);cursor:pointer}
+  #intelFab .n{width:8px;height:8px;border-radius:50%;background:#4ade80}
+  #intelClose{display:none;margin-left:auto;border:none;background:#f1f5f9;width:30px;height:30px;border-radius:50%;font-size:16px;color:#64748b;cursor:pointer}
+
+  /* 手机 */
   @media (max-width:900px){
-    nav.top,.side.right{display:none}
+    nav.top{display:none}
+    .side.right{display:flex;position:fixed;top:0;right:0;bottom:0;left:0;width:auto;margin:0;border-radius:0;z-index:80;background:#f8fafc;
+      transform:translateX(100%);transition:transform .28s;pointer-events:auto}
+    .side.right.open{transform:translateX(0)!important}
+    .intel-head{border-radius:0}
+    #intelBody{border-radius:0}
+    #intelFab{display:flex}
+    #intelClose{display:block}
     .burger{display:flex}
-    .brand .tag{display:none}
-    .brand h1{font-size:16px}
-    .search{width:118px}
-    #metrics{top:58px;gap:7px;left:8px;right:8px;transform:none;justify-content:flex-start;overflow-x:auto;padding-bottom:2px}
+    .brand .tag{display:none}.brand h1{font-size:15px}
+    .search{width:100px}
+    #metrics{top:52px;left:8px;right:8px;transform:none;gap:6px;overflow-x:auto;padding-bottom:2px}
     #metrics::-webkit-scrollbar{display:none}
-    .metric{width:140px;flex-shrink:0;height:56px}
-    .metric .v{font-size:17px}
-    #stage{width:100vw}
-    .side.left{
-      top:0;left:0;height:100%;width:238px;z-index:70;
-      background:linear-gradient(165deg,#fbf7f0,#f0e9df);
-      padding:70px 14px 18px;overflow-y:auto;
-      transform:translateX(-100%);transition:transform .26s;
-      box-shadow:0 0 44px rgba(30,43,58,.25);
-    }
+    .metric{width:132px;flex-shrink:0;height:52px}.metric .v{font-size:16px}
+    #netHint{top:112px;font-size:10px}
+    .side.left{top:0;left:0;height:100%;width:232px;z-index:70;background:linear-gradient(165deg,#f8fafc,#eef2f7);padding:64px 13px 16px;overflow-y:auto;transform:translateX(-100%);transition:transform .25s;box-shadow:0 0 40px rgba(30,43,58,.22)}
     .side.left.open{transform:translateX(0)}
-    .side.left .card.scen{display:block}
-    .plate .chip{padding:5px 6px 5px 8px;gap:5px}
-    .plate .ic{width:20px;height:20px}
-    .plate .tt{font-size:11px}
-    .plate .ss{display:none}
-    .plate .badge{font-size:9px;padding:1px 5px}
-    .plate .core{padding:5px 12px}.plate .core .tt{font-size:12px}.plate .core .ss{font-size:9px}
-    footer{height:auto;flex-wrap:wrap;gap:8px;padding:8px 10px}
-    .go{padding:11px 15px;gap:10px}.go .play{width:32px;height:32px}.go .t{font-size:13px}.go .s{display:none}
-    .ops{order:3}
-    .ops button{padding:8px 11px;font-size:11px}
-    .scenes{margin-left:0;order:2;width:100%}
-    .scenes .thumb{width:56px;height:36px}
-    #detail{width:calc(100vw - 24px)}
+    footer{height:96px;padding:0 8px}
+    .tl-node .l{max-width:72px;font-size:9px}
+    #pop{width:calc(100vw - 22px)}
   }
 </style>
 </head>
@@ -170,316 +158,723 @@
 <div id="app">
   <div class="overlay" id="overlay"></div>
 
-  <!-- 顶部 -->
   <header>
     <button class="burger" id="burger" aria-label="菜单"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1e2b3a" stroke-width="2.2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     <div class="brand">
-      <svg class="logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#1e2b3a"/><circle cx="20" cy="20" r="18" fill="none" stroke="#38bdf8" stroke-width="1.4" opacity=".7"/><circle cx="20" cy="11" r="3" fill="#38bdf8"/><circle cx="12" cy="25" r="2.4" fill="#7dd3fc"/><circle cx="28" cy="25" r="2.4" fill="#7dd3fc"/><line x1="20" y1="11" x2="12" y2="25" stroke="#bae6fd" stroke-width="1"/><line x1="20" y1="11" x2="28" y2="25" stroke="#bae6fd" stroke-width="1"/><line x1="12" y1="25" x2="28" y2="25" stroke="#bae6fd" stroke-width="1"/></svg>
-      <div><h1>惠城 · 全息版</h1><div class="tag">看见城市 · 理解服务 · 预见未来</div></div>
+      <svg class="logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#1e2b3a"/><circle cx="20" cy="11" r="3" fill="#38bdf8"/><circle cx="12" cy="25" r="2.4" fill="#7dd3fc"/><circle cx="28" cy="25" r="2.4" fill="#7dd3fc"/><line x1="20" y1="11" x2="12" y2="25" stroke="#bae6fd" stroke-width="1"/><line x1="20" y1="11" x2="28" y2="25" stroke="#bae6fd" stroke-width="1"/><line x1="12" y1="25" x2="28" y2="25" stroke="#bae6fd" stroke-width="1"/></svg>
+      <div><h1>惠城 · 全息关系版</h1><div class="tag">用关系看世界 · 让变化被看见</div></div>
     </div>
     <nav class="top" id="topnav">
-      <button data-id="all" class="active">全景</button>
-      <button data-id="tech">产业</button>
-      <button data-id="consume">消费</button>
-      <button data-id="service">服务</button>
-      <button data-id="culture">文旅</button>
-      <button data-id="living">人居</button>
-      <button data-id="transit">交通</button>
+      <button data-f="all" class="active">全景</button>
+      <button data-f="industry">产业</button>
+      <button data-f="investment">投资</button>
+      <button data-f="regional">区域</button>
+      <button data-f="tourism_consumption">文旅</button>
+      <button data-f="transport">交通</button>
     </nav>
     <div class="search">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
-      <input placeholder="搜索企业、去处或事件…">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+      <input id="searchInput" placeholder="搜索企业、集群或事件…">
     </div>
   </header>
 
-  <!-- 指标卡 -->
   <div id="metrics">
     <div class="metric"><div class="k">GDP（亿元）</div><div class="v">1203.33 <small class="up">+4.3%</small></div></div>
     <div class="metric"><div class="k">规上工业总产值（亿元）</div><div class="v">937.92 <small class="up">+9.6%</small></div></div>
     <div class="metric"><div class="k">社消零（亿元）</div><div class="v">805.68 <small class="up">+3.7%</small></div></div>
     <div class="metric"><div class="k">外贸进出口（亿元）</div><div class="v">383.60 <small class="up">+7.1%</small></div></div>
-    <div class="metric"><div class="k">人均可支配（元）</div><div class="v">63776 <small class="up">+4.5%</small></div></div>
+    <div class="metric"><div class="k">常住人口（万人）</div><div class="v">159.78</div></div>
   </div>
 
-  <!-- 沙盘 -->
   <div id="stageWrap">
-    <div id="stage">
-      <img class="base" id="baseimg" alt="惠城全息关系沙盘" src="https://aka.doubaocdn.com/s/XA3U7fpeoj">
-
-      <button class="plate" data-id="tech" style="left:18%;top:30%">
-        <span class="chip"><span class="ic" style="background:#2563eb"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg></span>
-        <span><span class="tt">高新产业</span><span class="ss">电子信息·装备</span></span><span class="badge" style="background:#2563eb">0.82</span></span>
-      </button>
-
-      <button class="plate" data-id="consume" style="left:50%;top:17%">
-        <span class="chip"><span class="ic" style="background:#ea580c"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M3 9l2-4h14l2 4M4 9v10h16V9M9 13h6"/></svg></span>
-        <span><span class="tt">城市消费</span><span class="ss">商圈·夜市</span></span><span class="badge" style="background:#ea580c">0.78</span></span>
-      </button>
-
-      <button class="plate" data-id="service" style="left:82%;top:30%">
-        <span class="chip"><span class="ic" style="background:#0d9488"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M3 21h18M5 21V8l5-3v16M14 21V11l5 3v7"/></svg></span>
-        <span><span class="tt">城市服务</span><span class="ss">金融·公服</span></span><span class="badge" style="background:#0d9488">0.75</span></span>
-      </button>
-
-      <button class="plate" data-id="transit" style="left:82%;top:70%">
-        <span class="chip"><span class="ic" style="background:#dc2626"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M2 7h3l2.5 7.5h9L20 10h2"/></svg></span>
-        <span><span class="tt">交通枢纽</span><span class="ss">高铁·桥梁</span></span><span class="badge" style="background:#dc2626">0.70</span></span>
-      </button>
-
-      <button class="plate" data-id="culture" style="left:50%;top:83%">
-        <span class="chip"><span class="ic" style="background:#7c3aed"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M3 20l5-8 4 5 3-4 6 7z"/><circle cx="17" cy="6" r="2"/></svg></span>
-        <span><span class="tt">文旅生态</span><span class="ss">西湖·山水</span></span><span class="badge" style="background:#7c3aed">0.66</span></span>
-      </button>
-
-      <button class="plate" data-id="living" style="left:18%;top:70%">
-        <span class="chip"><span class="ic" style="background:#16a34a"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M3 12l9-8 9 8M5 10v10h14V10"/></svg></span>
-        <span><span class="tt">城市人居</span><span class="ss">居住·社区</span></span><span class="badge" style="background:#16a34a">0.63</span></span>
-      </button>
-
-      <button class="plate" data-id="all" style="left:50%;top:48%">
-        <span class="core"><span class="tt">惠城</span><span class="ss">城市运行核心</span></span>
-      </button>
-    </div>
+    <canvas id="net"></canvas>
+    <div id="netHint">拖拽节点可重新布局 · 点击节点看关系 · 点击连线看证据</div>
   </div>
 
   <!-- 左栏 -->
   <div class="side left">
-    <div class="card allhc" id="allhc">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1e2b3a" stroke-width="2"><circle cx="7" cy="7" r="2.5"/><circle cx="18" cy="7" r="2.5"/><circle cx="12" cy="17" r="2.5"/><path d="M9 8l2 7M16 8l-2.5 7M9 7h6.5"/></svg>
-      整个惠城
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1e2b3a" stroke-width="2.5" style="margin-left:auto"><path d="M9 6l6 6-6 6"/></svg>
+    <div class="card filter" id="filter">
+      <h3><span class="dot"></span>关系图层</h3>
+      <button data-f="all" class="active"><span class="swatch" style="background:#1e2b3a"></span>全部关系</button>
+      <button data-f="supply_chain"><span class="swatch" style="background:#2563eb"></span>供应链配套</button>
+      <button data-f="investment"><span class="swatch" style="background:#0891b2"></span>投资建设</button>
+      <button data-f="regional"><span class="swatch" style="background:#7c3aed"></span>区域协作</button>
+      <button data-f="transport"><span class="swatch" style="background:#dc2626"></span>交通物流</button>
+      <button data-f="tourism_consumption"><span class="swatch" style="background:#d97706"></span>消费文旅</button>
     </div>
-    <div class="card menu" id="leftmenu">
-      <button data-id="tech"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M9 13h.01M9 17h.01M15 9h.01M15 13h.01M15 17h.01"/></svg>高新产业</button>
-      <button data-id="consume"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l2-4h14l2 4M4 9v10h16V9M9 13h6"/></svg>城市消费</button>
-      <button data-id="service"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V8l5-3v16M14 21V11l5 3v7"/></svg>城市服务</button>
-      <button data-id="culture"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 20l5-8 4 5 3-4 6 7z"/></svg>文旅生态</button>
-      <button data-id="living"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-8 9 8M5 10v10h14V10"/></svg>城市人居</button>
-      <button data-id="transit"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M2 7h3l2.5 7.5h9L20 10h2"/></svg>交通外联</button>
-    </div>
-    <div class="card scen" id="scen">
-      <h3>情景模式</h3>
-      <button class="active" data-s="base"><span class="radio"></span>基准情景</button>
-      <button data-s="delay"><span class="radio"></span>重大项目延期</button>
-      <button data-s="commute"><span class="radio"></span>通勤承载压力</button>
-      <button data-s="weak"><span class="radio"></span>城市消费走弱</button>
-      <button data-s="both"><span class="radio"></span>多重冲击组合</button>
-    </div>
-  </div>
-
-  <!-- 右栏 -->
-  <div class="side right">
     <div class="card legend">
-      <h3>关系强度</h3>
-      <div class="row"><span class="ln" style="border-top:3px solid #2563eb"></span>很强</div>
-      <div class="row"><span class="ln" style="border-top:3px solid #f59e0b"></span>较强</div>
-      <div class="row"><span class="ln" style="border-top:2px solid #cbd5e1"></span>一般</div>
-      <div class="row"><span class="ln" style="border-top:2px dashed #94a3b8"></span>较弱</div>
-      <div class="toggle-row"><span>显示标签</span><span class="switch" id="swLabel"><i></i></span></div>
-      <div class="toggle-row"><span>聚焦模式</span><span class="switch off" id="swFocus"><i></i></span></div>
+      <h3><span class="dot" style="background:#16a34a"></span>证据分级</h3>
+      <div class="row"><span class="ln" style="border-top:2.5px solid #1e2b3a"></span>A 已证实</div>
+      <div class="row"><span class="ln" style="border-top:2.5px dashed #64748b"></span>B 证据推断</div>
+      <div class="row"><span class="ln" style="border-top:2.5px dotted #94a3b8"></span>C 待验证</div>
+      <div class="toggle-row"><span>显示连线标签</span><span class="switch" id="swLab"><i></i></span></div>
+      <div class="toggle-row"><span>只看近期变化</span><span class="switch off" id="swChg"><i></i></span></div>
     </div>
   </div>
 
-  <!-- 底部 -->
-  <footer>
-    <button class="go" id="go">
-      <span class="play"><svg width="17" height="17" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
-      <span><span class="t">开始探索</span><span class="s">进入惠城的关系世界</span></span>
-    </button>
-    <div class="ops">
-      <button><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="7" r="2.5"/><circle cx="18" cy="7" r="2.5"/><path d="M7 9.5v4M18 9.5v4M7 17h.01M18 17h.01"/></svg>关系追踪</button>
-      <button><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M4 19h16M8 16l3-4 3 2 4-6"/></svg>情景模拟</button>
-      <button><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="8" height="16" rx="1.5"/><rect x="13" y="4" width="8" height="16" rx="1.5"/></svg>前后对比</button>
-    </div>
-    <div class="scenes">
-      <div class="hd">典型场景<span>更多情景 ›</span></div>
-      <div class="grid">
-        <div class="it" data-s="base"><div class="thumb" style="background:linear-gradient(135deg,#bae6fd,#7dd3fc)"><svg width="22" height="22" viewBox="0 0 24 24" fill="#1e2b3a"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="7" r="2"/><circle cx="19" cy="7" r="2"/><path d="M7 8l3 3M17 8l-3 3"/></svg></div><div class="lb">基准情景</div></div>
-        <div class="it" data-s="delay"><div class="thumb" style="background:linear-gradient(135deg,#fde68a,#fcd34d)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#92400e" stroke-width="2"><path d="M3 18l6-9 4 5 3-4 5 8"/></svg></div><div class="lb">项目延期</div></div>
-        <div class="it" data-s="commute"><div class="thumb" style="background:linear-gradient(135deg,#ddd6fe,#c4b5fd)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5b21b6" stroke-width="2"><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M2 7h3l2.5 7.5h9L20 10h2"/></svg></div><div class="lb">通勤压力</div></div>
-        <div class="it" data-s="weak"><div class="thumb" style="background:linear-gradient(135deg,#fecaca,#fca5a5)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#991b1b" stroke-width="2"><path d="M3 9l2-4h14l2 4M4 9v10h16V9M9 13h6"/></svg></div><div class="lb">消费走弱</div></div>
+  <!-- 右栏 AI 情报 -->
+  <div class="side right">
+    <div class="intel-head">
+      <span class="ai-avatar"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#7dd3fc" stroke-width="2"><path d="M12 2a7 7 0 0 1 7 7c0 3-2 4.5-2 7H7c0-2.5-2-4-2-7a7 7 0 0 1 7-7z"/><path d="M9 19h6M10 22h4"/></svg></span>
+      <div>
+        <div class="t">惠城 AI 情报</div>
+        <div class="s"><span class="pulse-dot"></span>今年重大变化 · 值得讨论</div>
       </div>
+      <button id="intelClose" aria-label="关闭">×</button>
+    </div>
+    <div id="intelBody"></div>
+  </div>
+
+  <!-- 底部时间线 -->
+  <footer>
+    <div class="tl-wrap">
+      <div class="tl-head">
+        <div class="t"><span class="dot"></span>关系变化时间线 · 2026</div>
+        <div class="s">只收录会改变网络结构的事件 · 签约≠投产</div>
+      </div>
+      <div class="tl-track" id="tlTrack"><div class="tl-line"></div></div>
     </div>
   </footer>
 
-  <!-- 详情模态遮罩 -->
-  <div id="detailMask"></div>
-  <!-- 详情浮卡 -->
-  <div id="detail">
-    <div class="dh">
-      <span class="ic" id="d_ic"></span>
-      <span><span class="t" id="d_t"></span><span class="s" id="d_s"></span></span>
-      <button class="close" id="d_close">×</button>
-    </div>
-    <p id="d_p"></p>
-    <div class="facts" id="d_facts"></div>
-    <div class="ev" id="d_ev"></div>
-  </div>
+  <div id="popMask"></div>
 
+  <!-- 移动端情报浮动按钮 -->
+  <button id="intelFab"><span class="n"></span>AI 情报</button>
+  <div id="pop">
+    <div class="ph">
+      <span class="ic" id="p_ic"></span>
+      <span><span class="t" id="p_t"></span><span class="s" id="p_s"></span></span>
+      <button class="close" id="p_close">×</button>
+    </div>
+    <div id="p_body"></div>
+  </div>
 </div>
 
 <script>
-const PLATES = {
-  tech:{
-    t:'高新产业', s:'惠城高新区 · 核心引擎', color:'#2563eb',
-    icon:'<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/>',
-    p:'惠城高新区是惠州首家省级高新区，按“1 核 4 组团”布局，由东江湾核心园区与三栋、马安、横沥、汝湖四个联动组团构成，重点发展新一代电子信息、智能装备、新能源新材料、生物医药及生产性服务业。',
-    facts:[['高新区总规划面积','67.7 km²'],['2025 高新区产值','632.7 亿元'],['2026 目标产值','800 亿元'],['全区规上工业总产值','937.92 亿、+9.6%']],
-    ev:'<b>口径：</b>园区面积、产值与“1 核 4 组团”来自惠城区政府公开资料；2026 年 800 亿为园区年度目标，非政府刚性预测。'
-  },
-  consume:{
-    t:'城市消费', s:'商圈 · 夜市 · 烟火气', color:'#ea580c',
-    icon:'<path d="M3 9l2-4h14l2 4M4 9v10h16V9M9 13h6"/>',
-    p:'惠城是惠州消费中心，拥有华贸天地、水东街、西湖商圈等核心去处。但作为中心城区，也面临“消费留不住”的结构性问题：高端消费流向深圳、日常消费部分流向东莞、线上订单外流。',
-    facts:[['社会消费品零售总额','805.68 亿元'],['社消零增速','+3.7%'],['热门去处','水东街·华贸·西湖'],['消费结构','服务消费为主']],
-    ev:'<b>口径：</b>社消零总额及增速来自 2025 年统计公报；“消费外流”为公开资料与调研基础上的结构性判断，具体外流规模为区间估算，非实测值。'
-  },
-  service:{
-    t:'城市服务', s:'金融 · 公服 · 楼宇总部', color:'#0d9488',
-    icon:'<path d="M3 21h18M5 21V8l5-3v16M14 21V11l5 3v7"/>',
-    p:'惠城第三产业占比达 69%，是全市行政、金融、教育、医疗与商务服务中心。江北 CBD 集聚楼宇总部与生产性服务业，是中心城区最核心的功能。',
-    facts:[['第三产业占比','69.0%'],['三产结构','3.4:27.6:69.0'],['核心载体','江北 CBD'],['服务内容','金融·教育·医疗·政务']],
-    ev:'<b>口径：</b>三次产业结构来自 2025 年统计公报；功能分区来自公开规划资料。'
-  },
-  transit:{
-    t:'交通枢纽', s:'高铁 · 桥梁 · 融深融湾', color:'#dc2626',
-    icon:'<circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M2 7h3l2.5 7.5h9L20 10h2"/>',
-    p:'惠城是惠州综合交通枢纽，高铁惠州北站、过江通道与高速路网支撑城市运行，也是融深融湾、对接深圳东莞的关键。',
-    facts:[['高铁枢纽','惠州北站（小金口）'],['对外方向','深圳·东莞·广州'],['城市骨架','过江通道·高速'],['定位','融深融湾门户']],
-    ev:'<b>口径：</b>交通设施来自公开规划与交通资料；本页不展示具体通勤人数，跨界流动为区间估算（见产业风洞）。'
-  },
-  culture:{
-    t:'文旅生态', s:'西湖 · 山水 · 休闲', color:'#7c3aed',
-    icon:'<path d="M3 20l5-8 4 5 3-4 6 7z"/><circle cx="17" cy="6" r="2"/>',
-    p:'惠城拥有惠州西湖（5A）、红花湖绿道、祝屋巷、野岛文化社区等文旅休闲资源，是市民日常休闲与外地游客的主要去处。',
-    facts:[['核心景区','惠州西湖 5A'],['城市绿道','红花湖'],['文创街区','祝屋巷·野岛'],['功能','休闲·夜游·运动']],
-    ev:'<b>口径：</b>景区与去处来自公开资料；各去处实时人气热度见 life.json 与风向标页面。'
-  },
-  living:{
-    t:'城市人居', s:'居住 · 社区 · 城市更新', color:'#16a34a',
-    icon:'<path d="M3 12l9-8 9 8M5 10v10h14V10"/>',
-    p:'惠城常住人口 159.78 万，居住片区沿江北、桥西、水口、马安、三栋等组团分布，城市更新与社区生活是中心城区的基础功能。',
-    facts:[['常住人口','159.78 万人'],['人均可支配收入','63776 元'],['收入增速','+4.5%'],['主要片区','江北·桥西·水口·马安']],
-    ev:'<b>口径：</b>人口、居民收入及增速来自 2025 年统计公报。'
+/* ================= 数据：优先 fetch 三件套，失败用内嵌 fallback ================= */
+const DATA_BASE = "data/";
+let GRAPH = null;
+
+/* ---- 内嵌 fallback（与 data/relationship-*.json 同源，保证 file:// 可看）---- */
+const FALLBACK = {
+  nodes:[
+    {node_id:"hc",name:"惠城",node_type:"core",layer:"城市核心",town:"主城区",description:"惠州市中心城区，行政/商务/服务核心",stat:"GDP 1203.33亿/+4.3%·常住159.78万",node_status:"active",change_status:"无显著变化",evidence_grade:"A",color:"#1e2b3a",source_ids:["S001"]},
+    {node_id:"gxq",name:"惠城高新区",node_type:"anchor",layer:"产业引擎",town:"水口/马安/三栋",description:"省级高新区·1核4组团",stat:"2025产值632.7亿→2026目标800亿",node_status:"active",change_status:"增强",evidence_grade:"A",color:"#2563eb",source_ids:["S001","S004"]},
+    {node_id:"dz",name:"电子信息集群",node_type:"cluster",layer:"三大集群",town:"水口/马安",description:"规上工业总产值主体",stat:"胜宏/润众/沃尔核材集聚",node_status:"active",change_status:"增强",evidence_grade:"A",color:"#2563eb",source_ids:["S001","S010"]},
+    {node_id:"xcl",name:"新材料集群",node_type:"cluster",layer:"三大集群",town:"水口/小金口",description:"新材料产业集聚区",stat:"金澜/天濠落子",node_status:"active",change_status:"增强",evidence_grade:"A",color:"#0891b2",source_ids:["S006","S007"]},
+    {node_id:"ai",name:"AI与机器人",node_type:"cluster",layer:"新兴产业",town:"南部AI经济带",description:"新兴战略产业",stat:"市级方案已印发·区级制定中",node_status:"active",change_status:"增强",evidence_grade:"A",color:"#7c3aed",source_ids:["S014","S015"]},
+    {node_id:"fw",name:"生产性服务业",node_type:"cluster",layer:"城市功能",town:"江北CBD",description:"金融/商务/企业服务",stat:"三产69%·会客厅300家",node_status:"active",change_status:"增强",evidence_grade:"A",color:"#0d9488",source_ids:["S001","S013"]},
+    {node_id:"jt",name:"交通枢纽",node_type:"infrastructure",layer:"城市功能",town:"小金口/水口",description:"区域交通枢纽",stat:"惠州北站·东江特大桥",node_status:"active",change_status:"增强",evidence_grade:"A",color:"#dc2626",source_ids:["S005"]},
+    {node_id:"wh",name:"文旅生态",node_type:"cluster",layer:"城市功能",town:"西湖/红花湖",description:"文旅资源集聚区",stat:"西湖5A·文化艺术节",node_status:"active",change_status:"增强",evidence_grade:"A",color:"#9333ea",source_ids:["S016"]},
+    {node_id:"rj",name:"城市人居",node_type:"cluster",layer:"城市功能",town:"江北/水口",description:"中心城区人居环境",stat:"人才社区300套·890封顶",node_status:"active",change_status:"增强",evidence_grade:"A",color:"#16a34a",source_ids:["S012"]},
+    {node_id:"jl",name:"金澜新材料",node_type:"enterprise",layer:"卫星·新材料",town:"水口新民洛塘",description:"新能源高分子材料企业",stat:"10.5亿竞地落子",node_status:"pending",change_status:"新增",evidence_grade:"A",color:"#0891b2",source_ids:["S006"]},
+    {node_id:"th",name:"天濠新材料",node_type:"enterprise",layer:"卫星·新材料",town:"水口新民洛塘",description:"半固态镁合金制造",stat:"4.84亿·达产超10亿",node_status:"pending",change_status:"新增",evidence_grade:"A",color:"#0891b2",source_ids:["S007"]},
+    {node_id:"sh",name:"胜宏科技",node_type:"enterprise",layer:"卫星·电子信息",town:"高新区",description:"AI高端电路智造",stat:"30亿摘牌·百亿级",node_status:"pending",change_status:"新增",evidence_grade:"A",color:"#2563eb",source_ids:["S009"]},
+    {node_id:"rz",name:"润众科技",node_type:"enterprise",layer:"卫星·电子信息",town:"水口龙津",description:"高精密度线路板",stat:"技改4256万·12月投产",node_status:"pending",change_status:"新增",evidence_grade:"A",color:"#2563eb",source_ids:["S011"]},
+    {node_id:"wr",name:"沃尔核材",node_type:"enterprise",layer:"卫星·电子信息",town:"高新区",description:"AI算力/高速通讯",stat:"大湾区制造中心",node_status:"pending",change_status:"新增",evidence_grade:"A",color:"#2563eb",source_ids:["S010"]},
+    {node_id:"lyh",name:"利元亨",node_type:"enterprise",layer:"卫星·AI",town:"惠城",description:"智能装备龙头",stat:"党代会点名链主",node_status:"active",change_status:"增强",evidence_grade:"A",color:"#7c3aed",source_ids:["S017"]},
+    {node_id:"sz",name:"深圳",node_type:"external",layer:"外部",town:"外部",description:"大湾区核心城市",stat:"融深·创新要素外溢",node_status:"active",change_status:"无显著变化",evidence_grade:"B",color:"#64748b",source_ids:["S010"]},
+    {node_id:"dg",name:"东莞",node_type:"external",layer:"外部",town:"外部",description:"大湾区制造业城市",stat:"电子外溢历史来源",node_status:"active",change_status:"无显著变化",evidence_grade:"B",color:"#64748b",source_ids:["S001"]}
+  ],
+  edges:[
+    {edge_id:"E001",source_node_id:"gxq",target_node_id:"jl",relation_type:"investment",relation_description:"金澜新材料竞地落子惠城高新区水口片区（约115.2亩），总投资不低于10.5亿，建设四大功能板块",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:{metric_name:"总投资",metric_value:10.5,metric_unit:"亿元"},strength_basis:"政府公告+惠州日报",change_status:"新增",counter_evidence:"未动工，实际投资完成额未公开"},
+    {edge_id:"E002",source_node_id:"gxq",target_node_id:"th",relation_type:"investment",relation_description:"天濠半固态镁合金制造基地奠基，总投资4.84亿、达产年产值超10亿",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:{metric_name:"总投资",metric_value:4.84,metric_unit:"亿元"},strength_basis:"高新区奠基公告",change_status:"新增",counter_evidence:"在建，投产待观察"},
+    {edge_id:"E003",source_node_id:"xcl",target_node_id:"th",relation_type:"supply_chain",relation_description:"天濠半固态镁合金项目嵌入新材料集群，补强华南镁合金产能",direction:"有方向",evidence_type:"证据推断",evidence_grade:"B",confidence:"中",metric:null,strength_basis:"同集群产业协同推断",change_status:"新增",counter_evidence:"协同深度无量化证据"},
+    {edge_id:"E004",source_node_id:"gxq",target_node_id:"sh",relation_type:"investment",relation_description:"胜宏AI高端电路智造产业园摘牌落户，投资30亿、百亿级规模",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:{metric_name:"总投资",metric_value:30,metric_unit:"亿元"},strength_basis:"投促局摘牌+南方+",change_status:"新增",counter_evidence:"投产时间未公开"},
+    {edge_id:"E005",source_node_id:"dz",target_node_id:"sh",relation_type:"supply_chain",relation_description:"胜宏（全球首批6阶24层HDI量产）AI算力电路板产能布局，强化电子信息集群",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:{metric_name:"总投资",metric_value:30,metric_unit:"亿元"},strength_basis:"官方摘牌+产业报道",change_status:"新增",counter_evidence:"达产产值未公开"},
+    {edge_id:"E006",source_node_id:"dz",target_node_id:"rz",relation_type:"investment",relation_description:"润众高精密度线路板智能化技改（水口），总投资约4256.6万、预计12月投产",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:{metric_name:"总投资",metric_value:0.4257,metric_unit:"亿元"},strength_basis:"区发改局节能审查",change_status:"新增",counter_evidence:"存量技改，非新增主体"},
+    {edge_id:"E007",source_node_id:"gxq",target_node_id:"wr",relation_type:"investment",relation_description:"沃尔核材粤港澳大湾区制造中心落户，面向AI算力与高速通讯网络",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:null,strength_basis:"南方+产业报道",change_status:"新增",counter_evidence:"投资额未公开"},
+    {edge_id:"E008",source_node_id:"ai",target_node_id:"gxq",relation_type:"regional",relation_description:"市、区两级AI与机器人实施方案：市级已印发、区级制定中",direction:"双向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:null,strength_basis:"政府文件（提案答复）",change_status:"增强",counter_evidence:"区级方案未正式印发"},
+    {edge_id:"E009",source_node_id:"hc",target_node_id:"ai",relation_type:"regional",relation_description:"党代会提出南部人工智能产业经济带，联动惠阳PCB、惠东算力，承接深莞AI要素",direction:"有方向",evidence_type:"证据推断",evidence_grade:"B",confidence:"中",metric:null,strength_basis:"党代会报告+惠州日报",change_status:"新增",counter_evidence:"方向指引，落地待细化"},
+    {edge_id:"E010",source_node_id:"gxq",target_node_id:"hc",relation_type:"investment",relation_description:"高新区是惠城工业核心引擎：2025产值632.7亿→2026目标800亿，138宗重点项目支撑",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:{metric_name:"2025产值",metric_value:632.7,metric_unit:"亿元"},strength_basis:"政府工作报告+重点项目",change_status:"无显著变化",counter_evidence:"800亿为年度目标"},
+    {edge_id:"E011",source_node_id:"jt",target_node_id:"hc",relation_type:"transport",relation_description:"东江特大桥（桥塔172米）合龙，惠霞高速冲刺年内通车，改写跨江通勤",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:null,strength_basis:"省交通运输厅公告",change_status:"新增",counter_evidence:"年内通车为目标"},
+    {edge_id:"E012",source_node_id:"wh",target_node_id:"hc",relation_type:"tourism_consumption",relation_description:"西湖5A、红花湖+湾区文化艺术节（10/31），带动文旅消费",direction:"双向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:null,strength_basis:"文旅活动官方发布",change_status:"增强",counter_evidence:"客流/消费额未细分"},
+    {edge_id:"E013",source_node_id:"rj",target_node_id:"hc",relation_type:"regional",relation_description:"下良人才社区300套投用、荔枝城890套封顶，中心城区人才安居支撑",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"中",metric:{metric_name:"保障房",metric_value:890,metric_unit:"套"},strength_basis:"南方+报道",change_status:"新增",counter_evidence:"民生配套，非产业直接贡献"},
+    {edge_id:"E014",source_node_id:"fw",target_node_id:"hc",relation_type:"regional",relation_description:"企业会客厅揭牌（首批约300家重点企业专人帮办），生产性服务支撑企业",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:{metric_name:"首批企业",metric_value:300,metric_unit:"家"},strength_basis:"市政府发布",change_status:"新增",counter_evidence:"服务效能未量化"},
+    {edge_id:"E015",source_node_id:"sz",target_node_id:"gxq",relation_type:"regional",relation_description:"融深融湾：承接深圳产业与创新要素（胜宏AI智造、沃尔核材的深圳关联）",direction:"有方向",evidence_type:"证据推断",evidence_grade:"B",confidence:"中",metric:null,strength_basis:"产业来源与政策方向推断",change_status:"无显著变化",counter_evidence:"深圳直接关联程度无数据"},
+    {edge_id:"E016",source_node_id:"dg",target_node_id:"dz",relation_type:"supply_chain",relation_description:"东莞电子产业历史外溢构成惠城电子集群来源之一",direction:"有方向",evidence_type:"证据推断",evidence_grade:"B",confidence:"中",metric:null,strength_basis:"产业迁移历史与同城化",change_status:"无显著变化",counter_evidence:"外溢占比无统计"},
+    {edge_id:"E017",source_node_id:"gxq",target_node_id:"ai",relation_type:"regional",relation_description:"AI与机器人产业布局在高新区/南部经济带落地（利元亨链主+链属引育）",direction:"双向",evidence_type:"证据推断",evidence_grade:"B",confidence:"中",metric:null,strength_basis:"党代会链主引育表述",change_status:"增强",counter_evidence:"企业落地进度待跟踪"},
+    {edge_id:"E018",source_node_id:"hc",target_node_id:"dz",relation_type:"supply_chain",relation_description:"电子信息是惠城规上工业总产值主体（937.92亿/+9.6%），构成工业基本盘",direction:"双向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:{metric_name:"规上工业总产值",metric_value:937.92,metric_unit:"亿元"},strength_basis:"政府工作报告",change_status:"无显著变化",counter_evidence:"集群内部结构未细分"},
+    {edge_id:"E019",source_node_id:"ai",target_node_id:"lyh",relation_type:"supply_chain",relation_description:"党代会明确以利元亨为链主，培育AI与机器人产业集群链属企业（链主-链属关系）",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:null,strength_basis:"党代会报告+惠州日报点名链主",change_status:"增强",counter_evidence:"链属企业数量与协同规模未公开"}
+  ],
+  changes:[
+    {change_id:"C001",change_type:"new_entity",title:"金澜新材料竞地落子（10.5亿）",event_date:"2026-10-13",involved_node_ids:["gxq","jl"],involved_edge_ids:["E001"],before_after:"此前：项目未落地；此后：竞地成功进入建设准备",uncertainty:"实际投资完成额与投产时间未公开",topic:"竞地≠开工。10.5亿从签约到投产还有多远？水口新材料集群能否真正成型？"},
+    {change_id:"C002",change_type:"new_entity",title:"天濠半固态镁合金奠基（4.84亿）",event_date:"2026-06-04",involved_node_ids:["gxq","th"],involved_edge_ids:["E002","E003"],before_after:"此前：镁合金产能空白；此后：在建，与海天智胜签装备合作",uncertainty:"投产时间待定",topic:"镁合金是新赛道。天濠的装备合作能否支撑达产？新材料集群会形成第二增长极吗？"},
+    {change_id:"C003",change_type:"new_entity",title:"胜宏AI高端电路智造摘牌（30亿）",event_date:"2026-06",involved_node_ids:["gxq","sh"],involved_edge_ids:["E004","E005"],before_after:"此前：AI硬件制造本地空白；此后：AI算力电路板产能布局",uncertainty:"投产与达产时间未公开",topic:"惠城能否从“电子配套”升级为“AI硬件”？百亿级目标靠什么兑现？"},
+    {change_id:"C004",change_type:"new_entity",title:"沃尔核材大湾区制造中心落户",event_date:"2026-06",involved_node_ids:["gxq","wr"],involved_edge_ids:["E007"],before_after:"此前：无对应主体；此后：落户高新区",uncertainty:"投资额未公开",topic:"沃尔核材与胜宏能否在AI硬件上“抱团”？形成本地协同还是各自为战？"},
+    {change_id:"C005",change_type:"new_edge",title:"东江特大桥合龙·惠霞高速冲刺通车",event_date:"2026-10-21",involved_node_ids:["jt"],involved_edge_ids:["E011"],before_after:"此前：跨江通道未贯通；此后：南北大动脉关键节点打通",uncertainty:"年内通车为目标",topic:"桥通了，跨江通勤真的会变吗？还是主要利好过境车流而非本地居民？"},
+    {change_id:"C006",change_type:"new_entity",title:"企业会客厅揭牌（首批300家）",event_date:"2026-10-27",involved_node_ids:["fw"],involved_edge_ids:["E014"],before_after:"此前：无统一企业服务入口；此后：专人帮办涉企业务",uncertainty:"服务效能未量化",topic:"服务窗口能否真正降低企业办事成本？300家企业的获得感如何衡量？"},
+    {change_id:"C007",change_type:"new_edge",title:"党代会：三地五城+南部AI产业经济带",event_date:"2026-10-27",involved_node_ids:["hc","ai","lyh"],involved_edge_ids:["E009","E017"],before_after:"此前：AI布局分散；此后：明确南部AI产业经济带方向",uncertainty:"方向指引，落地待细化",topic:"方向明确但区级AI方案仍在制定中，会不会起大早赶晚集？利元亨链主能带出多少链属？"}
+  ],
+  sources:{
+    "S001":["2026年惠城区政府工作报告","http://www.hcq.gov.cn/zfxxgkml/hzshcqzf/zfgzbg/content/mpost_5732355.html"],
+    "S004":["1-9月138宗重点项目完成投资103.05亿","http://www.hcq.gov.cn/hcqzdlyxxgk/zdjsxm/ssqk/content/post_5872769.html"],
+    "S005":["东江特大桥合龙（省交通厅）","https://td.gd.gov.cn/gkmlpt/content/4/4963/mpost_4963897.html"],
+    "S006":["金澜新材料竞地落子（惠州日报）","https://www.huizhou.gov.cn/zwgk/hzsz/zwyw/content/mpost_5870128.html"],
+    "S007":["天濠奠基（高新区管委会）","http://www.hcq.gov.cn/hzhckjyglw/gkmlpt/content/5/5785/post_5785894.html"],
+    "S009":["胜宏AI智造摘牌（投促中心）","http://www.hcq.gov.cn/hzhctczx/gkmlpt/content/5/5831/mpost_5831203.html"],
+    "S010":["惠城五年经济之变（南方+）","http://m.toutiao.com/group/7698303822905360934/"],
+    "S011":["润众技改节能审查（区发改局）","http://www.hcq.gov.cn/zfxxgkml/hcqfzggj/bmwj/content/post_5840202.html"],
+    "S012":["下良人才社区投用（南方+）","https://www.nfnews.com/content/1y0lxOAMyB.html"],
+    "S013":["企业会客厅揭牌（市政府）","https://www.huizhou.gov.cn/zwgk/hzsz/xqyw/content/post_5880050.html"],
+    "S014":["市级AI方案（提案答复引用）","https://www.huizhou.gov.cn/zfxxgkml/hzsnyhzdxmj/jytagk/content/mpost_5834858.html"],
+    "S015":["区级AI方案制定中（提案答复）","http://www.hcq.gov.cn/hzhcfgj/gkmlpt/content/5/5878/post_5878490.html"],
+    "S016":["湾区文化艺术节（惠州文明网）","http://hz.wenming.cn/ecjj/202610/t20261014_9379785.htm"],
+    "S017":["利元亨链主（惠州日报）","http://e.hznews.com/hzrb/pc/content/202610/28/content_1134303.html"]
   }
 };
 
-const stage=document.getElementById('stage');
-const detail=document.getElementById('detail');
-let current=null;
+/* ================= 网络引擎 ================= */
+const canvas = document.getElementById("net");
+const ctx = canvas.getContext("2d");
+let W=0,H=0,DPR=1;
+let nodes=[], edges=[], changes=[], sourcesMap={};
+let activeFilter="all", showLab=true, onlyChg=false;
+let selectedNode=null, selectedEdge=null, hoverNode=null;
+let dragNode=null, dragMoved=false;
+let mouse={x:0,y:0};
+let startTime = performance.now();
+let UI=1; // 小屏布局缩放因子
 
-function showDetail(id){
-  const d=PLATES[id]; if(!d) return;
-  document.getElementById('d_ic').style.background=d.color;
-  document.getElementById('d_ic').innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="#fff">'+d.icon+'</svg>';
-  document.getElementById('d_t').textContent=d.t;
-  document.getElementById('d_s').textContent=d.s;
-  document.getElementById('d_p').textContent=d.p;
-  document.getElementById('d_facts').innerHTML=d.facts.map(f=>
-    '<div class="fact"><span>'+f[0]+'</span><b>'+f[1]+'</b></div>').join('');
-  document.getElementById('d_ev').innerHTML=d.ev;
-  detail.classList.add('show');
-  document.getElementById('detailMask').classList.add('show');
+function resize(){
+  DPR = Math.min(window.devicePixelRatio||1, 2);
+  const r = canvas.getBoundingClientRect();
+  W=r.width; H=r.height;
+  canvas.width=W*DPR; canvas.height=H*DPR;
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  UI = W<520 ? Math.max(0.66, W/560) : 1;
 }
-function hideDetail(){
-  detail.classList.remove('show');
-  document.getElementById('detailMask').classList.remove('show');
+window.addEventListener("resize",resize);
+
+/* 初始位置：按 layer 分组，core 居中，卫星由弹簧自然抱团 */
+function initPositions(){
+  const cx=W/2, cy=H/2+6;
+  const ang = {gxq:-Math.PI*0.72, dz:-Math.PI*0.42, xcl:-Math.PI, ai:-Math.PI*0.15,
+               fw:-Math.PI*0.55, jt:Math.PI*0.12, wh:Math.PI*0.55, rj:Math.PI*0.9};
+  nodes.forEach(n=>{
+    n.vx=0; n.vy=0; n.fixed=false; n.spawn = n.change_status==="新增" ? 0 : 1;
+    if(n.node_type==="core"){ n.x=cx; n.y=cy; n.fixed=true; n.spawn=1; }
+    else if(n.node_type==="external"){
+      n.x = n.node_id==="sz" ? W-90 : W-150;
+      n.y = n.node_id==="sz" ? H*0.34 : H*0.62;
+      n.fixed=true;
+    }
+    else if(n.node_type==="anchor"){
+      const a=ang[n.node_id] ?? -Math.PI*0.7;
+      n.x=cx+Math.cos(a)*200; n.y=cy+Math.sin(a)*160;
+    }
+    else if(n.node_type==="cluster"){
+      const a=ang[n.node_id] ?? Math.random()*Math.PI*2;
+      n.x=cx+Math.cos(a)*150+ (Math.random()-.5)*40;
+      n.y=cy+Math.sin(a)*120+ (Math.random()-.5)*40;
+    }
+    else { // enterprise 卫星：先放锚点附近随机
+      n.x=cx+(Math.random()-.5)*260; n.y=cy+(Math.random()-.5)*220;
+    }
+  });
 }
 
-function focus(id){
-  current=id;
-  document.querySelectorAll('.plate').forEach(p=>{
-    p.classList.toggle('focus', p.dataset.id===id);
-  });
-  stage.classList.toggle('dim', !!id && id!=='all');
-  // 导航高亮
-  document.querySelectorAll('#topnav button').forEach(b=>b.classList.toggle('active',b.dataset.id===id));
-  document.querySelectorAll('#leftmenu button').forEach(b=>b.classList.toggle('active',b.dataset.id===id));
-  if(id && id!=='all' && PLATES[id]){
-    showDetail(id);
-  } else hideDetail();
-}
-function reset(){
-  current=null;
-  document.querySelectorAll('.plate').forEach(p=>p.classList.remove('focus'));
-  stage.classList.remove('dim');
-  document.querySelectorAll('#topnav button').forEach(b=>b.classList.toggle('active',b.dataset.id==='all'));
-  document.querySelectorAll('#leftmenu button').forEach(b=>b.classList.remove('active'));
-  hideDetail();
+function nodeRadius(n){
+  let r;
+  if(n.node_type==="core") r=30;
+  else if(n.node_type==="anchor") r=24;
+  else if(n.node_type==="cluster") r=19;
+  else if(n.node_type==="external") r=18;
+  else r=12; // enterprise
+  return r*UI;
 }
 
-document.querySelectorAll('.plate').forEach(p=>{
-  p.addEventListener('click',e=>{
-    e.stopPropagation();
-    const id=p.dataset.id;
-    if(id==='all'){reset();return;}
-    focus(current===id?null:id);
+function edgeVisible(e){
+  if(activeFilter!=="all" && e.relation_type!==activeFilter) return false;
+  if(onlyChg && e.change_status==="无显著变化") return false;
+  return true;
+}
+function nodeDimmed(n){
+  if(!selectedNode) return false;
+  // 与选中节点相连才亮
+  return !edges.some(e=>edgeVisible(e) &&
+    ((e.source_node_id===selectedNode.node_id&&e.target_node_id===n.node_id)||
+     (e.target_node_id===selectedNode.node_id&&e.source_node_id===n.node_id)))
+    && n.node_id!==selectedNode.node_id;
+}
+
+/* 力模拟 */
+function simulate(){
+  const REP = 5200*UI*UI, SPRING=0.012, DAMP=0.86, CENTER=0.0025;
+  // 斥力
+  for(let i=0;i<nodes.length;i++){
+    for(let j=i+1;j<nodes.length;j++){
+      const a=nodes[i], b=nodes[j];
+      let dx=a.x-b.x, dy=a.y-b.y;
+      let d2=dx*dx+dy*dy; if(d2<1) d2=1;
+      const d=Math.sqrt(d2);
+      const f=REP/d2;
+      const fx=f*dx/d, fy=f*dy/d;
+      if(!a.fixed){a.vx+=fx;a.vy+=fy;}
+      if(!b.fixed){b.vx-=fx;b.vy-=fy;}
+    }
+  }
+  // 弹簧
+  edges.forEach(e=>{
+    if(!edgeVisible(e)) return;
+    const a=nodes.find(n=>n.node_id===e.source_node_id);
+    const b=nodes.find(n=>n.node_id===e.target_node_id);
+    if(!a||!b) return;
+    // 卫星到锚点目标距离短（抱团）
+    const target = (b.node_type==="enterprise")? 58*UI : 120*UI;
+    let dx=b.x-a.x, dy=b.y-a.y;
+    const d=Math.sqrt(dx*dx+dy*dy)||1;
+    const f=(d-target)*SPRING;
+    const fx=f*dx/d, fy=f*dy/d;
+    if(!a.fixed){a.vx+=fx;a.vy+=fy;}
+    if(!b.fixed){b.vx-=fx;b.vy-=fy;}
   });
+  // 归位 + 阻尼
+  const cx=W/2, cy=H/2+6;
+  nodes.forEach(n=>{
+    if(n.fixed){ n.vx=0; n.vy=0; return; }
+    n.vx+=(cx-n.x)*CENTER; n.vy+=(cy-n.y)*CENTER;
+    n.vx*=DAMP; n.vy*=DAMP;
+    n.x+=n.vx; n.y+=n.vy;
+    // 边界
+    const r=nodeRadius(n);
+    n.x=Math.max(r+8,Math.min(W-r-8,n.x));
+    n.y=Math.max(r+70,Math.min(H-r-100,n.y));
+    // 新节点 spawn
+    if(n.spawn<1) n.spawn=Math.min(1,n.spawn+0.03);
+  });
+}
+
+function edgeLabel(e){
+  if(e.metric){
+    const v=e.metric.metric_value;
+    const u=e.metric.metric_unit==="亿元"?"亿":e.metric.metric_unit;
+    return (v<1? v.toFixed(2): v)+u;
+  }
+  const map={supply_chain:"配套",investment:"投资",regional:"协作",transport:"通道",tourism_consumption:"文旅"};
+  return map[e.relation_type]||"";
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  const t=performance.now();
+
+  // 边
+  edges.forEach(e=>{
+    if(!edgeVisible(e)) return;
+    const a=nodes.find(n=>n.node_id===e.source_node_id);
+    const b=nodes.find(n=>n.node_id===e.target_node_id);
+    if(!a||!b) return;
+    const dim = nodeDimmed(a)||nodeDimmed(b);
+    ctx.save();
+    ctx.globalAlpha = dim?0.12:0.9;
+    let col = a.color||"#64748b";
+    if(e.change_status==="断裂") col="#dc2626";
+    ctx.strokeStyle=col; ctx.lineWidth = e.evidence_grade==="A"?2:1.6;
+    if(e.evidence_grade==="B") ctx.setLineDash([7,6]);
+    if(e.evidence_grade==="C") ctx.setLineDash([2,5]);
+    // 新增边：生长动画
+    let grow=1;
+    if(e.change_status==="新增"){
+      grow = Math.min(1, (t-startTime)/1400 + (parseInt(e.edge_id.slice(1))*0.04));
+    }
+    const ex=a.x+(b.x-a.x)*grow, ey=a.y+(b.y-a.y)*grow;
+    ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(ex,ey); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // 变化边的流动点（代表关系活跃/资源流动）
+    if(e.change_status==="新增"||e.change_status==="增强"){
+      const phase=((t/1400)+parseInt(e.edge_id.slice(1))*0.13)%1;
+      const px=a.x+(b.x-a.x)*phase, py=a.y+(b.y-a.y)*phase;
+      ctx.fillStyle=col; ctx.globalAlpha=dim?0.1:0.85;
+      ctx.beginPath(); ctx.arc(px,py,2.6,0,Math.PI*2); ctx.fill();
+    }
+    // 断裂符号
+    if(e.change_status==="断裂"){
+      const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
+      ctx.globalAlpha=dim?0.1:0.95;
+      ctx.strokeStyle="#dc2626"; ctx.lineWidth=2.4;
+      ctx.beginPath();
+      ctx.moveTo(mx-6,my-6);ctx.lineTo(mx+6,my+6);
+      ctx.moveTo(mx+6,my-6);ctx.lineTo(mx-6,my+6);
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    // 标签 LAB
+    if(showLab && grow>=1){
+      const mx=a.x+(b.x-a.x)*0.5, my=a.y+(b.y-a.y)*0.5;
+      const lab=edgeLabel(e);
+      if(lab){
+        ctx.font="600 10.5px sans-serif";
+        const tw=ctx.measureText(lab).width;
+        ctx.globalAlpha=dim?0.1:0.95;
+        ctx.fillStyle="rgba(255,255,255,.92)";
+        ctx.beginPath();
+        ctx.roundRect(mx-tw/2-5,my-8,tw+10,16,8); ctx.fill();
+        ctx.fillStyle = e.change_status==="断裂"?"#dc2626":"#334155";
+        ctx.textAlign="center"; ctx.textBaseline="middle";
+        ctx.fillText(lab,mx,my+0.5);
+        ctx.globalAlpha=1;
+      }
+    }
+  });
+
+  // 节点
+  nodes.forEach(n=>{
+    const dim=nodeDimmed(n);
+    const r=nodeRadius(n);
+    const scale=n.spawn||1;
+    ctx.save();
+    ctx.translate(n.x,n.y); ctx.scale(scale,scale);
+    // 新增/变化脉冲环
+    if((n.change_status==="新增"||n.change_status==="增强")&&!dim){
+      const ph=(t/1300)%1;
+      ctx.globalAlpha=(1-ph)*0.4;
+      ctx.strokeStyle=n.color; ctx.lineWidth=1.5;
+      ctx.beginPath(); ctx.arc(0,0,r+4+ph*12,0,Math.PI*2); ctx.stroke();
+      ctx.globalAlpha=1;
+    }
+    ctx.globalAlpha=dim?0.18:1;
+    // 主体
+    ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2);
+    ctx.fillStyle="#fff"; ctx.fill();
+    ctx.lineWidth = n.node_type==="core"?3:2.2;
+    ctx.strokeStyle=n.color; ctx.stroke();
+    // 内部小圆点（类型标识）
+    ctx.fillStyle=n.color;
+    ctx.beginPath(); ctx.arc(0,0,r*0.32,0,Math.PI*2); ctx.fill();
+    // pending 卫星：虚线环表示在建
+    if(n.node_status==="pending"){
+      ctx.setLineDash([3,3]); ctx.strokeStyle=n.color; ctx.lineWidth=1.2;
+      ctx.beginPath(); ctx.arc(0,0,r+3,0,Math.PI*2); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    ctx.restore();
+
+    // 名字
+    ctx.save();
+    ctx.globalAlpha=dim?0.15:1;
+    ctx.font=(n.node_type==="enterprise"?"600 10.5px":"700 11.5px")+" sans-serif";
+    ctx.textAlign="center"; ctx.textBaseline="top";
+    ctx.fillStyle="#1e2b3a";
+    ctx.fillText(n.name,n.x,n.y+r+4);
+    // 新增/退出小标
+    if(n.change_status==="新增"&&!dim){
+      ctx.font="700 8.5px sans-serif";
+      ctx.fillStyle="#16a34a";
+      ctx.fillText("●新",n.x,n.y+r+17);
+    }
+    ctx.restore();
+  });
+}
+
+function loop(){
+  simulate();
+  draw();
+  requestAnimationFrame(loop);
+}
+
+/* ================= 交互 ================= */
+function getPos(e){
+  const r=canvas.getBoundingClientRect();
+  const t=e.touches?e.touches[0]:e;
+  return {x:t.clientX-r.left, y:t.clientY-r.top};
+}
+function hitNode(x,y){
+  for(let i=nodes.length-1;i>=0;i--){
+    const n=nodes[i];
+    const d=Math.hypot(x-n.x,y-n.y);
+    if(d<=nodeRadius(n)+3) return n;
+  }
+  return null;
+}
+function hitEdge(x,y){
+  let best=null, bd=9;
+  edges.forEach(e=>{
+    if(!edgeVisible(e)) return;
+    const a=nodes.find(n=>n.node_id===e.source_node_id);
+    const b=nodes.find(n=>n.node_id===e.target_node_id);
+    if(!a||!b) return;
+    // 点到线段距离
+    const dx=b.x-a.x, dy=b.y-a.y;
+    const len2=dx*dx+dy*dy;
+    let u=len2?((x-a.x)*dx+(y-a.y)*dy)/len2:0;
+    u=Math.max(0,Math.min(1,u));
+    const px=a.x+u*dx, py=a.y+u*dy;
+    const d=Math.hypot(x-px,y-py);
+    if(d<bd){bd=d;best=e;}
+  });
+  return best;
+}
+
+canvas.addEventListener("mousedown",e=>{
+  const p=getPos(e);
+  const n=hitNode(p.x,p.y);
+  if(n){
+    dragNode=n; dragMoved=false;
+    n.fixed=true; canvas.classList.add("drag");
+  }
 });
-document.querySelectorAll('#topnav button, #leftmenu button').forEach(b=>{
-  b.addEventListener('click',()=>{const id=b.dataset.id; if(id==='all')reset(); else focus(id);});
+canvas.addEventListener("mousemove",e=>{
+  const p=getPos(e); mouse=p;
+  if(dragNode){
+    dragNode.x=p.x; dragNode.y=p.y; dragNode.vx=0; dragNode.vy=0;
+    dragMoved=true;
+  } else {
+    hoverNode=hitNode(p.x,p.y);
+    canvas.style.cursor=hoverNode?"pointer":"grab";
+  }
 });
-document.getElementById('allhc').addEventListener('click',reset);
-document.getElementById('d_close').addEventListener('click',()=>{hideDetail();reset();});
-document.getElementById('detailMask').addEventListener('click',()=>{hideDetail();reset();});
-document.getElementById('go').addEventListener('click',()=>{
-  if(!current) focus('tech');
+window.addEventListener("mouseup",e=>{
+  if(dragNode){
+    const wasCore = dragNode.node_type==="core"||dragNode.node_type==="external";
+    if(!wasCore) dragNode.fixed=false;
+    if(!dragMoved){ selectNode(dragNode); }
+    dragNode=null; canvas.classList.remove("drag");
+  }
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){hideDetail();reset();}});
-document.getElementById('stageWrap').addEventListener('click',e=>{
-  if(e.target.closest('.plate')) return; reset();
+canvas.addEventListener("click",e=>{
+  if(dragMoved){dragMoved=false;return;}
+  const p=getPos(e);
+  const n=hitNode(p.x,p.y);
+  if(n){ selectNode(n); return; }
+  const ed=hitEdge(p.x,p.y);
+  if(ed){ showEdgePop(ed); return; }
+  clearSelection();
+});
+// 触摸
+canvas.addEventListener("touchstart",e=>{
+  const p=getPos(e); const n=hitNode(p.x,p.y);
+  if(n){dragNode=n;dragMoved=false;n.fixed=true;}
+},{passive:true});
+canvas.addEventListener("touchmove",e=>{
+  if(dragNode){const p=getPos(e);dragNode.x=p.x;dragNode.y=p.y;dragMoved=true;e.preventDefault();}
+},{passive:false});
+canvas.addEventListener("touchend",e=>{
+  if(dragNode){
+    if(!(dragNode.node_type==="core"||dragNode.node_type==="external")) dragNode.fixed=false;
+    if(!dragMoved) selectNode(dragNode);
+    dragNode=null;
+  }
 });
 
-// 情景模式（仅切换高亮，不伪造数值；真实计算在产业风洞）
-document.querySelectorAll('#scen button').forEach(b=>{
-  b.addEventListener('click',()=>{
-    document.querySelectorAll('#scen button').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
+function selectNode(n){
+  selectedNode=n; selectedEdge=null;
+  showNodePop(n);
+}
+function clearSelection(){
+  selectedNode=null; selectedEdge=null;
+  hidePop();
+}
+
+/* ================= 浮卡 ================= */
+const pop=document.getElementById("pop");
+const popMask=document.getElementById("popMask");
+function gradeChip(g){
+  const m={A:["#16a34a","A 已证实事实"],B:["#d97706","B 证据推断"],C:["#94a3b8","C 待验证假设"]};
+  return '<span class="grade-chip" style="background:'+m[g][0]+'22;color:'+m[g][0]+'">'+m[g][1]+'</span>';
+}
+function showNodePop(n){
+  document.getElementById("p_ic").style.background=n.color;
+  document.getElementById("p_ic").innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="12" r="4"/></svg>';
+  document.getElementById("p_t").textContent=n.name;
+  document.getElementById("p_s").textContent=n.layer+(n.town&&n.town!=="外部"?" · "+n.town:"");
+  const relEdges=edges.filter(e=>
+    (e.source_node_id===n.node_id||e.target_node_id===n.node_id));
+  let html='<p>'+n.description+'</p>'+gradeChip(n.evidence_grade);
+  if(n.stat) html+='<div class="facts"><div class="fact"><span>关键指标</span><b style="font-size:11px">'+n.stat+'</b></div></div>';
+  html+='<div class="facts"><div style="font-size:11px;font-weight:800;color:#475569">相连关系（'+relEdges.length+'）</div>';
+  relEdges.forEach(e=>{
+    const other=e.source_node_id===n.node_id?e.target_node_id:e.source_node_id;
+    const on=nodes.find(x=>x.node_id===other);
+    html+='<div class="fact" data-e="'+e.edge_id+'" style="cursor:pointer"><span>'+(on?on.name:other)+' · <span style="color:#94a3b8">'+e.relation_type+'</span></span><b style="color:'+(e.evidence_grade==="A"?"#16a34a":(e.evidence_grade==="B"?"#d97706":"#94a3b8"))+'">'+e.evidence_grade+'</b></div>';
   });
+  html+='</div>';
+  const sid=n.source_ids&&n.source_ids[0];
+  if(sid&&sourcesMap[sid]) html+='<div class="src">来源：'+sourcesMap[sid][0]+'<br><a href="'+sourcesMap[sid][1]+'" target="_blank">'+sourcesMap[sid][1]+'</a></div>';
+  document.getElementById("p_body").innerHTML=html;
+  pop.classList.add("show"); popMask.classList.add("show");
+  pop.querySelectorAll("[data-e]").forEach(el=>el.addEventListener("click",()=>{
+    const e=edges.find(x=>x.edge_id===el.dataset.e); if(e) showEdgePop(e);
+  }));
+}
+function showEdgePop(e){
+  selectedEdge=e;
+  const a=nodes.find(n=>n.node_id===e.source_node_id);
+  const b=nodes.find(n=>n.node_id===e.target_node_id);
+  document.getElementById("p_ic").style.background=a.color;
+  document.getElementById("p_ic").innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 12h16M14 6l6 6-6 6"/></svg>';
+  document.getElementById("p_t").textContent=(a?a.name:"")+" → "+(b?b.name:"");
+  document.getElementById("p_s").textContent=e.relation_type+" · "+e.direction;
+  let html='<p>'+e.relation_description+'</p>'+gradeChip(e.evidence_grade);
+  const facts=[];
+  if(e.metric) facts.push([e.metric.metric_name, e.metric.metric_value+" "+e.metric.metric_unit]);
+  facts.push(["置信度",e.confidence],["变化状态",e.change_status],["强度依据",e.strength_basis]);
+  if(e.counter_evidence) facts.push(["限制/反证",e.counter_evidence]);
+  html+='<div class="facts">'+facts.map(f=>'<div class="fact"><span>'+f[0]+'</span><b style="font-size:11px;text-align:right;max-width:60%">'+f[1]+'</b></div>').join("")+'</div>';
+  const sids=e.source_ids||[];
+  let srcHtml="";
+  sids.forEach(s=>{ if(sourcesMap[s]) srcHtml+='<div style="margin-bottom:5px">'+sourcesMap[s][0]+'<br><a href="'+sourcesMap[s][1]+'" target="_blank">'+sourcesMap[s][1]+'</a></div>'; });
+  if(srcHtml) html+='<div class="src">来源：<br>'+srcHtml+'</div>';
+  document.getElementById("p_body").innerHTML=html;
+  pop.classList.add("show"); popMask.classList.add("show");
+}
+function hidePop(){pop.classList.remove("show");popMask.classList.remove("show");}
+document.getElementById("p_close").addEventListener("click",()=>{hidePop();clearSelection();});
+popMask.addEventListener("click",()=>{hidePop();clearSelection();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){hidePop();clearSelection();}});
+
+/* ================= 筛选/开关 ================= */
+function setFilter(f){
+  activeFilter=f;
+  document.querySelectorAll("#filter button,#topnav button").forEach(b=>{
+    b.classList.toggle("active",b.dataset.f===f);
+  });
+  clearSelection();
+}
+document.querySelectorAll("#filter button,#topnav button").forEach(b=>{
+  b.addEventListener("click",()=>setFilter(b.dataset.f));
 });
-document.querySelectorAll('.scenes .it').forEach(it=>{
-  it.addEventListener('click',()=>{
-    const s=it.dataset.s;
-    const map={base:'base',delay:'delay',commute:'commute',weak:'weak'};
-    const btn=document.querySelector('#scen button[data-s="'+map[s]+'"]');
-    if(btn) btn.click();
-  });
+document.getElementById("swLab").addEventListener("click",function(){
+  showLab=!showLab; this.classList.toggle("off",!showLab);
+});
+document.getElementById("swChg").addEventListener("click",function(){
+  onlyChg=!onlyChg; this.classList.toggle("off",!onlyChg);
 });
 
-// 标签/聚焦开关
-document.getElementById('swLabel').addEventListener('click',function(){
-  const on=!this.classList.contains('off');
-  this.classList.toggle('off',on);
-  document.querySelectorAll('.plate .chip, .plate .core').forEach(c=>{
-    c.style.visibility=on?'hidden':'visible';
+/* ================= 右侧 AI 情报区 ================= */
+const tagMeta={
+  new_entity:["#16a34a","新主体接入"], new_edge:["#2563eb","新连接形成"],
+  strengthen:["#d97706","关系增强"], break:["#dc2626","连接断裂"]
+};
+function buildIntel(){
+  const body=document.getElementById("intelBody");
+  // 按时间倒序
+  const sorted=[...changes].sort((a,b)=>b.event_date.localeCompare(a.event_date));
+  body.innerHTML=sorted.map(c=>{
+    const tm=tagMeta[c.change_type]||["#64748b","变化"];
+    return '<div class="msg" data-c="'+c.change_id+'">'+
+      '<span class="ma"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7dd3fc" stroke-width="2"><path d="M12 3l2 5 5 .5-4 3.5 1.5 5L12 14l-4.5 3 1.5-5-4-3.5L10 8z"/></svg></span>'+
+      '<div class="bubble">'+
+        '<span class="tag" style="background:'+tm[0]+'1e;color:'+tm[0]+'">'+tm[1]+' · '+c.event_date.slice(5)+'</span>'+
+        '<div class="h">'+c.title+'</div>'+
+        '<div class="q"><b>值得讨论：</b>'+(c.topic||c.uncertainty)+'</div>'+
+        '<div class="go-link">在网络中定位 →</div>'+
+      '</div></div>';
+  }).join("");
+  body.querySelectorAll(".msg").forEach(m=>{
+    m.addEventListener("click",()=>{
+      const c=changes.find(x=>x.change_id===m.dataset.c);
+      if(!c) return;
+      // 高亮首个节点 + 边
+      const firstNode=c.involved_node_ids[0];
+      const n=nodes.find(x=>x.node_id===firstNode);
+      if(n){ selectNode(n); }
+      setTLActive(c.change_id);
+    });
   });
-});
-document.getElementById('swFocus').addEventListener('click',function(){
-  this.classList.toggle('off');
+}
+
+/* ================= 底部时间线 ================= */
+function buildTL(){
+  const track=document.getElementById("tlTrack");
+  const sorted=[...changes].sort((a,b)=>a.event_date.localeCompare(b.event_date));
+  const nodesHtml=sorted.map(c=>{
+    const cls=c.change_type==="new_entity"?"new":"edge";
+    return '<div class="tl-node '+cls+'" data-c="'+c.change_id+'">'+
+      '<span class="l">'+c.title.replace(/（.*$/,"")+'</span>'+
+      '<span class="n"></span>'+
+      '<span class="d">'+c.event_date.slice(5)+'</span></div>';
+  }).join("");
+  track.innerHTML='<div class="tl-line"></div>'+nodesHtml;
+  track.querySelectorAll(".tl-node").forEach(el=>{
+    el.addEventListener("click",()=>{
+      const c=changes.find(x=>x.change_id===el.dataset.c);
+      if(c){
+        const n=nodes.find(x=>x.node_id===c.involved_node_ids[0]);
+        if(n) selectNode(n);
+        setTLActive(c.change_id);
+      }
+    });
+  });
+}
+function setTLActive(cid){
+  document.querySelectorAll(".tl-node").forEach(el=>{
+    el.classList.toggle("active",el.dataset.c===cid);
+  });
+}
+
+/* ================= 搜索 ================= */
+document.getElementById("searchInput").addEventListener("input",function(){
+  const q=this.value.trim();
+  if(!q){clearSelection();return;}
+  const n=nodes.find(x=>x.name.includes(q)||x.layer.includes(q));
+  if(n) selectNode(n);
 });
 
-// 手机端汉堡抽屉
-const sideLeft=document.querySelector('.side.left');
-const overlay=document.getElementById('overlay');
-function openDrawer(){sideLeft.classList.add('open');overlay.classList.add('show');}
-function closeDrawer(){sideLeft.classList.remove('open');overlay.classList.remove('show');}
-document.getElementById('burger').addEventListener('click',openDrawer);
-overlay.addEventListener('click',closeDrawer);
-document.querySelectorAll('#leftmenu button').forEach(b=>{
-  b.addEventListener('click',()=>{if(innerWidth<=900) closeDrawer();});
+/* ================= 汉堡抽屉 ================= */
+const sideLeft=document.querySelector(".side.left");
+const overlay=document.getElementById("overlay");
+document.getElementById("burger").addEventListener("click",()=>{sideLeft.classList.add("open");overlay.classList.add("show");});
+overlay.addEventListener("click",()=>{sideLeft.classList.remove("open");overlay.classList.remove("show");});
+
+/* 移动端 AI 情报抽屉 */
+const sideRight=document.querySelector(".side.right");
+document.getElementById("intelFab").addEventListener("click",()=>sideRight.classList.add("open"));
+document.getElementById("intelClose").addEventListener("click",()=>sideRight.classList.remove("open"));
+// 点击情报消息后关闭抽屉
+document.getElementById("intelBody").addEventListener("click",e=>{
+  if(e.target.closest(".msg")&&innerWidth<=900){
+    setTimeout(()=>sideRight.classList.remove("open"),250);
+  }
 });
 
-// 鼠标视差（轻微，营造 3D 深度）
-const baseimg=document.getElementById('baseimg');
-let raf=null;
-document.addEventListener('mousemove',e=>{
-  if(innerWidth<900) return;
-  const dx=(e.clientX/innerWidth-.5), dy=(e.clientY/innerHeight-.5);
-  if(raf) cancelAnimationFrame(raf);
-  raf=requestAnimationFrame(()=>{
-    baseimg.style.transform='translate('+(-dx*10)+'px,'+(-dy*7)+'px) scale(1.02)';
-  });
-});
+/* ================= 启动 ================= */
+function applyData(data){
+  // 兼容：fetch 三件套合并
+  nodes = data.nodes.map(n=>({...n, color:n.color||typeColor(n)}));
+  edges = data.edges;
+  changes = data.changes||[];
+  sourcesMap = data.sources||{};
+  resize();
+  initPositions();
+  buildIntel();
+  buildTL();
+  loop();
+}
+function typeColor(n){
+  const m={core:"#1e2b3a",anchor:"#2563eb",cluster:"#2563eb",enterprise:"#2563eb",infrastructure:"#dc2626",external:"#64748b"};
+  return m[n.node_type]||"#64748b";
+}
+async function boot(){
+  resize();
+  try{
+    const [ev,ch] = await Promise.all([
+      fetch(DATA_BASE+"relationship-evidence-v1.json").then(r=>{if(!r.ok)throw 0;return r.json();}),
+      fetch(DATA_BASE+"relationship-changes-v1.json").then(r=>{if(!r.ok)throw 0;return r.json();})
+    ]);
+    // evidence 节点没有 color，按 layer 补
+    const layerColor={"城市核心":"#1e2b3a","产业引擎":"#2563eb","三大集群":"#2563eb","新兴产业":"#7c3aed","城市功能":"#0d9488","外部":"#64748b"};
+    ev.nodes.forEach(n=>{
+      if(n.layer==="卫星·新材料") n.color="#0891b2";
+      else if(n.layer==="卫星·电子信息") n.color="#2563eb";
+      else if(n.layer==="卫星·AI") n.color="#7c3aed";
+      else n.color=layerColor[n.layer]||"#2563eb";
+    });
+    // 城市功能细分
+    const cf={jt:"#dc2626",wh:"#9333ea",rj:"#16a34a",fw:"#0d9488"};
+    ev.nodes.forEach(n=>{ if(cf[n.node_id]) n.color=cf[n.node_id]; });
+    // sources 表
+    const src=await fetch(DATA_BASE+"relationship-sources-v1.json").then(r=>r.json());
+    const sm={};
+    src.sources.forEach(s=>{ sm[s.source_id]=[s.title,s.url]; });
+    applyData({nodes:ev.nodes, edges:ev.edges, changes:ch.changes, sources:sm});
+  }catch(e){
+    applyData(FALLBACK);
+  }
+}
+boot();
 </script>
 </body>
 </html>
