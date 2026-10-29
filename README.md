@@ -51,7 +51,7 @@
 | 页面 | 文件 | 状态与定位 |
 |---|---|---|
 | 看见惠城 · 全息关系版 | <code>holo.html</code> | 现有正式关系页，可筛选关系、查看主体与证据、追踪变化 |
-| 全息关系工作区 | <code>holo-workspace.html</code> | 独立 UI 预览，探索关系图、变化时间线、来源详情与讨论卡；不替换现有正式页 |
+| 全息关系工作区 | [在线预览](https://zhanglingshare.github.io/huicheng-simulator/holo-workspace.html) · <code>holo-workspace.html</code> | 独立 UI 预览，探索关系图、变化时间线、来源详情与讨论卡；不替换现有正式页 |
 
 全息关系页使用独立的公开关系数据文件，方便维护主体、连接、事件与来源。用户可以从一个主体追踪相连对象，也可以从一项变化查看涉及的关系和公开依据。
 
