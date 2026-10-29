@@ -203,8 +203,8 @@ a{color:inherit;text-decoration:none}button:disabled{cursor:default;opacity:.55}
 
 /* Animated schematic connections (choice illustration, not measured flows). */
 .network-links{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:visible}
-.network-route{fill:none;stroke:#65e5dc;stroke-width:.12;stroke-opacity:.16;vector-effect:non-scaling-stroke}
-.network-trace{fill:none;stroke:#7ff8e5;stroke-width:.32;stroke-linecap:round;stroke-dasharray:1 21;opacity:.62;animation:threadMove 12s linear infinite;filter:drop-shadow(0 0 4px #6aeed8);vector-effect:non-scaling-stroke}
+.network-route{fill:none;stroke:#65e5dc;stroke-width:1;stroke-opacity:.2;vector-effect:non-scaling-stroke}
+.network-trace{fill:none;stroke:#7ff8e5;stroke-width:2;stroke-linecap:round;stroke-dasharray:1 21;opacity:.62;animation:threadMove 12s linear infinite;filter:drop-shadow(0 0 4px #6aeed8);vector-effect:non-scaling-stroke}
 @keyframes threadMove{to{stroke-dashoffset:-180}}
 @media(max-width:650px){.map-status{bottom:137px}.network-trace{opacity:.48}}
 @media(prefers-reduced-motion:reduce){.network-trace{animation:none;stroke-dasharray:none;opacity:.22}}
