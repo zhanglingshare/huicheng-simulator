@@ -13,7 +13,7 @@ check(!html.includes('src="model.js"')&&!/HT\.run|DEFAULT_PATHS/.test(js),"Page 
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(x=>x[1]);
 check(new Set(ids).size===ids.length,"No duplicate HTML IDs");
 const refs=[...new Set([...js.matchAll(/\$\("([^"]+)"\)/g)].map(m=>m[1]))];
-check(refs.every(id=>ids.includes(id)),"All referenced controls exist");
+check(refs.every(id=>ids.includes(id)||id==="kgInspectEvent"&&js.includes('id="kgInspectEvent"')),"All referenced static and intentionally created dynamic controls exist");
 const personas=[...html.matchAll(/data-persona="([^"]+)"/g)].map(m=>m[1]);
 check(["job","shop","commute","city"].every(s=>personas.includes(s)),"Four ordinary-life entry points");
 check(html.includes('id="kgSvg"')&&html.includes('id="kgViewport"')&&html.includes('id="kgEdges"')&&html.includes('id="kgNodes"'),"Graph is real SVG with edge/node layers");
