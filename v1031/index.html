@@ -112,7 +112,7 @@ function run(k){if(results[k])return results[k];if(typeof HT==='undefined')retur
 var p=HT.DEFAULT_PATHS.map(function(x){return Object.assign({},x)});
 function cut(path,loss){p[path].mu=Math.max(0,p[path].mu-loss)}
 if(k==='delay'||k==='both')cut(0,90);
-if(k==='commute'||k==='both'){cut(3,120);cut(0,36)}
+if(k==='commute'||k==='both'){cut(3,60);cut(0,18)}
 return results[k]=HT.run(42,20000,p)}
 function sceneButtons(){$('sceneGrid').innerHTML=P.scenes.map(function(s){return '<button class="scene '+(s.id===scene?'active':'')+'" data-scene="'+esc(s.id)+'" aria-pressed="'+(s.id===scene?'true':'false')+'"><strong>'+esc(s.label)+'</strong><small>'+esc(s.desc)+'</small></button>'}).join('');$('sceneGrid').querySelectorAll('button').forEach(function(b){b.onclick=function(){scene=b.dataset.scene;sceneButtons();renderScene()}})}
 function num(n){return Math.round(n).toLocaleString('zh-CN')}
