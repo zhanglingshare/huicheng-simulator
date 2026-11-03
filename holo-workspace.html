@@ -22,7 +22,7 @@ body{
   background:var(--bg); color:var(--ink); overflow:hidden;
   font:13px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-  display:grid; grid-template-rows:60px auto auto minmax(0,1fr) 106px; gap:12px; padding-bottom:14px;
+  display:grid; grid-template-rows:56px auto auto minmax(0,1fr) 88px; gap:10px; padding-bottom:12px;
 }
 button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:8px}
@@ -57,7 +57,7 @@ nav.main button.on{background:var(--ink);color:#fff;box-shadow:0 2px 8px rgba(13
 .mode-switch{display:flex;align-items:center;gap:2px;padding:3px;border-radius:10px;background:#eef3f9;border:1px solid #e3eaf4;white-space:nowrap}
 .mode-switch button{border:0;background:transparent;border-radius:7px;padding:5px 9px;font-size:11px;font-weight:750;color:#64748b;cursor:pointer}
 .mode-switch button.on{background:#fff;color:#174ea6;box-shadow:0 1px 4px rgba(13,26,43,.10)}
-.brief{position:relative;isolation:isolate;display:flex;align-items:center;gap:14px;margin:0 20px;padding:10px 16px;min-height:72px;
+.brief{position:relative;isolation:isolate;display:flex;align-items:center;gap:14px;margin:0 20px;padding:7px 14px;min-height:56px;
   background:linear-gradient(105deg,#e8f2ff 0%,#f8fbff 54%,#edf7ff 100%);border:1px solid #d9e8fb;border-radius:15px;
   box-shadow:var(--sh-1);overflow:hidden}
 .brief:after{content:"";position:absolute;z-index:-1;right:-22px;top:-55px;width:330px;height:180px;opacity:.75;pointer-events:none;
@@ -80,7 +80,7 @@ body[data-mode="pro"] .pro-only{display:block}
 body[data-mode="pro"] .brief p{white-space:normal}
 /* ============ KPI ============ */
 .kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;padding:0 20px}
-.kpi{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:12px 15px 13px;
+.kpi{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:9px 13px 10px;
   box-shadow:var(--sh-1);position:relative;overflow:hidden;transition:.18s}
 .kpi::after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c,var(--blue));opacity:.9}
 .kpi:hover{transform:translateY(-1px);box-shadow:var(--sh-2)}
@@ -94,7 +94,7 @@ body[data-mode="pro"] .brief p{white-space:normal}
 .kpi .delta.flat{color:#64748b;background:#f1f5f9}
 
 /* ============ 主体三栏 ============ */
-main{display:grid;grid-template-columns:200px minmax(0,1fr) 360px;gap:14px;padding:0 20px;min-height:0}
+main{display:grid;grid-template-columns:180px minmax(0,1fr) 320px;gap:12px;padding:0 20px;min-height:0}
 
 /* --- 左栏 --- */
 .rail{display:flex;flex-direction:column;gap:12px;min-height:0;overflow-y:auto;scrollbar-width:none}
@@ -727,10 +727,10 @@ let byId = {};
 const REL_TO_FAM = {supply_chain:'supply',investment:'invest',regional:'region',transport:'transit',tourism_consumption:'consume'};
 const REL_NAME = {supply_chain:'供应链配套',investment:'投资建设',regional:'区域协作',transport:'交通物流',tourism_consumption:'消费文旅'};
 const POS = {
-  hc:[450,300],gxq:[655,306],dz:[285,190],xcl:[210,430],ai:[600,492],
-  fw:[572,106],jt:[138,188],wh:[148,502],rj:[90,345],jl:[600,232],
-  th:[452,196],sh:[804,210],rz:[80,240],wr:[742,136],lyh:[618,572],
-  sz:[105,105],dg:[310,80]
+  hc:[640,360],gxq:[920,368],dz:[420,228],xcl:[310,516],ai:[840,590],
+  fw:[800,128],jt:[192,226],wh:[206,602],rj:[126,414],jl:[840,278],
+  th:[633,235],sh:[1125,252],rz:[112,288],wr:[1039,164],lyh:[865,686],
+  sz:[147,126],dg:[434,96]
 };
 function esc(v){
   return String(v==null?'':v).replace(/[&<>"']/g,function(c){
@@ -783,7 +783,7 @@ function edgeLabelFor(e){
 function makeData(evidence,changes,sources){
   SOURCES=Object.fromEntries((sources.sources||[]).map(function(s){return [s.source_id,s];}));
   NODES=(evidence.nodes||[]).map(function(n,i){
-    const p=POS[n.node_id]||[450+Math.cos(i*2.4)*240,300+Math.sin(i*2.4)*190];
+    const p=POS[n.node_id]||[640+Math.cos(i*2.4)*340,360+Math.sin(i*2.4)*230];
     const kind=nodeKind(n);
     const r=kind==='core'?27:kind==='hub'?17:kind==='cluster'?14:10;
     return {
@@ -873,11 +873,11 @@ function resize(){
   S.H = Math.max(280, r.height);
   svg.setAttribute('viewBox', `0 0 ${S.W} ${S.H}`);
   // 设计坐标 -> 实际像素（等比缩放并居中）
-  const pad = 30;
-  const sc = Math.min((S.W - pad*2) / 900, (S.H - pad*2) / 600);
+  const pad = 20;
+  const sc = Math.min((S.W - pad*2) / 1280, (S.H - pad*2) / 720);
   VIEW.scale = sc;
-  VIEW.ox = (S.W - 900*sc) / 2;
-  VIEW.oy = (S.H - 600*sc) / 2;
+  VIEW.ox = (S.W - 1280*sc) / 2;
+  VIEW.oy = (S.H - 720*sc) / 2;
   NODES.forEach(n => {
     if (n.px == null) { n.px = n.x; n.py = n.y; }
   });
