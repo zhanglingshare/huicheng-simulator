@@ -15,6 +15,11 @@
 .hcjn-menu a[aria-current="page"]{background:#184978;color:white;box-shadow:inset 3px 0 #65c6ff}
 .hcjn-menu a .hcjn-num{width:26px;font-variant-numeric:tabular-nums;color:#8fb5db;font-size:11px}
 .hcjn-menu a[aria-current="page"] .hcjn-num{color:#8de0ff}
+.hcjn-group{font-size:10px;letter-spacing:.14em;color:#6f8fb3;padding:11px 10px 4px}
+.hcjn-group:first-child{padding-top:2px}
+.hcjn-menu a .hcjn-mid{display:flex;flex-direction:column;gap:2px;min-width:0}
+.hcjn-menu a .hcjn-label{font-size:12px;font-weight:650;line-height:1.25}
+.hcjn-menu a .hcjn-desc{font-size:10.5px;font-weight:400;color:#9db4d0;line-height:1.3}
 .hcjn-menufoot{font-size:10px;line-height:1.6;color:#a1b7cf;border-top:1px solid #263c55;margin:7px 8px 2px;padding:10px 3px 2px}
 .hcjn-root :focus-visible{outline:2px solid #93d5ff;outline-offset:2px}
 @media(max-width:620px){
