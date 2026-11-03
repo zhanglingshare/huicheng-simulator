@@ -9,6 +9,7 @@
     {url:'choices.html',label:'路径',desc:'先确定发展路径'},
     {url:'future.html',label:'未来',desc:'再观察可能区间'},
     {url:'windtunnel.html',label:'风洞测试',desc:'情景压力测试'},
+    {url:'commute.html',label:'通勤案例',desc:'案例：通勤可能的影响'},
     {url:'blindspot.html',label:'忽略了什么',desc:'留意城市盲点'},
     {url:'report.html',label:'报告',desc:'整理观察结果'},
     {url:'ending.html',label:'结语',desc:'回到人和城市'}
