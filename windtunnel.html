@@ -27,6 +27,33 @@ h1{font-size:20px;margin:0 0 2px}
 .note{font-size:11.5px;color:#8fa3bf;margin-top:8px;line-height:1.6}
 .btn{background:rgba(10,132,255,.25);color:#eef2fb;border:1px solid rgba(10,132,255,.4);padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
 .hint{font-size:11px;color:#5b6b82;text-align:center;margin-top:6px}
+
+/* ===== 精致深色皮肤增强 ===== */
+body{position:relative;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 15%,rgba(191,90,242,.07),transparent 30%),
+    radial-gradient(circle at 80% 80%,rgba(90,200,250,.06),transparent 35%),
+    radial-gradient(circle at 60% 40%,rgba(48,209,88,.04),transparent 30%)}
+.card{background:linear-gradient(160deg,rgba(40,52,76,.55),rgba(20,28,44,.45));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 4px 24px rgba(0,0,0,.25)}
+.card h2{color:#eef2fb;font-weight:700}
+.section-title{color:#eef2fb}
+.readout{background:rgba(10,16,28,.5);border:1px solid rgba(255,255,255,.05)}
+.mini{background:rgba(10,16,28,.3);border-radius:8px;padding:4px}
+/* 红框柔化：改成左边框强调 */
+.card[style*="border-color:#f87171"],.card[style*="border:1px solid #b91c1c"]{
+  border:1px solid rgba(255,69,58,.2)!important;
+  border-left:3px solid rgba(255,69,58,.5)!important}
+.press button{transition:all .15s}
+.press button:hover{background:rgba(255,255,255,.08);color:#eef2fb}
+.btn{transition:all .2s;backdrop-filter:blur(10px)}
+.btn:hover{background:rgba(10,132,255,.35);box-shadow:0 0 20px rgba(10,132,255,.2)}
+.wrap>div[style*="background:#0a0f1a"],.wrap>div[style*="background:#0b1426"]{
+  background:linear-gradient(160deg,rgba(40,52,76,.5),rgba(20,28,44,.4))!important;
+  border:1px solid rgba(255,255,255,.08)!important;
+  border-radius:14px!important;
+  backdrop-filter:blur(16px)}
 </style><link rel="stylesheet" href="hc-journey-nav.css">
 </head><body>
 
@@ -112,7 +139,7 @@ h1{font-size:20px;margin:0 0 2px}
   <!-- 下半场 -->
   <div class="section-title rev">下半场 · 一个容易被忽略的地方</div>
 
-  <div class="card" style="border-color:#ff453a">
+  <div class="card" style="border-left:3px solid rgba(255,69,58,.5);border-color:rgba(255,69,58,.15)">
     <h2>龙头扩产落空 vs 通勤路承压</h2>
     <p style="font-size:12.5px;color:#93a4bd;margin:0 0 10px">
       大家最担心龙头。但比起"迁走"（概率很低），更现实的是"扩产落空"——利元亨要从50亿冲100亿，没冲上去。拿它和一条通勤路比一比。
@@ -136,7 +163,7 @@ h1{font-size:20px;margin:0 0 2px}
     <div class="note">通勤一压是双向失血：东江湾招工难，江北服务业丢消费。过江通道早晚高峰排队已经在发生，高新区扩能后还会加重。</div>
   </div>
 
-  <div class="card" style="border-color:#ff453a">
+  <div class="card" style="border-left:3px solid rgba(255,69,58,.5);border-color:rgba(255,69,58,.15)">
     <h2>全部压力，按杀伤力重新排序</h2>
     <div style="height:280px"><canvas id="rank2"></canvas></div>
     <div class="hint" id="rank2-note"></div>
