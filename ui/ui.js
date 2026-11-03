@@ -5,20 +5,18 @@
   'use strict';
 
   var PAGES = [
-    { url: 'index.html',            n: '01', label: '序章',      desc: '看见产业关系，理解城市变化' },
-    { url: 'holo-workspace.html',   n: '02', label: '全息工作区', desc: '关系网络、情报流与变化详情' },
-    { url: 'today.html',            n: '03', label: '钱去哪了',   desc: '追问资金去向与消费路径' },
-    { url: 'fun.html',              n: '04', label: '风向标',     desc: '今晚，谁能把你留在惠城' },
-    { url: 'choices.html',          n: '05', label: '路径',       desc: '先选方向，再看可能' },
-    { url: 'future.html',           n: '06', label: '未来',       desc: '把未来反复扔进模型' },
-    { url: 'windtunnel.html',       n: '07', label: '风洞测试',   desc: '给假设持续加压' },
-    { url: 'blindspot.html',        n: '08', label: '忽略了什么', desc: '城市承载与居民生活的盲点' },
-    { url: 'report.html',           n: '09', label: '报告',       desc: '把观察整理成可讨论的材料' },
-    { url: 'ending.html',           n: '10', label: '结语',       desc: '回到人、城市与决策责任' }
-  ];
-  var EXTRA = [
-    { url: 'commute.html',  label: '通勤案例' },
-    { url: 'future-lab.html', label: '未来实验室' }
+    { url: 'index.html',            n: '01', group: '开篇', label: '序章',      desc: '看见产业关系，理解城市变化' },
+    { url: 'holo-workspace.html',   n: '02', group: '看见世界', label: '全息工作区', desc: '关系网络、情报流与变化详情' },
+    { url: 'today.html',            n: '03', group: '看见世界', label: '钱去哪了',   desc: '追问资金去向与消费路径' },
+    { url: 'fun.html',              n: '04', group: '看见世界', label: '风向标',     desc: '今晚，谁能把你留在惠城' },
+    { url: 'choices.html',          n: '05', group: '推演未来', label: '路径',       desc: '先选方向，再看可能' },
+    { url: 'future.html',           n: '06', group: '推演未来', label: '未来',       desc: '把未来反复扔进模型' },
+    { url: 'windtunnel.html',       n: '07', group: '推演未来', label: '风洞测试',   desc: '给假设持续加压' },
+    { url: 'commute.html',        n: '08', group: '推演未来', label: '通勤案例',   desc: '通勤可能带来的影响' },
+    { url: 'blindspot.html',        n: '09', group: '推演未来', label: '忽略了什么', desc: '城市承载与居民生活的盲点' },
+    { url: 'report.html',           n: '10', group: '汇总与实验', label: '报告',       desc: '把观察整理成可讨论的材料' },
+    { url: 'future-lab.html',     n: '11', group: '汇总与实验', label: '未来实验室', desc: '动手调参，做多实验舱挑战' },
+    { url: 'ending.html',           n: '12', group: '收尾', label: '结语',       desc: '回到人、城市与决策责任' }
   ];
 
   var SVG = {
@@ -119,13 +117,20 @@
     panel.innerHTML =
       '<div class="ds-panel-head">' +
         '<div><div class="ds-panel-title">体验路线</div>' +
-        '<div class="ds-panel-sub">十页，从看见关系开始 · 可自由跳转</div></div>' +
+        '<div class="ds-panel-sub">'+PAGES.length+' 页，从看见关系开始 · 可自由跳转</div></div>' +
         '<button type="button" class="ds-panel-close" data-ds-close aria-label="关闭目录">' + SVG.close + '</button>' +
       '</div>';
 
     var steps = el('nav', 'ds-steps');
-    steps.setAttribute('aria-label', '十个章节');
+    steps.setAttribute('aria-label', PAGES.length+' 个章节');
+    var lastGroup = '';
     PAGES.forEach(function (p, i) {
+      if (p.group !== lastGroup) {
+        var gh = el('div', 'ds-step-group');
+        gh.textContent = p.group;
+        steps.appendChild(gh);
+        lastGroup = p.group;
+      }
       var a = el('a', 'ds-step');
       a.href = p.url;
       if (i === current) a.setAttribute('aria-current', 'page');
@@ -137,16 +142,6 @@
     });
     panel.appendChild(steps);
 
-    var foot = el('div', 'ds-panel-foot');
-    foot.innerHTML = '<span>案例与实验</span><span class="ds-dot"></span>';
-    EXTRA.forEach(function (p) {
-      var a = el('a', '');
-      a.href = p.url;
-      a.textContent = p.label;
-      foot.appendChild(a);
-    });
-    panel.appendChild(foot);
-
     sheet.appendChild(scrim);
     sheet.appendChild(panel);
     return sheet;
@@ -155,11 +150,10 @@
   function mount() {
     var file = slug();
     var idx = PAGES.map(function (p) { return p.url; }).indexOf(file);
-    var extra = idx < 0 ? EXTRA.map(function (p) { return p.url; }).indexOf(file) : -1;
-    if (idx < 0 && extra < 0) return;
+    if (idx < 0) return;
     document.body.dataset.page = file.replace('.html', '');
     if (document.getElementById('dsBar')) return;
-    var entry = idx >= 0 ? PAGES[idx] : { n: '·', label: EXTRA[extra].label, url: file };
+    var entry = PAGES[idx];
 
     var bar = buildBar(idx, entry);
     var sheet = buildSheet(idx);

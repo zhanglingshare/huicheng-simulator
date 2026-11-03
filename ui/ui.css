@@ -294,6 +294,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border:0;border-radiu
 .ds-panel-close{margin-left:auto;width:28px;height:28px;border-radius:50%;border:0;background:var(--ds-surface-2);color:var(--ds-text-2);display:grid;place-items:center}
 .ds-panel-close:hover{background:var(--ds-surface-3);color:#fff}
 .ds-steps{display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:8px;overflow:auto}
+.ds-step-group{grid-column:1/-1;padding:12px 10px 4px;font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--ds-text-4)}
 .ds-step{
   display:grid;grid-template-columns:30px 1fr;align-items:center;gap:2px 8px;
   padding:10px 10px;border-radius:10px;text-decoration:none;color:var(--ds-text-2);
