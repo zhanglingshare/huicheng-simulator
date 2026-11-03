@@ -2,246 +2,207 @@
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%230a84ff%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%226%22 fill=%22%23fff%22/%3E%3C/svg%3E">
 <title>惠城产业风洞 · 案例：通勤可能的影响</title>
-<script src="model.js"></script>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(circle at 85% 10%,rgba(191,90,242,.08),transparent 35%),radial-gradient(circle at 10% 90%,rgba(90,200,250,.06),transparent 40%),radial-gradient(120% 100% at 50% 0%,#161d30 0%,#0e1420 55%,#080b12 100%);color:#eef2fb;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh}
-.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(12,16,24,.9);border-bottom:1px solid rgba(255,255,255,.08);overflow-x:auto;backdrop-filter:blur(12px)}
-.nav b{font-size:14px;margin-right:6px;flex:none}
-.nav a{background:rgba(255,255,255,.04);color:#93a0b8;border:1px solid rgba(255,255,255,.1);padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
-.nav a.on{background:rgba(10,132,255,.2);border-color:rgba(10,132,255,.4);color:#eef2fb;font-weight:600}
-.wrap{max-width:900px;margin:auto;padding:24px 16px}
-h1{font-size:24px;margin:0 0 4px;font-weight:700}
-.sub{color:#93a0b8;font-size:13px;margin:0 0 24px}
-.section{font-size:16px;font-weight:700;margin:28px 0 12px;padding-left:10px;border-left:3px solid #0a84ff;color:#eef2fb}
-.card{background:linear-gradient(160deg,rgba(40,52,76,.5),rgba(20,28,44,.45));border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px;margin-bottom:14px;backdrop-filter:blur(16px);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 4px 24px rgba(0,0,0,.25)}
-.card h2{font-size:15px;margin:0 0 10px;color:#eef2fb}
-.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}
-.kpi{background:rgba(10,16,28,.5);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px}
-.kpi .num{font-size:24px;font-weight:700;color:#eef2fb;font-variant-numeric:tabular-nums}
-.kpi .num.green{color:#30d158}
-.kpi .num.red{color:#ff453a}
-.kpi .num.amber{color:#ff9500}
-.kpi .label{font-size:11px;color:#93a0b8;margin-top:4px}
-.chart-box{height:260px;margin:10px 0}
-.note{font-size:11.5px;color:#93a0b8;line-height:1.7;margin-top:10px}
-.src{font-size:10px;color:#5a6678;margin-top:8px;line-height:1.5}
-.press{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}
-.press button{flex:1;min-width:100px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#93a0b8;padding:8px 4px;border-radius:8px;font-size:11px;cursor:pointer;transition:.15s}
-.press button:hover{background:rgba(255,255,255,.08);color:#eef2fb}
-.press button.sel{background:rgba(10,132,255,.2);border-color:rgba(10,132,255,.4);color:#eef2fb;font-weight:600}
-.formula{background:rgba(10,16,28,.6);border-radius:8px;padding:12px 14px;font-family:ui-monospace,monospace;font-size:12px;color:#5ac8fa;margin:10px 0;line-height:1.8}
-.chain{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0;font-size:12px}
-.chain .step{background:rgba(90,200,250,.1);border:1px solid rgba(90,200,250,.2);border-radius:8px;padding:6px 10px;color:#eef2fb}
-.chain .arrow{color:#5a6678}
-.btn{background:rgba(10,132,255,.25);color:#eef2fb;border:1px solid rgba(10,132,255,.4);padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block;backdrop-filter:blur(10px)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(circle at 85% 10%,rgba(191,90,242,.1),transparent 35%),radial-gradient(circle at 10% 90%,rgba(90,200,250,.08),transparent 40%),radial-gradient(120% 100% at 50% 0%,#161d30 0%,#0e1420 55%,#080b12 100%);color:#eef2fb;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh;padding:20px}
+.window{max-width:1400px;margin:0 auto;background:rgba(20,28,44,.6);border:1px solid rgba(255,255,255,.1);border-radius:18px;backdrop-filter:blur(20px);box-shadow:0 20px 60px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08);overflow:hidden}
+.titlebar{display:flex;align-items:center;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(12,16,24,.4)}
+.traffic{display:flex;gap:8px}
+.traffic span{width:12px;height:12px;border-radius:50%}
+.traffic .red{background:#ff5f57}.traffic .yellow{background:#febc2e}.traffic .green{background:#28c840}
+.titlebar h1{flex:1;text-align:center;font-size:15px;font-weight:600;color:#eef2fb;letter-spacing:1px}
+.titlebar .icons{display:flex;gap:12px;color:#5a6678;font-size:14px}
+
+/* 顶部融合KPI长条 */
+.kpi-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
+.kpi-item{background:rgba(20,28,44,.7);padding:16px 20px;display:flex;align-items:center;gap:12px}
+.kpi-dot{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:14px;flex:none;box-shadow:inset 0 -3px 6px rgba(0,0,0,.3),inset 0 2px 4px rgba(255,255,255,.3)}
+.kpi-dot.blue{background:radial-gradient(circle at 35% 30%,#7ec8ff,#0a84ff 70%)}
+.kpi-dot.orange{background:radial-gradient(circle at 35% 30%,#ffc880,#ff9500 70%)}
+.kpi-dot.green{background:radial-gradient(circle at 35% 30%,#80ffb8,#30d158 70%)}
+.kpi-dot.purple{background:radial-gradient(circle at 35% 30%,#d8a0ff,#bf5af2 70%)}
+.kpi-dot.red{background:radial-gradient(circle at 35% 30%,#ff8a7a,#ff453a 70%)}
+.kpi-num{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;color:#eef2fb}
+.kpi-label{font-size:11px;color:#93a0b8;margin-top:2px}
+
+/* 主体三栏 */
+.main{display:grid;grid-template-columns:240px 1fr 280px;gap:0;min-height:560px}
+.panel{padding:20px;border-right:1px solid rgba(255,255,255,.06)}
+.panel:last-child{border-right:0;border-left:1px solid rgba(255,255,255,.06)}
+.panel-title{font-size:12px;font-weight:700;letter-spacing:1.5px;color:#93a0b8;margin-bottom:16px;text-transform:uppercase}
+
+/* 左侧图例 */
+.legend-item{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:13px;color:#eef2fb}
+.legend-dot{width:14px;height:14px;border-radius:50%;flex:none}
+.legend-dot.hollow{background:transparent;border:2px solid #93a0b8}
+
+/* 中间网络图 */
+.graph-area{position:relative;background:radial-gradient(circle at 50% 50%,rgba(20,40,80,.3),transparent 70%);display:grid;place-items:center;overflow:hidden}
+.graph-area::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(90,200,250,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(90,200,250,.04) 1px,transparent 1px);background-size:40px 40px}
+svg{position:relative;z-index:1;max-width:100%;max-height:500px}
+
+/* 右侧面板 */
+.big-num{background:linear-gradient(160deg,rgba(255,69,58,.12),rgba(255,69,58,.04));border:1px solid rgba(255,69,58,.3);border-radius:14px;padding:24px;margin-bottom:20px;position:relative}
+.big-num::before{content:'';position:absolute;left:0;top:16px;bottom:16px;width:3px;background:#ff453a;border-radius:0 2px 2px 0}
+.big-num .num{font-size:56px;font-weight:800;color:#ff453a;line-height:1;font-variant-numeric:tabular-nums}
+.big-num .label{font-size:12px;color:#93a0b8;margin-top:8px}
+.big-num2{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;margin-bottom:16px;position:relative}
+.big-num2::before{content:'';position:absolute;inset:8px;border:1px solid rgba(255,149,0,.3);border-radius:10px;pointer-events:none}
+.big-num2 .num{font-size:36px;font-weight:700;color:#ff9500;font-variant-numeric:tabular-nums}
+.big-num2 .label{font-size:11px;color:#93a0b8;margin-top:4px}
+.panel-text{font-size:12px;color:#93a0b8;line-height:1.7;margin-top:12px}
+.panel-text b{color:#eef2fb}
+
+/* 底部说明 */
+.footer{padding:16px 20px;border-top:1px solid rgba(255,255,255,.06);font-size:11px;color:#5a6678;line-height:1.6}
+
+/* 响应式 */
+@media(max-width:900px){
+  .main{grid-template-columns:1fr}
+  .panel{border-right:0;border-bottom:1px solid rgba(255,255,255,.06)}
+  .panel:last-child{border-left:0;border-bottom:0}
+  .kpi-bar{grid-template-columns:repeat(2,1fr)}
+}
 </style>
 </head><body>
 
-<nav class="nav">
-  <b>惠城产业风洞</b>
-  <a href="index.html">序章</a>
-  <a href="holo-workspace.html">全息</a>
-  <a href="today.html">钱去哪</a>
-  <a href="fun.html">风向标</a>
-  <a href="choices.html">路径</a>
-  <a href="future.html">未来</a>
-  <a href="windtunnel.html">风洞</a>
-  <a class="on" href="#" onclick="event.preventDefault()">通勤案例</a>
-  <a href="blindspot.html">盲点</a>
-  <a href="report.html">报告</a>
-  <a href="ending.html">结语</a>
-</nav>
-
-<div class="wrap">
-
-<h1>案例1：通勤可能的影响</h1>
-<p class="sub">风洞测试里，通勤压力排第2。这一页展开算一笔账：每天过江那40分钟，到底值多少钱。</p>
-
-<!-- 背景数据 -->
-<div class="section">一、现状：惠城跨江通勤的真实基数</div>
-<div class="card">
-  <h2>谁在跨江？</h2>
-  <div class="kpi-row">
-    <div class="kpi"><div class="num">22.15万</div><div class="label">水口街道常住人口（七普）</div></div>
-    <div class="kpi"><div class="num">~10万</div><div class="label">马安镇常住人口</div></div>
-    <div class="kpi"><div class="num">25.17万</div><div class="label">河南岸街道常住人口</div></div>
-    <div class="kpi"><div class="num">~9.6万</div><div class="label">估算跨江上班人口（30%）</div></div>
+<div class="window">
+  <div class="titlebar">
+    <div class="traffic"><span class="red"></span><span class="yellow"></span><span class="green"></span></div>
+    <h1>通勤压力推演 · Commute Stress Simulator</h1>
+    <div class="icons">⇅ ◎</div>
   </div>
-  <p class="note">水口、马安在东江以东，江北CBD在以西。每天早高峰，东江大桥从南桥头到东平下沉通道排起"车龙"——这是惠州最繁忙的桥，没有之一。</p>
-  <div class="src">数据来源：惠城区第七次全国人口普查公报；惠城区政府官网；惠州市政府《细数惠州桥之最》</div>
-</div>
 
-<div class="card">
-  <h2>过江要多久？</h2>
-  <div class="chain">
-    <span class="step">2019年前：东江大桥高峰 ~40分钟</span>
-    <span class="arrow">→</span>
-    <span class="step">2019年隆生大桥通车：缩至 ~10分钟</span>
-    <span class="arrow">→</span>
-    <span class="step">2024年底鹅城大桥通车：再分流</span>
-  </div>
-  <p class="note">三座桥不是均匀分流。东江大桥仍然承担最大流量，早晚高峰依然排队。鹅城大桥通车后，江北与水口之间往来更方便，但"最后一公里"和桥下拥堵仍在。</p>
-  <div class="src">数据来源：南方+《盼到了！惠州隆生大桥今日通车》；惠州新闻网《鹅城大桥》</div>
-</div>
-
-<!-- 模型 -->
-<div class="section">二、模型：通勤时间怎么变成经济损失</div>
-<div class="card">
-  <h2>传导链条</h2>
-  <div class="chain">
-    <span class="step">通勤时间长</span>
-    <span class="arrow">→</span>
-    <span class="step">时间成本损失</span>
-    <span class="arrow">→</span>
-    <span class="step">消费外溢（不愿在江北吃饭逛街）</span>
-    <span class="arrow">→</span>
-    <span class="step">服务业收入流失</span>
-    <span class="arrow">→</span>
-    <span class="step">企业选址犹豫</span>
-  </div>
-  <div class="formula">
-    时间成本 = 跨江人数 × 每日多花时间 × 22工作日 × 小时工资<br>
-    消费外溢损失 = 跨江人数 × 每月人均消费 × 消费外溢比例<br>
-    产业流失 = 企业因通勤不便推迟迁入的产值（情景假设）
-  </div>
-  <p class="note">小时工资按惠城城镇非私营单位平均工资折算，约 35元/小时（假设值，用于量级估算）。消费外溢比例：通勤超过40分钟的人，下班后直接回家，不在江北停留消费。</p>
-</div>
-
-<!-- 测算 -->
-<div class="section">三、测算：三个情景下的影响</div>
-<div class="press">
-  <button class="sel" onclick="scenario(0,this)">基准：现状</button>
-  <button onclick="scenario(1,this)">改善：鹅城大桥分流后</button>
-  <button onclick="scenario(2,this)">远期：再建一条通道</button>
-</div>
-
-<div class="card">
-  <h2 id="scenarioTitle">基准情景：现状</h2>
-  <div class="kpi-row">
-    <div class="kpi"><div class="num red" id="kpi1">~4.2亿</div><div class="label">每年时间成本损失</div></div>
-    <div class="kpi"><div class="num amber" id="kpi2">~1.8亿</div><div class="label">每年消费外溢损失</div></div>
-    <div class="kpi"><div class="num" id="kpi3">64%</div><div class="label">通勤压力达标率</div></div>
-    <div class="kpi"><div class="num green" id="kpi4">51%</div><div class="label">通勤+20%情景达标率（呼应风洞）</div></div>
-  </div>
-  <div style="margin:16px 0">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-      <div style="width:100px;font-size:12px;color:#93a0b8">时间成本损失</div>
-      <div style="flex:1;height:24px;background:rgba(255,69,58,.15);border-radius:6px;overflow:hidden">
-        <div id="bar1" style="width:70%;height:100%;background:linear-gradient(90deg,#ff453a,#ff6b5e);border-radius:6px;transition:width .3s"></div>
-      </div>
-      <div id="bar1v" style="width:60px;text-align:right;font-size:13px;font-weight:700;color:#ff453a">4.2亿</div>
+  <!-- 顶部融合KPI长条 -->
+  <div class="kpi-bar">
+    <div class="kpi-item">
+      <div class="kpi-dot blue"></div>
+      <div><div class="kpi-num">9.6万</div><div class="kpi-label">跨江上班人口</div></div>
     </div>
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-      <div style="width:100px;font-size:12px;color:#93a0b8">消费外溢损失</div>
-      <div style="flex:1;height:24px;background:rgba(255,149,0,.15);border-radius:6px;overflow:hidden">
-        <div id="bar2" style="width:30%;height:100%;background:linear-gradient(90deg,#ff9500,#ffb340);border-radius:6px;transition:width .3s"></div>
-      </div>
-      <div id="bar2v" style="width:60px;text-align:right;font-size:13px;font-weight:700;color:#ff9500">1.8亿</div>
+    <div class="kpi-item">
+      <div class="kpi-dot orange"></div>
+      <div><div class="kpi-num">40→10</div><div class="kpi-label">分钟 · 过江时间变化</div></div>
     </div>
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="width:100px;font-size:12px;color:#93a0b8">合计隐性损失</div>
-      <div style="flex:1;height:24px;background:rgba(10,132,255,.15);border-radius:6px;overflow:hidden">
-        <div id="bar3" style="width:100%;height:100%;background:linear-gradient(90deg,#0a84ff,#5ac8fa);border-radius:6px;transition:width .3s"></div>
-      </div>
-      <div id="bar3v" style="width:60px;text-align:right;font-size:13px;font-weight:700;color:#5ac8fa">6.0亿</div>
+    <div class="kpi-item">
+      <div class="kpi-dot green"></div>
+      <div><div class="kpi-num">4.2亿</div><div class="kpi-label">时间成本损失/年</div></div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-dot purple"></div>
+      <div><div class="kpi-num">1.8亿</div><div class="kpi-label">消费外溢损失/年</div></div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-dot red"></div>
+      <div><div class="kpi-num">51%</div><div class="kpi-label">通勤+20%情景达标率</div></div>
     </div>
   </div>
-  <p class="note" id="scenarioNote">现状下，约9.6万人每天跨江上班，平均每人每天多花20分钟在堵车上。一年下来，光是"时间被堵掉"的成本就超过4亿。这还没算他们下班后不愿在江北停留、直接开车回家，给江北服务业造成的消费流失。</p>
-</div>
 
-<div class="card">
-  <h2>压力叠加后，达标率怎么变？</h2>
-  <div style="margin:16px 0;padding:16px;background:rgba(10,16,28,.4);border-radius:10px">
-    <div style="font-size:12px;color:#93a0b8;margin-bottom:12px">达标率变化曲线（基准 → 通勤单独 → 通勤+20% → 改善后 → 远期）</div>
-    <div style="display:flex;align-items:flex-end;gap:12px;height:120px;padding:0 10px;border-bottom:1px solid rgba(255,255,255,.1)">
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%">
-        <div style="font-size:11px;color:#93a0b8;margin-bottom:4px">66%</div>
-        <div style="width:100%;max-width:30px;height:66%;background:#30d158;border-radius:4px 4px 0 0;opacity:.7"></div>
+  <!-- 主体三栏 -->
+  <div class="main">
+    <!-- 左侧图例 -->
+    <div class="panel">
+      <div class="panel-title">节点类型</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#fff"></div>江北CBD（中心）</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ff453a"></div>东岸居住区</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ff9500"></div>桥梁通道</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#5ac8fa"></div>服务业集聚区</div>
+      <div class="legend-item"><div class="legend-dot hollow"></div>规划中节点</div>
+      <div style="margin-top:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,.06)">
+        <div class="panel-title">传导链</div>
+        <div class="panel-text">
+          <b>通勤时间长</b> → 时间成本损失<br>
+          <b>不愿停留消费</b> → 服务业流失<br>
+          <b>企业选址犹豫</b> → 产业增速放缓
+        </div>
       </div>
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%">
-        <div style="font-size:11px;color:#93a0b8;margin-bottom:4px">64%</div>
-        <div style="width:100%;max-width:30px;height:64%;background:#5ac8fa;border-radius:4px 4px 0 0;opacity:.7"></div>
+    </div>
+
+    <!-- 中间网络图 -->
+    <div class="graph-area">
+      <svg viewBox="0 0 600 480">
+        <defs>
+          <radialGradient id="gBlue" cx="35%" cy="30%" r="70%">
+            <stop offset="0%" stop-color="#fff" stop-opacity=".9"/>
+            <stop offset="40%" stop-color="#5ac8fa"/>
+            <stop offset="100%" stop-color="#0a84ff"/>
+          </radialGradient>
+          <radialGradient id="gRed" cx="35%" cy="30%" r="70%">
+            <stop offset="0%" stop-color="#fff" stop-opacity=".9"/>
+            <stop offset="40%" stop-color="#ff6b5e"/>
+            <stop offset="100%" stop-color="#ff453a"/>
+          </radialGradient>
+          <radialGradient id="gOrange" cx="35%" cy="30%" r="70%">
+            <stop offset="0%" stop-color="#fff" stop-opacity=".9"/>
+            <stop offset="40%" stop-color="#ffb340"/>
+            <stop offset="100%" stop-color="#ff9500"/>
+          </radialGradient>
+          <radialGradient id="gWhite" cx="35%" cy="30%" r="70%">
+            <stop offset="0%" stop-color="#fff" stop-opacity="1"/>
+            <stop offset="60%" stop-color="#eef2fb"/>
+            <stop offset="100%" stop-color="#93a0b8"/>
+          </radialGradient>
+        </defs>
+        <!-- 连线 -->
+        <line x1="300" y1="240" x2="150" y2="120" stroke="#ff453a" stroke-opacity=".4" stroke-width="1.5"/>
+        <line x1="300" y1="240" x2="120" y2="300" stroke="#ff453a" stroke-opacity=".4" stroke-width="1.5"/>
+        <line x1="300" y1="240" x2="200" y2="380" stroke="#ff453a" stroke-opacity=".4" stroke-width="1.5"/>
+        <line x1="300" y1="240" x2="450" y2="100" stroke="#5ac8fa" stroke-opacity=".4" stroke-width="1.5"/>
+        <line x1="300" y1="240" x2="480" y2="280" stroke="#5ac8fa" stroke-opacity=".4" stroke-width="1.5"/>
+        <line x1="150" y1="120" x2="120" y2="300" stroke="#ff9500" stroke-opacity=".3" stroke-width="1.2" stroke-dasharray="4 3"/>
+        <line x1="120" y1="300" x2="200" y2="380" stroke="#ff9500" stroke-opacity=".3" stroke-width="1.2" stroke-dasharray="4 3"/>
+        <!-- 中心瞄准环 -->
+        <circle cx="300" cy="240" r="50" fill="none" stroke="#fff" stroke-opacity=".2" stroke-width="1"/>
+        <circle cx="300" cy="240" r="65" fill="none" stroke="#fff" stroke-opacity=".1" stroke-width="1" stroke-dasharray="4 6"/>
+        <!-- 中心节点 江北CBD -->
+        <circle cx="300" cy="240" r="22" fill="url(#gWhite)"/>
+        <text x="300" y="245" text-anchor="middle" font-size="11" fill="#0c1018" font-weight="700">江北</text>
+        <text x="300" y="280" text-anchor="middle" font-size="10" fill="#93a0b8">CBD · 上班集中地</text>
+        <!-- 节点 水口 -->
+        <circle cx="150" cy="120" r="16" fill="url(#gRed)"/>
+        <text x="150" y="124" text-anchor="middle" font-size="10" fill="#fff" font-weight="600">水口</text>
+        <text x="150" y="95" text-anchor="middle" font-size="9" fill="#93a0b8">22.15万人</text>
+        <!-- 节点 马安 -->
+        <circle cx="120" cy="300" r="14" fill="url(#gRed)"/>
+        <text x="120" y="304" text-anchor="middle" font-size="10" fill="#fff" font-weight="600">马安</text>
+        <text x="120" y="325" text-anchor="middle" font-size="9" fill="#93a0b8">~10万人</text>
+        <!-- 节点 河南岸 -->
+        <circle cx="200" cy="380" r="16" fill="url(#gRed)"/>
+        <text x="200" y="384" text-anchor="middle" font-size="10" fill="#fff" font-weight="600">河南岸</text>
+        <text x="200" y="405" text-anchor="middle" font-size="9" fill="#93a0b8">25.17万人</text>
+        <!-- 节点 华贸 -->
+        <circle cx="450" cy="100" r="14" fill="url(#gBlue)"/>
+        <text x="450" y="104" text-anchor="middle" font-size="10" fill="#fff" font-weight="600">华贸</text>
+        <text x="450" y="80" text-anchor="middle" font-size="9" fill="#93a0b8">服务业集聚区</text>
+        <!-- 节点 水东街 -->
+        <circle cx="480" cy="280" r="12" fill="url(#gBlue)"/>
+        <text x="480" y="284" text-anchor="middle" font-size="9" fill="#fff" font-weight="600">水东街</text>
+      </svg>
+    </div>
+
+    <!-- 右侧面板 -->
+    <div class="panel">
+      <div class="panel-title">压力测试结果</div>
+      <div class="big-num">
+        <div class="num">51%</div>
+        <div class="label">通勤+20%情景达标率</div>
       </div>
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%">
-        <div style="font-size:11px;color:#ff453a;margin-bottom:4px">51%</div>
-        <div style="width:100%;max-width:30px;height:51%;background:#ff453a;border-radius:4px 4px 0 0;opacity:.7"></div>
+      <div class="big-num2">
+        <div class="num">+20%</div>
+        <div class="label">通勤压力增幅（高峰拥堵恶化）</div>
       </div>
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%">
-        <div style="font-size:11px;color:#93a0b8;margin-bottom:4px">72%</div>
-        <div id="bar4" style="width:100%;max-width:30px;height:72%;background:#30d158;border-radius:4px 4px 0 0;opacity:.7;transition:height .3s"></div>
-      </div>
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%">
-        <div style="font-size:11px;color:#93a0b8;margin-bottom:4px">68%</div>
-        <div id="bar5" style="width:100%;max-width:30px;height:68%;background:#5ac8fa;border-radius:4px 4px 0 0;opacity:.7;transition:height .3s"></div>
+      <div class="panel-text">
+        <b>基准达标率 66.4%</b><br>
+        通勤压力单独施加 → <b>64%</b><br>
+        与投产延期叠加 → <b>51%</b><br><br>
+        通勤不是最显眼的压力，但它是"慢刀子"——每天都在失血。
       </div>
     </div>
   </div>
-  <p class="note">这和我们在风洞测试里看到的一致：通勤压力单独施加时，达标率从66.4%掉到64%；和投产延期、招商不及预期叠加时，掉到51%。通勤不是最显眼的，但它是"慢刀子"——每天都在失血。</p>
+
+  <!-- 底部说明 -->
+  <div class="footer">
+    数据来源：惠城区第七次全国人口普查；惠州市政府《细数惠州桥之最》；南方+隆生大桥通车报道；鹅城大桥2024年底通车。跨江人口比例30%为假设值，小时工资35元/小时为量级估算。本页为模型推演，不代表精确统计。
+  </div>
 </div>
 
-<!-- 呼应项目 -->
-<div class="section">四、呼应：这和风洞、盲点说的是同一件事</div>
-<div class="card">
-  <h2>三个地方，同一个结论</h2>
-  <p class="note"><b style="color:#eef2fb">风洞测试里：</b>通勤压力排第2，仅次于投产延期。很多人觉得通勤是"小问题"，但它每天都在发生，影响面最大。</p>
-  <p class="note"><b style="color:#eef2fb">盲点页里：</b>"一条每天要走的路"和"一个孩子的学位"、"一家楼下的小店"——这些小地基，决定了城市站不站得稳。</p>
-  <p class="note"><b style="color:#eef2fb">这里算出来：</b>每年约6亿的隐性损失（时间成本+消费外溢），相当于一个中型项目的投资额。通勤不是"要不要修桥"的问题，是"每天在漏多少钱"的问题。</p>
-</div>
-
-<div style="text-align:center;margin:24px 0">
-  <a class="btn" href="windtunnel.html">回到风洞测试</a>
-</div>
-
-<div class="src" style="padding:0 4px 20px">
-  注：跨江人口比例30%为假设值（水口+马安约32万人，估算30%在江北上班）。小时工资35元/小时为量级估算。消费外溢比例按通勤时长分段假设。本页为模型推演，不代表精确统计。
-</div>
-
-</div>
-
-<script src="hc-journey-nav.js"></script>
-<script>
-const scenarios=[
-  {name:'基准：现状',extra:20,hit:64,commuteHit:51,note:'现状下，约9.6万人每天跨江上班，平均每人每天多花20分钟在堵车上。一年下来，光是"时间被堵掉"的成本就超过4亿。这还没算他们下班后不愿在江北停留、直接开车回家，给江北服务业造成的消费流失。'},
-  {name:'改善：鹅城大桥分流后',extra:12,hit:72,commuteHit:58,note:'鹅城大桥通车后，分流约30%的跨江车流。平均每人每天少堵8分钟，时间成本损失降到2.5亿左右。但"最后一公里"和桥下拥堵仍在，改善不是根治。'},
-  {name:'远期：再建一条通道',extra:6,hit:82,commuteHit:68,note:'如果再建一条跨江通道，平均通勤时间缩到6分钟以内。时间成本损失降到1.2亿，消费外溢也明显减少。但这需要投资和时间——远期情景。'}
-];
-
-function calc(extra){
-  const people=96000; // 跨江人数
-  const wage=35; // 元/小时
-  const days=250; // 工作日
-  const timeCost=people*extra/60*wage*days/1e8; // 亿元/年
-  const consumption=people*0.15*12/1e8; // 消费外溢（亿）
-  return {timeCost,consumption};
-}
-
-function scenario(i,btn){
-  document.querySelectorAll('.press button').forEach(b=>b.classList.remove('sel'));
-  btn.classList.add('sel');
-  const s=scenarios[i];
-  document.getElementById('scenarioTitle').textContent=s.name;
-  const r=calc(s.extra);
-  document.getElementById('kpi1').textContent='~'+r.timeCost.toFixed(1)+'亿';
-  document.getElementById('kpi2').textContent='~'+r.consumption.toFixed(1)+'亿';
-  document.getElementById('kpi3').textContent=s.hit+'%';
-  document.getElementById('kpi4').textContent=s.commuteHit+'%';
-  document.getElementById('scenarioNote').textContent=s.note;
-  updateCharts(s);
-}
-
-function updateCharts(s){
-  const r=calc(s.extra);
-  document.getElementById('bar1').style.width=(r.timeCost/6*100)+'%';
-  document.getElementById('bar2').style.width=(r.consumption/6*100)+'%';
-  document.getElementById('bar3').style.width=((r.timeCost+r.consumption)/6*100)+'%';
-  document.getElementById('bar1v').textContent=r.timeCost.toFixed(1)+'亿';
-  document.getElementById('bar2v').textContent=r.consumption.toFixed(1)+'亿';
-  document.getElementById('bar3v').textContent=(r.timeCost+r.consumption).toFixed(1)+'亿';
-  document.getElementById('bar4').style.height=s.hit+'%';
-  document.getElementById('bar5').style.height=s.commuteHit+'%';
-}
-
-// 纯CSS图表，无需初始化
-</script>
 </body></html>
