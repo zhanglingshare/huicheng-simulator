@@ -3,32 +3,38 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%230a84ff%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%226%22 fill=%22%23fff%22/%3E%3C/svg%3E">
 <title>惠城产业风洞 · 第一页 · 序章</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#060914;
-  --ink:#F0F4FF;
-  --ink2:#7B8DB0;
-  --muted:#3D4A66;
-  --cyan:#22D3EE;
-  --blue:#3B82F6;
-  --purple:#8B5CF6;
-  --green:#10B981;
-  --amber:#F59E0B;
-  --red:#EF4444;
-  --orange:#F97316;
-  --glass:rgba(255,255,255,.03);
-  --glass-b:rgba(255,255,255,.06);
+  --bg:#0c1018;
+  --ink:#eef2fb;
+  --ink2:#93a0b8;
+  --muted:#5a6678;
+  --cyan:#5ac8fa;
+  --blue:#0a84ff;
+  --purple:#bf5af2;
+  --green:#30d158;
+  --amber:#ff9500;
+  --red:#ff453a;
+  --orange:#ff9500;
+  --glass:rgba(255,255,255,.045);
+  --glass-b:rgba(255,255,255,.09);
 }
 html,body{background:var(--bg);color:var(--ink);
   font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
   -webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
-body::before{content:'';position:fixed;top:-10%;left:50%;transform:translateX(-50%);
-  width:800px;height:500px;
-  background:radial-gradient(ellipse,rgba(34,211,238,.07) 0%,transparent 70%);
+body{background:
+  radial-gradient(120% 100% at 50% 0%,#161d30 0%,#0e1420 55%,#080b12 100%);}
+body::before{content:'';position:fixed;top:-15%;left:50%;transform:translateX(-50%);
+  width:900px;height:600px;
+  background:radial-gradient(ellipse,rgba(90,200,250,.05) 0%,transparent 70%);
   pointer-events:none;z-index:0}
 @keyframes pageIn{from{opacity:0}to{opacity:1}}
+#starLayer{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.star{fill:#fff;animation:twinkle 3s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.12}50%{opacity:.85}}
 .shell{position:relative;z-index:1;min-height:100vh;
   display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);
   gap:40px;max-width:1280px;margin:0 auto;padding:32px 40px;animation:pageIn .4s ease both}
@@ -36,15 +42,14 @@ body::before{content:'';position:fixed;top:-10%;left:50%;transform:translateX(-5
 .col-visual{display:flex;flex-direction:column;justify-content:center}
 @keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
 .top{animation:slideDown .5s ease .2s both;display:flex;align-items:center;gap:10px;margin-bottom:40px}
-.dot{width:9px;height:9px;border-radius:50%;background:var(--cyan);
-  box-shadow:0 0 12px var(--cyan);flex:none;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 12px var(--cyan)}50%{opacity:.4;box-shadow:0 0 4px var(--cyan)}}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);flex:none;animation:pulse 2.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 .brand h1{font-size:16px;font-weight:800;letter-spacing:.3px}
 .brand h1 span{color:var(--cyan)}
 .brand .en{font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
-.mode{margin-left:auto;font-size:10.5px;color:var(--cyan);
-  border:1px solid rgba(34,211,238,.25);padding:4px 11px;border-radius:4px;
-  background:rgba(34,211,238,.05);letter-spacing:.5px}
+.mode{margin-left:auto;font-size:10.5px;color:var(--ink2);
+  border:1px solid var(--glass-b);padding:4px 11px;border-radius:8px;
+  background:var(--glass);letter-spacing:.5px}
 @keyframes dropIn{
   0%{opacity:0;transform:translateY(-60px) scale(1.1)}
   60%{opacity:1;transform:translateY(8px) scale(.98)}
@@ -52,22 +57,20 @@ body::before{content:'';position:fixed;top:-10%;left:50%;transform:translateX(-5
 }
 .headline{animation:dropIn .7s cubic-bezier(.2,.8,.3,1.2) .4s both;margin-bottom:32px}
 .kicker{display:inline-flex;align-items:center;gap:8px;
-  font-size:11px;color:var(--amber);letter-spacing:2.5px;font-weight:700;
+  font-size:11px;color:var(--ink2);letter-spacing:2px;font-weight:600;
   text-transform:uppercase;margin-bottom:18px;opacity:0;animation:fadeIn .4s ease .6s both}
 @keyframes fadeIn{to{opacity:1}}
 .headline h2{font-size:clamp(36px,5.5vw,64px);font-weight:900;line-height:1.05;letter-spacing:-1.5px;margin-bottom:20px}
 .headline h2 .line1,.headline h2 .line2{display:block}
-.crack{color:var(--red);position:relative;text-shadow:0 0 30px rgba(239,68,68,.4)}
-.crack::after{content:'';position:absolute;left:0;right:0;top:52%;height:3px;
-  background:var(--red);transform:rotate(-1.2deg);
-  box-shadow:0 0 12px rgba(239,68,68,.6);
+.crack{color:var(--red);position:relative}
+.crack::after{content:'';position:absolute;left:0;right:0;top:54%;height:2px;
+  background:rgba(255,69,58,.55);transform:rotate(-1deg);
   animation:slashIn .6s ease 1.2s both;transform:scaleX(0);transform-origin:left}
-@keyframes slashIn{to{transform:rotate(-1.2deg) scaleX(1)}}
+@keyframes slashIn{to{transform:rotate(-1deg) scaleX(1)}}
 .headline p{font-size:clamp(14px,1.2vw,16px);color:var(--ink2);line-height:1.75;max-width:520px;
   opacity:0;animation:fadeIn .5s ease 1s both}
 .headline p b{color:var(--ink);font-weight:700}
-.headline p .hl{color:var(--orange);font-weight:700;animation:blink 1.5s ease 2.5s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
+.headline p .hl{color:var(--ink);font-weight:700}
 @keyframes stageIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
 .relbox{animation:stageIn .8s ease .8s both;margin-bottom:24px}
 .rel-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px;
@@ -75,19 +78,17 @@ body::before{content:'';position:fixed;top:-10%;left:50%;transform:translateX(-5
 .rel-head .t{font-size:11px;font-weight:700;color:var(--ink2);letter-spacing:1.5px}
 .rel-head .d{font-size:10px;color:var(--muted)}
 .rel-svg{width:100%;height:auto;display:block;aspect-ratio:4/3;
-  background:linear-gradient(180deg,rgba(34,211,238,.025),rgba(239,68,68,.035));
-  border-radius:16px;border:1px solid rgba(255,255,255,.05);overflow:visible}
+  background:rgba(20,26,40,.4);
+  border-radius:18px;border:1px solid var(--glass-b);overflow:visible}
 .nd .lb{font-weight:700;fill:#fff;paint-order:stroke;stroke:rgba(6,9,20,.95);stroke-width:3.5px}
 .nd .sub{fill:var(--ink2);paint-order:stroke;stroke:rgba(6,9,20,.9);stroke-width:3px}
-.local-line{fill:none;stroke:var(--cyan);stroke-width:1.2;stroke-dasharray:3 5;opacity:.22;
-  stroke-dashoffset:200;animation:drawLine 1s ease 1.5s both,tremble .3s ease 2.5s infinite}
+.local-line{fill:none;stroke:#5ac8fa;stroke-width:1;stroke-dasharray:3 5;opacity:.16;
+  stroke-dashoffset:200;animation:drawLine 1s ease 1.5s both}
 @keyframes drawLine{to{stroke-dashoffset:0}}
-@keyframes tremble{0%,100%{opacity:.22}50%{opacity:.1}}
-.leak-line{fill:none;stroke-linecap:round;filter:drop-shadow(0 0 5px currentColor);
+.leak-line{fill:none;stroke-linecap:round;
   stroke-dasharray:600;stroke-dashoffset:600;
-  animation:shootLine .8s cubic-bezier(.4,0,.8,1) 1.8s both,flowDash 1.5s linear 2.6s infinite}
+  animation:shootLine .8s cubic-bezier(.4,0,.8,1) 1.8s both}
 @keyframes shootLine{to{stroke-dashoffset:0}}
-@keyframes flowDash{to{stroke-dashoffset:-20}}
 .particle{opacity:0;animation:particleIn .4s ease 2s both}
 @keyframes particleIn{to{opacity:1}}
 .leak-target{opacity:0;animation:targetPop .5s cubic-bezier(.2,1.4,.4,1) both}
@@ -105,25 +106,22 @@ body::before{content:'';position:fixed;top:-10%;left:50%;transform:translateX(-5
 .annot.warn{animation:fadeIn .5s ease 2.8s both,blink 1.5s ease 3s infinite}
 @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 .insights{animation:slideUp .6s ease 2.8s both;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
-.insight{position:relative;padding:18px 16px 16px;border-radius:12px;
-  background:var(--glass);border:1px solid var(--glass-b);overflow:hidden}
-.insight::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
-.insight.brk::before{background:var(--red)}
-.insight.rvs::before{background:var(--amber)}
-.insight .num{font-size:26px;font-weight:900;line-height:1;margin-bottom:8px;font-variant-numeric:tabular-nums;opacity:.9}
-.insight.brk .num{color:var(--red)}
-.insight.rvs .num{color:var(--amber)}
+.insight{position:relative;padding:20px 18px 18px;border-radius:14px;
+  background:rgba(28,34,48,.5);border:1px solid var(--glass-b);overflow:hidden;
+  backdrop-filter:blur(16px)}
+.insight::before{display:none}
+.insight .num{font-size:22px;font-weight:700;line-height:1;margin-bottom:10px;
+  font-family:ui-monospace,monospace;color:var(--ink2);font-variant-numeric:tabular-nums}
 .insight .t{font-size:14px;font-weight:800;line-height:1.35;margin-bottom:6px}
 .insight .d{font-size:11.5px;color:var(--ink2);line-height:1.55}
 .cta{animation:slideUp .6s ease 3.2s both;display:flex;align-items:center;justify-content:space-between;
   width:100%;padding:18px 22px;
-  background:linear-gradient(135deg,rgba(34,211,238,.1),rgba(139,92,246,.1));
-  border:1px solid rgba(34,211,238,.25);border-radius:14px;
-  color:var(--ink);font-size:15px;font-weight:800;cursor:pointer;
+  background:rgba(28,34,48,.55);backdrop-filter:blur(16px);
+  border:1px solid var(--glass-b);border-radius:16px;
+  color:var(--ink);font-size:15px;font-weight:700;cursor:pointer;
   transition:.2s;text-align:left;text-decoration:none}
-.cta:hover{border-color:rgba(34,211,238,.5);
-  background:linear-gradient(135deg,rgba(34,211,238,.16),rgba(139,92,246,.16))}
-.cta .arrow{font-size:20px;color:var(--cyan);transition:.2s;animation:arrowNudge 2s ease 4s infinite}
+.cta:hover{background:rgba(40,48,66,.65);border-color:rgba(255,255,255,.16)}
+.cta .arrow{font-size:20px;color:var(--ink2);transition:.2s}
 @keyframes arrowNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
 .cta:hover .arrow{transform:translateX(5px)}
 .cta .sub{display:block;font-size:11px;font-weight:400;color:var(--ink2);margin-top:3px}
@@ -158,6 +156,7 @@ body::before{content:'';position:fixed;top:-10%;left:50%;transform:translateX(-5
 <link rel="stylesheet" href="hc-journey-nav.css">
 </head>
 <body>
+<svg id="starLayer" aria-hidden="true"></svg>
 <div class="shell">
   <div class="col-text">
     <div class="top">
@@ -191,87 +190,102 @@ body::before{content:'';position:fixed;top:-10%;left:50%;transform:translateX(-5
       </div>
       <svg class="rel-svg" viewBox="0 0 600 450" preserveAspectRatio="xMidYMid meet">
         <defs>
-          <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          <filter id="glowStrong"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-            <path d="M0,0 L10,5 L0,10 z" fill="#EF4444"/>
+          <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="softShadow" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity=".5"/></filter>
+          <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="#ff453a"/>
           </marker>
           <marker id="arrowOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-            <path d="M0,0 L10,5 L0,10 z" fill="#F97316"/>
+            <path d="M0,0 L10,5 L0,10 z" fill="#ff9500"/>
           </marker>
-          <radialGradient id="coreG" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#67E8F9"/>
-            <stop offset="70%" stop-color="#06B6D4"/>
-            <stop offset="100%" stop-color="#0E7490"/>
+          <radialGradient id="coreG" cx="38%" cy="34%" r="68%">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="45%" stop-color="#dcecff"/>
+            <stop offset="100%" stop-color="#7fa6d8"/>
+          </radialGradient>
+          <radialGradient id="ballBlue" cx="38%" cy="34%" r="68%">
+            <stop offset="0%" stop-color="#7cc4ff"/><stop offset="50%" stop-color="#0a84ff"/><stop offset="100%" stop-color="#0050b0"/>
+          </radialGradient>
+          <radialGradient id="ballPurple" cx="38%" cy="34%" r="68%">
+            <stop offset="0%" stop-color="#d8a0ff"/><stop offset="50%" stop-color="#bf5af2"/><stop offset="100%" stop-color="#7030a0"/>
+          </radialGradient>
+          <radialGradient id="ballGreen" cx="38%" cy="34%" r="68%">
+            <stop offset="0%" stop-color="#8ff0a8"/><stop offset="50%" stop-color="#30d158"/><stop offset="100%" stop-color="#1a8038"/>
+          </radialGradient>
+          <radialGradient id="ballRed" cx="38%" cy="34%" r="68%">
+            <stop offset="0%" stop-color="#ff9090"/><stop offset="50%" stop-color="#ff453a"/><stop offset="100%" stop-color="#b01e18"/>
+          </radialGradient>
+          <radialGradient id="ballAmber" cx="38%" cy="34%" r="68%">
+            <stop offset="0%" stop-color="#ffd080"/><stop offset="50%" stop-color="#ff9500"/><stop offset="100%" stop-color="#b06000"/>
           </radialGradient>
           <linearGradient id="leakRed" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#EF4444" stop-opacity=".9"/>
-            <stop offset="100%" stop-color="#F97316" stop-opacity=".9"/>
+            <stop offset="0%" stop-color="#ff453a" stop-opacity=".55"/>
+            <stop offset="100%" stop-color="#ff9500" stop-opacity=".55"/>
           </linearGradient>
           <linearGradient id="leakAmber" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#F59E0B" stop-opacity=".8"/>
-            <stop offset="100%" stop-color="#F97316" stop-opacity=".8"/>
+            <stop offset="0%" stop-color="#ff9500" stop-opacity=".5"/>
+            <stop offset="100%" stop-color="#ff9500" stop-opacity=".5"/>
           </linearGradient>
         </defs>
         <path class="local-line" d="M260,220 Q200,140 130,100"/>
         <path class="local-line" d="M260,220 Q330,130 420,95"/>
         <path class="local-line" d="M260,220 Q180,310 120,350"/>
         <path class="local-line" d="M260,220 Q350,310 440,355"/>
-        <path class="leak-line" d="M290,200 Q430,150 540,130" stroke="url(#leakRed)" stroke-width="3" marker-end="url(#arrowRed)" style="color:#EF4444"/>
-        <path class="leak-line" d="M290,230 Q430,235 540,235" stroke="url(#leakRed)" stroke-width="2.5" marker-end="url(#arrowRed)" style="color:#EF4444;opacity:.7"/>
+        <path class="leak-line" d="M290,200 Q430,150 540,130" stroke="url(#leakRed)" stroke-width="3" marker-end="url(#arrowRed)"/>
+        <path class="leak-line" d="M290,230 Q430,235 540,235" stroke="url(#leakRed)" stroke-width="2.5" marker-end="url(#arrowRed)" style="opacity:.7"/>
         <path class="leak-line" d="M280,250 Q390,330 500,365" stroke="url(#leakAmber)" stroke-width="2.5" marker-end="url(#arrowOrange)" style="color:#F97316;opacity:.8"/>
         <circle class="particle" r="3">
           <animateMotion dur="2s" repeatCount="indefinite" begin="2.4s" path="M290,200 Q430,150 540,130"/>
         </circle>
-        <circle class="particle" r="2.5" style="fill:#F59E0B;filter:drop-shadow(0 0 4px #F59E0B)">
+        <circle class="particle" r="2.5" style="fill:#ff9500">
           <animateMotion dur="2.5s" repeatCount="indefinite" begin="2.8s" path="M290,230 Q430,235 540,235"/>
         </circle>
-        <circle class="particle" r="2.5" style="fill:#FBBF24;filter:drop-shadow(0 0 4px #FBBF24)">
+        <circle class="particle" r="2.5" style="fill:#ffd080">
           <animateMotion dur="3s" repeatCount="indefinite" begin="3.2s" path="M280,250 Q390,330 500,365"/>
         </circle>
-        <circle class="particle" r="2" style="fill:#F87171;filter:drop-shadow(0 0 3px #F87171)">
+        <circle class="particle" r="2" style="fill:#ff8a80">
           <animateMotion dur="1.8s" repeatCount="indefinite" begin="3s" path="M290,200 Q430,150 540,130"/>
         </circle>
         <g id="coreNode" class="nd">
           <circle id="coreRing1" cx="260" cy="220" r="46" fill="none" stroke="#22D3EE" stroke-width="1" opacity=".2"/>
           <circle id="coreRing2" cx="260" cy="220" r="60" fill="none" stroke="#22D3EE" stroke-width=".5" opacity=".1"/>
-          <circle id="coreCircle" cx="260" cy="220" r="32" fill="url(#coreG)" filter="url(#glowStrong)"/>
+          <circle id="coreCircle" cx="260" cy="220" r="32" fill="url(#coreG)" filter="url(#softShadow)"/>
           <text class="lb" x="260" y="178" text-anchor="middle" font-size="14">惠城核心</text>
           <text class="sub" x="260" y="262" text-anchor="middle" font-size="11">楼宇总部群</text>
         </g>
         <g class="nd jb">
-          <circle cx="130" cy="100" r="9" fill="#22D3EE" opacity=".4"/>
+          <circle cx="130" cy="100" r="9" fill="url(#ballBlue)" opacity=".85" filter="url(#softShadow)"/>
           <text class="lb" x="130" y="82" text-anchor="middle" font-size="11" opacity=".7">江北CBD</text>
         </g>
         <g class="nd jsh">
-          <circle cx="420" cy="95" r="9" fill="#8B5CF6" opacity=".4"/>
+          <circle cx="420" cy="95" r="9" fill="url(#ballPurple)" opacity=".85" filter="url(#softShadow)"/>
           <text class="lb" x="420" y="77" text-anchor="middle" font-size="11" opacity=".7">金山湖</text>
         </g>
         <g class="nd sdj">
-          <circle cx="120" cy="350" r="8" fill="#10B981" opacity=".4"/>
+          <circle cx="120" cy="350" r="8" fill="url(#ballGreen)" opacity=".85" filter="url(#softShadow)"/>
           <text class="lb" x="120" y="372" text-anchor="middle" font-size="11" opacity=".7">水东街</text>
         </g>
         <g class="nd hm">
-          <circle cx="440" cy="355" r="8" fill="#3B82F6" opacity=".4"/>
+          <circle cx="440" cy="355" r="8" fill="url(#ballBlue)" opacity=".85" filter="url(#softShadow)"/>
           <text class="lb" x="440" y="377" text-anchor="middle" font-size="11" opacity=".7">华贸天地</text>
         </g>
         <g class="leak-target sz">
           <circle class="ring" cx="540" cy="130" r="26" stroke="#EF4444"/>
-          <circle cx="540" cy="130" r="9" fill="#EF4444" filter="url(#glow)"/>
+          <circle cx="540" cy="130" r="9" fill="url(#ballRed)" filter="url(#softShadow)"/>
           <text class="lb" x="540" y="102" text-anchor="middle" font-size="12" fill="#F87171">深圳</text>
         </g>
         <g class="leak-target dg">
           <circle class="ring" cx="540" cy="235" r="20" stroke="#EF4444"/>
-          <circle cx="540" cy="235" r="7" fill="#EF4444" opacity=".7" filter="url(#glow)"/>
+          <circle cx="540" cy="235" r="7" fill="url(#ballRed)" opacity=".9" filter="url(#softShadow)"/>
           <text class="lb" x="540" y="265" text-anchor="middle" font-size="10" fill="#F87171">东莞</text>
         </g>
         <g class="leak-target ec">
           <circle class="ring" cx="500" cy="365" r="18" stroke="#F59E0B"/>
-          <circle cx="500" cy="365" r="6" fill="#F59E0B" opacity=".75" filter="url(#glow)"/>
+          <circle cx="500" cy="365" r="6" fill="url(#ballAmber)" opacity=".9" filter="url(#softShadow)"/>
           <text class="lb" x="500" y="392" text-anchor="middle" font-size="10" fill="#FBBF24">电商</text>
         </g>
-        <text class="annot warn" x="400" y="175" font-size="11" fill="#F87171">钱在往外流 →</text>
-        <text class="annot" x="140" y="230" font-size="10" fill="#3D4A66">本地关系断裂</text>
+        <text class="annot warn" x="400" y="175" font-size="11" fill="#ff8a80">钱在往外流 →</text>
+        <text class="annot" x="140" y="230" font-size="10" fill="#5a6678">本地关系断裂</text>
       </svg>
     </div>
     <div class="insights">
@@ -295,6 +309,31 @@ body::before{content:'';position:fixed;top:-10%;left:50%;transform:translateX(-5
     </a>
   </div>
 </div>
+<script>
+(function(){
+  var g=document.getElementById('starLayer');
+  function build(){
+    var w=window.innerWidth,h=window.innerHeight;
+    g.setAttribute('viewBox','0 0 '+w+' '+h);
+    g.innerHTML='';
+    var count=Math.round(w*h/9000);
+    var frag=document.createDocumentFragment();
+    for(var i=0;i<count;i++){
+      var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      c.setAttribute('class','star');
+      c.setAttribute('cx',Math.random()*w);
+      c.setAttribute('cy',Math.random()*h);
+      c.setAttribute('r',Math.random()*1.1+.3);
+      c.style.animationDelay=(Math.random()*3).toFixed(2)+'s';
+      c.style.animationDuration=(2+Math.random()*3).toFixed(2)+'s';
+      frag.appendChild(c);
+    }
+    g.appendChild(frag);
+  }
+  build();
+  var t;window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(build,250);});
+})();
+</script>
 <script src="hc-journey-nav.js" defer></script>
 </body>
 </html>

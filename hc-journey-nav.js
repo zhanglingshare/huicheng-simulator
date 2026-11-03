@@ -33,7 +33,7 @@
     var bar=document.createElement('div');bar.className='hcjn-bar';
     function step(i,word,symbol){
       var x=document.createElement('a');x.className='hcjn-step';
-      if(i<0||i>=pages.length){x.href='#';x.setAttribute('aria-disabled','true');x.tabIndex=-1;}
+      if(i<0||i>=pages.length){x.href='#';x.setAttribute('aria-disabled','true');x.tabIndex=-1;x.onclick=function(e){e.preventDefault();};}
       else{x.href=pages[i].url;x.setAttribute('aria-label',word+'：'+pages[i].label);x.title=word+' · '+pages[i].label;}
       var ico=document.createElement('span');ico.className='hcjn-icon';ico.setAttribute('aria-hidden','true');ico.textContent=symbol;
       var long=document.createElement('span');long.className='hcjn-long';long.textContent=word;
