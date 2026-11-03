@@ -118,10 +118,24 @@ function paint(){
   const p=drawPoints.get(n.id),r=n.type==="question"?43:n.type==="path"?35:26,focus=n.id===selected;
   const isNew=!seenNodes.has(n.id);seenNodes.add(n.id);
   const g=elem("g",{"data-node":n.id,"class":"kg-node "+(focus?"active ":"")+(isNew?"new-node":"")+(n.type==="entity"&&activeEvent?.involved_node_ids?.includes(n.id.slice(2))?" event-touch":""),tabindex:0,role:"button","aria-label":"查看："+n.name,transform:"translate("+p.x+" "+p.y+")"},$("kgNodes"));
+  /* 彩色玻璃球：独立径向渐变，高光偏移 */
+  const gid="kgGrad_"+n.id.replace(/[^a-z0-9]/gi,"");
+  const defs=$("kgSvg").querySelector("defs");
+  let grad=document.getElementById(gid);
+  if(!grad){grad=document.createElementNS(SVG,"radialGradient");grad.id=gid;grad.setAttribute("cx","35%");grad.setAttribute("cy","30%");grad.setAttribute("r","75%");
+    const s1=document.createElementNS(SVG,"stop");s1.setAttribute("offset","0%");s1.setAttribute("stop-color","#ffffff");s1.setAttribute("stop-opacity",".9");
+    const s2=document.createElementNS(SVG,"stop");s2.setAttribute("offset","35%");s2.setAttribute("stop-color",n.color);
+    const s3=document.createElementNS(SVG,"stop");s3.setAttribute("offset","100%");s3.setAttribute("stop-color","#0c1018");s3.setAttribute("stop-opacity",".9");
+    grad.appendChild(s1);grad.appendChild(s2);grad.appendChild(s3);defs.appendChild(grad);}
   elem("circle",{r:r+17,fill:n.color,"class":"kg-node-halo"},g);
-  elem("circle",{r,stroke:n.color,"class":"kg-node-circle"},g);
-  elem("text",{x:0,y:5,fill:n.color,"class":"kg-node-icon"},g,n.icon);
-  elem("rect",{x:-73,y:r+7,width:146,height:42,rx:9,fill:"#081d31ed",stroke:n.color,"stroke-opacity":.65},g);
+  /* 中心 question 节点加瞄准环 */
+  if(n.type==="question"){
+    elem("circle",{r:r+8,fill:"none",stroke:n.color,"stroke-opacity":".4","stroke-width":"1"},g);
+    elem("circle",{r:r+16,fill:"none",stroke:n.color,"stroke-opacity":".2","stroke-width":"1","stroke-dasharray":"3 6"},g);
+  }
+  elem("circle",{r,stroke:n.color,"stroke-opacity":".85","class":"kg-node-circle",fill:"url(#"+gid+")"},g);
+  elem("text",{x:0,y:5,fill:"#fff","class":"kg-node-icon"},g,n.icon);
+  elem("rect",{x:-73,y:r+7,width:146,height:42,rx:9,fill:"rgba(12,16,24,.85)",stroke:n.color,"stroke-opacity":".35"},g);
   elem("text",{x:0,y:r+23,"class":"kg-node-label"},g,n.name.length>11?n.name.slice(0,10)+"…":n.name);
   elem("text",{x:0,y:r+38,"class":"kg-node-sub"},g,n.sub);
   if(n.type==="entity"&&n.evidence_grade){
@@ -371,11 +385,11 @@ function shareState(){
 }
 function background(){
  const c=$("kgCity"),w=Math.max(1,c.clientWidth),hh=Math.max(1,c.clientHeight),dpr=Math.min(window.devicePixelRatio||1,2),ctx=c.getContext("2d");c.width=w*dpr;c.height=hh*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
- const gradient=ctx.createLinearGradient(0,0,w,hh);gradient.addColorStop(0,"#07192e");gradient.addColorStop(.52,"#11405a");gradient.addColorStop(1,"#071729");ctx.fillStyle=gradient;ctx.fillRect(0,0,w,hh);
+ const gradient=ctx.createRadialGradient(w*.5,hh*.4,.1,w*.5,hh*.5,w*.8);gradient.addColorStop(0,"#161d30");gradient.addColorStop(.55,"#0e1420");gradient.addColorStop(1,"#080b12");ctx.fillStyle=gradient;ctx.fillRect(0,0,w,hh);
  let seed=82921;const rand=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
  for(let i=0;i<1000;i++){const x=rand()*w,y=rand()*hh;if(rand()>.4)continue;ctx.fillStyle=rand()<.7?"#e5b36b2a":"#7bd2f02a";ctx.fillRect(x,y,2+rand()*8,1+rand()*6);}
  for(let i=0;i<22;i++){const x=i*w/20;ctx.beginPath();ctx.moveTo(x-50,0);ctx.bezierCurveTo(x+35,hh*.3,x-25,hh*.7,x+50,hh);ctx.strokeStyle=i%4===0?"#5cbccb3c":"#9b9b8530";ctx.lineWidth=i%4===0?2:1;ctx.stroke();}
- ctx.beginPath();ctx.moveTo(-20,hh*.7);ctx.bezierCurveTo(w*.24,hh*.5,w*.48,hh*.79,w*.75,hh*.44);ctx.bezierCurveTo(w*.89,hh*.29,w*.97,hh*.43,w+20,hh*.3);ctx.strokeStyle="#20afd437";ctx.lineWidth=30;ctx.stroke();ctx.strokeStyle="#88e6e681";ctx.lineWidth=2;ctx.stroke();
+ ctx.beginPath();ctx.moveTo(-20,hh*.7);ctx.bezierCurveTo(w*.24,hh*.5,w*.48,hh*.79,w*.75,hh*.44);ctx.bezierCurveTo(w*.89,hh*.29,w*.97,hh*.43,w+20,hh*.3);ctx.strokeStyle="#5ac8fa20";ctx.lineWidth=30;ctx.stroke();ctx.strokeStyle="#5ac8fa60";ctx.lineWidth=2;ctx.stroke();
 }
 let timer;window.addEventListener("resize",()=>{clearTimeout(timer);timer=setTimeout(()=>{background();if(raw)render()},150);});
 async function load(){
