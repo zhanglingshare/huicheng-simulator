@@ -1,30 +1,31 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%230a84ff%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%226%22 fill=%22%23fff%22/%3E%3C/svg%3E">
 <title>惠城产业风洞 · 风洞测试</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="model.js"></script>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
-.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
+body{margin:0;background:radial-gradient(circle at 85% 10%,rgba(191,90,242,.08),transparent 35%),radial-gradient(circle at 10% 90%,rgba(90,200,250,.06),transparent 40%),radial-gradient(120% 100% at 50% 0%,#161d30 0%,#0e1420 55%,#080b12 100%);color:#eef2fb;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(12,16,24,.9);border-bottom:1px solid rgba(255,255,255,.08);overflow-x:auto;backdrop-filter:blur(12px)}
 .nav b{font-size:14px;margin-right:6px;flex:none}
-.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
-.nav a.on{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
+.nav a{background:rgba(255,255,255,.04);color:#93a0b8;border:1px solid rgba(255,255,255,.1);padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
+.nav a.on{background:rgba(10,132,255,.2);border-color:rgba(10,132,255,.4);color:#eef2fb;font-weight:600}
 .wrap{max-width:820px;margin:auto;padding:16px}
 h1{font-size:20px;margin:0 0 2px}
 .sub{color:#8fa3bf;font-size:13px;margin:0 0 16px}
-.section-title{font-size:16px;font-weight:700;margin:22px 0 10px;padding-left:10px;border-left:3px solid #3b82f6}
-.section-title.rev{border-color:#f87171}
-.card{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:16px;margin-bottom:12px}
+.section-title{font-size:16px;font-weight:700;margin:22px 0 10px;padding-left:10px;border-left:3px solid #0a84ff}
+.section-title.rev{border-color:#ff453a}
+.card{background:rgba(28,34,48,.5);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px;margin-bottom:12px;backdrop-filter:blur(16px)}
 .card h2{font-size:14px;margin:0 0 8px}
 .press{display:flex;gap:6px;margin:8px 0}
-.press button{flex:1;background:#0a0f1a;border:1px solid #22304a;color:#93a4bd;padding:8px 4px;border-radius:8px;font-size:11px;cursor:pointer;transition:.15s}
-.press button.sel{background:#1d4ed8;border-color:#3b82f6;color:#fff;font-weight:600}
-.press button.revbtn.sel{background:#b91c1c;border-color:#f87171}
+.press button{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#93a0b8;padding:8px 4px;border-radius:8px;font-size:11px;cursor:pointer;transition:.15s}
+.press button.sel{background:rgba(10,132,255,.2);border-color:rgba(10,132,255,.4);color:#eef2fb;font-weight:600}
+.press button.revbtn.sel{background:rgba(255,69,58,.2);border-color:rgba(255,69,58,.4);color:#ff453a}
 .mini{height:110px;margin:6px 0}
-.readout{background:#0a0f1a;border-radius:8px;padding:8px 10px;font-size:12px;color:#cbd5e1}
+.readout{background:rgba(255,255,255,.04);border-radius:8px;padding:8px 10px;font-size:12px;color:#93a0b8}
 .note{font-size:11.5px;color:#8fa3bf;margin-top:8px;line-height:1.6}
-.btn{background:#1d4ed8;color:#fff;border:0;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
+.btn{background:rgba(10,132,255,.25);color:#eef2fb;border:1px solid rgba(10,132,255,.4);padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
 .hint{font-size:11px;color:#5b6b82;text-align:center;margin-top:6px}
 </style><link rel="stylesheet" href="hc-journey-nav.css">
 </head><body>
@@ -36,7 +37,7 @@ h1{font-size:20px;margin:0 0 2px}
   <p class="sub">点档位，图会跟着变。先看常规压力，再看一个容易忽略的地方。</p>
   <div class="card" style="background:#0a0f1a;border-color:#2b3a55;margin-bottom:14px">
     <div style="font-size:12px;color:#93a4bd;line-height:1.8">
-      <b style="color:#fbbf24">两本账，别混：</b><br>
+      <b style="color:#ff9500">两本账，别混：</b><br>
       <b>① 参数敏感性（见⑤未来页）</b>：逐个参数 ±20% 扰动，其他不变，看达标概率和中位产值变多少。回答的是"哪个参数最敏感"。<br>
       <b>② 受控场景压测（本页）</b>：注入具体现实事件（投产延期、招商不及预期、通勤堵塞等），看系统怎么反应。回答的是"如果这件事发生，会怎样"。<br>
       前者是参数微分，后者是事件注入。两把尺子，两个问题，不放在同一个排序里比。
@@ -111,20 +112,20 @@ h1{font-size:20px;margin:0 0 2px}
   <!-- 下半场 -->
   <div class="section-title rev">下半场 · 一个容易被忽略的地方</div>
 
-  <div class="card" style="border-color:#7f1d1d">
+  <div class="card" style="border-color:#ff453a">
     <h2>龙头扩产落空 vs 通勤路承压</h2>
     <p style="font-size:12.5px;color:#93a4bd;margin:0 0 10px">
       大家最担心龙头。但比起"迁走"（概率很低），更现实的是"扩产落空"——利元亨要从50亿冲100亿，没冲上去。拿它和一条通勤路比一比。
     </p>
 
-    <h2 style="color:#fbbf24">A. 龙头扩产落空（少增50亿）</h2>
+    <h2 style="color:#ff9500">A. 龙头扩产落空（少增50亿）</h2>
     <div class="press">
       <button onclick="pick(this,'dragon',0)">如期扩产</button>
       <button class="sel revbtn" onclick="pick(this,'dragon',1)">扩产落空</button>
     </div>
     <div class="readout" id="ro-dragon"></div>
 
-    <h2 style="color:#fbbf24;margin-top:14px">B. 过江通道通勤压力</h2>
+    <h2 style="color:#ff9500;margin-top:14px">B. 过江通道通勤压力</h2>
     <div class="press">
       <button onclick="pick(this,'commute',0)">畅通</button>
       <button class="sel revbtn" onclick="pick(this,'commute',1)">通勤+20%</button>
@@ -135,7 +136,7 @@ h1{font-size:20px;margin:0 0 2px}
     <div class="note">通勤一压是双向失血：东江湾招工难，江北服务业丢消费。过江通道早晚高峰排队已经在发生，高新区扩能后还会加重。</div>
   </div>
 
-  <div class="card" style="border-color:#7f1d1d">
+  <div class="card" style="border-color:#ff453a">
     <h2>全部压力，按杀伤力重新排序</h2>
     <div style="height:280px"><canvas id="rank2"></canvas></div>
     <div class="hint" id="rank2-note"></div>
@@ -196,9 +197,9 @@ function renderRO(key){
   const drop=effects[key][state[key]];
   const el=document.getElementById('ro-'+key);
   if(!el)return;
-  if(drop<=0){el.innerHTML='无压力，达标率 <b style="color:#34d399">'+BASE_HIT.toFixed(0)+'%</b>';return;}
+  if(drop<=0){el.innerHTML='无压力，达标率 <b style="color:#30d158">'+BASE_HIT.toFixed(0)+'%</b>';return;}
   const m=runTunnel(key);
-  const color=m.hit>40?'#fbbf24':'#f87171';
+  const color=m.hit>40?'#ff9500':'#ff453a';
   el.innerHTML='基准中位 <b>'+Math.round(BASE_P50)+'亿</b> → 施加该压力后中位 <b style="color:'+color+'">'+Math.round(m.p50)+'亿</b>，达标率 <b style="color:'+color+'">'+m.hit.toFixed(0)+'%</b>（同一模型内核重跑）';
 }
 
@@ -211,21 +212,21 @@ function drawMini(key){
   if(key==='delay'){
     const final=1500-effects.delay[L];
     charts[key]=new Chart(ctx,{type:'bar',data:{labels:['2026','2027','2028','2029','2030'],
-      datasets:[{data:[820-effects.delay[L]*0.2,1000-effects.delay[L]*0.4,1200-effects.delay[L]*0.6,1350-effects.delay[L]*0.8,final],backgroundColor:'#3b82f6',borderRadius:3}]},
+      datasets:[{data:[820-effects.delay[L]*0.2,1000-effects.delay[L]*0.4,1200-effects.delay[L]*0.6,1350-effects.delay[L]*0.8,final],backgroundColor:'#0a84ff',borderRadius:3}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:tickColor,font:{size:9}},grid:{display:false}},y:{ticks:{color:tickColor,font:{size:9}},grid:{color:gridColor}}}}});
   }else if(key==='invest'){
     const pct=[100,80,60,40][L];
-    charts[key]=new Chart(ctx,{type:'doughnut',data:{labels:['完成','缺口'],datasets:[{data:[pct,100-pct],backgroundColor:['#3b82f6','#7f1d1d'],borderWidth:0}]},
+    charts[key]=new Chart(ctx,{type:'doughnut',data:{labels:['完成','缺口'],datasets:[{data:[pct,100-pct],backgroundColor:['#0a84ff','#ff453a'],borderWidth:0}]},
       options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'right',labels:{color:'#93a4bd',font:{size:10}}}}}});
   }else if(key==='export'){
     const end=[18,8,0,-10][L];
     charts[key]=new Chart(ctx,{type:'line',data:{labels:['2025','2026','2027','2028','2029','2030'],
-      datasets:[{data:[17.6,end*0.9,end*0.8,end*0.7,end*0.6,end],borderColor:'#f87171',backgroundColor:'rgba(248,113,113,.15)',fill:true,tension:.3,pointRadius:2}]},
+      datasets:[{data:[17.6,end*0.9,end*0.8,end*0.7,end*0.6,end],borderColor:'#ff453a',backgroundColor:'rgba(248,113,113,.15)',fill:true,tension:.3,pointRadius:2}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:tickColor,font:{size:9}},grid:{display:false}},y:{ticks:{color:tickColor,font:{size:9},callback:v=>v+'%'},grid:{color:gridColor}}}}});
   }else if(key==='shen'){
     const year=[2029,2030,2031,2032][L];
     charts[key]=new Chart(ctx,{type:'bar',data:{labels:['计划','实际预期'],
-      datasets:[{data:[2029,year],backgroundColor:['#3b82f6','#f87171'],borderRadius:4}]},
+      datasets:[{data:[2029,year],backgroundColor:['#0a84ff','#ff453a'],borderRadius:4}]},
       options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{min:2027,max:2033,ticks:{color:tickColor,font:{size:9},stepSize:1},grid:{color:gridColor}},y:{ticks:{color:tickColor,font:{size:10}},grid:{display:false}}}}});
   }
 }
@@ -247,7 +248,7 @@ function drawWaterfall(){
   });
   dk('wf');
   charts.wf=new Chart(document.getElementById('waterfall').getContext('2d'),{type:'bar',
-    data:{labels:labels,datasets:[{data:cumulative.map(v=>Math.round(v*10)/10),backgroundColor:cumulative.map((v,i)=>i===0?'#34d399':'#f87171'),borderRadius:4}]},
+    data:{labels:labels,datasets:[{data:cumulative.map(v=>Math.round(v*10)/10),backgroundColor:cumulative.map((v,i)=>i===0?'#30d158':'#ff453a'),borderRadius:4}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>{
       const i=it.dataIndex;
       return (i===0?'无冲击基准达标率 ':'累计达标率 ')+cumulative[i].toFixed(1)+'%'+(i>0?'（本档较上一档下降 '+marginal[i].toFixed(1)+' 个百分点）':'');
@@ -263,13 +264,13 @@ function drawRank(){
   dk('rank');
   charts.rank=new Chart(document.getElementById('rank2').getContext('2d'),{type:'bar',
     data:{labels:rows.map(r=>names[r.k]),datasets:[{data:rows.map(r=>r.drop),
-      backgroundColor:rows.map(r=>r.k==='commute'?'#f87171':r.k==='dragon'?'#fbbf24':'#3b82f6'),borderRadius:4}]},
+      backgroundColor:rows.map(r=>r.k==='commute'?'#ff453a':r.k==='dragon'?'#ff9500':'#0a84ff'),borderRadius:4}]},
     options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>'达标率下降约'+it.parsed.x.toFixed(1)+'个百分点'}}},
       scales:{x:{ticks:{color:tickColor,callback:v=>v+'%'},grid:{color:gridColor}},y:{ticks:{color:'#93a4bd',font:{size:12}},grid:{display:false}}}}});
   const cr=rows.findIndex(r=>r.k==='commute')+1, dr=rows.findIndex(r=>r.k==='dragon')+1;
   document.getElementById('rank2-note').textContent='通勤压力单独施加时排第'+cr+'，龙头扩产落空排第'+dr+'（按达标率下降幅度）。';
   document.getElementById('final').innerHTML=
-    '上半场四个常规压力，规划里都在盯着，这很对。<br>但把"龙头扩产落空"和"通勤压力"也放进来排序，结果有点反常识：<b style="color:#f87171">通勤压力排第'+cr+'</b>，<b style="color:#fbbf24">龙头扩产落空排第'+dr+'</b>。<br>'+
+    '上半场四个常规压力，规划里都在盯着，这很对。<br>但把"龙头扩产落空"和"通勤压力"也放进来排序，结果有点反常识：<b style="color:#ff453a">通勤压力排第'+cr+'</b>，<b style="color:#ff9500">龙头扩产落空排第'+dr+'</b>。<br>'+
     '龙头扩产落空当然疼，但集群还在；可通勤路一堵，是产业招工和城市消费两个轮子一起卡。<br>通勤在规划里叫"基础设施配套"，风洞却提示它更像传动轴。好消息是——改善通勤比招大项目便宜、见效快、自己可控；风险是一堵就双向失血。这是一个被低估、性价比很高的抓手。<br>'+
     '<span style="color:#6b7280;font-size:11px">注：达标率由 model.js 同一内核（基准 632.7 亿＝2025 惠城高新区规上工业产值、种子42、2万次）重跑；"基准"为六项压力全为0的无冲击基准。压力损失量为模型设定，非实测。</span>';
 }
@@ -281,11 +282,11 @@ try{drawRank();}catch(e){window.__rankErr=e.message;}
 </script>
 
 <div class="likebar">
-  <button onclick="likePage()">👍 <span id="pcount">0</span></button>
-  <button onclick="sharePage()">🔁 转给朋友</button>
+  <button onclick="likePage()"> <span id="pcount">0</span></button>
+  <button onclick="sharePage()"> 转给朋友</button>
 </div>
 <style>
-.likebar{position:relative;bottom:auto;left:auto;transform:none;display:flex;justify-content:center;margin:20px 0;background:rgba(15,23,42,.96);border:1px solid #3b82f6;border-radius:24px;padding:9px 20px;display:flex;gap:22px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.6)}
+.likebar{position:relative;bottom:auto;left:auto;transform:none;display:flex;justify-content:center;margin:20px 0;background:rgba(15,23,42,.96);border:1px solid #0a84ff;border-radius:24px;padding:9px 20px;display:flex;gap:22px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.6)}
 .likebar button{background:none;border:none;color:#e2e8f0;font-size:14px;cursor:pointer}
 .likebar button:active{transform:scale(1.15)}
 </style>
