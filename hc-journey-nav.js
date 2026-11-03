@@ -1,4 +1,4 @@
-/* 惠城产业风洞 · 10 页统一章节导航。仅处理导航 DOM，不调用模型或读取数据。 */
+/* 惠城产业风洞 · 全站统一章节导航。仅处理导航 DOM，不调用模型或读取数据。 */
 (function(){
   'use strict';
   var pages=[
@@ -12,7 +12,8 @@
     {url:'commute.html',label:'通勤案例',desc:'案例：通勤可能的影响'},
     {url:'blindspot.html',label:'忽略了什么',desc:'留意城市盲点'},
     {url:'report.html',label:'报告',desc:'整理观察结果'},
-    {url:'ending.html',label:'结语',desc:'回到人和城市'}
+    {url:'ending.html',label:'结语',desc:'回到人和城市'},
+    {url:'future-lab.html',label:'未来实验室',desc:'可交互多实验舱'}
   ];
   function mount(){
     if(document.getElementById('hcjn-root'))return;
@@ -20,9 +21,9 @@
     var current=pages.findIndex(function(p){return p.url===path;});
     if(current<0)return;
     var root=document.createElement('nav');
-    root.id='hcjn-root';root.className='hcjn-root';root.setAttribute('aria-label','惠城产业风洞 · 十页导航');
+    root.id='hcjn-root';root.className='hcjn-root';root.setAttribute('aria-label','惠城产业风洞 · 全站导航');
     var menu=document.createElement('div');menu.id='hcjn-menu';menu.className='hcjn-menu';menu.hidden=true;
-    var head=document.createElement('div');head.className='hcjn-menuhead';head.textContent='惠城产业风洞 · 十页体验路线';menu.appendChild(head);
+    var head=document.createElement('div');head.className='hcjn-menuhead';head.textContent='惠城产业风洞 · 体验路线';menu.appendChild(head);
     pages.forEach(function(p,i){
       var a=document.createElement('a');a.href=p.url;
       if(i===current)a.setAttribute('aria-current','page');
@@ -30,7 +31,7 @@
       var label=document.createElement('span');label.textContent=p.label;
       a.appendChild(num);a.appendChild(label);menu.appendChild(a);
     });
-    var foot=document.createElement('div');foot.className='hcjn-menufoot';foot.textContent='浏览顺序可自由跳转 · 全站仅保留十个正式入口';menu.appendChild(foot);
+    var foot=document.createElement('div');foot.className='hcjn-menufoot';foot.textContent='浏览顺序可自由跳转 · 各页之间自由切换';menu.appendChild(foot);
     var bar=document.createElement('div');bar.className='hcjn-bar';
     function step(i,word,symbol){
       var x=document.createElement('a');x.className='hcjn-step';
@@ -42,8 +43,8 @@
       x.appendChild(ico);x.appendChild(long);x.appendChild(short);return x;
     }
     bar.appendChild(step(current-1,'上一页','‹'));
-    var button=document.createElement('button');button.type='button';button.className='hcjn-toc';button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls','hcjn-menu');button.setAttribute('aria-label','打开十页目录，当前第'+(current+1)+'页：'+pages[current].label);
-    var count=document.createElement('span');count.className='hcjn-count';count.textContent=String(current+1).padStart(2,'0')+'/10';
+    var button=document.createElement('button');button.type='button';button.className='hcjn-toc';button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls','hcjn-menu');button.setAttribute('aria-label','打开目录，当前第'+(current+1)+'页：'+pages[current].label);
+    var count=document.createElement('span');count.className='hcjn-count';count.textContent=String(current+1).padStart(2,'0')+'/'+String(pages.length).padStart(2,'0');
     var name=document.createElement('span');name.textContent=pages[current].label;
     var arrow=document.createElement('span');arrow.setAttribute('aria-hidden','true');arrow.textContent='⌃';
     button.appendChild(count);button.appendChild(name);button.appendChild(arrow);
