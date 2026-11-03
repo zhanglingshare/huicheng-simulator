@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%230a84ff%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%226%22 fill=%22%23fff%22/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠城产业风洞 · 我们可能忽略了什么</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{
+  --sky1:#04060f; --sky2:#0a0f24; --sky3:#1e1b4b;
+  --glass:rgba(255,255,255,.06); --glass-b:rgba(255,255,255,.12);
+  --ink:#f1f5f9; --ink2:#cbd5e1; --muted:#94a3b8;
+  --neon:#38bdf8; --warm:#fbbf24; --ok:#34d399; --bad:#fb7185;
+  --orange:#f97316; --pink:#f472b6;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,#04060f 0%,#0a0f24 30%,#0b1226 100%);color:var(--ink);font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh}
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:10px 14px;background:rgba(6,10,24,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--glass-b);overflow-x:auto}
+.nav b{font-size:14px;margin-right:6px;flex:none;color:var(--ink)}
+.nav a{background:var(--glass);color:var(--muted);border:1px solid var(--glass-b);padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none;transition:.2s}
+.nav a.on{background:rgba(56,189,248,.22);border-color:var(--neon);color:var(--neon);font-weight:700}
+.wrap{max-width:780px;margin:auto;padding:20px 16px 40px}
+h1{font-size:22px;margin:0 0 4px;font-weight:800;letter-spacing:.3px}
+.sub{color:var(--muted);font-size:13px;margin:0 0 20px;line-height:1.7}
+.card{background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 4px 24px rgba(0,0,0,.25)}
+.card h2{font-size:14px;margin:0 0 12px;color:var(--ink);font-weight:700}
+.btn{background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:#fff;border:0;padding:12px 28px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 4px 16px rgba(59,130,246,.35)}
+.hint{font-size:11px;color:var(--muted);text-align:center;margin-top:10px;opacity:.8}
+.nodeL,.nodeR{cursor:pointer;transition:.2s}
+.nodeL:hover circle,.nodeR:hover circle{stroke-width:3.5}
+.tag{font-size:10px;fill:var(--muted)}
+.pop{background:rgba(10,15,36,.85);backdrop-filter:blur(12px);border:1px solid var(--glass-b);border-left:3px solid var(--warm);border-radius:12px;padding:14px 16px;font-size:13px;color:var(--ink2);display:none;line-height:1.8;margin-top:12px}
+.pop b{color:var(--warm)}
+.pop .src{display:block;margin-top:8px;font-size:10.5px;color:var(--muted);opacity:.75}
+.cursor{display:inline-block;width:2px;height:1.1em;background:var(--warm);margin-left:1px;vertical-align:text-bottom;animation:blink .8s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+svg{max-width:100%;height:auto;display:block}
+body{overflow-x:hidden}
+@media(max-width:560px){
+  .wrap{padding:16px 12px 32px}
+  .card{padding:14px;border-radius:14px}
+  h1{font-size:19px}
+  .chart-grid{grid-template-columns:1fr!important}
+}
+</style><link rel="stylesheet" href="hc-journey-nav.css">
+</head><body>
+
+
+
+<div class="wrap">
+  <h1>我们可能忽略了什么</h1>
+  <p class="sub">老百姓的日子，和决策者的目标，其实是同一批东西。点任意一条线，看背后的数字和来源。</p>
+
+  <!-- 打通连线图 -->
+  <div class="card">
+    <h2>左右是连着的</h2>
+    <svg viewBox="0 0 700 340" id="linkSvg">
+      <!-- 左列标题 -->
+      <text x="110" y="24" text-anchor="middle" font-size="12" fill="#f97316" font-weight="700">老百姓每天在意</text>
+      <text x="590" y="24" text-anchor="middle" font-size="12" fill="#3b82f6" font-weight="700">决策者这头盯着</text>
+
+      <!-- 连线（先画，后亮） -->
+      <g id="lines" stroke="#fbbf24" stroke-width="2" fill="none" stroke-dasharray="480" stroke-dashoffset="480">
+        <line x1="170" y1="70" x2="530" y2="70"/>
+        <line x1="170" y1="140" x2="530" y2="140"/>
+        <line x1="170" y1="210" x2="530" y2="210"/>
+        <line x1="170" y1="280" x2="530" y2="280"/>
+      </g>
+
+      <!-- 左列节点 -->
+      <g class="nodeL" onclick="showPop(0)">
+        <circle cx="110" cy="70" r="30" fill="#1a0e08" stroke="#f97316" stroke-width="2"/>
+        <text x="110" y="67" text-anchor="middle" font-size="11" fill="#f97316">过江通勤</text>
+        <text x="110" y="81" text-anchor="middle" font-size="9" fill="#8fa3bf">堵不堵</text>
+      </g>
+      <g class="nodeL" onclick="showPop(1)">
+        <circle cx="110" cy="140" r="30" fill="#1a0e08" stroke="#f97316" stroke-width="2"/>
+        <text x="110" y="137" text-anchor="middle" font-size="11" fill="#f97316">孩子学位</text>
+        <text x="110" y="151" text-anchor="middle" font-size="9" fill="#8fa3bf">有没有学上</text>
+      </g>
+      <g class="nodeL" onclick="showPop(2)">
+        <circle cx="110" cy="210" r="30" fill="#1a0e08" stroke="#f97316" stroke-width="2"/>
+        <text x="110" y="207" text-anchor="middle" font-size="11" fill="#f97316">楼下小店</text>
+        <text x="110" y="221" text-anchor="middle" font-size="9" fill="#8fa3bf">旺不旺</text>
+      </g>
+      <g class="nodeL" onclick="showPop(3)">
+        <circle cx="110" cy="280" r="30" fill="#1a0e08" stroke="#f97316" stroke-width="2"/>
+        <text x="110" y="277" text-anchor="middle" font-size="11" fill="#f97316">年轻人</text>
+        <text x="110" y="291" text-anchor="middle" font-size="9" fill="#8fa3bf">留不留得下</text>
+      </g>
+
+      <!-- 右列节点 -->
+      <g class="nodeR" onclick="showPop(0)">
+        <circle cx="590" cy="70" r="30" fill="#081018" stroke="#3b82f6" stroke-width="2"/>
+        <text x="590" y="67" text-anchor="middle" font-size="11" fill="#3b82f6">高新区招工</text>
+        <text x="590" y="81" text-anchor="middle" font-size="9" fill="#8fa3bf">632.7→1500(刻度)</text>
+      </g>
+      <g class="nodeR" onclick="showPop(1)">
+        <circle cx="590" cy="140" r="30" fill="#081018" stroke="#3b82f6" stroke-width="2"/>
+        <text x="590" y="137" text-anchor="middle" font-size="11" fill="#3b82f6">人口目标</text>
+        <text x="590" y="151" text-anchor="middle" font-size="9" fill="#8fa3bf">家庭留不留</text>
+      </g>
+      <g class="nodeR" onclick="showPop(2)">
+        <circle cx="590" cy="210" r="30" fill="#081018" stroke="#3b82f6" stroke-width="2"/>
+        <text x="590" y="207" text-anchor="middle" font-size="11" fill="#3b82f6">消费内循环</text>
+        <text x="590" y="221" text-anchor="middle" font-size="9" fill="#8fa3bf">805亿</text>
+      </g>
+      <g class="nodeR" onclick="showPop(3)">
+        <circle cx="590" cy="280" r="30" fill="#081018" stroke="#3b82f6" stroke-width="2"/>
+        <text x="590" y="277" text-anchor="middle" font-size="11" fill="#3b82f6">城市未来</text>
+        <text x="590" y="291" text-anchor="middle" font-size="9" fill="#8fa3bf">159.78万人</text>
+      </g>
+    </svg>
+    <div class="pop" id="pop"></div>
+    <div class="hint">线会一条条长出来。点圆圈看数字和来源。</div>
+  </div>
+
+  <!-- 冲击文字 -->
+  <div class="card" style="border-color:rgba(251,191,36,.35);background:linear-gradient(135deg,rgba(30,20,10,.55),rgba(15,20,40,.5))">
+    <div style="font-size:13px;line-height:2.1;color:var(--ink2)">
+      我们习惯为大项目、大数字、大平台激动——几十亿的投资、千亿的目标，写在最显眼的地方。<br>
+      但一座城真正的较量，藏在那些被叫做"配套""民生""小事"的地方：<b style="color:var(--orange)">一条每天要走的路、一个孩子的学位、一家楼下的小店、一个年轻人的去留。</b>
+    </div>
+    <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08);font-size:15px;font-weight:700;line-height:2;color:var(--ink)">
+      大项目能给一座城一个<span style="color:var(--neon)">高度</span>，<br>
+      但只有这些小地基，能决定它站不站得<span style="color:var(--neon)">稳</span>。
+    </div>
+    <div style="margin-top:12px;text-align:center;font-size:17px;font-weight:800;color:var(--warm);letter-spacing:1px">
+      结果，是地基长出来的。
+    </div>
+  </div>
+
+  <!-- 地基支撑图 -->
+  <div class="card">
+    <h2>大目标，是小地基撑着的</h2>
+    <svg viewBox="0 0 700 250">
+      <!-- 大目标 -->
+      <rect x="250" y="15" width="200" height="44" fill="#1d4ed8" opacity="0.85" rx="6"/>
+      <text x="350" y="43" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">高新区2030年1500亿（模型参考刻度）</text>
+
+      <!-- 四块地基 -->
+      <rect x="60" y="150" width="130" height="70" fill="#0a0f1a" stroke="#f97316" stroke-width="1.5" rx="6"/>
+      <text x="125" y="180" text-anchor="middle" font-size="12" fill="#f97316">通勤路</text>
+      <text x="125" y="198" text-anchor="middle" font-size="9" fill="#8fa3bf">过江通道</text>
+
+      <rect x="210" y="150" width="130" height="70" fill="#0a0f1a" stroke="#f97316" stroke-width="1.5" rx="6"/>
+      <text x="275" y="180" text-anchor="middle" font-size="12" fill="#f97316">学位</text>
+      <text x="275" y="198" text-anchor="middle" font-size="9" fill="#8fa3bf">十五五5万</text>
+
+      <rect x="360" y="150" width="130" height="70" fill="#0a0f1a" stroke="#f97316" stroke-width="1.5" rx="6"/>
+      <text x="425" y="180" text-anchor="middle" font-size="12" fill="#f97316">小店/消费</text>
+      <text x="425" y="198" text-anchor="middle" font-size="9" fill="#8fa3bf">805亿烟火气</text>
+
+      <rect x="510" y="150" width="130" height="70" fill="#0a0f1a" stroke="#f97316" stroke-width="1.5" rx="6"/>
+      <text x="575" y="180" text-anchor="middle" font-size="12" fill="#f97316">年轻人</text>
+      <text x="575" y="198" text-anchor="middle" font-size="9" fill="#8fa3bf">城市的奔头</text>
+
+      <!-- 支撑线 -->
+      <line x1="125" y1="150" x2="280" y2="59" stroke="#334155" stroke-width="1.5"/>
+      <line x1="275" y1="150" x2="330" y2="59" stroke="#334155" stroke-width="1.5"/>
+      <line x1="425" y1="150" x2="380" y2="59" stroke="#334155" stroke-width="1.5"/>
+      <line x1="575" y1="150" x2="420" y2="59" stroke="#334155" stroke-width="1.5"/>
+
+      <text x="350" y="240" text-anchor="middle" font-size="11" fill="#8fa3bf">抽掉任意一块，上面的大目标就会晃。</text>
+    </svg>
+  </div>
+
+  <!-- 佐证小图 -->
+  <div class="chart-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+    <div class="card" style="margin-bottom:0">
+      <h2>学位：供给在追需求（示意）</h2>
+      <div style="height:150px"><canvas id="eduChart"></canvas></div>
+    </div>
+    <div class="card" style="margin-bottom:0">
+      <h2>通勤压力随扩能上升（示意）</h2>
+      <div style="height:150px"><canvas id="commChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- 体感投票 -->
+  <div class="card" style="margin-top:12px">
+    <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:4px">️ 惠城人体感小调查</div>
+    <div style="font-size:12.5px;color:#94a3b8;margin-bottom:12px">你早上从家到单位，路上大概要多久？（本地累计，非全网统计）</div>
+    <div id="voteOpts" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+    <div id="voteResult" style="margin-top:12px;font-size:12.5px;color:#cbd5e1"></div>
+  </div>
+
+  <!-- 众包：最希望先办什么 -->
+  <div class="card" style="margin-top:12px">
+    <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:4px"> 惠城人最希望先把哪件事办好？</div>
+    <div style="font-size:12.5px;color:#94a3b8;margin-bottom:12px">这不是随便选——你选的，就是这座城最该先补的那块短板。（本地累计）</div>
+    <div id="wantOpts" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+    <div id="wantResult" style="margin-top:12px;font-size:12.5px;color:#cbd5e1"></div>
+  </div>
+
+  <!-- 收尾 -->
+  <div class="card" style="margin-top:16px;text-align:center;background:linear-gradient(180deg,rgba(56,189,248,.06),rgba(255,255,255,.03))">
+    <div style="font-size:14px;line-height:2.2;color:var(--ink2)">
+      看一个地方，别只抬头看它有多高。<br>
+      低头看看——走在里面的人，路顺不顺、孩子有没有学上、日子有没有奔头。<br><br>
+      大数字会被记住一时，<br>
+      但只有<b style="color:var(--warm)">人愿意把下一个五年留在这里</b>，这座城才有真正的未来。
+    </div>
+    <div style="margin-top:16px;font-size:18px;font-weight:800;color:var(--orange);letter-spacing:1px">
+      人对了，数字，自然会跟上。
+    </div>
+    <div style="font-size:11px;color:var(--muted);margin-top:16px;line-height:1.7;padding-top:14px;border-top:1px solid rgba(255,255,255,.08)">
+      数字均来自惠城区统计公报、政府工作报告、民生实事等公开渠道；只说"关联/连着"，不说"导致"。通勤流向缺真实OD数据，为D级假设。
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:20px 0"><a class="btn" href="index.html">回到首页</a></div>
+</div>
+
+<script>
+// 弹窗数据（加强版）
+const pops=[
+  '<b style="font-size:14px;display:block;margin-bottom:6px">通勤 ↔ 高新区招工</b>'+
+  '过江通道早晚高峰排队，已经在发生。多堵十分钟，迟到的是工人，受损的是企业。<br><br>'+
+  '高新区规上工业产值要从 632.7 亿走向模型参考刻度 1500 亿（非官方目标，官方公开目标为 2027 年破千亿），要的不是多一条路，是<b>人能不能每天按时站到岗位上</b>。通勤路上耽误的每一分钟，最后都会变成企业账上的成本、园区失去的产值。'+
+  '<span class="src">来源：直通车投诉、高新区公开信息；1500 为模型参考刻度</span>',
+  '<b style="font-size:14px;display:block;margin-bottom:6px">学位 ↔ 家庭留存</b>'+
+  '一个家庭决定留在哪座城，往往不是看工资单，是看孩子能不能进一所好学校。<br><br>'+
+  '十五五规划新增5万个公办学位、37所学校新建改扩建，追的正是这件事。<b>学位不只是教育问题，它是一座城能不能留住一个家庭的钥匙。</b>学位松一松，人就留一留。'+
+  '<span class="src">来源：2026民生实事</span>',
+  '<b style="font-size:14px;display:block;margin-bottom:6px">小店 ↔ 消费循环</b>'+
+  '楼下的早餐店、街角的五金铺、水东街的灯火——看着小，它们是一座城的烟火气，也是钱在本地转一圈的方式。<br><br>'+
+  '社消零805亿，近20家企业隔墙供应。<b>产业循环一旦转起来，工资在这发、消费在这花，钱才真正留在了这座城。</b>小店活，城市才活。'+
+  '<span class="src">来源：2025统计公报</span>',
+  '<b style="font-size:14px;display:block;margin-bottom:6px">年轻人 ↔ 城市未来</b>'+
+  '一座城最怕的，不是现在不够大，是年轻人用脚投票、一个个离开。<br><br>'+
+  '159.78万常住人口里，年轻人留不留，看的是有没有好岗位、好学校，更看这座城有没有奔头。<b>年轻人是一座城的未来时态——他们在哪，下一个十年就在哪。</b>'+
+  '<span class="src">来源：2025统计公报</span>'
+];
+let cur=-1;
+const allLines=document.querySelectorAll('#lines line');
+const leftNodes=document.querySelectorAll('.nodeL');
+const rightNodes=document.querySelectorAll('.nodeR');
+
+function clearHL(){
+  allLines.forEach(l=>{l.setAttribute('stroke-width','2');l.style.opacity='0.5';});
+  leftNodes.forEach(n=>n.querySelector('circle').setAttribute('stroke-width','2'));
+  rightNodes.forEach(n=>n.querySelector('circle').setAttribute('stroke-width','2'));
+}
+function showPop(i){
+  clearHL();
+  const el=document.getElementById('pop');
+  el.innerHTML=pops[i];el.style.display='block';cur=i;
+  // 高亮当前组
+  allLines[i].setAttribute('stroke-width','4');
+  allLines[i].style.opacity='1';
+  leftNodes[i].querySelector('circle').setAttribute('stroke-width','4');
+  rightNodes[i].querySelector('circle').setAttribute('stroke-width','4');
+}
+
+// 自动播放
+let autoIdx=0, timer=null, paused=false;
+function startAuto(){
+  stopAuto();
+  timer=setInterval(()=>{
+    if(!paused){showPop(autoIdx);autoIdx=(autoIdx+1)%4;}
+  },3200);
+}
+function stopAuto(){if(timer){clearInterval(timer);timer=null;}}
+
+// 线长完后开始自动播放
+window.addEventListener('load',function(){
+  allLines.forEach(l=>l.style.opacity='0.5');
+  const lines=allLines;
+  let done=0;
+  lines.forEach((l,i)=>{
+    setTimeout(()=>{
+      l.style.transition='stroke-dashoffset 1s ease';
+      l.style.strokeDashoffset='0';
+      done++;
+      if(done===lines.length){setTimeout(startAuto,600);}
+    },400+i*500);
+  });
+});
+
+// 用户交互：暂停/恢复
+function userTakesOver(){
+  paused=true;stopAuto();
+  setTimeout(()=>{paused=false;startAuto();},12000); // 12秒无操作恢复
+}
+[leftNodes,rightNodes].forEach(group=>group.forEach(n=>{
+  n.addEventListener('click',userTakesOver);
+}));
+
+// 学位图
+new Chart(document.getElementById('eduChart').getContext('2d'),{
+  type:'bar',
+  data:{labels:['现有','2026新增'],datasets:[
+    {label:'学位',data:[100,108],backgroundColor:'#3b82f6',borderRadius:3},
+    {label:'需求',data:[105,112],backgroundColor:'#f87171',borderRadius:3}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#93a4bd',font:{size:9}}}},
+    scales:{x:{ticks:{color:'#6b7280',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#6b7280',font:{size:9},display:false},grid:{color:'#1c2739'}}}}
+});
+
+// 通勤压力图
+new Chart(document.getElementById('commChart').getContext('2d'),{
+  type:'line',
+  data:{labels:['2025','2026','2027','2028','2030'],
+    datasets:[{label:'通勤压力',data:[40,48,55,62,72],borderColor:'#f97316',backgroundColor:'rgba(249,115,22,.15)',fill:true,tension:.3,pointRadius:2}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'园区扩能，通勤人数跟着涨',color:'#6b7280',font:{size:10}}},
+    scales:{x:{ticks:{color:'#6b7280',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#6b7280',font:{size:9}},grid:{color:'#1c2739'}}}}
+});
+</script>
+
+<div class="likebar">
+  <button onclick="likePage()"> <span id="pcount">0</span></button>
+  <button onclick="sharePage()"> 转给朋友</button>
+</div>
+<style>
+.likebar{position:relative;bottom:auto;left:auto;transform:none;display:flex;justify-content:center;margin:24px auto;background:rgba(15,23,42,.7);backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:24px;padding:10px 22px;gap:24px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.4);max-width:280px}
+.likebar button{background:none;border:none;color:var(--ink2);font-size:14px;cursor:pointer}
+.likebar button:active{transform:scale(1.15)}
+
+/* ===== 精致深色皮肤增强 ===== */
+body{position:relative;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(191,90,242,.07),transparent 35%),
+    radial-gradient(circle at 85% 75%,rgba(90,200,250,.06),transparent 40%),
+    radial-gradient(circle at 70% 15%,rgba(48,209,88,.04),transparent 30%)}
+.card, .box, .panel{
+  background:linear-gradient(160deg,rgba(40,52,76,.5),rgba(20,28,44,.45))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 4px 24px rgba(0,0,0,.25)!important;
+  backdrop-filter:blur(16px)!important}
+</style>
+<script>
+(function(){
+  var k="like_"+location.pathname;
+  var n=parseInt(localStorage.getItem(k)||"0");
+  document.getElementById("pcount").textContent=n;
+  window.likePage=function(){
+    n++;localStorage.setItem(k,n);
+    document.getElementById("pcount").textContent=n;
+  };
+  window.sharePage=function(){
+  var m=document.getElementById("shareModal");
+  if(!m){
+    m=document.createElement("div");
+    m.id="shareModal";
+    m.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px";
+    m.onclick=function(){m.remove();};
+    m.innerHTML='<div style="background:#0f172a;padding:20px;border-radius:14px;text-align:center" onclick="event.stopPropagation()"><div style="color:#fff;font-size:14px;margin-bottom:12px">截图二维码，发给朋友/群</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(location.href)+'" style="width:200px;height:200px;background:#fff;padding:8px;border-radius:8px"><div style="color:#94a3b8;font-size:12px;margin-top:12px">扫码打开</div></div>';
+    document.body.appendChild(m);
+  }
+  navigator.clipboard && navigator.clipboard.writeText(location.href);
+};
+})();
+</script>
+<!-- 百度统计：去 mtj.baidu.com 注册后替换 YOUR_ID -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?YOUR_ID";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+// 体感投票：本地累计
+(function(){
+  const KEY="vote_commute_v1";
+  const opts=[{k:"lt20",label:"20分钟以内",c:"#34d399"},{k:"mid",label:"20-40分钟",c:"#fbbf24"},{k:"gt40",label:"40分钟以上",c:"#f87171"}];
+  let data=JSON.parse(localStorage.getItem(KEY)||'{"lt20":0,"mid":0,"gt40":0}');
+  function render(voted){
+    const total=opts.reduce((s,o)=>s+data[o.k],0);
+    document.getElementById("voteOpts").innerHTML=opts.map(o=>{
+      const pct=total?Math.round(data[o.k]/total*100):0;
+      const dis=voted?'pointer-events:none':'';
+      return `<button onclick="vote('${o.k}')" style="${dis};flex:1;min-width:90px;background:${o.c}22;border:1px solid ${o.c};color:${o.c};border-radius:10px;padding:10px 8px;cursor:pointer;font-size:13px;font-weight:700">${o.label}</button>`;
+    }).join("");
+    if(total>0){
+      const my=opts.find(o=>data[o.k]>0);
+      document.getElementById("voteResult").innerHTML=`你这一票：早上通勤「<b style="color:${my.c}">${my.label}</b>」。<br>这是你本机的记录。你堵在路上的每一分钟，都和高新区能不能招到人有关。`;
+    }
+  }
+  window.vote=function(k){
+    if(localStorage.getItem(KEY+"_done"))return;
+    data[k]++;localStorage.setItem(KEY,JSON.stringify(data));localStorage.setItem(KEY+"_done","1");
+    render(true);
+  };
+  render(localStorage.getItem(KEY+"_done")?true:false);
+})();
+</script>
+<script>
+// 众包：最希望先办什么
+(function(){
+  const KEY="huicheng_want_v1";
+  const opts=[{k:"road",label:"️ 路更顺",c:"#f97316"},{k:"school",label:" 学校更多",c:"#3b82f6"},{k:"hosp",label:" 医院更近",c:"#34d399"},{k:"park",label:" 公园更多",c:"#a3e635"},{k:"night",label:" 夜市更热闹",c:"#fbbf24"}];
+  let d=JSON.parse(localStorage.getItem(KEY)||'{"road":0,"school":0,"hosp":0,"park":0,"night":0}');
+  function render(){
+    const total=opts.reduce((s,o)=>s+d[o.k],0);
+    const voted=localStorage.getItem(KEY+"_done");
+    document.getElementById("wantOpts").innerHTML=opts.map(o=>{
+      const pct=total?Math.round(d[o.k]/total*100):0;
+      const dis=voted?'pointer-events:none;opacity:.7':'';
+      return `<button onclick="want('${o.k}')" style="${dis};flex:1;min-width:80px;background:${o.c}22;border:1px solid ${o.c};color:${o.c};border-radius:10px;padding:10px 6px;cursor:pointer;font-size:12.5px;font-weight:700">${o.label}</button>`;
+    }).join("");
+    if(total>0){
+      const my=opts.find(o=>d[o.k]>0);
+      document.getElementById("wantResult").innerHTML=`你这一票投给了「<b style="color:${my.c}">${my.label}</b>」。<br>这是你本机的记录。你最想先办好的，就是值得这座城先补上的一块。`;
+    }
+  }
+  window.want=function(k){
+    if(localStorage.getItem(KEY+"_done"))return;
+    d[k]++;localStorage.setItem(KEY,JSON.stringify(d));localStorage.setItem(KEY+"_done","1");
+    render();
+  };
+  render();
+})();
+</script>
+<script src="hc-journey-nav.js" defer></script>
+</body></html>

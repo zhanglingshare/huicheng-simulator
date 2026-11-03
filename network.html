@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='slateblue'/><circle cx='16' cy='16' r='6' fill='none' stroke='white' stroke-width='2.5'/><circle cx='16' cy='16' r='2' fill='white'/></svg>">
+<title>惠城产业风洞 · 建构世界</title>
+<style>
+:root{
+  --sky1:#0b1026; --sky2:#1e1b4b; --sky3:#141a35;
+  --glass:rgba(255,255,255,.07); --glass-b:rgba(255,255,255,.14);
+  --ink:#f1f5f9; --ink2:#cbd5e1; --muted:#94a3b8;
+  --neon:#38bdf8; --warm:#fbbf24; --ok:#34d399; --bad:#fb7185; --pink:#f472b6;
+  --ind:#3b82f6; --spa:#9aa6b8; --hum:#f97316;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden}
+body{background:var(--sky1);color:var(--ink);font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased;position:relative}
+
+/* ===== 背景：俯瞰城市地基（蓝图网格） ===== */
+.scene{position:fixed;inset:0;z-index:0;background:
+  radial-gradient(ellipse at 50% 28%, #1a2148 0%, #0d1330 55%, #070a18 100%);}
+.scene::before{content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(148,163,184,.055) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(148,163,184,.055) 1px,transparent 1px);
+  background-size:38px 38px;
+  mask-image:radial-gradient(ellipse at 50% 40%,#000 30%,transparent 85%);}
+.scene::after{content:"";position:absolute;left:50%;top:42%;width:520px;height:520px;
+  transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(circle,rgba(56,189,248,.10),transparent 65%);pointer-events:none}
+
+/* ===== HUD ===== */
+.hud{position:relative;z-index:10;height:100vh;display:flex;flex-direction:column;padding:10px 12px;
+  width:100%;max-width:100vw;overflow-x:hidden}
+.top{display:flex;align-items:center;gap:10px;flex:none}
+.round{width:36px;height:36px;border-radius:10px;background:var(--glass);border:1px solid var(--glass-b);
+  display:flex;align-items:center;justify-content:center;color:var(--ink2);text-decoration:none;font-size:18px;flex:none}
+.ttl{flex:1;min-width:0}
+.ttl h1{font-size:16px;margin:0;font-weight:800;letter-spacing:.3px}
+.ttl span{font-size:11px;color:var(--muted);display:block;line-height:1.3}
+.lab-btn{background:var(--glass);border:1px solid var(--glass-b);color:var(--ink2);
+  padding:8px 14px;border-radius:10px;font-size:12.5px;font-weight:600;cursor:pointer;flex:none;white-space:nowrap}
+.lab-btn:hover{background:var(--glass-b);color:#fff}
+
+/* ===== 主区域 ===== */
+.main{flex:1;min-height:0;min-width:0;width:100%;max-width:100vw;overflow:hidden;display:flex;flex-direction:column;gap:8px;margin-top:9px}
+.filters{display:flex;gap:6px;flex:none;justify-content:center;flex-wrap:wrap}
+.f{background:var(--glass);border:1px solid var(--glass-b);color:var(--ink2);
+  padding:6px 13px;border-radius:18px;font-size:12px;font-weight:600;cursor:pointer;transition:.2s}
+.f:hover{color:#fff}
+.f.on{background:linear-gradient(135deg,#38bdf8,#6366f1);border-color:transparent;color:#fff;
+  box-shadow:0 0 14px rgba(56,189,248,.4)}
+.stage{flex:1;min-height:0;position:relative;border:1px solid var(--glass-b);border-radius:16px;
+  overflow:hidden;display:flex;
+  background:radial-gradient(ellipse at 50% 40%,rgba(20,28,60,.7),rgba(8,12,28,.55));
+  box-shadow:inset 0 0 60px rgba(2,6,16,.7)}
+.stage svg{width:100%;height:100%;display:block}
+.cap{position:absolute;left:50%;top:10px;transform:translateX(-50%);
+  background:rgba(8,12,28,.72);border:1px solid var(--glass-b);backdrop-filter:blur(8px);
+  padding:5px 16px;border-radius:20px;font-size:12px;font-weight:600;color:var(--ink2);
+  white-space:nowrap;max-width:92%;overflow:hidden;text-overflow:ellipsis}
+.legend{position:absolute;left:10px;bottom:8px;display:flex;gap:11px;font-size:10px;color:var(--muted);flex-wrap:wrap}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+
+/* ===== 解读卡：事实→现状→抛问题（不下定论） ===== */
+.readcard{flex:none;background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-b);
+  border-radius:12px;padding:8px 11px;display:flex;flex-direction:column;gap:4px;margin-top:8px;
+  width:100%;max-width:100%;overflow:hidden;box-sizing:border-box}
+.rc-row{font-size:11.5px;line-height:1.5;color:var(--ink2);margin-bottom:3px;overflow-wrap:anywhere;word-break:break-word}
+.rc-row:last-child{margin-bottom:0}
+.rc-tag{display:inline-block;font-style:normal;font-size:9.5px;font-weight:800;padding:1px 6px;border-radius:5px;letter-spacing:.5px;white-space:nowrap;margin-right:6px;vertical-align:1px}
+.rc-row.rc-q{color:var(--ink)}
+.rc-row.rc-q .rc-qtext{color:#fde68a;font-weight:600}
+
+/* ===== 底部时间轴控制 ===== */
+.controls{flex:none;background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-b);
+  border-radius:14px;padding:10px 12px;margin-top:9px}
+.timeline{display:flex;align-items:center;gap:10px}
+.cbtn{width:38px;height:38px;border-radius:50%;border:0;cursor:pointer;flex:none;
+  background:linear-gradient(135deg,#38bdf8,#6366f1);color:#fff;font-size:15px;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 0 14px rgba(56,189,248,.4)}
+.cbtn:active{transform:scale(.92)}
+.seek-wrap{flex:1;min-width:0}
+.seek{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:3px;
+  background:linear-gradient(90deg,var(--neon) 0%,var(--neon) var(--p,0%),rgba(148,163,184,.2) var(--p,0%));
+  outline:none;cursor:pointer}
+.seek::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;
+  background:#fff;box-shadow:0 0 10px var(--neon);cursor:pointer;border:2px solid var(--neon)}
+.seek::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid var(--neon)}
+.ticks{display:flex;justify-content:space-between;margin-top:5px;font-size:9px;color:var(--muted);padding:0 2px}
+.spd{width:46px;height:38px;border-radius:10px;background:var(--glass);border:1px solid var(--glass-b);
+  color:var(--ink2);font-size:12px;font-weight:700;cursor:pointer;flex:none}
+.spd:hover{color:#fff}
+.stepnav{display:flex;gap:8px;margin-top:8px}
+.stepnav a{flex:1;text-align:center;padding:8px;border-radius:9px;text-decoration:none;font-size:12px;font-weight:600;
+  background:var(--glass);border:1px solid var(--glass-b);color:var(--ink2)}
+.stepnav a.primary{background:linear-gradient(135deg,#38bdf8,#6366f1);border-color:transparent;color:#fff}
+
+/* ===== 节点与边 ===== */
+.gnode{opacity:0;transform-box:fill-box;transform-origin:center;cursor:pointer}
+.gnode.show{opacity:1;animation:grow .6s cubic-bezier(.2,1.2,.4,1)}
+@keyframes grow{0%{opacity:0;transform:scale(0)}60%{transform:scale(1.18)}100%{opacity:1;transform:scale(1)}}
+.gnode .core{transition:opacity .4s,r .4s}
+.gnode .lbl{pointer-events:none;user-select:none}
+.eline{opacity:0;transition:opacity .5s}
+.eline.show{opacity:1}
+.eline.hot{stroke-dasharray:7 7;animation:flow 1.1s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-28}}
+.gnode .ring{opacity:0;transform-box:fill-box;transform-origin:center}
+.gnode.pulse .ring{opacity:1;animation:ringp 1.6s ease-out infinite}
+@keyframes ringp{0%{transform:scale(.85);opacity:.8}100%{transform:scale(1.5);opacity:0}}
+
+/* ===== 抽屉（实验室） ===== */
+.mask{position:fixed;inset:0;background:rgba(2,6,16,.62);z-index:40;opacity:0;pointer-events:none;transition:.3s}
+.mask.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;left:8px;right:8px;bottom:0;z-index:41;
+  background:linear-gradient(180deg,#141a38,#0b1026);border:1px solid var(--glass-b);border-bottom:0;
+  border-radius:18px 18px 0 0;max-height:82vh;transform:translateY(102%);transition:transform .35s cubic-bezier(.2,.8,.3,1);
+  padding:14px 16px 22px;overflow-y:auto}
+.drawer.open{transform:translateY(0)}
+.drag-bar{width:40px;height:4px;border-radius:2px;background:var(--glass-b);margin:0 auto 12px}
+.dh{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.dh b{font-size:15px;font-weight:800}
+.dx{background:var(--glass);border:1px solid var(--glass-b);color:var(--ink2);width:30px;height:30px;
+  border-radius:8px;cursor:pointer;font-size:15px}
+.dsec{background:var(--glass);border:1px solid var(--glass-b);border-radius:12px;padding:12px;margin-bottom:11px}
+.dsec h3{margin:0 0 9px;font-size:12.5px;color:var(--muted);font-weight:700;display:flex;align-items:center;gap:6px}
+.dtabs{display:flex;gap:6px;margin-bottom:10px}
+.dtab{flex:1;background:var(--glass);border:1px solid var(--glass-b);color:var(--ink2);padding:6px;border-radius:8px;
+  font-size:11px;font-weight:600;cursor:pointer}
+.dtab.on{background:linear-gradient(135deg,#38bdf8,#6366f1);border-color:transparent;color:#fff}
+.rank-row{display:flex;align-items:center;gap:7px;margin-bottom:5px;font-size:11.5px}
+.rank-row .nm{width:78px;flex:none;color:var(--ink2);text-align:right;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rank-row .bg{flex:1;height:12px;background:rgba(2,6,16,.5);border-radius:3px;overflow:hidden}
+.rank-row .bar{height:100%;border-radius:3px}
+.rank-row .vl{width:52px;flex:none;font-size:10.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.blood-tag{display:inline-block;font-size:9px;padding:1px 5px;border-radius:3px;font-weight:700;margin-right:5px}
+.blood-A{background:#14532d;color:#86efac}.blood-B{background:#1e3a5f;color:#93c5fd}
+.blood-C{background:#4a3a12;color:#fcd34d}.blood-D{background:#4a1a1a;color:#fca5a5}
+.dbtn{background:var(--glass);border:1px solid var(--glass-b);color:var(--ink2);padding:8px 12px;
+  border-radius:9px;font-size:11.5px;font-weight:600;cursor:pointer;flex:1}
+.dbtn:hover{color:#fff}
+.dbtn-row{display:flex;gap:8px}
+.note-plain{font-size:12px;line-height:1.85;color:var(--ink2);margin:0}
+.note-plain b{color:var(--warm)}
+.dtip{font-size:10.5px;color:var(--muted);line-height:1.7;margin-top:6px}
+
+/* ===== 响应式 ===== */
+@media(max-width:600px){
+  .hud{padding:8px 10px}
+  .ttl h1{font-size:15px}
+  .ttl span{font-size:10.5px}
+  .lab-btn{padding:7px 11px;font-size:11.5px}
+  .f{padding:5px 10px;font-size:11px}
+  .legend{display:none}
+  .stepnav a{font-size:11px;padding:7px}
+  .readcard{padding:6px 9px;gap:3px;margin-top:6px}
+  .rc-row{font-size:10.5px;line-height:1.4}
+  .rc-tag{font-size:9px}
+}
+@media(max-height:620px){
+  .ttl span{display:none}
+  .filters{margin-top:0}
+}
+
+/* ===== 电脑端大屏优化：图占满主空间，解读卡浮层化 ===== */
+@media(min-width:1024px){
+  .hud{padding:14px 20px}
+  .top{margin-bottom:4px}
+  .ttl h1{font-size:18px}
+  .ttl span{font-size:12px}
+  .main{margin-top:10px;gap:10px}
+  .filters .f{padding:8px 18px;font-size:13px;border-radius:20px}
+  .stage{border-radius:20px;box-shadow:inset 0 0 80px rgba(2,6,16,.7),0 0 0 1px rgba(56,189,248,.06)}
+  /* 解读卡浮在 stage 左下角，不占独立行 */
+  .readcard{
+    position:absolute;left:20px;bottom:148px;max-width:400px;z-index:5;
+    margin-top:0;padding:12px 14px;border-radius:14px;
+    background:rgba(10,16,36,.82);backdrop-filter:blur(16px);
+    box-shadow:0 8px 32px rgba(0,0,0,.45);
+  }
+  .rc-row{font-size:12px;line-height:1.6}
+  /* 时间轴压缩高度 */
+  .controls{padding:10px 16px;margin-top:10px;border-radius:14px}
+  .stepnav{margin-top:6px}
+  .stepnav a{padding:7px 12px;font-size:12px}
+  .legend{font-size:11px;bottom:12px;left:14px}
+  .cap{font-size:13px;padding:6px 20px}
+}
+@media(min-width:1400px){
+  .readcard{max-width:440px;padding:14px 16px;bottom:140px}
+  .rc-row{font-size:12.5px;line-height:1.7}
+}
+</style></head>
+<body>
+
+<div class="scene"></div>
+
+<div class="hud">
+  <!-- 顶部 -->
+  <div class="top">
+    <a class="round" href="index.html" aria-label="返回沙盘">←</a>
+    <div class="ttl">
+      <h1>建构世界</h1>
+      <span>拖动时间轴，看惠城怎么一点点长起来</span>
+    </div>
+    <button class="lab-btn" onclick="openLab()">实验室</button>
+  </div>
+
+  <!-- 主区域 -->
+  <div class="main">
+    <div class="filters">
+      <button class="f on" data-layer="city">城市</button>
+      <button class="f" data-layer="degree">谁连得最多</button>
+      <button class="f" data-layer="between">必经之路</button>
+      <button class="f" data-layer="close">城市中心</button>
+    </div>
+    <div class="stage">
+      <svg id="net" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet">
+        <g id="edges"></g>
+        <g id="nodes"></g>
+      </svg>
+      <div class="cap" id="cap">点播放，看城市长出来</div>
+      <div class="legend">
+        <span><i class="dot" style="background:var(--ind)"></i>产业</span>
+        <span><i class="dot" style="background:var(--spa)"></i>空间</span>
+        <span><i class="dot" style="background:var(--hum)"></i>人</span>
+        <span style="color:var(--hum)">— 通勤走廊</span>
+      </div>
+    </div>
+  </div>
+  <div class="readcard" id="readCard">
+    <div class="rc-row"><i class="rc-tag" style="background:rgba(249,115,22,.22);color:#fbbf24">跟你</i><span id="rcYou"></span></div>
+    <div class="rc-row"><i class="rc-tag" style="background:rgba(56,189,248,.18);color:#38bdf8">现状</i><span id="rcNow"></span></div>
+    <div class="rc-row rc-q"><i class="rc-tag" style="background:rgba(251,113,133,.18);color:#fb7185">抛给你</i><span class="rc-qtext" id="rcQ"></span></div>
+  </div>
+
+  <!-- 底部时间轴 -->
+  <div class="controls">
+    <div class="timeline">
+      <button class="cbtn" id="playBtn" aria-label="播放">▶</button>
+      <div class="seek-wrap">
+        <input class="seek" id="seek" type="range" min="0" max="1000" value="0" aria-label="生长进度">
+        <div class="ticks">
+          <span>地基</span><span>产业</span><span>空间</span><span>人</span><span>现在</span>
+        </div>
+      </div>
+      <button class="spd" id="spdBtn">1x</button>
+    </div>
+    <div class="stepnav">
+      <a href="index.html">返回沙盘</a>
+      <a class="primary" href="who.html">下一步：掂量 →</a>
+    </div>
+  </div>
+</div>
+
+<!-- 实验室抽屉 -->
+<div class="mask" id="mask" onclick="closeLab()"></div>
+<aside class="drawer" id="drawer" aria-label="实验室">
+  <div class="drag-bar"></div>
+  <div class="dh"><b>实验室</b><button class="dx" onclick="closeLab()">×</button></div>
+
+  <div class="dsec">
+    <h3>三把尺子 · 谁最重要</h3>
+    <div class="dtabs">
+      <button class="dtab on" data-rank="degree">连接数</button>
+      <button class="dtab" data-rank="between">必经之路</button>
+      <button class="dtab" data-rank="close">到哪都近</button>
+    </div>
+    <div id="rankList"></div>
+    <div class="dtip" id="rankTip"></div>
+  </div>
+
+  <div class="dsec">
+    <h3>关系的数据血统</h3>
+    <div class="note-plain" style="line-height:2">
+      <span class="blood-tag blood-A">A</span>公开资料直接给出<br>
+      <span class="blood-tag blood-B">B</span>据公开主体与产业逻辑可推断<br>
+      <span class="blood-tag blood-C">C</span>合理推断但缺直接证据<br>
+      <span class="blood-tag blood-D">D</span>无公开数据，属模型假设
+    </div>
+    <div class="dtip" id="bloodStat"></div>
+  </div>
+
+  <div class="dsec">
+    <h3>导出数据</h3>
+    <div class="dbtn-row">
+      <button class="dbtn" id="exEdges">导出关系 edges.csv</button>
+      <button class="dbtn" id="exNodes">导出节点 nodes.csv</button>
+    </div>
+  </div>
+
+  <div class="dsec">
+    <h3>这张图想说什么</h3>
+    <p class="note-plain">26个主体，理论上最多能有325对关系，实际只连了37条可佐证主边，密度约<b>11.4%</b>。我们总盯着谁最大、谁最有名，却容易忽略：真正让整座城转起来的，可能是那些不起眼、却卡在咽喉上的连接。<b>节点大不大，不决定命门；它卡在什么位置，才决定。</b></p>
+  </div>
+</aside>
+
+<script>
+// ===== 26节点：产业12 / 空间8 / 人6；t=生长时刻（0-1） =====
+const NODES=[
+  // 地基（老城）
+  {n:"江北CBD",x:220,y:320,r:21,c:"#9aa6b8",layer:"空间",t:0.05},
+  {n:"桥西老城",x:180,y:480,r:13,c:"#9aa6b8",layer:"空间",t:0.08},
+  {n:"东江湾",x:880,y:400,r:24,c:"#9aa6b8",layer:"空间",t:0.11},
+  {n:"水口老城",x:760,y:540,r:13,c:"#9aa6b8",layer:"空间",t:0.14},
+  // 产业落地
+  {n:"高新区",x:860,y:340,r:23,c:"#3b82f6",layer:"产业",t:0.20},
+  {n:"生产性服务业",x:260,y:420,r:15,c:"#3b82f6",layer:"产业",t:0.24},
+  {n:"产业基金",x:360,y:200,r:11,c:"#3b82f6",layer:"产业",t:0.26},
+  {n:"利元亨",x:1050,y:270,r:14,c:"#3b82f6",layer:"产业",t:0.28},
+  {n:"智能装备",x:1080,y:420,r:13,c:"#3b82f6",layer:"产业",t:0.30},
+  {n:"电子信息",x:1120,y:340,r:13,c:"#3b82f6",layer:"产业",t:0.32},
+  {n:"新能源新材料",x:980,y:500,r:13,c:"#3b82f6",layer:"产业",t:0.34},
+  {n:"智能家电",x:820,y:500,r:12,c:"#3b82f6",layer:"产业",t:0.36},
+  {n:"AI机器人",x:1020,y:180,r:12,c:"#3b82f6",layer:"产业",t:0.38},
+  {n:"雷士光电",x:1000,y:570,r:11,c:"#3b82f6",layer:"产业",t:0.40},
+  {n:"先进科技",x:1150,y:420,r:10,c:"#3b82f6",layer:"产业",t:0.42},
+  {n:"天宝创能",x:1130,y:520,r:10,c:"#3b82f6",layer:"产业",t:0.44},
+  // 空间展开
+  {n:"过江通道",x:560,y:370,r:14,c:"#d1d5db",layer:"空间",t:0.50},
+  {n:"小金口枢纽",x:560,y:130,r:12,c:"#9aa6b8",layer:"空间",t:0.54},
+  {n:"三栋南部",x:880,y:600,r:12,c:"#9aa6b8",layer:"空间",t:0.58},
+  {n:"马安北部",x:1020,y:110,r:12,c:"#9aa6b8",layer:"空间",t:0.62},
+  // 人走进来
+  {n:"蓝领工人",x:800,y:620,r:12,c:"#f97316",layer:"人",t:0.68},
+  {n:"工程师",x:800,y:220,r:11,c:"#f97316",layer:"人",t:0.71},
+  {n:"江北白领",x:160,y:250,r:11,c:"#f97316",layer:"人",t:0.74},
+  {n:"青年新市民",x:440,y:420,r:10,c:"#f97316",layer:"人",t:0.77},
+  {n:"跨城通勤",x:660,y:90,r:10,c:"#f97316",layer:"人",t:0.80},
+  {n:"学龄家庭",x:140,y:560,r:11,c:"#f97316",layer:"人",t:0.83}
+];
+const byName={};NODES.forEach(n=>byName[n.n]=n);
+
+// ===== 37条边：type=link/commute；weight；blood=血统 =====
+const EDGES=[
+  {from:"利元亨",to:"智能装备",type:"link",weight:1.0,blood:"B"},
+  {from:"雷士光电",to:"智能家电",type:"link",weight:1.0,blood:"B"},
+  {from:"先进科技",to:"电子信息",type:"link",weight:1.0,blood:"B"},
+  {from:"天宝创能",to:"新能源新材料",type:"link",weight:1.0,blood:"B"},
+  {from:"智能装备",to:"高新区",type:"link",weight:1.2,blood:"B"},
+  {from:"电子信息",to:"高新区",type:"link",weight:1.2,blood:"B"},
+  {from:"新能源新材料",to:"高新区",type:"link",weight:1.2,blood:"B"},
+  {from:"智能家电",to:"高新区",type:"link",weight:1.0,blood:"B"},
+  {from:"AI机器人",to:"高新区",type:"link",weight:0.8,blood:"C"},
+  {from:"利元亨",to:"东江湾",type:"link",weight:1.0,blood:"B"},
+  {from:"电子信息",to:"东江湾",type:"link",weight:1.0,blood:"B"},
+  {from:"智能装备",to:"东江湾",type:"link",weight:1.0,blood:"B"},
+  {from:"新能源新材料",to:"东江湾",type:"link",weight:1.0,blood:"B"},
+  {from:"先进科技",to:"东江湾",type:"link",weight:1.0,blood:"B"},
+  {from:"高新区",to:"东江湾",type:"link",weight:1.5,blood:"A"},
+  {from:"生产性服务业",to:"高新区",type:"link",weight:0.8,blood:"C"},
+  {from:"生产性服务业",to:"江北CBD",type:"link",weight:1.0,blood:"B"},
+  {from:"产业基金",to:"高新区",type:"link",weight:0.8,blood:"C"},
+  {from:"产业基金",to:"江北CBD",type:"link",weight:0.8,blood:"C"},
+  {from:"小金口枢纽",to:"高新区",type:"link",weight:0.7,blood:"C"},
+  {from:"雷士光电",to:"东江湾",type:"link",weight:1.0,blood:"B"},
+  {from:"智能家电",to:"水口老城",type:"link",weight:0.6,blood:"C"},
+  {from:"过江通道",to:"东江湾",type:"commute",weight:1.5,blood:"C"},
+  {from:"过江通道",to:"江北CBD",type:"commute",weight:1.5,blood:"C"},
+  {from:"东江湾",to:"水口老城",type:"commute",weight:1.0,blood:"C"},
+  {from:"江北CBD",to:"三栋南部",type:"commute",weight:0.8,blood:"C"},
+  {from:"小金口枢纽",to:"跨城通勤",type:"commute",weight:0.6,blood:"D"},
+  {from:"马安北部",to:"东江湾",type:"commute",weight:0.8,blood:"C"},
+  {from:"桥西老城",to:"江北CBD",type:"commute",weight:1.0,blood:"C"},
+  {from:"蓝领工人",to:"高新区",type:"commute",weight:1.2,blood:"C"},
+  {from:"蓝领工人",to:"东江湾",type:"commute",weight:1.2,blood:"C"},
+  {from:"蓝领工人",to:"水口老城",type:"commute",weight:1.0,blood:"C"},
+  {from:"江北白领",to:"生产性服务业",type:"commute",weight:1.0,blood:"C"},
+  {from:"江北白领",to:"江北CBD",type:"commute",weight:1.2,blood:"C"},
+  {from:"工程师",to:"高新区",type:"commute",weight:1.0,blood:"C"},
+  {from:"青年新市民",to:"高新区",type:"commute",weight:0.8,blood:"C"},
+  {from:"学龄家庭",to:"桥西老城",type:"commute",weight:0.8,blood:"C"}
+];
+EDGES.forEach((e,i)=>{e.t=0.86+i*0.12/EDGES.length;});
+
+// ===== 中心性计算 =====
+function buildAdj(){
+  const adj={};
+  NODES.forEach(n=>adj[n.n]=[]);
+  EDGES.forEach(e=>{
+    adj[e.from].push(e.to);adj[e.to].push(e.from);
+  });
+  return adj;
+}
+function calcDegree(){
+  const d={};NODES.forEach(n=>d[n.n]=0);
+  EDGES.forEach(e=>{d[e.from]++;d[e.to]++;});
+  return d;
+}
+function calcBetweenness(){
+  const adj=buildAdj();const cb={};
+  NODES.forEach(n=>cb[n.n]=0);
+  NODES.forEach(s=>{
+    const S=[];const P={};const sigma={};const dist={};
+    NODES.forEach(n=>{P[n.n]=[];sigma[n.n]=0;dist[n.n]=-1;});
+    sigma[s.n]=1;dist[s.n]=0;const Q=[s.n];
+    while(Q.length){
+      const v=Q.shift();S.push(v);
+      adj[v].forEach(w=>{
+        if(dist[w]<0){dist[w]=dist[v]+1;Q.push(w);}
+        if(dist[w]===dist[v]+1){sigma[w]+=sigma[v];P[w].push(v);}
+      });
+    }
+    const delta={};NODES.forEach(n=>delta[n.n]=0);
+    while(S.length){
+      const w=S.pop();
+      P[w].forEach(v=>{delta[v]+=(sigma[v]/sigma[w])*(1+delta[w]);});
+      if(w!==s.n)cb[w]+=delta[w];
+    }
+  });
+  NODES.forEach(n=>cb[n.n]/=2);
+  return cb;
+}
+function calcCloseness(){
+  const adj=buildAdj();const cc={};
+  NODES.forEach(s=>{
+    const dist={};NODES.forEach(n=>dist[n.n]=-1);
+    dist[s.n]=0;const Q=[s.n];
+    while(Q.length){
+      const v=Q.shift();
+      adj[v].forEach(w=>{if(dist[w]<0){dist[w]=dist[v]+1;Q.push(w);}});
+    }
+    let sum=0,count=0;
+    NODES.forEach(n=>{if(dist[n.n]>0){sum+=dist[n.n];count++;}});
+    cc[s.n]=(count>0&&sum>0)?(count/sum):0;
+  });
+  return cc;
+}
+const degVals=calcDegree(), betVals=calcBetweenness(), cloVals=calcCloseness();
+const bloodCount={A:0,B:0,C:0,D:0};
+EDGES.forEach(e=>bloodCount[e.blood]++);
+
+// ===== 初始化 DOM =====
+const SVGNS="http://www.w3.org/2000/svg";
+const nodesG=document.getElementById("nodes"), edgesG=document.getElementById("edges");
+const nodeEls=[], edgeEls=[];
+
+NODES.forEach(nd=>{
+  const g=document.createElementNS(SVGNS,"g");
+  g.setAttribute("class","gnode");
+  g.style.color=nd.c;
+  const big=nd.r>=18;
+  const lbl=big
+    ? `<text class="lbl" x="${nd.x}" y="${nd.y+5}" text-anchor="middle" font-size="${nd.r>=22?13:11}" font-weight="700" fill="#0b1018">${nd.n}</text>`
+    : `<text class="lbl" x="${nd.x}" y="${nd.y+nd.r+14}" text-anchor="middle" font-size="10.5" font-weight="600" fill="#c7d2e0">${nd.n}</text>`;
+  g.innerHTML=
+    `<circle class="ring" cx="${nd.x}" cy="${nd.y}" r="${nd.r+5}" fill="none" stroke="${nd.c}" stroke-width="1.5"/>
+     <circle class="core" cx="${nd.x}" cy="${nd.y}" r="${nd.r}" fill="${nd.c}" opacity="0.92"/>${lbl}`;
+  nodesG.appendChild(g);
+  nodeEls.push(g);
+});
+
+EDGES.forEach(e=>{
+  const A=byName[e.from],B=byName[e.to];
+  const isC=e.type==="commute";
+  const main=(e.from==="过江通道"||e.to==="过江通道");
+  const line=document.createElementNS(SVGNS,"line");
+  line.setAttribute("x1",A.x);line.setAttribute("y1",A.y);
+  line.setAttribute("x2",B.x);line.setAttribute("y2",B.y);
+  line.setAttribute("stroke",isC?"#f97316":"#5b6b86");
+  line.setAttribute("stroke-width",main?4.5:(isC?1.6:1.3));
+  line.setAttribute("stroke-linecap","round");
+  line.setAttribute("class","eline"+(main?" hot":""));
+  line.setAttribute("data-def",main?"1":"0");
+  line.style.opacity=main?0.95:(isC?0.7:0.4);
+  edgesG.appendChild(line);
+  edgeEls.push(line);
+});
+
+// ===== 时间轴进度 =====
+const seek=document.getElementById("seek"), cap=document.getElementById("cap");
+let progress=0, playing=false, speed=1, raf=0, lastT=0;
+
+function updateCap(p){
+  let txt;
+  if(p<0.02)txt="点播放，看城市长出来";
+  else if(p<0.18)txt="先有老城和地基";
+  else if(p<0.48)txt="产业落地，一栋栋建起来";
+  else if(p<0.66)txt="空间展开，桥和枢纽通了";
+  else if(p<0.86)txt="人走进来";
+  else if(p<1)txt="关系连起来，城市成型";
+  else txt="建构完成 · 26主体 / 37关系";
+  cap.textContent=txt;
+}
+// ===== 解读卡：每段 事实(跟你)→现状(数据)→抛问题(不下定论) =====
+const READS=[
+  {max:0.18,you:"你熟悉的桥东、桥西老城是根，江北CBD是后来从江边长出来的。",
+   now:"最先出现的4个空间主体——老城和江北CBD，是整座城的地基。",
+   q:"如果重来，你会先把钱投给老城更新，还是先把江北垫出来？"},
+  {max:0.48,you:"你的饭碗（或父母的）多半挂在东边那团蓝色里——利元亨、雷士光电、AI机器人。",
+   now:"12个产业主体几乎全挤在高新区，西边江北只有一个生产性服务业。",
+   q:"产业全压一头，你觉得是“聚得好”，还是“东边太重”？"},
+  {max:0.66,you:"过江通道、小金口枢纽、三栋南部——你每天上下班走的就是这些路。",
+   now:"4个空间节点长出来，把老城、高新区、枢纽缝在一起；过江通道到江北CBD和东江湾的连线最粗。",
+   q:"城要继续往外长，下一座桥或枢纽，你会放在哪？"},
+  {max:0.86,you:"你是这6种人之一——蓝领、工程师、江北白领、青年新市民、跨城通勤、学龄家庭。",
+   now:"人最后才到，而且各去各的：蓝领往高新区/水口，工程师往东，家庭住桥西老城。",
+   q:"青年新市民来了，可它直接连着的只有高新区——它住哪、玩在哪，图上有答案吗？"},
+  {max:1.01,you:"你大概率在三条线里：在江北上班、在东江湾住、每天走过那条橙色过江通道。",
+   now:"26个主体、37条关系，三核成形；产业最密的高新区与居住的东江湾，只靠一条通道相连。",
+   q:"下一个五年，你押哪边——再修一条过江通道，还是先让高新区自己长出学校和夜市？"}
+];
+function updateRead(p){
+  let r=READS[0];
+  for(const x of READS){ if(p<=x.max){ r=x; break; } }
+  document.getElementById("rcYou").textContent=r.you;
+  document.getElementById("rcNow").textContent=r.now;
+  document.getElementById("rcQ").textContent=r.q;
+}
+function setProgress(p){
+  progress=p;
+  NODES.forEach((nd,i)=>{
+    nodeEls[i].classList.toggle("show",nd.t<=p);
+  });
+  EDGES.forEach((e,i)=>{
+    edgeEls[i].classList.toggle("show",e.t<=p);
+  });
+  seek.value=Math.round(p*1000);
+  seek.style.setProperty("--p",(p*100)+"%");
+  updateCap(p);
+  updateRead(p);
+}
+function tick(ts){
+  if(!playing)return;
+  if(!lastT)lastT=ts;
+  const dt=(ts-lastT)/1000;lastT=ts;
+  let p=progress+dt*0.12*speed;
+  if(p>=1){setProgress(1);pause();setPlayIcon();}
+  else setProgress(p);
+  if(playing)raf=requestAnimationFrame(tick);
+}
+function play(){
+  playing=true;lastT=0;
+  raf=requestAnimationFrame(tick);
+  document.getElementById("playBtn").textContent="❚❚";
+}
+function pause(){
+  playing=false;
+  if(raf)cancelAnimationFrame(raf);
+  document.getElementById("playBtn").textContent="▶";
+}
+function setPlayIcon(){document.getElementById("playBtn").textContent="▶";}
+document.getElementById("playBtn").onclick=function(){
+  if(playing){pause();}
+  else{
+    if(progress>=1)setProgress(0);
+    play();
+  }
+};
+seek.addEventListener("input",function(){
+  pause();setProgress(seek.value/1000);
+});
+const speeds=[0.5,1,2,4];let si=1;
+document.getElementById("spdBtn").onclick=function(){
+  si=(si+1)%speeds.length;speed=speeds[si];
+  this.textContent=speeds[si]+"x";
+};
+setProgress(0);
+
+// ===== 信息图层滤镜 =====
+let currentLayer="city", focusName=null;
+function setFocus(name){
+  focusName=(focusName===name)?null:name;
+  renderFocus();
+}
+function renderFocus(){
+  if(!focusName){applyLayer(currentLayer);updateCap(progress);return;}
+  const neighbors=new Set([focusName]);
+  EDGES.forEach(function(e){
+    if(e.from===focusName)neighbors.add(e.to);
+    if(e.to===focusName)neighbors.add(e.from);
+  });
+  NODES.forEach(function(nd,i){
+    const core=nodeEls[i].querySelector(".core");
+    const lbl=nodeEls[i].querySelector(".lbl");
+    const on=neighbors.has(nd.n);
+    core.setAttribute("opacity",on?1:0.08);
+    lbl.style.opacity=on?1:0.1;
+  });
+  EDGES.forEach(function(e,i){
+    const touch=(e.from===focusName||e.to===focusName);
+    edgeEls[i].style.opacity=touch?0.95:0.05;
+  });
+  cap.textContent=focusName+" · 直接连着 "+degVals[focusName]+" 个主体";
+}
+function normOne(vals,name){
+  const arr=NODES.map(n=>vals[n.n]);
+  const max=Math.max.apply(null,arr), min=Math.min.apply(null,arr);
+  if(max===min)return 0.5;
+  return (vals[name]-min)/(max-min);
+}
+function applyLayer(layer){
+  currentLayer=layer;focusName=null;
+  NODES.forEach((nd,i)=>{
+    const g=nodeEls[i];
+    const core=g.querySelector(".core");
+    const lbl=g.querySelector(".lbl");
+    g.classList.remove("pulse");
+    if(layer==="city"){
+      core.setAttribute("r",nd.r);
+      core.setAttribute("opacity",0.92);
+      core.setAttribute("fill",nd.c);
+      lbl.style.opacity=1;
+    }else{
+      const vals=layer==="degree"?degVals:(layer==="between"?betVals:cloVals);
+      const n=normOne(vals,nd.n);
+      if(layer==="degree"){
+        core.setAttribute("r",Math.max(6,nd.r*0.55+n*nd.r*0.9));
+      }else{
+        core.setAttribute("r",nd.r);
+      }
+      core.setAttribute("opacity",0.2+n*0.8);
+      lbl.style.opacity=n>0.5?1:0.2;
+      if(n>0.78)g.classList.add("pulse");
+    }
+  });
+  EDGES.forEach((e,i)=>{
+    const el=edgeEls[i];
+    if(layer==="city"){
+      const def=el.getAttribute("data-def")==="1";
+      el.style.opacity=def?0.95:(e.type==="commute"?0.7:0.4);
+    }else{
+      el.style.opacity=0.12;
+    }
+  });
+}
+document.querySelectorAll("[data-layer]").forEach(function(b){
+  b.onclick=function(){
+    document.querySelectorAll("[data-layer]").forEach(function(x){x.classList.remove("on");});
+    this.classList.add("on");
+    applyLayer(this.dataset.layer);
+  };
+});
+// 节点点击聚焦 / 点击空白恢复
+NODES.forEach(function(nd,i){
+  nodeEls[i].addEventListener("click",function(ev){
+    ev.stopPropagation();setFocus(nd.n);
+  });
+});
+document.getElementById("net").addEventListener("click",function(){
+  if(focusName){focusName=null;renderFocus();}
+});
+
+// ===== 实验室抽屉 =====
+function openLab(){
+  document.getElementById("drawer").classList.add("open");
+  document.getElementById("mask").classList.add("open");
+}
+function closeLab(){
+  document.getElementById("drawer").classList.remove("open");
+  document.getElementById("mask").classList.remove("open");
+}
+window.openLab=openLab;window.closeLab=closeLab;
+
+function renderRank(mode){
+  const vals=mode==="degree"?degVals:(mode==="between"?betVals:cloVals);
+  const sorted=NODES.slice().sort(function(a,b){return vals[b.n]-vals[a.n];});
+  const max=vals[sorted[0].n]||1;
+  const col={产业:"#3b82f6",空间:"#9aa6b8",人:"#f97316"};
+  let html="";
+  sorted.slice(0,10).forEach(function(n){
+    const v=vals[n.n];
+    const pct=max>0?(v/max*100):0;
+    const disp=mode==="degree"?v+"条":v.toFixed(3);
+    html+='<div class="rank-row"><span class="nm">'+n.n+'</span>'+
+      '<div class="bg"><div class="bar" style="width:'+pct+'%;background:'+col[n.layer]+'"></div></div>'+
+      '<span class="vl">'+disp+'</span></div>';
+  });
+  document.getElementById("rankList").innerHTML=html;
+  const tips={
+    degree:"连接数：直接连了多少条边，回答“谁现在最热闹”。",
+    between:"必经之路：多少条最短路径必须经过它，回答“谁是咽喉”。它一断，网络会裂成几块。",
+    close:"到哪都近：到其他主体的平均距离的倒数，回答“谁的位置最居中”。近不等于必经。"
+  };
+  document.getElementById("rankTip").textContent=tips[mode];
+}
+document.querySelectorAll("[data-rank]").forEach(function(b){
+  b.onclick=function(){
+    document.querySelectorAll("[data-rank]").forEach(function(x){x.classList.remove("on");});
+    this.classList.add("on");
+    renderRank(this.dataset.rank);
+  };
+});
+renderRank("degree");
+
+document.getElementById("bloodStat").textContent=
+  "本页37条关系：A "+bloodCount.A+" 条，B "+bloodCount.B+" 条，C "+bloodCount.C+" 条，D "+bloodCount.D+" 条。导出的 edges.csv 含每条关系的血统标注。";
+
+function downloadCSV(filename,rows){
+  const csv=rows.map(function(r){
+    return r.map(function(c){
+      const s=String(c);
+      return (s.indexOf(",")>=0||s.indexOf('"')>=0||s.indexOf("\n")>=0)?'"'+s.replace(/"/g,'""')+'"':s;
+    }).join(",");
+  }).join("\n");
+  const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;a.download=filename;a.click();
+  URL.revokeObjectURL(url);
+}
+document.getElementById("exEdges").onclick=function(){
+  const rows=[["from","to","type","weight","blood","direction"]];
+  EDGES.forEach(function(e){rows.push([e.from,e.to,e.type,e.weight,e.blood,"undirected"]);});
+  downloadCSV("huicheng_edges.csv",rows);
+};
+document.getElementById("exNodes").onclick=function(){
+  const rows=[["name","layer","x","y","radius","color"]];
+  NODES.forEach(function(n){rows.push([n.n,n.layer,n.x,n.y,n.r,n.c]);});
+  downloadCSV("huicheng_nodes.csv",rows);
+};
+</script>
+</body></html>
