@@ -16,7 +16,7 @@ class FakeElement{
   if(selector.includes('[data-edge]')&&this.dataset.edge)return this;
   return null;
  }
- querySelector(sel){if(sel==='span'){const x=new FakeElement('span');return x}return null}
+ querySelector(sel){if(sel==='span'){const x=new FakeElement('span');return x}if(sel==='defs'){return this._defs||(this._defs=new FakeElement('defs'))}return null}
  querySelectorAll(sel){
   if(sel==='[data-open]'||sel==='[data-focus]')return [];
   return [];
