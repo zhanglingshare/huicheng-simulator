@@ -761,9 +761,12 @@ svg{max-width:100%;height:auto}
     <p style="font-size:11px;color:#6b7280;margin:12px 0 0">建议方向均对应官方"高新区引领、产业协同、城市承载、民生保障、开放融深"等战略表述，为模拟推演的优先级提示，非替代官方决策。</p>
   </div>
 
-  <!-- 数据来源 -->
-  <div class="card" id="sources">
-    <h2>十二、数据来源与分级</h2>
+  <!-- 数据来源与模型边界：退到第二层折叠 -->
+  <details class="ds-fold" id="sources">
+  <summary>数据来源、分级与模型边界说明</summary>
+  <div class="ds-fold-inner">
+  <div class="card" id="sources-card">
+    <h3>十二、数据来源与分级</h3>
     <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 4px">越靠塔底越硬、越可核对；越靠塔顶假设成分越多。这台模型把每类数据放在哪一层，全部公开。</p>
     <div class="pyramid">
       <div class="pyra"><div class="bar" style="background:#7f1d1d;width:130px">D · 假设</div><div class="lab"><b>网络边权重、路径贡献区间、通勤强度</b>——缺真实通勤OD数据，假设最多</div></div>
@@ -783,7 +786,7 @@ svg{max-width:100%;height:auto}
 
   <!-- 模型边界 -->
   <div class="card">
-    <h2>十三、模型边界与免责声明</h2>
+    <h3>十三、模型边界与免责声明</h3>
     <div class="disc-grid">
       <div class="disc-item"><div class="di"></div><div><div class="dt">不是预测器</div><div class="dd">不预测具体产值或招商成败，只在公开数据与明确假设下给出叙事分布与结构提示。</div></div></div>
       <div class="disc-item"><div class="di"></div><div><div class="dt">不做因果断言</div><div class="dd">统一用“关联、同步、结构提示”，不用“因为A所以B”；系数均为模型内部关联强度，不代表现实因果。</div></div></div>
@@ -794,6 +797,8 @@ svg{max-width:100%;height:auto}
       <div class="disc-item" style="grid-column:1/-1;border-color:rgba(251,113,133,.35)"><div class="di" style="background:rgba(251,113,133,.14);border-color:rgba(251,113,133,.35)">️</div><div><div class="dt">不构成投资建议，亦不替代官方决策</div><div class="dd">结论随假设改变而改变。</div></div></div>
     </div>
   </div>
+  </div>
+  </details>
 
   <!-- 作者 -->
   <div class="card">
@@ -816,7 +821,7 @@ svg{max-width:100%;height:auto}
 
   <div class="card">
     <p class="bigquote" style="margin:4px 0">大数字会被记住一时，<br>但只有<b style="color:#fbbf24">人愿意把下一个五年留在这里</b>，这座城才有未来。</p>
-    <p class="disc" style="margin-top:14px">本报告为Demo演示版本。<b>数据时效性：</b>2025年GDP、固投、一般公共预算收入等为计划执行快报数，非最终统计公报定数；规上工业、社零、外贸等来自统计公报或政府工作报告。2026年统计公报发布后部分数字可能微调。模拟结果仅代表当前数据、参数与规则下的压力测试，不代表对未来的精确预测，亦不构成投资建议。</p>
+    <details class="ds-fold" style="margin-top:14px"><summary>数据时效与免责说明</summary><div class="ds-fold-inner disc" style="font-size:12.5px;color:#9fb3cc;line-height:1.8">本报告为Demo演示版本。<b>数据时效性：</b>2025年GDP、固投、一般公共预算收入等为计划执行快报数，非最终统计公报定数；规上工业、社零、外贸等来自统计公报或政府工作报告。2026年统计公报发布后部分数字可能微调。模拟结果仅代表当前数据、参数与规则下的压力测试，不代表对未来的精确预测，亦不构成投资建议。</div></details>
   </div>
 
   <div style="text-align:center;margin:22px 0"><a class="btn" href="index.html">回到首页</a></div>

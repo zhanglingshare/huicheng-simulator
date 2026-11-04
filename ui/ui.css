@@ -356,3 +356,12 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border:0;border-radiu
   .ds-bar,.ds-sheet,.hcjn-root{display:none !important}
   body{padding-top:0}
 }
+
+/* 第二层收纳：证据/口径/开源说明默认折叠，决策内容为首屏主角 */
+.ds-fold{margin:16px 0;border:1px solid rgba(148,170,200,.18);border-radius:14px;background:rgba(148,170,200,.04);overflow:hidden}
+.ds-fold>summary{cursor:pointer;list-style:none;padding:13px 18px;font-size:13px;font-weight:700;color:#9fb3cc;display:flex;align-items:center;justify-content:space-between;gap:10px;user-select:none;outline:none}
+.ds-fold>summary::-webkit-details-marker{display:none}
+.ds-fold>summary::after{content:"展开";font-size:11px;font-weight:600;color:#7d90ad;border:1px solid rgba(148,170,200,.25);padding:3px 11px;border-radius:99px;white-space:nowrap;transition:all .15s}
+.ds-fold[open]>summary{color:#cfe0f5}
+.ds-fold[open]>summary::after{content:"收起"}
+.ds-fold>.ds-fold-inner{padding:2px 18px 16px}
