@@ -5,10 +5,10 @@ const dir=path.join(__dirname,".."),read=f=>fs.readFileSync(path.join(dir,f),"ut
 let fail=0;const check=(ok,msg)=>{if(ok)console.log("✓ "+msg);else{console.error("✗ "+msg);fail++}};
 const html=read("choices.html"),js=read("choices-kg.js"),css=read("choices-kg.css");
 const evidence=json("data/relationship-evidence-v1.json"),source=json("data/relationship-sources-v1.json"),changes=json("data/relationship-changes-v1.json");
-const nav=read("hc-journey-nav.js");
+const nav=read("ui/ui.js");
 try{new Function(js);check(true,"Knowledge graph JS parses")}catch(e){check(false,"JS syntax: "+e.message)}
 check(html.includes('src="choices-kg.js"')&&html.includes('href="choices-kg.css"'),"Page imports new graph assets");
-check(html.includes("hc-journey-nav.js")&&html.includes("hc-journey-nav.css"),"Ten-page journey remains");
+check(html.includes("ui/ui.js"),"Unified ui.js navigation remains");
 check(!html.includes('src="model.js"')&&!/HT\.run|DEFAULT_PATHS/.test(js),"Page does not alter simulator model");
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(x=>x[1]);
 check(new Set(ids).size===ids.length,"No duplicate HTML IDs");
@@ -34,7 +34,7 @@ check(paths.every(p=>p.members.every(x=>nids.has(x))&&p.sources.every(x=>sids.ha
 check(js.includes('type:"guide"')&&js.includes('type:"fact"'),"Illustrative associations distinguishable from sourced facts");
 check(js.includes('e.evidence_grade==="A"')&&js.includes('grade==="AB"'),"A and B evidence remain distinguishable");
 check(!js.includes("localStorage.setItem")&&!js.includes("hcChoices"),"No fake scenario transfer to future page");
-const order=[...nav.matchAll(/\{url:'([^']+)'/g)].map(x=>x[1]);
+const order=[...nav.matchAll(/url:\s*'([^']+)'/g)].map(x=>x[1]);
 check(order.slice(3,7).join("|")==="fun.html|choices.html|future.html|windtunnel.html","Chapter sequence preserved");
 // V4.1: verify event record integrity, mobile focus, and limited progressive reveal.
 check(html.includes('id="kgEventList"')&&html.includes('id="kgEventStory"')&&html.includes('id="kgFocusMeta"'),"V4.1 events, story and focus HUD are present");

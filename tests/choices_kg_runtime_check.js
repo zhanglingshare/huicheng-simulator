@@ -29,7 +29,8 @@ class Element{
  appendChild(element){this.children.push(element);return element}
  replaceChildren(){this.children=[]}
  getContext(){return {setTransform(){},fillRect(){},beginPath(){},moveTo(){},bezierCurveTo(){},stroke(){},
-  createLinearGradient(){return {addColorStop(){}}}}}
+  createLinearGradient(){return {addColorStop(){}}},
+  createRadialGradient(){return {addColorStop(){}}}}}
  getScreenCTM(){return {inverse(){return {}}}}
  createSVGPoint(){return {x:0,y:0,matrixTransform(){return {x:this.x,y:this.y}}}}
  setPointerCapture(){}hasPointerCapture(){return true}releasePointerCapture(){}

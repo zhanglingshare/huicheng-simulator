@@ -1,32 +1,20 @@
 /* 惠城产业风洞 · 全站统一章节导航。仅处理导航 DOM，不调用模型或读取数据。 */
 (function(){
   'use strict';
-  var groups=[
-    {name:'开篇',items:[
-      {url:'index.html',label:'序章',desc:'从这里开始'}
-    ]},
-    {name:'看见世界',items:[
-      {url:'holo-workspace.html',label:'全息工作区',desc:'看见关系如何变化'},
-      {url:'today.html',label:'钱去哪了',desc:'追问资金去向'},
-      {url:'fun.html',label:'风向标',desc:'城市生活线索'}
-    ]},
-    {name:'推演未来',items:[
-      {url:'choices.html',label:'路径',desc:'先确定发展路径'},
-      {url:'future.html',label:'未来',desc:'观察可能区间'},
-      {url:'windtunnel.html',label:'风洞测试',desc:'情景压力测试'},
-      {url:'commute.html',label:'通勤案例',desc:'通勤可能的影响'},
-      {url:'blindspot.html',label:'忽略了什么',desc:'留意城市盲点'}
-    ]},
-    {name:'汇总与实验',items:[
-      {url:'report.html',label:'报告',desc:'整理观察结果'},
-      {url:'future-lab.html',label:'未来实验室',desc:'动手调参做实验'}
-    ]},
-    {name:'收尾',items:[
-      {url:'ending.html',label:'结语',desc:'回到人和城市'}
-    ]}
+  var pages=[
+    {url:'index.html',label:'序章',desc:'从这里开始'},
+    {url:'holo-workspace.html',label:'全息工作区',desc:'看见关系变化'},
+    {url:'today.html',label:'钱去哪了',desc:'追问资金去向'},
+    {url:'fun.html',label:'风向标 · 去哪玩',desc:'城市生活线索'},
+    {url:'choices.html',label:'路径',desc:'先确定发展路径'},
+    {url:'future.html',label:'未来',desc:'再观察可能区间'},
+    {url:'windtunnel.html',label:'风洞测试',desc:'情景压力测试'},
+    {url:'commute.html',label:'通勤案例',desc:'案例：通勤可能的影响'},
+    {url:'blindspot.html',label:'忽略了什么',desc:'留意城市盲点'},
+    {url:'report.html',label:'报告',desc:'整理观察结果'},
+    {url:'ending.html',label:'结语',desc:'回到人和城市'},
+    {url:'future-lab.html',label:'未来实验室',desc:'可交互多实验舱'}
   ];
-  var pages=[];
-  groups.forEach(function(g){g.items.forEach(function(it){it.group=g.name;pages.push(it);});});
   function mount(){
     if(document.getElementById('hcjn-root'))return;
     var path=location.pathname.split('/').pop()||'index.html';
@@ -36,20 +24,12 @@
     root.id='hcjn-root';root.className='hcjn-root';root.setAttribute('aria-label','惠城产业风洞 · 全站导航');
     var menu=document.createElement('div');menu.id='hcjn-menu';menu.className='hcjn-menu';menu.hidden=true;
     var head=document.createElement('div');head.className='hcjn-menuhead';head.textContent='惠城产业风洞 · 体验路线';menu.appendChild(head);
-    var idx=0;
-    groups.forEach(function(g){
-      var gh=document.createElement('div');gh.className='hcjn-group';gh.textContent=g.name;menu.appendChild(gh);
-      g.items.forEach(function(p){
-        var i=idx++;
-        var a=document.createElement('a');a.href=p.url;
-        if(i===current)a.setAttribute('aria-current','page');
-        var num=document.createElement('span');num.className='hcjn-num';num.textContent=String(i+1).padStart(2,'0');
-        var mid=document.createElement('span');mid.className='hcjn-mid';
-        var label=document.createElement('span');label.className='hcjn-label';label.textContent=p.label;
-        var desc=document.createElement('span');desc.className='hcjn-desc';desc.textContent=p.desc;
-        mid.appendChild(label);mid.appendChild(desc);
-        a.appendChild(num);a.appendChild(mid);menu.appendChild(a);
-      });
+    pages.forEach(function(p,i){
+      var a=document.createElement('a');a.href=p.url;
+      if(i===current)a.setAttribute('aria-current','page');
+      var num=document.createElement('span');num.className='hcjn-num';num.textContent=String(i+1).padStart(2,'0');
+      var label=document.createElement('span');label.textContent=p.label;
+      a.appendChild(num);a.appendChild(label);menu.appendChild(a);
     });
     var foot=document.createElement('div');foot.className='hcjn-menufoot';foot.textContent='浏览顺序可自由跳转 · 各页之间自由切换';menu.appendChild(foot);
     var bar=document.createElement('div');bar.className='hcjn-bar';
