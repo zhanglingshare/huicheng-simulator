@@ -358,6 +358,14 @@ svg{max-width:100%;height:auto}
 .nb-v.neg{color:#E38C86}
 .nb-n{font-size:10.5px;color:#949FB8;margin-top:3px;line-height:1.55}
 @media(max-width:640px){.nb-grid{grid-template-columns:repeat(2,1fr)}}
+/* ui-mobile-patch 2026-11-07 */
+@media (max-width:520px){
+  strong,h1,h2,h3,h4,th,td,label,.cap,.title,summary,.ka{word-break:keep-all;overflow-wrap:anywhere}
+  body{line-break:strict}
+  .nav a,footer a,footer button,button,.btn,.kg-footer summary{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+  input[type=range]{min-height:44px}
+  .slider-row{min-height:44px}
+}
 </style>
 <link rel="stylesheet" href="ui/ui.css">
 <link rel="stylesheet" href="ui/ui-pages.css">

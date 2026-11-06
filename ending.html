@@ -279,6 +279,14 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
   background:linear-gradient(160deg,rgba(40,52,76,.5),rgba(20,28,44,.45))!important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 4px 24px rgba(0,0,0,.25)!important;
   backdrop-filter:blur(16px)!important}
+/* ui-mobile-patch 2026-11-07 */
+@media (max-width:520px){
+  strong,h1,h2,h3,h4,th,td,label,.cap,.title,summary,.ka{word-break:keep-all;overflow-wrap:anywhere}
+  body{line-break:strict}
+  .nav a,footer a,footer button,button,.btn,.kg-footer summary{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+  input[type=range]{min-height:44px}
+  .slider-row{min-height:44px}
+}
 </style>
 <script src="model.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>

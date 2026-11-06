@@ -12,6 +12,14 @@ a{color:inherit}.shell{max-width:1320px;margin:auto;padding:20px 22px 45px}.top{
 .step-bar{display:flex;flex-wrap:wrap;gap:8px;padding:17px 18px 4px}.step-bar button{font-size:12px;cursor:pointer;background:#112d49;color:#adc7e2;border:1px solid #315270;border-radius:999px;padding:8px 13px}.step-bar button.active{background:#2d7cab;color:#fff;border-color:#59c6f1}.content{padding:18px 22px}.content h3{font-size:22px;line-height:1.45;margin:3px 0 12px}.content p{color:#bfd1e2;font-size:13px;line-height:1.85}.fact{border-left:3px solid var(--orange);background:rgba(255,193,109,.075);border-radius:4px 9px 9px 4px;padding:14px;margin:17px 0;color:#ffe4bd;font-size:12px;line-height:1.8}.prompt{border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}.prompt b{display:block;color:#82dcff;font-size:12px;margin-bottom:7px}.prompt p{margin:0}.ask{display:flex;align-items:center;gap:8px;margin-top:20px;border:1px solid #2e6789;border-radius:12px;background:rgba(23,80,112,.3);padding:12px;font-size:12px;color:#cce6fa}.foot{margin-top:22px;border:1px solid var(--line);border-radius:15px;padding:20px;color:#9cb5d0;line-height:1.8;font-size:12px}.foot strong{color:#fff}
 svg .edge{stroke:#466b8d;stroke-width:2.5;fill:none;stroke-dasharray:7 7;transition:all .25s}.edge.active{stroke:var(--orange);stroke-width:4;stroke-dasharray:11 5;animation:move 1.3s linear infinite}@keyframes move{to{stroke-dashoffset:-32}}.node circle{fill:#1f557b;stroke:#6ec6f7;stroke-width:2;transition:.2s}.node.active circle{fill:#177baa;stroke:#b0ecff;stroke-width:3;filter:drop-shadow(0 0 8px #4faefc)}.node text{fill:#e9f5ff;font-size:14px;font-weight:750;text-anchor:middle;pointer-events:none}.node small{font-size:10px}.node{cursor:pointer}.edge.no-data{stroke-dasharray:2 8;opacity:.8}
 @media(max-width:900px){.grid{grid-template-columns:1fr}.network{min-height:0}.shell{padding:16px 12px 30px}.hero{padding:35px 0 20px}.hero h1{font-size:36px}}
+/* ui-mobile-patch 2026-11-07 */
+@media (max-width:520px){
+  strong,h1,h2,h3,h4,th,td,label,.cap,.title,summary,.ka{word-break:keep-all;overflow-wrap:anywhere}
+  body{line-break:strict}
+  .nav a,footer a,footer button,button,.btn,.kg-footer summary{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+  input[type=range]{min-height:44px}
+  .slider-row{min-height:44px}
+}
 </style>
 </head>
 <body><div class="shell">

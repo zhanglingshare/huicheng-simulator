@@ -192,6 +192,14 @@ body{background:var(--sky1);color:var(--ink);font:14px/1.6 -apple-system,"PingFa
   .readcard{max-width:440px;padding:14px 16px;bottom:140px}
   .rc-row{font-size:12.5px;line-height:1.7}
 }
+/* ui-mobile-patch 2026-11-07 */
+@media (max-width:520px){
+  strong,h1,h2,h3,h4,th,td,label,.cap,.title,summary,.ka{word-break:keep-all;overflow-wrap:anywhere}
+  body{line-break:strict}
+  .nav a,footer a,footer button,button,.btn,.kg-footer summary{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+  input[type=range]{min-height:44px}
+  .slider-row{min-height:44px}
+}
 </style></head>
 <body>
 

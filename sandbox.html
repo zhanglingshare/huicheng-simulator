@@ -251,7 +251,7 @@ body.moff #net .heart .core{transform:none}
 .beam-light::before{content:"";position:absolute;left:50%;width:2px;height:20px;transform:translateX(-50%);background:linear-gradient(to top,transparent,rgba(255,255,255,.95),transparent);animation:beamUp 2.6s linear infinite}
 @keyframes beamUp{0%{bottom:-12%;opacity:0}25%{opacity:1}100%{bottom:112%;opacity:0}}
 .beam-head{width:9px;height:9px;border-radius:50%;background:var(--bc);box-shadow:0 0 9px var(--bc),0 0 18px var(--bc);margin-top:-3px;animation:beamPulse 3.2s ease-in-out infinite}
-.beam-cap{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:7px;white-space:nowrap;font-size:10px;font-weight:700;color:var(--ink2);background:rgba(13,20,38,.78);border:1px solid rgba(255,255,255,.1);padding:2px 7px;border-radius:6px;line-height:1.3;max-width:112px;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 2px #000}
+.beam-cap{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:7px;white-space:normal;text-align:center;width:118px;font-size:10px;font-weight:700;color:var(--ink2);background:rgba(13,20,38,.78);border:1px solid rgba(255,255,255,.1);padding:2px 7px;border-radius:6px;line-height:1.25;max-width:150px;display:block;white-space:normal;text-shadow:0 1px 2px #000}
 .beam-cap .ar{font-size:9px;margin-right:2px}
 .ar.dir-good{color:var(--ok)}.ar.dir-mid{color:#7dd3fc}.ar.dir-bad{color:var(--bad)}
 .beam-num{position:absolute;bottom:calc(100% + 24px);left:50%;transform:translateX(-50%);font-size:25px;font-weight:900;color:var(--warm);text-shadow:0 0 18px rgba(251,191,36,.85),0 2px 6px #000;white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -280,9 +280,16 @@ body.moff #net .heart .core{transform:none}
   .news-h{padding:5px 12px 0;gap:5px}
   .news-h .chip{padding:3px 9px;font-size:10px}
   .beam-field{padding:0 22px;gap:2px;top:9%}
-  .beam-cap{font-size:9px;max-width:80px;padding:1px 5px}
-  .beam.hero .beam-cap{font-size:10px;max-width:120px}
+  .beam-cap,.beam.hero .beam-cap{display:none}
   .beam-num{font-size:19px}
+}
+/* ui-mobile-patch 2026-11-07 */
+@media (max-width:520px){
+  strong,h1,h2,h3,h4,th,td,label,.cap,.title,summary,.ka{word-break:keep-all;overflow-wrap:anywhere}
+  body{line-break:strict}
+  .nav a,footer a,footer button,button,.btn,.kg-footer summary{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+  input[type=range]{min-height:44px}
+  .slider-row{min-height:44px}
 }
 </style>
 </head>
@@ -807,7 +814,7 @@ if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded"
   function moneyOf(t){var m=String(t).match(/([\d.]+)\s*亿/);return m?m[1]+"亿":"";}
   function shortT(t){
     var s=String(t).split(/[，,、:：（(]/)[0].replace(/^惠州市?/,"").replace(/^惠城区?/,"");
-    if(s.length>11)s=s.slice(0,11);
+    if(s.length>16)s=s.slice(0,16)+"…";
     return s;
   }
   function beamH(it,i){

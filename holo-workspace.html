@@ -542,6 +542,14 @@ footer{margin:0 20px;background:#1C1D1E;border:1px solid var(--line);border-radi
 .project-links a{display:inline-flex;align-items:center;justify-content:center;gap:5px;border:1px solid #4E6188;background:#1C1D1E;color:#3969D0;text-decoration:none;font-size:11px;font-weight:800;border-radius:10px;padding:9px 11px;white-space:nowrap;box-shadow:0 2px 6px rgba(16,65,130,.06);transition:.16s}
 .project-links a:hover{background:#A4BAEA;border-color:#9BB4E8;transform:translateY(-1px)}
 @media(max-width:560px){.project-links{width:100%;order:5;flex-wrap:wrap}.project-links a{flex:1}.brief-action{order:6}}
+/* ui-mobile-patch 2026-11-07 */
+@media (max-width:520px){
+  strong,h1,h2,h3,h4,th,td,label,.cap,.title,summary,.ka{word-break:keep-all;overflow-wrap:anywhere}
+  body{line-break:strict}
+  .nav a,footer a,footer button,button,.btn,.kg-footer summary{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+  input[type=range]{min-height:44px}
+  .slider-row{min-height:44px}
+}
 </style>
 <link rel="stylesheet" href="ui/ui.css">
 <link rel="stylesheet" href="ui/ui-pages.css">

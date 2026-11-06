@@ -119,7 +119,7 @@
   .tl-node .n{width:14px;height:14px;border-radius:50%;background:#fff;border:2.5px solid #aab8c8;transition:.18s}
   .tl-node:hover .n{transform:scale(1.25)}
   .tl-node .d{font-size:9.5px;color:var(--sub);font-weight:700;margin-top:5px;white-space:nowrap}
-  .tl-node .l{order:-1;font-size:10px;color:#475569;font-weight:700;white-space:nowrap;max-width:122px;overflow:hidden;text-overflow:ellipsis;background:rgba(255,255,255,.94);padding:3px 10px;border-radius:999px;box-shadow:var(--sh-sm);border:1px solid var(--line);margin-bottom:8px;transition:.18s}
+  .tl-node .l{order:-1;font-size:10px;color:#475569;font-weight:700;white-space:normal;line-height:1.25;text-align:center;-webkit-line-clamp:3;display:-webkit-box;-webkit-box-orient:vertical;max-width:136px;overflow:hidden;background:rgba(255,255,255,.94);padding:3px 10px;border-radius:999px;box-shadow:var(--sh-sm);border:1px solid var(--line);margin-bottom:8px;transition:.18s}
   .tl-node:hover .l{border-color:#cdd9ea;box-shadow:var(--sh-md)}
   .tl-node.active .n{border-color:var(--blue);background:var(--blue);box-shadow:0 0 0 5px rgba(37,99,235,.16)}
   .tl-node.new .n{border-color:var(--green);background:var(--green)}
@@ -182,9 +182,18 @@
     .side.left{top:0;left:0;height:100%;width:240px;z-index:70;background:#fff;padding:66px 14px 16px;overflow-y:auto;transform:translateX(-100%);transition:transform .25s;box-shadow:var(--sh-lg)}
     .side.left.open{transform:translateX(0)}
     footer{height:108px;padding:0 8px}
-    .tl-node .l{max-width:74px;font-size:9px}
+    .tl-node .l{display:none}
+    .tl-node.active .l{display:-webkit-box;max-width:150px;font-size:9.5px;-webkit-line-clamp:3}
     #pop{width:calc(100vw - 20px)}
   }
+/* ui-mobile-patch 2026-11-07 */
+@media (max-width:520px){
+  strong,h1,h2,h3,h4,th,td,label,.cap,.title,summary,.ka{word-break:keep-all;overflow-wrap:anywhere}
+  body{line-break:strict}
+  .nav a,footer a,footer button,button,.btn,.kg-footer summary{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+  input[type=range]{min-height:44px}
+  .slider-row{min-height:44px}
+}
 </style>
 </head>
 <body>
