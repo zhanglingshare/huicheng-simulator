@@ -17,7 +17,7 @@
   "items": [
     {
       "title": "惠城小金口“未诉先办”点亮500米民心路",
-      "cat": "warm",
+      "cat": "gossip",
       "emoji": "🤝",
       "tier": "较高",
       "srcLevel": "官方发布",
@@ -29,7 +29,13 @@
       "event_date": null,
       "fetched_at": "2026-11-07 07:36",
       "verified_status": "已核验",
-      "fate": null
+      "fate": {
+        "kind": "life",
+        "ident": "gossip",
+        "objects": "小金口街道柏岗村新屋至惠州大道段500米乡道",
+        "direction": "利好",
+        "assumption": "以区镇办动态发布为准，照明覆盖范围为发布口径"
+      }
     },
     {
       "title": "龙丰街道开展重点场所安全隐患专项排查行动",
@@ -45,7 +51,13 @@
       "event_date": null,
       "fetched_at": "2026-11-07 07:36",
       "verified_status": "已核验",
-      "fate": null
+      "fate": {
+        "kind": "info",
+        "ident": "city",
+        "objects": "龙丰街道废品回收站、闲置旧厂房、铁皮房",
+        "direction": "中性",
+        "assumption": "属常规安全监管排查，整治成效以后续官方通报为准"
+      }
     },
     {
       "title": "聚力雨污分流整治　做实源头截污管控-金山河流域管网错混接整治培训",
@@ -61,7 +73,13 @@
       "event_date": null,
       "fetched_at": "2026-11-07 07:36",
       "verified_status": "已核验",
-      "fate": null
+      "fate": {
+        "kind": "info",
+        "ident": "city",
+        "objects": "金山河流域、市水务集团及各相关区直单位",
+        "direction": "利好",
+        "assumption": "培训为整治前序动作，水质改善需后续监测数据印证"
+      }
     },
     {
       "title": "区交通分局召开惠城区普通货运及网约车安全管理工作会议",
@@ -77,7 +95,13 @@
       "event_date": null,
       "fetched_at": "2026-11-07 07:36",
       "verified_status": "已核验",
-      "fate": null
+      "fate": {
+        "kind": "info",
+        "ident": "city",
+        "objects": "惠城区普通货运企业、网约车平台",
+        "direction": "中性",
+        "assumption": "以事故通报与监管部署原文为准，不代表处置结论"
+      }
     },
     {
       "title": "汝湖：“巧手妈妈” AI 村播公益培训在围仔村顺利开课",
@@ -93,7 +117,13 @@
       "event_date": null,
       "fetched_at": "2026-11-07 07:36",
       "verified_status": "已核验",
-      "fate": null
+      "fate": {
+        "kind": "life",
+        "ident": "livelihood",
+        "objects": "汝湖镇围仔村、农村居家妇女",
+        "direction": "利好",
+        "assumption": "培训已开课，就业转化效果以主办方后续公布为准"
+      }
     },
     {
       "title": "关于公开评选2026年惠城区农家（社区）书屋图书更新及优化提升项目服务机构结果的公告",
@@ -109,7 +139,13 @@
       "event_date": null,
       "fetched_at": "2026-11-07 07:36",
       "verified_status": "已核验",
-      "fate": null
+      "fate": {
+        "kind": "info",
+        "ident": "livelihood",
+        "objects": "惠城区农家（社区）书屋",
+        "direction": "中性",
+        "assumption": "为采购评选结果公告，服务范围与金额以公告原文为准"
+      }
     },
     {
       "title": "惠城区2026年下半年教师资格认定证书发放公告",
@@ -125,7 +161,13 @@
       "event_date": null,
       "fetched_at": "2026-11-07 07:36",
       "verified_status": "已核验",
-      "fate": null
+      "fate": {
+        "kind": "info",
+        "ident": "livelihood",
+        "objects": "2026年下半年教师资格认定申请人",
+        "direction": "中性",
+        "assumption": "办理时限与领取方式以区教育局公告为准"
+      }
     },
     {
       "title": "关于惠城区空巢老人政府购买服务对象的公示",
@@ -141,7 +183,13 @@
       "event_date": null,
       "fetched_at": "2026-11-07 07:36",
       "verified_status": "已核验",
-      "fate": null
+      "fate": {
+        "kind": "life",
+        "ident": "livelihood",
+        "objects": "河南岸街道空巢老人服务对象",
+        "direction": "利好",
+        "assumption": "公示期满无异议后生效，覆盖人数以民政部门口径为准"
+      }
     },
     {
       "title": "关于《惠州市惠城区横沥镇墨园村、芦洲镇岚派村传统村落保护发展规划（2025-2035年）（草案）》的公示",
@@ -157,7 +205,13 @@
       "event_date": null,
       "fetched_at": "2026-11-07 07:36",
       "verified_status": "已核验",
-      "fate": null
+      "fate": {
+        "kind": "info",
+        "ident": "city",
+        "objects": "横沥镇墨园村、芦洲镇兰派村传统村落",
+        "direction": "中性",
+        "assumption": "为规划草案公示，最终内容以批准文件为准"
+      }
     }
   ]
 }
