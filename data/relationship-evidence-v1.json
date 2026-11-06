@@ -2,7 +2,7 @@
   "schema_version": "relationship-evidence-v1",
   "region": "huicheng",
   "name": "惠城全息关系世界 · 公开证据关系底座",
-  "generated_at": "2026-11-06 14:20",
+  "generated_at": "2026-11-06 17:20",
   "evidence_grade_legend": {
     "A": "官方统计/政府文件/主体公告直接证实，带 URL",
     "B": "多源间接证据推断，给区间/定性，不冒充精确值",
@@ -17,8 +17,8 @@
     "eco_constraint": "生态约束",
     "regional": "区域协作"
   },
-  "node_count": 18,
-  "edge_count": 20,
+  "node_count": 19,
+  "edge_count": 21,
   "note": "关系强度不编造：有公开量化数据才显示 metric，否则只给 strength_basis；C 级为待验证假设，前端须显式标注。",
   "nodes": [
     {
@@ -300,6 +300,21 @@
         "S018",
         "S019"
       ]
+    },
+    {
+      "node_id": "bx",
+      "name": "博鑫智能驾舱",
+      "node_type": "enterprise",
+      "layer": "产业引擎",
+      "town": "水口",
+      "description": "博鑫立业科技智能驾舱研发制造项目，位于高新科技产业园鹿岗片区02单元（东江湾千亿产业园内），2025年6月动工",
+      "node_status": "pending",
+      "change_status": "新增",
+      "evidence_grade": "A",
+      "source_ids": [
+        "S021",
+        "S023"
+      ]
     }
   ],
   "edges": [
@@ -325,7 +340,7 @@
         "S006"
       ],
       "counter_evidence": "未动工，实际投资完成额未公开",
-      "last_verified_at": "2026-10-29",
+      "last_verified_at": "2026-11-06",
       "change_status": "新增"
     },
     {
@@ -398,7 +413,7 @@
         "S010"
       ],
       "counter_evidence": "投产时间未公开",
-      "last_verified_at": "2026-10-29",
+      "last_verified_at": "2026-11-06",
       "change_status": "新增"
     },
     {
@@ -424,7 +439,7 @@
         "S010"
       ],
       "counter_evidence": "达产产值未公开",
-      "last_verified_at": "2026-10-29",
+      "last_verified_at": "2026-11-06",
       "change_status": "新增"
     },
     {
@@ -449,7 +464,7 @@
         "S011"
       ],
       "counter_evidence": "存量技改，非新增产能主体",
-      "last_verified_at": "2026-10-29",
+      "last_verified_at": "2026-11-06",
       "change_status": "新增"
     },
     {
@@ -583,7 +598,7 @@
         "S016",
         "S020"
       ],
-      "counter_evidence": "客流/消费额未细分；2026年1-9月社消零+2.0%，文旅对消费的贡献未单独统计",
+      "counter_evidence": "客流/消费额未细分；2026年1-9月社消零+2.0%，文旅对消费的贡献未单独统计；西湖更新一期丰山片区（11-03 市政工程获受理）与丰渚园商区综合体为两个子项，勿合并计数",
       "last_verified_at": "2026-11-06",
       "change_status": "增强"
     },
@@ -771,6 +786,28 @@
         "S019"
       ],
       "counter_evidence": "中标未开工，工期480日历天，开业运营效果未知",
+      "last_verified_at": "2026-11-06",
+      "change_status": "新增"
+    },
+    {
+      "edge_id": "E021",
+      "source_node_id": "gxq",
+      "target_node_id": "bx",
+      "relation_type": "investment",
+      "relation_description": "博鑫智能驾舱研发制造项目落地惠城高新区鹿岗片区，2025年6月动工，2026-11-04 取得建设工程规划条件核实合格证",
+      "direction": "有方向",
+      "valid_period": "2025-06 至 2026-11",
+      "evidence_type": "已证实事实",
+      "evidence_grade": "A",
+      "confidence": "高",
+      "metric": null,
+      "comparison_period": "2026-11-04",
+      "strength_basis": "区自然资源局受理公示载明规划条件核实合格；2025年7月区政府报道确认6月动工",
+      "source_ids": [
+        "S021",
+        "S023"
+      ],
+      "counter_evidence": "单体投资额未公开，15亿元为同批5宗合计；规划核实合格不等于投产",
       "last_verified_at": "2026-11-06",
       "change_status": "新增"
     }

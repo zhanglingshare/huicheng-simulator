@@ -1,8 +1,8 @@
 {
   "schema_version": "relationship-sources-v1",
   "region": "huicheng",
-  "generated_at": "2026-11-06 14:20",
-  "count": 20,
+  "generated_at": "2026-11-06 17:20",
+  "count": 23,
   "note": "转载不视为独立来源；可信度按发布机构与可核验性评定。",
   "sources": [
     {
@@ -357,6 +357,58 @@
         "gxq"
       ],
       "summary": "前三季度GDP883.46亿+1.1%；二产237.92亿-1.6%；规上工业+0.8%；固投-40.7%；社消零622.07亿+2.0%；进出口337.0亿+11.4%",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S021",
+      "title": "20261104受理公示：博鑫智能驾舱规划条件核实、乐朗(上良)110千伏输变电用地许可、群鑫达厂房核验",
+      "publisher": "惠州市惠城区自然资源局",
+      "source_type": "政府文件",
+      "url": "http://www.hcq.gov.cn/hzhczrzyj/gkmlpt/content/5/5887/post_5887764.html",
+      "published_at": "2026-11-05",
+      "collected_at": "2026-11-06",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "bx",
+        "gxq"
+      ],
+      "summary": "11月4日受理14宗：博鑫智能驾舱研发制造项目（鹿岗片区LG02-01-06-03）规划条件核实合格；110千伏乐朗（上良）输变电工程（马安LG02-02-11-01）建设用地规划许可；群鑫达生产厂房规划核实；河南岸HNAHJL-01保障性租赁住房规划许可",
+      "credibility": "官方发布，高",
+      "corroborated": false
+    },
+    {
+      "source_id": "S022",
+      "title": "惠城区资源交易中心建设工程公告：政府控制资源光伏发电项目（一期）EPC中标、马安南园土方回填评标",
+      "publisher": "惠城区资源交易中心",
+      "source_type": "政府文件",
+      "url": "http://www.hcq.gov.cn/zfxxgkml/hcqzyjyzx/ywgz/jsgc/index.html",
+      "published_at": "2026-11-05",
+      "collected_at": "2026-11-06",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "gxq"
+      ],
+      "summary": "11月5日政府控制资源光伏发电项目（一期）EPC中标公告、高新园区马安南园MAN01-05-15地块土方回填（一标段）评标公示、高标准农田新建250亩招标；11月2日丰渚园商区综合体施工中标",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S023",
+      "title": "惠城5宗产业类重点项目密集动工：博鑫智能驾舱、群鑫达等在列（总用地12万㎡、总投资15亿）",
+      "publisher": "惠城区人民政府",
+      "source_type": "政府文件",
+      "url": "http://www.hcq.gov.cn/hzhczdjsxmbgs/gkmlpt/content/5/5560/post_5560754.html",
+      "published_at": "2025-07-07",
+      "collected_at": "2026-11-06",
+      "region": "huicheng",
+      "period": "2025",
+      "supports": [
+        "bx"
+      ],
+      "summary": "2025年6月以来乐庭智联二期、辉翰储能、群鑫达智能制造、博鑫智能驾舱、立得微电子5宗产业项目密集动工，总用地12万㎡、总投资15亿元",
       "credibility": "官方发布，高",
       "corroborated": true
     }

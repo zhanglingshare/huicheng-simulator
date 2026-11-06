@@ -1,8 +1,8 @@
 {
   "schema_version": "relationship-changes-v1",
   "region": "huicheng",
-  "generated_at": "2026-11-06 14:20",
-  "count": 8,
+  "generated_at": "2026-11-06 17:20",
+  "count": 9,
   "change_type_legend": {
     "new_entity": "新主体接入",
     "new_edge": "新连接形成",
@@ -170,6 +170,26 @@
         "S019"
       ],
       "uncertainty": "尚未开工，工期480日历天，开业运营待观察",
+      "last_verified_at": "2026-11-06"
+    },
+    {
+      "change_id": "C009",
+      "change_type": "new_entity",
+      "title": "博鑫智能驾舱研发制造项目完成规划条件核实（鹿岗片区）",
+      "event_date": "2026-11-04",
+      "involved_node_ids": [
+        "gxq",
+        "bx"
+      ],
+      "involved_edge_ids": [
+        "E021"
+      ],
+      "before_after": "此前：2025年6月动工、在建；此后：规划条件核实合格，转入投产准备",
+      "source_ids": [
+        "S021",
+        "S023"
+      ],
+      "uncertainty": "投产时间与达产产值未公开；同批5宗项目单体投资额未拆分",
       "last_verified_at": "2026-11-06"
     }
   ]
