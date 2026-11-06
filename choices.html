@@ -1,239 +1,101 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>惠城产业风洞 · 五条路</title>
-<script src="model.js"></script>
-<style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;height:100%;overflow:hidden}
-body{background:linear-gradient(180deg,#0a1830 0%,#14294d 45%,#0c1e38 100%);
-  color:#f0f4fa;font:15px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
-  -webkit-font-smoothing:antialiased;position:relative}
-body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(800px 400px at 50% 0%,rgba(59,130,246,.18),transparent 60%),
-             radial-gradient(600px 300px at 50% 100%,rgba(240,199,94,.06),transparent 60%)}
-
-.hud{position:relative;z-index:10;height:100vh;display:flex;flex-direction:column;padding:16px 18px;max-width:640px;margin:0 auto}
-
-.top{display:flex;align-items:center;gap:12px;flex:none}
-.back{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;
-  color:#b8c5d9;text-decoration:none;font-size:18px;flex:none;backdrop-filter:blur(10px)}
-.ttl{flex:1;min-width:0}
-.ttl h1{font-size:20px;margin:0;font-weight:800;letter-spacing:.3px}
-.ttl span{font-size:12.5px;color:#7a8ba3;display:block;line-height:1.4;margin-top:2px}
-
-/* 塔身区 */
-.stage{flex:1;min-height:0;position:relative;display:flex;align-items:flex-end;justify-content:center;margin:20px 0}
-.tower-wrap{position:relative;display:flex;align-items:flex-end;gap:20px;height:100%}
-.tower{display:flex;flex-direction:column-reverse;gap:6px;align-items:center;justify-content:flex-end}
-.block{width:180px;max-width:40vw;padding:16px 12px;border-radius:16px;
-  background:linear-gradient(145deg,rgba(255,255,255,.18) 0%,rgba(125,211,252,.08) 100%);
-  border:1px solid rgba(255,255,255,.25);
-  box-shadow:0 4px 20px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.3);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  text-align:center;cursor:pointer;transition:all .4s cubic-bezier(.34,1.56,.64,1);
-  position:relative;overflow:hidden}
-.block::before{content:"";position:absolute;top:0;left:0;right:0;height:40%;
-  background:linear-gradient(180deg,rgba(255,255,255,.15),transparent)}
-.block .b-name{font-size:13.5px;font-weight:700;color:#fff;line-height:1.3;position:relative}
-.block .b-val{font-size:11px;color:#7dd3fc;margin-top:4px;font-variant-numeric:tabular-nums;position:relative}
-.block.placed{background:linear-gradient(145deg,rgba(125,211,252,.25) 0%,rgba(59,130,246,.15) 100%);
-  border-color:rgba(125,211,252,.5);
-  box-shadow:0 4px 24px rgba(125,211,252,.2),inset 0 1px 0 rgba(255,255,255,.3)}
-.block:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.4)}
-.block.shake{animation:shake .4s}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
-
-/* 刻度线 */
-.scale{position:relative;width:3px;height:100%;background:linear-gradient(180deg,rgba(240,199,94,.4),rgba(255,255,255,.15));flex:none;border-radius:2px}
-.scale .mark{position:absolute;left:12px;transform:translateY(-50%);font-size:11.5px;color:#b8c5d9;white-space:nowrap;font-weight:600}
-.scale .mark.target{color:#f0c75e;font-weight:700}
-.scale .mark.base{color:#7a8ba3;font-weight:400}
-.scale .target-line{position:absolute;left:-8px;right:-8px;height:2px;background:linear-gradient(90deg,transparent,rgba(240,199,94,.7),transparent);box-shadow:0 0 12px rgba(240,199,94,.4)}
-.scale .cur-line{position:absolute;left:-14px;right:-14px;height:3px;background:#7dd3fc;border-radius:2px;
-  box-shadow:0 0 16px rgba(125,211,252,.8),0 0 4px #fff;transition:bottom .6s cubic-bezier(.34,1.56,.64,1)}
-.scale .cur-line::after{content:"";position:absolute;right:-8px;top:50%;transform:translateY(-50%);
-  width:8px;height:8px;border-radius:50%;background:#7dd3fc;box-shadow:0 0 8px rgba(125,211,252,.8)}
-
-/* 底部未放积木 */
-.pool{flex:none;padding:10px 0 16px}
-.pool-label{font-size:11.5px;color:#7a8ba3;text-align:center;margin-bottom:10px}
-.pool-blocks{display:flex;gap:8px;overflow-x:auto;padding:4px;scrollbar-width:none}
-.pool-blocks::-webkit-scrollbar{display:none}
-.pool-block{flex:none;width:120px;padding:12px;border-radius:14px;
-  background:linear-gradient(145deg,rgba(255,255,255,.1) 0%,rgba(255,255,255,.04) 100%);
-  border:1px solid rgba(255,255,255,.15);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
-  text-align:center;cursor:pointer;transition:.25s;backdrop-filter:blur(10px)}
-.pool-block:hover{background:linear-gradient(145deg,rgba(125,211,252,.2) 0%,rgba(125,211,252,.08) 100%);
-  border-color:rgba(125,211,252,.4);transform:translateY(-2px)}
-.pool-block .pb-name{font-size:11.5px;font-weight:600;color:#e2e8f0;line-height:1.3}
-.pool-block .pb-val{font-size:10px;color:#7dd3fc;margin-top:2px}
-
-/* 底部结果 */
-.result-bar{flex:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
-  border-radius:18px;padding:14px 18px;backdrop-filter:blur(12px);margin-bottom:12px}
-.result-bar .r-top{display:flex;justify-content:space-between;align-items:baseline}
-.result-bar .r-label{font-size:12px;color:#7a8ba3}
-.result-bar .r-val{font-size:26px;font-weight:800;color:#f0f4fa;font-variant-numeric:tabular-nums}
-.result-bar .r-val small{font-size:14px;color:#7a8ba3;font-weight:400}
-.result-bar .r-gap{font-size:12.5px;margin-top:6px;color:#f0c75e;font-weight:600}
-.result-bar .r-gap.over{color:#34d399}
-
-.next-btn{flex:none;width:100%;padding:15px;border:none;border-radius:16px;
-  background:linear-gradient(135deg,#f0c75e,#d4a843);color:#1a1a2e;
-  font-size:15px;font-weight:800;cursor:pointer;transition:.2s;font-family:inherit}
-.next-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(240,199,94,.3)}
-.next-btn:disabled{opacity:.4;cursor:default;transform:none;box-shadow:none}
-</style></head><body>
-
-<div class="hud">
-  <div class="top">
-    <a class="back" href="network.html">←</a>
-    <div class="ttl">
-      <h1>搭你的惠城 2030</h1>
-      <span>6 块积木，搭到模型参考刻度 1500 亿</span>
-    </div>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#061321"><meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%230a84ff%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%26%22 fill=%22%23fff%22/%3E%3C/svg%3E">
+<title>05 · 惠城知识图谱 V4.1｜从生活问题看公开证据</title>
+<meta name="description" content="从工作、做生意、通勤等生活问题出发，一步步探索惠城规划路径、产业主体、关系与证据。">
+<link rel="stylesheet" href="choices-kg.css">
+<link rel="stylesheet" href="ui/ui.css">
+<link rel="stylesheet" href="ui/ui-pages.css">
+</head>
+<body>
+<div class="kg-app">
+<header class="kg-top">
+  <a class="kg-brand" href="index.html"><span class="kg-brandmark">◈</span><span>惠城产业风洞<small>KNOWLEDGE GRAPH / 规划探索</small></span></a>
+  <div class="kg-headnav"><span class="kg-page">05 / 10</span><a href="fun.html">← 上一页</a><a href="future.html">未来 →</a></div>
+</header>
+<main class="kg-shell">
+ <section class="kg-heading">
+  <div><div class="kg-overline"><i></i> HUI CHENG 2030 · INTERACTIVE KNOWLEDGE GRAPH</div><h1>惠城这五条路，<em>与你有什么关系？</em></h1><p>先选你关心的事，再顺着发光的关系一步步探索。</p></div>
+  <div class="kg-live"><span></span>公开信息关系探索<small>资料并不等于完整现实</small></div>
+ </section>
+ <nav class="kg-personas" aria-label="选择生活问题">
+  <button type="button" data-persona="job" aria-pressed="true"><span>▣</span> 想找工作</button>
+  <button type="button" data-persona="shop" aria-pressed="false"><span>▤</span> 想做生意</button>
+  <button type="button" data-persona="commute" aria-pressed="false"><span>↝</span> 每天要通勤</button>
+  <button type="button" data-persona="city" aria-pressed="false"><span>◎</span> 关心城市未来</button>
+ </nav>
+ <section class="kg-layout" aria-label="惠城规划知识图谱探索工作区">
+  <div class="kg-stage">
+   <canvas id="kgCity" aria-hidden="true"></canvas>
+   <div class="kg-stage-top">
+    <div class="kg-scene-label"><span>RELATIONSHIP EXPLORER</span><strong id="kgSceneTitle">我想找一份好工作</strong><small id="kgSceneSub">从你关心的问题开始，点击规划路径</small></div>
+    <div class="kg-toolbar"><button type="button" id="kgBack" title="退回上一步">↶ <span>后退</span></button><button type="button" id="kgHome" title="重新探索">⟲ <span>重来</span></button><button type="button" id="kgFit" title="适配全部节点">⊞ <span>适配</span></button></div>
+   </div>
+   <svg id="kgSvg" class="kg-svg" viewBox="0 0 1000 650" role="img" aria-label="点击规划路径，展开产业实体及有来源的关联关系。支持拖拽和缩放">
+    <defs>
+      <radialGradient id="kgNodeGrad" cx="35%" cy="30%" r="70%">
+        <stop offset="0%" stop-color="#3a4a66"/>
+        <stop offset="100%" stop-color="#141c2c"/>
+      </radialGradient>
+      <filter id="kgHalo"><feGaussianBlur stdDeviation="7" result="glow"/><feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <marker id="kgArrow" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9" fill="none" stroke="#9ecce4" stroke-width="1.2" opacity=".64"/></marker>
+    </defs>
+    <g id="kgViewport"><g id="kgEdges"></g><g id="kgNodes"></g></g>
+   </svg>
+   <nav id="kgMobileNodes" class="kg-mobile-nodes" aria-label="当前可探索的图谱节点"></nav>
+   <div id="kgEmpty" class="kg-empty" hidden><strong>证据数据暂时无法加载</strong><span>检查网络后重新加载，不会用虚构数据替代。</span><button type="button" id="kgRetry">重新读取证据</button></div>
+   <div class="kg-stage-bottom">
+    <div class="kg-legend"><span><i class="kg-mark gold"></i>规划方向</span><span><i class="kg-mark aqua"></i>公开主体</span><span><i class="kg-mark dotted"></i>问题引导 / 解读性关联</span></div>
+    <div class="kg-zoom"><button id="kgMinus" aria-label="缩小图谱" type="button">−</button><output id="kgZoomLabel">100%</output><button id="kgPlus" aria-label="放大图谱" type="button">+</button></div>
+   </div>
+   <div class="kg-hint" id="kgHint" role="status">点一条规划路径，每次发现一个新主体</div>
+    <div class="kg-focus-meta" id="kgFocusMeta" aria-live="polite">当前焦点 · 从生活问题出发</div>
   </div>
-
-  <div class="stage">
-    <div class="tower-wrap">
-      <div class="tower" id="tower"></div>
-      <div class="scale" id="scale">
-        <div class="target-line" style="top:0"></div>
-        <div class="mark target" style="top:0">1500亿 参考刻度</div>
-        <div class="mark base" style="bottom:0">632.7亿 高新区现状</div>
-        <div class="cur-line" id="curLine" style="bottom:0"></div>
+  <aside class="kg-inspector" aria-label="所选节点和关系的详细证据">
+    <div class="kg-aside-head"><span>CONTEXT & EVIDENCE</span><span id="kgSelectedType">生活问题</span></div>
+    <div class="kg-heroicon" id="kgHeroIcon" aria-hidden="true">◎</div>
+    <div class="kg-aside-main">
+      <h2 id="kgDetailTitle">从你熟悉的事情开始</h2>
+      <p id="kgDetailLead">选一件你关心的事，点击图谱中的节点。关系将逐层展开。</p>
+      <div class="kg-meta" id="kgMeta"></div>
+      <div class="kg-aside-tabs" role="tablist" aria-label="查看详情">
+        <button data-tab="what" role="tab" aria-selected="true" type="button">看懂它</button>
+        <button data-tab="links" role="tab" aria-selected="false" type="button">谁关联</button>
+        <button data-tab="proof" role="tab" aria-selected="false" type="button">证据</button>
       </div>
+      <div id="kgDetailBody" class="kg-detail-body" role="tabpanel" aria-live="polite"></div>
     </div>
-  </div>
-
-  <div class="pool">
-    <div class="pool-label">点一块积木放到塔上 · 点塔上的积木拿掉</div>
-    <div class="pool-blocks" id="pool"></div>
-  </div>
-
-  <div class="result-bar">
-    <div class="r-top">
-      <span class="r-label">你的塔高</span>
-      <span class="r-val"><span id="curVal">632.7</span><small> 亿</small></span>
-    </div>
-    <div class="r-gap" id="gap">离参考刻度 1500 亿还差 867.3 亿</div>
-  </div>
-
-  <button class="next-btn" id="nextBtn" onclick="goNext()">就这么着，跑模型 →</button>
+    <div class="kg-aside-foot"><button id="kgExpand" class="kg-expand" type="button">发现下一条关系 <span>↗</span></button><div id="kgEvidenceNotice" class="kg-source-hint">实线为有来源的记录关系；虚线为解读性联系。点击线可查看关系依据。</div></div>
+  </aside>
+ </section>
+ <section class="kg-controls" aria-label="证据与时间筛选">
+   <div class="kg-controlgroup"><div class="kg-control-caption">你想看到哪些关系？</div><div class="kg-pills" role="group" aria-label="证据等级">
+      <button type="button" data-grade="A" aria-pressed="true">只看已证实</button><button type="button" data-grade="AB" aria-pressed="false">包含证据推断</button>
+   </div></div>
+   <div class="kg-controlgroup kg-time"><label for="kgDate">按公开记录日期探索 <span id="kgDateLabel">截至 2026-10-30</span></label>
+    <input id="kgDate" type="range" min="0" max="4" step="1" value="4" aria-label="资料发布日期筛选">
+    <div class="kg-ticks"><span>2026·03</span><span>06</span><span>08</span><span>10·15</span><span>10·30</span></div>
+   </div>
+   <div class="kg-stats"><span><strong id="kgNodeCount">0</strong> 个已展开主体</span><span><strong id="kgEdgeCount">0</strong> 条可见关系</span><small>只统计当前显示的图谱内容</small></div>
+ </section>
+ <section class="kg-events" aria-label="公开记录中的七条结构变化">
+    <header class="kg-events-head"><div><div class="kg-overline">EVIDENCE-BASED CHANGE LOG</div><h3>这座城市的关系，最近发生了什么变化？</h3><p>选择一件公开变化，观察相关主体及关系。事件的公开阶段不等于项目已投产。</p></div><div class="kg-events-count">已有 <strong id="kgEventTotal">7</strong> 条变化记录</div></header>
+    <div class="kg-events-scroll" id="kgEventList" aria-label="可探索的公开变化事件"></div>
+    <div class="kg-event-story" id="kgEventStory" hidden aria-live="polite"></div>
+   </section>
+  <section class="kg-discover">
+   <div><span class="kg-overline">ONE MORE CONNECTION</span><h3>想看看实际发生了什么？</h3><p>点击图中的项目、企业或关系线，可追溯公开材料、报道日期与仍待核实的问题。选一个新问题，还可以换一条路重新探索。</p></div>
+   <div class="kg-next"><button id="kgShare" type="button">分享当前探索 ↗</button><a href="future.html">进入第⑥页 · 未来模拟 →</a></div>
+ </section>
+ <footer class="kg-footer"><details class="ds-fold" style="margin:0"><summary>资料底座与口径说明</summary><div class="ds-fold-inner">资料底座：项目已有公开证据关系数据（17 个主体、19 条基础关系、17 条来源、7 条变化记录，版本日期 2026-10-29）。图谱是选择性探索，非完整实时产业网络；“规划路径 → 主体”的归类与生活问题引导属于解释性关联。按来源发布日期的筛选不是历史真实网络重建。事件根据原始资料中的日期、阶段与不确定性呈现，不将动效视为因果证明。第五页不修改模型计算，也不会把图谱点击当作模拟参数传入未来页。</div></details></footer>
+</main>
+<div class="kg-toast" id="kgToast" role="status" hidden></div>
 </div>
-
-<script>
-// 6块积木：按mu值定大小和颜色
-var BLOCKS=[
-  {mu:500,name:'新投产项目',desc:'15宗开工/18宗投产',color:'#fbbf24',icon:'🏭'},
-  {mu:200,name:'三大集群',desc:'电子/装备/新能源',color:'#60a5fa',icon:'⚙️'},
-  {mu:100,name:'AI机器人',desc:'新赛道',color:'#a78bfa',icon:'🤖'},
-  {mu:100,name:'生产性服务业',desc:'双轮驱动',color:'#34d399',icon:'☕'},
-  {mu:50, name:'融深融湾',desc:'外部变量',color:'#f87171',icon:'🚄'},
-  {mu:30, name:'跨江深惠',desc:'半小时通勤圈',color:'#94a3b8',icon:'🌉'}
-];
-
-// mu=500 → 220px宽，mu=30 → 120px宽
-function blockWidth(mu){return Math.round(120 + (mu-30)/(500-30)*(220-120));}
-
-var BASE=632.7, TARGET=1500;
-var placed=[]; // 已放的索引
-
-function total(){return BASE + placed.reduce(function(s,i){return s+BLOCKS[i].mu;},0);}
-
-function render(){
-  // 塔
-  var tw=document.getElementById('tower');
-  tw.innerHTML='';
-  // 从下到上：已放的按放入顺序
-  placed.forEach(function(idx){
-    var b=BLOCKS[idx];
-    var w=blockWidth(b.mu);
-    var d=document.createElement('div');
-    d.className='block placed';
-    d.style.width=w+'px';
-    d.style.background='linear-gradient(145deg,'+b.color+'44 0%,'+b.color+'22 100%)';
-    d.style.borderColor=b.color+'88';
-    d.innerHTML='<div class="b-name">'+b.icon+' '+b.name+'</div><div class="b-val">+'+b.mu+'亿</div>';
-    d.onclick=function(){removeBlock(idx);};
-    tw.appendChild(d);
-  });
-  // 底部地基
-  var base=document.createElement('div');
-  base.style.cssText='width:210px;max-width:52vw;height:14px;border-radius:7px;'+
-    'background:linear-gradient(180deg,rgba(255,255,255,.25),rgba(255,255,255,.08));'+
-    'box-shadow:0 4px 16px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.3)';
-  tw.appendChild(base);
-
-  // 池
-  var pool=document.getElementById('pool');
-  pool.innerHTML='';
-  BLOCKS.forEach(function(b,i){
-    if(placed.indexOf(i)>=0)return;
-    var w=Math.max(90,blockWidth(b.mu)*0.7);
-    var d=document.createElement('div');
-    d.className='pool-block';
-    d.style.width=w+'px';
-    d.style.borderColor=b.color+'55';
-    d.innerHTML='<div class="pb-name">'+b.icon+' '+b.name+'</div><div class="pb-val">+'+b.mu+'亿</div>';
-    d.onclick=function(){placeBlock(i);};
-    pool.appendChild(d);
-  });
-
-  // 数字
-  var t=total();
-  animateVal(t);
-
-  // 刻度线位置：塔高对应在 0~100%（target在0%，base在100%）
-  var pct=Math.max(0,Math.min(100,(t-TARGET)/(BASE-TARGET)*100));
-  document.getElementById('curLine').style.bottom=pct+'%';
-
-  // gap
-  var gapEl=document.getElementById('gap');
-  var diff=TARGET-t;
-  if(diff>0){
-    gapEl.textContent='离参考刻度 1500 亿还差 '+diff.toFixed(0)+' 亿';
-    gapEl.className='r-gap';
-  }else{
-    gapEl.textContent='已过参考刻度 1500 亿 '+( -diff).toFixed(0)+' 亿';
-    gapEl.className='r-gap over';
-  }
-}
-
-function placeBlock(i){
-  if(placed.indexOf(i)>=0)return;
-  placed.push(i);
-  render();
-}
-function removeBlock(i){
-  placed=placed.filter(function(x){return x!==i;});
-  render();
-}
-
-// 数字滚动
-function animateVal(target){
-  var el=document.getElementById('curVal');
-  var start=parseFloat(el.textContent)||BASE;
-  var dur=600,t0=null;
-  function step(ts){
-    if(!t0)t0=ts;
-    var p=Math.min(1,(ts-t0)/dur);
-    var e=1-Math.pow(1-p,3);
-    el.textContent=(start+(target-start)*e).toFixed(1);
-    if(p<1)requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
-
-function goNext(){
-  // 把选择存下来，传给 future.html
-  var active=placed.map(function(i){return i;});
-  localStorage.setItem('hcChoices',JSON.stringify(active));
-  location.href='future.html?from=choices';
-}
-
-render();
-</script>
-</body></html>
+<script src="choices-kg.js" defer></script>
+<script src="ui/ui.js" defer></script>
+</body>
+</html>

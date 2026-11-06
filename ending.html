@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%230a84ff%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%226%22 fill=%22%23fff%22/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>让每一个重大决策，先跑一遍 · 惠城产业风洞</title>
 <style>
 :root{
@@ -266,24 +267,26 @@ details.dcard .dbody h2{font-size:16px;margin:0 0 14px;padding-bottom:10px;borde
 .likebar{position:relative;bottom:auto;left:auto;transform:none;display:flex;justify-content:center;margin:24px auto;background:rgba(15,23,42,.7);backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:24px;padding:10px 22px;gap:24px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.4);max-width:280px}
 .likebar button{background:none;border:none;color:var(--ink2);font-size:14px;cursor:pointer}
 .likebar button:active{transform:scale(1.15)}
+
+/* ===== 精致深色皮肤增强 ===== */
+body{position:relative;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(191,90,242,.07),transparent 35%),
+    radial-gradient(circle at 85% 75%,rgba(90,200,250,.06),transparent 40%),
+    radial-gradient(circle at 70% 15%,rgba(48,209,88,.04),transparent 30%)}
+.card, .box, .panel{
+  background:linear-gradient(160deg,rgba(40,52,76,.5),rgba(20,28,44,.45))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 4px 24px rgba(0,0,0,.25)!important;
+  backdrop-filter:blur(16px)!important}
 </style>
 <script src="model.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="ui/ui.css">
+<link rel="stylesheet" href="ui/ui-pages.css">
 </head><body>
 
-<div class="nav">
-  <b>惠城产业风洞</b>
-  <a href="index.html">① 今日话题</a>
-  <a href="fun.html">🍜 风向标</a>
-  <a href="network.html">② 建构世界</a>
-  <a href="who.html">③ 掂量</a>
-  <a href="choices.html">④ 五条路</a>
-  <a href="future.html">⑤ 未来</a>
-  <a href="windtunnel.html">⑥ 风洞测试</a>
-  <a href="blindspot.html">⑦ 忽略了什么</a>
-  <a href="report.html">⑧ 分析报告</a>
-  <a href="ending.html" class="on">⑨ 结语</a>
-</div>
+
 
 <div class="wrap">
 
@@ -292,14 +295,14 @@ details.dcard .dbody h2{font-size:16px;margin:0 0 14px;padding-bottom:10px;borde
     <div class="hero-bg"></div>
     <div class="hero-mask"></div>
     <div class="hero-in">
-      <div class="kick">09 · 结 语</div>
+      <div class="kick">10 · 结 语</div>
       <h1>一场变化，如何影响一座城市，<br>以及<b>每一个普通人</b>的生活。</h1>
       <p>基于同一模型和你在第⑧页的连接，我们把数据变化放回真实的城市场景，看看它可能带来的连锁影响。交通、工作、消费、居住，最终都会抵达某个人的日子。</p>
     </div>
     <div class="hero-pills">
-      <span class="hpill">🧭 承接你刚才的实验设置</span>
-      <span class="hpill">🎲 同一模型 · 同一随机种子</span>
-      <span class="hpill">⚠️ 压力测试叙事 · 非预测</span>
+      <span class="hpill"> 承接你刚才的实验设置</span>
+      <span class="hpill"> 同一模型 · 同一随机种子</span>
+      <span class="hpill">️ 压力测试叙事 · 非预测</span>
     </div>
   </div>
 
@@ -325,25 +328,25 @@ details.dcard .dbody h2{font-size:16px;margin:0 0 14px;padding-bottom:10px;borde
       <!-- 场景坐标以百分比定位 -->
       <div class="scene" data-k="bridge" data-t="t" style="left:18%;top:38%">
         <div class="s-dot"></div>
-        <div class="s-bubble"><div class="s-name">🌉 桥与道路</div>
+        <div class="s-bubble"><div class="s-name"> 桥与道路</div>
           <div class="s-ok">通勤顺畅 · 跨江物流高效</div>
           <div class="s-bad">通勤时间延长 · 物流效率下降</div></div>
       </div>
       <div class="scene" data-k="park" data-t="w" style="left:48%;top:28%">
         <div class="s-dot"></div>
-        <div class="s-bubble"><div class="s-name">🏭 产业园区</div>
+        <div class="s-bubble"><div class="s-name"> 产业园区</div>
           <div class="s-ok">新厂投产 · 岗位稳步增加</div>
           <div class="s-bad">投产节奏放缓 · 就业增长减少</div></div>
       </div>
       <div class="scene" data-k="shop" data-t="c" style="left:58%;top:62%">
         <div class="s-dot"></div>
-        <div class="s-bubble"><div class="s-name">🛍️ 商圈小店</div>
+        <div class="s-bubble"><div class="s-name">️ 商圈小店</div>
           <div class="s-ok">客流增长 · 消费活力升温</div>
           <div class="s-bad">客流增长放缓 · 消费活力减弱</div></div>
       </div>
       <div class="scene" data-k="home" data-t="h" style="left:82%;top:68%">
         <div class="s-dot"></div>
-        <div class="s-bubble"><div class="s-name">🏘️ 社区与家庭</div>
+        <div class="s-bubble"><div class="s-name">️ 社区与家庭</div>
           <div class="s-ok">就业稳定 · 生活预期向好</div>
           <div class="s-bad">就业机会减少 · 生活预期受影响</div></div>
       </div>
@@ -357,11 +360,11 @@ details.dcard .dbody h2{font-size:16px;margin:0 0 14px;padding-bottom:10px;borde
 
   <!-- ② 这是你刚刚亲手改变的惠城（真实模型结果，承接第⑧页） -->
   <div class="card">
-    <h2>🎯 这是你刚刚亲手改变的惠城</h2>
+    <h2> 这是你刚刚亲手改变的惠城</h2>
     <div class="exp-bar">
       <span class="cur-tag" id="curTag">你的情景：基准情景</span>
       <span style="font-size:11px;color:var(--muted)">基于你在第⑧页（或风洞页）的设置，用同一模型重新计算</span>
-      <a class="back-link" href="report.html">🎛️ 回到第⑧页改条件</a>
+      <a class="back-link" href="report.html">️ 回到第⑧页改条件</a>
     </div>
     <div class="exp-grid">
       <div class="exp-side base">
@@ -387,21 +390,21 @@ details.dcard .dbody h2{font-size:16px;margin:0 0 14px;padding-bottom:10px;borde
         <div class="dist-box"><canvas id="cDist"></canvas></div>
       </div>
     </div>
-    <div class="exp-meta" id="expMeta">模型版本 v1.0 · 随机种子 42 · 单次 2 万次蒙特卡洛 · BASE 632.7 亿（2025 惠城高新区规上工业产值实测，非全区 GDP）· TARGET 1500 亿（外延参考刻度，非官方目标）；压力叠加采用累计口径，与第⑥风洞页、第⑧报告页完全一致。<br>本结果为压力测试叙事，<b>不是预测，不构成投资建议</b>。</div>
+    <details class="ds-fold" style="margin:8px 0 0"><summary>模型口径与边界说明</summary><div class="ds-fold-inner exp-meta" id="expMeta">模型版本 v1.0 · 随机种子 42 · 单次 2 万次蒙特卡洛 · BASE 632.7 亿（2025 惠城高新区规上工业产值实测，非全区 GDP）· TARGET 1500 亿（外延参考刻度，非官方目标）；压力叠加采用累计口径，与第⑥风洞页、第⑧报告页完全一致。<br>本结果为压力测试叙事，<b>不是预测，不构成投资建议</b>。</div></details>
   </div>
 
   <!-- ③ 继续你的实验 -->
   <div class="card">
-    <h2>🎛️ 继续你的实验</h2>
+    <h2>️ 继续你的实验</h2>
     <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 14px">以上是你当前条件下的模型结果。可以回到报告页调整压力档位，或换一组情景再跑一次——这组结果只在本机本页查看，不向外导出。</p>
     <div class="share-grid">
-      <a class="share-btn pri" href="report.html#d=0&c=0">🎛️ 回到第⑧页改条件</a>
-      <a class="share-btn sec" href="windtunnel.html">🎲 再次挑战不同情景</a>
+      <a class="share-btn pri" href="report.html#d=0&c=0">️ 回到第⑧页改条件</a>
+      <a class="share-btn sec" href="windtunnel.html"> 再次挑战不同情景</a>
     </div>
   </div>
 
   <!-- 深度阅读 -->
-  <div class="deep-divider"><span class="dd-line"></span>📖 深度阅读 · 政策依据、世界经验与数据底座<span class="dd-line"></span></div>
+  <div class="deep-divider"><span class="dd-line"></span> 深度阅读 · 政策依据、世界经验与数据底座<span class="dd-line"></span></div>
 
   <!-- 数字中国依据 -->
   <details class="dcard">
@@ -466,36 +469,36 @@ details.dcard .dbody h2{font-size:16px;margin:0 0 14px;padding-bottom:10px;borde
     <div class="dbody">
       <div class="flows">
         <div class="flow-branch daily">
-          <div class="bh">🔄 每日热点数据 · 每天自动刷新</div>
+          <div class="bh"> 每日热点数据 · 每天自动刷新</div>
           <div class="bf">喂给首页「今日话题」「今夜人气」，追踪的是大家在关注什么；每条都带真实来源链接。</div>
           <div class="flow-rail"><span class="pulse-dot"></span></div>
           <div class="flow-steps">
-            <div class="fs"><div class="fc">📰</div><div class="ft">公开采集</div><div class="fd">政府公报·权威媒体·社交平台</div></div>
-            <div class="fs"><div class="fc">📊</div><div class="ft">声量分档</div><div class="fd">只排高低，非平台后台统计</div></div>
-            <div class="fs"><div class="fc">✅</div><div class="ft">结构校验</div><div class="fd">字段校验通过才放行</div></div>
-            <div class="fs"><div class="fc">🌐</div><div class="ft">每日上线</div><div class="fd">hot.json · life.json</div></div>
+            <div class="fs"><div class="fc"></div><div class="ft">公开采集</div><div class="fd">政府公报·权威媒体·社交平台</div></div>
+            <div class="fs"><div class="fc"></div><div class="ft">声量分档</div><div class="fd">只排高低，非平台后台统计</div></div>
+            <div class="fs"><div class="fc"></div><div class="ft">结构校验</div><div class="fd">字段校验通过才放行</div></div>
+            <div class="fs"><div class="fc"></div><div class="ft">每日上线</div><div class="fd">hot.json · life.json</div></div>
           </div>
         </div>
         <div class="flow-branch model">
-          <div class="bh">🧩 模型参数 · 不随每日热点自动改变</div>
+          <div class="bh"> 模型参数 · 不随每日热点自动改变</div>
           <div class="bf">喂给「产业风洞」推演；只有官方新锚点、经过证据审核才会调整，绝不拿传闻直接改模型。</div>
           <div class="flow-rail"><span class="pulse-dot"></span></div>
           <div class="flow-steps">
-            <div class="fs"><div class="fc">📕</div><div class="ft">官方实测锚点</div><div class="fd">统计公报·政府工作报告</div></div>
-            <div class="fs"><div class="fc">🔎</div><div class="ft">证据审核</div><div class="fd">须权威来源·人工核对</div></div>
-            <div class="fs"><div class="fc">⚖️</div><div class="ft">参数修订</div><div class="fd">改 model.js 并写明依据</div></div>
-            <div class="fs"><div class="fc">🎲</div><div class="ft">进入推演</div><div class="fd">路径 μ/σ 才更新</div></div>
+            <div class="fs"><div class="fc"></div><div class="ft">官方实测锚点</div><div class="fd">统计公报·政府工作报告</div></div>
+            <div class="fs"><div class="fc"></div><div class="ft">证据审核</div><div class="fd">须权威来源·人工核对</div></div>
+            <div class="fs"><div class="fc">️</div><div class="ft">参数修订</div><div class="fd">改 model.js 并写明依据</div></div>
+            <div class="fs"><div class="fc"></div><div class="ft">进入推演</div><div class="fd">路径 μ/σ 才更新</div></div>
           </div>
         </div>
       </div>
-      <div style="text-align:center;font-size:11.5px;color:#fcd34d;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25);border-radius:10px;padding:9px 12px;margin:0 0 14px;line-height:1.7">⚠️ 每天更新的是「大家在看什么」，<b>不代表模型参数每天在变</b>；涉及模型参数的事件，必须先通过证据审核。</div>
+      <div style="text-align:center;font-size:11.5px;color:#fcd34d;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25);border-radius:10px;padding:9px 12px;margin:0 0 14px;line-height:1.7">️ 每天更新的是「大家在看什么」，<b>不代表模型参数每天在变</b>；涉及模型参数的事件，必须先通过证据审核。</div>
       <div class="grid6">
-        <div class="feat"><div class="ic">📰</div><b>来源公开</b><span>政府公开公报、官方发布、主流媒体，以及公开社交平台上的本地事，每条都能点回去看原文。</span></div>
-        <div class="feat"><div class="ic">🗓️</div><b>每天更新一次</b><span>统计最近24小时的公开讨论，读的是今天这一份，不是随时在变。</span></div>
-        <div class="feat"><div class="ic">📊</div><b>数字是合理估算</b><span>按公开热度估的，不是平台后台真实统计，只用来排先后、看冷热。</span></div>
-        <div class="feat"><div class="ic">🔍</div><b>能回头核对</b><span>“推演”是把公开条件换着组合、重复跑很多遍看区间，不是预测，更不是官方结论。</span></div>
-        <div class="feat"><div class="ic">🤝</div><b>补充一个视角</b><span>在官方规划和已有成绩基础上多给一个看问题的角度，不是说谁对谁错。</span></div>
-        <div class="feat"><div class="ic">🌱</div><b>独立、开源</b><span>张凌博士个人业余时间所做，没有课题、没有赞助，代码与参数全部公开，欢迎挑错。</span></div>
+        <div class="feat"><div class="ic"></div><b>来源公开</b><span>政府公开公报、官方发布、主流媒体，以及公开社交平台上的本地事，每条都能点回去看原文。</span></div>
+        <div class="feat"><div class="ic">️</div><b>每天更新一次</b><span>统计最近24小时的公开讨论，读的是今天这一份，不是随时在变。</span></div>
+        <div class="feat"><div class="ic"></div><b>数字是合理估算</b><span>按公开热度估的，不是平台后台真实统计，只用来排先后、看冷热。</span></div>
+        <div class="feat"><div class="ic"></div><b>能回头核对</b><span>“推演”是把公开条件换着组合、重复跑很多遍看区间，不是预测，更不是官方结论。</span></div>
+        <div class="feat"><div class="ic"></div><b>补充一个视角</b><span>在官方规划和已有成绩基础上多给一个看问题的角度，不是说谁对谁错。</span></div>
+        <div class="feat"><div class="ic"></div><b>独立、开源</b><span>张凌博士个人业余时间所做，没有课题、没有赞助，代码与参数全部公开，欢迎挑错。</span></div>
       </div>
     </div>
   </details>
@@ -506,27 +509,27 @@ details.dcard .dbody h2{font-size:16px;margin:0 0 14px;padding-bottom:10px;borde
     <div class="dbody">
       <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 4px">不画主观分数，只按真实开发状态，把六个方向已做了什么、待验证什么、还要补什么逐条摆出来。</p>
       <div class="cap-list">
-        <div class="cap-row"><div class="ch"><span class="ic">🌬️</span><span class="nm">更全 · 压力测试广度</span><span class="st wip">进行中</span></div>
-          <div class="cap-lines"><div class="li yes"><span class="mk">✓</span><span>已做：投产延期、通勤堵塞、外需走弱，以及“延期+通勤”叠加情景。</span></div><div class="li no"><span class="mk">○</span><span>待补：极端天气、产业链断点、政策突变等多重压力同时发生的组合。</span></div></div></div>
-        <div class="cap-row"><div class="ch"><span class="ic">🎯</span><span class="nm">更准 · 找“命门”的精度</span><span class="st wip">进行中</span></div>
-          <div class="cap-lines"><div class="li yes"><span class="mk">✓</span><span>已做：五条路径参数微分（敏感性）、26主体介数中心性、5路相关系数。</span></div><div class="li no"><span class="mk">○</span><span>待补：从“路径级”下沉到“单个项目/地块级”，需要企业与地块粒度数据。</span></div></div></div>
-        <div class="cap-row"><div class="ch"><span class="ic">🎲</span><span class="nm">更稳 · 上万次推演的稳健性</span><span class="st done">已具备</span></div>
-          <div class="cap-lines"><div class="li yes"><span class="mk">✓</span><span>已做：单次 2 万次蒙特卡洛，给出 p10/p50/p90 区间与达标率，而非一个数字。</span></div><div class="li now"><span class="mk">◐</span><span>待验证：不同随机种子下结论是否同样稳定。</span></div></div></div>
-        <div class="cap-row"><div class="ch"><span class="ic">📡</span><span class="nm">更实 · 数据真实程度</span><span class="st wip">进行中</span></div>
-          <div class="cap-lines"><div class="li yes"><span class="mk">✓</span><span>已做：GDP、规上工业、高新区、固投、社消零等均用统计公报/政府工作报告实测锚点。</span></div><div class="li now"><span class="mk">◐</span><span>待验证：五条路径 μ/σ 目前是专家设定的假设，不是实测分布。</span></div><div class="li no"><span class="mk">○</span><span>待补：通勤 OD、就业、教育、交通等真实数据源。</span></div></div></div>
-        <div class="cap-row"><div class="ch"><span class="ic">🛠️</span><span class="nm">更开 · 可交互、可核对</span><span class="st done">已具备</span></div>
-          <div class="cap-lines"><div class="li yes"><span class="mk">✓</span><span>已做：参数可改、情景开关、结论可复制，代码与参数全部开源，每条话题带真实来源链接。</span></div></div></div>
-        <div class="cap-row"><div class="ch"><span class="ic">🧭</span><span class="nm">更远 · 从“看见”到“怎么走”</span><span class="st todo">待做</span></div>
-          <div class="cap-lines"><div class="li yes"><span class="mk">✓</span><span>已做：指出脆弱点、给出优先方向。</span></div><div class="li no"><span class="mk">○</span><span>待补：与一线一起共创，推演具体行动怎么走、先后如何排、效果如何回测。</span></div></div></div>
+        <div class="cap-row"><div class="ch"><span class="ic">️</span><span class="nm">更全 · 压力测试广度</span><span class="st wip">进行中</span></div>
+          <div class="cap-lines"><div class="li yes"><span class="mk"></span><span>已做：投产延期、通勤堵塞、外需走弱，以及“延期+通勤”叠加情景。</span></div><div class="li no"><span class="mk">○</span><span>待补：极端天气、产业链断点、政策突变等多重压力同时发生的组合。</span></div></div></div>
+        <div class="cap-row"><div class="ch"><span class="ic"></span><span class="nm">更准 · 找“命门”的精度</span><span class="st wip">进行中</span></div>
+          <div class="cap-lines"><div class="li yes"><span class="mk"></span><span>已做：五条路径参数微分（敏感性）、26主体介数中心性、5路相关系数。</span></div><div class="li no"><span class="mk">○</span><span>待补：从“路径级”下沉到“单个项目/地块级”，需要企业与地块粒度数据。</span></div></div></div>
+        <div class="cap-row"><div class="ch"><span class="ic"></span><span class="nm">更稳 · 上万次推演的稳健性</span><span class="st done">已具备</span></div>
+          <div class="cap-lines"><div class="li yes"><span class="mk"></span><span>已做：单次 2 万次蒙特卡洛，给出 p10/p50/p90 区间与达标率，而非一个数字。</span></div><div class="li now"><span class="mk">◐</span><span>待验证：不同随机种子下结论是否同样稳定。</span></div></div></div>
+        <div class="cap-row"><div class="ch"><span class="ic"></span><span class="nm">更实 · 数据真实程度</span><span class="st wip">进行中</span></div>
+          <div class="cap-lines"><div class="li yes"><span class="mk"></span><span>已做：GDP、规上工业、高新区、固投、社消零等均用统计公报/政府工作报告实测锚点。</span></div><div class="li now"><span class="mk">◐</span><span>待验证：五条路径 μ/σ 目前是专家设定的假设，不是实测分布。</span></div><div class="li no"><span class="mk">○</span><span>待补：通勤 OD、就业、教育、交通等真实数据源。</span></div></div></div>
+        <div class="cap-row"><div class="ch"><span class="ic">️</span><span class="nm">更开 · 可交互、可核对</span><span class="st done">已具备</span></div>
+          <div class="cap-lines"><div class="li yes"><span class="mk"></span><span>已做：参数可改、情景开关、结论可复制，代码与参数全部开源，每条话题带真实来源链接。</span></div></div></div>
+        <div class="cap-row"><div class="ch"><span class="ic"></span><span class="nm">更远 · 从“看见”到“怎么走”</span><span class="st todo">待做</span></div>
+          <div class="cap-lines"><div class="li yes"><span class="mk"></span><span>已做：指出脆弱点、给出优先方向。</span></div><div class="li no"><span class="mk">○</span><span>待补：与一线一起共创，推演具体行动怎么走、先后如何排、效果如何回测。</span></div></div></div>
       </div>
-      <p style="font-size:11px;color:#8fa3bf;text-align:center;margin:12px 0 0;line-height:1.8">以上为 Demo 真实开发状态，<b style="color:#fbbf24">不是主观打分，也不代表任何机构测评</b>；✓ 已做到　◐ 待验证　○ 待补数据。</p>
+      <p style="font-size:11px;color:#8fa3bf;text-align:center;margin:12px 0 0;line-height:1.8">以上为 Demo 真实开发状态，<b style="color:#fbbf24">不是主观打分，也不代表任何机构测评</b>； 已做到　◐ 待验证　○ 待补数据。</p>
       <div class="stair" style="margin-top:18px">
-        <div class="step-card"><div class="ic">🌬️</div><div class="tx"><div class="lv">更全</div><h4>更多压力测试</h4><p>极端天气、产业链断点、外部冲击、政策变化等组合情景。</p></div></div>
-        <div class="step-card"><div class="ic">🎯</div><div class="tx"><div class="lv">更准</div><h4>更细找“命门”</h4><p>把每个项目、每条关系、每个参数逐一扰动，精确找出最不能出错的位置。</p></div></div>
-        <div class="step-card"><div class="ic">🎲</div><div class="tx"><div class="lv">更稳</div><h4>上万次推演</h4><p>让未来在不同条件下反复演化，给出更稳健的可能性分布。</p></div></div>
-        <div class="step-card"><div class="ic">📡</div><div class="tx"><div class="lv">更实</div><h4>更真实数据</h4><p>对接统计、交通、就业、教育等真实数据源，逐步减少假设。</p></div></div>
-        <div class="step-card"><div class="ic">🛠️</div><div class="tx"><div class="lv">更开</div><h4>可交互可核对</h4><p>决策者自己改参数、提问题、现场推演，每一步都能回到公开资料。</p></div></div>
-        <div class="step-card"><div class="ic">🧭</div><div class="tx"><div class="lv">更远</div><h4>从看见到怎么走</h4><p>和一线一起，推演具体行动怎么走、先后如何排。</p></div></div>
+        <div class="step-card"><div class="ic">️</div><div class="tx"><div class="lv">更全</div><h4>更多压力测试</h4><p>极端天气、产业链断点、外部冲击、政策变化等组合情景。</p></div></div>
+        <div class="step-card"><div class="ic"></div><div class="tx"><div class="lv">更准</div><h4>更细找“命门”</h4><p>把每个项目、每条关系、每个参数逐一扰动，精确找出最不能出错的位置。</p></div></div>
+        <div class="step-card"><div class="ic"></div><div class="tx"><div class="lv">更稳</div><h4>上万次推演</h4><p>让未来在不同条件下反复演化，给出更稳健的可能性分布。</p></div></div>
+        <div class="step-card"><div class="ic"></div><div class="tx"><div class="lv">更实</div><h4>更真实数据</h4><p>对接统计、交通、就业、教育等真实数据源，逐步减少假设。</p></div></div>
+        <div class="step-card"><div class="ic">️</div><div class="tx"><div class="lv">更开</div><h4>可交互可核对</h4><p>决策者自己改参数、提问题、现场推演，每一步都能回到公开资料。</p></div></div>
+        <div class="step-card"><div class="ic"></div><div class="tx"><div class="lv">更远</div><h4>从看见到怎么走</h4><p>和一线一起，推演具体行动怎么走、先后如何排。</p></div></div>
       </div>
     </div>
   </details>
@@ -554,14 +557,14 @@ details.dcard .dbody h2{font-size:16px;margin:0 0 14px;padding-bottom:10px;borde
     </div>
     <div class="sign">惠城产业决策风洞 · Demo版 &nbsp;|&nbsp; <b>张凌 博士</b> · 决策模拟推演</div>
     <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-      <a class="btn" href="windtunnel.html" style="background:#f59e0b">🎲 你来当一次市长</a>
+      <a class="btn" href="windtunnel.html" style="background:#f59e0b"> 你来当一次市长</a>
       <a class="btn ghost" href="report.html">查看分析报告</a>
       <a class="btn ghost" href="index.html">重新看一遍</a>
     </div>
   </div>
 
   <div class="likebar">
-    <button onclick="likePage()">👍 <span id="pcount">0</span></button>
+    <button onclick="likePage()"> <span id="pcount">0</span></button>
   </div>
 
 </div>
@@ -727,4 +730,5 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
+<script src="ui/ui.js" defer></script>
 </body></html>

@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='slateblue'/><circle cx='16' cy='16' r='6' fill='none' stroke='white' stroke-width='2.5'/><circle cx='16' cy='16' r='2' fill='white'/></svg>">
+<title>惠城产业风洞 · 模拟沙盘首页</title>
+<style>
+:root{
+  --sky1:#0b1026; --sky2:#1e1b4b; --sky3:#7c2d12; --horizon:#fbbf24;
+  --glass:rgba(255,255,255,.07); --glass-b:rgba(255,255,255,.13);
+  --ink:#f1f5f9; --ink2:#cbd5e1; --muted:#94a3b8;
+  --neon:#38bdf8; --warm:#fbbf24; --ok:#34d399; --bad:#fb7185; --pink:#f472b6;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden}
+body{background:var(--sky1);color:var(--ink);font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased;position:relative}
+
+/* ===== 场景背景：黄昏城市沙盘 ===== */
+.scene{position:fixed;inset:0;z-index:0;overflow:hidden}
+.sky{position:absolute;inset:0;background:linear-gradient(180deg,#0b1026 0%,#1e1b4b 42%,#5b21b6 62%,#9a3412 80%,#fbbf24 96%)}
+.sun{position:absolute;left:50%;bottom:14%;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,#fde68a,#f59e0b 60%,transparent 72%);transform:translateX(-50%);filter:blur(2px);opacity:.9}
+.stars{position:absolute;inset:0 0 40% 0}
+.stars i{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:.7;animation:tw 3s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.2}50%{opacity:.9}}
+/* 远山 */
+.mountains{position:absolute;left:0;right:0;bottom:22%;height:120px;background:linear-gradient(180deg,transparent,#1e1b4b);clip-path:polygon(0 100%,8% 55%,18% 75%,28% 40%,40% 70%,52% 35%,64% 65%,76% 45%,88% 70%,100% 50%,100% 100%)}
+/* 城市天际线 */
+.skyline{position:absolute;left:0;right:0;bottom:18%;height:180px;display:flex;align-items:flex-end;gap:3px;padding:0 20px}
+.b{flex:1;background:linear-gradient(180deg,#1e293b,#0f172a);border-radius:2px 2px 0 0;position:relative}
+.b::after{content:"";position:absolute;inset:8px 4px 4px;background-image:radial-gradient(circle,#fbbf24 1px,transparent 1.5px);background-size:10px 12px;opacity:.55}
+.b.tall{flex:1.4}
+.b.wide{flex:2}
+/* 近景道路+车流 */
+.road{position:absolute;left:0;right:0;bottom:0;height:18%;background:linear-gradient(180deg,#0f172a,#020617);border-top:1px solid rgba(255,255,255,.06)}
+.road::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:repeating-linear-gradient(90deg,#fbbf24 0 30px,transparent 30px 60px);opacity:.5}
+.car{position:absolute;top:42%;width:8px;height:4px;border-radius:2px;background:#38bdf8;box-shadow:0 0 8px #38bdf8;animation:drive 6s linear infinite}
+.car.r{background:#f472b6;box-shadow:0 0 8px #f472b6;animation-duration:8s;animation-delay:-2s;top:58%}
+@keyframes drive{from{left:-5%}to{left:105%}}
+/* 产业链发光节点（浮在场景上） */
+.nodes{position:absolute;inset:0}
+.node{position:absolute;width:14px;height:14px;border-radius:50%;background:var(--neon);box-shadow:0 0 0 4px rgba(56,189,248,.2),0 0 16px var(--neon);cursor:pointer;animation:pulse 2.4s ease-in-out infinite;transform:translate(-50%,-50%)}
+.node.warm{background:var(--warm);box-shadow:0 0 0 4px rgba(251,191,36,.2),0 0 16px var(--warm)}
+.node.ok{background:var(--ok);box-shadow:0 0 0 4px rgba(52,211,153,.2),0 0 16px var(--ok)}
+.node.pink{background:var(--pink);box-shadow:0 0 0 4px rgba(244,114,182,.2),0 0 16px var(--pink)}
+@keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.25)}}
+.node .lbl{position:absolute;left:18px;top:-4px;font-size:11px;color:var(--ink2);white-space:nowrap;background:rgba(15,23,42,.7);padding:2px 7px;border-radius:5px;opacity:0;transition:.2s;pointer-events:none}
+.node:hover .lbl{opacity:1}
+
+/* ===== HUD 层 ===== */
+.hud{position:relative;z-index:10;height:100vh;display:flex;flex-direction:column;padding:12px}
+/* 顶部资源条 */
+.topbar{display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:14px;padding:8px 14px;flex:none}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:14px;letter-spacing:.3px;flex:none}
+.brand .logo{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#38bdf8,#6366f1);display:flex;align-items:center;justify-content:center}
+.res{display:flex;gap:14px;flex:1;justify-content:center;flex-wrap:wrap}
+.res .r{display:flex;flex-direction:column;align-items:center;min-width:70px}
+.res .r .v{font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--warm)}
+.res .r .v.blue{color:var(--neon)}
+.res .r .v.green{color:var(--ok)}
+.res .r .l{font-size:10px;color:var(--muted);letter-spacing:.5px}
+.clock{font-size:11px;color:var(--muted);text-align:right;flex:none;line-height:1.4}
+.clock b{color:var(--ink2);font-size:13px}
+
+/* 中央区（双视角容器） */
+.mid{flex:1;margin-top:10px;min-height:0;position:relative}
+.view{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:12px}
+/* 视角切换 */
+.viewswitch{flex:none;display:flex;justify-content:center;gap:0;margin-top:9px}
+.viewswitch .seg{display:flex;background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:99px;padding:3px;gap:2px}
+.viewswitch button{font-size:12px;font-weight:700;color:var(--muted);background:transparent;border:0;padding:6px 22px;border-radius:99px;cursor:pointer;letter-spacing:1px;display:flex;align-items:center;gap:6px}
+.viewswitch button.on{background:linear-gradient(135deg,rgba(56,189,248,.3),rgba(99,102,241,.3));color:#fff;box-shadow:0 0 14px rgba(56,189,248,.25)}
+.viewswitch button svg{width:14px;height:14px}
+.stage{position:relative;background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--glass-b);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.stage-h{padding:12px 16px 0;display:flex;align-items:baseline;gap:10px}
+.stage-h h2{font-size:16px;margin:0;font-weight:800}
+.stage-h .sub{font-size:11px;color:var(--muted)}
+.stage-h .live{margin-left:auto;font-size:10px;color:var(--ok);display:flex;align-items:center;gap:5px}
+.stage-h .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ok);animation:pulse2 1.5s infinite}
+@keyframes pulse2{0%,100%{opacity:1}50%{opacity:.3}}
+.stage-body{flex:1;position:relative;min-height:0}
+/* 真实产业链网络 */
+#net{width:100%;height:100%;display:block}
+#net .edge{stroke-linecap:round;transition:opacity .15s}
+#net .node{cursor:pointer;transition:opacity .15s}
+#net .node:hover{filter:drop-shadow(0 0 6px currentColor)}
+#net .lbl{font-size:11px;fill:#cbd5e1;pointer-events:none;transition:opacity .2s}
+#net .lbl.hot{fill:#f1f5f9;font-weight:700}
+#netLbl{position:absolute;inset:0;pointer-events:none}
+#netLbl .lb{position:absolute;transform:translate(0,-50%);font-size:12px;font-weight:650;color:#dbe4f0;white-space:nowrap;line-height:1.35;text-shadow:0 1px 3px rgba(0,0,0,.85)}
+#netLbl .lb strong{font-size:13px;font-weight:800;color:#fff}
+#netLbl .lb.weak{font-size:10px;font-weight:400;color:#8fa3bf}
+#netLbl .lb.dim{opacity:.65}
+.net-legend{position:absolute;left:10px;bottom:8px;display:flex;gap:10px;font-size:9.5px;color:var(--muted);background:rgba(15,23,42,.55);padding:4px 9px;border-radius:7px;flex-wrap:wrap}
+.net-legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:3px;vertical-align:-1px}
+.net-legend .b{width:10px;height:2px;border-radius:2px;margin-right:3px;vertical-align:2px}
+/* ===== 心脏供血：心脏跳动、血液泵出、节点被点亮 ===== */
+#net .heart .core{transform-box:fill-box;transform-origin:center;animation:heartbeat 2s ease-in-out infinite}
+@keyframes heartbeat{0%,100%{transform:scale(1)}12%{transform:scale(1.18)}26%{transform:scale(1.04)}40%{transform:scale(1.13)}}
+#net .pulse-ring{fill:none;stroke:#7dd3fc;stroke-width:1.6;opacity:0;animation:pring 2s ease-out infinite}
+@keyframes pring{0%{r:10px;opacity:.85}100%{r:140px;opacity:0}}
+#net .bloodflow{stroke:#eaf2ff;stroke-width:1.8;stroke-dasharray:4 26;fill:none;opacity:0;animation:bfpump 2s linear infinite}
+@keyframes bfpump{0%{stroke-dashoffset:30;opacity:0}12%{opacity:.95}60%{opacity:.4}100%{stroke-dashoffset:-30;opacity:0}}
+#net .bridge-ring{fill:none;stroke:#22d3ee;stroke-width:1.3;opacity:.7}
+#net .node .recv{animation:recvHit 2s ease-in-out infinite}
+@keyframes recvHit{0%,14%{opacity:.42}28%{opacity:1}58%{opacity:.72}100%{opacity:.58}}
+#net .node.in{animation:nodeIn .55s ease-out both}
+@keyframes nodeIn{from{opacity:0}to{opacity:1}}
+/* 供血不足：半暗 / 停供：全暗 */
+#net .node.weak .recv{opacity:.2!important;animation-play-state:paused}
+#net .node.starved .recv{opacity:.12!important;animation-play-state:paused}
+#net .node.weak .bridge-ring,#net .node.starved .bridge-ring{opacity:.15}
+/* 心脏停跳 */
+#net .heart.dead .core{animation:none;fill:#4b5563;opacity:.55}
+#net .heart.dead .pulse-ring,#net .heart.dead .bloodflow{animation:none;opacity:0}
+/* 断裂点标记 */
+#netLbl .nbrk{position:absolute;transform:translate(-50%,-50%);color:var(--bad);font-size:13px;font-weight:900;line-height:1;text-shadow:0 0 5px #000,0 0 5px #000;cursor:pointer;z-index:7;animation:nbrkflash 1.4s ease-in-out infinite}
+@keyframes nbrkflash{0%,100%{opacity:.6}50%{opacity:1}}
+/* 大字幕 */
+.net-cap{position:absolute;top:9px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:7px;background:rgba(13,20,38,.74);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(8px);padding:5px 14px;border-radius:20px;font-size:11.5px;color:#e2eaf7;white-space:nowrap;max-width:94%;z-index:9}
+.net-cap .beat{width:9px;height:9px;border-radius:50%;background:#fb7185;box-shadow:0 0 7px #fb7185;animation:heartbeat 1.1s ease-in-out infinite;flex:none}
+.net-legend .lg-hb{width:11px;height:11px;border-radius:50%;background:#38bdf8;box-shadow:0 0 6px #38bdf8;margin-right:3px;vertical-align:-1px}
+.net-legend .lg-bl{display:inline-block;width:11px;height:2px;background:linear-gradient(90deg,#eaf2ff,transparent);margin-right:3px;vertical-align:2px}
+.nf-btn{display:inline-flex;align-items:center;gap:5px;background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.4);color:#7dd3fc;font-size:11px;font-weight:600;padding:4px 11px;border-radius:8px;cursor:pointer}
+.nf-btn svg{width:13px;height:13px}
+.nf-btn:hover{background:rgba(56,189,248,.25)}
+body.moff #net .heart .core,body.moff #net .pulse-ring,body.moff #net .bloodflow,body.moff #net .node .recv,body.moff #net .node.in,body.moff #net-cap .beat,body.moff #netLbl .nbrk{animation:none!important}
+body.moff #net .pulse-ring,body.moff #net .bloodflow{opacity:0}
+body.moff #net .heart .core{transform:none}
+/* 沙盘内的产业链节点位置 */
+.mini-node{position:absolute;width:10px;height:10px;border-radius:50%;cursor:pointer;transform:translate(-50%,-50%)}
+.mini-node .tip{position:absolute;left:14px;top:-6px;font-size:10.5px;color:var(--ink2);background:rgba(15,23,42,.85);padding:3px 8px;border-radius:5px;white-space:nowrap;opacity:0;transition:.15s;pointer-events:none;z-index:5}
+.mini-node:hover .tip{opacity:1}
+.stage-foot{padding:8px 16px 12px;font-size:11px;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);display:flex;gap:14px;flex-wrap:wrap}
+.stage-foot b{color:var(--ink2)}
+
+/* 右侧事件播报 */
+.side{display:flex;flex-direction:column;gap:10px;min-height:0}
+.side-tab{display:none}
+.side-mask{display:none}
+.panel{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:14px;padding:12px 14px}
+.panel h3{font-size:12px;margin:0 0 10px;font-weight:700;letter-spacing:1px;color:var(--muted);text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.panel h3 .dot{width:6px;height:6px;border-radius:50%;background:var(--warm)}
+.ev{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);cursor:pointer;transition:.15s}
+.ev:last-child{border-bottom:0}
+.ev:active{transform:scale(.98)}
+.ev .ttl{font-size:12.5px;font-weight:650;line-height:1.45;margin:0 0 3px;display:flex;gap:6px}
+.ev .ttl .cd{width:3px;border-radius:2px;flex:none;background:var(--neon)}
+.ev.industry .cd{background:var(--neon)}.ev.city .cd{background:var(--muted)}.ev.gossip .cd{background:var(--warm)}
+.ev .meta{font-size:10px;color:var(--muted);display:flex;gap:6px;flex-wrap:wrap;padding-left:9px}
+.ev .meta .src{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:4px}
+/* 投票卡 */
+.vote .qt{font-size:14px;font-weight:800;margin:0 0 3px}
+.vote .sub{font-size:11px;color:var(--muted);margin:0 0 10px}
+.gauge{height:8px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;position:relative;margin:8px 0 4px}
+.gauge i{display:block;height:100%;width:66%;background:linear-gradient(90deg,#38bdf8,#818cf8);border-radius:99px}
+.gstat{display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);margin-bottom:10px}
+.gstat b{color:var(--ink2);font-variant-numeric:tabular-nums}
+.vbtns{display:flex;gap:6px}
+.vbtns button{flex:1;border-radius:9px;padding:9px 2px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid;background:transparent;transition:.15s}
+.vb-ok{border-color:rgba(52,211,153,.5);color:var(--ok)}.vb-ok:active{background:rgba(52,211,153,.15);transform:scale(.96)}
+.vb-bad{border-color:rgba(251,113,133,.5);color:var(--bad)}.vb-bad:active{background:rgba(251,113,133,.15);transform:scale(.96)}
+.vb-mid{border-color:rgba(148,163,184,.4);color:var(--muted)}.vb-mid:active{background:rgba(148,163,184,.12);transform:scale(.96)}
+.vout{margin-top:9px;font-size:11px;color:var(--ink2);background:rgba(255,255,255,.06);border-radius:8px;padding:8px 10px;display:none;line-height:1.55}
+.vout b{font-weight:800}
+.cmp{font-size:10px;font-weight:700;border-radius:4px;padding:1px 6px;margin-left:4px}
+.cmp-ok{background:rgba(52,211,153,.2);color:var(--ok)}.cmp-bad{background:rgba(251,113,133,.2);color:var(--bad)}.cmp-mid{background:rgba(148,163,184,.2);color:var(--muted)}
+
+/* 底部操作栏（游戏菜单式） */
+.dock{flex:none;margin-top:12px;display:flex;gap:8px;background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:16px;padding:10px 12px;overflow-x:auto;scrollbar-width:none}
+.dock::-webkit-scrollbar{display:none}
+.dock a{flex:1;min-width:72px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;border-radius:10px;font-size:11px;color:var(--ink2);text-decoration:none;transition:.15s;cursor:pointer}
+.dock a:hover{background:rgba(255,255,255,.08);color:var(--ink)}
+.dock a.on{background:rgba(56,189,248,.18);color:var(--neon)}
+.dock a .ic{width:22px;height:22px;display:flex;align-items:center;justify-content:center}
+.dock a .ic svg{width:20px;height:20px}
+
+/* toast */
+#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:rgba(15,23,42,.95);color:#fff;padding:9px 16px;border-radius:10px;font-size:12px;z-index:99;white-space:nowrap;border:1px solid var(--glass-b);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+
+/* ===== 消费关系网络 ===== */
+#cnet{width:100%;height:100%;display:block}
+.cnnode{position:absolute;transform:translate(-50%,-50%);z-index:5;text-align:center;cursor:pointer}
+.cnnode .dot{width:24px;height:24px;border-radius:50%;margin:0 auto;border:1.5px solid rgba(255,255,255,.55);box-shadow:0 0 16px currentColor;animation:cnbreathe 2.4s ease-in-out infinite}
+.cnnode .nm{font-size:13px;font-weight:800;color:var(--ink);text-shadow:0 1px 4px #000;margin-top:3px;white-space:nowrap}
+.cnnode .am{font-size:11px;color:var(--amber);font-weight:700;text-shadow:0 1px 4px #000;white-space:nowrap}
+.cnnode.hero .dot{width:50px;height:50px;background:radial-gradient(circle,rgba(56,189,248,.5),rgba(139,92,246,.35));border-color:var(--neon);box-shadow:0 0 30px var(--neon)}
+.cnnode.hero .nm{font-size:16px}
+@keyframes cnbreathe{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.18)}}
+.cbrk{position:absolute;transform:translate(-50%,-50%);z-index:6;text-align:center;cursor:pointer}
+.cbrk .x{width:20px;height:20px;margin:0 auto;border-radius:50%;background:rgba(251,113,133,.2);border:1.5px solid var(--bad);color:var(--bad);font-size:12px;font-weight:900;line-height:17px;animation:cnhit 1.4s ease-in-out infinite}
+@keyframes cnhit{0%,100%{box-shadow:0 0 0 0 rgba(251,113,133,.4)}50%{box-shadow:0 0 0 9px rgba(251,113,133,0)}}
+.cbrk .bt{font-size:9.5px;color:var(--bad);font-weight:700;text-shadow:0 1px 4px #000;margin-top:3px;white-space:nowrap;background:rgba(13,17,34,.75);padding:1px 6px;border-radius:5px}
+.cmp2{display:flex;align-items:center;gap:8px}
+.cmp2 .c{flex:1;text-align:center;background:rgba(255,255,255,.05);border:1px solid var(--glass-b);border-radius:10px;padding:8px 4px}
+.cmp2 .c .v{font-size:21px;font-weight:900;font-variant-numeric:tabular-nums}
+.cmp2 .c.a .v{color:var(--amber)}
+.cmp2 .c.b .v{color:var(--ok)}
+.cmp2 .c .k{font-size:9px;color:var(--muted);line-height:1.3}
+.cmp2 .vs{font-size:11px;color:var(--muted);font-weight:700}
+.blist{margin:0;padding:0;list-style:none}
+.blist li{display:flex;gap:8px;align-items:flex-start;font-size:11.5px;color:var(--ink2);padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.blist li:last-child{border-bottom:0}
+.blist li .n{flex:none;width:18px;height:18px;border-radius:50%;background:rgba(251,113,133,.18);border:1px solid var(--bad);color:var(--bad);font-size:11px;font-weight:900;line-height:15px;text-align:center}
+.cta2{display:flex;justify-content:center}
+.cta2 .go{background:linear-gradient(135deg,rgba(56,189,248,.25),rgba(139,92,246,.25));border:1px solid rgba(56,189,248,.55);color:var(--ink);font-size:14px;font-weight:800;padding:10px 18px;border-radius:11px;cursor:pointer;letter-spacing:.5px}
+.cta2 .go:hover{background:linear-gradient(135deg,rgba(56,189,248,.4),rgba(139,92,246,.4));box-shadow:0 0 22px rgba(56,189,248,.3)}
+
+/* 平板 */
+@media(min-width:768px) and (max-width:1179px){
+  .view{grid-template-columns:minmax(0,1fr) 285px}
+  .viewswitch button{padding:6px 16px}
+  .res{gap:10px}
+  .dock a{min-width:64px}
+}
+/* 手机 */
+@media(max-width:767px){
+  .view{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto;overflow-y:auto}
+  .stage{min-height:280px}
+  #view-industry .stage-body{flex:none;aspect-ratio:860/600}
+  #netLbl .lb{font-size:11px}
+  .net-legend{font-size:8.5px;gap:6px;padding:3px 6px}
+  .side{flex-direction:column;overflow:visible;gap:10px}
+  .side .panel{min-width:0;width:100%;flex:none}
+  /* 手机：关系图全屏，播报/公投/留存/断点收进底部抽屉 */
+  #view-consume,#view-industry{grid-template-rows:1fr;overflow:hidden}
+  .side-mask{display:block;position:fixed;inset:0;z-index:35;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .25s}
+  .side-mask.on{opacity:1;pointer-events:auto}
+  #view-consume .side,#view-industry .side{position:fixed;left:8px;right:8px;bottom:0;z-index:40;max-height:66vh;overflow-y:auto;border-radius:18px 18px 0 0;background:rgba(9,14,28,.97);border:1px solid rgba(255,255,255,.14);border-bottom:0;box-shadow:0 -10px 34px rgba(0,0,0,.5);transform:translateY(110%);transition:transform .28s ease;padding:12px 14px calc(env(safe-area-inset-bottom,0px) + 14px);scrollbar-width:none}
+  #view-consume .side.open,#view-industry .side.open{transform:translateY(0)}
+  .side-tab{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:99px;background:rgba(56,189,248,.13);border:1px solid rgba(56,189,248,.32);color:#7dd3fc;cursor:pointer;margin-left:4px}
+  .res{gap:8px}
+  .res .r{min-width:54px}
+  .res .r .v{font-size:13px}
+  .brand{font-size:12px}
+  .clock{display:none}
+  .dock a{min-width:60px;font-size:10px}
+  .viewswitch{margin-top:7px}
+  .viewswitch button{padding:5px 14px;font-size:11px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 场景 ===== -->
+<div class="scene">
+  <div class="sky"></div>
+  <div class="stars" id="stars"></div>
+  <div class="sun"></div>
+  <div class="mountains"></div>
+  <div class="skyline" id="skyline"></div>
+  <div class="road">
+    <div class="car"></div><div class="car r"></div><div class="car" style="animation-delay:-3s;top:30%"></div>
+  </div>
+</div>
+
+<!-- ===== HUD ===== -->
+<div class="hud">
+
+  <!-- 顶部资源条 -->
+  <div class="topbar">
+    <div class="brand"><span class="logo"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="white"/></svg></span>惠城产业风洞</div>
+    <div class="res">
+      <div class="r"><span class="v blue">1203亿</span><span class="l">GDP · 2025</span></div>
+      <div class="r"><span class="v">159.78万</span><span class="l">常住人口 · 2025</span></div>
+      <div class="r"><span class="v green">4.3%</span><span class="l">2025增速</span></div>
+      <div class="r"><span class="v">66%</span><span class="l">2030达标概率(模型)</span></div>
+    </div>
+    <div class="clock" title="每日07:27只刷新今日话题与热度，模型参数不随新闻自动更新"><b>第 1 轮</b><br>每日 07:27 刷话题</div>
+  </div>
+
+  <!-- 视角切换 -->
+  <div class="viewswitch">
+    <div class="seg">
+      <button class="on" id="seg-consume" onclick="setView('consume')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>消费关系</button>
+      <button id="seg-industry" onclick="setView('industry')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 7.5l3 8m6-8l-3 8m-6-9h9"/></svg>产业关系</button>
+    </div>
+  </div>
+
+  <!-- 中央 -->
+  <div class="mid">
+    <!-- ===== 消费关系视图（默认） ===== -->
+    <div class="view" id="view-consume">
+      <div class="stage">
+        <div class="stage-h">
+          <h2>惠城人的钱，去了哪里？</h2>
+          <span class="sub">每100元消费约38元流向城区外（合理估算）</span>
+          <span class="live">估算</span>
+          <span class="side-tab" onclick="openDrawer('view-consume','ret')">留存对比</span>
+          <span class="side-tab" onclick="openDrawer('view-consume','brk')">三个断点</span>
+        </div>
+        <div class="stage-body">
+          <svg id="cnet" viewBox="0 0 1000 700" preserveAspectRatio="none"></svg>
+          <div id="cnetNodes"></div>
+        </div>
+        <div class="stage-foot">
+          <span><b>惠城 805.68 亿</b>为官方口径（2025 社消零，+3.7%）</span>
+          <span>外流结构 128 亿 / 52 / 34 / 42 亿均为<b>合理估算</b></span>
+        </div>
+      </div>
+      <div class="side-mask" id="view-consumeMask" onclick="closeDrawer()"></div>
+      <div class="side">
+        <div class="panel">
+          <h3><span class="dot" style="background:var(--pink)"></span>留存对比</h3>
+          <div class="cmp2">
+            <div class="c a"><div class="v">62%</div><div class="k">惠城消费留存（合理估算）</div></div>
+            <div class="vs">vs</div>
+            <div class="c b"><div class="v">78%</div><div class="k">周边城市平均（合理估算）</div></div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3><span class="dot" style="background:var(--bad)"></span>三个断点</h3>
+          <ul class="blist">
+            <li><span class="n">✗</span><span><b>高端零售不足</b>——高端消费去深圳</span></li>
+            <li><span class="n">✗</span><span><b>总部员工跨城消费</b>——日常消费去东莞</span></li>
+            <li><span class="n">✗</span><span><b>文旅留不住过夜</b>——线上订单外溢</span></li>
+          </ul>
+        </div>
+        <div class="panel">
+          <div class="cta2"><button class="go" onclick="toast('进入实验：留住10%情景，风洞正文接入中')">进入实验，看看留住10%会怎样 →</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 产业关系视图 ===== -->
+    <div class="view" id="view-industry" style="display:none">
+    <div class="stage">
+      <div class="stage-h">
+        <h2>惠城产业关系网络</h2>
+        <span class="sub">精选 13 主体：枢纽、桥、人、链主配套；完整 26 主体见 network</span>
+        <span class="live">实时</span>
+        <span class="side-tab" onclick="openDrawer('view-industry','ev')">今日播报</span>
+        <span class="side-tab" onclick="openDrawer('view-industry','vote')">市民公投</span>
+      </div>
+      <div class="stage-body">
+        <svg id="net" viewBox="0 0 860 600" preserveAspectRatio="xMidYMid meet"></svg>
+        <div id="netLbl"></div>
+        <!-- 大白话解说字幕 -->
+        <div class="net-cap" id="netCap"><span class="beat"></span><span id="netCapTxt">3 颗心脏，给全区 26 个主体供血 —— 点心脏，看它停跳</span></div>
+        <div class="net-legend">
+          <span><i class="lg-hb"></i>跳动的心脏（枢纽）</span>
+          <span><span class="lg-bl"></span>血液＝产业与通勤能量</span>
+          <span style="color:#fb7185">✗ 断裂点</span>
+        </div>
+      </div>
+      <div class="stage-foot">
+        <button class="nf-btn" onclick="replayNet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 109-9 9 9 0 00-6.7 3M3 3v6h6"/></svg>重播供血动画</button>
+        <span><b>高新区规上工业</b> 632.7亿 · 占全区约67%（2025）</span>
+        <span><b>固定资产投资</b> 2025年 −37.1% · 调整期</span>
+        <span><b>完整 26 主体</b>见 network</span>
+      </div>
+      </div>
+
+    <div class="side-mask" id="indMask" onclick="closeDrawer()"></div>
+    <div class="side">
+      <!-- 事件播报 -->
+      <div class="panel">
+        <h3><span class="dot"></span>今日事件播报</h3>
+        <div class="ev industry" onclick="toast('金澜新材料 · 官方发布 · 关注度较高')">
+          <p class="ttl"><span class="cd"></span>金澜新材料落子惠城高新区，总投资10.5亿</p>
+          <div class="meta"><span class="src">官方发布</span><span>产业</span><span>关注度：较高</span></div>
+        </div>
+        <div class="ev city" onclick="toast('下角南路快速化改造 · 官方发布')">
+          <p class="ttl"><span class="cd"></span>下角南路快速化改造工程推进清场</p>
+          <div class="meta"><span class="src">官方发布</span><span>城市</span><span>关注度：较高</span></div>
+        </div>
+        <div class="ev city" onclick="toast('环西湖丰渚园商区 · 官方发布')">
+          <p class="ttl"><span class="cd"></span>环西湖丰渚园商区综合体项目施工招标</p>
+          <div class="meta"><span class="src">官方发布</span><span>城市</span><span>关注度：较高</span></div>
+        </div>
+        <div class="ev gossip" onclick="toast('安全头盔公益活动 · 官方发布')">
+          <p class="ttl"><span class="cd"></span>惠城高新区开展赠送安全头盔公益活动</p>
+          <div class="meta"><span class="src">官方发布</span><span>暖闻</span><span>关注度：较高</span></div>
+        </div>
+      </div>
+
+      <!-- 市民公投 -->
+      <div class="panel vote">
+        <h3><span class="dot" style="background:var(--pink)"></span>市民公投</h3>
+        <p class="qt">2030年，惠城能到模型参考刻度1500亿吗？</p>
+        <p class="sub">模型跑了很多遍：过线约66%，中位数1579亿（1500为模型参考刻度，非官方目标）</p>
+        <div class="gauge"><i></i></div>
+        <div class="gstat"><span>模型估算 <b>66%</b></span><span>中位数 <b>1579亿</b></span></div>
+        <div class="vbtns">
+          <button class="vb-ok" onclick="judge('ok')">我看稳了</button>
+          <button class="vb-bad" onclick="judge('bad')">有点悬</button>
+          <button class="vb-mid" onclick="judge('mid')">不好说</button>
+        </div>
+        <div class="vout" id="vout"></div>
+      </div>
+    </div>
+    </div><!-- /产业关系视图 -->
+  </div>
+
+  <!-- 底部操作栏 -->
+  <div class="dock">
+    <a class="on" href="index.html">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg></span>今日话题
+    </a>
+    <a href="fun.html">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6m0 0l-3-3m3 3l3-3"/><path d="M5 12a7 7 0 0114 0c0 4-3 7-7 10-4-3-7-6-7-10z"/></svg></span>风向标
+    </a>
+    <a href="network.html">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 7.5l3 8m6-8l-3 8m-6-9h9"/></svg></span>产业链
+    </a>
+    <a href="choices.html">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20l4-10 4 6 4-8 4 4"/></svg></span>五条路
+    </a>
+    <a href="windtunnel.html">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v3m0 12v3m9-9h-3M6 12H3m14.5-6.5l-2 2m-7 7l-2 2m11 0l-2-2m-7-7l-2-2"/><circle cx="12" cy="12" r="3"/></svg></span>风洞
+    </a>
+    <a href="future.html">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>未来
+    </a>
+    <a href="report.html">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12v18H6z"/><path d="M9 8h6m-6 4h6m-6 4h4"/></svg></span>报告
+    </a>
+  </div>
+</div>
+
+<script>
+// 星星
+(function(){
+  var s=document.getElementById("stars");
+  for(var i=0;i<40;i++){
+    var st=document.createElement("i");
+    st.style.left=Math.random()*100+"%";
+    st.style.top=Math.random()*100+"%";
+    st.style.animationDelay=(Math.random()*3)+"s";
+    st.style.opacity=(.3+Math.random()*.6);
+    s.appendChild(st);
+  }
+})();
+// 天际线
+(function(){
+  var sk=document.getElementById("skyline");
+  var hs=[60,100,80,130,90,150,70,110,140,85,120,95,160,75,105,130,88,115,145,70,100,125,90,155];
+  hs.forEach(function(h,i){
+    var b=document.createElement("div");
+    b.className="b"+(h>130?" tall":"")+(i%5===0?" wide":"");
+    b.style.height=h+"px";
+    sk.appendChild(b);
+  });
+})();
+// 首页两极沙盘：核心枢纽(高新区12/东江湾11/江北CBD6) vs 最弱连接(8个仅1条节点)，全标名
+(function(){
+  var svg=document.getElementById("net");
+  if(!svg)return;
+  var NS="http://www.w3.org/2000/svg";
+  function el(tag,attrs){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);return e;}
+  var ALL=[ // 26节点全量（用于邻居查询与度数）
+    {n:"高新区",x:620,y:300,r:23,c:"#38bdf8",layer:"产业"},{n:"利元亨",x:720,y:235,r:14,c:"#3b82f6",layer:"产业"},
+    {n:"电子信息",x:755,y:305,r:13,c:"#3b82f6",layer:"产业"},{n:"智能装备",x:735,y:375,r:13,c:"#3b82f6",layer:"产业"},
+    {n:"新能源新材料",x:675,y:435,r:13,c:"#3b82f6",layer:"产业"},{n:"智能家电",x:575,y:425,r:12,c:"#3b82f6",layer:"产业"},
+    {n:"雷士光电",x:695,y:485,r:11,c:"#3b82f6",layer:"产业"},{n:"天宝创能",x:775,y:440,r:10,c:"#3b82f6",layer:"产业"},
+    {n:"先进科技",x:780,y:370,r:10,c:"#3b82f6",layer:"产业"},{n:"AI机器人",x:700,y:165,r:12,c:"#3b82f6",layer:"产业"},
+    {n:"生产性服务业",x:215,y:335,r:15,c:"#3b82f6",layer:"产业"},{n:"产业基金",x:300,y:175,r:11,c:"#3b82f6",layer:"产业"},
+    {n:"东江湾",x:605,y:345,r:24,c:"#94a3b8",layer:"空间"},{n:"江北CBD",x:180,y:250,r:21,c:"#9aa6b8",layer:"空间"},
+    {n:"三栋南部",x:600,y:500,r:12,c:"#9aa6b8",layer:"空间"},{n:"马安北部",x:710,y:120,r:12,c:"#9aa6b8",layer:"空间"},
+    {n:"桥西老城",x:150,y:405,r:13,c:"#9aa6b8",layer:"空间"},{n:"水口老城",x:515,y:460,r:13,c:"#9aa6b8",layer:"空间"},
+    {n:"过江通道",x:405,y:290,r:14,c:"#d1d5db",layer:"空间"},{n:"小金口枢纽",x:400,y:85,r:12,c:"#9aa6b8",layer:"空间"},
+    {n:"蓝领工人",x:560,y:535,r:12,c:"#f97316",layer:"人"},{n:"江北白领",x:135,y:200,r:11,c:"#f97316",layer:"人"},
+    {n:"跨城通勤",x:475,y:60,r:10,c:"#f97316",layer:"人"},{n:"工程师",x:560,y:175,r:11,c:"#f97316",layer:"人"},
+    {n:"青年新市民",x:335,y:345,r:10,c:"#f97316",layer:"人"},{n:"学龄家庭",x:115,y:475,r:11,c:"#f97316",layer:"人"}
+  ];
+  var EDGES=[
+    {from:"利元亨",to:"智能装备",type:"link",weight:1.0,blood:"B"},{from:"雷士光电",to:"智能家电",type:"link",weight:1.0,blood:"B"},{from:"先进科技",to:"电子信息",type:"link",weight:1.0,blood:"B"},{from:"天宝创能",to:"新能源新材料",type:"link",weight:1.0,blood:"B"},
+    {from:"智能装备",to:"高新区",type:"link",weight:1.2,blood:"B"},{from:"电子信息",to:"高新区",type:"link",weight:1.2,blood:"B"},{from:"新能源新材料",to:"高新区",type:"link",weight:1.2,blood:"B"},{from:"智能家电",to:"高新区",type:"link",weight:1.0,blood:"B"},
+    {from:"AI机器人",to:"高新区",type:"link",weight:0.8,blood:"C"},{from:"利元亨",to:"东江湾",type:"link",weight:1.0,blood:"B"},{from:"电子信息",to:"东江湾",type:"link",weight:1.0,blood:"B"},{from:"智能装备",to:"东江湾",type:"link",weight:1.0,blood:"B"},
+    {from:"新能源新材料",to:"东江湾",type:"link",weight:1.0,blood:"B"},{from:"先进科技",to:"东江湾",type:"link",weight:1.0,blood:"B"},{from:"高新区",to:"东江湾",type:"link",weight:1.5,blood:"A"},{from:"生产性服务业",to:"高新区",type:"link",weight:0.8,blood:"C"},
+    {from:"生产性服务业",to:"江北CBD",type:"link",weight:1.0,blood:"B"},{from:"产业基金",to:"高新区",type:"link",weight:0.8,blood:"C"},{from:"产业基金",to:"江北CBD",type:"link",weight:0.8,blood:"C"},{from:"小金口枢纽",to:"高新区",type:"link",weight:0.7,blood:"C"},
+    {from:"雷士光电",to:"东江湾",type:"link",weight:1.0,blood:"B"},{from:"智能家电",to:"水口老城",type:"link",weight:0.6,blood:"C"},{from:"过江通道",to:"东江湾",type:"commute",weight:1.5,blood:"C"},{from:"过江通道",to:"江北CBD",type:"commute",weight:1.5,blood:"C"},
+    {from:"东江湾",to:"水口老城",type:"commute",weight:1.0,blood:"C"},{from:"江北CBD",to:"三栋南部",type:"commute",weight:0.8,blood:"C"},{from:"小金口枢纽",to:"跨城通勤",type:"commute",weight:0.6,blood:"D"},{from:"马安北部",to:"东江湾",type:"commute",weight:0.8,blood:"C"},
+    {from:"桥西老城",to:"江北CBD",type:"commute",weight:1.0,blood:"C"},{from:"蓝领工人",to:"高新区",type:"commute",weight:1.2,blood:"C"},{from:"蓝领工人",to:"东江湾",type:"commute",weight:1.2,blood:"C"},{from:"蓝领工人",to:"水口老城",type:"commute",weight:1.0,blood:"C"},
+    {from:"江北白领",to:"生产性服务业",type:"commute",weight:1.0,blood:"C"},{from:"江北白领",to:"江北CBD",type:"commute",weight:1.2,blood:"C"},{from:"工程师",to:"高新区",type:"commute",weight:1.0,blood:"C"},{from:"青年新市民",to:"高新区",type:"commute",weight:0.8,blood:"C"},
+    {from:"学龄家庭",to:"桥西老城",type:"commute",weight:0.8,blood:"C"}
+  ];
+  var byName={};
+  ALL.forEach(function(nd){byName[nd.n]=nd});
+  var DEG={};
+  EDGES.forEach(function(e){DEG[e.from]=(DEG[e.from]||0)+1;DEG[e.to]=(DEG[e.to]||0)+1});
+  // ===== 心脏供血：3 心脏跳动泵血，节点被点亮；点心脏停跳/恢复 =====
+  var HEARTS=["高新区","东江湾","江北CBD"];
+  var BRIDGE=["过江通道","小金口枢纽"];
+  var SELECT=["高新区","东江湾","江北CBD","过江通道","小金口枢纽","利元亨","智能装备","蓝领工人","跨城通勤","桥西老城","学龄家庭","AI机器人","马安北部"];
+  var selMap={};SELECT.forEach(function(n){selMap[n]=1});
+  var LAYERC={产业:"#3b82f6",空间:"#9aa6b8",人:"#f97316"};
+  var dead={},nodeG={};
+  function neighborsOf(name){
+    var ns=[];
+    EDGES.forEach(function(e){
+      if(!selMap[e.from]||!selMap[e.to])return;
+      if(e.from===name&&ns.indexOf(e.to)<0)ns.push(e.to);
+      if(e.to===name&&ns.indexOf(e.from)<0)ns.push(e.from);
+    });
+    return ns;
+  }
+  function directHubs(name){
+    var hs=[];
+    neighborsOf(name).forEach(function(n){
+      if(HEARTS.indexOf(n)>=0&&hs.indexOf(n)<0)hs.push(n);
+    });
+    return hs;
+  }
+  // 1. 画基础血管（暗淡）+ 从心脏泵出的血液
+  EDGES.forEach(function(e){
+    if(!selMap[e.from]||!selMap[e.to])return;
+    var a=byName[e.from],b=byName[e.to];
+    var isCommute=e.type==="commute";
+    var base=el("line",{class:"vessel"+(isCommute?" commute":""),x1:a.x,y1:a.y,x2:b.x,y2:b.y,
+      stroke:isCommute?"#22d3ee":"#7aa2d8","stroke-width":Math.max(1,(e.weight||1)*.9),opacity:isCommute?.22:.16});
+    svg.appendChild(base);
+    var fromHeart=HEARTS.indexOf(e.from)>=0,toHeart=HEARTS.indexOf(e.to)>=0;
+    if(fromHeart||toHeart){
+      var hb=fromHeart?a:b,ob=fromHeart?b:a;
+      var fl=el("line",{class:"bloodflow",x1:hb.x,y1:hb.y,x2:ob.x,y2:ob.y});
+      svg.appendChild(fl);
+    }
+  });
+  // 2. 画节点
+  function nearDist(nd){var best=1e9;HEARTS.forEach(function(sn){var h=byName[sn];var d=Math.hypot(nd.x-h.x,nd.y-h.y);if(d<best)best=d});return best}
+  SELECT.forEach(function(name){
+    var nd=byName[name];
+    var isHeart=HEARTS.indexOf(name)>=0,isBridge=BRIDGE.indexOf(name)>=0;
+    var deg=DEG[name]||1;
+    var g=el("g",{class:"node in"+(isHeart?" heart":""),transform:"translate("+nd.x+","+nd.y+")"});
+    if(isBridge){
+      g.appendChild(el("circle",{class:"bridge-ring",r:nd.r+5}));
+    }
+    var rr=isHeart?nd.r*1.15:nd.r*.72;
+    var fill=isHeart?nd.c:(LAYERC[nd.layer]||"#5b6b82");
+    var core=el("circle",{r:rr,fill:fill,stroke:isHeart?"rgba(255,255,255,.7)":"rgba(255,255,255,.2)","stroke-width":isHeart?2.2:1,opacity:isHeart?1:.32});
+    if(isHeart)core.setAttribute("filter","url(#glow)");
+    core.setAttribute("class",isHeart?"core":"recv");
+    g.appendChild(core);
+    if(isHeart){
+      g.appendChild(el("circle",{class:"pulse-ring"}));
+    }else{
+      var dd=nearDist(nd);
+      core.style.animationDelay=Math.min(dd/380,.75)+"s";
+      g.style.animationDelay=Math.min(dd/560,.55)+"s";
+      var t=el("title",{});t.textContent=name+" · "+deg+(isBridge?"（桥）":"");g.appendChild(t);
+    }
+    nodeG[name]=g;
+    if(isHeart){
+      var lbl=document.createElement("div");
+      lbl.className="lb hb";lbl.style.left=(nd.x/860*100)+"%";lbl.style.top=(nd.y/600*100)+"%";
+      lbl.innerHTML="<strong>"+name+"</strong> · "+deg;
+      document.getElementById("netLbl").appendChild(lbl);
+    }
+    g.addEventListener("click",function(ev){ev.stopPropagation();
+      if(isHeart){toggleHeart(name);}
+      else{toast(name+" · "+nd.layer+"层 · 连"+deg+"条"+(isBridge?"（桥）":"")+" · 全图见 network");}
+    });
+    svg.appendChild(g);
+  });
+  // 3. 断裂点：跨城通勤 D 级边
+  EDGES.forEach(function(e){
+    if(e.blood==="D"&&selMap[e.from]&&selMap[e.to]){
+      var a=byName[e.from],b=byName[e.to],mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+      var x=document.createElement("div");
+      x.className="nbrk";x.style.left=(mx/860*100)+"%";x.style.top=(my/600*100)+"%";
+      x.innerHTML="✗";
+      x.onclick=function(){toast("断裂点：跨城通勤—小金口，D级弱连接，易断裂")};
+      document.getElementById("netLbl").appendChild(x);
+    }
+  });
+  // 4. 活心脏供血可达性（flood fill）
+  function computeReach(){
+    var reach={},queue=HEARTS.filter(function(h){return !dead[h]});
+    queue.forEach(function(h){reach[h]=1});
+    while(queue.length){
+      var cur=queue.shift();
+      neighborsOf(cur).forEach(function(n){
+        if(!reach[n]&&!dead[n]){reach[n]=1;queue.push(n)}
+      });
+    }
+    return reach;
+  }
+  function updateState(){
+    var reach=computeReach(),lost=0;
+    SELECT.forEach(function(name){
+      var g=nodeG[name];if(!g)return;
+      if(HEARTS.indexOf(name)>=0){
+        g.classList.toggle("dead",!!dead[name]);
+        return;
+      }
+      var s;
+      if(!reach[name]){s="starved";lost++;}
+      else{
+        var deadHub=directHubs(name).some(function(h){return dead[h]});
+        s=deadHub?"weak":"ok";
+      }
+      g.classList.toggle("starved",s==="starved");
+      g.classList.toggle("weak",s==="weak");
+    });
+    var deadList=HEARTS.filter(function(h){return dead[h]});
+    var cap=document.getElementById("netCapTxt");
+    if(deadList.length===0){
+      cap.textContent="3 颗心脏，给全区 26 个主体供血 —— 点心脏，看它停跳";
+    }else{
+      cap.textContent=deadList.join("、")+" 停跳，约 "+lost+" 个主体失去供血 —— 再点心脏恢复";
+    }
+  }
+  function toggleHeart(name){
+    if(dead[name])delete dead[name];else dead[name]=1;
+    updateState();
+  }
+  window.replayNet=function(){
+    var ns=svg.querySelectorAll(".node");
+    ns.forEach(function(g){g.classList.remove("in");g.style.animation="none";
+      void g.getBoundingClientRect();g.style.animation="";g.classList.add("in")});
+  };
+  updateState();
+  // 光晕滤镜
+  var defs=el("defs",{});
+  var f=el("filter",{id:"glow",x:"-80%",y:"-80%",width:"260%",height:"260%"});
+  f.appendChild(el("feGaussianBlur",{stdDeviation:"5","result":"blur"}));
+  var mg=el("feMerge",{});
+  mg.appendChild(el("feMergeNode",{in:"blur"}));mg.appendChild(el("feMergeNode",{in:"SourceGraphic"}));
+  f.appendChild(mg);defs.appendChild(f);svg.insertBefore(defs,svg.firstChild);
+})();
+// 消费关系网络（横版，节点HTML覆盖+连线SVG流光）
+(function(){
+  var svg=document.getElementById("cnet");
+  if(!svg)return;
+  var NS="http://www.w3.org/2000/svg",VW=1000,VH=700;
+  var NODES={
+    hero:{x:500,y:380,nm:"惠城",am:"805.68亿",color:"#38bdf8"},
+    sz:{x:175,y:175,nm:"深圳",am:"52亿",color:"#38bdf8"},
+    dg:{x:825,y:175,nm:"东莞",am:"34亿",color:"#38bdf8"},
+    ec:{x:830,y:520,nm:"电商",am:"42亿",color:"#fbbf24"}
+  };
+  var EDGES=[{from:"hero",to:"sz",bt:"高端零售不足"},{from:"hero",to:"dg",bt:"总部员工跨城消费"},{from:"hero",to:"ec",bt:"文旅留不住过夜"}];
+  var pid=0;
+  EDGES.forEach(function(e,i){
+    var a=NODES[e.from],b=NODES[e.to],mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+    var d="M "+a.x+" "+a.y+" Q "+mx+" "+(my-40)+" "+b.x+" "+b.y;
+    var p=document.createElementNS(NS,"path");
+    p.setAttribute("d",d);p.setAttribute("fill","none");p.setAttribute("stroke","rgba(251,113,133,.5)");
+    p.setAttribute("stroke-width","2.2");p.setAttribute("stroke-dasharray","10 30");p.setAttribute("id","ce"+i);
+    p.style.animation="cnflow 2.8s linear infinite";p.style.animationDelay=(i*.5)+"s";
+    svg.appendChild(p);
+    for(var k=0;k<3;k++){
+      var c=document.createElementNS(NS,"circle");
+      c.setAttribute("r","3");c.setAttribute("fill","#fb7185");
+      var am=document.createElementNS(NS,"animateMotion");
+      am.setAttribute("dur","3.6s");am.setAttribute("repeatCount","indefinite");am.setAttribute("begin",(pid*.35+k*1.2)+"s");
+      var mp=document.createElementNS(NS,"mpath");
+      mp.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href","#ce"+i);
+      am.appendChild(mp);c.appendChild(am);svg.appendChild(c);pid++;
+    }
+    var t=0.55;
+    var bx=(1-t)*(1-t)*a.x+2*(1-t)*t*mx+t*t*b.x;
+    var by=(1-t)*(1-t)*a.y+2*(1-t)*t*(my-40)+t*t*b.y;
+    var dx=b.x-a.x,dy=b.y-a.y,len=Math.sqrt(dx*dx+dy*dy),ux=-dy/len*22,uy=dx/len*22;
+    var l1=document.createElementNS(NS,"line");
+    l1.setAttribute("x1",bx-ux);l1.setAttribute("y1",by-uy);l1.setAttribute("x2",bx-ux*.4);l1.setAttribute("y2",by-uy*.4);
+    l1.setAttribute("stroke","#fb7185");l1.setAttribute("stroke-width","2.6");
+    var l2=document.createElementNS(NS,"line");
+    l2.setAttribute("x1",bx+ux*.4);l2.setAttribute("y1",by+uy*.4);l2.setAttribute("x2",bx+ux);l2.setAttribute("y2",by+uy);
+    l2.setAttribute("stroke","#fb7185");l2.setAttribute("stroke-width","2.6");
+    svg.appendChild(l1);svg.appendChild(l2);
+    var bk=document.createElement("div");
+    bk.className="cbrk";bk.style.left=(bx/VW*100)+"%";bk.style.top=(by/VH*100)+"%";
+    bk.innerHTML="<div class='x'>✗</div><div class='bt'>"+e.bt+"</div>";
+    bk.onclick=function(){toast("断点："+e.bt+" —— 基于公开讨论的合理推断")};
+    document.getElementById("cnetNodes").appendChild(bk);
+  });
+  Object.keys(NODES).forEach(function(k){
+    var n=NODES[k],d=document.createElement("div");
+    d.className="cnnode"+(k==="hero"?" hero":"");
+    d.style.left=(n.x/VW*100)+"%";d.style.top=(n.y/VH*100)+"%";d.style.color=n.color;
+    d.innerHTML=k==="hero"
+      ? "<div class='dot'></div><div class='nm'>"+n.nm+"</div><div class='am'>"+n.am+"</div>"
+      : "<div class='dot' style='background:currentColor'></div><div class='nm'>"+n.nm+"</div><div class='am'>"+n.am+"</div>";
+    d.onclick=function(){
+      if(k==="hero")toast("惠城 · 2025 社消零 805.68 亿（+3.7%，官方口径）");
+      else toast(n.nm+" · 消费外流约 "+n.am+"（合理估算，非官方统计）");
+    };
+    document.getElementById("cnetNodes").appendChild(d);
+  });
+  document.head.insertAdjacentHTML("beforeend","<style>@keyframes cnflow{from{stroke-dashoffset:0}to{stroke-dashoffset:-40}}</style>");
+})();
+// 视角切换
+window.setView=function(v){
+  document.getElementById("view-consume").style.display=v==="consume"?"grid":"none";
+  document.getElementById("view-industry").style.display=v==="industry"?"grid":"none";
+  document.getElementById("seg-consume").classList.toggle("on",v==="consume");
+  document.getElementById("seg-industry").classList.toggle("on",v==="industry");
+  if(v!=="industry")closeDrawer();
+};
+// 手机端：播报/公投/留存/断点底部抽屉
+window.openDrawer=function(viewId,k){
+  var sd=document.querySelector("#"+viewId+" .side");
+  var mk=document.getElementById(viewId+"Mask");
+  if(sd)sd.classList.add("open");
+  if(mk)mk.classList.add("on");
+  var target=null;
+  if(sd){
+    if(k==="vote")target=sd.querySelector(".vote");
+    else if(k==="brk")target=sd.querySelectorAll(".panel")[1];
+    else target=sd.querySelector(".panel");
+  }
+  if(target)target.scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+window.closeDrawer=function(){
+  ["view-consume","view-industry"].forEach(function(v){
+    var sd=document.querySelector("#"+v+" .side");
+    var mk=document.getElementById(v+"Mask");
+    if(sd)sd.classList.remove("open");
+    if(mk)mk.classList.remove("on");
+  });
+};
+// 投票
+(function(){
+  var KEY="huicheng_judge_v1";
+  var opts={
+    ok:{label:"我看稳了",cmp:"你比模型乐观",cls:"cmp-ok",c:"#34d399"},
+    bad:{label:"有点悬",cmp:"你比模型悲观",cls:"cmp-bad",c:"#fb7185"},
+    mid:{label:"不好说",cmp:"你和模型一样谨慎",cls:"cmp-mid",c:"#94a3b8"}
+  };
+  var done=localStorage.getItem(KEY+"_done");
+  function render(){
+    var out=document.getElementById("vout");
+    if(done){
+      var o=opts[done];
+      out.style.display="block";
+      out.innerHTML="你投了「<b style='color:"+o.c+"'>"+o.label+"</b>」<span class='cmp "+o.cls+"'>"+o.cmp+"</span><br>本机记录，一年后回来验证。";
+      var bs=document.querySelectorAll(".vbtns button");
+      for(var i=0;i<bs.length;i++){bs[i].style.pointerEvents="none";bs[i].style.opacity=".5"}
+    }
+  }
+  window.judge=function(k){
+    if(done)return;
+    done=k;localStorage.setItem(KEY+"_done",k);
+    render();
+  };
+  render();
+})();
+// toast
+function toast(txt){
+  var t=document.getElementById("toast");
+  if(t)t.remove();
+  t=document.createElement("div");t.id="toast";t.textContent=txt;
+  document.body.appendChild(t);
+  setTimeout(function(){t.remove()},1800);
+}
+</script>
+</body>
+</html>

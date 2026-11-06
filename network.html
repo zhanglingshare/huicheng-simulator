@@ -163,6 +163,35 @@ body{background:var(--sky1);color:var(--ink);font:14px/1.6 -apple-system,"PingFa
   .ttl span{display:none}
   .filters{margin-top:0}
 }
+
+/* ===== 电脑端大屏优化：图占满主空间，解读卡浮层化 ===== */
+@media(min-width:1024px){
+  .hud{padding:14px 20px}
+  .top{margin-bottom:4px}
+  .ttl h1{font-size:18px}
+  .ttl span{font-size:12px}
+  .main{margin-top:10px;gap:10px}
+  .filters .f{padding:8px 18px;font-size:13px;border-radius:20px}
+  .stage{border-radius:20px;box-shadow:inset 0 0 80px rgba(2,6,16,.7),0 0 0 1px rgba(56,189,248,.06)}
+  /* 解读卡浮在 stage 左下角，不占独立行 */
+  .readcard{
+    position:absolute;left:20px;bottom:148px;max-width:400px;z-index:5;
+    margin-top:0;padding:12px 14px;border-radius:14px;
+    background:rgba(10,16,36,.82);backdrop-filter:blur(16px);
+    box-shadow:0 8px 32px rgba(0,0,0,.45);
+  }
+  .rc-row{font-size:12px;line-height:1.6}
+  /* 时间轴压缩高度 */
+  .controls{padding:10px 16px;margin-top:10px;border-radius:14px}
+  .stepnav{margin-top:6px}
+  .stepnav a{padding:7px 12px;font-size:12px}
+  .legend{font-size:11px;bottom:12px;left:14px}
+  .cap{font-size:13px;padding:6px 20px}
+}
+@media(min-width:1400px){
+  .readcard{max-width:440px;padding:14px 16px;bottom:140px}
+  .rc-row{font-size:12.5px;line-height:1.7}
+}
 </style></head>
 <body>
 
@@ -188,7 +217,7 @@ body{background:var(--sky1);color:var(--ink);font:14px/1.6 -apple-system,"PingFa
       <button class="f" data-layer="close">城市中心</button>
     </div>
     <div class="stage">
-      <svg id="net" viewBox="0 0 860 600" preserveAspectRatio="xMidYMid meet">
+      <svg id="net" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet">
         <g id="edges"></g>
         <g id="nodes"></g>
       </svg>
@@ -272,35 +301,35 @@ body{background:var(--sky1);color:var(--ink);font:14px/1.6 -apple-system,"PingFa
 // ===== 26节点：产业12 / 空间8 / 人6；t=生长时刻（0-1） =====
 const NODES=[
   // 地基（老城）
-  {n:"江北CBD",x:180,y:250,r:21,c:"#9aa6b8",layer:"空间",t:0.05},
-  {n:"桥西老城",x:150,y:405,r:13,c:"#9aa6b8",layer:"空间",t:0.08},
-  {n:"东江湾",x:605,y:345,r:24,c:"#9aa6b8",layer:"空间",t:0.11},
-  {n:"水口老城",x:515,y:460,r:13,c:"#9aa6b8",layer:"空间",t:0.14},
+  {n:"江北CBD",x:220,y:320,r:21,c:"#9aa6b8",layer:"空间",t:0.05},
+  {n:"桥西老城",x:180,y:480,r:13,c:"#9aa6b8",layer:"空间",t:0.08},
+  {n:"东江湾",x:880,y:400,r:24,c:"#9aa6b8",layer:"空间",t:0.11},
+  {n:"水口老城",x:760,y:540,r:13,c:"#9aa6b8",layer:"空间",t:0.14},
   // 产业落地
-  {n:"高新区",x:620,y:300,r:23,c:"#3b82f6",layer:"产业",t:0.20},
-  {n:"生产性服务业",x:215,y:335,r:15,c:"#3b82f6",layer:"产业",t:0.24},
-  {n:"产业基金",x:300,y:175,r:11,c:"#3b82f6",layer:"产业",t:0.26},
-  {n:"利元亨",x:720,y:235,r:14,c:"#3b82f6",layer:"产业",t:0.28},
-  {n:"智能装备",x:735,y:375,r:13,c:"#3b82f6",layer:"产业",t:0.30},
-  {n:"电子信息",x:755,y:305,r:13,c:"#3b82f6",layer:"产业",t:0.32},
-  {n:"新能源新材料",x:675,y:435,r:13,c:"#3b82f6",layer:"产业",t:0.34},
-  {n:"智能家电",x:575,y:425,r:12,c:"#3b82f6",layer:"产业",t:0.36},
-  {n:"AI机器人",x:700,y:165,r:12,c:"#3b82f6",layer:"产业",t:0.38},
-  {n:"雷士光电",x:695,y:485,r:11,c:"#3b82f6",layer:"产业",t:0.40},
-  {n:"先进科技",x:780,y:370,r:10,c:"#3b82f6",layer:"产业",t:0.42},
-  {n:"天宝创能",x:775,y:440,r:10,c:"#3b82f6",layer:"产业",t:0.44},
+  {n:"高新区",x:860,y:340,r:23,c:"#3b82f6",layer:"产业",t:0.20},
+  {n:"生产性服务业",x:260,y:420,r:15,c:"#3b82f6",layer:"产业",t:0.24},
+  {n:"产业基金",x:360,y:200,r:11,c:"#3b82f6",layer:"产业",t:0.26},
+  {n:"利元亨",x:1050,y:270,r:14,c:"#3b82f6",layer:"产业",t:0.28},
+  {n:"智能装备",x:1080,y:420,r:13,c:"#3b82f6",layer:"产业",t:0.30},
+  {n:"电子信息",x:1120,y:340,r:13,c:"#3b82f6",layer:"产业",t:0.32},
+  {n:"新能源新材料",x:980,y:500,r:13,c:"#3b82f6",layer:"产业",t:0.34},
+  {n:"智能家电",x:820,y:500,r:12,c:"#3b82f6",layer:"产业",t:0.36},
+  {n:"AI机器人",x:1020,y:180,r:12,c:"#3b82f6",layer:"产业",t:0.38},
+  {n:"雷士光电",x:1000,y:570,r:11,c:"#3b82f6",layer:"产业",t:0.40},
+  {n:"先进科技",x:1150,y:420,r:10,c:"#3b82f6",layer:"产业",t:0.42},
+  {n:"天宝创能",x:1130,y:520,r:10,c:"#3b82f6",layer:"产业",t:0.44},
   // 空间展开
-  {n:"过江通道",x:405,y:290,r:14,c:"#d1d5db",layer:"空间",t:0.50},
-  {n:"小金口枢纽",x:400,y:85,r:12,c:"#9aa6b8",layer:"空间",t:0.54},
-  {n:"三栋南部",x:600,y:500,r:12,c:"#9aa6b8",layer:"空间",t:0.58},
-  {n:"马安北部",x:710,y:120,r:12,c:"#9aa6b8",layer:"空间",t:0.62},
+  {n:"过江通道",x:560,y:370,r:14,c:"#d1d5db",layer:"空间",t:0.50},
+  {n:"小金口枢纽",x:560,y:130,r:12,c:"#9aa6b8",layer:"空间",t:0.54},
+  {n:"三栋南部",x:880,y:600,r:12,c:"#9aa6b8",layer:"空间",t:0.58},
+  {n:"马安北部",x:1020,y:110,r:12,c:"#9aa6b8",layer:"空间",t:0.62},
   // 人走进来
-  {n:"蓝领工人",x:560,y:535,r:12,c:"#f97316",layer:"人",t:0.68},
-  {n:"工程师",x:560,y:175,r:11,c:"#f97316",layer:"人",t:0.71},
-  {n:"江北白领",x:135,y:200,r:11,c:"#f97316",layer:"人",t:0.74},
-  {n:"青年新市民",x:335,y:345,r:10,c:"#f97316",layer:"人",t:0.77},
-  {n:"跨城通勤",x:475,y:60,r:10,c:"#f97316",layer:"人",t:0.80},
-  {n:"学龄家庭",x:115,y:475,r:11,c:"#f97316",layer:"人",t:0.83}
+  {n:"蓝领工人",x:800,y:620,r:12,c:"#f97316",layer:"人",t:0.68},
+  {n:"工程师",x:800,y:220,r:11,c:"#f97316",layer:"人",t:0.71},
+  {n:"江北白领",x:160,y:250,r:11,c:"#f97316",layer:"人",t:0.74},
+  {n:"青年新市民",x:440,y:420,r:10,c:"#f97316",layer:"人",t:0.77},
+  {n:"跨城通勤",x:660,y:90,r:10,c:"#f97316",layer:"人",t:0.80},
+  {n:"学龄家庭",x:140,y:560,r:11,c:"#f97316",layer:"人",t:0.83}
 ];
 const byName={};NODES.forEach(n=>byName[n.n]=n);
 
@@ -414,8 +443,8 @@ NODES.forEach(nd=>{
   g.style.color=nd.c;
   const big=nd.r>=18;
   const lbl=big
-    ? `<text class="lbl" x="${nd.x}" y="${nd.y+4}" text-anchor="middle" font-size="${nd.r>=22?10:9}" font-weight="700" fill="#0b1018">${nd.n}</text>`
-    : `<text class="lbl" x="${nd.x}" y="${nd.y+nd.r+11}" text-anchor="middle" font-size="8.5" font-weight="600" fill="#c7d2e0">${nd.n}</text>`;
+    ? `<text class="lbl" x="${nd.x}" y="${nd.y+5}" text-anchor="middle" font-size="${nd.r>=22?13:11}" font-weight="700" fill="#0b1018">${nd.n}</text>`
+    : `<text class="lbl" x="${nd.x}" y="${nd.y+nd.r+14}" text-anchor="middle" font-size="10.5" font-weight="600" fill="#c7d2e0">${nd.n}</text>`;
   g.innerHTML=
     `<circle class="ring" cx="${nd.x}" cy="${nd.y}" r="${nd.r+5}" fill="none" stroke="${nd.c}" stroke-width="1.5"/>
      <circle class="core" cx="${nd.x}" cy="${nd.y}" r="${nd.r}" fill="${nd.c}" opacity="0.92"/>${lbl}`;

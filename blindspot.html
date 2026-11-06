@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%230a84ff%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%226%22 fill=%22%23fff%22/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>惠城产业风洞 · 我们可能忽略了什么</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
@@ -39,21 +40,12 @@ body{overflow-x:hidden}
   h1{font-size:19px}
   .chart-grid{grid-template-columns:1fr!important}
 }
-</style></head><body>
+</style>
+<link rel="stylesheet" href="ui/ui.css">
+<link rel="stylesheet" href="ui/ui-pages.css">
+</head><body>
 
-<div class="nav">
-  <b>惠城产业风洞</b>
-  <a href="index.html">① 今日话题</a>
-  <a href="fun.html">🍜 风向标</a>
-  <a href="network.html">② 建构世界</a>
-  <a href="who.html">③ 掂量</a>
-  <a href="choices.html">④ 五条路</a>
-  <a href="future.html">⑤ 未来</a>
-  <a href="windtunnel.html">⑥ 风洞测试</a>
-  <a href="blindspot.html" class="on">⑦ 忽略了什么</a>
-  <a href="report.html">⑧ 分析报告</a>
-  <a href="ending.html">⑨ 结语</a>
-</div>
+
 
 <div class="wrap">
   <h1>我们可能忽略了什么</h1>
@@ -187,7 +179,7 @@ body{overflow-x:hidden}
 
   <!-- 体感投票 -->
   <div class="card" style="margin-top:12px">
-    <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:4px">🗳️ 惠城人体感小调查</div>
+    <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:4px">️ 惠城人体感小调查</div>
     <div style="font-size:12.5px;color:#94a3b8;margin-bottom:12px">你早上从家到单位，路上大概要多久？（本地累计，非全网统计）</div>
     <div id="voteOpts" style="display:flex;gap:8px;flex-wrap:wrap"></div>
     <div id="voteResult" style="margin-top:12px;font-size:12.5px;color:#cbd5e1"></div>
@@ -195,7 +187,7 @@ body{overflow-x:hidden}
 
   <!-- 众包：最希望先办什么 -->
   <div class="card" style="margin-top:12px">
-    <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:4px">📋 惠城人最希望先把哪件事办好？</div>
+    <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:4px"> 惠城人最希望先把哪件事办好？</div>
     <div style="font-size:12.5px;color:#94a3b8;margin-bottom:12px">这不是随便选——你选的，就是这座城最该先补的那块短板。（本地累计）</div>
     <div id="wantOpts" style="display:flex;gap:8px;flex-wrap:wrap"></div>
     <div id="wantResult" style="margin-top:12px;font-size:12.5px;color:#cbd5e1"></div>
@@ -317,13 +309,25 @@ new Chart(document.getElementById('commChart').getContext('2d'),{
 </script>
 
 <div class="likebar">
-  <button onclick="likePage()">👍 <span id="pcount">0</span></button>
-  <button onclick="sharePage()">🔁 转给朋友</button>
+  <button onclick="likePage()"> <span id="pcount">0</span></button>
+  <button onclick="sharePage()"> 转给朋友</button>
 </div>
 <style>
 .likebar{position:relative;bottom:auto;left:auto;transform:none;display:flex;justify-content:center;margin:24px auto;background:rgba(15,23,42,.7);backdrop-filter:blur(16px);border:1px solid var(--glass-b);border-radius:24px;padding:10px 22px;gap:24px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.4);max-width:280px}
 .likebar button{background:none;border:none;color:var(--ink2);font-size:14px;cursor:pointer}
 .likebar button:active{transform:scale(1.15)}
+
+/* ===== 精致深色皮肤增强 ===== */
+body{position:relative;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(191,90,242,.07),transparent 35%),
+    radial-gradient(circle at 85% 75%,rgba(90,200,250,.06),transparent 40%),
+    radial-gradient(circle at 70% 15%,rgba(48,209,88,.04),transparent 30%)}
+.card, .box, .panel{
+  background:linear-gradient(160deg,rgba(40,52,76,.5),rgba(20,28,44,.45))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 4px 24px rgba(0,0,0,.25)!important;
+  backdrop-filter:blur(16px)!important}
 </style>
 <script>
 (function(){
@@ -388,7 +392,7 @@ var _hmt = _hmt || [];
 // 众包：最希望先办什么
 (function(){
   const KEY="huicheng_want_v1";
-  const opts=[{k:"road",label:"🛣️ 路更顺",c:"#f97316"},{k:"school",label:"🏫 学校更多",c:"#3b82f6"},{k:"hosp",label:"🏥 医院更近",c:"#34d399"},{k:"park",label:"🌳 公园更多",c:"#a3e635"},{k:"night",label:"🍜 夜市更热闹",c:"#fbbf24"}];
+  const opts=[{k:"road",label:"️ 路更顺",c:"#f97316"},{k:"school",label:" 学校更多",c:"#3b82f6"},{k:"hosp",label:" 医院更近",c:"#34d399"},{k:"park",label:" 公园更多",c:"#a3e635"},{k:"night",label:" 夜市更热闹",c:"#fbbf24"}];
   let d=JSON.parse(localStorage.getItem(KEY)||'{"road":0,"school":0,"hosp":0,"park":0,"night":0}');
   function render(){
     const total=opts.reduce((s,o)=>s+d[o.k],0);
@@ -411,4 +415,5 @@ var _hmt = _hmt || [];
   render();
 })();
 </script>
+<script src="ui/ui.js" defer></script>
 </body></html>
