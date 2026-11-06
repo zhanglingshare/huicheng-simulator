@@ -142,6 +142,16 @@
     });
     panel.appendChild(steps);
 
+    var asof = window.HC_ASOF;
+    if (asof) {
+      var asofBox = el('div', 'ds-asof');
+      asofBox.innerHTML =
+        '<span class="ds-asof-k">数据期次</span>' +
+        '<span class="ds-asof-v">' + asof.officialLabel + '（官方年度）· ' + asof.currentLabel + '（当期快报）</span>' +
+        '<span class="ds-asof-c">最近核验 ' + asof.checked + '</span>';
+      panel.appendChild(asofBox);
+    }
+
     sheet.appendChild(scrim);
     sheet.appendChild(panel);
     return sheet;

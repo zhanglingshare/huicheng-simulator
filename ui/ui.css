@@ -365,3 +365,12 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border:0;border-radiu
 .ds-fold[open]>summary{color:#cfe0f5}
 .ds-fold[open]>summary::after{content:"收起"}
 .ds-fold>.ds-fold-inner{padding:2px 18px 16px}
+
+/* 章节目录 · 全站数据期次（由 hc-viz/data.js 的 HC_ASOF 提供，缺省时不渲染） */
+.ds-asof{margin:10px 14px 14px;padding:10px 12px;border-radius:10px;
+  border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.035);
+  display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;font-size:11.5px;line-height:1.5}
+.ds-asof-k{font-weight:600;color:#e5c06a;letter-spacing:.04em}
+.ds-asof-v{color:#cbd5e1}
+.ds-asof-c{margin-left:auto;color:#7c8798}
+@media(max-width:430px){.ds-asof-c{margin-left:0}}

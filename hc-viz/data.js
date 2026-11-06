@@ -1,3 +1,8 @@
+/* 惠城指标真源（L1）· 由 huicheng-data-audit 维护
+   页面只读本文件，不得内嵌指标数字。
+   以 IIFE 挂到 window，允许同页多次引用而不触发重复声明。 */
+(function(g){
+'use strict';
 const HC_SOURCE='https://www.hcq.gov.cn/ecgk/jjfz/content/post_5705666.html';
 const HC_OFFICIAL={year:2025,period:'2025 全年',source:HC_SOURCE,metrics:[
  {id:'ind_va',output:'937.92',k:'规上工业增加值',v:'+10.8%',unit:'同比',sub:'总产值 937.9 亿',tag:'超目标 9%',status:'good',spark:'M2,21 L15,18 L27,20 L39,13 L51,15 L63,8 L76,10 L88,4',
@@ -47,6 +52,11 @@ const HC_CURRENT={period:'2026年1-9月',periodShort:'1-9月',released_at:'2026-
   {k:'区本级财政收入',goal:'+3%',actual:'-4.1%',gap:'-7.1pct'}
 ]};
 // 2025 人口背景（统计公报口径），供报告页说明使用
+// 全站期次汇总：官方口径截止 / 当期快报截止 / 最近核验
+const HC_ASOF={official:'2025-12-31',officialLabel:'2025 全年',current:'2026-09-30',
+ currentLabel:'2026 年 1-9 月',checked:'2026-11-06',
+ note:'官方年度口径为 2025 全年终值；2026 年 1-9 月为当期累计快报，两类增速不可直接比较。'};
+
 const HC_POP={year:2025,pop:'159.78',urban:'85.74%',per_gdp:'75309',per_gdp_wan:'7.53',per_gdp_yoy:'+3.0%'};
 
 const SCENES={base:{name:'基准情景',desc:'按原模型默认情景'},delay:{name:'项目延期',desc:'项目贡献承压'},commute:{name:'通勤压力',desc:'招工与本地服务业相关路径承压'},both:{name:'两者叠加',desc:'两项压力同时注入'}};
@@ -66,3 +76,10 @@ function makeUrl(page,key){try{const u=new URL(page,location.href);u.searchParam
 const fmt=n=>Math.round(n).toLocaleString('zh-CN');
 function stateLabels(key){let s=getScene(key),b=getScene('base');return {hit:s.hit.toFixed(1)+'%',p50:fmt(s.p50),p10:fmt(s.p10),p90:fmt(s.p90),gap:(s.hit-b.hit).toFixed(1),diff:fmt(s.p50-b.p50),name:SCENES[key].name}}
 function perfCSV(){return Object.keys(SCENES).map(k=>{let r=getScene(k);return [SCENES[k].name,k,r.hit.toFixed(3),r.p10.toFixed(1),r.p50.toFixed(1),r.p90.toFixed(1)].join(',')}).join('\n')}
+g.HC_SOURCE=HC_SOURCE; g.HC_OFFICIAL=HC_OFFICIAL; g.HC_CURRENT=HC_CURRENT;
+g.HC_POP=HC_POP; g.HC_ASOF=HC_ASOF;
+g.SCENES=SCENES; g.SEED=SEED; g.N=N;
+g.runScene=runScene; g.getScene=getScene; g.initialScene=initialScene;
+g.saveScene=saveScene; g.makeUrl=makeUrl; g.fmt=fmt;
+g.stateLabels=stateLabels; g.perfCSV=perfCSV;
+})(window);
