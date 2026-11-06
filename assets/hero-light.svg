@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="520" viewBox="0 0 1440 520" preserveAspectRatio="xMidYMin slice" role="presentation">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8F3FE"/>
+      <stop offset="46%" stop-color="#F4FAFF"/>
+      <stop offset="100%" stop-color="#F2F7FC"/>
+    </linearGradient>
+    <linearGradient id="far" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#DCEBF8"/>
+      <stop offset="100%" stop-color="#EFF8FD"/>
+    </linearGradient>
+    <linearGradient id="mid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#CBE3F3"/>
+      <stop offset="100%" stop-color="#E7F5FB"/>
+    </linearGradient>
+    <linearGradient id="near" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#B7D8EA"/>
+      <stop offset="100%" stop-color="#DFF1F8"/>
+    </linearGradient>
+    <linearGradient id="haze" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#F2F7FC" stop-opacity="1"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#C9E8F4"/>
+      <stop offset="50%" stop-color="#E4F6FB"/>
+      <stop offset="100%" stop-color="#C9E8F4"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1440" height="520" fill="url(#sky)"/>
+
+  <!-- 远山 -->
+  <path d="M0,268 C110,214 196,248 284,212 C372,176 442,222 536,190 C630,158 706,206 800,178 C894,150 968,196 1064,168 C1160,140 1240,186 1330,158 C1380,144 1416,150 1440,146 L1440,380 L0,380 Z" fill="url(#far)"/>
+  <!-- 中山 -->
+  <path d="M0,308 C120,268 208,296 300,268 C392,240 470,282 566,258 C662,234 738,274 834,252 C930,230 1008,268 1104,246 C1200,224 1280,262 1370,240 L1440,232 L1440,420 L0,420 Z" fill="url(#mid)"/>
+  <!-- 近山带林木质感 -->
+  <path d="M0,352 C118,322 210,346 306,326 C402,306 484,338 582,320 C680,302 760,332 858,316 C956,300 1038,328 1136,312 C1234,296 1330,320 1440,306 L1440,462 L0,462 Z" fill="url(#near)"/>
+  <g fill="#A9CFE3" opacity=".55">
+    <circle cx="236" cy="352" r="9"/><circle cx="262" cy="360" r="6"/><circle cx="214" cy="362" r="6"/>
+    <circle cx="612" cy="344" r="9"/><circle cx="638" cy="352" r="6"/><circle cx="588" cy="354" r="6"/>
+    <circle cx="980" cy="342" r="9"/><circle cx="1006" cy="350" r="6"/><circle cx="956" cy="352" r="6"/>
+    <circle cx="1290" cy="332" r="8"/><circle cx="1314" cy="340" r="6"/>
+  </g>
+
+  <!-- 江水 -->
+  <path d="M0,404 C160,388 300,418 470,406 C640,394 780,420 950,408 C1120,396 1290,416 1440,404 L1440,424 C1290,436 1120,416 950,428 C780,440 640,414 470,426 C300,438 160,408 0,424 Z" fill="url(#water)" opacity=".9"/>
+
+  <!-- 底部雾化，接白色卡片 -->
+  <rect x="0" y="380" width="1440" height="140" fill="url(#haze)"/>
+</svg>
