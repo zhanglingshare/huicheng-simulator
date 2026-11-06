@@ -95,6 +95,10 @@ h1 .r{color:var(--red)}h1 .b{color:var(--blue-d)}
 .gap-line{stroke-dasharray:6 5;animation:march 3s linear infinite}
 @keyframes march{to{stroke-dashoffset:-22}}
 
+.rel{margin-top:10px;padding:10px 12px;border-radius:12px;background:#F3F7FC;border:1px solid #E2ECF7;display:flex;gap:8px;align-items:flex-start}
+.rel i{flex:none;width:18px;height:18px;border-radius:50%;background:#1B6FE0;color:#fff;font-size:10px;font-style:normal;display:grid;place-items:center;font-weight:800;margin-top:1px}
+.rel p{font-size:11px;color:#33506B;line-height:1.6}
+.rel p b{color:#0D3F8F}
 .duo{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px;padding:12px;border-radius:14px;background:#FBF7F0;border:1px solid #F0E2CC}
 .duo b{display:block;font-family:var(--mono);font-size:22px;font-weight:800;color:#8A5A12;letter-spacing:-.03em;line-height:1.1}
 .duo span{display:block;font-size:9.5px;color:#8A6A3E;line-height:1.45;margin-top:2px}
@@ -132,7 +136,7 @@ details div{margin-top:8px;line-height:1.85}
 <div class="wrap">
   <div class="kick">惠城 · 三个问题</div>
   <h1><span>钱留下了吗？</span><span>前景还剩多少？</span><span class="b">通勤，谁在扛？</span></h1>
-  <p class="sub">三张图，三组公开数字，<b>全部可回溯到原始出处</b>。不猜、不补、不编。</p>
+  <p class="sub">三张图，三组公开数字，<b>全部可回溯到原始出处</b>。每个数字，都翻译成普通人的账本。</p>
 
   <section class="grid">
     <div class="card c1">
@@ -246,6 +250,7 @@ details div{margin-top:8px;line-height:1.85}
           <text class="lbl" x="105" y="218" text-anchor="middle">100 元 GDP · 5.4 元留在本地</text>
         </svg>
       </div>
+      <div class="rel"><i>人</i><p>公交、学校、医院这些公共服务，靠的就是<b>留下的这 5.4 元</b>。</p></div>
       <div class="cfoot"><a href="report.html">钱去了哪 →</a><span>企业五年外迁 3439 家</span></div>
     </div>
 
@@ -291,6 +296,7 @@ details div{margin-top:8px;line-height:1.85}
           <text class="num" x="154" y="26" text-anchor="middle" fill="#8A3A32">缺口 51.5 个百分点</text>
         </svg>
       </div>
+      <div class="rel"><i>人</i><p>新工厂少了，普通人的<b>新岗位、涨薪机会</b>跟着少。</p></div>
       <div class="cfoot"><a href="windtunnel.html">调参数推演 →</a><span>产值仍在涨，投资在撤</span></div>
     </div>
 
@@ -324,6 +330,7 @@ details div{margin-top:8px;line-height:1.85}
         <div><b>100+</b><span>人的工厂</span></div>
         <div><b>2000</b><span>元/月，专线后省下</span></div>
       </div>
+      <div class="rel"><i>人</i><p>2 公里的路、每月近 2000 元车费，最后都落在<b>打工人自己</b>身上。</p></div>
       <div class="cfoot"><a href="commute.html">看这条通勤 →</a><span>专线后：每月省近 2000 元</span></div>
     </div>
   </section>
