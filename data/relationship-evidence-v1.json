@@ -2,7 +2,7 @@
   "schema_version": "relationship-evidence-v1",
   "region": "huicheng",
   "name": "惠城全息关系世界 · 公开证据关系底座",
-  "generated_at": "2026-10-29",
+  "generated_at": "2026-11-06",
   "evidence_grade_legend": {
     "A": "官方统计/政府文件/主体公告直接证实，带 URL",
     "B": "多源间接证据推断，给区间/定性，不冒充精确值",
@@ -17,8 +17,8 @@
     "eco_constraint": "生态约束",
     "regional": "区域协作"
   },
-  "node_count": 17,
-  "edge_count": 19,
+  "node_count": 18,
+  "edge_count": 20,
   "note": "关系强度不编造：有公开量化数据才显示 metric，否则只给 strength_basis；C 级为待验证假设，前端须显式标注。",
   "nodes": [
     {
@@ -28,12 +28,13 @@
       "layer": "城市核心",
       "town": "主城区全域",
       "description": "惠州市中心城区，行政/商务/服务核心",
-      "stat": "GDP 1203.33亿/+4.3%·常住159.78万",
+      "stat": "GDP 2025全年1203.33亿/+4.3%｜2026前三季度883.46亿/+1.1%·常住159.78万",
       "node_status": "active",
       "change_status": "无显著变化",
       "evidence_grade": "A",
       "source_ids": [
-        "S001"
+        "S001",
+        "S020"
       ]
     },
     {
@@ -43,7 +44,7 @@
       "layer": "产业引擎",
       "town": "水口/马安/三栋",
       "description": "省级高新区·1核4组团",
-      "stat": "2025产值632.7亿→2026目标800亿",
+      "stat": "2025产值632.7亿｜2026目标820亿·2027冲千亿",
       "node_status": "active",
       "change_status": "增强",
       "evidence_grade": "A",
@@ -59,7 +60,7 @@
       "layer": "三大集群",
       "town": "水口/马安/三栋",
       "description": "规上工业总产值主体",
-      "stat": "胜宏/润众/沃尔核材集聚",
+      "stat": "胜宏/润众/沃尔核材集聚｜2026前三季度规上工业+0.8%",
       "node_status": "active",
       "change_status": "增强",
       "evidence_grade": "A",
@@ -283,6 +284,22 @@
       "source_ids": [
         "S001"
       ]
+    },
+    {
+      "node_id": "fz",
+      "name": "环西湖丰渚园商区综合体",
+      "node_type": "infrastructure",
+      "layer": "城市功能·文旅载体",
+      "town": "下角/丰渚园",
+      "description": "原君豪酒店旧址更新项目，商业+精品酒店，环西湖西侧文旅载体",
+      "stat": "施工中标2.373亿·工期480天·350车位/70间客房",
+      "node_status": "pending",
+      "change_status": "新增",
+      "evidence_grade": "A",
+      "source_ids": [
+        "S018",
+        "S019"
+      ]
     }
   ],
   "edges": [
@@ -505,7 +522,7 @@
       "source_node_id": "gxq",
       "target_node_id": "hc",
       "relation_type": "investment",
-      "relation_description": "惠城高新区是惠城工业核心引擎：2025产值632.7亿→2026目标800亿，138宗重点项目支撑",
+      "relation_description": "惠城高新区是惠城工业核心引擎：2025产值632.7亿，2026年目标820亿、2027年冲千亿，138宗重点项目支撑",
       "direction": "有方向",
       "valid_period": "2026",
       "evidence_type": "已证实事实",
@@ -516,14 +533,15 @@
         "metric_value": 632.7,
         "metric_unit": "亿元"
       },
-      "comparison_period": "2026",
+      "comparison_period": "2025",
       "strength_basis": "政府工作报告+重点项目清单",
       "source_ids": [
         "S001",
-        "S004"
+        "S004",
+        "S020"
       ],
-      "counter_evidence": "800亿为年度目标",
-      "last_verified_at": "2026-10-29",
+      "counter_evidence": "820亿为年度目标；2026年1-9月全区固投-40.7%、工业投资-46.1%，园区实际产值进度未公开",
+      "last_verified_at": "2026-11-06",
       "change_status": "无显著变化"
     },
     {
@@ -562,10 +580,11 @@
       "comparison_period": "2026",
       "strength_basis": "文旅活动官方发布",
       "source_ids": [
-        "S016"
+        "S016",
+        "S020"
       ],
-      "counter_evidence": "客流/消费额未细分",
-      "last_verified_at": "2026-10-29",
+      "counter_evidence": "客流/消费额未细分；2026年1-9月社消零+2.0%，文旅对消费的贡献未单独统计",
+      "last_verified_at": "2026-11-06",
       "change_status": "增强"
     },
     {
@@ -698,13 +717,14 @@
         "metric_value": 937.92,
         "metric_unit": "亿元"
       },
-      "comparison_period": "2026",
+      "comparison_period": "2025",
       "strength_basis": "政府工作报告",
       "source_ids": [
-        "S001"
+        "S001",
+        "S020"
       ],
-      "counter_evidence": "集群内部结构未细分",
-      "last_verified_at": "2026-10-29",
+      "counter_evidence": "集群内部结构未细分；2026年1-9月规上工业增加值仅+0.8%、二产增加值-1.6%，工业基本盘增速明显放缓",
+      "last_verified_at": "2026-11-06",
       "change_status": "无显著变化"
     },
     {
@@ -727,6 +747,32 @@
       "counter_evidence": "链属企业数量与协同规模未公开",
       "last_verified_at": "2026-10-29",
       "change_status": "增强"
+    },
+    {
+      "edge_id": "E020",
+      "source_node_id": "wh",
+      "target_node_id": "fz",
+      "relation_type": "investment",
+      "relation_description": "环西湖丰渚园商区综合体施工中标2.373亿元，补齐西湖西侧文旅商业配套，串联丰渚园、菱湖、元妙观动线",
+      "direction": "有方向",
+      "valid_period": "2026-2027",
+      "evidence_type": "已证实事实",
+      "evidence_grade": "A",
+      "confidence": "高",
+      "metric": {
+        "metric_name": "施工中标价",
+        "metric_value": 2.373,
+        "metric_unit": "亿元"
+      },
+      "comparison_period": "2026",
+      "strength_basis": "广东省公共资源交易平台中标公告+自然资源局受理公示",
+      "source_ids": [
+        "S018",
+        "S019"
+      ],
+      "counter_evidence": "中标未开工，工期480日历天，开业运营效果未知",
+      "last_verified_at": "2026-11-06",
+      "change_status": "新增"
     }
   ]
 }

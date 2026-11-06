@@ -1,8 +1,8 @@
 {
   "schema_version": "relationship-changes-v1",
   "region": "huicheng",
-  "generated_at": "2026-10-29",
-  "count": 7,
+  "generated_at": "2026-11-06",
+  "count": 8,
   "change_type_legend": {
     "new_entity": "新主体接入",
     "new_edge": "新连接形成",
@@ -151,6 +151,26 @@
       ],
       "uncertainty": "方向指引，落地待政策细化",
       "last_verified_at": "2026-10-29"
+    },
+    {
+      "change_id": "C008",
+      "change_type": "new_entity",
+      "title": "环西湖丰渚园商区综合体施工中标2.373亿元（原君豪酒店旧址）",
+      "event_date": "2026-11-02",
+      "involved_node_ids": [
+        "wh",
+        "fz"
+      ],
+      "involved_edge_ids": [
+        "E020"
+      ],
+      "before_after": "此前：旧址拆除后空置；此后：商业+精品酒店项目定标进入施工准备",
+      "source_ids": [
+        "S018",
+        "S019"
+      ],
+      "uncertainty": "尚未开工，工期480日历天，开业运营待观察",
+      "last_verified_at": "2026-11-06"
     }
   ]
 }

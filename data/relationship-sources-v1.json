@@ -1,8 +1,8 @@
 {
   "schema_version": "relationship-sources-v1",
   "region": "huicheng",
-  "generated_at": "2026-10-29",
-  "count": 17,
+  "generated_at": "2026-11-06",
+  "count": 20,
   "note": "转载不视为独立来源；可信度按发布机构与可核验性评定。",
   "sources": [
     {
@@ -303,6 +303,61 @@
       ],
       "summary": "惠城区第十次党代会报告：以利元亨为龙头培育AI/机器人链属",
       "credibility": "媒体报道，中高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S018",
+      "title": "环西湖丰渚园商区综合体项目施工中标（2.373亿元，工期480日历天）",
+      "publisher": "惠城发布（引广东省公共资源交易平台）",
+      "source_type": "媒体报道",
+      "url": "http://m.toutiao.com/group/7703862474830791231/",
+      "published_at": "2026-11-03",
+      "collected_at": "2026-11-06",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "fz",
+        "wh"
+      ],
+      "summary": "原君豪酒店旧址地块，用地约17737㎡、总建面33594㎡，商业+精品酒店，350车位/70间客房，2026年8月以13290万元底价成交",
+      "credibility": "媒体报道，中高（交易平台公告可核）",
+      "corroborated": false
+    },
+    {
+      "source_id": "S019",
+      "title": "20261103受理公示：西湖及周边区域更新优化工程（一期）丰山片区提升项目获受理",
+      "publisher": "惠州市惠城区自然资源局",
+      "source_type": "政府文件",
+      "url": "http://www.hcq.gov.cn/hzhczrzyj/gkmlpt/content/5/5886/post_5886347.html",
+      "published_at": "2026-11-04",
+      "collected_at": "2026-11-06",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "fz",
+        "wh"
+      ],
+      "summary": "11月3日受理下角南路慈云路至丰山路段市政工程规划许可，同时受理马安南园基础设施一期设计审查、两宗配售型保障房报建",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S020",
+      "title": "2026年1-9月惠城区经济运行简况（GDP883.46亿/+1.1%，工业+0.8%，固投-40.7%）",
+      "publisher": "惠城区统计局",
+      "source_type": "官方统计",
+      "url": "http://www.hcq.gov.cn/zfxxgkml/hcqtjj/ywgz/content/post_5886184.html",
+      "published_at": "2026-11-03",
+      "collected_at": "2026-11-06",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "hc",
+        "dz",
+        "gxq"
+      ],
+      "summary": "前三季度GDP883.46亿+1.1%；二产237.92亿-1.6%；规上工业+0.8%；固投-40.7%；社消零622.07亿+2.0%；进出口337.0亿+11.4%",
+      "credibility": "官方发布，高",
       "corroborated": true
     }
   ]
