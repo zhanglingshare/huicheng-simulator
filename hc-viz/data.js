@@ -5,7 +5,7 @@
 'use strict';
 const HC_SOURCE='https://www.hcq.gov.cn/ecgk/jjfz/content/post_5705666.html';
 const HC_OFFICIAL={year:2025,period:'2025 全年',source:HC_SOURCE,metrics:[
- {id:'ind_va',output:'937.92',k:'规上工业增加值',v:'+10.8%',unit:'同比',sub:'总产值 937.9 亿',tag:'超目标 9%',status:'good',spark:'M2,21 L15,18 L27,20 L39,13 L51,15 L63,8 L76,10 L88,4',
+ {id:'ind_va',output:'937.92',output_v:'+9.6%',k:'规上工业增加值',v:'+10.8%',unit:'同比',sub:'总产值 937.9 亿',tag:'超目标 9%',status:'good',spark:'M2,21 L15,18 L27,20 L39,13 L51,15 L63,8 L76,10 L88,4',
   detail:'规上工业<b>增加值</b>增速 10.8%，高于年初约 9% 的目标；规上工业<b>总产值</b>937.92 亿元（现价，+9.6%）、销售产值 899.44 亿元（+7.8%）。注意：<b>增加值与总产值是两个口径</b>。来源：惠城区2025年统计公报（区统计局，初步核算数）。',
   note:'2025年规上工业增加值增长10.8%。此值不等于工业总产值增长率。'},
  {id:'ind_profit',k:'规上工业利润',v:'+49.7%',unit:'同比',sub:'42.51 亿元',tag:'盈利高增长',status:'good',spark:'M2,22 L15,20 L27,17 L39,15 L51,11 L63,10 L76,6 L88,3',

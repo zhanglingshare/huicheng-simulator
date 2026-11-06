@@ -45,6 +45,12 @@
 
   /* 指标条 */
   #metrics{position:absolute;top:64px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:25}
+  .asof-line{position:fixed;top:15px;right:262px;z-index:60;
+    font:500 11.5px/1.4 system-ui,-apple-system,sans-serif;color:#6b7787;
+    background:rgba(255,255,255,.94);border:1px solid #e8edf4;border-radius:999px;
+    padding:4px 11px;letter-spacing:.01em;white-space:nowrap;pointer-events:none}
+  .asof-line b{color:#1f2937;font-weight:600}
+  .metric-fail{padding:10px 14px;border-radius:10px;border:1px solid rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fca5a5;font:500 12.5px/1.6 system-ui,sans-serif}
   .metric{position:relative;width:152px;height:60px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.85);border-radius:var(--r-md);box-shadow:var(--sh-md);padding:9px 12px 9px 15px;overflow:hidden;transition:.2s}
   .metric::before{content:"";position:absolute;left:0;top:9px;bottom:9px;width:3px;border-radius:3px;background:linear-gradient(180deg,#38bdf8,#2563eb)}
   .metric:hover{transform:translateY(-2px);box-shadow:var(--sh-lg)}
@@ -170,7 +176,9 @@
     #metrics{top:56px;left:8px;right:8px;transform:none;gap:7px;overflow-x:auto;padding-bottom:2px}
     #metrics::-webkit-scrollbar{display:none}
     .metric{width:136px;flex-shrink:0;height:54px}.metric .v{font-size:16px}
-    #netHint{top:116px;font-size:10px}
+    .asof-line{top:112px;left:8px;right:8px;text-align:center;
+      font-size:10.5px;padding:3px 8px;white-space:normal}
+    #netHint{top:142px;font-size:10px}
     .side.left{top:0;left:0;height:100%;width:240px;z-index:70;background:#fff;padding:66px 14px 16px;overflow-y:auto;transform:translateX(-100%);transition:transform .25s;box-shadow:var(--sh-lg)}
     .side.left.open{transform:translateX(0)}
     footer{height:108px;padding:0 8px}
@@ -203,14 +211,8 @@
     </div>
   </header>
 
-  <div style="font:500 12.5px/1.5 system-ui,-apple-system,sans-serif;color:#94a3b8;padding:0 24px 6px;letter-spacing:.02em">指标期次：<b style="color:#e2e8f0;font-weight:600">2025 全年终值</b> · 来源 惠城区统计公报 · 与 2026 年当期数据不可混读</div>
-  <div id="metrics">
-    <div class="metric"><div class="k">GDP（亿元）</div><div class="v">1203.33 <small class="up">+4.3%</small></div></div>
-    <div class="metric"><div class="k">规上工业总产值（亿元）</div><div class="v">937.92 <small class="up">+9.6%</small></div></div>
-    <div class="metric"><div class="k">社消零（亿元）</div><div class="v">805.68 <small class="up">+3.7%</small></div></div>
-    <div class="metric"><div class="k">外贸进出口（亿元）</div><div class="v">383.60 <small class="up">+7.1%</small></div></div>
-    <div class="metric"><div class="k">常住人口（万人）</div><div class="v">159.78</div></div>
-  </div>
+  <div id="asofLine" class="asof-line"></div>
+  <div id="metrics"></div>
 
   <div id="stageWrap">
     <canvas id="net"></canvas>
@@ -276,6 +278,7 @@
   </div>
 </div>
 
+<script src="hc-viz/data.js"></script>
 <script src="hc-viz/dataset.js"></script>
 <script>
 /* ================= 数据：优先 fetch 三件套，失败用内嵌 fallback ================= */
@@ -841,6 +844,37 @@ async function boot(){
   }
 }
 boot();
+
+/* 指标概览：只从真源 hc-viz/data.js 生成，页面不存任何数字 */
+(function renderMetrics(){
+  var box=document.getElementById('metrics');
+  var line=document.getElementById('asofLine');
+  if(typeof HC_OFFICIAL==='undefined'||!HC_OFFICIAL.metrics){
+    if(box) box.innerHTML='<div class="metric-fail">指标数据未能加载 · hc-viz/data.js 读取失败，本页不使用旧数字替代</div>';
+    if(line) line.innerHTML='指标期次：<b>读取失败</b>';
+    return;
+  }
+  var by={};HC_OFFICIAL.metrics.forEach(function(m){by[m.id]=m;});
+  var pop=(typeof HC_POP!=='undefined'&&HC_POP.pop)||'—';
+  var items=[
+    ['GDP（亿元）', by.gdp&&by.gdp.total, by.gdp&&by.gdp.v],
+    ['规上工业总产值（亿元）', by.ind_va&&by.ind_va.output, by.ind_va&&by.ind_va.output_v],
+    ['社消零（亿元）', by.retail&&by.retail.total, by.retail&&by.retail.v],
+    ['外贸进出口（亿元）', by.trade&&by.trade.total, by.trade&&by.trade.v],
+    ['常住人口（万人）', pop, '']
+  ];
+  if(box){
+    box.innerHTML=items.map(function(it){
+      var ok=it[1]&&it[1]!=='—';
+      return '<div class="metric"><div class="k">'+it[0]+'</div><div class="v">'+(ok?it[1]:'—')+
+        (ok&&it[2]?' <small class="up">'+it[2]+'</small>':'')+'</div></div>';
+    }).join('');
+  }
+  if(line&&typeof HC_ASOF!=='undefined'){
+    line.innerHTML='指标期次：<b>'+HC_ASOF.officialLabel+'终值</b> · '+HC_ASOF.currentLabel+'为当期快报，不可混读';
+    line.title=HC_ASOF.note+' 来源：惠城区统计公报（'+HC_ASOF.official+'）。最近核验 '+HC_ASOF.checked+'。';
+  }
+})();
 </script>
 </body>
 </html>
