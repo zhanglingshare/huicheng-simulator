@@ -64,7 +64,8 @@ async function settle(){for(let i=0;i<12;i++)await Promise.resolve();}
  assert.equal(g("kgEmpty").hidden,true,"Data loaded without fallback");
  assert.equal(g("kgSvg").getAttribute("viewBox"),"0 0 360 350","Phone does not shrink 1000px graph");
  assert.equal(g("kgMobileNodes").children.length,4,"Mobile entry rail present");
- assert.equal(g("kgEventList").children.length,7,"All seven sourced changes shown");
+ const sourced=fixtures[2].changes.filter(c=>Array.isArray(c.source_ids)&&c.source_ids.length>0).length;
+ assert.equal(g("kgEventList").children.length,sourced,"All sourced changes shown ("+sourced+")");
  assert.ok(g("kgNodes").children.length<=3,"Only focus and two neighbors drawn on phone");
  g("kgMobileNodes").children.find(b=>b.textContent==="新投产项目").click();
  assert.equal(g("kgNodeCount").textContent,"1","Path click shows ONE entity");
@@ -94,5 +95,5 @@ async function settle(){for(let i=0;i<12;i++)await Promise.resolve();}
  assert.equal(desktop.get("kgSvg").getAttribute("viewBox"),"0 0 1000 650","Desktop remains broad graph");
  desktop.get("kgMobileNodes").children.find(b=>b.textContent==="新投产项目").click();
  assert.equal(desktop.get("kgNodeCount").textContent,"1","Desktop also reveals one entity");
- console.log("✓ Runtime knowledge graph V4.1: mobile/desktop, progressive reveal, undo, grade, seven events, share restoration and time gating");
+ console.log("✓ Runtime knowledge graph V4.1: mobile/desktop, progressive reveal, undo, grade, all sourced events, share restoration and time gating");
 })().catch(err=>{console.error(err.stack||err);process.exitCode=1;});
