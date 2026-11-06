@@ -3,435 +3,361 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#F2F7FC">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%231B6FE0%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%226%22 fill=%22%23fff%22/%3E%3C/svg%3E">
-<title>惠城决策风洞 · 产值在涨，投资在撤</title>
+<meta name="theme-color" content="#F4F8FC">
+<title>惠城 · 钱、前景、通勤：三个问题</title>
 <style>
 :root{
-  --bg:#F2F7FC;--ink:#0B2236;--ink2:#3A5163;--ink3:#6B7F92;--ink4:#98AABB;
-  --line:#DFEAF5;--line2:#C6DAEC;
-  --blue:#1B6FE0;--blue-d:#0D47A1;--blue-l:#E9F2FE;
-  --red:#C0453B;--green:#218A5C;--amber:#B8791F;
-  --r:18px;--pill:999px;
-  --sh:0 12px 34px -24px rgba(11,34,54,.42),0 1px 2px rgba(11,34,54,.05);
-  --sh2:0 20px 48px -28px rgba(11,34,54,.5);
-  --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --bg:#F4F8FC;--ink:#08192B;--ink2:#3B5165;--ink3:#6E8396;--ink4:#9AAAB8;
+  --line:#DEE9F4;--blue:#1B6FE0;--blue-d:#0D3F8F;
+  --red:#BE3F35;--green:#1E8A5C;--amber:#B0761C;
   --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Roboto Mono",monospace;
+  --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;min-width:0}
 html,body{overflow-x:hidden}
-body{font-family:var(--font);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased;
-  background-color:var(--bg);
-  background-image:linear-gradient(180deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,.5) 46%,#F2F7FC 78%),url(assets/hero-light.svg);
-  background-repeat:no-repeat,no-repeat;background-position:top center,top center;background-size:100% 100%,100% auto}
+body{font-family:var(--font);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;
+  background:radial-gradient(120% 80% at 50% 0%,#FFFFFF 0%,#F1F7FD 46%,#EAF2FA 100%) fixed}
 a{color:inherit;text-decoration:none}
-
-.bar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;padding:9px 16px;
-  background:rgba(255,255,255,.9);border-bottom:1px solid var(--line);
-  -webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%)}
-.brand{display:flex;align-items:center;gap:9px;flex:none}
-.mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:13px;
-  background:linear-gradient(150deg,#2E7DEB,#0D47A1);box-shadow:0 8px 18px -10px rgba(27,111,224,.95)}
-.nm{display:flex;flex-direction:column;line-height:1.1}
-.nm b{font-size:13.5px}
-.nm i{font-style:normal;font-size:8.5px;letter-spacing:.15em;color:var(--ink4);font-weight:700}
-.nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-left:4px}
+.bar{display:flex;align-items:center;gap:10px;padding:10px 18px;position:sticky;top:0;z-index:40;
+  background:rgba(255,255,255,.86);border-bottom:1px solid var(--line);
+  -webkit-backdrop-filter:blur(16px) saturate(180%);backdrop-filter:blur(16px) saturate(180%)}
+.brand{display:flex;align-items:center;gap:8px;flex:none}
+.mark{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:12px;
+  background:linear-gradient(150deg,#2E7DEB,#0D47A1)}
+.nm b{font-size:12.5px}.nm i{font-style:normal;font-size:8px;letter-spacing:.14em;color:var(--ink4);font-weight:700;display:block}
+.nav{display:flex;gap:1px;overflow-x:auto;scrollbar-width:none;margin-left:6px;
+  -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 18px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 18px),transparent)}
 .nav::-webkit-scrollbar{display:none}
-.nav a{flex:none;font-size:12.5px;color:var(--ink2);padding:6px 11px;border-radius:var(--pill);white-space:nowrap}
-.nav a:hover{background:var(--blue-l);color:var(--blue-d)}
-.nav a.on{background:linear-gradient(150deg,#2E7DEB,#1B6FE0);color:#fff;font-weight:700}
-.stamp{margin-left:auto;flex:none;display:flex;align-items:center;gap:6px;font-size:10.5px;color:var(--ink3);
-  background:#fff;border:1px solid var(--line);border-radius:var(--pill);padding:4px 10px;white-space:nowrap}
-.stamp i{width:6px;height:6px;border-radius:50%;background:var(--green)}
+.nav a{flex:none;font-size:11.5px;color:var(--ink2);padding:5px 9px;border-radius:999px;white-space:nowrap}
+.nav a.on{background:var(--blue);color:#fff;font-weight:700}
+.stamp{margin-left:auto;flex:none;font-size:9.5px;color:var(--ink3);background:#fff;border:1px solid var(--line);
+  border-radius:999px;padding:3px 8px;white-space:nowrap;display:flex;align-items:center;gap:5px}
+.stamp i{width:5px;height:5px;border-radius:50%;background:var(--green)}
 
-.wrap{max-width:1260px;margin:0 auto;padding:20px 18px 36px}
-.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px;align-items:start}
+.wrap{max-width:1180px;margin:0 auto;padding:26px 18px 30px}
+.kick{font-size:10.5px;font-weight:800;letter-spacing:.18em;color:var(--blue);margin-bottom:12px}
+h1{font-size:clamp(30px,4.4vw,52px);font-weight:800;line-height:1.08;letter-spacing:-.045em;margin-bottom:6px}
+h1 span{display:block}
+h1 .r{color:var(--red)}h1 .b{color:var(--blue-d)}
+.sub{font-size:12.5px;color:var(--ink3);margin-bottom:22px}
+.sub b{color:var(--ink2)}
 
-.kicker{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;color:var(--blue-d);
-  background:#fff;border:1px solid #D6E5F8;border-radius:var(--pill);padding:5px 11px;margin-bottom:14px}
-.kicker i{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:blip 1.8s infinite}
-@keyframes blip{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.card{position:relative;background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px 18px 14px;
+  box-shadow:0 18px 44px -34px rgba(8,25,43,.5),0 1px 2px rgba(8,25,43,.04);overflow:hidden;
+  display:flex;flex-direction:column;transition:.28s cubic-bezier(.16,1,.3,1)}
+.card:hover{transform:translateY(-4px);box-shadow:0 28px 60px -40px rgba(8,25,43,.55)}
+.card::after{content:"";position:absolute;left:18px;right:18px;top:0;height:3px;border-radius:0 0 3px 3px;background:var(--blue);opacity:.9}
+.card.c2::after{background:var(--red)}.card.c3::after{background:var(--amber)}
+.ctag{font-size:9.5px;font-weight:800;letter-spacing:.16em;color:var(--ink4);margin-bottom:6px}
+.ctitle{font-size:clamp(17px,1.5vw,20px);font-weight:800;line-height:1.35;letter-spacing:-.02em;margin-bottom:2px}
+.ctitle em{font-style:normal;font-family:var(--mono);color:var(--blue-d)}
+.c2 .ctitle em{color:var(--red)}
+.c3 .ctitle em{color:var(--amber)}
+.cnum{display:flex;align-items:baseline;gap:5px;margin:10px 0 2px}
+.cnum b{font-family:var(--mono);font-size:30px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.cnum s{text-decoration:none;font-size:11px;color:var(--ink3)}
+.cnote{font-size:10.5px;color:var(--ink4);line-height:1.6}
+.viz{margin:12px auto 8px;max-width:330px}
+.viz svg{width:100%;height:auto;display:block}
+.viz text{font-family:var(--font)}
+.lbl{font-size:10px;fill:#6E8396}
+.lbl-b{font-size:11px;font-weight:700;fill:#08192B}
+.num{font-family:var(--mono);font-size:12px;font-weight:800;fill:#0D3F8F}
+.cfoot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:10px;border-top:1px dashed var(--line)}
+.cfoot a{font-size:11px;font-weight:700;color:var(--blue)}
+.cfoot span{font-size:9.5px;color:var(--ink4)}
 
-h1.hook{font-size:clamp(31px,4vw,54px);font-weight:800;line-height:1.1;letter-spacing:-.042em;margin-bottom:14px}
-h1.hook > span{display:block}
-h1.hook .up{color:var(--green)}
-h1.hook .down{color:var(--red)}
-h1.hook .q{display:inline-block;color:var(--blue-d);box-shadow:inset 0 -.15em 0 rgba(27,111,224,.15)}
+/* 100 格矩阵 */
+.cell{fill:#EDF3F9;transition:fill .3s}
+.cell.on{animation:pop .5s cubic-bezier(.16,1,.3,1) both;fill:#2E7DEB}
+.cell.on:nth-of-type(3n){fill:#0D47A1}
+@keyframes pop{0%{opacity:0;transform:scale(.3)}100%{opacity:1;transform:scale(1)}}
+.cell.on{transform-box:fill-box;transform-origin:center}
+.glow{animation:gp 2.4s ease-in-out infinite}
+@keyframes gp{0%,100%{opacity:.0}50%{opacity:.5}}
 
-.lede{font-size:12.8px;line-height:1.9;color:var(--ink2);max-width:640px;margin-bottom:8px}
-.lede b{color:var(--ink);font-weight:700;font-family:var(--mono);font-size:13px}
-.lede em{font-style:normal;color:var(--blue-d);font-weight:700}
-.src-inline{display:block;font-size:10px;color:var(--ink4);margin-bottom:14px;line-height:1.7}
+/* 双轨折线 */
+.track{fill:none;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:400;stroke-dashoffset:400;
+  animation:draw 1.2s cubic-bezier(.16,1,.3,1) .35s forwards}
+.track.red{stroke:#BE3F35}
+.track.blue{stroke:#1B6FE0}
+@keyframes draw{to{stroke-dashoffset:0}}
+.dot{opacity:0;animation:fi .5s ease .9s forwards}
+@keyframes fi{to{opacity:1}}
+.pulse{animation:pl 2s ease-in-out infinite}
+@keyframes pl{0%,100%{opacity:.15;transform:scale(.85)}50%{opacity:.55;transform:scale(1.25)}}
+.pulse{transform-box:fill-box;transform-origin:center}
 
-.tension{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:14px}
-.tn{background:#fff;border:1px solid var(--line);border-radius:14px;padding:11px 12px;box-shadow:var(--sh)}
-.tn .v{display:block;font-family:var(--mono);font-size:19px;font-weight:800;letter-spacing:-.03em;line-height:1.15;white-space:nowrap}
-.tn .k{display:block;font-size:10.5px;color:var(--ink3);margin-top:4px;line-height:1.45}
-.tn.up{box-shadow:inset 0 3px 0 rgba(33,138,92,.5),var(--sh)}
-.tn.down{box-shadow:inset 0 3px 0 rgba(192,69,59,.55),var(--sh)}
-.tn.flat{box-shadow:inset 0 3px 0 rgba(184,121,31,.5),var(--sh)}
+/* 通勤时间条 */
+.win{animation:blink 2.6s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:.45}50%{opacity:1}}
+.gap-line{stroke-dasharray:6 5;animation:march 3s linear infinite}
+@keyframes march{to{stroke-dashoffset:-22}}
 
-.guess{background:#fff;border:1px solid #D9E6F7;border-radius:var(--r);padding:15px 16px 16px;box-shadow:var(--sh2);
-  position:relative;overflow:hidden}
-.guess::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#2E7DEB,#0D47A1)}
-.guess .gt{font-size:13px;font-weight:800;color:var(--blue-d);display:flex;align-items:center;gap:7px;margin-bottom:6px}
-.guess .gq{font-size:14.5px;font-weight:700;line-height:1.55;margin-bottom:11px}
-.gopts{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.gbtn{display:flex;align-items:center;justify-content:center;min-height:42px;border-radius:11px;cursor:pointer;
-  font-family:inherit;font-size:13.5px;font-weight:700;border:1px solid var(--line2);background:#F7FBFF;color:var(--ink2);transition:.18s}
-.gbtn:hover{border-color:#9CC4F0;background:#EFF7FF;color:var(--blue-d)}
-.gbtn[aria-pressed="true"]{background:linear-gradient(150deg,#2E7DEB,#1B6FE0);border-color:transparent;color:#fff;
-  box-shadow:0 12px 26px -18px rgba(27,111,224,.95)}
-.reveal{display:none;margin-top:11px;padding-top:11px;border-top:1px dashed var(--line)}
-.reveal.show{display:block;animation:fadeUp .45s cubic-bezier(.16,1,.3,1)}
-@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.reveal h4{font-size:12.5px;font-weight:800;margin-bottom:6px}
-.reveal ul{list-style:none;display:grid;gap:5px;font-size:12.5px;color:var(--ink2);line-height:1.75}
-.reveal ul li::before{content:"—";color:var(--blue);margin-right:6px;font-weight:700}
-.reveal .unknown{margin-top:8px;font-size:11.5px;color:var(--ink3)}
-.reveal .unknown b{color:var(--red)}
-.reveal a.more{display:inline-flex;align-items:center;gap:5px;margin-top:9px;font-size:12.5px;font-weight:700;color:var(--blue)}
-</style>
-<style>
-.evidence{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;display:flex;flex-direction:column}
-.ev-head{display:flex;align-items:flex-start;gap:10px;padding:14px 15px 0}
-.ev-head .t{flex:1}
-.ev-head b{display:block;font-size:14px;font-weight:800;letter-spacing:-.01em}
-.ev-head span{font-size:10.5px;color:var(--ink3);line-height:1.5}
-.ev-head .badge{font-size:10px;font-weight:700;color:var(--blue-d);background:var(--blue-l);border:1px solid #D3E4FA;
-  border-radius:var(--pill);padding:3px 9px;flex:none;white-space:nowrap}
-.netwrap{position:relative;margin:10px 14px 0;border-radius:13px;overflow:hidden;border:1px solid #E4EEF8;
-  background:radial-gradient(80% 70% at 46% 44%,#F9FCFF,#EDF5FC)}
-.netwrap svg{width:100%;height:auto;display:block}
-.netwrap text{font-family:var(--font)}
-.lb{font-size:12px;font-weight:700;fill:#0B2236}
-.lbv{font-family:var(--mono);font-size:12.5px;font-weight:800;fill:#0D47A1}
-.sub{font-size:10px;fill:#6B7F92}
-.annot{font-size:10px;font-weight:700;fill:#51707F}
-.annot.warn{fill:#C0453B}
-.annot.amber{fill:#B8791F}
-.link{fill:none;stroke:#9DBED9;stroke-width:1.4;opacity:.7}
-.link.thin{stroke-width:1;opacity:.5}
-.link-break{fill:none;stroke:#9DBED9;stroke-width:1.2;stroke-dasharray:4 8;opacity:.45}
-.leak-line{fill:none;stroke-linecap:round;stroke-dasharray:600;stroke-dashoffset:600}
-.leak-line.go{animation:shoot 1s cubic-bezier(.16,1,.3,1) forwards}
-@keyframes shoot{to{stroke-dashoffset:0}}
-.leak-target{opacity:0}
-.leak-target.show{animation:softIn .55s cubic-bezier(.16,1,.3,1) .5s forwards}
-@keyframes softIn{to{opacity:1}}
-.particle{opacity:0}
-.netwrap.is-out .particle{opacity:.9;transition:opacity .7s ease .5s}
-.netwrap.guess-net .leak-line{stroke-dashoffset:600 !important;animation:none !important;marker-end:none !important}
-.netwrap.guess-net .leak-target{opacity:0 !important;animation:none !important}
-.netwrap.guess-net .annot.warn{opacity:0 !important}
-.netwrap.guess-net{cursor:pointer}
-.netwrap.is-out .leak-line{animation:shoot 1s cubic-bezier(.16,1,.3,1) forwards !important}
-.netwrap.is-out .leak-target{animation:softIn .55s cubic-bezier(.16,1,.3,1) .5s forwards !important}
-.scrim{position:absolute;left:10px;right:10px;bottom:10px;display:flex;justify-content:center;pointer-events:none;transition:.25s}
-.scrim .sbox{text-align:center;padding:9px 16px;border-radius:var(--pill);background:rgba(255,255,255,.96);
-  border:1px solid #C9DDF6;box-shadow:0 12px 26px -18px rgba(11,34,54,.6)}
-.scrim .sq{font-size:12.5px;font-weight:800;color:var(--blue-d);margin-bottom:1px}
-.scrim .sa{font-size:10.5px;color:var(--ink3)}
-.scrim.hide{opacity:0;pointer-events:none}
-.reads{padding:2px 15px 10px;display:grid;gap:6px}
-.rd{display:flex;gap:8px;align-items:flex-start;font-size:11px;line-height:1.65;color:var(--ink2)}
-.rd b{flex:none;width:18px;height:18px;border-radius:6px;display:grid;place-items:center;font-size:10.5px;
-  background:var(--blue-l);color:var(--blue-d);border:1px solid #D3E4FA}
-.netcard-foot{display:flex;align-items:flex-start;gap:10px;justify-content:space-between;padding:10px 14px 12px}
-.netcard-foot .hint{font-size:9.8px;color:var(--ink4);line-height:1.65;max-width:calc(100% - 92px)}
-.netcard-foot .again{border:1px solid var(--line2);background:#fff;border-radius:var(--pill);padding:6px 12px;
-  min-height:32px;font-size:11px;font-weight:700;color:var(--ink2);cursor:pointer;font-family:inherit;flex:none}
-.netcard-foot .again:hover{border-color:#9CC4F0;color:var(--blue-d)}
-
-
-/* 手机端：地图换成条形版，字才看得清 */
-.barview{display:none;padding:6px 0 0}
-.bv-row{display:grid;grid-template-columns:74px minmax(0,1fr) 76px;align-items:center;gap:8px;padding:5px 0}
-.bv-n{font-size:12px;display:block;font-weight:700;color:var(--ink)}
-.bv-n small{display:block;font-size:9px;font-weight:400;color:var(--ink4)}
-.bv-t{display:block;height:12px;border-radius:6px;background:#EAF2FB;overflow:hidden}
-.bv-f{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#2E7DEB,#1B6FE0)}
-.bv-f.g{background:linear-gradient(90deg,#2EAE84,#218A5C)}
-.bv-f.p{background:linear-gradient(90deg,#9C86E8,#7B5FD6)}
-.bv-f.gray{background:repeating-linear-gradient(45deg,#E4EDF6,#E4EDF6 6px,#F2F7FC 6px,#F2F7FC 12px)}
-.bv-v{display:block;font-family:var(--mono);font-size:11.5px;font-weight:800;text-align:right;color:var(--blue-d);white-space:nowrap}
-.bv-v.gray{color:#9AACBC;font-weight:600}
-.bv-out{margin-top:8px;padding:8px 10px;border-radius:10px;background:#FDEDEB;border:1px solid #F2CFCA;font-size:11px;line-height:1.6;color:#8E342C}
-.bv-out b{font-family:var(--mono);font-size:12px}
-.bv-note{font-size:9.5px;color:var(--ink4);margin-top:6px;line-height:1.6}
-
-.asks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
-.ask{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 14px;box-shadow:var(--sh);
-  display:flex;flex-direction:column;gap:6px;transition:.2s}
-.ask:hover{border-color:#BAD5F0;transform:translateY(-2px);box-shadow:0 16px 36px -26px rgba(11,34,54,.55)}
-.ask .n{font-family:var(--mono);font-size:10.5px;font-weight:800;color:var(--blue)}
-.ask .q{font-size:13px;font-weight:700;line-height:1.5}
-.ask .m{margin-top:auto;font-size:11px;color:var(--blue);font-weight:700}
-
-.cta{margin-top:12px;display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:var(--r);
-  background:linear-gradient(120deg,#2E7DEB,#0D47A1);color:#fff;box-shadow:0 18px 40px -26px rgba(13,71,161,.85)}
-.cta .ct{flex:1;min-width:0}
-.cta .ct b{display:block;font-size:15px;font-weight:800}
-.cta .ct span{display:block;font-size:11.5px;color:rgba(255,255,255,.84);margin-top:3px}
-.cta .go{width:34px;height:34px;border-radius:50%;background:#fff;color:var(--blue);display:grid;place-items:center;flex:none;font-weight:800}
-
-.foot{margin-top:14px;font-size:10px;color:var(--ink4);line-height:1.9}
-.foot b{color:var(--ink3)}
-@media(max-width:1080px){.hero{grid-template-columns:minmax(0,1fr)}.asks{grid-template-columns:minmax(0,1fr)}}
-@media(max-width:760px){
-  .bar{flex-wrap:wrap;padding:8px 11px;gap:8px}
-  .nav{order:3;width:100%;margin:3px 0 0;
-    -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent);
-    mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent)}
-  .wrap{padding:14px 12px 30px}
-  h1.hook{font-size:clamp(27px,7.8vw,36px);line-height:1.18}
-  .lede{font-size:12.5px;line-height:1.9}
-  .tension{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
-  .tn{padding:9px 8px}
-  .tn .v{font-size:15px}
-  .tn .k{font-size:9.5px}
-  .gopts{grid-template-columns:1fr 1fr;gap:8px}
-  .gbtn{font-size:12.5px;min-height:44px}
-  .scrim{position:static;margin:6px 10px 10px}
-  .netwrap{margin:8px 10px 0}
-  .netwrap .mapview{display:none}
-  .barview{display:block;padding:0 12px}
-  body{background-size:100% 100%,180% auto}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px;padding:12px;border-radius:14px;background:#FBF7F0;border:1px solid #F0E2CC}
+.duo b{display:block;font-family:var(--mono);font-size:22px;font-weight:800;color:#8A5A12;letter-spacing:-.03em;line-height:1.1}
+.duo span{display:block;font-size:9.5px;color:#8A6A3E;line-height:1.45;margin-top:2px}
+.cta{margin-top:14px;display:flex;align-items:center;gap:12px;padding:15px 18px;border-radius:18px;
+  background:linear-gradient(110deg,#1B6FE0,#0D3F8F);color:#fff;box-shadow:0 20px 44px -30px rgba(13,63,143,.9)}
+.cta .t{flex:1}.cta .t b{display:block;font-size:14px}
+.cta .t span{display:block;font-size:10.5px;opacity:.82;margin-top:2px}
+.cta .g{width:30px;height:30px;border-radius:50%;background:#fff;color:var(--blue);display:grid;place-items:center;font-weight:800;flex:none}
+details{margin-top:14px;font-size:10px;color:var(--ink4)}
+details summary{cursor:pointer;font-weight:700;color:var(--ink3)}
+details div{margin-top:8px;line-height:1.85}
+@media(max-width:900px){
+  .grid{grid-template-columns:minmax(0,1fr)}
+  .wrap{padding:20px 12px 26px}
+  h1{font-size:clamp(26px,7.4vw,34px)}
+  .card{padding:16px 15px 12px}
+  .card:hover{transform:none}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-
 <header class="bar">
-  <div class="brand"><span class="mark">惠</span>
-    <span class="nm"><b>惠城决策风洞</b><i>HUI CHENG · WIND TUNNEL</i></span></div>
+  <div class="brand"><span class="mark">惠</span><span class="nm"><b>惠城决策风洞</b><i>WIND TUNNEL</i></span></div>
   <nav class="nav">
-    <a class="on" href="index.html">01 第一问</a>
-    <a href="today.html">02 今日动态</a>
-    <a href="sandbox.html">03 关系沙盘</a>
-    <a href="commute.html">04 通勤案例</a>
-    <a href="windtunnel.html">05 风洞测试</a>
-    <a href="report.html">06 研判报告</a>
+    <a class="on" href="index.html">三问</a>
+    <a href="today.html">动态</a>
+    <a href="sandbox.html">沙盘</a>
+    <a href="commute.html">通勤</a>
+    <a href="windtunnel.html">风洞</a>
+    <a href="report.html">报告</a>
   </nav>
-  <span class="stamp"><i></i>数据核对 2026-11-07</span>
+  <span class="stamp"><i></i>2026-11-07</span>
 </header>
 
 <div class="wrap">
-<section class="hero">
-  <div>
-    <span class="kicker"><i></i>序章 · 第一问</span>
-    <h1 class="hook">
-      <span>产值 <span class="up">+10.8%</span></span>
-      <span>投资 <span class="down">−40.7%</span></span>
-      <span>惠城在<span class="q">吃存量</span>吗？</span>
-    </h1>
-    <p class="lede">2026 年 1-9 月：GDP <b>883.46 亿</b>、只 <b>+1.1%</b>；规上工业增加值 <b>+0.8%</b>；固定资产投资 <b>−40.7%</b>，工业投资 <b>−46.1%</b>。<br>
-撑住这个盘子的是惠城高新区：<b>377</b> 家规上企业，2025 年产值 <b>632.69 亿</b>，2021 年还只有 <b>255.2 亿</b>。<br>
-一边产能还在跑，一边新增投资在撤；人也在走：2019—2023 年惠州迁出企业 <b>3439</b> 家，去广州 <b>1175</b>、深圳 <b>896</b>、东莞 <b>609</b>。</p>
-    <span class="src-inline">来源：惠城区统计局 2026 年 1-9 月经济运行简况；惠城高新区管委会（2026-06-11）；上奇产业通·大湾区企业迁移研究（2024-03），后一项为惠州市域口径。</span>
+  <div class="kick">惠城 · 三个问题</div>
+  <h1><span>钱留下了吗？</span><span>前景还剩多少？</span><span class="b">通勤，谁在扛？</span></h1>
+  <p class="sub">三张图，三组公开数字，<b>全部可回溯到原始出处</b>。不猜、不补、不编。</p>
 
-    <div class="tension">
-      <div class="tn up"><span class="v" style="color:#218A5C">632.69 亿</span><span class="k">惠城高新区规上工业总产值 · 2025</span></div>
-      <div class="tn down"><span class="v" style="color:#C0453B">−40.7%</span><span class="k">全区固定资产投资 · 2026 1-9 月</span></div>
-      <div class="tn flat"><span class="v" style="color:#B8791F">3439 家</span><span class="k">惠州迁出企业 · 2019—2023</span></div>
-    </div>
-
-    <div class="guess">
-      <div class="gt"><span>⚡</span>先猜，再看</div>
-      <div class="gq">632 亿的盘子，是 4 个组团一起扛，还是压在少数几个身上？</div>
-      <div class="gopts">
-        <button class="gbtn" type="button" data-k="even">4 个都在扛</button>
-        <button class="gbtn" type="button" data-k="skew">压在少数几个</button>
+  <section class="grid">
+    <div class="card c1">
+      <div class="ctag">Q1 · 钱</div>
+      <div class="ctitle">每 100 元 GDP，<em>留下 5.4 元</em></div>
+      <div class="cnum"><b data-count="5.4" data-dec="1">0</b><s>元 / 每百元 GDP 留在本地财政</s></div>
+      <div class="cnote">2025 年一般公共预算收入 64.60 亿，GDP 1203.33 亿。</div>
+      <div class="viz">
+        <svg viewBox="0 0 210 224" role="img" aria-label="100 个方块代表 100 元 GDP，其中 5 个亮色方块代表留在本地财政的 5.4 元">
+          <rect x="0" y="0" width="210" height="224" rx="12" fill="#FBFDFF"/>
+<rect class="cell" x="10" y="10" width="15" height="15" rx="2.5" style="animation-delay:0.61s"/>
+        <rect class="cell" x="29" y="10" width="15" height="15" rx="2.5" style="animation-delay:0.62s"/>
+        <rect class="cell" x="48" y="10" width="15" height="15" rx="2.5" style="animation-delay:0.64s"/>
+        <rect class="cell" x="67" y="10" width="15" height="15" rx="2.5" style="animation-delay:0.65s"/>
+        <rect class="cell" x="86" y="10" width="15" height="15" rx="2.5" style="animation-delay:0.66s"/>
+        <rect class="cell" x="105" y="10" width="15" height="15" rx="2.5" style="animation-delay:0.67s"/>
+        <rect class="cell" x="124" y="10" width="15" height="15" rx="2.5" style="animation-delay:0.68s"/>
+        <rect class="cell" x="143" y="10" width="15" height="15" rx="2.5" style="animation-delay:0.70s"/>
+        <rect class="cell" x="162" y="10" width="15" height="15" rx="2.5" style="animation-delay:0.71s"/>
+        <rect class="cell" x="181" y="10" width="15" height="15" rx="2.5" style="animation-delay:0.72s"/>
+        <rect class="cell" x="10" y="29" width="15" height="15" rx="2.5" style="animation-delay:0.73s"/>
+        <rect class="cell" x="29" y="29" width="15" height="15" rx="2.5" style="animation-delay:0.74s"/>
+        <rect class="cell" x="48" y="29" width="15" height="15" rx="2.5" style="animation-delay:0.76s"/>
+        <rect class="cell" x="67" y="29" width="15" height="15" rx="2.5" style="animation-delay:0.77s"/>
+        <rect class="cell" x="86" y="29" width="15" height="15" rx="2.5" style="animation-delay:0.78s"/>
+        <rect class="cell" x="105" y="29" width="15" height="15" rx="2.5" style="animation-delay:0.79s"/>
+        <rect class="cell" x="124" y="29" width="15" height="15" rx="2.5" style="animation-delay:0.80s"/>
+        <rect class="cell" x="143" y="29" width="15" height="15" rx="2.5" style="animation-delay:0.82s"/>
+        <rect class="cell" x="162" y="29" width="15" height="15" rx="2.5" style="animation-delay:0.83s"/>
+        <rect class="cell" x="181" y="29" width="15" height="15" rx="2.5" style="animation-delay:0.84s"/>
+        <rect class="cell" x="10" y="48" width="15" height="15" rx="2.5" style="animation-delay:0.85s"/>
+        <rect class="cell" x="29" y="48" width="15" height="15" rx="2.5" style="animation-delay:0.86s"/>
+        <rect class="cell" x="48" y="48" width="15" height="15" rx="2.5" style="animation-delay:0.88s"/>
+        <rect class="cell" x="67" y="48" width="15" height="15" rx="2.5" style="animation-delay:0.89s"/>
+        <rect class="cell" x="86" y="48" width="15" height="15" rx="2.5" style="animation-delay:0.90s"/>
+        <rect class="cell" x="105" y="48" width="15" height="15" rx="2.5" style="animation-delay:0.91s"/>
+        <rect class="cell" x="124" y="48" width="15" height="15" rx="2.5" style="animation-delay:0.92s"/>
+        <rect class="cell" x="143" y="48" width="15" height="15" rx="2.5" style="animation-delay:0.94s"/>
+        <rect class="cell" x="162" y="48" width="15" height="15" rx="2.5" style="animation-delay:0.95s"/>
+        <rect class="cell" x="181" y="48" width="15" height="15" rx="2.5" style="animation-delay:0.96s"/>
+        <rect class="cell" x="10" y="67" width="15" height="15" rx="2.5" style="animation-delay:0.97s"/>
+        <rect class="cell" x="29" y="67" width="15" height="15" rx="2.5" style="animation-delay:0.98s"/>
+        <rect class="cell" x="48" y="67" width="15" height="15" rx="2.5" style="animation-delay:1.00s"/>
+        <rect class="cell" x="67" y="67" width="15" height="15" rx="2.5" style="animation-delay:1.01s"/>
+        <rect class="cell" x="86" y="67" width="15" height="15" rx="2.5" style="animation-delay:1.02s"/>
+        <rect class="cell" x="105" y="67" width="15" height="15" rx="2.5" style="animation-delay:1.03s"/>
+        <rect class="cell" x="124" y="67" width="15" height="15" rx="2.5" style="animation-delay:1.04s"/>
+        <rect class="cell" x="143" y="67" width="15" height="15" rx="2.5" style="animation-delay:1.06s"/>
+        <rect class="cell" x="162" y="67" width="15" height="15" rx="2.5" style="animation-delay:1.07s"/>
+        <rect class="cell" x="181" y="67" width="15" height="15" rx="2.5" style="animation-delay:1.08s"/>
+        <rect class="cell" x="10" y="86" width="15" height="15" rx="2.5" style="animation-delay:1.09s"/>
+        <rect class="cell" x="29" y="86" width="15" height="15" rx="2.5" style="animation-delay:1.10s"/>
+        <rect class="cell" x="48" y="86" width="15" height="15" rx="2.5" style="animation-delay:1.12s"/>
+        <rect class="cell" x="67" y="86" width="15" height="15" rx="2.5" style="animation-delay:1.13s"/>
+        <rect class="cell" x="86" y="86" width="15" height="15" rx="2.5" style="animation-delay:1.14s"/>
+        <rect class="cell" x="105" y="86" width="15" height="15" rx="2.5" style="animation-delay:1.15s"/>
+        <rect class="cell" x="124" y="86" width="15" height="15" rx="2.5" style="animation-delay:1.16s"/>
+        <rect class="cell" x="143" y="86" width="15" height="15" rx="2.5" style="animation-delay:1.18s"/>
+        <rect class="cell" x="162" y="86" width="15" height="15" rx="2.5" style="animation-delay:1.19s"/>
+        <rect class="cell" x="181" y="86" width="15" height="15" rx="2.5" style="animation-delay:1.20s"/>
+        <rect class="cell" x="10" y="105" width="15" height="15" rx="2.5" style="animation-delay:1.21s"/>
+        <rect class="cell" x="29" y="105" width="15" height="15" rx="2.5" style="animation-delay:1.22s"/>
+        <rect class="cell" x="48" y="105" width="15" height="15" rx="2.5" style="animation-delay:1.24s"/>
+        <rect class="cell" x="67" y="105" width="15" height="15" rx="2.5" style="animation-delay:1.25s"/>
+        <rect class="cell" x="86" y="105" width="15" height="15" rx="2.5" style="animation-delay:1.26s"/>
+        <rect class="cell" x="105" y="105" width="15" height="15" rx="2.5" style="animation-delay:1.27s"/>
+        <rect class="cell" x="124" y="105" width="15" height="15" rx="2.5" style="animation-delay:1.28s"/>
+        <rect class="cell" x="143" y="105" width="15" height="15" rx="2.5" style="animation-delay:1.30s"/>
+        <rect class="cell" x="162" y="105" width="15" height="15" rx="2.5" style="animation-delay:1.31s"/>
+        <rect class="cell" x="181" y="105" width="15" height="15" rx="2.5" style="animation-delay:1.32s"/>
+        <rect class="cell" x="10" y="124" width="15" height="15" rx="2.5" style="animation-delay:1.33s"/>
+        <rect class="cell" x="29" y="124" width="15" height="15" rx="2.5" style="animation-delay:1.34s"/>
+        <rect class="cell" x="48" y="124" width="15" height="15" rx="2.5" style="animation-delay:1.36s"/>
+        <rect class="cell" x="67" y="124" width="15" height="15" rx="2.5" style="animation-delay:1.37s"/>
+        <rect class="cell" x="86" y="124" width="15" height="15" rx="2.5" style="animation-delay:1.38s"/>
+        <rect class="cell" x="105" y="124" width="15" height="15" rx="2.5" style="animation-delay:1.39s"/>
+        <rect class="cell" x="124" y="124" width="15" height="15" rx="2.5" style="animation-delay:1.40s"/>
+        <rect class="cell" x="143" y="124" width="15" height="15" rx="2.5" style="animation-delay:1.42s"/>
+        <rect class="cell" x="162" y="124" width="15" height="15" rx="2.5" style="animation-delay:1.43s"/>
+        <rect class="cell" x="181" y="124" width="15" height="15" rx="2.5" style="animation-delay:1.44s"/>
+        <rect class="cell" x="10" y="143" width="15" height="15" rx="2.5" style="animation-delay:1.45s"/>
+        <rect class="cell" x="29" y="143" width="15" height="15" rx="2.5" style="animation-delay:1.46s"/>
+        <rect class="cell" x="48" y="143" width="15" height="15" rx="2.5" style="animation-delay:1.48s"/>
+        <rect class="cell" x="67" y="143" width="15" height="15" rx="2.5" style="animation-delay:1.49s"/>
+        <rect class="cell" x="86" y="143" width="15" height="15" rx="2.5" style="animation-delay:1.50s"/>
+        <rect class="cell" x="105" y="143" width="15" height="15" rx="2.5" style="animation-delay:1.51s"/>
+        <rect class="cell" x="124" y="143" width="15" height="15" rx="2.5" style="animation-delay:1.52s"/>
+        <rect class="cell" x="143" y="143" width="15" height="15" rx="2.5" style="animation-delay:1.54s"/>
+        <rect class="cell" x="162" y="143" width="15" height="15" rx="2.5" style="animation-delay:1.55s"/>
+        <rect class="cell" x="181" y="143" width="15" height="15" rx="2.5" style="animation-delay:1.56s"/>
+        <rect class="cell" x="10" y="162" width="15" height="15" rx="2.5" style="animation-delay:1.57s"/>
+        <rect class="cell" x="29" y="162" width="15" height="15" rx="2.5" style="animation-delay:1.58s"/>
+        <rect class="cell" x="48" y="162" width="15" height="15" rx="2.5" style="animation-delay:1.60s"/>
+        <rect class="cell" x="67" y="162" width="15" height="15" rx="2.5" style="animation-delay:1.61s"/>
+        <rect class="cell" x="86" y="162" width="15" height="15" rx="2.5" style="animation-delay:1.62s"/>
+        <rect class="cell" x="105" y="162" width="15" height="15" rx="2.5" style="animation-delay:1.63s"/>
+        <rect class="cell" x="124" y="162" width="15" height="15" rx="2.5" style="animation-delay:1.64s"/>
+        <rect class="cell" x="143" y="162" width="15" height="15" rx="2.5" style="animation-delay:1.66s"/>
+        <rect class="cell" x="162" y="162" width="15" height="15" rx="2.5" style="animation-delay:1.67s"/>
+        <rect class="cell" x="181" y="162" width="15" height="15" rx="2.5" style="animation-delay:1.68s"/>
+        <rect class="cell" x="10" y="181" width="15" height="15" rx="2.5" style="animation-delay:1.69s"/>
+        <rect class="cell" x="29" y="181" width="15" height="15" rx="2.5" style="animation-delay:1.70s"/>
+        <rect class="cell" x="48" y="181" width="15" height="15" rx="2.5" style="animation-delay:1.72s"/>
+        <rect class="cell" x="67" y="181" width="15" height="15" rx="2.5" style="animation-delay:1.73s"/>
+        <rect class="cell" x="86" y="181" width="15" height="15" rx="2.5" style="animation-delay:1.74s"/>
+        <rect class="cell on" x="105" y="181" width="15" height="15" rx="2.5" style="animation-delay:1.75s"/>
+        <rect class="cell on" x="124" y="181" width="15" height="15" rx="2.5" style="animation-delay:1.76s"/>
+        <rect class="cell on" x="143" y="181" width="15" height="15" rx="2.5" style="animation-delay:1.78s"/>
+        <rect class="cell on" x="162" y="181" width="15" height="15" rx="2.5" style="animation-delay:1.79s"/>
+        <rect class="cell on" x="181" y="181" width="15" height="15" rx="2.5" style="animation-delay:1.80s"/>
+          <text class="lbl" x="105" y="218" text-anchor="middle">100 元 GDP · 5.4 元留在本地</text>
+        </svg>
       </div>
-      <div class="reveal" id="gReveal">
-        <h4>揭晓：能查到的，是这两个数</h4>
-        <ul>
-          <li>三栋：2025 年规上工业总产值 <b>160 亿+</b>，全年 <b>+10.6%</b>（增加值增速）。</li>
-          <li>马安：2025 年规上工业总产值 <b>142.53 亿</b>，增速 <b>+20.1%</b>，规上企业 68 家。</li>
-          <li>汝湖：2025 年规上工业总产值 <b>36.86 亿</b>，农业产值 11.81 亿。</li>
-        </ul>
-        <p class="unknown">三栋加马安已经超过 300 亿——但这是镇域口径，和高新区口径不完全可比，只能看量级。<b>横沥的规上产值没找到公开数</b>，这就是图上那条断线。</p>
-        <a class="more" href="sandbox.html">去关系沙盘，逐个组团看 →</a>
+      <div class="cfoot"><a href="report.html">钱去了哪 →</a><span>企业五年外迁 3439 家</span></div>
+    </div>
+
+    <div class="card c2">
+      <div class="ctag">Q2 · 前景</div>
+      <div class="ctitle">增速，<em>掉了一个零</em></div>
+      <div class="cnum"><b>+0.8%</b><s>规上工业增加值 · 2026 1-9 月</s></div>
+      <div class="cnote">同期固定资产投资 −40.7%、工业投资 −46.1%。</div>
+      <div class="viz">
+        <svg viewBox="0 0 300 175" role="img" aria-label="双轨折线：工业增加值增速从 2025 年 +10.8% 降到 2026 年 1-9 月 +0.8%；固定资产投资从 −37.1% 降到 −40.7%">
+          <line x1="56" y1="10" x2="56" y2="150" stroke="#E3EDF7"/>
+          <line x1="232" y1="10" x2="232" y2="150" stroke="#E3EDF7"/>
+          <text class="lbl" x="56" y="170" text-anchor="middle">2025 全年</text>
+          <text class="lbl" x="232" y="170" text-anchor="middle">2026 1-9 月</text>
+
+          <path class="track blue" d="M56,52 L232,88"/>
+          <circle class="dot" cx="56" cy="52" r="3.4" fill="#1B6FE0"/>
+          <circle class="dot" cx="232" cy="88" r="3.4" fill="#1B6FE0"/>
+          <text class="num" x="46" y="48" text-anchor="end" fill="#1B6FE0">+10.8%</text>
+          <text class="num" x="240" y="86" fill="#1B6FE0">+0.8%</text>
+          <circle cx="70" cy="14" r="3.4" fill="#1B6FE0"/><text class="lbl" x="80" y="18">规上工业增加值</text>
+
+          <path class="track red" d="M56,112 L232,132"/>
+          <circle class="dot" cx="56" cy="112" r="3.4" fill="#BE3F35"/>
+          <circle class="dot" cx="232" cy="132" r="3.4" fill="#BE3F35"/>
+          <text class="num" x="46" y="108" text-anchor="end" fill="#BE3F35">−37.1%</text>
+          <text class="num" x="240" y="130" fill="#BE3F35">−40.7%</text>
+          <circle cx="196" cy="14" r="3.4" fill="#BE3F35"/><text class="lbl" x="206" y="18" fill="#BE3F35">固定资产投资</text>
+
+          <circle class="pulse" cx="232" cy="88" r="9" fill="#1B6FE0" opacity=".3"/>
+        </svg>
+        <svg viewBox="0 0 300 96" role="img" aria-label="产值增速 +10.8% 与投资增速 −40.7% 之间的缺口为 51.5 个百分点">
+          <line x1="30" y1="52" x2="278" y2="52" stroke="#E7EFF7" stroke-width="1.4"/>
+          <line x1="30" y1="44" x2="30" y2="60" stroke="#D6E4F2"/>
+          <line x1="278" y1="44" x2="278" y2="60" stroke="#D6E4F2"/>
+          <text class="lbl" x="30" y="76" text-anchor="middle">−50%</text>
+          <text class="lbl" x="278" y="76" text-anchor="middle">+20%</text>
+          <rect x="30" y="47" width="33" height="10" rx="5" fill="#FCE7E4"/>
+          <rect x="245" y="47" width="33" height="10" rx="5" fill="#E4EEFC"/>
+          <circle cx="245" cy="52" r="5" fill="#1B6FE0"/>
+          <circle cx="63" cy="52" r="5" fill="#BE3F35"/>
+          <path d="M245,42 L245,34 L63,34 L63,42" fill="none" stroke="#8A3A32" stroke-width="1.2"/>
+          <text class="num" x="154" y="26" text-anchor="middle" fill="#8A3A32">缺口 51.5 个百分点</text>
+        </svg>
       </div>
-    </div>
-  </div>
-  <div class="evidence">
-    <div class="ev-head">
-      <div class="t"><b>632 亿的盘子，压在谁身上？</b><span>镇街与组团按公开数据落位 · 无公开数据处留断口</span></div>
-      <span class="badge">有源可查</span>
+      <div class="cfoot"><a href="windtunnel.html">调参数推演 →</a><span>产值仍在涨，投资在撤</span></div>
     </div>
 
-    <div class="netwrap guess-net" id="netwrap">
-      <div class="scrim" id="scrim">
-        <div class="sbox">
-          <div class="sq">先猜：谁在扛这 632 亿？</div>
-          <div class="sa">点这张图，看组团、断口和外流</div>
-        </div>
+    <div class="card c3">
+      <div class="ctag">Q3 · 通勤</div>
+      <div class="ctitle"><em>2 公里</em>，没人愿意走</div>
+      <div class="cnum"><b>2</b><s>公里：宿舍到厂区，没有直达公交</s></div>
+      <div class="cnote">惠城高新区一家 100 余人的企业，员工流失率因此偏高。</div>
+      <div class="viz">
+        <svg viewBox="0 0 300 150" role="img" aria-label="一天 24 小时只有 7:30 与 21:00 两个发车窗口；宿舍到厂区 2 公里无直达公交">
+          <line x1="24" y1="46" x2="276" y2="46" stroke="#E7EFF7" stroke-width="8" stroke-linecap="round"/>
+          <rect class="win" x="100" y="36" width="16" height="20" rx="5" fill="#1B6FE0"/>
+          <rect class="win" x="248" y="36" width="16" height="20" rx="5" fill="#1B6FE0" style="animation-delay:.6s"/>
+          <text class="num" x="108" y="28" text-anchor="middle">07:30</text>
+          <text class="num" x="256" y="28" text-anchor="middle">21:00</text>
+          <text class="lbl" x="24" y="70">00:00</text>
+          <text class="lbl" x="276" y="70" text-anchor="end">24:00</text>
+          <text class="lbl-b" x="150" y="86" text-anchor="middle">一天只有两班</text>
+
+          <g transform="translate(0,112)">
+            <circle cx="30" cy="14" r="5" fill="#B0761C"/>
+            <line class="gap-line" x1="38" y1="14" x2="262" y2="14" stroke="#C9A473" stroke-width="1.6"/>
+            <circle cx="270" cy="14" r="5" fill="#B0761C"/>
+            <text class="lbl" x="30" y="32">宿舍</text>
+            <text class="lbl" x="270" y="32" text-anchor="end">厂区</text>
+            <text class="num" x="150" y="8" text-anchor="middle" fill="#B0761C">2 km · 无直达公交</text>
+          </g>
+        </svg>
       </div>
-      <svg class="mapview" viewBox="0 0 640 470" preserveAspectRatio="xMidYMid meet" role="img"
-           aria-label="惠城产业关系示意：惠城高新区东江湾核心与三栋、马安、汝湖、小金口、横沥的连接，横沥数据未接通，三处新增投资与三条企业外流线索指向广州、深圳、东莞">
-        <defs>
-          <filter id="sh1" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0B2236" flood-opacity=".15"/></filter>
-          <filter id="glowR" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="3.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          <marker id="arRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C0453B"/></marker>
-          <radialGradient id="gCore" cx="34%" cy="30%" r="72%"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="52%" stop-color="#DBEAFF"/><stop offset="100%" stop-color="#7FA6D6"/></radialGradient>
-          <radialGradient id="gBlue" cx="38%" cy="34%" r="66%"><stop offset="0%" stop-color="#7CC4FF"/><stop offset="60%" stop-color="#1B6FE0"/><stop offset="100%" stop-color="#0D47A1"/></radialGradient>
-          <radialGradient id="gPurp" cx="38%" cy="34%" r="66%"><stop offset="0%" stop-color="#C9A6FF"/><stop offset="60%" stop-color="#7B5FD6"/><stop offset="100%" stop-color="#4A339E"/></radialGradient>
-          <radialGradient id="gGreen" cx="38%" cy="34%" r="66%"><stop offset="0%" stop-color="#8FE3B6"/><stop offset="60%" stop-color="#218A5C"/><stop offset="100%" stop-color="#0F5C3A"/></radialGradient>
-          <radialGradient id="gGray" cx="38%" cy="34%" r="66%"><stop offset="0%" stop-color="#D6E3EE"/><stop offset="60%" stop-color="#9DB3C4"/><stop offset="100%" stop-color="#6D8496"/></radialGradient>
-          <radialGradient id="gRed" cx="38%" cy="34%" r="66%"><stop offset="0%" stop-color="#FFA69E"/><stop offset="60%" stop-color="#C0453B"/><stop offset="100%" stop-color="#7C221B"/></radialGradient>
-          <linearGradient id="lkRed" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#C0453B" stop-opacity=".9"/><stop offset="100%" stop-color="#C0453B" stop-opacity=".5"/></linearGradient>
-        </defs>
-
-        <!-- 连接：实线=已接通；虚线=数据未公开 -->
-        <path class="link" d="M314,230 Q370,266 396,292"/>
-        <path class="link" d="M354,258 Q420,314 472,348"/>
-        <path class="link thin" d="M310,214 Q276,162 248,118"/>
-        <path class="link thin" d="M302,216 Q206,134 154,80"/>
-        <path class="link-break" d="M344,216 Q414,158 478,92"/>
-
-        <!-- 总部与产线：两端 -->
-        <path class="link-break" d="M298,236 Q212,228 116,214"/>
-        <circle cx="212" cy="230" r="2.6" fill="#9DB3C4"/>
-        <circle cx="236" cy="226" r="2" fill="#9DB3C4" opacity=".6"/>
-
-        <!-- 新增投资：断口 -->
-        <path class="link-break" d="M310,266 Q272,300 246,326" stroke="#B8791F" stroke-opacity=".55" stroke-width="1.6"/>
-        <g class="brk"><path d="M240,322 L232,316 M240,322 L235,331" stroke="#B8791F" stroke-width="1.6" fill="none" stroke-opacity=".7"/></g>
-
-        <!-- 外流线索 -->
-        <path class="leak-line" d="M358,228 Q468,186 540,150" stroke="url(#lkRed)" stroke-width="3" marker-end="url(#arRed)"/>
-        <path class="leak-line" d="M360,240 Q478,222 540,210" stroke="url(#lkRed)" stroke-width="2.4" marker-end="url(#arRed)"/>
-        <path class="leak-line" d="M356,254 Q468,260 540,264" stroke="url(#lkRed)" stroke-width="2.2" marker-end="url(#arRed)" opacity=".85"/>
-        <circle class="particle" r="3.2" fill="#C0453B"><animateMotion path="M358,232 Q470,190 552,152" dur="2.4s" begin=".5s" repeatCount="indefinite"/></circle>
-        <circle class="particle" r="2.6" fill="#C0453B"><animateMotion path="M360,244 Q480,226 552,212" dur="2.8s" begin=".9s" repeatCount="indefinite"/></circle>
-        <circle class="particle" r="2.2" fill="#C0453B"><animateMotion path="M356,258 Q470,266 552,266" dur="3.1s" begin=".3s" repeatCount="indefinite"/></circle>
-
-        <!-- 核心 -->
-        <circle cx="330" cy="240" r="42" fill="none" stroke="#1B6FE0" stroke-width="1" opacity=".18"/>
-        <circle cx="330" cy="240" r="30" fill="url(#gCore)" stroke="#1B6FE0" stroke-width="1.3" filter="url(#sh1)"/>
-        <text class="lb" x="330" y="186" text-anchor="middle">东江湾核心</text>
-        <text class="lbv" x="330" y="205" text-anchor="middle">632.69 亿</text>
-        <text class="sub" x="248" y="292" text-anchor="middle">高新区 1 核心 · 4 组团</text>
-
-        <!-- 组团节点 -->
-        <g><circle cx="486" cy="356" r="13" fill="url(#gBlue)" filter="url(#sh1)"/>
-          <text class="lb" x="486" y="334" text-anchor="middle">三栋</text>
-          <text class="lbv" x="486" y="382" text-anchor="middle">160 亿+</text>
-          <text class="sub" x="486" y="398" text-anchor="middle">规上工业总产值 2025</text></g>
-        <g><circle cx="408" cy="300" r="11" fill="url(#gBlue)" filter="url(#sh1)"/>
-          <text class="lb" x="408" y="278" text-anchor="middle">马安</text>
-          <text class="lbv" x="408" y="326" text-anchor="middle">142.53 亿</text></g>
-        <g><circle cx="240" cy="104" r="11" fill="url(#gGreen)" filter="url(#sh1)"/>
-          <text class="lb" x="240" y="84" text-anchor="middle">汝湖</text>
-          <text class="lbv" x="240" y="128" text-anchor="middle">36.86 亿</text></g>
-        <g><circle cx="146" cy="66" r="11" fill="url(#gPurp)" filter="url(#sh1)"/>
-          <text class="lb" x="146" y="46" text-anchor="middle">小金口</text>
-          <text class="sub" x="146" y="90" text-anchor="middle">规上 108 家</text></g>
-        <g><circle cx="486" cy="86" r="10" fill="url(#gGray)" opacity=".85"/>
-          <text class="lb" x="486" y="66" text-anchor="middle" fill="#6B7F92">横沥</text>
-          <text class="sub" x="486" y="108" text-anchor="middle" fill="#98AABB">产值未公开</text></g>
-        <g><circle cx="100" cy="206" r="12" fill="url(#gPurp)" filter="url(#sh1)"/>
-          <text class="lb" x="100" y="184" text-anchor="middle">江北</text>
-          <text class="sub" x="100" y="230" text-anchor="middle">总部 · 金融</text></g>
-
-        <!-- 外流去向 -->
-        <g class="leak-target">
-          <circle cx="556" cy="152" r="6" fill="url(#gRed)" filter="url(#glowR)"/>
-          <text class="lb" x="534" y="156" text-anchor="end" fill="#C0453B">广州 <tspan class="lbv" fill="#C0453B">1175</tspan></text>
-          
-        </g>
-        <g class="leak-target">
-          <circle cx="556" cy="212" r="5.4" fill="url(#gRed)" filter="url(#glowR)"/>
-          <text class="lb" x="534" y="216" text-anchor="end" fill="#C0453B">深圳 <tspan class="lbv" fill="#C0453B">896</tspan></text>
-          
-        </g>
-        <g class="leak-target">
-          <circle cx="556" cy="266" r="5" fill="url(#gRed)" filter="url(#glowR)"/>
-          <text class="lb" x="534" y="270" text-anchor="end" fill="#C0453B">东莞 <tspan class="lbv" fill="#C0453B">609</tspan></text>
-          
-        </g>
-
-        
-        <text class="annot" x="112" y="256">总部在这头，产线在那头</text>
-        <text class="annot amber" x="164" y="344">新增投资已断 · 固投 −40.7%</text>
-        
-      </svg>
+      <div class="duo">
+        <div><b>100+</b><span>人的工厂</span></div>
+        <div><b>2000</b><span>元/月，专线后省下</span></div>
+      </div>
+      <div class="cfoot"><a href="commute.html">看这条通勤 →</a><span>专线后：每月省近 2000 元</span></div>
     </div>
-    <div class="barview">
-      <div class="bv-row"><span class="bv-n">东江湾核心<small>高新区合计</small></span><span class="bv-t"><span class="bv-f" style="width:100%"></span></span><span class="bv-v">632.69 亿</span></div>
-      <div class="bv-row"><span class="bv-n">三栋</span><span class="bv-t"><span class="bv-f" style="width:25.3%"></span></span><span class="bv-v">160 亿+</span></div>
-      <div class="bv-row"><span class="bv-n">马安</span><span class="bv-t"><span class="bv-f" style="width:22.5%"></span></span><span class="bv-v">142.53 亿</span></div>
-      <div class="bv-row"><span class="bv-n">汝湖</span><span class="bv-t"><span class="bv-f g" style="width:5.8%"></span></span><span class="bv-v">36.86 亿</span></div>
-      <div class="bv-row"><span class="bv-n">横沥<small>数据断口</small></span><span class="bv-t"><span class="bv-f gray" style="width:100%"></span></span><span class="bv-v gray">未公开</span></div>
-      <div class="bv-row"><span class="bv-n">小金口<small>规上 108 家</small></span><span class="bv-t"><span class="bv-f gray" style="width:100%"></span></span><span class="bv-v gray">无产值数</span></div>
-      <div class="bv-out">五年外迁（惠州市域 2019—2023）：<b>3439 家</b> → 广州 1175 · 深圳 896 · 东莞 609</div>
-      <div class="bv-note">外迁去向：广州 1175 · 深圳 896 · 东莞 609。镇街为全镇口径，高新区为园区口径，不完全可比。</div>
-    </div>
-    <div class="reads">
-      <div class="rd"><b>扛</b><span>三栋 160 亿 + 马安 142.53 亿，两个镇加起来就过 300 亿（镇域口径，与园区口径不完全可比）。</span></div>
-      <div class="rd"><b>断</b><span>横沥规上产值查不到；全区固投 −40.7%、工业投资 −46.1%，新增投入这一头是断的。</span></div>
-      <div class="rd"><b>走</b><span>惠州 2019—2023 年迁出 3439 家：广州 1175、深圳 896、东莞 609。</span></div>
-    </div>
-    <div class="netcard-foot">
-      <span class="hint">注：镇街为全镇口径，高新区为园区口径，两者不完全可比；横沥、芦洲未查到公开规上产值，图上以断线表示，不做推测。企业迁出为惠州市域 2019—2023 年数据。</span>
-      <button class="again" type="button" id="again">重放</button>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section class="asks">
-  <a class="ask" href="windtunnel.html"><span class="n">追问 01</span><span class="q">投资再撤两年，产值还能撑住吗？</span><span class="m">去风洞调参数 →</span></a>
-  <a class="ask" href="sandbox.html"><span class="n">追问 02</span><span class="q">哪个组团在逆势扩张，哪个在收缩？</span><span class="m">进关系沙盘 →</span></a>
-  <a class="ask" href="report.html"><span class="n">追问 03</span><span class="q">迁出去的 3439 家，是什么行业？</span><span class="m">看研判报告 →</span></a>
-</section>
+  <a class="cta" href="holo-workspace.html">
+    <span class="t"><b>进全息工作区，把每个数字的出处、口径和变化自己核一遍</b><span>来源追溯 · 口径对照 · 数据变更记录</span></span>
+    <span class="g">→</span>
+  </a>
 
-<a class="cta" href="holo-workspace.html">
-  <span class="ct"><b>进全息工作区，把每条线和每个断口自己核一遍</b><span>来源追溯 · 口径对照 · 变化记录</span></span>
-  <span class="go">→</span>
-</a>
-
-<div class="foot">
-  <b>数据来源</b><br>
-  1. 惠城区统计局《2026 年 1—9 月经济运行简况》：GDP 883.46 亿、+1.1%、规上工业增加值 +0.8%、固投 −40.7%、工业投资 −46.1%。<br>
-  2. 惠城高新区管委会《“网约公交”定制专线 破解企业通勤难题》（2026-06-11）：园区 35.96 平方公里、1 核心 4 组团、规上企业 377 家、高企 235 家、2025 年产值 632.69 亿、2021 年 255.2 亿、增加值 149.2 亿。<br>
-  3. 三栋镇招商推介会（2026-04-02）：2025 年 GDP 76.5 亿、+5.9%，规上工业总产值 160 亿+、增加值 +10.6%。<br>
-  4. 马安镇《76 平方公里的发展空间藏不住了》（2026-04-03）：2025 年 GDP 70.46 亿、+8.1%，规上工业总产值 142.53 亿、+20.1%，规上企业 68 家。<br>
-  5. 汝湖镇《2026 年政府工作报告》：2025 年 GDP 40.12 亿、规上工业产值 36.86 亿、农业产值 11.81 亿。<br>
-  6. 小金口街道在线访谈（2026-08-14）：GDP 连续两年破百亿、规上企业 108 家、四上企业 427 家。<br>
-  7. 上奇产业通·大湾区企业迁移研究（2024-03，经 36氪 转载）：2019—2023 年惠州市迁出企业 3439 家，前三目的地广州 1175、深圳 896、东莞 609。<br>
-  本页为公开信息的整理与呈现，非官方统计平台，不构成投资或决策依据。
-</div>
+  <details>
+    <summary>数据来源（7 条，点击展开）</summary>
+    <div>
+    1）惠城区 2025 年统计公报：GDP 1203.33 亿、一般公共预算收入 64.60 亿、规上工业增加值 +10.8%、固定资产投资 −37.1%。<br>
+    2）惠城区 2026 年 1—9 月经济运行简况：GDP 883.46 亿、+1.1%、规上工业增加值 +0.8%、固投 −40.7%、工业投资 −46.1%。<br>
+    3）惠城高新区管委会《“网约公交”定制专线 破解企业通勤难题》（2026-06-11）：35.96 km²、1 核心 4 组团、377 家规上、2025 年产值 632.69 亿（2021 年 255.2 亿）；聚欣照明宿舍距厂区约 2 公里、无直达公交、员工流失率偏高，专线 7:30—7:40 / 21:00—21:10 发车，每月省近 2000 元。<br>
+    4）三栋镇（2026-04-02）：2025 年 GDP 76.5 亿、规上工业总产值 160 亿+。<br>
+    5）马安镇（2026-04-03）：2025 年 GDP 70.46 亿、规上工业总产值 142.53 亿、+20.1%。<br>
+    6）汝湖镇（2026-06）：2025 年 GDP 40.12 亿、规上工业产值 36.86 亿。<br>
+    7）上奇产业通（2024-03）：2019—2023 年惠州市迁出企业 3439 家，前三分广州 1175、深圳 896、东莞 609。<br>
+    本页为公开信息整理，非官方统计平台。
+    </div>
+  </details>
 </div>
 
 <script>
 (function(){
-  var btns=document.querySelectorAll('.gbtn'), rev=document.getElementById('gReveal');
-  Array.prototype.forEach.call(btns,function(b){
-    b.addEventListener('click',function(){
-      Array.prototype.forEach.call(btns,function(x){x.setAttribute('aria-pressed','false');});
-      b.setAttribute('aria-pressed','true');
-      rev.classList.add('show');
-      var w=document.getElementById('netwrap');
-      if(w&&w.classList.contains('guess-net')) release();
-    });
+  // 数字入场
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    var to=parseFloat(el.dataset.count), dec=parseInt(el.dataset.dec||'0',10), t0=null, dur=1100;
+    function step(t){ if(!t0)t0=t; var p=Math.min((t-t0)/dur,1); var e=1-Math.pow(1-p,3);
+      el.textContent=(to*e).toFixed(dec); if(p<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
   });
-  var net=document.getElementById('netwrap'), scrim=document.getElementById('scrim'), again=document.getElementById('again');
-  function release(){
-    net.classList.remove('guess-net');net.classList.add('is-out');
-    Array.prototype.forEach.call(net.querySelectorAll('.leak-line'),function(l){l.classList.add('go');});
-    Array.prototype.forEach.call(net.querySelectorAll('.leak-target'),function(t){t.classList.add('show');});
-    if(scrim) scrim.classList.add('hide');
-  }
-  function reset(){
-    net.classList.add('guess-net');net.classList.remove('is-out');
-    Array.prototype.forEach.call(net.querySelectorAll('.leak-line'),function(l){l.classList.remove('go');});
-    Array.prototype.forEach.call(net.querySelectorAll('.leak-target'),function(t){t.classList.remove('show');});
-    if(scrim) scrim.classList.remove('hide');
-  }
-  if(net) net.addEventListener('click',function(){ if(net.classList.contains('guess-net')) release(); });
-  if(again) again.addEventListener('click',function(){reset();setTimeout(release,220);});
 })();
 </script>
 </body>
