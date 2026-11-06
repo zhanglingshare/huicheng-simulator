@@ -162,27 +162,14 @@
   </section>
 </div>
 <div class="toast" id="toast" hidden role="status"></div>
+<script src="hc-viz/dataset.js"></script>
 <script>
 (function(){"use strict";
-const BASE_SNAPSHOT={updated:"2026-10-29 07:29",season:"秋",sourceLabel:"公开文旅与近期公开打卡",pulse:["本周末水东街奇幻夜、华贸寻梦灵感集市相关公开信息，具体安排以主办方为准","惠城夜经济与江边休闲的讨论持续受到关注","南方+与本地媒体公开文旅话题可供进一步核查"],spots:[
-{n:"水东街",c:"night",tag:"夜生活",why:"合江市集与老街夜景，近期万圣节主题活动值得关注",d:"骑楼老街、糖水与夜间集市，具体活动以现场公告为准",watch:"夜经济与年轻人回流",hot:90,level:"高"},
-{n:"惠州西湖",c:"show",tag:"夜游",why:"湖边夜色与东坡文化主题受到持续关注",d:"苏堤、泗洲塔、城市景观",watch:"公共景区的人气与承载",hot:87,level:"高"},
-{n:"红花湖绿道",c:"sport",tag:"骑行",why:"秋季骑行与户外休闲体验",d:"18公里环湖绿道，开放情况与租车信息以现场为准",watch:"生态休闲承载力",hot:87,level:"高"},
-{n:"江北华贸天地",c:"shop",tag:"逛街",why:"商圈里的集市、餐饮与文化活动",d:"江北商圈，具体活动日期以公告为准",watch:"江北服务业客流",hot:86,level:"高"},
-{n:"滨江东江边",c:"sport",tag:"散步",why:"入夜散步、沿江观景与慢跑",d:"东江边日常休闲空间",watch:"居住吸引力",hot:74,level:"较高"},
-{n:"祝屋巷",c:"cafe",tag:"文创",why:"老街巷里的手作与咖啡",d:"西湖周边文创街区",watch:"文化街区商业化与本味",hot:73,level:"较高"},
-{n:"野岛文化生活社区",c:"cafe",tag:"文创",why:"旧厂房改造的生活方式空间",d:"小店、咖啡与展览活动",watch:"年轻人愿不愿留下来",hot:68,level:"较高"},
-{n:"市博物馆/科技馆",c:"kid",tag:"遛娃",why:"室内文化场馆适合家庭探索",d:"具体展览与开放时间请核对场馆公告",watch:"家庭公共配套",hot:63,level:"较高"},
-{n:"桥东江边",c:"cafe",tag:"咖啡",why:"江边小店与慢生活",d:"咖啡、小酒馆和老城街巷",watch:"老城更新活过来没有",hot:63,level:"较高"},
-{n:"客家老味道",c:"food",tag:"觅食",why:"试试当地人熟悉的客家风味",d:"盐焗鸡、梅菜扣肉与酿豆腐等",watch:"本地消费循环",hot:60,level:"较高"},
-{n:"惠州文化艺术中心",c:"show",tag:"演出",why:"演出、文化活动与亲子剧值得关注",d:"具体排期、票务以主办方公告为准",watch:"文化消费浓度",hot:54,level:"中"},
-{n:"市民乐园/江北体育馆",c:"kid",tag:"亲子",why:"草坪与球场，适合家庭周末放电",d:"公共活动空间，情况以现场为准",watch:"学龄家庭周末活跃",hot:53,level:"中"},
-{n:"隆生广场/丽日",c:"shop",tag:"逛街",why:"老商圈中的本地生活与消费",d:"餐饮与商圈活动",watch:"老城商业活力",hot:48,level:"中"},
-{n:"佳兆业中心",c:"shop",tag:"逛街",why:"江北的餐饮与购物选择",d:"适合下班后顺路走走",watch:"CBD留不留得住人",hot:44,level:"中"}
-]};
+const SHELL={updated:"",season:"",sourceLabel:"公开文旅与近期公开打卡",note:"去处热度来自公开打卡分档，非实时人数统计。",pulse:[],spots:[]};
+
 const CAT={all:{name:"全部",ch:"全",color:"#3b7a9e"},night:{name:"夜生活",ch:"夜",color:"#b766df"},cafe:{name:"发呆咖啡",ch:"咖",color:"#d9954b"},shop:{name:"逛街约会",ch:"逛",color:"#2c91d6"},kid:{name:"亲子带娃",ch:"亲",color:"#31b79b"},sport:{name:"散步运动",ch:"走",color:"#2caa80"},show:{name:"演出夜游",ch:"演",color:"#9167e5"},food:{name:"觅食",ch:"食",color:"#e87959"}};
 const POS=[[55,44],[20,54],[36,69],[62,25],[42,48],[18,38],[56,73],[66,55],[30,47],[47,80],[63,19],[22,74],[39,28],[16,23]];
-const state={data:BASE_SNAPSHOT,cat:"all",search:"",selected:null,display:"map",wish:new Set(),isRolling:false,role:"any",time:"20",intervention:"none",groupId:"",groupGuest:false,hostPref:null,friends:[],replyId:""};
+const state={data:SHELL,cat:"all",search:"",selected:null,display:"map",wish:new Set(),isRolling:false,role:"any",time:"20",intervention:"none",groupId:"",groupGuest:false,hostPref:null,friends:[],replyId:""};
 const $=id=>document.getElementById(id);const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const PERSONAS={
   any:{label:"随便看看",bonus:{}},
@@ -239,7 +226,7 @@ function selectSpot(s,fromRoll){state.selected=s;renderPins();renderNetworkLines
 function refresh(){const items=filtered();if(!items.includes(state.selected))state.selected=items[0]||null;renderPins();renderNetworkLines();renderFocus();renderRank();renderList();renderLensNarrative();}
 function renderPulses(){const el=$("storyList");el.replaceChildren();(state.data.pulse||[]).slice(0,3).forEach(txt=>{const p=document.createElement("p");p.className="story";p.textContent=txt;el.appendChild(p);});if(!el.children.length){el.innerHTML='<p class="story">暂无可用的城市生活线索。</p>';}}
 function renderMeta(){const d=state.data;$("sumCount").textContent=d.spots.length;$("sumHot").textContent=d.spots.filter(s=>s.level==="高").length;$("sumPulse").textContent=(d.pulse||[]).length;$("updateTime").textContent=d.updated?"更新 "+d.updated.slice(5):"每日更新";$("sourceNote").textContent=(d.note||"去处热度来自公开打卡分档，非实时人数统计。")+(d.updated?" · 最近刷新 "+d.updated:"");}
-function normalize(d){if(!d||!Array.isArray(d.spots)||!d.spots.length)return BASE_SNAPSHOT;return {updated:d.updated||"",note:d.note||BASE_SNAPSHOT.note,pulse:Array.isArray(d.pulse)?d.pulse:[],spots:d.spots.map(x=>({n:String(x.n||"未命名"),c:String(x.c||"show"),tag:String(x.tag||""),why:String(x.why||""),d:String(x.d||""),watch:String(x.watch||""),hot:Math.max(0,Number(x.hot||0)),level:String(x.level||"中")})),season:d.season||""};}
+function normalize(d){if(!d||!Array.isArray(d.spots)||!d.spots.length)return SHELL;return {updated:d.updated||"",note:d.note||SHELL.note,pulse:Array.isArray(d.pulse)?d.pulse:[],spots:d.spots.map(x=>({n:String(x.n||"未命名"),c:String(x.c||"show"),tag:String(x.tag||""),why:String(x.why||""),d:String(x.d||""),watch:String(x.watch||""),hot:Math.max(0,Number(x.hot||0)),level:String(x.level||"中")})),season:d.season||""};}
 function applyData(d){state.data=normalize(d);state.selected=sorted()[0]||null;renderMeta();renderFilters();renderLensControls();refresh();renderPulses();renderScenario();renderGroupResult();}
 function setMode(k){state.display=k;$("mapToggle").classList.toggle("on",k==="map");$("listToggle").classList.toggle("on",k==="list");$("mapToggle").setAttribute("aria-pressed",String(k==="map"));$("listToggle").setAttribute("aria-pressed",String(k==="list"));$("mapBody").classList.toggle("list-hidden",k!=="map");$("listMode").classList.toggle("show",k==="list");}
 function randomPick(){if(state.isRolling)return;const list=filtered();if(!list.length){toast("这个条件没有去处，换个分类吧");return;}state.isRolling=true;const btn=$("rollBtn");btn.disabled=true;btn.textContent="正在探索城市…";let i=0;let temp;const duration=window.matchMedia("(prefers-reduced-motion:reduce)").matches?0:760;const tick=setInterval(()=>{temp=list[Math.floor(Math.random()*list.length)];selectSpot(temp);i++;if(i>=7)clearInterval(tick);},95);setTimeout(()=>{clearInterval(tick);const picked=list[Math.floor(Math.random()*list.length)];selectSpot(picked,true);btn.disabled=false;btn.textContent="再摇一站";state.isRolling=false;},duration);}
@@ -394,8 +381,9 @@ $("friendReply").addEventListener("keydown",e=>{if(e.key==="Enter")addFriendRepl
 loadGroupInvite();
 
 $("spotSearch").addEventListener("input",e=>{state.search=e.target.value.trim().toLowerCase();refresh();});$("rollBtn").addEventListener("click",randomPick);$("mapRollBtn").addEventListener("click",randomPick);$("inviteBtn").addEventListener("click",invite);$("saveBtn").addEventListener("click",save);$("planShare").addEventListener("click",sharePlan);$("mapToggle").addEventListener("click",()=>setMode("map"));$("listToggle").addEventListener("click",()=>setMode("list"));
-applyData(BASE_SNAPSHOT);renderPlan();
-if(location.protocol!=="file:"){fetch("life.json?ts="+Date.now(),{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("No life.json");return r.json();}).then(applyData).catch(()=>{toast("暂未读取到最新数据，正在显示 10/29 示例快照");});}
+applyData(SHELL);renderPlan();$("updateTime").textContent="正在读取今日数据…";
+if(location.protocol==="file:"){toast("本地文件方式无法读取 life.json，请用线上地址或本地服务打开");$("updateTime").textContent="数据未加载";}
+else{HCData.intel().then(function(r){applyData(r.life);}).catch(function(e){toast("今日去处数据暂时无法加载 · "+(e&&e.message?e.message:"读取失败"));$("updateTime").textContent="数据未加载";$("sourceNote").textContent="今日生活数据读取失败，不使用历史快照替代。";});}
 })();
 
 </script>

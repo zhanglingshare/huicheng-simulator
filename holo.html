@@ -203,6 +203,7 @@
     </div>
   </header>
 
+  <div style="font:500 12.5px/1.5 system-ui,-apple-system,sans-serif;color:#94a3b8;padding:0 24px 6px;letter-spacing:.02em">指标期次：<b style="color:#e2e8f0;font-weight:600">2025 全年终值</b> · 来源 惠城区统计公报 · 与 2026 年当期数据不可混读</div>
   <div id="metrics">
     <div class="metric"><div class="k">GDP（亿元）</div><div class="v">1203.33 <small class="up">+4.3%</small></div></div>
     <div class="metric"><div class="k">规上工业总产值（亿元）</div><div class="v">937.92 <small class="up">+9.6%</small></div></div>
@@ -275,79 +276,13 @@
   </div>
 </div>
 
+<script src="hc-viz/dataset.js"></script>
 <script>
 /* ================= 数据：优先 fetch 三件套，失败用内嵌 fallback ================= */
 const DATA_BASE = "data/";
 let GRAPH = null;
 
-/* ---- 内嵌 fallback（与 data/relationship-*.json 同源，保证 file:// 可看）---- */
-const FALLBACK = {
-  nodes:[
-    {node_id:"hc",name:"惠城",node_type:"core",layer:"城市核心",town:"主城区",description:"惠州市中心城区，行政/商务/服务核心",stat:"GDP 1203.33亿/+4.3%·常住159.78万",node_status:"active",change_status:"无显著变化",evidence_grade:"A",color:"#1e2b3a",source_ids:["S001"]},
-    {node_id:"gxq",name:"惠城高新区",node_type:"anchor",layer:"产业引擎",town:"水口/马安/三栋",description:"省级高新区·1核4组团",stat:"2025产值632.7亿→2026目标820亿",node_status:"active",change_status:"增强",evidence_grade:"A",color:"#2563eb",source_ids:["S001","S004"]},
-    {node_id:"dz",name:"电子信息集群",node_type:"cluster",layer:"三大集群",town:"水口/马安",description:"规上工业总产值主体",stat:"胜宏/润众/沃尔核材集聚",node_status:"active",change_status:"增强",evidence_grade:"A",color:"#2563eb",source_ids:["S001","S010"]},
-    {node_id:"xcl",name:"新材料集群",node_type:"cluster",layer:"三大集群",town:"水口/小金口",description:"新材料产业集聚区",stat:"金澜/天濠落子",node_status:"active",change_status:"增强",evidence_grade:"A",color:"#0891b2",source_ids:["S006","S007"]},
-    {node_id:"ai",name:"AI与机器人",node_type:"cluster",layer:"新兴产业",town:"南部AI经济带",description:"新兴战略产业",stat:"市级方案已印发·区级制定中",node_status:"active",change_status:"增强",evidence_grade:"A",color:"#7c3aed",source_ids:["S014","S015"]},
-    {node_id:"fw",name:"生产性服务业",node_type:"cluster",layer:"城市功能",town:"江北CBD",description:"金融/商务/企业服务",stat:"三产69%·会客厅300家",node_status:"active",change_status:"增强",evidence_grade:"A",color:"#0d9488",source_ids:["S001","S013"]},
-    {node_id:"jt",name:"交通枢纽",node_type:"infrastructure",layer:"城市功能",town:"小金口/水口",description:"区域交通枢纽",stat:"惠州北站·东江特大桥",node_status:"active",change_status:"增强",evidence_grade:"A",color:"#dc2626",source_ids:["S005"]},
-    {node_id:"wh",name:"文旅生态",node_type:"cluster",layer:"城市功能",town:"西湖/红花湖",description:"文旅资源集聚区",stat:"西湖5A·文化艺术节",node_status:"active",change_status:"增强",evidence_grade:"A",color:"#9333ea",source_ids:["S016"]},
-    {node_id:"rj",name:"城市人居",node_type:"cluster",layer:"城市功能",town:"江北/水口",description:"中心城区人居环境",stat:"人才社区300套·890封顶",node_status:"active",change_status:"增强",evidence_grade:"A",color:"#16a34a",source_ids:["S012"]},
-    {node_id:"jl",name:"金澜新材料",node_type:"enterprise",layer:"卫星·新材料",town:"水口新民洛塘",description:"新能源高分子材料企业",stat:"10.5亿竞地落子",node_status:"pending",change_status:"新增",evidence_grade:"A",color:"#0891b2",source_ids:["S006"]},
-    {node_id:"th",name:"天濠新材料",node_type:"enterprise",layer:"卫星·新材料",town:"水口新民洛塘",description:"半固态镁合金制造",stat:"4.84亿·达产超10亿",node_status:"pending",change_status:"新增",evidence_grade:"A",color:"#0891b2",source_ids:["S007"]},
-    {node_id:"sh",name:"胜宏科技",node_type:"enterprise",layer:"卫星·电子信息",town:"高新区",description:"AI高端电路智造",stat:"30亿摘牌·百亿级",node_status:"pending",change_status:"新增",evidence_grade:"A",color:"#2563eb",source_ids:["S009"]},
-    {node_id:"rz",name:"润众科技",node_type:"enterprise",layer:"卫星·电子信息",town:"水口龙津",description:"高精密度线路板",stat:"技改4256万·12月投产",node_status:"pending",change_status:"新增",evidence_grade:"A",color:"#2563eb",source_ids:["S011"]},
-    {node_id:"wr",name:"沃尔核材",node_type:"enterprise",layer:"卫星·电子信息",town:"高新区",description:"AI算力/高速通讯",stat:"大湾区制造中心",node_status:"pending",change_status:"新增",evidence_grade:"A",color:"#2563eb",source_ids:["S010"]},
-    {node_id:"lyh",name:"利元亨",node_type:"enterprise",layer:"卫星·AI",town:"惠城",description:"智能装备龙头",stat:"党代会点名链主",node_status:"active",change_status:"增强",evidence_grade:"A",color:"#7c3aed",source_ids:["S017"]},
-    {node_id:"sz",name:"深圳",node_type:"external",layer:"外部",town:"外部",description:"大湾区核心城市",stat:"融深·创新要素外溢",node_status:"active",change_status:"无显著变化",evidence_grade:"B",color:"#64748b",source_ids:["S010"]},
-    {node_id:"dg",name:"东莞",node_type:"external",layer:"外部",town:"外部",description:"大湾区制造业城市",stat:"电子外溢历史来源",node_status:"active",change_status:"无显著变化",evidence_grade:"B",color:"#64748b",source_ids:["S001"]}
-  ],
-  edges:[
-    {edge_id:"E001",source_node_id:"gxq",target_node_id:"jl",relation_type:"investment",relation_description:"金澜新材料竞地落子惠城高新区水口片区（约115.2亩），总投资不低于10.5亿，建设四大功能板块",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:{metric_name:"总投资",metric_value:10.5,metric_unit:"亿元"},strength_basis:"政府公告+惠州日报",change_status:"新增",counter_evidence:"未动工，实际投资完成额未公开"},
-    {edge_id:"E002",source_node_id:"gxq",target_node_id:"th",relation_type:"investment",relation_description:"天濠半固态镁合金制造基地奠基，总投资4.84亿、达产年产值超10亿",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:{metric_name:"总投资",metric_value:4.84,metric_unit:"亿元"},strength_basis:"高新区奠基公告",change_status:"新增",counter_evidence:"在建，投产待观察"},
-    {edge_id:"E003",source_node_id:"xcl",target_node_id:"th",relation_type:"supply_chain",relation_description:"天濠半固态镁合金项目嵌入新材料集群，补强华南镁合金产能",direction:"有方向",evidence_type:"证据推断",evidence_grade:"B",confidence:"中",metric:null,strength_basis:"同集群产业协同推断",change_status:"新增",counter_evidence:"协同深度无量化证据"},
-    {edge_id:"E004",source_node_id:"gxq",target_node_id:"sh",relation_type:"investment",relation_description:"胜宏AI高端电路智造产业园摘牌落户，投资30亿、百亿级规模",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:{metric_name:"总投资",metric_value:30,metric_unit:"亿元"},strength_basis:"投促局摘牌+南方+",change_status:"新增",counter_evidence:"投产时间未公开"},
-    {edge_id:"E005",source_node_id:"dz",target_node_id:"sh",relation_type:"supply_chain",relation_description:"胜宏（全球首批6阶24层HDI量产）AI算力电路板产能布局，强化电子信息集群",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:{metric_name:"总投资",metric_value:30,metric_unit:"亿元"},strength_basis:"官方摘牌+产业报道",change_status:"新增",counter_evidence:"达产产值未公开"},
-    {edge_id:"E006",source_node_id:"dz",target_node_id:"rz",relation_type:"investment",relation_description:"润众高精密度线路板智能化技改（水口），总投资约4256.6万、预计12月投产",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:{metric_name:"总投资",metric_value:0.4257,metric_unit:"亿元"},strength_basis:"区发改局节能审查",change_status:"新增",counter_evidence:"存量技改，非新增主体"},
-    {edge_id:"E007",source_node_id:"gxq",target_node_id:"wr",relation_type:"investment",relation_description:"沃尔核材粤港澳大湾区制造中心落户，面向AI算力与高速通讯网络",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:null,strength_basis:"南方+产业报道",change_status:"新增",counter_evidence:"投资额未公开"},
-    {edge_id:"E008",source_node_id:"ai",target_node_id:"gxq",relation_type:"regional",relation_description:"市、区两级AI与机器人实施方案：市级已印发、区级制定中",direction:"双向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:null,strength_basis:"政府文件（提案答复）",change_status:"增强",counter_evidence:"区级方案未正式印发"},
-    {edge_id:"E009",source_node_id:"hc",target_node_id:"ai",relation_type:"regional",relation_description:"党代会提出南部人工智能产业经济带，联动惠阳PCB、惠东算力，承接深莞AI要素",direction:"有方向",evidence_type:"证据推断",evidence_grade:"B",confidence:"中",metric:null,strength_basis:"党代会报告+惠州日报",change_status:"新增",counter_evidence:"方向指引，落地待细化"},
-    {edge_id:"E010",source_node_id:"gxq",target_node_id:"hc",relation_type:"investment",relation_description:"高新区是惠城工业核心引擎：2025产值632.7亿→2026目标820亿，138宗重点项目支撑",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:{metric_name:"2025产值",metric_value:632.7,metric_unit:"亿元"},strength_basis:"政府工作报告+重点项目",change_status:"无显著变化",counter_evidence:"820亿为年度目标"},
-    {edge_id:"E011",source_node_id:"jt",target_node_id:"hc",relation_type:"transport",relation_description:"东江特大桥（桥塔172米）合龙，惠霞高速冲刺年内通车，改写跨江通勤",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:null,strength_basis:"省交通运输厅公告",change_status:"新增",counter_evidence:"年内通车为目标"},
-    {edge_id:"E012",source_node_id:"wh",target_node_id:"hc",relation_type:"tourism_consumption",relation_description:"西湖5A、红花湖+湾区文化艺术节（10/31），带动文旅消费",direction:"双向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:null,strength_basis:"文旅活动官方发布",change_status:"增强",counter_evidence:"客流/消费额未细分"},
-    {edge_id:"E013",source_node_id:"rj",target_node_id:"hc",relation_type:"regional",relation_description:"下良人才社区300套投用、荔枝城890套封顶，中心城区人才安居支撑",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"中",metric:{metric_name:"保障房",metric_value:890,metric_unit:"套"},strength_basis:"南方+报道",change_status:"新增",counter_evidence:"民生配套，非产业直接贡献"},
-    {edge_id:"E014",source_node_id:"fw",target_node_id:"hc",relation_type:"regional",relation_description:"企业会客厅揭牌（首批约300家重点企业专人帮办），生产性服务支撑企业",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:{metric_name:"首批企业",metric_value:300,metric_unit:"家"},strength_basis:"市政府发布",change_status:"新增",counter_evidence:"服务效能未量化"},
-    {edge_id:"E015",source_node_id:"sz",target_node_id:"gxq",relation_type:"regional",relation_description:"融深融湾：承接深圳产业与创新要素（胜宏AI智造、沃尔核材的深圳关联）",direction:"有方向",evidence_type:"证据推断",evidence_grade:"B",confidence:"中",metric:null,strength_basis:"产业来源与政策方向推断",change_status:"无显著变化",counter_evidence:"深圳直接关联程度无数据"},
-    {edge_id:"E016",source_node_id:"dg",target_node_id:"dz",relation_type:"supply_chain",relation_description:"东莞电子产业历史外溢构成惠城电子集群来源之一",direction:"有方向",evidence_type:"证据推断",evidence_grade:"B",confidence:"中",metric:null,strength_basis:"产业迁移历史与同城化",change_status:"无显著变化",counter_evidence:"外溢占比无统计"},
-    {edge_id:"E017",source_node_id:"gxq",target_node_id:"ai",relation_type:"regional",relation_description:"AI与机器人产业布局在高新区/南部经济带落地（利元亨链主+链属引育）",direction:"双向",evidence_type:"证据推断",evidence_grade:"B",confidence:"中",metric:null,strength_basis:"党代会链主引育表述",change_status:"增强",counter_evidence:"企业落地进度待跟踪"},
-    {edge_id:"E018",source_node_id:"hc",target_node_id:"dz",relation_type:"supply_chain",relation_description:"电子信息是惠城规上工业总产值主体（937.92亿/+9.6%），构成工业基本盘",direction:"双向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:{metric_name:"规上工业总产值",metric_value:937.92,metric_unit:"亿元"},strength_basis:"政府工作报告",change_status:"无显著变化",counter_evidence:"集群内部结构未细分"},
-    {edge_id:"E019",source_node_id:"ai",target_node_id:"lyh",relation_type:"supply_chain",relation_description:"党代会明确以利元亨为链主，培育AI与机器人产业集群链属企业（链主-链属关系）",direction:"有方向",evidence_type:"已证实事实",evidence_grade:"A",confidence:"高",metric:null,strength_basis:"党代会报告+惠州日报点名链主",change_status:"增强",counter_evidence:"链属企业数量与协同规模未公开"}
-  ],
-  changes:[
-    {change_id:"C001",change_type:"new_entity",title:"金澜新材料竞地落子（10.5亿）",event_date:"2026-10-13",involved_node_ids:["gxq","jl"],involved_edge_ids:["E001"],before_after:"此前：项目未落地；此后：竞地成功进入建设准备",uncertainty:"实际投资完成额与投产时间未公开",topic:"竞地≠开工。10.5亿从签约到投产还有多远？水口新材料集群能否真正成型？"},
-    {change_id:"C002",change_type:"new_entity",title:"天濠半固态镁合金奠基（4.84亿）",event_date:"2026-06-04",involved_node_ids:["gxq","th"],involved_edge_ids:["E002","E003"],before_after:"此前：镁合金产能空白；此后：在建，与海天智胜签装备合作",uncertainty:"投产时间待定",topic:"镁合金是新赛道。天濠的装备合作能否支撑达产？新材料集群会形成第二增长极吗？"},
-    {change_id:"C003",change_type:"new_entity",title:"胜宏AI高端电路智造摘牌（30亿）",event_date:"2026-06",involved_node_ids:["gxq","sh"],involved_edge_ids:["E004","E005"],before_after:"此前：AI硬件制造本地空白；此后：AI算力电路板产能布局",uncertainty:"投产与达产时间未公开",topic:"惠城能否从“电子配套”升级为“AI硬件”？百亿级目标靠什么兑现？"},
-    {change_id:"C004",change_type:"new_entity",title:"沃尔核材大湾区制造中心落户",event_date:"2026-06",involved_node_ids:["gxq","wr"],involved_edge_ids:["E007"],before_after:"此前：无对应主体；此后：落户高新区",uncertainty:"投资额未公开",topic:"沃尔核材与胜宏能否在AI硬件上“抱团”？形成本地协同还是各自为战？"},
-    {change_id:"C005",change_type:"new_edge",title:"东江特大桥合龙·惠霞高速冲刺通车",event_date:"2026-10-21",involved_node_ids:["jt"],involved_edge_ids:["E011"],before_after:"此前：跨江通道未贯通；此后：南北大动脉关键节点打通",uncertainty:"年内通车为目标",topic:"桥通了，跨江通勤真的会变吗？还是主要利好过境车流而非本地居民？"},
-    {change_id:"C006",change_type:"new_entity",title:"企业会客厅揭牌（首批300家）",event_date:"2026-10-27",involved_node_ids:["fw"],involved_edge_ids:["E014"],before_after:"此前：无统一企业服务入口；此后：专人帮办涉企业务",uncertainty:"服务效能未量化",topic:"服务窗口能否真正降低企业办事成本？300家企业的获得感如何衡量？"},
-    {change_id:"C007",change_type:"new_edge",title:"党代会：三地五城+南部AI产业经济带",event_date:"2026-10-27",involved_node_ids:["hc","ai","lyh"],involved_edge_ids:["E009","E017"],before_after:"此前：AI布局分散；此后：明确南部AI产业经济带方向",uncertainty:"方向指引，落地待细化",topic:"方向明确但区级AI方案仍在制定中，会不会起大早赶晚集？利元亨链主能带出多少链属？"}
-  ],
-  sources:{
-    "S001":["2026年惠城区政府工作报告","http://www.hcq.gov.cn/zfxxgkml/hzshcqzf/zfgzbg/content/mpost_5732355.html"],
-    "S004":["1-9月138宗重点项目完成投资103.05亿","http://www.hcq.gov.cn/hcqzdlyxxgk/zdjsxm/ssqk/content/post_5872769.html"],
-    "S005":["东江特大桥合龙（省交通厅）","https://td.gd.gov.cn/gkmlpt/content/4/4963/mpost_4963897.html"],
-    "S006":["金澜新材料竞地落子（惠州日报）","https://www.huizhou.gov.cn/zwgk/hzsz/zwyw/content/mpost_5870128.html"],
-    "S007":["天濠奠基（高新区管委会）","http://www.hcq.gov.cn/hzhckjyglw/gkmlpt/content/5/5785/post_5785894.html"],
-    "S009":["胜宏AI智造摘牌（投促中心）","http://www.hcq.gov.cn/hzhctczx/gkmlpt/content/5/5831/mpost_5831203.html"],
-    "S010":["惠城五年经济之变（南方+）","http://m.toutiao.com/group/7698303822905360934/"],
-    "S011":["润众技改节能审查（区发改局）","http://www.hcq.gov.cn/zfxxgkml/hcqfzggj/bmwj/content/post_5840202.html"],
-    "S012":["下良人才社区投用（南方+）","https://www.nfnews.com/content/1y0lxOAMyB.html"],
-    "S013":["企业会客厅揭牌（市政府）","https://www.huizhou.gov.cn/zwgk/hzsz/xqyw/content/post_5880050.html"],
-    "S014":["市级AI方案（提案答复引用）","https://www.huizhou.gov.cn/zfxxgkml/hzsnyhzdxmj/jytagk/content/mpost_5834858.html"],
-    "S015":["区级AI方案制定中（提案答复）","http://www.hcq.gov.cn/hzhcfgj/gkmlpt/content/5/5878/post_5878490.html"],
-    "S016":["湾区文化艺术节（惠州文明网）","http://hz.wenming.cn/ecjj/202610/t20261014_9379785.htm"],
-    "S017":["利元亨链主（惠州日报）","http://e.hznews.com/hzrb/pc/content/202610/28/content_1134303.html"]
-  }
-};
+/* 关系数据统一由 hc-viz/dataset.js 提供；本页不再内嵌副本，读不到即提示，不以旧数据兜底 */
 
 /* ================= 网络引擎 ================= */
 const canvas = document.getElementById("net");
@@ -881,10 +816,7 @@ function relLabel(t){return REL_LABEL[t]||t;}
 async function boot(){
   resize();
   try{
-    const [ev,ch] = await Promise.all([
-      fetch(DATA_BASE+"relationship-evidence-v1.json").then(r=>{if(!r.ok)throw 0;return r.json();}),
-      fetch(DATA_BASE+"relationship-changes-v1.json").then(r=>{if(!r.ok)throw 0;return r.json();})
-    ]);
+    const [ev,ch,sc] = await HCData.relations();
     // evidence 节点没有 color，按 layer 补
     const layerColor={"城市核心":"#1e2b3a","产业引擎":"#2563eb","三大集群":"#2563eb","新兴产业":"#7c3aed","城市功能":"#0d9488","外部":"#64748b"};
     ev.nodes.forEach(n=>{
@@ -897,12 +829,15 @@ async function boot(){
     const cf={jt:"#dc2626",wh:"#9333ea",rj:"#16a34a",fw:"#0d9488"};
     ev.nodes.forEach(n=>{ if(cf[n.node_id]) n.color=cf[n.node_id]; });
     // sources 表
-    const src=await fetch(DATA_BASE+"relationship-sources-v1.json").then(r=>r.json());
     const sm={};
-    src.sources.forEach(s=>{ sm[s.source_id]=[s.title,s.url]; });
+    sc.sources.forEach(s=>{ sm[s.source_id]=[s.title,s.url]; });
     applyData({nodes:ev.nodes, edges:ev.edges, changes:ch.changes, sources:sm});
   }catch(e){
-    applyData(FALLBACK);
+    const bar=document.createElement('div');
+    bar.style.cssText='position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:9999;background:#7f1d1d;color:#fff;padding:10px 16px;border-radius:10px;font:500 13px/1.5 system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.35);max-width:92vw';
+    bar.textContent='关系数据暂时无法加载 · '+(e&&e.message?e.message:'未知错误');
+    document.body.appendChild(bar);
+    console.error(e);
   }
 }
 boot();
