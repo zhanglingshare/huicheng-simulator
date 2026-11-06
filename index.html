@@ -3,347 +3,482 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#08090b">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%230a84ff%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%226%22 fill=%22%23fff%22/%3E%3C/svg%3E">
-<title>惠城产业风洞 · 01 序章</title>
+<meta name="theme-color" content="#F2F7FC">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%231B6FE0%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%226%22 fill=%22%23fff%22/%3E%3C/svg%3E">
+<title>惠城决策风洞 · 你以为你了解惠城？</title>
 <style>
-/* 序章 · 独立版式（设计令牌见 ui/ui.css） */
-body[data-page="index"]{overflow-x:hidden}
-#starLayer{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.7}
-.star{fill:#F2F2F2;animation:twinkle 5s ease-in-out infinite}
-@keyframes twinkle{0%,100%{opacity:.10}50%{opacity:.45}}
+:root{
+  --bg:#F2F7FC; --ink:#0E2438; --ink2:#3D5568; --ink3:#6B7F92; --ink4:#9AACBC;
+  --line:#DFEAF5; --line2:#C7DAEC;
+  --blue:#1B6FE0; --blue-d:#0D47A1; --blue-l:#E9F2FE;
+  --green:#2C9C68; --amber:#C0872B; --red:#C4544C; --purple:#6C63C8;
+  --r:16px; --r-p:999px;
+  --sh:0 10px 28px -22px rgba(14,52,96,.4),0 1px 2px rgba(14,52,96,.05);
+  --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Roboto Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;min-width:0}
+html,body{overflow-x:hidden}
+body{font-family:var(--font);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.6;
+  background-image:radial-gradient(1100px 460px at 80% -8%,rgba(27,111,224,.08),transparent 62%)}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{letter-spacing:-.02em;line-height:1.22;font-weight:800}
 
-.shell{
-  position:relative;z-index:1;
-  display:grid;
-  grid-template-columns:minmax(0,1.02fr) minmax(0,1.06fr);
-  grid-template-rows:auto auto;
-  column-gap:clamp(32px,5vw,72px);
-  row-gap:clamp(28px,4vw,44px);
-  align-items:center;
-  max-width:1240px;margin:0 auto;
-  padding:clamp(28px,5vh,64px) 32px 40px;
-  min-height:calc(100vh - var(--ds-bar-h));
-  animation:pageIn .5s var(--ds-ease) both;
-}
-@keyframes pageIn{from{opacity:0}to{opacity:1}}
+/* 顶栏 */
+.top{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:12px;
+  padding:9px 16px;background:rgba(255,255,255,.88);border-bottom:1px solid var(--line);
+  backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%)}
+.brand{display:flex;align-items:center;gap:8px;flex:none}
+.mark{width:29px;height:29px;border-radius:9px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:13px;
+  background:linear-gradient(150deg,#2E7DEB,#0D47A1);box-shadow:0 6px 16px -9px rgba(27,111,224,.9)}
+.nm{display:flex;flex-direction:column;line-height:1.12}
+.nm b{font-size:13.5px}
+.nm i{font-style:normal;font-size:8.5px;letter-spacing:.15em;color:var(--ink4);font-weight:700}
+.chapters{display:flex;gap:1px;overflow-x:auto;scrollbar-width:none;margin-left:4px}
+.chapters::-webkit-scrollbar{display:none}
+.chapters a{flex:none;font-size:12.5px;color:var(--ink2);padding:6px 11px;border-radius:var(--r-p);white-space:nowrap;transition:.18s}
+.chapters a:hover{background:var(--blue-l);color:var(--blue-d)}
+.chapters a.on{background:linear-gradient(150deg,#2E7DEB,#1B6FE0);color:#fff;font-weight:700;box-shadow:0 8px 18px -13px rgba(27,111,224,.95)}
+.stamp{margin-left:auto;flex:none;display:flex;align-items:center;gap:6px;font-size:10.5px;color:var(--ink3);
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-p);padding:4px 10px;white-space:nowrap}
+.stamp i{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(44,156,104,.15)}
 
-.col-text{display:flex;flex-direction:column;justify-content:center;min-width:0}
-.top{display:flex;align-items:center;gap:12px;margin-bottom:clamp(22px,4vh,40px)}
-.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:500;color:var(--ds-text-3);letter-spacing:.01em}
-.dot{width:6px;height:6px;border-radius:50%;background:var(--ds-accent);flex:none;box-shadow:0 0 0 3px rgba(10,132,255,.16)}
-.mode{margin-left:auto;font-size:11.5px;color:var(--ds-text-3);padding:4px 10px;border-radius:var(--ds-r-pill);
-  border:1px solid var(--ds-hairline);background:var(--ds-surface-1);white-space:nowrap}
+.wrap{max-width:1272px;margin:0 auto;padding:18px 18px 34px}
 
-.headline{margin-bottom:clamp(22px,4vh,34px)}
-.headline h1{
-  font-size:clamp(36px,4.9vw,60px);
-  font-weight:600;line-height:1.12;letter-spacing:-.035em;
-  margin:0 0 22px;
-}
-.headline h1 > span{display:block}
-.crack{position:relative;color:#E1857E;display:inline-block;max-width:100%}
-.crack::after{
-  content:'';position:absolute;left:2px;right:2px;top:56%;height:1.5px;
-  background:rgba(255,107,96,.5);transform:rotate(-.8deg) scaleX(0);
-  transform-origin:left;animation:slashIn .8s var(--ds-ease) .35s forwards;
-}
-@keyframes slashIn{to{transform:rotate(-.8deg) scaleX(1)}}
-.headline p{font-size:15.5px;line-height:1.78;color:var(--ds-text-2);max-width:520px;margin:0}
-.headline p b,.headline p .hl{color:var(--ds-text);font-weight:500}
+/* 首屏标题 */
+.herohead{position:relative;border-radius:var(--r);overflow:hidden;margin-bottom:12px;
+  background:linear-gradient(112deg,#EAF3FE 0%,#F4F9FE 46%,#FDFEFF 100%);
+  border:1px solid var(--line);box-shadow:var(--sh);padding:20px 22px 18px}
+.herohead::after{content:"";position:absolute;right:-40px;top:-60px;width:320px;height:220px;border-radius:50%;
+  background:radial-gradient(circle,rgba(27,111,224,.10),transparent 70%)}
+.herohead .kick{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;color:var(--blue-d);
+  background:#fff;border:1px solid #D6E5F8;border-radius:var(--r-p);padding:4px 10px;margin-bottom:10px}
+.herohead .kick i{width:6px;height:6px;border-radius:50%;background:var(--blue)}
+.herohead h1{font-size:clamp(27px,3.6vw,42px);line-height:1.16;max-width:720px}
+.herohead h1 .hl{background:linear-gradient(100deg,#2E7DEB,#0D47A1);-webkit-background-clip:text;background-clip:text;color:transparent}
+.herohead p{margin-top:9px;font-size:13px;color:var(--ink2);max-width:660px;line-height:1.8}
 
-.foot{display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-  padding-top:20px;border-top:1px solid var(--ds-hairline);font-size:12px;color:var(--ds-text-3)}
-.foot .sep{width:3px;height:3px;border-radius:50%;background:var(--ds-text-4)}
+/* KPI */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-bottom:12px}
+.kpi{position:relative;display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);
+  border-radius:13px;padding:11px 12px;box-shadow:var(--sh)}
+.kpi .ic{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;flex:none;font-size:14px}
+.kpi .txt{min-width:0;flex:1}
+.kpi .v{display:block;font-family:var(--mono);font-size:17.5px;font-weight:700;letter-spacing:-.02em;line-height:1.15;color:#12365A}
+.kpi .v small{font-size:10.5px;font-weight:600;margin-left:2px;color:var(--ink3)}
+.kpi .l{display:block;font-size:10.5px;color:var(--ink3);margin-top:1px;line-height:1.3}
+.kpi .yoy{font-family:var(--mono);font-size:11px;font-weight:700;flex:none}
+.up{color:var(--green)}.down{color:var(--red)}.flat{color:var(--ink3)}
 
-.col-visual{min-width:0}
-.relbox{min-width:0}
-.rel-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:10px}
-.rel-head .t{font-size:12px;font-weight:500;color:var(--ds-text-2)}
-.rel-head .d{font-size:11px;color:var(--ds-text-4);text-align:right}
-.rel-card{
-  background:rgba(18,20,24,.55);
-  border:1px solid var(--ds-hairline);
-  border-radius:var(--ds-r-xl);
-  padding:14px;
-  box-shadow:var(--ds-shadow-1),inset 0 1px 0 rgba(255,255,255,.04);
-  -webkit-backdrop-filter:blur(18px) saturate(140%);
-  backdrop-filter:blur(18px) saturate(140%);
-}
-.rel-svg{width:100%;height:auto;display:block;aspect-ratio:4/3;border-radius:12px;overflow:hidden;
-  background:
-    radial-gradient(80% 70% at 42% 42%,rgba(10,132,255,.08),transparent 70%),
-    #0A0C10;
-  border:1px solid rgba(255,255,255,.05)}
-.rel-svg text{font-family:var(--ds-font)}
-.rel-svg .lb{font-weight:500;fill:#F2F2F2;font-size:12px;letter-spacing:0}
-.rel-svg .sub{fill:var(--ds-text-3);font-size:10.5px}
-.rel-svg .nd .lb,.rel-svg .leak-target .lb{font-size:11.5px}
-.rel-svg .annot{font-size:10.5px;font-weight:500}
-.local-line{fill:none;stroke:#75C6DF;stroke-width:1;stroke-dasharray:3 6;opacity:.14}
-.leak-line{fill:none;stroke-linecap:round;stroke-dasharray:600;stroke-dashoffset:600;
-  animation:shootLine 1.1s var(--ds-ease) .5s forwards}
-@keyframes shootLine{to{stroke-dashoffset:0}}
-.leak-target .ring{animation:none;opacity:.35;stroke-width:1.2}
-.nd,.leak-target,.annot,.particle{opacity:0;animation:softIn .6s var(--ds-ease) .3s forwards}
-.nd.jb{animation-delay:.34s}.nd.jsh{animation-delay:.4s}.nd.sdj{animation-delay:.46s}.nd.hm{animation-delay:.52s}
-.leak-target.sz{animation-delay:.62s}.leak-target.dg{animation-delay:.68s}.leak-target.ec{animation-delay:.74s}
-.annot{animation-delay:.8s}.particle{animation-delay:.9s}
-@keyframes softIn{to{opacity:1}}
-.annot.warn{animation:softIn .6s var(--ds-ease) .8s forwards}
+/* 三栏 */
+.hero{display:grid;grid-template-columns:242px minmax(0,1fr) 300px;gap:12px;align-items:start}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh)}
 
-.row-bottom{
-  grid-column:1/-1;
-  display:grid;grid-template-columns:1fr 1fr minmax(260px,.82fr);
-  gap:14px;align-items:stretch;
-}
-.insights{display:contents}
-.insight{
-  position:relative;padding:20px 20px 18px;border-radius:var(--ds-r-l);
-  background:var(--ds-surface-1);border:1px solid var(--ds-hairline);
-  transition:background .25s var(--ds-ease),border-color .25s;
-}
-.insight:hover{background:var(--ds-surface-2);border-color:var(--ds-hairline-strong)}
-.insight .num{font-family:var(--ds-mono);font-size:11px;font-weight:500;color:var(--ds-accent-hi);letter-spacing:.04em;margin-bottom:10px}
-.insight .t{font-size:14.5px;font-weight:600;line-height:1.45;margin-bottom:6px;letter-spacing:-.01em}
-.insight .d{font-size:12.5px;color:var(--ds-text-3);line-height:1.65}
+/* 左：我要看哪里 */
+.pick{padding:14px 12px}
+.pick h2{font-size:13.5px;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.pick h2::before{content:"";width:3px;height:13px;border-radius:2px;background:var(--blue)}
+.opt{display:flex;align-items:center;gap:10px;padding:10px;border-radius:11px;border:1px solid transparent;margin-bottom:6px;transition:.2s}
+.opt:hover{border-color:var(--line2);background:#F8FBFE}
+.opt.sel{background:linear-gradient(150deg,#2E7DEB,#1B6FE0);color:#fff;box-shadow:0 10px 22px -15px rgba(27,111,224,.95)}
+.opt .oi{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none;background:var(--blue-l);color:var(--blue);font-size:13px}
+.opt.sel .oi{background:rgba(255,255,255,.22);color:#fff}
+.opt b{display:block;font-size:12.5px;letter-spacing:-.01em}
+.opt span{display:block;font-size:10.5px;color:var(--ink3);margin-top:1px}
+.opt.sel span{color:rgba(255,255,255,.84)}
+.pick .hint{margin-top:9px;padding-top:9px;border-top:1px dashed var(--line);font-size:10.5px;color:var(--ink4);line-height:1.7}
+.pick .plat{margin-top:10px;display:grid;gap:6px}
+.plat div{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink3)}
+.plat div b{font-family:var(--mono);color:var(--ink2);font-weight:600}
 
-.cta{
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
-  padding:20px;border-radius:var(--ds-r-l);text-decoration:none;
-  background:linear-gradient(180deg,rgba(10,132,255,.16),rgba(10,132,255,.09));
-  border:1px solid rgba(10,132,255,.32);
-  color:var(--ds-text);
-  transition:background .25s var(--ds-ease),border-color .25s,transform .25s var(--ds-ease);
-}
-.cta:hover{background:linear-gradient(180deg,rgba(10,132,255,.24),rgba(10,132,255,.14));border-color:rgba(10,132,255,.5)}
-.cta:active{transform:scale(.995)}
-.cta .cta-title{font-size:14.5px;font-weight:600;letter-spacing:-.01em}
-.cta .sub{display:block;font-size:11.5px;color:var(--ds-text-2);margin-top:4px;line-height:1.5}
-.cta .arrow{
-  width:32px;height:32px;flex:none;border-radius:50%;display:grid;place-items:center;
-  background:rgba(10,132,255,.9);color:#F2F2F2;box-shadow:0 2px 8px rgba(10,132,255,.35);
-  transition:transform .25s var(--ds-ease)
-}
-.cta:hover .arrow{transform:translateX(2px)}
+/* 中：山水主图 */
+.map{overflow:hidden;display:flex;flex-direction:column}
+.map-head{padding:13px 15px 0;display:flex;align-items:flex-start;gap:10px}
+.map-head .hd{flex:1;min-width:0}
+.map-head b{display:block;font-size:14.5px;font-weight:800}
+.map-head span{font-size:11px;color:var(--ink3)}
+.map-head .tag{font-size:10px;font-weight:700;color:var(--blue-d);background:var(--blue-l);border:1px solid #D3E4FA;
+  border-radius:var(--r-p);padding:3px 9px;white-space:nowrap;flex:none}
+.terrain{aspect-ratio:1000/560;margin-top:6px;position:relative}
+.terrain svg{width:100%;height:100%;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:5px;padding:0 14px 12px}
+.lm{font-size:10.5px;color:var(--ink2);background:#F6FAFE;border:1px solid var(--line);border-radius:var(--r-p);
+  padding:3px 8px;display:inline-flex;align-items:center;gap:5px}
+.lm i{width:5px;height:5px;border-radius:50%;flex:none}
 
-@media(max-width:1080px){
-  .shell{grid-template-columns:1fr;max-width:760px;gap:32px;padding-top:32px}
-  .headline h1{font-size:clamp(34px,7vw,50px)}
-  .row-bottom{grid-template-columns:1fr 1fr}
-  .cta{grid-column:1/-1}
+/* 右：今日洞察 */
+.insight{padding:13px 13px 11px;display:flex;flex-direction:column;min-height:100%}
+.insight h2{font-size:13.5px;display:flex;align-items:center;gap:6px}
+.insight h2 em{font-style:normal;font-size:10.5px;font-weight:600;color:var(--ink3);margin-left:auto}
+.ins-list{margin-top:9px;display:flex;flex-direction:column;gap:7px;flex:1}
+.ins{display:flex;gap:8px;padding:9px;border-radius:11px;border:1px solid var(--line);background:#FBFDFF;transition:.2s}
+.ins:hover{border-color:#C9DFFA;background:#F4F9FF}
+.ins .n{font-family:var(--mono);font-size:10.5px;font-weight:700;color:var(--blue);width:16px;flex:none;padding-top:2px}
+.ins .b{min-width:0}
+.ins .b b{display:block;font-size:12px;font-weight:700;line-height:1.45;letter-spacing:-.01em;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ins .b span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  font-size:10.5px;color:var(--ink3);margin-top:3px;line-height:1.55}
+.ins .cat{display:inline-block;font-size:9.5px;font-weight:700;color:var(--blue-d);background:var(--blue-l);border-radius:5px;padding:1px 6px;margin-top:5px}
+.insight .more{margin-top:9px;font-size:11.5px;color:var(--blue);font-weight:700;display:flex;align-items:center;gap:4px}
+
+/* 底部两卡 + 口径 */
+.duo{display:grid;grid-template-columns:1fr 1fr .92fr;gap:12px;margin-top:12px}
+.duo .card{padding:14px}
+.duo h3{font-size:13px;display:flex;align-items:center;gap:7px;margin-bottom:2px}
+.duo h3 .badge{font-size:9.5px;font-weight:700;border-radius:5px;padding:2px 6px;background:var(--blue-l);color:var(--blue-d)}
+.duo .sub{font-size:10.5px;color:var(--ink3);margin-bottom:11px}
+.rows{display:grid;gap:8px}
+.row{display:grid;grid-template-columns:minmax(0,34%) minmax(0,1fr) 58px;align-items:center;gap:9px}
+.row .rk{font-size:11.5px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .bar{height:6px;border-radius:3px;background:#EDF3FA;position:relative;overflow:hidden}
+.row .bar i{position:absolute;inset:0 auto 0 0;border-radius:3px}
+.row .rv{font-family:var(--mono);font-size:11.5px;font-weight:700;text-align:right}
+.note{padding:14px;background:linear-gradient(160deg,#FFFDF7,#FFF8EA);border:1px solid #F1E3C4;border-radius:var(--r);box-shadow:var(--sh)}
+.note h3{font-size:13px;color:#8A5E12;display:flex;align-items:center;gap:6px;margin-bottom:7px}
+.note p{font-size:11px;line-height:1.85;color:#7A6A46}
+.note p b{color:#6B5218}
+.note p+p{margin-top:7px}
+
+/* 追问条 */
+.ask{margin-top:12px;display:grid;grid-template-columns:auto repeat(3,minmax(0,1fr));gap:9px;align-items:center;
+  background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:11px 13px;box-shadow:var(--sh)}
+.ask .lead{font-size:12.5px;color:#12365A;display:flex;align-items:center;gap:7px;padding-right:4px}
+.ask .lead::before{content:"//";font-family:var(--mono);color:#B9CEE4;font-weight:700}
+.ask a{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--ink2);background:#F6FAFE;
+  border:1px solid var(--line);border-radius:10px;padding:8px 10px;transition:.18s;min-height:38px}
+.ask a:hover{border-color:#C9DFFA;background:#EFF7FF;color:var(--blue-d)}
+.ask a .q{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--blue-l);
+  color:var(--blue);font-weight:800;font-size:10.5px}
+.ask a .arr{margin-left:auto;color:var(--blue);font-size:12px;flex:none}
+
+.foot{margin-top:16px;font-size:10.5px;color:var(--ink4);line-height:1.85;text-align:center}
+
+/* 响应式 */
+@media(max-width:1120px){
+  .hero{grid-template-columns:1fr 1fr}
+  .map{grid-column:1/-1;grid-row:1}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .duo{grid-template-columns:1fr 1fr}
+  .note{grid-column:1/-1}
+  .ask{grid-template-columns:1fr 1fr}
+  .ask .lead{grid-column:1/-1}
 }
-@media(max-width:640px){
-  .shell{padding:20px 18px 36px;gap:26px;min-height:0}
-  .top{margin-bottom:22px}
-  .headline h1{font-size:clamp(32px,9.6vw,40px);letter-spacing:-.03em;margin-bottom:16px}
-  .headline p{font-size:14.5px;line-height:1.8}
-  .rel-head{flex-direction:column;gap:3px;align-items:flex-start}
-  .rel-head .d{text-align:left}
-  .rel-card{padding:10px;border-radius:18px}
-  .rel-svg{aspect-ratio:1/1}
-  .rel-svg .lb{font-size:20px}
-  .rel-svg .nd .lb,.rel-svg .leak-target .lb{font-size:19px}
-  .rel-svg .sub{font-size:17px}
-  .rel-svg .annot{font-size:17px}
-  .foot{row-gap:6px;font-size:11.5px}
-  .foot .sep{display:none}
-  .row-bottom{grid-template-columns:1fr}
-  .cta{grid-column:auto}
-  .insight{padding:16px 16px 15px}
+@media(max-width:760px){
+  .top{padding:8px 11px;gap:8px;flex-wrap:wrap}
+  .chapters{order:3;width:100%;margin:3px 0 0}
+  .stamp{font-size:10px;padding:3px 8px}
+  .wrap{padding:12px 12px 28px}
+  .herohead{padding:15px 15px 14px;margin-bottom:10px}
+  .herohead h1{font-size:clamp(24px,7.2vw,32px)}
+  .herohead p{font-size:12px;line-height:1.75}
+  .kpis{gap:7px}
+  .kpi{padding:9px 9px;gap:8px}
+  .kpi .ic{width:27px;height:27px;font-size:12px;border-radius:8px}
+  .kpi .v{font-size:15px}
+  .kpi .l{font-size:9.5px}
+  .kpi .yoy{font-size:10px;position:absolute;right:9px;top:8px}
+  .kpi .txt{padding-right:26px}
+  .hero{grid-template-columns:minmax(0,1fr);gap:10px}
+  .pick{order:2}
+  .insight{order:3}
+  .map{order:1}
+  .terrain{aspect-ratio:1000/500}
+  .terrain text{display:none}
+  .terrain rect{opacity:.9}
+  .duo{grid-template-columns:minmax(0,1fr);gap:10px}
+  .ask{grid-template-columns:minmax(0,1fr);gap:7px}
+  .row{grid-template-columns:minmax(0,38%) minmax(0,1fr) 54px}
+  .legend{gap:4px}
 }
-@media(prefers-reduced-motion:reduce){
-  .crack::after{transform:rotate(-.8deg) scaleX(1)}
-  .particle{display:none}
-}
-/* ui-mobile-patch 2026-11-07 */
-@media (max-width:520px){
-  strong,h1,h2,h3,h4,th,td,label,.cap,.title,summary,.ka{word-break:keep-all;overflow-wrap:anywhere}
-  body{line-break:strict}
-  .nav a,footer a,footer button,button,.btn,.kg-footer summary{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
-  input[type=range]{min-height:44px}
-  .slider-row{min-height:44px}
-}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
-<link rel="stylesheet" href="ui/ui.css">
-<link rel="stylesheet" href="ui/ui-pages.css">
-<link rel="stylesheet" href="ui/skin.css?v=20261106">
 </head>
-<body class="sk-index">
-<svg id="starLayer" aria-hidden="true"></svg>
-<main class="shell">
-  <section class="col-text">
-    <div class="top">
-      <span class="eyebrow"><i class="dot" aria-hidden="true"></i>序章 · 看见产业关系</span>
-      <span class="mode">惠城 · 中心城区</span>
-    </div>
-    <div class="headline">
-      <h1>
-        <span>看见产业关系，</span>
-        <span><span class="crack">理解城市变化</span></span>
-      </h1>
-      <p>惠城产业风洞把产业、投资、城市承载与居民生活相关的<span class="hl">公开信息与关系线索</span>组织起来。它不替你宣布答案，而是帮助你发现变化、追问证据，并比较不同情景下值得继续思考的问题。</p>
-    </div>
-    <details class="ds-fold" style="margin-top:22px"><summary>这是什么工具</summary><div class="ds-fold-inner" style="display:flex;gap:8px;flex-wrap:wrap;font-size:12px;color:#9fb3cc;line-height:1.9">基于公开信息的观察工具<span aria-hidden="true">·</span>非官方统计平台<span aria-hidden="true">·</span>不构成投资或决策依据</div></details>
+<body>
+
+<header class="top">
+  <div class="brand"><span class="mark">惠</span>
+    <span class="nm"><b>惠城决策风洞</b><i>HUI CHENG · WIND TUNNEL</i></span></div>
+  <nav class="chapters">
+    <a class="on" href="index.html">01 序章</a>
+    <a href="today.html">02 今日动态</a>
+    <a href="sandbox.html">03 关系沙盘</a>
+    <a href="commute.html">04 通勤案例</a>
+    <a href="windtunnel.html">05 风洞测试</a>
+    <a href="report.html">06 研判报告</a>
+  </nav>
+  <span class="stamp"><i></i>数据核对 <b id="stampTime">2026-11-07 01:00</b></span>
+</header>
+
+<div class="wrap">
+
+  <section class="herohead">
+    <span class="kick"><i></i>惠城 · 中心城区 · 公开数据观察工具</span>
+    <h1>你以为你了解<span class="hl">惠城</span>？</h1>
+    <p>把产业、投资、城市承载与居民生活放进同一张底图。选一个你熟悉的地方，看看它靠什么运转；再看看，还有什么你并不知道。</p>
   </section>
 
-  <section class="col-visual">
-    <div class="relbox">
-      <div class="rel-head">
-        <span class="t">从关系网络观察惠城</span>
-        <span class="d">公开信息 · 关系线索 · 变化记录</span>
+  <section class="kpis">
+    <div class="kpi">
+      <span class="ic" style="background:#E9F2FE;color:#1B6FE0">▤</span>
+      <span class="txt"><span class="v">1203.33<small>亿元</small></span><span class="l">2025 年 GDP</span></span>
+      <span class="yoy up">+4.3%</span>
+    </div>
+    <div class="kpi">
+      <span class="ic" style="background:#E7F7EE;color:#2C9C68">⚙</span>
+      <span class="txt"><span class="v">937.92<small>亿元</small></span><span class="l">规上工业总产值</span></span>
+      <span class="yoy up">+9.6%</span>
+    </div>
+    <div class="kpi">
+      <span class="ic" style="background:#EEF0FB;color:#6C63C8">◉</span>
+      <span class="txt"><span class="v">159.78<small>万人</small></span><span class="l">常住人口 · 城镇化 85.74%</span></span>
+      <span class="yoy flat">2025</span>
+    </div>
+    <div class="kpi">
+      <span class="ic" style="background:#FDF1E7;color:#C0872B">⚑</span>
+      <span class="txt"><span class="v">883.46<small>亿元</small></span><span class="l">2026 年 1-9 月 GDP</span></span>
+      <span class="yoy up">+1.1%</span>
+    </div>
+  </section>
+
+  <section class="hero">
+
+    <aside class="card pick">
+      <h2>我要看哪里？</h2>
+      <a class="opt sel" href="sandbox.html">
+        <span class="oi">◎</span>
+        <span><b>镇街视角</b><span>按片区看产业与生活</span></span>
+      </a>
+      <a class="opt" href="today.html">
+        <span class="oi">▦</span>
+        <span><b>产业视角</b><span>1203 亿怎么构成</span></span>
+      </a>
+      <a class="opt" href="windtunnel.html">
+        <span class="oi">◈</span>
+        <span><b>风洞视角</b><span>换参数，看三年后</span></span>
+      </a>
+      <div class="hint">三个视角共用一套公开数据。切换视角不换事实，只换你提问的角度。</div>
+      <div class="plat">
+        <div><span>数据口径</span><b>2025 全年 / 2026 1-9 月</b></div>
+        <div><span>覆盖镇街</span><b>区本级 + 片区</b></div>
+        <div><span>更新频次</span><b>每日两次</b></div>
       </div>
-      <div class="rel-card">
-        <svg class="rel-svg" viewBox="0 0 600 450" preserveAspectRatio="xMidYMid meet" role="img" aria-label="惠城关系网络示意：核心楼宇总部群与江北CBD、金山湖、水东街、华贸天地的连接，以及资金流向深圳、东莞与电商渠道">
+    </aside>
+
+    <div class="card map">
+      <div class="map-head">
+        <div class="hd"><b>惠城 · 中心城区底图</b><span>东江自西向东，西湖居中，产业园在南、涉农镇在北</span></div>
+        <span class="tag">公开数据 · 可核查</span>
+      </div>
+      <div class="terrain">
+        <svg viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid meet" role="img"
+             aria-label="惠城空间示意：东江由西向东穿过城区，西湖居中，江北 CBD 位于江北岸，南部高新园、水东街与金山湖分布城区，横沥芦洲位于东北部">
           <defs>
-            <filter id="softShadow" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity=".45"/></filter>
-            <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-              <path d="M0,0 L10,5 L0,10 z" fill="#ff453a"/>
-            </marker>
-            <marker id="arrowOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-              <path d="M0,0 L10,5 L0,10 z" fill="#ff9f0a"/>
-            </marker>
-            <radialGradient id="coreG" cx="38%" cy="34%" r="68%">
-              <stop offset="0%" stop-color="#ffffff"/>
-              <stop offset="45%" stop-color="#dcecff"/>
-              <stop offset="100%" stop-color="#8fb4e0"/>
-            </radialGradient>
-            <radialGradient id="ballBlue" cx="38%" cy="34%" r="68%">
-              <stop offset="0%" stop-color="#7cc4ff"/><stop offset="50%" stop-color="#0a84ff"/><stop offset="100%" stop-color="#0050b0"/>
-            </radialGradient>
-            <radialGradient id="ballPurple" cx="38%" cy="34%" r="68%">
-              <stop offset="0%" stop-color="#d8a0ff"/><stop offset="50%" stop-color="#bf5af2"/><stop offset="100%" stop-color="#7030a0"/>
-            </radialGradient>
-            <radialGradient id="ballGreen" cx="38%" cy="34%" r="68%">
-              <stop offset="0%" stop-color="#8ff0a8"/><stop offset="50%" stop-color="#30d158"/><stop offset="100%" stop-color="#1a8038"/>
-            </radialGradient>
-            <radialGradient id="ballRed" cx="38%" cy="34%" r="68%">
-              <stop offset="0%" stop-color="#ff9090"/><stop offset="50%" stop-color="#ff453a"/><stop offset="100%" stop-color="#b01e18"/>
-            </radialGradient>
-            <radialGradient id="ballAmber" cx="38%" cy="34%" r="68%">
-              <stop offset="0%" stop-color="#ffd080"/><stop offset="50%" stop-color="#ff9f0a"/><stop offset="100%" stop-color="#b06000"/>
-            </radialGradient>
-            <linearGradient id="leakRed" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#ff453a" stop-opacity=".5"/>
-              <stop offset="100%" stop-color="#ff9f0a" stop-opacity=".5"/>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#E4F1FD"/><stop offset="55%" stop-color="#F3FAFF"/><stop offset="100%" stop-color="#FFFFFF"/>
             </linearGradient>
-            <linearGradient id="leakAmber" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#ff9f0a" stop-opacity=".45"/>
-              <stop offset="100%" stop-color="#ff9f0a" stop-opacity=".45"/>
+            <linearGradient id="h1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#C7E3F7"/><stop offset="100%" stop-color="#E7F4FC"/>
             </linearGradient>
+            <linearGradient id="h2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#A9D2EC"/><stop offset="100%" stop-color="#DBEEF9"/>
+            </linearGradient>
+            <linearGradient id="h3" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#8CBFDD"/><stop offset="100%" stop-color="#C6E5F2"/>
+            </linearGradient>
+            <linearGradient id="river" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#7FC9E6"/><stop offset="45%" stop-color="#A8DFF1"/><stop offset="100%" stop-color="#7FC9E6"/>
+            </linearGradient>
+            <linearGradient id="plain" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#F1FAEC"/><stop offset="100%" stop-color="#FCFEF9"/>
+            </linearGradient>
+            <filter id="blur2"><feGaussianBlur stdDeviation="2.2"/></filter>
           </defs>
-          <path class="local-line" d="M260,220 Q200,140 130,100"/>
-          <path class="local-line" d="M260,220 Q330,130 420,95"/>
-          <path class="local-line" d="M260,220 Q180,310 120,350"/>
-          <path class="local-line" d="M260,220 Q350,310 440,355"/>
-          <path class="leak-line" d="M290,200 Q430,150 540,130" stroke="url(#leakRed)" stroke-width="2" marker-end="url(#arrowRed)"/>
-          <path class="leak-line" d="M290,230 Q430,235 540,235" stroke="url(#leakRed)" stroke-width="1.8" marker-end="url(#arrowRed)" style="opacity:.7"/>
-          <path class="leak-line" d="M280,250 Q390,330 500,365" stroke="url(#leakAmber)" stroke-width="1.8" marker-end="url(#arrowOrange)" style="opacity:.8"/>
-          <circle class="particle" r="2.5" style="fill:#ff8a80">
-            <animateMotion dur="2.4s" repeatCount="indefinite" begin="1.2s" path="M290,200 Q430,150 540,130"/>
-          </circle>
-          <circle class="particle" r="2" style="fill:#ffb366">
-            <animateMotion dur="2.8s" repeatCount="indefinite" begin="1.4s" path="M290,230 Q430,235 540,235"/>
-          </circle>
-          <circle class="particle" r="2" style="fill:#ffd080">
-            <animateMotion dur="3.2s" repeatCount="indefinite" begin="1.6s" path="M280,250 Q390,330 500,365"/>
-          </circle>
-          <g id="coreNode" class="nd">
-            <circle id="coreRing1" cx="260" cy="220" r="46" fill="none" stroke="#0a84ff" stroke-width="1" opacity=".22"/>
-            <circle id="coreRing2" cx="260" cy="220" r="60" fill="none" stroke="#0a84ff" stroke-width=".6" opacity=".1"/>
-            <circle id="coreCircle" cx="260" cy="220" r="32" fill="url(#coreG)" filter="url(#softShadow)"/>
-            <text class="lb" x="260" y="176" text-anchor="middle">惠城核心</text>
-            <text class="sub" x="260" y="262" text-anchor="middle">楼宇总部群</text>
+
+          <rect width="1000" height="560" fill="url(#sky)"/>
+          <!-- 远中近三层山脊 -->
+          <path d="M0,158 C64,120 118,146 178,116 C238,86 288,124 350,102 C412,80 462,118 520,96 C580,74 634,114 696,92 C756,71 806,108 862,88 C912,70 960,96 1000,84 L1000,250 L0,250 Z" fill="url(#h1)" opacity=".92"/>
+          <path d="M0,196 C74,162 132,188 196,164 C262,140 320,178 384,156 C448,134 508,170 572,150 C636,130 694,166 758,146 C818,128 878,160 938,142 C968,134 986,140 1000,136 L1000,282 L0,282 Z" fill="url(#h2)"/>
+          <path d="M0,232 C86,204 148,226 214,206 C282,186 344,216 412,198 C480,180 540,210 610,194 C678,178 740,206 810,190 C868,178 924,198 978,188 L1000,184 L1000,312 L0,312 Z" fill="url(#h3)" opacity=".96"/>
+
+          <!-- 东江 -->
+          <path d="M-10,306 C120,288 216,326 340,314 C464,302 542,332 664,318 C766,306 862,330 1010,320 L1010,352 C870,364 780,340 664,352 C542,364 464,334 340,346 C216,358 120,320 -10,338 Z" fill="url(#river)" opacity=".8" filter="url(#blur2)"/>
+          <path d="M-10,322 C120,306 214,342 340,330 C464,318 542,348 664,334 C766,322 862,344 1010,336" stroke="#FFFFFF" stroke-width="2" opacity=".55" fill="none"/>
+
+          <!-- 平原 -->
+          <path d="M0,344 C160,330 300,356 460,346 C610,338 740,360 1000,350 L1000,560 L0,560 Z" fill="url(#plain)"/>
+          <!-- 等高线肌理 -->
+          <g stroke="#C9DEEF" stroke-width="1" fill="none" opacity=".5">
+            <path d="M60,404 C160,388 260,412 360,400"/>
+            <path d="M520,398 C620,384 720,406 860,394"/>
+            <path d="M140,510 C260,494 380,514 520,502"/>
           </g>
-          <g class="nd jb">
-            <circle cx="130" cy="100" r="8" fill="url(#ballBlue)" opacity=".9" filter="url(#softShadow)"/>
-            <text class="lb" x="130" y="80" text-anchor="middle" opacity=".75">江北CBD</text>
+
+          <!-- 西湖 / 金山湖 -->
+          <ellipse cx="470" cy="416" rx="86" ry="27" fill="#B7E3F1" opacity=".9"/>
+          <ellipse cx="470" cy="416" rx="58" ry="16" fill="#9DD9EE" opacity=".75"/>
+          <ellipse cx="636" cy="438" rx="56" ry="19" fill="#B7E3F1" opacity=".9"/>
+          <ellipse cx="636" cy="438" rx="36" ry="11" fill="#9DD9EE" opacity=".75"/>
+
+          <!-- 江北 CBD 楼群 -->
+          <g fill="#8CB6D9" opacity=".95">
+            <rect x="626" y="272" width="8" height="30" rx="2"/>
+            <rect x="638" y="258" width="10" height="44" rx="2"/>
+            <rect x="652" y="266" width="7" height="36" rx="2"/>
+            <rect x="663" y="278" width="9" height="24" rx="2"/>
+            <rect x="676" y="262" width="11" height="40" rx="2"/>
+            <rect x="691" y="274" width="8" height="28" rx="2"/>
           </g>
-          <g class="nd jsh">
-            <circle cx="420" cy="95" r="8" fill="url(#ballPurple)" opacity=".9" filter="url(#softShadow)"/>
-            <text class="lb" x="420" y="75" text-anchor="middle" opacity=".75">金山湖</text>
+          <!-- 水东街老城 -->
+          <g fill="#D6C3A8" opacity=".95">
+            <rect x="272" y="424" width="22" height="13" rx="2"/><rect x="298" y="428" width="18" height="9" rx="2"/>
+            <rect x="320" y="421" width="16" height="16" rx="2"/>
           </g>
-          <g class="nd sdj">
-            <circle cx="120" cy="350" r="7" fill="url(#ballGreen)" opacity=".9" filter="url(#softShadow)"/>
-            <text class="lb" x="120" y="372" text-anchor="middle" opacity=".75">水东街</text>
+          <!-- 南部高新园 -->
+          <g fill="#AFCDB8" opacity=".95">
+            <rect x="96" y="464" width="30" height="15" rx="3"/><rect x="132" y="470" width="24" height="10" rx="2"/>
+            <rect x="164" y="466" width="20" height="14" rx="2"/><rect x="190" y="472" width="26" height="9" rx="2"/>
           </g>
-          <g class="nd hm">
-            <circle cx="440" cy="355" r="7" fill="url(#ballBlue)" opacity=".9" filter="url(#softShadow)"/>
-            <text class="lb" x="440" y="377" text-anchor="middle" opacity=".75">华贸天地</text>
+          <!-- 涉农镇 -->
+          <g fill="#CFE0B9" opacity=".95">
+            <rect x="880" y="244" width="18" height="12" rx="2"/><rect x="904" y="248" width="14" height="9" rx="2"/>
           </g>
-          <g class="leak-target sz">
-            <circle class="ring" cx="540" cy="130" r="24" fill="none" stroke="#ff453a"/>
-            <circle cx="540" cy="130" r="8" fill="url(#ballRed)" filter="url(#softShadow)"/>
-            <text class="lb" x="540" y="102" text-anchor="middle" fill="#ff8a80">深圳</text>
+
+          <!-- 标注 -->
+          <g font-family="-apple-system,PingFang SC,sans-serif">
+          <g>
+            <circle cx="726" cy="296" r="12" fill="#1B6FE0" opacity=".10"/>
+            <circle cx="726" cy="296" r="5" fill="#1B6FE0"/>
+            <rect x="738" y="283" width="74" height="26" rx="13" fill="#FFFFFF" opacity=".94" stroke="#DFEAF5"/>
+            <text x="748" y="301" font-size="13.5" font-weight="700" fill="#0E2438">江北 CBD</text>
           </g>
-          <g class="leak-target dg">
-            <circle class="ring" cx="540" cy="235" r="18" fill="none" stroke="#ff453a"/>
-            <circle cx="540" cy="235" r="6.5" fill="url(#ballRed)" opacity=".92" filter="url(#softShadow)"/>
-            <text class="lb" x="540" y="264" text-anchor="middle" fill="#ff8a80">东莞</text>
+          <g>
+            <circle cx="516" cy="414" r="12" fill="#2C9C68" opacity=".10"/>
+            <circle cx="516" cy="414" r="5" fill="#2C9C68"/>
+            <rect x="524" y="401" width="46" height="26" rx="13" fill="#FFFFFF" opacity=".94" stroke="#DFEAF5"/>
+            <text x="534" y="419" font-size="13.5" font-weight="700" fill="#0E2438">西湖</text>
           </g>
-          <g class="leak-target ec">
-            <circle class="ring" cx="500" cy="365" r="16" fill="none" stroke="#ff9f0a"/>
-            <circle cx="500" cy="365" r="5.5" fill="url(#ballAmber)" opacity=".92" filter="url(#softShadow)"/>
-            <text class="lb" x="500" y="391" text-anchor="middle" fill="#ffc46b">电商</text>
+          <g>
+            <circle cx="302" cy="436" r="12" fill="#C0872B" opacity=".10"/>
+            <circle cx="302" cy="436" r="5" fill="#C0872B"/>
+            <rect x="166" y="422" width="60" height="26" rx="13" fill="#FFFFFF" opacity=".94" stroke="#DFEAF5"/>
+            <text x="176" y="440" font-size="13.5" font-weight="700" fill="#0E2438">水东街</text>
           </g>
-          <text class="annot warn" x="392" y="172" fill="#ff9a90">钱在往外流 →</text>
-          <text class="annot" x="140" y="230" fill="#6e7580">本地关系断裂</text>
+          <g>
+            <circle cx="704" cy="434" r="12" fill="#6C63C8" opacity=".10"/>
+            <circle cx="704" cy="434" r="5" fill="#6C63C8"/>
+            <rect x="712" y="421" width="60" height="26" rx="13" fill="#FFFFFF" opacity=".94" stroke="#DFEAF5"/>
+            <text x="722" y="439" font-size="13.5" font-weight="700" fill="#0E2438">金山湖</text>
+          </g>
+          <g>
+            <circle cx="152" cy="478" r="12" fill="#3E8F63" opacity=".10"/>
+            <circle cx="152" cy="478" r="5" fill="#3E8F63"/>
+            <rect x="56" y="464" width="84" height="26" rx="13" fill="#FFFFFF" opacity=".94" stroke="#DFEAF5"/>
+            <text x="66" y="482" font-size="13.5" font-weight="700" fill="#0E2438">南部高新园</text>
+          </g>
+          <g>
+            <circle cx="906" cy="262" r="12" fill="#C4544C" opacity=".10"/>
+            <circle cx="906" cy="262" r="5" fill="#C4544C"/>
+            <rect x="790" y="248" width="88" height="26" rx="13" fill="#FFFFFF" opacity=".94" stroke="#DFEAF5"/>
+            <text x="800" y="266" font-size="13.5" font-weight="700" fill="#0E2438">横沥 · 芦洲</text>
+          </g>
+          </g>
         </svg>
       </div>
+      <div class="legend">
+        <span class="lm"><i style="background:#1B6FE0"></i>江北 CBD</span>
+        <span class="lm"><i style="background:#2C9C68"></i>西湖</span>
+        <span class="lm"><i style="background:#6C63C8"></i>金山湖</span>
+        <span class="lm"><i style="background:#C0872B"></i>水东街</span>
+        <span class="lm"><i style="background:#3E8F63"></i>南部高新园</span>
+        <span class="lm"><i style="background:#C4544C"></i>横沥 · 芦洲</span>
+      </div>
+    </div>
+
+    <aside class="card insight">
+      <h2><span>🔔</span>今日洞察<em id="insHead">近 24 小时</em></h2>
+      <div class="ins-list" id="insList">
+        <a class="ins" href="today.html"><span class="n">01</span><span class="b"><b>前三季度 GDP 883.46 亿、+1.1%，规上工业 +0.8%、固投 -40.7%</b><span>增长趋缓与投资收缩同时出现</span><span class="cat">城市</span></span></a>
+        <a class="ins" href="today.html"><span class="n">02</span><span class="b"><b>环西湖丰渚园商区综合体 2.373 亿中标</b><span>原君豪酒店旧址建商业与精品酒店</span><span class="cat">城市</span></span></a>
+        <a class="ins" href="today.html"><span class="n">03</span><span class="b"><b>惠城人社“十五五”规划公开征求意见</b><span>11 月 4 日起接受社会反馈</span><span class="cat">民生</span></span></a>
+      </div>
+      <a class="more" href="today.html">看今日全部动态 →</a>
+    </aside>
+  </section>
+
+  <section class="duo">
+    <div class="card">
+      <h3>2025 全年（终值）<span class="badge">统计公报</span></h3>
+      <div class="sub">口径：区统计局 2025 年统计公报，初步核算数</div>
+      <div class="rows">
+        <div class="row"><span class="rk">规上工业增加值</span><span class="bar"><i style="width:78%;background:linear-gradient(90deg,#2E7DEB,#1B6FE0)"></i></span><span class="rv up">+10.8%</span></div>
+        <div class="row"><span class="rk">规上工业利润</span><span class="bar"><i style="width:92%;background:linear-gradient(90deg,#37B47C,#2C9C68)"></i></span><span class="rv up">+49.7%</span></div>
+        <div class="row"><span class="rk">外贸进出口</span><span class="bar"><i style="width:56%;background:linear-gradient(90deg,#4E9BE8,#2E7DEB)"></i></span><span class="rv up">+7.1%</span></div>
+        <div class="row"><span class="rk">社零总额</span><span class="bar"><i style="width:38%;background:linear-gradient(90deg,#E0B36A,#C0872B)"></i></span><span class="rv up">+3.7%</span></div>
+        <div class="row"><span class="rk">GDP</span><span class="bar"><i style="width:44%;background:linear-gradient(90deg,#8C86DE,#6C63C8)"></i></span><span class="rv up">+4.3%</span></div>
+        <div class="row"><span class="rk">固定资产投资</span><span class="bar"><i style="width:34%;background:linear-gradient(90deg,#DA7A73,#C4544C)"></i></span><span class="rv down">-37.1%</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>2026 年 1-9 月（快报）<span class="badge">当期累计</span></h3>
+      <div class="sub">口径：区统计局三季度快报，与年度终值不可直接比较</div>
+      <div class="rows">
+        <div class="row"><span class="rk">地区生产总值</span><span class="bar"><i style="width:22%;background:linear-gradient(90deg,#2E7DEB,#1B6FE0)"></i></span><span class="rv up">+1.1%</span></div>
+        <div class="row"><span class="rk">规上工业增加值</span><span class="bar"><i style="width:18%;background:linear-gradient(90deg,#4E9BE8,#2E7DEB)"></i></span><span class="rv up">+0.8%</span></div>
+        <div class="row"><span class="rk">固定资产投资</span><span class="bar"><i style="width:86%;background:linear-gradient(90deg,#DA7A73,#C4544C)"></i></span><span class="rv down">-40.7%</span></div>
+        <div class="row"><span class="rk">社零总额</span><span class="bar"><i style="width:24%;background:linear-gradient(90deg,#E0B36A,#C0872B)"></i></span><span class="rv up">+2.0%</span></div>
+        <div class="row"><span class="rk">外贸进出口</span><span class="bar"><i style="width:62%;background:linear-gradient(90deg,#37B47C,#2C9C68)"></i></span><span class="rv up">+11.4%</span></div>
+        <div class="row"><span class="rk">第二产业</span><span class="bar"><i style="width:28%;background:linear-gradient(90deg,#8C86DE,#6C63C8)"></i></span><span class="rv down">-1.6%</span></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <h3><span>ⓘ</span>先说清口径</h3>
+      <p>左卡是 <b>2025 全年终值</b>，右卡是 <b>2026 年 1-9 月累计快报</b>。两个口径的增速<b>不能直接相减</b>，也不能算“掉了多少个百分点”。</p>
+      <p>2026 年固投 <b>-40.7%</b> 在高基数上继续收缩，工业投资同步 <b>-46.1%</b>；而规上工业增加值仍为正增长——说明<b>存量产能在撑产出</b>。</p>
+      <p>本站只做事实归置与情景推演，<b>不代表官方预测</b>。</p>
     </div>
   </section>
 
-  <section class="row-bottom">
-    <div class="insights">
-      <article class="insight brk">
-        <div class="num">01</div>
-        <div class="t">数字中国，不止于数据汇集</div>
-        <div class="d">把分散的公开信息放进关系中观察，让数据更容易被理解、核查，并用于提出公共问题。</div>
-      </article>
-      <article class="insight rvs">
-        <div class="num">02</div>
-        <div class="t">数据不足，更要把未知说清</div>
-        <div class="d">公开资料不完整时，区分已知、推断与待核实事项；不替代决策，而是引出问题、支撑判断。</div>
-      </article>
-    </div>
-    <a href="holo-workspace.html" class="cta">
-      <div>
-        <span class="cta-title">进入全息工作区</span>
-        <span class="sub">浏览关系网络 · 查看情报变化 · 追溯公开来源</span>
-      </div>
-      <span class="arrow" aria-hidden="true">
-        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3.4 8h9.2M8.8 4.2 12.6 8l-3.8 3.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </span>
-    </a>
+  <section class="ask">
+    <div class="lead">3 个你可以继续追问的问题</div>
+    <a href="windtunnel.html"><span class="q">?</span>投资收缩，什么时候传到产出？<span class="arr">→</span></a>
+    <a href="sandbox.html"><span class="q">?</span>哪几个片区的产业在逆势扩张？<span class="arr">→</span></a>
+    <a href="report.html"><span class="q">?</span>社零 805 亿，钱花在哪几条街上？<span class="arr">→</span></a>
   </section>
-</main>
+
+  <p class="foot">惠城决策风洞 · 基于公开信息的观察工具 ｜ 非官方统计平台 ｜ 不构成投资或决策依据<br>
+  数据源：惠城区 2025 年统计公报、惠城区统计局 2026 年 1-9 月经济运行简况、区政府门户公开信息</p>
+</div>
+
+<script src="hc-viz/data.js"></script>
 <script>
 (function(){
-  var g=document.getElementById('starLayer');
-  function build(){
-    var w=window.innerWidth,h=window.innerHeight;
-    g.setAttribute('viewBox','0 0 '+w+' '+h);
-    g.innerHTML='';
-    if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
-    var count=Math.min(160,Math.round(w*h/16000));
-    var frag=document.createDocumentFragment();
-    for(var i=0;i<count;i++){
-      var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
-      c.setAttribute('class','star');
-      c.setAttribute('cx',(Math.random()*w).toFixed(1));
-      c.setAttribute('cy',(Math.random()*h).toFixed(1));
-      c.setAttribute('r',(Math.random()*1+.3).toFixed(2));
-      c.style.animationDelay=(Math.random()*5).toFixed(2)+'s';
-      c.style.animationDuration=(4+Math.random()*4).toFixed(2)+'s';
-      frag.appendChild(c);
+  var CAT={city:'城市',industry:'产业',livelihood:'民生',fun:'好玩',food:'美食',gossip:'暖闻'};
+  function esc(x){return String(x==null?'':x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function clip(x,n){x=String(x||'').replace(/\s+/g,' ').trim();return x.length>n?x.slice(0,n)+'…':x;}
+  var list=document.getElementById('insList');
+  fetch('hot.json?cb='+Date.now()).then(function(r){return r.ok?r.json():null;}).then(function(d){
+    if(!d||!d.items||!d.items.length||!list) return;
+    var head=document.getElementById('insHead');
+    if(head&&d.count) head.textContent=d.count+' 条 · 近 24 小时';
+    list.innerHTML=d.items.slice(0,3).map(function(it,i){
+      return '<a class="ins" href="today.html"><span class="n">0'+(i+1)+'</span><span class="b">'+
+        '<b>'+esc(clip(it.title,46))+'</b><span>'+esc(clip(it.summary,24))+'</span>'+
+        '<span class="cat">'+(CAT[it.cat]||'动态')+'</span></span></a>';
+    }).join('');
+  }).catch(function(){});
+})();
+(function(){
+  if(typeof HC_OFFICIAL==='undefined') return;
+  try{
+    if(typeof HC_ASOF!=='undefined'&&HC_ASOF.checked){
+      var el=document.getElementById('stampTime');
+      if(el) el.textContent=HC_ASOF.checked;
     }
-    g.appendChild(frag);
-  }
-  build();
-  var t;window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(build,300);});
+  }catch(e){}
 })();
 </script>
-<script src="hc-viz/data.js"></script>
-<script src="ui/ui.js?v=20261106" defer></script>
 </body>
 </html>
