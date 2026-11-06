@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#F2F7FC">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%231B6FE0%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%226%22 fill=%22%23fff%22/%3E%3C/svg%3E">
-<title>惠城决策风洞 · 工业在涨，投资在撤</title>
+<title>惠城决策风洞 · 产值在涨，投资在撤</title>
 <style>
 :root{
-  --bg:#F2F7FC;--ink:#0B2236;--ink2:#3A5163;--ink3:#6B7F92;--ink4:#9AACBC;
+  --bg:#F2F7FC;--ink:#0B2236;--ink2:#3A5163;--ink3:#6B7F92;--ink4:#98AABB;
   --line:#DFEAF5;--line2:#C6DAEC;
   --blue:#1B6FE0;--blue-d:#0D47A1;--blue-l:#E9F2FE;
   --red:#C0453B;--green:#218A5C;--amber:#B8791F;
@@ -21,9 +21,10 @@
 *{box-sizing:border-box;margin:0;padding:0;min-width:0}
 html,body{overflow-x:hidden}
 body{font-family:var(--font);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased;
-  background-color:var(--bg);background-image:linear-gradient(180deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,.5) 46%,#F2F7FC 78%),url(assets/hero-light.svg);background-repeat:no-repeat,no-repeat;background-position:top center,top center;background-size:100% 100%,100% auto}
+  background-color:var(--bg);
+  background-image:linear-gradient(180deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,.5) 46%,#F2F7FC 78%),url(assets/hero-light.svg);
+  background-repeat:no-repeat,no-repeat;background-position:top center,top center;background-size:100% 100%,100% auto}
 a{color:inherit;text-decoration:none}
-h1,h2,h3,h4{letter-spacing:-.02em}
 
 .bar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;padding:9px 16px;
   background:rgba(255,255,255,.9);border-bottom:1px solid var(--line);
@@ -44,37 +45,39 @@ h1,h2,h3,h4{letter-spacing:-.02em}
 .stamp i{width:6px;height:6px;border-radius:50%;background:var(--green)}
 
 .wrap{max-width:1260px;margin:0 auto;padding:20px 18px 36px}
-.hero{display:grid;grid-template-columns:minmax(0,1.16fr) minmax(0,1fr);gap:16px;align-items:start}
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px;align-items:start}
 
 .kicker{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;color:var(--blue-d);
   background:#fff;border:1px solid #D6E5F8;border-radius:var(--pill);padding:5px 11px;margin-bottom:14px}
 .kicker i{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:blip 1.8s infinite}
 @keyframes blip{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
 
-h1.hook{font-size:clamp(33px,4.4vw,58px);font-weight:800;line-height:1.08;letter-spacing:-.045em;margin-bottom:14px}
+h1.hook{font-size:clamp(31px,4vw,54px);font-weight:800;line-height:1.1;letter-spacing:-.042em;margin-bottom:14px}
 h1.hook > span{display:block}
 h1.hook .up{color:var(--green)}
 h1.hook .down{color:var(--red)}
-h1.hook .q{position:relative;display:inline-block;color:var(--blue-d);box-shadow:inset 0 -.16em 0 rgba(27,111,224,.16)}
+h1.hook .q{display:inline-block;color:var(--blue-d);box-shadow:inset 0 -.15em 0 rgba(27,111,224,.15)}
 
-.lede{font-size:13.5px;line-height:1.9;color:var(--ink2);max-width:600px;margin-bottom:16px}
-.lede b{color:var(--ink);font-weight:700}
-.lede em{font-style:normal;color:var(--blue-d);font-weight:700;box-shadow:inset 0 -.52em 0 rgba(27,111,224,.13)}
+.lede{font-size:12.8px;line-height:1.9;color:var(--ink2);max-width:640px;margin-bottom:8px}
+.lede b{color:var(--ink);font-weight:700;font-family:var(--mono);font-size:13px}
+.lede em{font-style:normal;color:var(--blue-d);font-weight:700}
+.src-inline{display:block;font-size:10px;color:var(--ink4);margin-bottom:14px;line-height:1.7}
 
 .tension{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:14px}
 .tn{background:#fff;border:1px solid var(--line);border-radius:14px;padding:11px 12px;box-shadow:var(--sh)}
-.tn .v{display:block;font-family:var(--mono);font-size:21px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
-.tn .k{display:block;font-size:10.5px;color:var(--ink3);margin-top:4px;line-height:1.4}
-.tn.up{box-shadow:inset 0 3px 0 rgba(33,138,92,.55),var(--sh)}
-.tn.down{box-shadow:inset 0 3px 0 rgba(192,69,59,.6),var(--sh)}
+.tn .v{display:block;font-family:var(--mono);font-size:19px;font-weight:800;letter-spacing:-.03em;line-height:1.15;white-space:nowrap}
+.tn .k{display:block;font-size:10.5px;color:var(--ink3);margin-top:4px;line-height:1.45}
+.tn.up{box-shadow:inset 0 3px 0 rgba(33,138,92,.5),var(--sh)}
+.tn.down{box-shadow:inset 0 3px 0 rgba(192,69,59,.55),var(--sh)}
+.tn.flat{box-shadow:inset 0 3px 0 rgba(184,121,31,.5),var(--sh)}
 
 .guess{background:#fff;border:1px solid #D9E6F7;border-radius:var(--r);padding:15px 16px 16px;box-shadow:var(--sh2);
   position:relative;overflow:hidden}
 .guess::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#2E7DEB,#0D47A1)}
 .guess .gt{font-size:13px;font-weight:800;color:var(--blue-d);display:flex;align-items:center;gap:7px;margin-bottom:6px}
-.guess .gq{font-size:14.5px;font-weight:700;line-height:1.55;letter-spacing:-.01em;margin-bottom:11px}
+.guess .gq{font-size:14.5px;font-weight:700;line-height:1.55;margin-bottom:11px}
 .gopts{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.gbtn{display:flex;align-items:center;justify-content:center;gap:7px;min-height:42px;border-radius:11px;cursor:pointer;
+.gbtn{display:flex;align-items:center;justify-content:center;min-height:42px;border-radius:11px;cursor:pointer;
   font-family:inherit;font-size:13.5px;font-weight:700;border:1px solid var(--line2);background:#F7FBFF;color:var(--ink2);transition:.18s}
 .gbtn:hover{border-color:#9CC4F0;background:#EFF7FF;color:var(--blue-d)}
 .gbtn[aria-pressed="true"]{background:linear-gradient(150deg,#2E7DEB,#1B6FE0);border-color:transparent;color:#fff;
@@ -83,55 +86,79 @@ h1.hook .q{position:relative;display:inline-block;color:var(--blue-d);box-shadow
 .reveal.show{display:block;animation:fadeUp .45s cubic-bezier(.16,1,.3,1)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .reveal h4{font-size:12.5px;font-weight:800;margin-bottom:6px}
-.reveal ul{list-style:none;display:grid;gap:5px;font-size:12.5px;color:var(--ink2);line-height:1.7}
+.reveal ul{list-style:none;display:grid;gap:5px;font-size:12.5px;color:var(--ink2);line-height:1.75}
 .reveal ul li::before{content:"—";color:var(--blue);margin-right:6px;font-weight:700}
-.reveal .unknown{margin-top:8px;font-size:12px;color:var(--ink3)}
+.reveal .unknown{margin-top:8px;font-size:11.5px;color:var(--ink3)}
 .reveal .unknown b{color:var(--red)}
 .reveal a.more{display:inline-flex;align-items:center;gap:5px;margin-top:9px;font-size:12.5px;font-weight:700;color:var(--blue)}
 </style>
-</head>
-<body>
 <style>
 .evidence{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;display:flex;flex-direction:column}
 .ev-head{display:flex;align-items:flex-start;gap:10px;padding:14px 15px 0}
 .ev-head .t{flex:1}
-.ev-head b{display:block;font-size:14px;font-weight:800}
-.ev-head span{font-size:11px;color:var(--ink3)}
+.ev-head b{display:block;font-size:14px;font-weight:800;letter-spacing:-.01em}
+.ev-head span{font-size:10.5px;color:var(--ink3);line-height:1.5}
 .ev-head .badge{font-size:10px;font-weight:700;color:var(--blue-d);background:var(--blue-l);border:1px solid #D3E4FA;
   border-radius:var(--pill);padding:3px 9px;flex:none;white-space:nowrap}
 .netwrap{position:relative;margin:10px 14px 0;border-radius:13px;overflow:hidden;border:1px solid #E4EEF8;
-  background:radial-gradient(80% 70% at 44% 44%,#F9FCFF,#EFF7FD)}
+  background:radial-gradient(80% 70% at 46% 44%,#F9FCFF,#EDF5FC)}
 .netwrap svg{width:100%;height:auto;display:block}
 .netwrap text{font-family:var(--font)}
 .lb{font-size:12px;font-weight:700;fill:#0B2236}
-.sub{font-size:10.5px;fill:#6B7F92}
-.annot{font-size:10.5px;font-weight:700;fill:#51707F}
+.lbv{font-family:var(--mono);font-size:12.5px;font-weight:800;fill:#0D47A1}
+.sub{font-size:10px;fill:#6B7F92}
+.annot{font-size:10px;font-weight:700;fill:#51707F}
 .annot.warn{fill:#C0453B}
-.local-line{fill:none;stroke:#9DBED9;stroke-width:1;stroke-dasharray:3 6;opacity:.55}
+.annot.amber{fill:#B8791F}
+.link{fill:none;stroke:#9DBED9;stroke-width:1.4;opacity:.7}
+.link.thin{stroke-width:1;opacity:.5}
+.link-break{fill:none;stroke:#9DBED9;stroke-width:1.2;stroke-dasharray:4 8;opacity:.45}
 .leak-line{fill:none;stroke-linecap:round;stroke-dasharray:600;stroke-dashoffset:600}
 .leak-line.go{animation:shoot 1s cubic-bezier(.16,1,.3,1) forwards}
 @keyframes shoot{to{stroke-dashoffset:0}}
 .leak-target{opacity:0}
 .leak-target.show{animation:softIn .55s cubic-bezier(.16,1,.3,1) .5s forwards}
 @keyframes softIn{to{opacity:1}}
+.particle{opacity:0}
+.netwrap.is-out .particle{opacity:.9;transition:opacity .7s ease .5s}
+.netwrap.guess-net .leak-line{stroke-dashoffset:600 !important;animation:none !important;marker-end:none !important}
 .netwrap.guess-net .leak-target{opacity:0 !important;animation:none !important}
-.netwrap.guess-net .leak-line{stroke-dashoffset:600 !important;animation:none !important}
-.netwrap.guess-net .annot.warn{opacity:0 !important;animation:none !important}
+.netwrap.guess-net .annot.warn{opacity:0 !important}
 .netwrap.guess-net{cursor:pointer}
-.netwrap.guess-net .leak-line{marker-end:none !important}
+.netwrap.is-out .leak-line{animation:shoot 1s cubic-bezier(.16,1,.3,1) forwards !important}
+.netwrap.is-out .leak-target{animation:softIn .55s cubic-bezier(.16,1,.3,1) .5s forwards !important}
 .scrim{position:absolute;left:10px;right:10px;bottom:10px;display:flex;justify-content:center;pointer-events:none;transition:.25s}
 .scrim .sbox{text-align:center;padding:9px 16px;border-radius:var(--pill);background:rgba(255,255,255,.96);
   border:1px solid #C9DDF6;box-shadow:0 12px 26px -18px rgba(11,34,54,.6)}
 .scrim .sq{font-size:12.5px;font-weight:800;color:var(--blue-d);margin-bottom:1px}
 .scrim .sa{font-size:10.5px;color:var(--ink3)}
-.scrim .sq{font-size:13px;font-weight:800;color:var(--blue-d);margin-bottom:4px}
-.scrim .sa{font-size:11px;color:var(--ink3)}
 .scrim.hide{opacity:0;pointer-events:none}
-.netcard-foot{display:flex;align-items:center;gap:10px;justify-content:space-between;padding:11px 14px 13px}
-.netcard-foot .hint{font-size:10.5px;color:var(--ink3);line-height:1.5}
+.reads{padding:2px 15px 10px;display:grid;gap:6px}
+.rd{display:flex;gap:8px;align-items:flex-start;font-size:11px;line-height:1.65;color:var(--ink2)}
+.rd b{flex:none;width:18px;height:18px;border-radius:6px;display:grid;place-items:center;font-size:10.5px;
+  background:var(--blue-l);color:var(--blue-d);border:1px solid #D3E4FA}
+.netcard-foot{display:flex;align-items:flex-start;gap:10px;justify-content:space-between;padding:10px 14px 12px}
+.netcard-foot .hint{font-size:9.8px;color:var(--ink4);line-height:1.65;max-width:calc(100% - 92px)}
 .netcard-foot .again{border:1px solid var(--line2);background:#fff;border-radius:var(--pill);padding:6px 12px;
-  min-height:34px;font-size:11px;font-weight:700;color:var(--ink2);cursor:pointer;font-family:inherit;flex:none}
+  min-height:32px;font-size:11px;font-weight:700;color:var(--ink2);cursor:pointer;font-family:inherit;flex:none}
 .netcard-foot .again:hover{border-color:#9CC4F0;color:var(--blue-d)}
+
+
+/* 手机端：地图换成条形版，字才看得清 */
+.barview{display:none;padding:6px 0 0}
+.bv-row{display:grid;grid-template-columns:74px minmax(0,1fr) 76px;align-items:center;gap:8px;padding:5px 0}
+.bv-n{font-size:12px;display:block;font-weight:700;color:var(--ink)}
+.bv-n small{display:block;font-size:9px;font-weight:400;color:var(--ink4)}
+.bv-t{display:block;height:12px;border-radius:6px;background:#EAF2FB;overflow:hidden}
+.bv-f{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#2E7DEB,#1B6FE0)}
+.bv-f.g{background:linear-gradient(90deg,#2EAE84,#218A5C)}
+.bv-f.p{background:linear-gradient(90deg,#9C86E8,#7B5FD6)}
+.bv-f.gray{background:repeating-linear-gradient(45deg,#E4EDF6,#E4EDF6 6px,#F2F7FC 6px,#F2F7FC 12px)}
+.bv-v{display:block;font-family:var(--mono);font-size:11.5px;font-weight:800;text-align:right;color:var(--blue-d);white-space:nowrap}
+.bv-v.gray{color:#9AACBC;font-weight:600}
+.bv-out{margin-top:8px;padding:8px 10px;border-radius:10px;background:#FDEDEB;border:1px solid #F2CFCA;font-size:11px;line-height:1.6;color:#8E342C}
+.bv-out b{font-family:var(--mono);font-size:12px}
+.bv-note{font-size:9.5px;color:var(--ink4);margin-top:6px;line-height:1.6}
 
 .asks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
 .ask{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 14px;box-shadow:var(--sh);
@@ -148,31 +175,28 @@ h1.hook .q{position:relative;display:inline-block;color:var(--blue-d);box-shadow
 .cta .ct span{display:block;font-size:11.5px;color:rgba(255,255,255,.84);margin-top:3px}
 .cta .go{width:34px;height:34px;border-radius:50%;background:#fff;color:var(--blue);display:grid;place-items:center;flex:none;font-weight:800}
 
-.foot{margin-top:16px;font-size:10.5px;color:var(--ink4);line-height:1.9;text-align:center}
-@media(max-width:1080px){
-  .hero{grid-template-columns:minmax(0,1fr)}
-  .asks{grid-template-columns:minmax(0,1fr)}
-}
+.foot{margin-top:14px;font-size:10px;color:var(--ink4);line-height:1.9}
+.foot b{color:var(--ink3)}
+@media(max-width:1080px){.hero{grid-template-columns:minmax(0,1fr)}.asks{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:760px){
   .bar{flex-wrap:wrap;padding:8px 11px;gap:8px}
   .nav{order:3;width:100%;margin:3px 0 0;
     -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent);
     mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent)}
   .wrap{padding:14px 12px 30px}
-  h1.hook{font-size:clamp(28px,8.2vw,38px);line-height:1.16}
-  .lede{font-size:12.5px;line-height:1.85}
+  h1.hook{font-size:clamp(27px,7.8vw,36px);line-height:1.18}
+  .lede{font-size:12.5px;line-height:1.9}
   .tension{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
   .tn{padding:9px 8px}
-  .tn .v{font-size:16px}
+  .tn .v{font-size:15px}
   .tn .k{font-size:9.5px}
-  .guess{padding:13px}
   .gopts{grid-template-columns:1fr 1fr;gap:8px}
   .gbtn{font-size:12.5px;min-height:44px}
-  /* 手机上把“先猜”提示片放到图下方，不压住节点 */
-  .scrim{position:static;left:auto;right:auto;bottom:auto;margin:6px 10px 10px}
-  .scrim .sbox{padding:9px 14px}
+  .scrim{position:static;margin:6px 10px 10px}
   .netwrap{margin:8px 10px 0}
-  body{background-size:180% auto;background-position:top right}
+  .netwrap .mapview{display:none}
+  .barview{display:block;padding:0 12px}
+  body{background-size:100% 100%,180% auto}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -190,7 +214,7 @@ h1.hook .q{position:relative;display:inline-block;color:var(--blue-d);box-shadow
     <a href="windtunnel.html">05 风洞测试</a>
     <a href="report.html">06 研判报告</a>
   </nav>
-  <span class="stamp"><i></i>数据核对 2026-11-07 01:00</span>
+  <span class="stamp"><i></i>数据核对 2026-11-07</span>
 </header>
 
 <div class="wrap">
@@ -198,139 +222,191 @@ h1.hook .q{position:relative;display:inline-block;color:var(--blue-d);box-shadow
   <div>
     <span class="kicker"><i></i>序章 · 第一问</span>
     <h1 class="hook">
-      <span>工业在<span class="up">涨</span>，投资在<span class="down">撤</span>，</span>
-      <span>惠城这条腿<span class="q">还能撑多久</span>？</span>
+      <span>产值 <span class="up">+10.8%</span></span>
+      <span>投资 <span class="down">−40.7%</span></span>
+      <span>惠城在<span class="q">吃存量</span>吗？</span>
     </h1>
-    <p class="lede">2025 年，惠城 GDP <b>1203.33 亿</b>、+4.3%；规上工业增加值 <b>+10.8%</b>，利润 <b>+49.7%</b>。<br>
-    同一年，固定资产投资 <b>−37.1%</b>；2026 年前三季度继续 <b>−40.7%</b>，工业投资 <b>−46.1%</b>。<br>
-    一边产出还在涨，一边钱在往外走。这不是结论，是这页要你一起看的第一道裂缝：<em style="display:inline-block">投资撤了，产出靠什么撑？</em></p>
+    <p class="lede">2026 年 1-9 月：GDP <b>883.46 亿</b>、只 <b>+1.1%</b>；规上工业增加值 <b>+0.8%</b>；固定资产投资 <b>−40.7%</b>，工业投资 <b>−46.1%</b>。<br>
+撑住这个盘子的是惠城高新区：<b>377</b> 家规上企业，2025 年产值 <b>632.69 亿</b>，2021 年还只有 <b>255.2 亿</b>。<br>
+一边产能还在跑，一边新增投资在撤；人也在走：2019—2023 年惠州迁出企业 <b>3439</b> 家，去广州 <b>1175</b>、深圳 <b>896</b>、东莞 <b>609</b>。</p>
+    <span class="src-inline">来源：惠城区统计局 2026 年 1-9 月经济运行简况；惠城高新区管委会（2026-06-11）；上奇产业通·大湾区企业迁移研究（2024-03），后一项为惠州市域口径。</span>
 
     <div class="tension">
-      <div class="tn up"><span class="v" style="color:#218A5C">+10.8%</span><span class="k">规上工业增加值 · 2025 全年</span></div>
-      <div class="tn down"><span class="v" style="color:#C0453B">−37.1%</span><span class="k">固定资产投资 · 2025 全年</span></div>
-      <div class="tn down"><span class="v" style="color:#C0453B">−40.7%</span><span class="k">固定资产投资 · 2026 1-9 月</span></div>
+      <div class="tn up"><span class="v" style="color:#218A5C">632.69 亿</span><span class="k">惠城高新区规上工业总产值 · 2025</span></div>
+      <div class="tn down"><span class="v" style="color:#C0453B">−40.7%</span><span class="k">全区固定资产投资 · 2026 1-9 月</span></div>
+      <div class="tn flat"><span class="v" style="color:#B8791F">3439 家</span><span class="k">惠州迁出企业 · 2019—2023</span></div>
     </div>
 
     <div class="guess">
       <div class="gt"><span>⚡</span>先猜，再看</div>
-      <div class="gq">投资掉了四成，工业还在涨——这条腿，你赌它撑得住，还是撑不住？</div>
+      <div class="gq">632 亿的盘子，是 4 个组团一起扛，还是压在少数几个身上？</div>
       <div class="gopts">
-        <button class="gbtn" type="button" data-k="hold">撑得住</button>
-        <button class="gbtn" type="button" data-k="fail">撑不住</button>
+        <button class="gbtn" type="button" data-k="even">4 个都在扛</button>
+        <button class="gbtn" type="button" data-k="skew">压在少数几个</button>
       </div>
       <div class="reveal" id="gReveal">
-        <h4>揭晓：现在能确定的只有两条</h4>
+        <h4>揭晓：能查到的，是这两个数</h4>
         <ul>
-          <li>钱在撤：固投 2025 <b>−37.1%</b>，2026 年 1-9 月 <b>−40.7%</b>，还没见底。</li>
-          <li>产在涨：规上工业增加值 2025 <b>+10.8%</b>，2026 年 1-9 月仍有 <b>+0.8%</b>，靠存量产能撑着。</li>
-          <li>利润在涨、家底在漏：规上工业利润 <b>42.51 亿</b>、<b>+49.7%</b>；同期房地产开发投资 <b>−47.3%</b>。</li>
+          <li>三栋：2025 年规上工业总产值 <b>160 亿+</b>，全年 <b>+10.6%</b>（增加值增速）。</li>
+          <li>马安：2025 年规上工业总产值 <b>142.53 亿</b>，增速 <b>+20.1%</b>，规上企业 68 家。</li>
+          <li>汝湖：2025 年规上工业总产值 <b>36.86 亿</b>，农业产值 11.81 亿。</li>
         </ul>
-        <p class="unknown">这一条<b>没有人能替你断言</b>。风洞不给答案，只给不同参数下的后果。</p>
-        <a class="more" href="windtunnel.html">自己调参数，看三年后 →</a>
+        <p class="unknown">三栋加马安已经超过 300 亿——但这是镇域口径，和高新区口径不完全可比，只能看量级。<b>横沥的规上产值没找到公开数</b>，这就是图上那条断线。</p>
+        <a class="more" href="sandbox.html">去关系沙盘，逐个组团看 →</a>
       </div>
     </div>
   </div>
   <div class="evidence">
     <div class="ev-head">
-      <div class="t"><b>钱在往外流？先看这张关系图</b><span>公开信息整理 · 关系线索示意，不是因果结论</span></div>
-      <span class="badge">可核查</span>
+      <div class="t"><b>632 亿的盘子，压在谁身上？</b><span>镇街与组团按公开数据落位 · 无公开数据处留断口</span></div>
+      <span class="badge">有源可查</span>
     </div>
 
     <div class="netwrap guess-net" id="netwrap">
       <div class="scrim" id="scrim">
         <div class="sbox">
-          <div class="sq">先猜：外流还是留下？</div>
-          <div class="sa">点这张图，放出三条线索</div>
+          <div class="sq">先猜：谁在扛这 632 亿？</div>
+          <div class="sa">点这张图，看组团、断口和外流</div>
         </div>
       </div>
-      <svg viewBox="0 0 600 450" preserveAspectRatio="xMidYMid meet" role="img"
-           aria-label="惠城关系网络示意：惠城核心楼宇总部群连接江北CBD、金山湖、水东街、华贸天地，并有资金流向深圳、东莞与电商渠道的线索">
+      <svg class="mapview" viewBox="0 0 640 470" preserveAspectRatio="xMidYMid meet" role="img"
+           aria-label="惠城产业关系示意：惠城高新区东江湾核心与三栋、马安、汝湖、小金口、横沥的连接，横沥数据未接通，三处新增投资与三条企业外流线索指向广州、深圳、东莞">
         <defs>
-          <filter id="sh1" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0B2236" flood-opacity=".16"/></filter>
-          <marker id="arRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C0453B"/></marker>
-          <marker id="arAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#B8791F"/></marker>
-          <radialGradient id="gCore" cx="38%" cy="32%" r="70%"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="55%" stop-color="#DCEBFF"/><stop offset="100%" stop-color="#8FB4E0"/></radialGradient>
+          <filter id="sh1" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0B2236" flood-opacity=".15"/></filter>
+          <filter id="glowR" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="3.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <marker id="arRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C0453B"/></marker>
+          <radialGradient id="gCore" cx="34%" cy="30%" r="72%"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="52%" stop-color="#DBEAFF"/><stop offset="100%" stop-color="#7FA6D6"/></radialGradient>
           <radialGradient id="gBlue" cx="38%" cy="34%" r="66%"><stop offset="0%" stop-color="#7CC4FF"/><stop offset="60%" stop-color="#1B6FE0"/><stop offset="100%" stop-color="#0D47A1"/></radialGradient>
           <radialGradient id="gPurp" cx="38%" cy="34%" r="66%"><stop offset="0%" stop-color="#C9A6FF"/><stop offset="60%" stop-color="#7B5FD6"/><stop offset="100%" stop-color="#4A339E"/></radialGradient>
           <radialGradient id="gGreen" cx="38%" cy="34%" r="66%"><stop offset="0%" stop-color="#8FE3B6"/><stop offset="60%" stop-color="#218A5C"/><stop offset="100%" stop-color="#0F5C3A"/></radialGradient>
+          <radialGradient id="gGray" cx="38%" cy="34%" r="66%"><stop offset="0%" stop-color="#D6E3EE"/><stop offset="60%" stop-color="#9DB3C4"/><stop offset="100%" stop-color="#6D8496"/></radialGradient>
           <radialGradient id="gRed" cx="38%" cy="34%" r="66%"><stop offset="0%" stop-color="#FFA69E"/><stop offset="60%" stop-color="#C0453B"/><stop offset="100%" stop-color="#7C221B"/></radialGradient>
-          <radialGradient id="gAmber" cx="38%" cy="34%" r="66%"><stop offset="0%" stop-color="#FFD08A"/><stop offset="60%" stop-color="#B8791F"/><stop offset="100%" stop-color="#7A4A08"/></radialGradient>
-          <linearGradient id="lkRed" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#C0453B" stop-opacity=".85"/><stop offset="100%" stop-color="#C0453B" stop-opacity=".45"/></linearGradient>
-          <linearGradient id="lkAmber" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#B8791F" stop-opacity=".8"/><stop offset="100%" stop-color="#B8791F" stop-opacity=".4"/></linearGradient>
+          <linearGradient id="lkRed" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#C0453B" stop-opacity=".9"/><stop offset="100%" stop-color="#C0453B" stop-opacity=".5"/></linearGradient>
         </defs>
 
-        <path class="local-line" d="M260,220 Q200,150 130,110"/>
-        <path class="local-line" d="M260,220 Q330,140 420,100"/>
-        <path class="local-line" d="M260,220 Q180,310 120,352"/>
-        <path class="local-line" d="M260,220 Q350,310 440,356"/>
+        <!-- 连接：实线=已接通；虚线=数据未公开 -->
+        <path class="link" d="M314,230 Q370,266 396,292"/>
+        <path class="link" d="M354,258 Q420,314 472,348"/>
+        <path class="link thin" d="M310,214 Q276,162 248,118"/>
+        <path class="link thin" d="M302,216 Q206,134 154,80"/>
+        <path class="link-break" d="M344,216 Q414,158 478,92"/>
 
-        <path class="leak-line" d="M292,204 Q430,156 540,132" stroke="url(#lkRed)" stroke-width="2.4" marker-end="url(#arRed)"/>
-        <path class="leak-line" d="M292,232 Q430,234 540,236" stroke="url(#lkRed)" stroke-width="2" marker-end="url(#arRed)" opacity=".8"/>
-        <path class="leak-line" d="M282,252 Q392,330 500,366" stroke="url(#lkAmber)" stroke-width="2" marker-end="url(#arAmber)" opacity=".85"/>
+        <!-- 总部与产线：两端 -->
+        <path class="link-break" d="M298,236 Q212,228 116,214"/>
+        <circle cx="212" cy="230" r="2.6" fill="#9DB3C4"/>
+        <circle cx="236" cy="226" r="2" fill="#9DB3C4" opacity=".6"/>
 
-        <g><circle cx="130" cy="110" r="9" fill="url(#gBlue)" filter="url(#sh1)"/>
-          <text class="lb" x="130" y="88" text-anchor="middle">江北 CBD</text></g>
-        <g><circle cx="420" cy="100" r="9" fill="url(#gPurp)" filter="url(#sh1)"/>
-          <text class="lb" x="420" y="78" text-anchor="middle">金山湖</text></g>
-        <g><circle cx="120" cy="352" r="8" fill="url(#gGreen)" filter="url(#sh1)"/>
-          <text class="lb" x="120" y="376" text-anchor="middle">水东街</text></g>
-        <g><circle cx="440" cy="356" r="8" fill="url(#gBlue)" filter="url(#sh1)"/>
-          <text class="lb" x="440" y="380" text-anchor="middle">华贸天地</text></g>
+        <!-- 新增投资：断口 -->
+        <path class="link-break" d="M310,266 Q272,300 246,326" stroke="#B8791F" stroke-opacity=".55" stroke-width="1.6"/>
+        <g class="brk"><path d="M240,322 L232,316 M240,322 L235,331" stroke="#B8791F" stroke-width="1.6" fill="none" stroke-opacity=".7"/></g>
 
-        <g>
-          <circle cx="260" cy="220" r="44" fill="none" stroke="#1B6FE0" stroke-width="1" opacity=".2"/>
-          <circle cx="260" cy="220" r="58" fill="none" stroke="#1B6FE0" stroke-width=".6" opacity=".1"/>
-          <circle cx="260" cy="220" r="31" fill="url(#gCore)" stroke="#1B6FE0" stroke-width="1.2" filter="url(#sh1)"/>
-          <text class="lb" x="260" y="170" text-anchor="middle">惠城核心</text>
-          <text class="sub" x="260" y="272" text-anchor="middle">楼宇总部群</text>
-        </g>
+        <!-- 外流线索 -->
+        <path class="leak-line" d="M358,228 Q468,186 540,150" stroke="url(#lkRed)" stroke-width="3" marker-end="url(#arRed)"/>
+        <path class="leak-line" d="M360,240 Q478,222 540,210" stroke="url(#lkRed)" stroke-width="2.4" marker-end="url(#arRed)"/>
+        <path class="leak-line" d="M356,254 Q468,260 540,264" stroke="url(#lkRed)" stroke-width="2.2" marker-end="url(#arRed)" opacity=".85"/>
+        <circle class="particle" r="3.2" fill="#C0453B"><animateMotion path="M358,232 Q470,190 552,152" dur="2.4s" begin=".5s" repeatCount="indefinite"/></circle>
+        <circle class="particle" r="2.6" fill="#C0453B"><animateMotion path="M360,244 Q480,226 552,212" dur="2.8s" begin=".9s" repeatCount="indefinite"/></circle>
+        <circle class="particle" r="2.2" fill="#C0453B"><animateMotion path="M356,258 Q470,266 552,266" dur="3.1s" begin=".3s" repeatCount="indefinite"/></circle>
 
+        <!-- 核心 -->
+        <circle cx="330" cy="240" r="42" fill="none" stroke="#1B6FE0" stroke-width="1" opacity=".18"/>
+        <circle cx="330" cy="240" r="30" fill="url(#gCore)" stroke="#1B6FE0" stroke-width="1.3" filter="url(#sh1)"/>
+        <text class="lb" x="330" y="186" text-anchor="middle">东江湾核心</text>
+        <text class="lbv" x="330" y="205" text-anchor="middle">632.69 亿</text>
+        <text class="sub" x="248" y="292" text-anchor="middle">高新区 1 核心 · 4 组团</text>
+
+        <!-- 组团节点 -->
+        <g><circle cx="486" cy="356" r="13" fill="url(#gBlue)" filter="url(#sh1)"/>
+          <text class="lb" x="486" y="334" text-anchor="middle">三栋</text>
+          <text class="lbv" x="486" y="382" text-anchor="middle">160 亿+</text>
+          <text class="sub" x="486" y="398" text-anchor="middle">规上工业总产值 2025</text></g>
+        <g><circle cx="408" cy="300" r="11" fill="url(#gBlue)" filter="url(#sh1)"/>
+          <text class="lb" x="408" y="278" text-anchor="middle">马安</text>
+          <text class="lbv" x="408" y="326" text-anchor="middle">142.53 亿</text></g>
+        <g><circle cx="240" cy="104" r="11" fill="url(#gGreen)" filter="url(#sh1)"/>
+          <text class="lb" x="240" y="84" text-anchor="middle">汝湖</text>
+          <text class="lbv" x="240" y="128" text-anchor="middle">36.86 亿</text></g>
+        <g><circle cx="146" cy="66" r="11" fill="url(#gPurp)" filter="url(#sh1)"/>
+          <text class="lb" x="146" y="46" text-anchor="middle">小金口</text>
+          <text class="sub" x="146" y="90" text-anchor="middle">规上 108 家</text></g>
+        <g><circle cx="486" cy="86" r="10" fill="url(#gGray)" opacity=".85"/>
+          <text class="lb" x="486" y="66" text-anchor="middle" fill="#6B7F92">横沥</text>
+          <text class="sub" x="486" y="108" text-anchor="middle" fill="#98AABB">产值未公开</text></g>
+        <g><circle cx="100" cy="206" r="12" fill="url(#gPurp)" filter="url(#sh1)"/>
+          <text class="lb" x="100" y="184" text-anchor="middle">江北</text>
+          <text class="sub" x="100" y="230" text-anchor="middle">总部 · 金融</text></g>
+
+        <!-- 外流去向 -->
         <g class="leak-target">
-          <circle cx="540" cy="132" r="23" fill="none" stroke="#C0453B" opacity=".5"/>
-          <circle cx="540" cy="132" r="9" fill="url(#gRed)" filter="url(#sh1)"/>
-          <text class="lb" x="540" y="106" text-anchor="middle" fill="#C0453B">深圳</text>
+          <circle cx="556" cy="152" r="6" fill="url(#gRed)" filter="url(#glowR)"/>
+          <text class="lb" x="534" y="156" text-anchor="end" fill="#C0453B">广州 <tspan class="lbv" fill="#C0453B">1175</tspan></text>
+          
         </g>
         <g class="leak-target">
-          <circle cx="540" cy="236" r="18" fill="none" stroke="#C0453B" opacity=".45"/>
-          <circle cx="540" cy="236" r="7" fill="url(#gRed)" opacity=".9" filter="url(#sh1)"/>
-          <text class="lb" x="540" y="262" text-anchor="middle" fill="#C0453B">东莞</text>
+          <circle cx="556" cy="212" r="5.4" fill="url(#gRed)" filter="url(#glowR)"/>
+          <text class="lb" x="534" y="216" text-anchor="end" fill="#C0453B">深圳 <tspan class="lbv" fill="#C0453B">896</tspan></text>
+          
         </g>
         <g class="leak-target">
-          <circle cx="500" cy="366" r="16" fill="none" stroke="#B8791F" opacity=".45"/>
-          <circle cx="500" cy="366" r="6" fill="url(#gAmber)" filter="url(#sh1)"/>
-          <text class="lb" x="500" y="392" text-anchor="middle" fill="#B8791F">电商渠道</text>
+          <circle cx="556" cy="266" r="5" fill="url(#gRed)" filter="url(#glowR)"/>
+          <text class="lb" x="534" y="270" text-anchor="end" fill="#C0453B">东莞 <tspan class="lbv" fill="#C0453B">609</tspan></text>
+          
         </g>
 
-        <text class="annot warn" x="386" y="176" fill="#C0453B">钱在往外流 →</text>
-        <text class="annot" x="132" y="232">本地关系待补</text>
+        
+        <text class="annot" x="112" y="256">总部在这头，产线在那头</text>
+        <text class="annot amber" x="164" y="344">新增投资已断 · 固投 −40.7%</text>
+        
       </svg>
     </div>
-
+    <div class="barview">
+      <div class="bv-row"><span class="bv-n">东江湾核心<small>高新区合计</small></span><span class="bv-t"><span class="bv-f" style="width:100%"></span></span><span class="bv-v">632.69 亿</span></div>
+      <div class="bv-row"><span class="bv-n">三栋</span><span class="bv-t"><span class="bv-f" style="width:25.3%"></span></span><span class="bv-v">160 亿+</span></div>
+      <div class="bv-row"><span class="bv-n">马安</span><span class="bv-t"><span class="bv-f" style="width:22.5%"></span></span><span class="bv-v">142.53 亿</span></div>
+      <div class="bv-row"><span class="bv-n">汝湖</span><span class="bv-t"><span class="bv-f g" style="width:5.8%"></span></span><span class="bv-v">36.86 亿</span></div>
+      <div class="bv-row"><span class="bv-n">横沥<small>数据断口</small></span><span class="bv-t"><span class="bv-f gray" style="width:100%"></span></span><span class="bv-v gray">未公开</span></div>
+      <div class="bv-row"><span class="bv-n">小金口<small>规上 108 家</small></span><span class="bv-t"><span class="bv-f gray" style="width:100%"></span></span><span class="bv-v gray">无产值数</span></div>
+      <div class="bv-out">五年外迁（惠州市域 2019—2023）：<b>3439 家</b> → 广州 1175 · 深圳 896 · 东莞 609</div>
+      <div class="bv-note">外迁去向：广州 1175 · 深圳 896 · 东莞 609。镇街为全镇口径，高新区为园区口径，不完全可比。</div>
+    </div>
+    <div class="reads">
+      <div class="rd"><b>扛</b><span>三栋 160 亿 + 马安 142.53 亿，两个镇加起来就过 300 亿（镇域口径，与园区口径不完全可比）。</span></div>
+      <div class="rd"><b>断</b><span>横沥规上产值查不到；全区固投 −40.7%、工业投资 −46.1%，新增投入这一头是断的。</span></div>
+      <div class="rd"><b>走</b><span>惠州 2019—2023 年迁出 3439 家：广州 1175、深圳 896、东莞 609。</span></div>
+    </div>
     <div class="netcard-foot">
-      <span class="hint">三条线是线索，不是定论。点“再放一次”可以重看。</span>
-      <button class="again" type="button" id="again">再放一次</button>
+      <span class="hint">注：镇街为全镇口径，高新区为园区口径，两者不完全可比；横沥、芦洲未查到公开规上产值，图上以断线表示，不做推测。企业迁出为惠州市域 2019—2023 年数据。</span>
+      <button class="again" type="button" id="again">重放</button>
     </div>
   </div>
 </section>
 
 <section class="asks">
-  <a class="ask" href="report.html"><span class="n">追问 01</span><span class="q">投资撤到什么时候，才会传到产出？</span><span class="m">看研判报告 →</span></a>
-  <a class="ask" href="sandbox.html"><span class="n">追问 02</span><span class="q">哪几个片区的产业在逆势扩张？</span><span class="m">进关系沙盘 →</span></a>
-  <a class="ask" href="today.html"><span class="n">追问 03</span><span class="q">这周惠城又冒出了哪些新信号？</span><span class="m">看今日动态 →</span></a>
+  <a class="ask" href="windtunnel.html"><span class="n">追问 01</span><span class="q">投资再撤两年，产值还能撑住吗？</span><span class="m">去风洞调参数 →</span></a>
+  <a class="ask" href="sandbox.html"><span class="n">追问 02</span><span class="q">哪个组团在逆势扩张，哪个在收缩？</span><span class="m">进关系沙盘 →</span></a>
+  <a class="ask" href="report.html"><span class="n">追问 03</span><span class="q">迁出去的 3439 家，是什么行业？</span><span class="m">看研判报告 →</span></a>
 </section>
 
 <a class="cta" href="holo-workspace.html">
-  <span class="ct"><b>进全息工作区，把三条外流线自己查一遍</b><span>关系网络 · 情报变化 · 公开来源追溯</span></span>
+  <span class="ct"><b>进全息工作区，把每条线和每个断口自己核一遍</b><span>来源追溯 · 口径对照 · 变化记录</span></span>
   <span class="go">→</span>
 </a>
 
-<p class="foot">惠城决策风洞 · 基于公开信息的观察工具 ｜ 非官方统计平台 ｜ 不构成投资或决策依据<br>
-数据源：惠城区 2025 年统计公报、惠城区统计局 2026 年 1-9 月经济运行简况、区政府门户公开信息</p>
+<div class="foot">
+  <b>数据来源</b><br>
+  1. 惠城区统计局《2026 年 1—9 月经济运行简况》：GDP 883.46 亿、+1.1%、规上工业增加值 +0.8%、固投 −40.7%、工业投资 −46.1%。<br>
+  2. 惠城高新区管委会《“网约公交”定制专线 破解企业通勤难题》（2026-06-11）：园区 35.96 平方公里、1 核心 4 组团、规上企业 377 家、高企 235 家、2025 年产值 632.69 亿、2021 年 255.2 亿、增加值 149.2 亿。<br>
+  3. 三栋镇招商推介会（2026-04-02）：2025 年 GDP 76.5 亿、+5.9%，规上工业总产值 160 亿+、增加值 +10.6%。<br>
+  4. 马安镇《76 平方公里的发展空间藏不住了》（2026-04-03）：2025 年 GDP 70.46 亿、+8.1%，规上工业总产值 142.53 亿、+20.1%，规上企业 68 家。<br>
+  5. 汝湖镇《2026 年政府工作报告》：2025 年 GDP 40.12 亿、规上工业产值 36.86 亿、农业产值 11.81 亿。<br>
+  6. 小金口街道在线访谈（2026-08-14）：GDP 连续两年破百亿、规上企业 108 家、四上企业 427 家。<br>
+  7. 上奇产业通·大湾区企业迁移研究（2024-03，经 36氪 转载）：2019—2023 年惠州市迁出企业 3439 家，前三目的地广州 1175、深圳 896、东莞 609。<br>
+  本页为公开信息的整理与呈现，非官方统计平台，不构成投资或决策依据。
+</div>
 </div>
 
 <script>
 (function(){
-  /* 先猜后揭：两个选项任一都揭晓同一组事实，重点是让人先停一下 */
   var btns=document.querySelectorAll('.gbtn'), rev=document.getElementById('gReveal');
   Array.prototype.forEach.call(btns,function(b){
     b.addEventListener('click',function(){
@@ -341,17 +417,15 @@ h1.hook .q{position:relative;display:inline-block;color:var(--blue-d);box-shadow
       if(w&&w.classList.contains('guess-net')) release();
     });
   });
-
-  /* 关系图：遮罩点击 / 按钮，都能放出外流线 */
   var net=document.getElementById('netwrap'), scrim=document.getElementById('scrim'), again=document.getElementById('again');
   function release(){
-    net.classList.remove('guess-net');
+    net.classList.remove('guess-net');net.classList.add('is-out');
     Array.prototype.forEach.call(net.querySelectorAll('.leak-line'),function(l){l.classList.add('go');});
     Array.prototype.forEach.call(net.querySelectorAll('.leak-target'),function(t){t.classList.add('show');});
     if(scrim) scrim.classList.add('hide');
   }
   function reset(){
-    net.classList.add('guess-net');
+    net.classList.add('guess-net');net.classList.remove('is-out');
     Array.prototype.forEach.call(net.querySelectorAll('.leak-line'),function(l){l.classList.remove('go');});
     Array.prototype.forEach.call(net.querySelectorAll('.leak-target'),function(t){t.classList.remove('show');});
     if(scrim) scrim.classList.remove('hide');
