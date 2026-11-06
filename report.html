@@ -4,6 +4,7 @@
 <title>惠城区产业分析报告（Demo版）· 张凌</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="model.js"></script>
+<script src="hc-viz/data.js"></script>
 <style>
 :root{
   --sky1:#04060f; --sky2:#0a0f24; --sky3:#121a30;
@@ -339,6 +340,21 @@ svg{max-width:100%;height:auto}
 .inject code{background:rgba(239,68,68,.14);color:#fca5a5;border-radius:5px;padding:1px 6px;font-size:10.5px;margin:0 2px;white-space:nowrap}
 .dist-box{display:none}
 .dist-box.show{display:block}
+
+.nowbar{margin:14px 0 12px;padding:14px 16px;border-radius:14px;border:1px solid rgba(229,192,106,.28);
+  background:linear-gradient(180deg,rgba(229,192,106,.09),rgba(229,192,106,.02))}
+.nb-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.nb-tag{font-size:11px;font-weight:700;letter-spacing:.05em;color:#0b1220;background:#e5c06a;padding:3px 9px;border-radius:999px}
+.nb-sub{font-size:11.5px;color:#9ca3af}
+.nb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.nb-item{padding:9px 11px;border-radius:10px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}
+.nb-k{font-size:11px;color:#94a3b8;margin-bottom:3px}
+.nb-v{font:600 17px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace}
+.nb-v.pos{color:#34d399}
+.nb-v.mid{color:#fbbf24}
+.nb-v.neg{color:#f87171}
+.nb-n{font-size:10.5px;color:#94a3b8;margin-top:3px;line-height:1.55}
+@media(max-width:640px){.nb-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 <link rel="stylesheet" href="ui/ui.css">
 <link rel="stylesheet" href="ui/ui-pages.css">
@@ -353,7 +369,7 @@ svg{max-width:100%;height:auto}
     <img class="hero-bg" src="assets/huicheng-night.jpg" alt="惠城滨江夜景">
     <div class="hero-mask"></div>
     <div class="hero-pills">
-      <span class="hero-pill"> 数据更新：2025 年统计公报</span>
+      <span class="hero-pill"> 数据更新：2025 全年公报 + 2026 1-9 月快报</span>
       <a class="hero-pill" href="#sources">数据来源说明 ↓</a>
     </div>
     <div class="hero-in">
@@ -368,80 +384,49 @@ svg{max-width:100%;height:auto}
   <div class="card">
     <h2>① 惠城经济CT · 八项体检指标 <span class="itag real">官方实测 · 2025</span></h2>
     <div class="scan-verdict">
-      <div class="sv g"><span class="dot"></span><span class="n">3</span><span class="t">项跑得快<br>（工业·利润·外贸）</span></div>
-      <div class="sv y"><span class="n">4</span><span class="t">项温和承压<br>（GDP·消费·财力·收入）</span></div>
-      <div class="sv r"><span class="dot"></span><span class="n">1</span><span class="t">项明显下滑<br>（固定资产投资）</span></div>
+      <div class="sv g"><span class="dot"></span><span class="n" id="svGood">3</span><span class="t">项跑得快<br>（工业·利润·外贸）</span></div>
+      <div class="sv y"><span class="n" id="svWarn">4</span><span class="t">项温和承压<br>（GDP·消费·财力·收入）</span></div>
+      <div class="sv r"><span class="dot"></span><span class="n" id="svBad">1</span><span class="t">项明显下滑<br>（固定资产投资）</span></div>
     </div>
     <div style="font-size:10.5px;color:#6b7280;margin:-2px 0 2px">最新数据（同比）· 点任一指标卡，查看<b>口径、目标差距与来源</b>；迷你折线仅表示状态方向，不代表逐年数值。</div>
-    <div class="scan-grid" id="scanGrid">
-      <div class="metric good" data-t="规上工业增加值 · +10.8%（超目标）" data-d="规上工业<b>增加值</b>增速 10.8%，高于年初约 9% 的目标；规上工业<b>总产值</b>937.92 亿元（现价，+9.6%）、销售产值 899.44 亿元（+7.8%）。注意：<b>增加值与总产值是两个口径</b>。来源：惠城区2025年统计公报（区统计局，初步核算数）。">
-        <div class="m-icon"></div>
-        <div class="m-name">规上工业增加值</div>
-        <div class="m-val">+10.8%</div>
-        <div class="m-sub">总产值 937.9 亿</div>
-        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,21 L15,18 L27,20 L39,13 L51,15 L63,8 L76,10 L88,4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,21 L15,18 L27,20 L39,13 L51,15 L63,8 L76,10 L88,4 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
-        <div class="m-tag">超目标 9%</div>
-      </div>
-      <div class="metric good" data-t="规上工业利润 · +49.7%（42.51 亿元）" data-d="规上工业企业实现利润总额 <b>42.51 亿元、+49.7%</b>；高技术制造业增加值 +15.6%（占比 37%）、先进制造业 +13.9%（占比 50.3%）。盈利大幅改善，是工业这条腿的亮点。来源：2025年统计公报。">
-        <div class="m-icon"></div>
-        <div class="m-name">规上工业利润</div>
-        <div class="m-val">+49.7%</div>
-        <div class="m-sub">42.51 亿元</div>
-        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,22 L15,20 L27,17 L39,15 L51,11 L63,10 L76,6 L88,3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,22 L15,20 L27,17 L39,15 L51,11 L63,10 L76,6 L88,3 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
-        <div class="m-tag">盈利高增长</div>
-      </div>
-      <div class="metric good" data-t="外贸进出口 · +7.1%（383.6 亿元）" data-d="货物进出口 383.6 亿元、+7.1%；其中<b>出口 239.0 亿元、+17.6%</b>，进口 144.6 亿元、-6.8%。实际利用外资 13.84 亿元、+27.3%。外需增长但受全球环境影响，钥匙不完全在本地。来源：2025年统计公报。">
-        <div class="m-icon"></div>
-        <div class="m-name">外贸进出口</div>
-        <div class="m-val">+7.1%</div>
-        <div class="m-sub">383.6 亿 · 出口+17.6%</div>
-        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,21 L15,18 L27,19 L39,15 L51,13 L63,10 L76,7 L88,4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,21 L15,18 L27,19 L39,15 L51,13 L63,10 L76,7 L88,4 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
-        <div class="m-tag">出口拉动</div>
-      </div>
-      <div class="metric flat" data-t="居民人均可支配收入 · +4.5%（63776 元）" data-d="全体居民人均可支配收入 63776 元、+4.5%；城镇 68547 元（+4.2%）、农村 35998 元（+6.5%）。常住人口 159.78 万、城镇化率 85.74%。来源：2025年统计公报。">
-        <div class="m-icon"></div>
-        <div class="m-name">居民人均可支配收入</div>
-        <div class="m-val">+4.5%</div>
-        <div class="m-sub">63776 元</div>
-        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,18 L15,17 L27,18 L39,16 L51,16 L63,14 L76,14 L88,12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,18 L15,17 L27,18 L39,16 L51,16 L63,14 L76,14 L88,12 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
-        <div class="m-tag">平稳增长</div>
-      </div>
-      <div class="metric warn" data-t="GDP · 1203.33 亿元（+4.3%）" data-d="地区生产总值 1203.33 亿元、+4.3%，年初增长目标约 6%，<b>差约 1.7 个百分点</b>。三产结构 3.4:27.6:69.0（一产 +2.9%、二产 +2.3%、三产 +5.2%）；人均 GDP 75309 元（+3.0%）。来源：2025年统计公报（初步核算数）。">
-        <div class="m-icon"></div>
-        <div class="m-name">GDP 增速</div>
-        <div class="m-val">+4.3%</div>
-        <div class="m-sub">1203.33 亿 · 三产69%</div>
-        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,19 L15,17 L27,18 L39,16 L51,15 L63,14 L76,13 L88,11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,19 L15,17 L27,18 L39,16 L51,15 L63,14 L76,13 L88,11 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
-        <div class="m-tag">低于目标 6%</div>
-      </div>
-      <div class="metric warn" data-t="社消零 · 805.68 亿元（+3.7%）" data-d="社会消费品零售总额 805.68 亿元、+3.7%，年初目标约 6%，<b>差约 2.3 个百分点</b>；限上消费品零售额 525.26 亿元、+4.2%（统计公报正文未列限上总额，该数出自经济运行简况/政府公报）。消费偏温，与人口、人气直接相关。来源：2025年统计公报、2025年经济运行简况。">
-        <div class="m-icon"></div>
-        <div class="m-name">社会消费品零售</div>
-        <div class="m-val">+3.7%</div>
-        <div class="m-sub">805.68 亿 · 限上+4.2%</div>
-        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,19 L15,18 L27,18 L39,16 L51,16 L63,14 L76,13 L88,12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,19 L15,18 L27,18 L39,16 L51,16 L63,14 L76,13 L88,12 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
-        <div class="m-tag">低于目标 6%</div>
-      </div>
-      <div class="metric flat" data-t="区本级一般公共预算 · 64.60 亿元（+3.5%）" data-d="区本级一般公共预算收入 <b>64.60 亿元、+3.5%</b>；全区（含市直）一般公共预算收入 195.86 亿元、+5.1%。政府可支配财力平稳，为公共服务与配套投入提供空间。来源：2025年统计公报。">
-        <div class="m-icon">️</div>
-        <div class="m-name">一般公共预算收入</div>
-        <div class="m-val">+3.5%</div>
-        <div class="m-sub">区本级 64.60 亿</div>
-        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,18 L15,17 L27,17 L39,16 L51,15 L63,15 L76,13 L88,13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,18 L15,17 L27,17 L39,16 L51,15 L63,15 L76,13 L88,13 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
-        <div class="m-tag">基本平稳</div>
-      </div>
-      <div class="metric bad" data-t="固定资产投资 · −37.1%" data-d="8 项指标中<b>唯一明显下滑</b>：工业投资 -34.4%、基建投资 -20.0%、房地产开发投资 -47.3%；商品房销售面积 -47%、销售金额 -54%。年初目标约 1%，投资这条腿明显收缩，对后续投产节点形成压力。来源：2025年统计公报。">
-        <div class="m-icon">️</div>
-        <div class="m-name">固定资产投资</div>
-        <div class="m-val">-37.1%</div>
-        <div class="m-sub">房地产开发 -47.3%</div>
-        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,7 L15,9 L27,8 L39,12 L51,11 L63,17 L76,16 L88,22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,7 L15,9 L27,8 L39,12 L51,11 L63,17 L76,16 L88,22 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
-        <div class="m-tag">明显下滑</div>
-      </div>
+    <div class="scan-grid" id="scanGrid"></div>
     </div>
+    <div class="nowbar" id="nowBar"></div>
+<script>
+(function(){
+  var O=HC_OFFICIAL,C=HC_CURRENT,P=HC_POP;
+  var grid=document.getElementById('scanGrid'),stat={good:0,warn:0,flat:0,bad:0};
+  if(grid){
+    grid.innerHTML=O.metrics.map(function(m){
+      stat[m.status]=(stat[m.status]||0)+1;
+      var t=m.k+' · '+m.v+'（'+m.tag+'）';
+      return '<div class="metric '+m.status+'" data-t="'+t+'" data-d="'+m.detail+'">'
+       +'<div class="m-icon"></div><div class="m-name">'+m.k+'</div>'
+       +'<div class="m-val">'+m.v+'</div><div class="m-sub">'+m.sub+'</div>'
+       +'<div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="'+m.spark+'" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="'+m.spark+' L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>'
+       +'<div class="m-tag">'+m.tag+'</div></div>';
+    }).join('');
+  }
+  var sg=document.getElementById('svGood'),sw=document.getElementById('svWarn'),sb=document.getElementById('svBad');
+  if(sg)sg.textContent=stat.good;
+  if(sw)sw.textContent=(stat.warn||0)+(stat.flat||0);
+  if(sb)sb.textContent=stat.bad;
+  var nb=document.getElementById('nowBar');
+  if(nb){nb.innerHTML='<div class="nb-h"><span class="nb-tag">'+C.period+'</span><span class="nb-sub">'+C.released_at+' 发布 · 与 2025 全年口径分层，两类增速不可直接比较</span></div><div class="nb-grid">'
+   +C.metrics.map(function(m){var cls=m.status==='b'?'neg':(m.status==='n'?'mid':'pos');return '<div class="nb-item"><div class="nb-k">'+m.k+'</div><div class="nb-v '+cls+'">'+m.yoy+'</div><div class="nb-n">'+(m.v?m.v+(m.unit||'')+' · ':'')+m.note+'</div></div>';}).join('')
+   +'</div>';}
+  document.addEventListener('DOMContentLoaded',function(){
+  var note=document.getElementById('scanNote');
+  if(note){note.innerHTML='利润、外贸、财力、收入以实际增速与定性方向呈现，不设主观目标线。<b>上述 8 项均为 2025 年统计公报初步核算数，未做加权综合评分。</b>人口背景：'+P.year+' 年常住人口 <b>'+P.pop+' 万人</b>、城镇化率 '+P.urban+'，人均 GDP <b>'+P.per_gdp_wan+' 万元</b>（'+P.per_gdp_yoy+'），不与上述增速指标同标尺评分。';}
+  var line=document.getElementById('scanLine');
+  if(line){var fai=O.metrics.filter(function(m){return m.id==="fai";})[0],cur=C.metrics.filter(function(m){return m.id==="fai";})[0];
+   line.innerHTML='一句话：<b style="color:#fbbf24">2025 年产业这条腿在快跑（工业、利润、外贸都是绿的），但固定资产投资 '+fai.v+' 明显拖后腿；到 '+C.period+'，全区 GDP 只有 <b style="color:#fca5a5">+1.1%</b>、规上工业 +0.8%，投资仍在 <b style="color:#fca5a5;white-space:nowrap">'+cur.yoy+'</b>。</b>跑得越快，越要看脚下的路稳不稳。';}
+  });
+})();
+</script>
     <div class="metric-detail" id="metricDetail"><div class="md-t">点任一指标，查看口径、目标差距与来源</div></div>
-    <div class="scan-note">利润、外贸、财力、收入以实际增速与定性方向呈现，不设主观目标线。<b>所有数字均为 2025 年统计公报初步核算数，未做加权综合评分。</b>人口背景：2025 年常住人口 <b>159.78 万人</b>、城镇化率 85.74%，人均 GDP <b>7.53 万元</b>（+3.0%），不与上述增速指标同标尺评分。</div>
-    <p style="font-size:13px;color:#cbd5e1;margin:10px 0 0">一句话：<b style="color:#fbbf24">产业这条腿在快跑（工业、利润、外贸都是绿的），但固定资产投资 −37.1% 明显拖后腿，GDP、消费离年初目标也还有距离。</b>跑得越快，越要看脚下的路稳不稳。</p>
+    <div class="scan-note" id="scanNote"></div>
+    <p id="scanLine" style="font-size:13px;color:#cbd5e1;margin:10px 0 0"></p>
   </div>
 
   <!-- 2030未来轨迹（驾驶舱：4情景tab + 主图 + 右结果面板） -->
@@ -552,7 +537,7 @@ svg{max-width:100%;height:auto}
         <div class="no">01</div>
         <div class="fct">
           <div class="tt">一座三产占 <b style="color:#fbbf24">69%</b> 的中心城区，高新区是主引擎 <span class="chip">结构事实</span></div>
-          <div class="ds">2025年 GDP <b>1203.33亿</b>（全区口径），规上工业<b>总产值 937.9亿</b>（公报初步核算口径，现价，增加值 +10.8%）；高新区规上工业产值 <b>632.7亿</b>，约占全区规上工业三分之二（67.4%）。注意：632.7 与 1203.33 不是同一基数，不能直接相减。</div>
+          <div class="ds" id="structDs"></div>
           <div class="conc">
             <div class="conc-track"><div class="conc-a" style="width:67.4%"></div></div>
             <div class="conc-leg"><span><i style="background:#f59e0b"></i>高新区 67.4%</span><span><i style="background:rgba(255,255,255,.15)"></i>其他规上 32.6%</span></div>
@@ -1243,6 +1228,14 @@ var _hmt = _hmt || [];
   hm.src = "https://hm.baidu.com/hm.js?YOUR_ID";
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+(function(){
+  var el=document.getElementById('structDs'); if(!el) return;
+  function byId(id){return HC_OFFICIAL.metrics.filter(function(m){return m.id===id;})[0];}
+  var g=byId('gdp'), ind=byId('ind_va'), base=(window.HT&&HT.BASE)?HT.BASE:'632.7';
+  el.innerHTML='2025年 GDP <b>'+g.total+'亿</b>（全区口径），规上工业<b>总产值 '+ind.output+'亿</b>（公报初步核算口径，现价，增加值 '+ind.v+'）；高新区规上工业产值 <b>'+base+'亿</b>，约占全区规上工业三分之二（67.4%）。注意：'+base+' 与 '+g.total+' 不是同一基数，不能直接相减。';
 })();
 </script>
 <script src="ui/ui.js" defer></script>
