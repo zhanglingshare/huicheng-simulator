@@ -161,9 +161,16 @@ window.HCData = {
 - 两页过时"800 亿"→"820 亿"（6 处字符串，纯事实纠错）
 - D1 更新至 11-06 并上线；巡检轨迹补齐
 
-**阶段 1（需确认）**：`hc-viz/dataset.js` + 02 页去内嵌副本
-**阶段 2（需确认）**：report / who / today 接真源，硬编码清零
-**阶段 3（需确认）**：audit Skill 升级为真源维护者，`as_of` 贯通
+**阶段 1（已完成，提交 7403e81）**：`hc-viz/dataset.js` + 02 页去内嵌副本
+- 新建 `hc-viz/dataset.js`（L2 唯一读取入口）：`relations()` / `relationsObject()` / `intel()` / `asOf()`；按天 `?v=YYYYMMDD` 切版本、`cache:'no-store'`、8s 超时 + AbortController、失败清缓存并抛错，**不返回任何旧数字**；根路径由 `document.currentScript.src` 推导，兼容子目录。
+- `holo-workspace.html` 删除 `EVIDENCE_DATA` / `CHANGES_DATA` / `SOURCES_DATA` 三段内嵌常量共 568 行、24377 字节（文件 3081→1885 行），唯一使用点改为 `const payload=await HCData.relations();`（`boot()` 本就是 async，catch 已有"公开数据读取失败"降级）。残留引用计数为 0。
+- 双端实测：改造前 17 节点 / 19 边 / 7 变化 / 2026-10-29；改造后 **18 / 20 / 8 / 2026-11-06**，桌面 1440×900 与手机 390×844 一致，console/page error 为空。截图对比无布局塌陷，新增节点"环西湖丰渚园商区综合体"正常并入网络。
+- 回归：`verify_all.js`、`check_html_syntax.js`、`choices_kg_runtime_check.js`、`choices_kg_check.js` 全绿。其中两处测试原先把数量写死（`7`、`17/19/17/7`），已改为从 `data/` 实际长度推导——**测试也不许自持数据副本**。
+- 线上核验（`holo-workspace.html`）：18 / 20 / 8 / 2026-11-06，与真源一致。
+- 遗留（阶段 2 处理）：`holo.html` 的 13.8KB FALLBACK、`fun.html` 的 "10/29 示例快照" 文案仍在，属"失败才出现"的低频兜底。
+
+**阶段 2（待启动）**：report / who / today 接真源，硬编码清零；`holo.html` FALLBACK 删除
+**阶段 3（待启动）**：audit Skill 升级为真源维护者，`as_of` 贯通
 
 **验收标准（三条，缺一不算完）**
 1. 改一次真源，19 页全部同步可见——不需要改任何 `.html`。
