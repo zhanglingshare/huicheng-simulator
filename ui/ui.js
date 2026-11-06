@@ -16,7 +16,9 @@
     { url: 'blindspot.html',        n: '09', group: '推演未来', label: '忽略了什么', desc: '城市承载与居民生活的盲点' },
     { url: 'report.html',           n: '10', group: '汇总与实验', label: '报告',       desc: '把观察整理成可讨论的材料' },
     { url: 'future-lab.html',     n: '11', group: '汇总与实验', label: '未来实验室', desc: '动手调参，做多实验舱挑战' },
-    { url: 'ending.html',           n: '12', group: '收尾', label: '结语',       desc: '回到人、城市与决策责任' }
+    { url: 'sandbox.html',          n: '12', group: '回看', label: '模拟沙盘',   desc: '今日动态落进沙盘，消费与产业两条心脏' },
+    { url: 'vibe.html',             n: '13', group: '回看', label: '入夜人气',   desc: '今晚惠城哪里最亮，去处人气与人流' },
+    { url: 'ending.html',           n: '14', group: '收尾', label: '结语',       desc: '回到人、城市与决策责任' }
   ];
 
   var SVG = {
