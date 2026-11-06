@@ -2,7 +2,7 @@
   "schema_version": "relationship-evidence-v1",
   "region": "huicheng",
   "name": "惠城全息关系世界 · 公开证据关系底座",
-  "generated_at": "2026-11-06 17:20",
+  "generated_at": "2026-11-06 21:40",
   "evidence_grade_legend": {
     "A": "官方统计/政府文件/主体公告直接证实，带 URL",
     "B": "多源间接证据推断，给区间/定性，不冒充精确值",
