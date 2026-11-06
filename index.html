@@ -10,7 +10,7 @@
 /* 序章 · 独立版式（设计令牌见 ui/ui.css） */
 body[data-page="index"]{overflow-x:hidden}
 #starLayer{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.7}
-.star{fill:#fff;animation:twinkle 5s ease-in-out infinite}
+.star{fill:#F2F2F2;animation:twinkle 5s ease-in-out infinite}
 @keyframes twinkle{0%,100%{opacity:.10}50%{opacity:.45}}
 
 .shell{
@@ -42,7 +42,7 @@ body[data-page="index"]{overflow-x:hidden}
   margin:0 0 22px;
 }
 .headline h1 > span{display:block}
-.crack{position:relative;color:#ff6b60;display:inline-block;max-width:100%}
+.crack{position:relative;color:#E1857E;display:inline-block;max-width:100%}
 .crack::after{
   content:'';position:absolute;left:2px;right:2px;top:56%;height:1.5px;
   background:rgba(255,107,96,.5);transform:rotate(-.8deg) scaleX(0);
@@ -73,14 +73,14 @@ body[data-page="index"]{overflow-x:hidden}
 .rel-svg{width:100%;height:auto;display:block;aspect-ratio:4/3;border-radius:12px;overflow:hidden;
   background:
     radial-gradient(80% 70% at 42% 42%,rgba(10,132,255,.08),transparent 70%),
-    #0a0c10;
+    #0A0C10;
   border:1px solid rgba(255,255,255,.05)}
 .rel-svg text{font-family:var(--ds-font)}
-.rel-svg .lb{font-weight:500;fill:#fff;font-size:12px;letter-spacing:0}
+.rel-svg .lb{font-weight:500;fill:#F2F2F2;font-size:12px;letter-spacing:0}
 .rel-svg .sub{fill:var(--ds-text-3);font-size:10.5px}
 .rel-svg .nd .lb,.rel-svg .leak-target .lb{font-size:11.5px}
 .rel-svg .annot{font-size:10.5px;font-weight:500}
-.local-line{fill:none;stroke:#5ac8fa;stroke-width:1;stroke-dasharray:3 6;opacity:.14}
+.local-line{fill:none;stroke:#75C6DF;stroke-width:1;stroke-dasharray:3 6;opacity:.14}
 .leak-line{fill:none;stroke-linecap:round;stroke-dasharray:600;stroke-dashoffset:600;
   animation:shootLine 1.1s var(--ds-ease) .5s forwards}
 @keyframes shootLine{to{stroke-dashoffset:0}}
@@ -122,7 +122,7 @@ body[data-page="index"]{overflow-x:hidden}
 .cta .sub{display:block;font-size:11.5px;color:var(--ds-text-2);margin-top:4px;line-height:1.5}
 .cta .arrow{
   width:32px;height:32px;flex:none;border-radius:50%;display:grid;place-items:center;
-  background:rgba(10,132,255,.9);color:#fff;box-shadow:0 2px 8px rgba(10,132,255,.35);
+  background:rgba(10,132,255,.9);color:#F2F2F2;box-shadow:0 2px 8px rgba(10,132,255,.35);
   transition:transform .25s var(--ds-ease)
 }
 .cta:hover .arrow{transform:translateX(2px)}
@@ -159,8 +159,9 @@ body[data-page="index"]{overflow-x:hidden}
 </style>
 <link rel="stylesheet" href="ui/ui.css">
 <link rel="stylesheet" href="ui/ui-pages.css">
+<link rel="stylesheet" href="ui/skin.css?v=20261106">
 </head>
-<body>
+<body class="sk-index">
 <svg id="starLayer" aria-hidden="true"></svg>
 <main class="shell">
   <section class="col-text">

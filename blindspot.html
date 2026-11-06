@@ -5,14 +5,14 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 :root{
-  --sky1:#04060f; --sky2:#0a0f24; --sky3:#1e1b4b;
+  --sky1:#0A0B10; --sky2:#11131D; --sky3:#3A399E;
   --glass:rgba(255,255,255,.06); --glass-b:rgba(255,255,255,.12);
-  --ink:#f1f5f9; --ink2:#cbd5e1; --muted:#94a3b8;
-  --neon:#38bdf8; --warm:#fbbf24; --ok:#34d399; --bad:#fb7185;
-  --orange:#f97316; --pink:#f472b6;
+  --ink:#B0BFDD; --ink2:#B8C1D6; --muted:#949FB8;
+  --neon:#58BAD8; --warm:#D5B94A; --ok:#37D0A5; --bad:#E389A2;
+  --orange:#D2963D; --pink:#E2849F;
 }
 *{box-sizing:border-box}
-body{margin:0;background:linear-gradient(180deg,#04060f 0%,#0a0f24 30%,#0b1226 100%);color:var(--ink);font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh}
+body{margin:0;background:linear-gradient(180deg,#0A0B10 0%,#11131D 30%,#12161F 100%);color:var(--ink);font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh}
 .nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:10px 14px;background:rgba(6,10,24,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--glass-b);overflow-x:auto}
 .nav b{font-size:14px;margin-right:6px;flex:none;color:var(--ink)}
 .nav a{background:var(--glass);color:var(--muted);border:1px solid var(--glass-b);padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none;transition:.2s}
@@ -22,7 +22,7 @@ h1{font-size:22px;margin:0 0 4px;font-weight:800;letter-spacing:.3px}
 .sub{color:var(--muted);font-size:13px;margin:0 0 20px;line-height:1.7}
 .card{background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 4px 24px rgba(0,0,0,.25)}
 .card h2{font-size:14px;margin:0 0 12px;color:var(--ink);font-weight:700}
-.btn{background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:#fff;border:0;padding:12px 28px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 4px 16px rgba(59,130,246,.35)}
+.btn{background:linear-gradient(135deg,#2F5FC6,#5981D8);color:#F2F2F2;border:0;padding:12px 28px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 4px 16px rgba(59,130,246,.35)}
 .hint{font-size:11px;color:var(--muted);text-align:center;margin-top:10px;opacity:.8}
 .nodeL,.nodeR{cursor:pointer;transition:.2s}
 .nodeL:hover circle,.nodeR:hover circle{stroke-width:3.5}
@@ -43,7 +43,8 @@ body{overflow-x:hidden}
 </style>
 <link rel="stylesheet" href="ui/ui.css">
 <link rel="stylesheet" href="ui/ui-pages.css">
-</head><body>
+<link rel="stylesheet" href="ui/skin.css?v=20261106">
+</head><body class="sk-blindspot">
 
 
 
