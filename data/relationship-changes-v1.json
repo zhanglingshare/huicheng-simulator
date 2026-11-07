@@ -1,7 +1,7 @@
 {
   "schema_version": "relationship-changes-v1",
   "region": "huicheng",
-  "generated_at": "2026-11-06 21:40",
+  "generated_at": "2026-11-07 17:20",
   "count": 9,
   "change_type_legend": {
     "new_entity": "新主体接入",
@@ -12,7 +12,7 @@
     "break": "连接失效",
     "alternative": "替代路径"
   },
-  "note": "仅收录会改变网络结构或连接状态的事件；签约≠投产，规划/在建均标注不确定性。",
+  "note": "仅收录会改变网络结构或连接状态的事件；签约≠投产，规划/在建均标注不确定性。2026-11-07 17:20 核验：本期无新增变化事件（无结构改变），仅补强 C005 济广高速征地、C008 丰渚园中标官方公告版来源。",
   "changes": [
     {
       "change_id": "C001",
@@ -107,10 +107,11 @@
       ],
       "before_after": "此前：跨江通道未贯通；此后：南北大动脉关键节点打通",
       "source_ids": [
-        "S005"
+        "S005",
+        "S027"
       ],
       "uncertainty": "年内通车为目标",
-      "last_verified_at": "2026-10-29"
+      "last_verified_at": "2026-11-07"
     },
     {
       "change_id": "C006",
@@ -167,10 +168,11 @@
       "before_after": "此前：旧址拆除后空置；此后：商业+精品酒店项目定标进入施工准备",
       "source_ids": [
         "S018",
-        "S019"
+        "S019",
+        "S024"
       ],
       "uncertainty": "尚未开工，工期480日历天，开业运营待观察",
-      "last_verified_at": "2026-11-06"
+      "last_verified_at": "2026-11-07"
     },
     {
       "change_id": "C009",

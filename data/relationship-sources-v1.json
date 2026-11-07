@@ -1,9 +1,9 @@
 {
   "schema_version": "relationship-sources-v1",
   "region": "huicheng",
-  "generated_at": "2026-11-06 21:40",
-  "count": 23,
-  "note": "转载不视为独立来源；可信度按发布机构与可核验性评定。",
+  "generated_at": "2026-11-07 17:20",
+  "count": 27,
+  "note": "转载不视为独立来源；可信度按发布机构与可核验性评定。2026-11-07 17:20 核验：新增 S024（丰渚园商区综合体中标的官方公告版，替换媒体口径）、S025（GP2026-40 鹿岗工业用地成交）、S026（金龙大道东南片区配售型保障房规划许可批前公示）、S027（济广高速惠城段征地公告）。",
   "sources": [
     {
       "source_id": "S001",
@@ -411,6 +411,82 @@
       "summary": "2025年6月以来乐庭智联二期、辉翰储能、群鑫达智能制造、博鑫智能驾舱、立得微电子5宗产业项目密集动工，总用地12万㎡、总投资15亿元",
       "credibility": "官方发布，高",
       "corroborated": true
+    },
+    {
+      "source_id": "S024",
+      "title": "惠州市环西湖丰渚园商区综合体项目施工中标公告（中标价约2.373亿元，工期480日历天）",
+      "publisher": "惠州市公共资源交易中心",
+      "source_type": "项目公示",
+      "url": "https://www.huizhou.gov.cn/hzzyjy/gkmlpt/content/5/5884/post_5884139.html",
+      "published_at": "2026-11-02",
+      "collected_at": "2026-11-07",
+      "region": "惠城区",
+      "period": "2026-2027",
+      "supports": [
+        "E020",
+        "E012",
+        "C008",
+        "wh",
+        "fz"
+      ],
+      "summary": "项目代码2602-441302-04-01-978466；中标人广东省第四建筑工程有限公司[惠州市骏跃建工有限公司]，中标下浮率0.50%；招标人惠州市惠城区惠智投资发展有限公司。属西湖西侧文旅商业配套，建设起止2026年9月至2027年12月。",
+      "credibility": "官方公告，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S025",
+      "title": "GP2026-40挂牌结果公告：惠城区高新科技产业园鹿岗片区04单元LG04-01-11-01地块成交（24206㎡）",
+      "publisher": "惠州市公共资源交易中心",
+      "source_type": "项目公示",
+      "url": "https://www.huizhou.gov.cn/hzzyjy/gkmlpt/content/5/5885/post_5885475.html",
+      "published_at": "2026-11-03",
+      "collected_at": "2026-11-07",
+      "region": "惠城区",
+      "period": "2026",
+      "supports": [
+        "E010",
+        "gxq"
+      ],
+      "summary": "一类工业用地，计算指标用地面积24206㎡，规划建筑面积38730~60515㎡，容积率1.6~2.5，使用年限50年；起始价2430万元，2026-11-02成交，竞得人惠州市鑫慧城投资有限公司（园区平台公司）。属产业载体空间供给，非具体企业投产。",
+      "credibility": "官方公告，高",
+      "corroborated": false
+    },
+    {
+      "source_id": "S026",
+      "title": "惠州市城投安居发展有限公司项目规划许可批前公示（金龙大道东南片区JBD57-07-01地块配售型保障房项目）",
+      "publisher": "惠州市惠城区自然资源局",
+      "source_type": "规划方案",
+      "url": "http://www.hcq.gov.cn/hzhczrzyj/gkmlpt/content/5/5887/post_5887598.html",
+      "published_at": "2026-11-05",
+      "collected_at": "2026-11-07",
+      "region": "惠城区",
+      "period": "2026",
+      "supports": [
+        "E013",
+        "rj"
+      ],
+      "summary": "公示期为2026年11月5日至11月14日，许可编号HCJLGS2026（建设工程规划类）。项目为金龙大道东南片区JBD57-07-01地块配售型保障房，属中心城区安居供给的新子项；总套数未在公示文本中列明。",
+      "credibility": "官方公示，高",
+      "corroborated": false
+    },
+    {
+      "source_id": "S027",
+      "title": "惠城区人民政府关于济广高速公路惠州小金口至广州萝岗段改扩建工程（惠城段）征收土地公告",
+      "publisher": "惠城区人民政府",
+      "source_type": "政府文件",
+      "url": "http://www.hcq.gov.cn/gkmlpt/content/5/5881/post_5881829.html",
+      "published_at": "2026-10-29",
+      "collected_at": "2026-11-07",
+      "region": "惠城区",
+      "period": "2026",
+      "supports": [
+        "E011",
+        "C005",
+        "jt"
+      ],
+      "summary": "征收小金口街道白石村汤一、汤二、汤三村民小组，小铁村小铁、山子村民小组属下集体土地1.7543公顷；公告期限2026年10月29日至11月12日。属工程征地实施阶段，不等于建成通车。",
+      "credibility": "官方文件，高",
+      "corroborated": false
     }
   ]
 }

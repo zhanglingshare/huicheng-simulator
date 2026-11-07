@@ -2,7 +2,7 @@
   "schema_version": "relationship-evidence-v1",
   "region": "huicheng",
   "name": "惠城全息关系世界 · 公开证据关系底座",
-  "generated_at": "2026-11-06 21:40",
+  "generated_at": "2026-11-07 17:20",
   "evidence_grade_legend": {
     "A": "官方统计/政府文件/主体公告直接证实，带 URL",
     "B": "多源间接证据推断，给区间/定性，不冒充精确值",
@@ -19,7 +19,7 @@
   },
   "node_count": 19,
   "edge_count": 21,
-  "note": "关系强度不编造：有公开量化数据才显示 metric，否则只给 strength_basis；C 级为待验证假设，前端须显式标注。",
+  "note": "关系强度不编造：有公开量化数据才显示 metric，否则只给 strength_basis；C 级为待验证假设，前端须显式标注。2026-11-07 17:20 核验：本期无新增节点/边；复核 E001 E004 E006 E010 E011 E012 E013 E018 E020，新增来源 S024/S025/S026/S027，四条投资边补 1-9 月固投-40.7%、工业投资-46.1% 的 counter_evidence。",
   "nodes": [
     {
       "node_id": "hc",
@@ -50,7 +50,8 @@
       "evidence_grade": "A",
       "source_ids": [
         "S001",
-        "S004"
+        "S004",
+        "S025"
       ]
     },
     {
@@ -130,7 +131,8 @@
       "change_status": "增强",
       "evidence_grade": "A",
       "source_ids": [
-        "S005"
+        "S005",
+        "S027"
       ]
     },
     {
@@ -145,7 +147,8 @@
       "change_status": "增强",
       "evidence_grade": "A",
       "source_ids": [
-        "S016"
+        "S016",
+        "S024"
       ]
     },
     {
@@ -160,7 +163,8 @@
       "change_status": "增强",
       "evidence_grade": "A",
       "source_ids": [
-        "S012"
+        "S012",
+        "S026"
       ]
     },
     {
@@ -298,7 +302,8 @@
       "evidence_grade": "A",
       "source_ids": [
         "S018",
-        "S019"
+        "S019",
+        "S024"
       ]
     },
     {
@@ -339,8 +344,8 @@
       "source_ids": [
         "S006"
       ],
-      "counter_evidence": "未动工，实际投资完成额未公开",
-      "last_verified_at": "2026-11-06",
+      "counter_evidence": "未动工，实际投资完成额未公开；2026年1-9月全区工业投资-46.1%，项目开工节点与投资完成额均未公开",
+      "last_verified_at": "2026-11-07",
       "change_status": "新增"
     },
     {
@@ -410,10 +415,11 @@
       "strength_basis": "投资促进局摘牌公告+南方+",
       "source_ids": [
         "S009",
-        "S010"
+        "S010",
+        "S020"
       ],
-      "counter_evidence": "投产时间未公开",
-      "last_verified_at": "2026-11-06",
+      "counter_evidence": "投产时间未公开；2026年1-9月全区固投-40.7%、工业投资-46.1%，摘牌后开工节点未公开",
+      "last_verified_at": "2026-11-07",
       "change_status": "新增"
     },
     {
@@ -463,8 +469,8 @@
       "source_ids": [
         "S011"
       ],
-      "counter_evidence": "存量技改，非新增产能主体",
-      "last_verified_at": "2026-11-06",
+      "counter_evidence": "存量技改，非新增产能主体；设备投资约0.43亿规模小，对全区工业投资（1-9月-46.1%）拉动有限",
+      "last_verified_at": "2026-11-07",
       "change_status": "新增"
     },
     {
@@ -553,10 +559,11 @@
       "source_ids": [
         "S001",
         "S004",
-        "S020"
+        "S020",
+        "S025"
       ],
-      "counter_evidence": "820亿为年度目标；2026年1-9月全区固投-40.7%、工业投资-46.1%，园区实际产值进度未公开",
-      "last_verified_at": "2026-11-06",
+      "counter_evidence": "820亿为年度目标；2026年1-9月全区固投-40.7%、工业投资-46.1%，园区实际产值进度未公开；产业类重点项目完成率60.83%，为三类中最慢",
+      "last_verified_at": "2026-11-07",
       "change_status": "无显著变化"
     },
     {
@@ -574,10 +581,11 @@
       "comparison_period": "2026",
       "strength_basis": "省交通运输厅公告",
       "source_ids": [
-        "S005"
+        "S005",
+        "S027"
       ],
-      "counter_evidence": "年内通车为目标",
-      "last_verified_at": "2026-10-29",
+      "counter_evidence": "年内通车为目标；截至2026-11-07未见惠霞高速通车公告，仍处桥面系及附属设施施工；济广高速惠城段改扩建仍处征地阶段（公告期至2026-11-12），征收不等于通车",
+      "last_verified_at": "2026-11-07",
       "change_status": "新增"
     },
     {
@@ -596,10 +604,12 @@
       "strength_basis": "文旅活动官方发布",
       "source_ids": [
         "S016",
-        "S020"
+        "S019",
+        "S020",
+        "S024"
       ],
       "counter_evidence": "客流/消费额未细分；2026年1-9月社消零+2.0%，文旅对消费的贡献未单独统计；西湖更新一期丰山片区（11-03 市政工程获受理）与丰渚园商区综合体为两个子项，勿合并计数",
-      "last_verified_at": "2026-11-06",
+      "last_verified_at": "2026-11-07",
       "change_status": "增强"
     },
     {
@@ -621,10 +631,11 @@
       "comparison_period": "2026",
       "strength_basis": "南方+报道",
       "source_ids": [
-        "S012"
+        "S012",
+        "S026"
       ],
-      "counter_evidence": "民生配套，非产业直接贡献",
-      "last_verified_at": "2026-10-29",
+      "counter_evidence": "民生配套，非产业直接贡献；金龙大道东南片区JBD57-07-01配售型保障房2026-11-05规划许可批前公示（套数未公开），与荔枝城890套为不同子项，勿合并计数",
+      "last_verified_at": "2026-11-07",
       "change_status": "新增"
     },
     {
@@ -739,7 +750,7 @@
         "S020"
       ],
       "counter_evidence": "集群内部结构未细分；2026年1-9月规上工业增加值仅+0.8%、二产增加值-1.6%，工业基本盘增速明显放缓",
-      "last_verified_at": "2026-11-06",
+      "last_verified_at": "2026-11-07",
       "change_status": "无显著变化"
     },
     {
@@ -783,10 +794,11 @@
       "strength_basis": "广东省公共资源交易平台中标公告+自然资源局受理公示",
       "source_ids": [
         "S018",
-        "S019"
+        "S019",
+        "S024"
       ],
       "counter_evidence": "中标未开工，工期480日历天，开业运营效果未知",
-      "last_verified_at": "2026-11-06",
+      "last_verified_at": "2026-11-07",
       "change_status": "新增"
     },
     {
