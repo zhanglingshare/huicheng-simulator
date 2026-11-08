@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>看见惠城 · 全息关系版</title>
+<meta name="description" content="用关系网络看惠城：产业、企业、投资、交通、文旅、人居与区域协作之间的有证据关系及其变化；已证实/推断/假设分层呈现，变化由动画与高亮凸显。">
+<style>
+  :root{
+    --ink:#0f1c2e; --ink2:#1e2b3a; --sub:#64748b; --faint:#94a3b8;
+    --line:#e7ecf3; --line2:#eef2f7;
+    --blue:#2563eb; --cyan:#0891b2; --teal:#0d9488;
+    --red:#e11d48; --purple:#7c3aed; --green:#16a34a; --amber:#d97706;
+    --sh-sm:0 1px 2px rgba(15,28,46,.05),0 2px 8px rgba(15,28,46,.05);
+    --sh-md:0 1px 3px rgba(15,28,46,.04),0 10px 28px rgba(15,28,46,.09);
+    --sh-lg:0 6px 16px rgba(15,28,46,.10),0 28px 64px rgba(15,28,46,.24);
+    --r-sm:10px; --r-md:14px; --r-lg:20px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei','Segoe UI',sans-serif;
+    color:var(--ink); overflow:hidden;
+    background:linear-gradient(180deg,#f7f9fc 0%,#f0f4f9 60%,#e9eef5 100%);
+    -webkit-font-smoothing:antialiased;
+  }
+  #app{position:relative;width:100%;height:100%}
+
+  /* 顶部 */
+  header{position:absolute;top:0;left:0;right:0;height:60px;display:flex;align-items:center;padding:0 22px;z-index:30;gap:10px}
+  .burger{display:none;align-items:center;justify-content:center;width:40px;height:40px;border:none;background:#fff;border-radius:12px;cursor:pointer;flex-shrink:0;box-shadow:var(--sh-sm)}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(15,28,46,.4);backdrop-filter:blur(2px);z-index:65}
+  .overlay.show{display:block}
+  .brand{display:flex;align-items:center;gap:11px;flex-shrink:0}
+  .brand .logo{width:36px;height:36px}
+  .brand h1{font-size:17px;font-weight:800;letter-spacing:.4px}
+  .brand .tag{font-size:10px;color:var(--sub);letter-spacing:1.2px;margin-top:1px}
+  nav.top{display:flex;gap:3px;margin-left:14px;background:rgba(255,255,255,.6);padding:4px;border-radius:999px;border:1px solid rgba(255,255,255,.7)}
+  nav.top button{border:none;background:transparent;cursor:pointer;font:inherit;color:#64748b;font-size:13px;font-weight:700;padding:7px 15px;border-radius:999px;transition:.18s}
+  nav.top button:hover{color:var(--ink)}
+  nav.top button.active{background:var(--ink);color:#fff;box-shadow:0 4px 12px rgba(15,28,46,.25)}
+  .search{margin-left:auto;display:flex;align-items:center;width:224px;height:38px;background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:999px;padding:0 15px;gap:8px;flex-shrink:0;transition:.18s;box-shadow:var(--sh-sm)}
+  .search:focus-within{border-color:#c3d2ec;box-shadow:0 0 0 4px rgba(37,99,235,.08)}
+  .search input{border:none;background:transparent;outline:none;font:inherit;font-size:12.5px;width:100%}
+
+  /* 指标条 */
+  #metrics{position:absolute;top:64px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:25}
+  .asof-line{position:fixed;top:15px;right:262px;z-index:60;
+    font:500 11.5px/1.4 system-ui,-apple-system,sans-serif;color:#6b7787;
+    background:rgba(255,255,255,.94);border:1px solid #e8edf4;border-radius:999px;
+    padding:4px 11px;letter-spacing:.01em;white-space:nowrap;pointer-events:none}
+  .asof-line b{color:#1f2937;font-weight:600}
+  .metric-fail{padding:10px 14px;border-radius:10px;border:1px solid rgba(239,68,68,.35);background:rgba(239,68,68,.08);color:#fca5a5;font:500 12.5px/1.6 system-ui,sans-serif}
+  .metric{position:relative;width:152px;height:60px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.85);border-radius:var(--r-md);box-shadow:var(--sh-md);padding:9px 12px 9px 15px;overflow:hidden;transition:.2s}
+  .metric::before{content:"";position:absolute;left:0;top:9px;bottom:9px;width:3px;border-radius:3px;background:linear-gradient(180deg,#38bdf8,#2563eb)}
+  .metric:hover{transform:translateY(-2px);box-shadow:var(--sh-lg)}
+  .metric .k{font-size:10.5px;color:var(--sub);white-space:nowrap}
+  .metric .v{font-size:19px;font-weight:800;line-height:1.15;margin-top:3px;display:flex;align-items:baseline;gap:6px}
+  .metric .v small{font-size:10px;font-weight:800;padding:1px 6px;border-radius:999px}
+  .up{color:#15803d}.down{color:#e11d48}
+  .metric .v small.up{background:#dcfce7}.metric .v small.down{background:#ffe4e6}
+
+  /* 网络舞台 */
+  #stageWrap{position:absolute;inset:0;z-index:5}
+  #net{position:absolute;inset:0;width:100%;height:100%;cursor:grab}
+  #net.drag{cursor:grabbing}
+  #netHint{position:absolute;top:132px;left:50%;transform:translateX(-50%);font-size:11px;color:#94a3b8;background:rgba(255,255,255,.8);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.9);padding:5px 14px;border-radius:999px;pointer-events:none;z-index:6;box-shadow:var(--sh-sm)}
+
+  /* 左栏 */
+  .side{position:absolute;z-index:24}
+  .side.left{top:136px;left:18px;width:164px}
+  .side.right{top:132px;right:18px;bottom:124px;width:296px;display:flex;flex-direction:column}
+  .card{background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.85);border-radius:var(--r-md);box-shadow:var(--sh-md);padding:13px}
+  .card + .card{margin-top:10px}
+  .card h3{font-size:12px;font-weight:800;margin-bottom:9px;display:flex;align-items:center;gap:7px;letter-spacing:.2px}
+  .card h3 .dot{width:7px;height:7px;border-radius:50%;background:var(--blue)}
+  .filter button{position:relative;width:100%;border:none;background:none;cursor:pointer;font:inherit;display:flex;align-items:center;gap:9px;color:#64748b;font-size:11.5px;font-weight:600;padding:7px 8px;border-radius:var(--r-sm);text-align:left;transition:.15s}
+  .filter button:hover{background:#f5f8fc;color:var(--ink)}
+  .filter button.active{color:var(--ink);background:var(--blue-soft);font-weight:800}
+  .filter button .swatch{width:14px;height:14px;border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px rgba(0,0,0,.04)}
+  .legend .row{display:flex;align-items:center;gap:9px;margin-bottom:7px;font-size:11px;color:#64748b;font-weight:600}
+  .legend .ln{width:26px;height:0}
+  .toggle-row{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:#64748b;font-weight:700;margin-top:11px}
+  .switch{width:36px;height:20px;border-radius:999px;background:var(--blue);position:relative;cursor:pointer;flex-shrink:0;transition:.2s}
+  .switch i{position:absolute;right:2px;top:2px;width:16px;height:16px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+  .switch.off{background:#cbd5e1}.switch.off i{right:auto;left:2px}
+
+  /* 右侧产业关系情报区 */
+  .intel-head{display:flex;align-items:center;gap:10px;padding:13px 15px;background:rgba(255,255,255,.95);border:1px solid rgba(255,255,255,.85);border-radius:var(--r-md) var(--r-md) 0 0;box-shadow:var(--sh-md)}
+  .ai-avatar{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,#0f1c2e,#334155);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 10px rgba(15,28,46,.25)}
+  .intel-head .t{font-size:13.5px;font-weight:800}
+  .intel-head .s{font-size:10px;color:#16a34a;font-weight:700;display:flex;align-items:center;gap:5px;margin-top:2px}
+  .intel-head .s .pulse-dot{width:6px;height:6px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 0 rgba(22,163,74,.5);animation:pd 1.8s infinite}
+  @keyframes pd{0%{box-shadow:0 0 0 0 rgba(22,163,74,.5)}70%{box-shadow:0 0 0 7px rgba(22,163,74,0)}100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}}
+  #intelBody{flex:1;overflow-y:auto;background:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.85);border-top:none;border-radius:0 0 var(--r-md) var(--r-md);box-shadow:var(--sh-md);padding:14px;display:flex;flex-direction:column;gap:14px}
+  #intelBody::-webkit-scrollbar{width:6px}#intelBody::-webkit-scrollbar-thumb{background:#d6dee9;border-radius:99px}
+  .msg{display:flex;gap:9px;cursor:pointer}
+  .msg .ma{width:26px;height:26px;border-radius:9px;background:linear-gradient(135deg,#0f1c2e,#334155);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;box-shadow:0 2px 6px rgba(15,28,46,.2)}
+  .msg .bubble{position:relative;background:#fff;border:1px solid #edf1f6;border-radius:4px 13px 13px 13px;padding:11px 12px;flex:1;transition:.18s;box-shadow:var(--sh-sm)}
+  .msg:hover .bubble{border-color:#dbe4f0;box-shadow:var(--sh-md);transform:translateY(-1px)}
+  .msg .bubble .tag{display:inline-block;font-size:9.5px;font-weight:800;padding:3px 9px;border-radius:999px;margin-bottom:7px;letter-spacing:.2px}
+  .msg .bubble .h{font-size:12.5px;font-weight:800;line-height:1.5}
+  .msg .bubble .q{font-size:11px;color:#5b6b7f;line-height:1.65;margin-top:8px;padding:8px 10px;background:#f7f9fc;border-radius:9px;border-left:2px solid #c3d2ec}
+  .msg .bubble .q b{color:var(--ink)}
+  .msg .bubble .go-link{font-size:10.5px;color:var(--blue);font-weight:800;margin-top:9px;display:flex;align-items:center;gap:4px}
+  .msg:hover .go-link svg{transform:translateX(3px)}
+  .msg .go-link svg{transition:.18s}
+
+  /* 底部时间线 */
+  footer{position:absolute;left:0;right:0;bottom:0;height:118px;z-index:30;padding:0 18px}
+  .tl-wrap{height:100%;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.85);border-radius:var(--r-md);box-shadow:var(--sh-md);padding:11px 18px;display:flex;flex-direction:column}
+  .tl-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+  .tl-head .t{font-size:12px;font-weight:800;display:flex;align-items:center;gap:7px}
+  .tl-head .t .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+  .tl-head .s{font-size:10px;color:var(--sub)}
+  .tl-track{position:relative;flex:1;display:flex;align-items:center}
+  .tl-line{position:absolute;left:2%;right:2%;top:50%;height:2px;background:linear-gradient(90deg,#dbe4ee,#e7ecf3);transform:translateY(-50%);border-radius:2px}
+  .tl-node{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;cursor:pointer;z-index:2}
+  .tl-node .n{width:14px;height:14px;border-radius:50%;background:#fff;border:2.5px solid #aab8c8;transition:.18s}
+  .tl-node:hover .n{transform:scale(1.25)}
+  .tl-node .d{font-size:9.5px;color:var(--sub);font-weight:700;margin-top:5px;white-space:nowrap}
+  .tl-node .l{order:-1;font-size:10px;color:#475569;font-weight:700;white-space:nowrap;max-width:122px;overflow:hidden;text-overflow:ellipsis;background:rgba(255,255,255,.94);padding:3px 10px;border-radius:999px;box-shadow:var(--sh-sm);border:1px solid var(--line);margin-bottom:8px;transition:.18s}
+  .tl-node:hover .l{border-color:#cdd9ea;box-shadow:var(--sh-md)}
+  .tl-node.active .n{border-color:var(--blue);background:var(--blue);box-shadow:0 0 0 5px rgba(37,99,235,.16)}
+  .tl-node.new .n{border-color:var(--green);background:var(--green)}
+  .tl-node.edge .n{border-color:var(--amber);background:var(--amber)}
+
+  /* 浮卡 */
+  #popMask{position:fixed;inset:0;z-index:70;background:rgba(15,28,46,.38);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:.22s}
+  #popMask.show{opacity:1;pointer-events:auto}
+  #pop{position:fixed;z-index:75;left:50%;top:50%;width:352px;max-width:92vw;max-height:84vh;overflow-y:auto;background:#fff;border:1px solid #eef2f7;border-radius:var(--r-lg);box-shadow:var(--sh-lg);padding:0;opacity:0;pointer-events:none;transform:translate(-50%,-46%) scale(.96);transition:.24s cubic-bezier(.2,.8,.3,1)}
+  #pop.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+  #pop::-webkit-scrollbar{width:6px}#pop::-webkit-scrollbar-thumb{background:#d6dee9;border-radius:99px}
+  #pop .ph{display:flex;align-items:center;gap:11px;padding:16px 17px 14px;border-bottom:1px solid #f1f5f9}
+  #pop .ph .ic{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 10px rgba(15,28,46,.18)}
+  #pop .ph .t{font-size:15px;font-weight:800;display:block;line-height:1.3}
+  #pop .ph .s{font-size:10.5px;color:var(--sub);display:block;margin-top:2px}
+  #pop .close{margin-left:auto;border:none;background:#f4f6f9;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:16px;color:#64748b;flex-shrink:0;transition:.16s}
+  #pop .close:hover{background:#e8edf3;color:var(--ink)}
+  #pop .p-body{padding:14px 17px 17px}
+  #pop p{font-size:12px;line-height:1.75;color:#46566b}
+  #pop .grade-chip{display:inline-block;font-size:10px;font-weight:800;padding:3px 10px;border-radius:999px;margin:10px 0 2px;letter-spacing:.2px}
+  #pop .facts{display:flex;flex-direction:column;gap:7px;margin:12px 0}
+  #pop .facts .sec-t{font-size:11px;font-weight:800;color:#64748b;letter-spacing:.3px;margin-bottom:1px}
+  #pop .fact{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#f7f9fc;border:1px solid #f1f5f9;border-radius:var(--r-sm);padding:8px 12px;font-size:11.5px;transition:.15s}
+  #pop .fact:hover{background:#f2f6fb}
+  #pop .fact b{font-size:11.5px;font-weight:800;text-align:right}
+  #pop .kpi{display:flex;align-items:center;gap:9px;background:#f7f9fc;border:1px solid #f1f5f9;border-radius:var(--r-sm);padding:8px 12px;font-size:11.5px;font-weight:700;color:#334155;transition:.15s}
+  #pop .kpi:hover{background:#f2f6fb;border-color:#e6ecf4}
+  #pop .kpi .kpi-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0}
+  #pop .src{font-size:10.5px;color:var(--sub);line-height:1.7;border-top:1px solid #f1f5f9;padding-top:12px;margin-top:4px}
+  #pop .src .src-card{display:block;background:#f7f9fc;border:1px solid #eef2f7;border-radius:var(--r-sm);padding:8px 11px;margin-bottom:7px;word-break:break-all;transition:.15s}
+  #pop .src .src-card:hover{border-color:#cdd9ea;background:#f2f6fb}
+  #pop .src .src-card .sn{font-weight:700;color:#46566b;display:block;margin-bottom:2px}
+  #pop .src a{color:var(--blue)}
+
+  /* 移动端情报浮动按钮 + 抽屉 */
+  #intelFab{display:none;position:fixed;right:16px;bottom:118px;z-index:60;align-items:center;gap:7px;background:linear-gradient(135deg,#0f1c2e,#2b3c52);color:#fff;border:none;border-radius:999px;padding:12px 18px;font:inherit;font-size:12px;font-weight:800;box-shadow:0 8px 20px rgba(15,28,46,.32);cursor:pointer;transition:.18s}
+  #intelFab:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(15,28,46,.4)}
+  #intelFab .n{width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 3px rgba(74,222,128,.2)}
+  #intelClose{display:none;margin-left:auto;border:none;background:#f1f5f9;width:32px;height:32px;border-radius:50%;font-size:17px;color:#64748b;cursor:pointer}
+
+  /* 手机 */
+  @media (max-width:900px){
+    nav.top{display:none}
+    .side.right{display:flex;position:fixed;top:0;right:0;bottom:0;left:0;width:auto;margin:0;border-radius:0;z-index:80;background:#fff;
+      transform:translateX(100%);transition:transform .28s;pointer-events:auto}
+    .side.right.open{transform:translateX(0)!important}
+    .intel-head{border-radius:0;border:none;border-bottom:1px solid #f1f5f9;box-shadow:none}
+    #intelBody{border-radius:0;border:none;box-shadow:none}
+    #intelFab{display:flex}
+    #intelClose{display:block}
+    .burger{display:flex}
+    .brand .tag{display:none}.brand h1{font-size:15px}
+    .search{width:100px;height:36px}
+    #metrics{top:56px;left:8px;right:8px;transform:none;gap:7px;overflow-x:auto;padding-bottom:2px}
+    #metrics::-webkit-scrollbar{display:none}
+    .metric{width:136px;flex-shrink:0;height:54px}.metric .v{font-size:16px}
+    .asof-line{top:112px;left:8px;right:8px;text-align:center;
+      font-size:10.5px;padding:3px 8px;white-space:normal}
+    #netHint{top:142px;font-size:10px}
+    .side.left{top:0;left:0;height:100%;width:240px;z-index:70;background:#fff;padding:66px 14px 16px;overflow-y:auto;transform:translateX(-100%);transition:transform .25s;box-shadow:var(--sh-lg)}
+    .side.left.open{transform:translateX(0)}
+    footer{height:108px;padding:0 8px}
+    .tl-node .l{max-width:74px;font-size:9px}
+    #pop{width:calc(100vw - 20px)}
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="overlay" id="overlay"></div>
+
+  <header>
+    <button class="burger" id="burger" aria-label="菜单"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1e2b3a" stroke-width="2.2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#1e2b3a"/><circle cx="20" cy="11" r="3" fill="#38bdf8"/><circle cx="12" cy="25" r="2.4" fill="#7dd3fc"/><circle cx="28" cy="25" r="2.4" fill="#7dd3fc"/><line x1="20" y1="11" x2="12" y2="25" stroke="#bae6fd" stroke-width="1"/><line x1="20" y1="11" x2="28" y2="25" stroke="#bae6fd" stroke-width="1"/><line x1="12" y1="25" x2="28" y2="25" stroke="#bae6fd" stroke-width="1"/></svg>
+      <div><h1>惠城 · 全息关系版</h1><div class="tag">用关系看世界 · 让变化被看见</div></div>
+    </div>
+    <nav class="top" id="topnav">
+      <button data-f="all" class="active">全景</button>
+      <button data-f="industry">产业</button>
+      <button data-f="investment">投资</button>
+      <button data-f="regional">区域</button>
+      <button data-f="tourism_consumption">文旅</button>
+      <button data-f="transport">交通</button>
+    </nav>
+    <div class="search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+      <input id="searchInput" placeholder="搜索企业、集群或事件…">
+    </div>
+  </header>
+
+  <div id="asofLine" class="asof-line"></div>
+  <div id="metrics"></div>
+
+  <div id="stageWrap">
+    <canvas id="net"></canvas>
+    <div id="netHint">拖拽节点可重新布局 · 点击节点看关系 · 点击连线看证据</div>
+  </div>
+
+  <!-- 左栏 -->
+  <div class="side left">
+    <div class="card filter" id="filter">
+      <h3><span class="dot"></span>关系图层</h3>
+      <button data-f="all" class="active"><span class="swatch" style="background:#1e2b3a"></span>全部关系</button>
+      <button data-f="supply_chain"><span class="swatch" style="background:#2563eb"></span>供应链配套</button>
+      <button data-f="investment"><span class="swatch" style="background:#0891b2"></span>投资建设</button>
+      <button data-f="regional"><span class="swatch" style="background:#7c3aed"></span>区域协作</button>
+      <button data-f="transport"><span class="swatch" style="background:#dc2626"></span>交通物流</button>
+      <button data-f="tourism_consumption"><span class="swatch" style="background:#d97706"></span>消费文旅</button>
+    </div>
+    <div class="card legend">
+      <h3><span class="dot" style="background:#16a34a"></span>证据分级</h3>
+      <div class="row"><span class="ln" style="border-top:2.5px solid #1e2b3a"></span>A 已证实</div>
+      <div class="row"><span class="ln" style="border-top:2.5px dashed #64748b"></span>B 证据推断</div>
+      <div class="row"><span class="ln" style="border-top:2.5px dotted #94a3b8"></span>C 待验证</div>
+      <div class="toggle-row"><span>显示连线标签</span><span class="switch" id="swLab"><i></i></span></div>
+      <div class="toggle-row"><span>只看近期变化</span><span class="switch off" id="swChg"><i></i></span></div>
+    </div>
+  </div>
+
+  <!-- 右栏 AI 情报 -->
+  <div class="side right">
+    <div class="intel-head">
+      <span class="ai-avatar"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#7dd3fc" stroke-width="2"><path d="M12 2a7 7 0 0 1 7 7c0 3-2 4.5-2 7H7c0-2.5-2-4-2-7a7 7 0 0 1 7-7z"/><path d="M9 19h6M10 22h4"/></svg></span>
+      <div>
+        <div class="t">惠城区产业关系情报</div>
+        <div class="s"><span class="pulse-dot"></span>今年重大变化 · 值得讨论</div>
+      </div>
+      <button id="intelClose" aria-label="关闭">×</button>
+    </div>
+    <div id="intelBody"></div>
+  </div>
+
+  <!-- 底部时间线 -->
+  <footer>
+    <div class="tl-wrap">
+      <div class="tl-head">
+        <div class="t"><span class="dot"></span>关系变化时间线 · 2026</div>
+        <div class="s">只收录会改变网络结构的事件 · 签约≠投产</div>
+      </div>
+      <div class="tl-track" id="tlTrack"><div class="tl-line"></div></div>
+    </div>
+  </footer>
+
+  <div id="popMask"></div>
+
+  <!-- 移动端情报浮动按钮 -->
+  <button id="intelFab"><span class="n"></span>产业关系情报</button>
+  <div id="pop">
+    <div class="ph">
+      <span class="ic" id="p_ic"></span>
+      <span><span class="t" id="p_t"></span><span class="s" id="p_s"></span></span>
+      <button class="close" id="p_close">×</button>
+    </div>
+    <div id="p_body" class="p-body"></div>
+  </div>
+</div>
+
+<script src="hc-viz/data.js"></script>
+<script src="hc-viz/dataset.js"></script>
+<script>
+/* ================= 数据：优先 fetch 三件套，失败用内嵌 fallback ================= */
+const DATA_BASE = "data/";
+let GRAPH = null;
+
+/* 关系数据统一由 hc-viz/dataset.js 提供；本页不再内嵌副本，读不到即提示，不以旧数据兜底 */
+
+/* ================= 网络引擎 ================= */
+const canvas = document.getElementById("net");
+const ctx = canvas.getContext("2d");
+let W=0,H=0,DPR=1;
+let nodes=[], edges=[], changes=[], sourcesMap={};
+let activeFilter="all", showLab=true, onlyChg=false;
+let selectedNode=null, selectedEdge=null, hoverNode=null;
+let dragNode=null, dragMoved=false;
+let mouse={x:0,y:0};
+let startTime = performance.now();
+let UI=1; // 小屏布局缩放因子
+
+function resize(){
+  DPR = Math.min(window.devicePixelRatio||1, 2);
+  const r = canvas.getBoundingClientRect();
+  W=r.width; H=r.height;
+  canvas.width=W*DPR; canvas.height=H*DPR;
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  UI = W<520 ? Math.max(0.66, W/560) : 1;
+}
+window.addEventListener("resize",resize);
+
+/* 初始位置：按 layer 分组，core 居中，卫星由弹簧自然抱团 */
+function initPositions(){
+  const cx=W/2, cy=H/2+6;
+  const ang = {gxq:-Math.PI*0.72, dz:-Math.PI*0.42, xcl:-Math.PI, ai:-Math.PI*0.15,
+               fw:-Math.PI*0.55, jt:Math.PI*0.12, wh:Math.PI*0.55, rj:Math.PI*0.9};
+  nodes.forEach(n=>{
+    n.vx=0; n.vy=0; n.fixed=false; n.spawn = n.change_status==="新增" ? 0 : 1;
+    if(n.node_type==="core"){ n.x=cx; n.y=cy; n.fixed=true; n.spawn=1; }
+    else if(n.node_type==="external"){
+      n.x = n.node_id==="sz" ? W-90 : W-150;
+      n.y = n.node_id==="sz" ? H*0.34 : H*0.62;
+      n.fixed=true;
+    }
+    else if(n.node_type==="anchor"){
+      const a=ang[n.node_id] ?? -Math.PI*0.7;
+      n.x=cx+Math.cos(a)*200; n.y=cy+Math.sin(a)*160;
+    }
+    else if(n.node_type==="cluster"){
+      const a=ang[n.node_id] ?? Math.random()*Math.PI*2;
+      n.x=cx+Math.cos(a)*150+ (Math.random()-.5)*40;
+      n.y=cy+Math.sin(a)*120+ (Math.random()-.5)*40;
+    }
+    else { // enterprise 卫星：先放锚点附近随机
+      n.x=cx+(Math.random()-.5)*260; n.y=cy+(Math.random()-.5)*220;
+    }
+  });
+}
+
+function nodeRadius(n){
+  let r;
+  if(n.node_type==="core") r=30;
+  else if(n.node_type==="anchor") r=24;
+  else if(n.node_type==="cluster") r=19;
+  else if(n.node_type==="external") r=18;
+  else r=12; // enterprise
+  return r*UI;
+}
+
+function edgeVisible(e){
+  if(activeFilter!=="all" && e.relation_type!==activeFilter) return false;
+  if(onlyChg && e.change_status==="无显著变化") return false;
+  return true;
+}
+function nodeDimmed(n){
+  if(!selectedNode) return false;
+  // 与选中节点相连才亮
+  return !edges.some(e=>edgeVisible(e) &&
+    ((e.source_node_id===selectedNode.node_id&&e.target_node_id===n.node_id)||
+     (e.target_node_id===selectedNode.node_id&&e.source_node_id===n.node_id)))
+    && n.node_id!==selectedNode.node_id;
+}
+
+/* 力模拟 */
+function simulate(){
+  const REP = 5200*UI*UI, SPRING=0.012, DAMP=0.86, CENTER=0.0025;
+  // 斥力
+  for(let i=0;i<nodes.length;i++){
+    for(let j=i+1;j<nodes.length;j++){
+      const a=nodes[i], b=nodes[j];
+      let dx=a.x-b.x, dy=a.y-b.y;
+      let d2=dx*dx+dy*dy; if(d2<1) d2=1;
+      const d=Math.sqrt(d2);
+      const f=REP/d2;
+      const fx=f*dx/d, fy=f*dy/d;
+      if(!a.fixed){a.vx+=fx;a.vy+=fy;}
+      if(!b.fixed){b.vx-=fx;b.vy-=fy;}
+    }
+  }
+  // 弹簧
+  edges.forEach(e=>{
+    if(!edgeVisible(e)) return;
+    const a=nodes.find(n=>n.node_id===e.source_node_id);
+    const b=nodes.find(n=>n.node_id===e.target_node_id);
+    if(!a||!b) return;
+    // 卫星到锚点目标距离短（抱团）
+    const target = (b.node_type==="enterprise")? 58*UI : 120*UI;
+    let dx=b.x-a.x, dy=b.y-a.y;
+    const d=Math.sqrt(dx*dx+dy*dy)||1;
+    const f=(d-target)*SPRING;
+    const fx=f*dx/d, fy=f*dy/d;
+    if(!a.fixed){a.vx+=fx;a.vy+=fy;}
+    if(!b.fixed){b.vx-=fx;b.vy-=fy;}
+  });
+  // 归位 + 阻尼
+  const cx=W/2, cy=H/2+6;
+  nodes.forEach(n=>{
+    if(n.fixed){ n.vx=0; n.vy=0; return; }
+    n.vx+=(cx-n.x)*CENTER; n.vy+=(cy-n.y)*CENTER;
+    n.vx*=DAMP; n.vy*=DAMP;
+    n.x+=n.vx; n.y+=n.vy;
+    // 边界
+    const r=nodeRadius(n);
+    n.x=Math.max(r+8,Math.min(W-r-8,n.x));
+    n.y=Math.max(r+70,Math.min(H-r-100,n.y));
+    // 新节点 spawn
+    if(n.spawn<1) n.spawn=Math.min(1,n.spawn+0.03);
+  });
+}
+
+function edgeLabel(e){
+  if(e.metric){
+    const v=e.metric.metric_value;
+    const u=e.metric.metric_unit==="亿元"?"亿":e.metric.metric_unit;
+    return (v<1? v.toFixed(2): v)+u;
+  }
+  const map={supply_chain:"配套",investment:"投资",regional:"协作",transport:"通道",tourism_consumption:"文旅"};
+  return map[e.relation_type]||"";
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  const t=performance.now();
+
+  // 边
+  edges.forEach(e=>{
+    if(!edgeVisible(e)) return;
+    const a=nodes.find(n=>n.node_id===e.source_node_id);
+    const b=nodes.find(n=>n.node_id===e.target_node_id);
+    if(!a||!b) return;
+    const dim = nodeDimmed(a)||nodeDimmed(b);
+    ctx.save();
+    ctx.globalAlpha = dim?0.12:0.9;
+    let col = a.color||"#64748b";
+    if(e.change_status==="断裂") col="#dc2626";
+    ctx.strokeStyle=col; ctx.lineWidth = e.evidence_grade==="A"?2:1.6;
+    if(e.evidence_grade==="B") ctx.setLineDash([7,6]);
+    if(e.evidence_grade==="C") ctx.setLineDash([2,5]);
+    // 新增边：生长动画
+    let grow=1;
+    if(e.change_status==="新增"){
+      grow = Math.min(1, (t-startTime)/1400 + (parseInt(e.edge_id.slice(1))*0.04));
+    }
+    const ex=a.x+(b.x-a.x)*grow, ey=a.y+(b.y-a.y)*grow;
+    ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(ex,ey); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // 变化边的流动点（代表关系活跃/资源流动）
+    if(e.change_status==="新增"||e.change_status==="增强"){
+      const phase=((t/1400)+parseInt(e.edge_id.slice(1))*0.13)%1;
+      const px=a.x+(b.x-a.x)*phase, py=a.y+(b.y-a.y)*phase;
+      ctx.fillStyle=col; ctx.globalAlpha=dim?0.1:0.85;
+      ctx.beginPath(); ctx.arc(px,py,2.6,0,Math.PI*2); ctx.fill();
+    }
+    // 断裂符号
+    if(e.change_status==="断裂"){
+      const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
+      ctx.globalAlpha=dim?0.1:0.95;
+      ctx.strokeStyle="#dc2626"; ctx.lineWidth=2.4;
+      ctx.beginPath();
+      ctx.moveTo(mx-6,my-6);ctx.lineTo(mx+6,my+6);
+      ctx.moveTo(mx+6,my-6);ctx.lineTo(mx-6,my+6);
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    // 标签 LAB
+    if(showLab && grow>=1){
+      const mx=a.x+(b.x-a.x)*0.5, my=a.y+(b.y-a.y)*0.5;
+      const lab=edgeLabel(e);
+      if(lab){
+        ctx.font="600 10.5px sans-serif";
+        const tw=ctx.measureText(lab).width;
+        ctx.globalAlpha=dim?0.1:0.95;
+        ctx.fillStyle="rgba(255,255,255,.92)";
+        ctx.beginPath();
+        ctx.roundRect(mx-tw/2-5,my-8,tw+10,16,8); ctx.fill();
+        ctx.fillStyle = e.change_status==="断裂"?"#dc2626":"#334155";
+        ctx.textAlign="center"; ctx.textBaseline="middle";
+        ctx.fillText(lab,mx,my+0.5);
+        ctx.globalAlpha=1;
+      }
+    }
+  });
+
+  // 节点
+  nodes.forEach(n=>{
+    const dim=nodeDimmed(n);
+    const r=nodeRadius(n);
+    const scale=n.spawn||1;
+    ctx.save();
+    ctx.translate(n.x,n.y); ctx.scale(scale,scale);
+    // 新增/变化脉冲环
+    if((n.change_status==="新增"||n.change_status==="增强")&&!dim){
+      const ph=(t/1300)%1;
+      ctx.globalAlpha=(1-ph)*0.4;
+      ctx.strokeStyle=n.color; ctx.lineWidth=1.5;
+      ctx.beginPath(); ctx.arc(0,0,r+4+ph*12,0,Math.PI*2); ctx.stroke();
+      ctx.globalAlpha=1;
+    }
+    ctx.globalAlpha=dim?0.18:1;
+    // 主体
+    ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2);
+    ctx.fillStyle="#fff"; ctx.fill();
+    ctx.lineWidth = n.node_type==="core"?3:2.2;
+    ctx.strokeStyle=n.color; ctx.stroke();
+    // 内部小圆点（类型标识）
+    ctx.fillStyle=n.color;
+    ctx.beginPath(); ctx.arc(0,0,r*0.32,0,Math.PI*2); ctx.fill();
+    // pending 卫星：虚线环表示在建
+    if(n.node_status==="pending"){
+      ctx.setLineDash([3,3]); ctx.strokeStyle=n.color; ctx.lineWidth=1.2;
+      ctx.beginPath(); ctx.arc(0,0,r+3,0,Math.PI*2); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    ctx.restore();
+
+    // 名字
+    ctx.save();
+    ctx.globalAlpha=dim?0.15:1;
+    ctx.font=(n.node_type==="enterprise"?"600 10.5px":"700 11.5px")+" sans-serif";
+    ctx.textAlign="center"; ctx.textBaseline="top";
+    ctx.fillStyle="#1e2b3a";
+    ctx.fillText(n.name,n.x,n.y+r+4);
+    // 新增/退出小标
+    if(n.change_status==="新增"&&!dim){
+      ctx.font="700 8.5px sans-serif";
+      ctx.fillStyle="#16a34a";
+      ctx.fillText("●新",n.x,n.y+r+17);
+    }
+    ctx.restore();
+  });
+}
+
+function loop(){
+  simulate();
+  draw();
+  requestAnimationFrame(loop);
+}
+
+/* ================= 交互 ================= */
+function getPos(e){
+  const r=canvas.getBoundingClientRect();
+  const t=e.touches?e.touches[0]:e;
+  return {x:t.clientX-r.left, y:t.clientY-r.top};
+}
+function hitNode(x,y){
+  for(let i=nodes.length-1;i>=0;i--){
+    const n=nodes[i];
+    const d=Math.hypot(x-n.x,y-n.y);
+    if(d<=nodeRadius(n)+3) return n;
+  }
+  return null;
+}
+function hitEdge(x,y){
+  let best=null, bd=9;
+  edges.forEach(e=>{
+    if(!edgeVisible(e)) return;
+    const a=nodes.find(n=>n.node_id===e.source_node_id);
+    const b=nodes.find(n=>n.node_id===e.target_node_id);
+    if(!a||!b) return;
+    // 点到线段距离
+    const dx=b.x-a.x, dy=b.y-a.y;
+    const len2=dx*dx+dy*dy;
+    let u=len2?((x-a.x)*dx+(y-a.y)*dy)/len2:0;
+    u=Math.max(0,Math.min(1,u));
+    const px=a.x+u*dx, py=a.y+u*dy;
+    const d=Math.hypot(x-px,y-py);
+    if(d<bd){bd=d;best=e;}
+  });
+  return best;
+}
+
+canvas.addEventListener("mousedown",e=>{
+  const p=getPos(e);
+  const n=hitNode(p.x,p.y);
+  if(n){
+    dragNode=n; dragMoved=false;
+    n.fixed=true; canvas.classList.add("drag");
+  }
+});
+canvas.addEventListener("mousemove",e=>{
+  const p=getPos(e); mouse=p;
+  if(dragNode){
+    dragNode.x=p.x; dragNode.y=p.y; dragNode.vx=0; dragNode.vy=0;
+    dragMoved=true;
+  } else {
+    hoverNode=hitNode(p.x,p.y);
+    canvas.style.cursor=hoverNode?"pointer":"grab";
+  }
+});
+window.addEventListener("mouseup",e=>{
+  if(dragNode){
+    const wasCore = dragNode.node_type==="core"||dragNode.node_type==="external";
+    if(!wasCore) dragNode.fixed=false;
+    if(!dragMoved){ selectNode(dragNode); }
+    dragNode=null; canvas.classList.remove("drag");
+  }
+});
+canvas.addEventListener("click",e=>{
+  if(dragMoved){dragMoved=false;return;}
+  const p=getPos(e);
+  const n=hitNode(p.x,p.y);
+  if(n){ selectNode(n); return; }
+  const ed=hitEdge(p.x,p.y);
+  if(ed){ showEdgePop(ed); return; }
+  clearSelection();
+});
+// 触摸
+canvas.addEventListener("touchstart",e=>{
+  const p=getPos(e); const n=hitNode(p.x,p.y);
+  if(n){dragNode=n;dragMoved=false;n.fixed=true;}
+},{passive:true});
+canvas.addEventListener("touchmove",e=>{
+  if(dragNode){const p=getPos(e);dragNode.x=p.x;dragNode.y=p.y;dragMoved=true;e.preventDefault();}
+},{passive:false});
+canvas.addEventListener("touchend",e=>{
+  if(dragNode){
+    if(!(dragNode.node_type==="core"||dragNode.node_type==="external")) dragNode.fixed=false;
+    if(!dragMoved) selectNode(dragNode);
+    dragNode=null;
+  }
+});
+
+function selectNode(n){
+  selectedNode=n; selectedEdge=null;
+  showNodePop(n);
+}
+function clearSelection(){
+  selectedNode=null; selectedEdge=null;
+  hidePop();
+}
+
+/* ================= 浮卡 ================= */
+const pop=document.getElementById("pop");
+const popMask=document.getElementById("popMask");
+function gradeChip(g){
+  const m={A:["#16a34a","A 已证实事实"],B:["#d97706","B 证据推断"],C:["#94a3b8","C 待验证假设"]};
+  return '<span class="grade-chip" style="background:'+m[g][0]+'22;color:'+m[g][0]+'">'+m[g][1]+'</span>';
+}
+function showNodePop(n){
+  document.getElementById("p_ic").style.background=n.color;
+  document.getElementById("p_ic").innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="12" r="4"/></svg>';
+  document.getElementById("p_t").textContent=n.name;
+  document.getElementById("p_s").textContent=n.layer+(n.town&&n.town!=="外部"?" · "+n.town:"");
+  const relEdges=edges.filter(e=>
+    (e.source_node_id===n.node_id||e.target_node_id===n.node_id));
+  let html='<p>'+n.description+'</p>'+gradeChip(n.evidence_grade);
+  if(n.stat){
+    const kpis=n.stat.split('·').filter(Boolean);
+    html+='<div class="facts"><div class="sec-t">关键指标（'+kpis.length+'）</div>'+
+      kpis.map(k=>'<div class="kpi"><span class="kpi-dot"></span>'+k+'</div>').join("")+'</div>';
+  }
+  html+='<div class="facts"><div class="sec-t">相连关系（'+relEdges.length+'）</div>';
+  relEdges.forEach(e=>{
+    const other=e.source_node_id===n.node_id?e.target_node_id:e.source_node_id;
+    const on=nodes.find(x=>x.node_id===other);
+    html+='<div class="fact" data-e="'+e.edge_id+'" style="cursor:pointer"><span>'+(on?on.name:other)+' · <span style="color:#94a3b8">'+relLabel(e.relation_type)+'</span></span><b style="color:'+(e.evidence_grade==="A"?"#16a34a":(e.evidence_grade==="B"?"#d97706":"#94a3b8"))+'">'+e.evidence_grade+'</b></div>';
+  });
+  html+='</div>';
+  const sid=n.source_ids&&n.source_ids[0];
+  if(sid&&sourcesMap[sid]) html+='<div class="src"><span class="src-card"><span class="sn">'+sourcesMap[sid][0]+'</span><a href="'+sourcesMap[sid][1]+'" target="_blank">'+sourcesMap[sid][1]+'</a></span></div>';
+  document.getElementById("p_body").innerHTML=html;
+  pop.classList.add("show"); popMask.classList.add("show");
+  pop.querySelectorAll("[data-e]").forEach(el=>el.addEventListener("click",()=>{
+    const e=edges.find(x=>x.edge_id===el.dataset.e); if(e) showEdgePop(e);
+  }));
+}
+function showEdgePop(e){
+  selectedEdge=e;
+  const a=nodes.find(n=>n.node_id===e.source_node_id);
+  const b=nodes.find(n=>n.node_id===e.target_node_id);
+  document.getElementById("p_ic").style.background=a.color;
+  document.getElementById("p_ic").innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 12h16M14 6l6 6-6 6"/></svg>';
+  document.getElementById("p_t").textContent=(a?a.name:"")+" → "+(b?b.name:"");
+  document.getElementById("p_s").textContent=relLabel(e.relation_type)+" · "+e.direction;
+  let html='<p>'+e.relation_description+'</p>'+gradeChip(e.evidence_grade);
+  const facts=[];
+  if(e.metric) facts.push([e.metric.metric_name, e.metric.metric_value+" "+e.metric.metric_unit]);
+  facts.push(["变化状态",e.change_status]);
+  html+='<div class="facts">'+facts.map(f=>'<div class="fact"><span>'+f[0]+'</span><b style="font-size:11px;text-align:right;max-width:60%">'+f[1]+'</b></div>').join("")+'</div>';
+  const sids=e.source_ids||[];
+  let cards="";
+  sids.forEach(s=>{ if(sourcesMap[s]) cards+='<span class="src-card"><span class="sn">'+sourcesMap[s][0]+'</span><a href="'+sourcesMap[s][1]+'" target="_blank">'+sourcesMap[s][1]+'</a></span>'; });
+  if(cards) html+='<div class="src">'+cards+'</div>';
+  document.getElementById("p_body").innerHTML=html;
+  pop.classList.add("show"); popMask.classList.add("show");
+}
+function hidePop(){pop.classList.remove("show");popMask.classList.remove("show");}
+document.getElementById("p_close").addEventListener("click",()=>{hidePop();clearSelection();});
+popMask.addEventListener("click",()=>{hidePop();clearSelection();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){hidePop();clearSelection();}});
+
+/* ================= 筛选/开关 ================= */
+function setFilter(f){
+  activeFilter=f;
+  document.querySelectorAll("#filter button,#topnav button").forEach(b=>{
+    b.classList.toggle("active",b.dataset.f===f);
+  });
+  clearSelection();
+}
+document.querySelectorAll("#filter button,#topnav button").forEach(b=>{
+  b.addEventListener("click",()=>setFilter(b.dataset.f));
+});
+document.getElementById("swLab").addEventListener("click",function(){
+  showLab=!showLab; this.classList.toggle("off",!showLab);
+});
+document.getElementById("swChg").addEventListener("click",function(){
+  onlyChg=!onlyChg; this.classList.toggle("off",!onlyChg);
+});
+
+/* ================= 右侧 AI 情报区 ================= */
+const tagMeta={
+  new_entity:["#16a34a","新主体接入"], new_edge:["#2563eb","新连接形成"],
+  strengthen:["#d97706","关系增强"], break:["#dc2626","连接断裂"]
+};
+function buildIntel(){
+  const body=document.getElementById("intelBody");
+  // 按时间倒序
+  const sorted=[...changes].sort((a,b)=>b.event_date.localeCompare(a.event_date));
+  body.innerHTML=sorted.map(c=>{
+    const tm=tagMeta[c.change_type]||["#64748b","变化"];
+    return '<div class="msg" data-c="'+c.change_id+'">'+
+      '<span class="ma"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7dd3fc" stroke-width="2"><path d="M12 3l2 5 5 .5-4 3.5 1.5 5L12 14l-4.5 3 1.5-5-4-3.5L10 8z"/></svg></span>'+
+      '<div class="bubble">'+
+        '<span class="tag" style="background:'+tm[0]+'1e;color:'+tm[0]+'">'+tm[1]+' · '+c.event_date.slice(5)+'</span>'+
+        '<div class="h">'+c.title+'</div>'+
+        '<div class="q"><b>值得讨论：</b>'+(c.topic||c.uncertainty)+'</div>'+
+        '<div class="go-link">在网络中定位 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>'+
+      '</div></div>';
+  }).join("");
+  body.querySelectorAll(".msg").forEach(m=>{
+    m.addEventListener("click",()=>{
+      const c=changes.find(x=>x.change_id===m.dataset.c);
+      if(!c) return;
+      // 高亮首个节点 + 边
+      const firstNode=c.involved_node_ids[0];
+      const n=nodes.find(x=>x.node_id===firstNode);
+      if(n){ selectNode(n); }
+      setTLActive(c.change_id);
+    });
+  });
+}
+
+/* ================= 底部时间线 ================= */
+function buildTL(){
+  const track=document.getElementById("tlTrack");
+  const sorted=[...changes].sort((a,b)=>a.event_date.localeCompare(b.event_date));
+  const nodesHtml=sorted.map(c=>{
+    const cls=c.change_type==="new_entity"?"new":"edge";
+    return '<div class="tl-node '+cls+'" data-c="'+c.change_id+'">'+
+      '<span class="l">'+c.title.replace(/（.*$/,"")+'</span>'+
+      '<span class="n"></span>'+
+      '<span class="d">'+c.event_date.slice(5)+'</span></div>';
+  }).join("");
+  track.innerHTML='<div class="tl-line"></div>'+nodesHtml;
+  track.querySelectorAll(".tl-node").forEach(el=>{
+    el.addEventListener("click",()=>{
+      const c=changes.find(x=>x.change_id===el.dataset.c);
+      if(c){
+        const n=nodes.find(x=>x.node_id===c.involved_node_ids[0]);
+        if(n) selectNode(n);
+        setTLActive(c.change_id);
+      }
+    });
+  });
+}
+function setTLActive(cid){
+  document.querySelectorAll(".tl-node").forEach(el=>{
+    el.classList.toggle("active",el.dataset.c===cid);
+  });
+}
+
+/* ================= 搜索 ================= */
+document.getElementById("searchInput").addEventListener("input",function(){
+  const q=this.value.trim();
+  if(!q){clearSelection();return;}
+  const n=nodes.find(x=>x.name.includes(q)||x.layer.includes(q));
+  if(n) selectNode(n);
+});
+
+/* ================= 汉堡抽屉 ================= */
+const sideLeft=document.querySelector(".side.left");
+const overlay=document.getElementById("overlay");
+document.getElementById("burger").addEventListener("click",()=>{sideLeft.classList.add("open");overlay.classList.add("show");});
+overlay.addEventListener("click",()=>{sideLeft.classList.remove("open");overlay.classList.remove("show");});
+
+/* 移动端 AI 情报抽屉 */
+const sideRight=document.querySelector(".side.right");
+document.getElementById("intelFab").addEventListener("click",()=>sideRight.classList.add("open"));
+document.getElementById("intelClose").addEventListener("click",()=>sideRight.classList.remove("open"));
+// 点击情报消息后关闭抽屉
+document.getElementById("intelBody").addEventListener("click",e=>{
+  if(e.target.closest(".msg")&&innerWidth<=900){
+    setTimeout(()=>sideRight.classList.remove("open"),250);
+  }
+});
+
+/* ================= 启动 ================= */
+function applyData(data){
+  // 兼容：fetch 三件套合并
+  nodes = data.nodes.map(n=>({...n, color:n.color||typeColor(n)}));
+  edges = data.edges;
+  changes = data.changes||[];
+  sourcesMap = data.sources||{};
+  resize();
+  initPositions();
+  buildIntel();
+  buildTL();
+  loop();
+}
+function typeColor(n){
+  const m={core:"#1e2b3a",anchor:"#2563eb",cluster:"#2563eb",enterprise:"#2563eb",infrastructure:"#dc2626",external:"#64748b"};
+  return m[n.node_type]||"#64748b";
+}
+const REL_LABEL={supply_chain:"供应链配套",investment:"投资建设",regional:"区域协作",transport:"交通物流",tourism_consumption:"消费文旅"};
+function relLabel(t){return REL_LABEL[t]||t;}
+async function boot(){
+  resize();
+  try{
+    const [ev,ch,sc] = await HCData.relations();
+    // evidence 节点没有 color，按 layer 补
+    const layerColor={"城市核心":"#1e2b3a","产业引擎":"#2563eb","三大集群":"#2563eb","新兴产业":"#7c3aed","城市功能":"#0d9488","外部":"#64748b"};
+    ev.nodes.forEach(n=>{
+      if(n.layer==="卫星·新材料") n.color="#0891b2";
+      else if(n.layer==="卫星·电子信息") n.color="#2563eb";
+      else if(n.layer==="卫星·AI") n.color="#7c3aed";
+      else n.color=layerColor[n.layer]||"#2563eb";
+    });
+    // 城市功能细分
+    const cf={jt:"#dc2626",wh:"#9333ea",rj:"#16a34a",fw:"#0d9488"};
+    ev.nodes.forEach(n=>{ if(cf[n.node_id]) n.color=cf[n.node_id]; });
+    // sources 表
+    const sm={};
+    sc.sources.forEach(s=>{ sm[s.source_id]=[s.title,s.url]; });
+    applyData({nodes:ev.nodes, edges:ev.edges, changes:ch.changes, sources:sm});
+  }catch(e){
+    const bar=document.createElement('div');
+    bar.style.cssText='position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:9999;background:#7f1d1d;color:#fff;padding:10px 16px;border-radius:10px;font:500 13px/1.5 system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.35);max-width:92vw';
+    bar.textContent='关系数据暂时无法加载 · '+(e&&e.message?e.message:'未知错误');
+    document.body.appendChild(bar);
+    console.error(e);
+  }
+}
+boot();
+
+/* 指标概览：只从真源 hc-viz/data.js 生成，页面不存任何数字 */
+(function renderMetrics(){
+  var box=document.getElementById('metrics');
+  var line=document.getElementById('asofLine');
+  if(typeof HC_OFFICIAL==='undefined'||!HC_OFFICIAL.metrics){
+    if(box) box.innerHTML='<div class="metric-fail">指标数据未能加载 · hc-viz/data.js 读取失败，本页不使用旧数字替代</div>';
+    if(line) line.innerHTML='指标期次：<b>读取失败</b>';
+    return;
+  }
+  var by={};HC_OFFICIAL.metrics.forEach(function(m){by[m.id]=m;});
+  var pop=(typeof HC_POP!=='undefined'&&HC_POP.pop)||'—';
+  var items=[
+    ['GDP（亿元）', by.gdp&&by.gdp.total, by.gdp&&by.gdp.v],
+    ['规上工业总产值（亿元）', by.ind_va&&by.ind_va.output, by.ind_va&&by.ind_va.output_v],
+    ['社消零（亿元）', by.retail&&by.retail.total, by.retail&&by.retail.v],
+    ['外贸进出口（亿元）', by.trade&&by.trade.total, by.trade&&by.trade.v],
+    ['常住人口（万人）', pop, '']
+  ];
+  if(box){
+    box.innerHTML=items.map(function(it){
+      var ok=it[1]&&it[1]!=='—';
+      return '<div class="metric"><div class="k">'+it[0]+'</div><div class="v">'+(ok?it[1]:'—')+
+        (ok&&it[2]?' <small class="up">'+it[2]+'</small>':'')+'</div></div>';
+    }).join('');
+  }
+  if(line&&typeof HC_ASOF!=='undefined'){
+    line.innerHTML='指标期次：<b>'+HC_ASOF.officialLabel+'终值</b> · '+HC_ASOF.currentLabel+'为当期快报，不可混读';
+    line.title=HC_ASOF.note+' 来源：惠城区统计公报（'+HC_ASOF.official+'）。最近核验 '+HC_ASOF.checked+'。';
+  }
+})();
+</script>
+</body>
+</html>

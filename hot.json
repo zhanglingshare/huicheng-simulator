@@ -1,0 +1,217 @@
+{
+  "schema_version": 2,
+  "region": "huicheng",
+  "updated": "2026-11-08 07:30",
+  "fetched_at": "2026-11-08 07:30",
+  "frequency": "每日更新两次（07:20 / 21:20）",
+  "count": 9,
+  "stats": [
+    {
+      "n": "今日话题",
+      "cap": "按关注程度排序 · 近1天",
+      "scope": "官方发布/媒体报道/市民讨论",
+      "warm": true
+    }
+  ],
+  "note": "话题按编辑关注程度排序，标注关注档（高/较高/中）与来源级别；每条显示原报道时间、最近抓取与核验状态（官方原文或≥2独立来源=已核验，单源媒体/本地=待核实），缺失标「待核实」。本页不展示平台后台真实阅读、转发、点赞数据。话题均来自公开渠道，每日更新。",
+  "items": [
+    {
+      "title": "周日15:00 西湖丰湖书院「东江童谣汇」传唱《落大水 发大风》",
+      "cat": "fun",
+      "emoji": "🎵",
+      "tier": "较高",
+      "srcLevel": "媒体报道",
+      "live": true,
+      "source": "文明惠州（惠州文明网）",
+      "url": "https://m.sohu.com/a/1096193743_121106875/",
+      "summary": "11月8日（周日）15:00，“丰湖书院·东江童谣汇”在惠州西湖景区丰湖书院乐群堂开唱，本期传唱童谣《落大水 发大风》，由惠州市民间文艺家协会副主席刘汉新、“中国好导游”何克勤主讲。活动由岭南书院·惠州丰湖书院主办，市委宣传部指导，免费参与。",
+      "published_at": "2026-11-02",
+      "event_date": "2026-11-08",
+      "fetched_at": "2026-11-08 07:30",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "life",
+        "ident": "city",
+        "objects": "西湖景区丰湖书院乐群堂",
+        "direction": "利好",
+        "assumption": "场次以主办方公布为准，遇雨以现场安排为准"
+      }
+    },
+    {
+      "title": "今晚19:30 女高音王一凤独唱音乐会在惠州文化艺术中心上演",
+      "cat": "fun",
+      "emoji": "🎻",
+      "tier": "较高",
+      "srcLevel": "媒体报道",
+      "live": true,
+      "source": "惠州发布（搜狐转载）",
+      "url": "https://m.sohu.com/a/1097558666_121106875/",
+      "summary": "11月8日（周日）19:30，“你在我心上——女高音歌唱家王一凤独唱音乐会”在惠州文化艺术中心·歌剧院演出，时长约105分钟（含中场休息）。票价分80/180/280/380元四档，惠州发布同步推出赠票活动。",
+      "published_at": "2026-11-05",
+      "event_date": "2026-11-08",
+      "fetched_at": "2026-11-08 07:30",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "life",
+        "ident": "fun",
+        "objects": "惠州文化艺术中心歌剧院",
+        "direction": "利好",
+        "assumption": "以剧院当日公告与票务信息为准"
+      }
+    },
+    {
+      "title": "华贸天地咖啡书暨汽车嘉年华持续至11月9日，每日12:00-20:30免费",
+      "cat": "food",
+      "emoji": "☕",
+      "tier": "较高",
+      "srcLevel": "媒体报道",
+      "live": true,
+      "source": "惠州本地宝",
+      "url": "https://m.huizhou.bendibao.com/xiuxian/111869.shtm",
+      "summary": "第三届美好咖啡书暨惠州汽车嘉年华11月7日至9日在惠州华贸天地L1层中央园林及外围场地举行，每日12:00-20:30免费开放，集合咖啡、汽车、园林与市集。今天是三天档期里最后一个完整周末日。",
+      "published_at": null,
+      "event_date": "2026-11-07",
+      "fetched_at": "2026-11-08 07:30",
+      "verified_status": "待核实",
+      "fate": {
+        "kind": "life",
+        "ident": "food",
+        "objects": "江北华贸天地中央园林",
+        "direction": "利好",
+        "assumption": "单源本地媒体，活动时间以商场现场公告为准"
+      }
+    },
+    {
+      "title": "惠城11月6日受理5项市政报建：江北排水主干管网、三批次配电、3部加装电梯",
+      "cat": "city",
+      "emoji": "🏗️",
+      "tier": "较高",
+      "srcLevel": "官方发布",
+      "live": false,
+      "source": "惠城区自然资源局",
+      "url": "http://www.hcq.gov.cn/hzhczrzyj/gkmlpt/content/5/5889/post_5889272.html",
+      "summary": "11月6日惠城区自然资源局受理9项申请，其中市政类5项：惠城供电局2026年度第十八批次中低压配电（河南岸、水口）、第十五批次（江南、马安）、第十四批次（桥东、江北、小金口）三项；惠州市排水管理中心“中心城区江北片区排水管网改造工程（江北污水处理厂北侧主干管网完善工程）”；另有3宗既有住宅增设电梯方案审查。",
+      "published_at": "2026-11-07",
+      "event_date": "2026-11-06",
+      "fetched_at": "2026-11-08 07:30",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "info",
+        "ident": "city",
+        "objects": "江北排水主干管网、河南岸水口马安小金口配电",
+        "direction": "中性",
+        "assumption": "受理不等于批准，以最终许可为准"
+      }
+    },
+    {
+      "title": "惠州市实验中学附属学校项目规划许可进入批前公示",
+      "cat": "livelihood",
+      "emoji": "🏫",
+      "tier": "中",
+      "srcLevel": "官方发布",
+      "live": false,
+      "source": "惠城区自然资源局",
+      "url": "http://www.hcq.gov.cn/hzhczrzyj/gkmlpt/content/5/5887/post_5887596.html",
+      "summary": "11月5日，惠城区自然资源局发布“惠州市实验中学附属学校项目规划许可批前公示”（索引号 11441302MB2D297651/2026-00941）。该校扩建项目用地预审（选址意见书）此前于2025年11月公示，拟选址小金口街道陈塘一路10号，用地约2.2789公顷。",
+      "published_at": "2026-11-05",
+      "event_date": "2026-11-05",
+      "fetched_at": "2026-11-08 07:30",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "info",
+        "ident": "city",
+        "objects": "小金口街道陈塘一路",
+        "direction": "中性",
+        "assumption": "公示不等于开工，建设时序以主管部门批复为准"
+      }
+    },
+    {
+      "title": "惠城小金口“未诉先办”点亮500米民心路",
+      "cat": "gossip",
+      "emoji": "🤝",
+      "tier": "较高",
+      "srcLevel": "官方发布",
+      "live": false,
+      "source": "惠城区政府·镇办动态（汇总）",
+      "url": "http://www.hcq.gov.cn/zwgk/zbdt/xjkjdbsc/content/post_5889071.html",
+      "summary": "“终于不用摸黑走路了，下班回家安心多了！”近日，惠城区小金口街道柏岗村新屋至惠州大道段的路灯全部点亮，500米乡间道路告别漆黑，明亮的灯光照亮了村民夜间出行路，收获群众连连点赞。",
+      "published_at": "2026-11-06",
+      "event_date": null,
+      "fetched_at": "2026-11-08 07:30",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "life",
+        "ident": "city",
+        "objects": "小金口柏岗村新屋至惠州大道段500米乡道",
+        "direction": "利好",
+        "assumption": "路灯已点亮，照明效果以现场为准"
+      }
+    },
+    {
+      "title": "汝湖：“巧手妈妈” AI 村播公益培训在围仔村顺利开课",
+      "cat": "livelihood",
+      "emoji": "🏛️",
+      "tier": "中",
+      "srcLevel": "官方发布",
+      "live": false,
+      "source": "惠城区政府·汝湖镇（工作动态栏目API）",
+      "url": "http://www.hcq.gov.cn/hzhcrhzzf/gkmlpt/content/5/5888/post_5888409.html",
+      "summary": "为进一步提升农村妇女数字技能水平，拓宽居家灵活就业渠道，赋能乡村振兴发展，10月26日，由惠城区妇联、汝湖镇妇联联合主办的“巧手妈妈”匠心工坊项目AI村播公益培训在汝湖镇围仔村顺利开班，面向辖区妇女群众开展为期一天的集中系统化培训。",
+      "published_at": "2026-11-06",
+      "event_date": null,
+      "fetched_at": "2026-11-08 07:30",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "info",
+        "ident": "livelihood",
+        "objects": "汝湖镇围仔村",
+        "direction": "利好",
+        "assumption": "培训已开课，后续带动效应待观察"
+      }
+    },
+    {
+      "title": "关于《惠州市惠城区横沥镇墨园村、芦洲镇岚派村传统村落保护发展规划（2025-2035年）（草案）》的公示",
+      "cat": "city",
+      "emoji": "🏙️",
+      "tier": "较高",
+      "srcLevel": "官方发布",
+      "live": false,
+      "source": "惠城区政府·区住房城乡建设局·部门文件",
+      "url": "http://www.hcq.gov.cn/hzhczjj/gkmlpt/content/5/5888/post_5888636.html",
+      "summary": "凡对规划内容有意见建议的单位和个人，可在公示之日起三十日内书面提出，逾期未提出的，视为放弃上述权利。（联系人：叶子龙，电话：2670280，邮箱：694915708@qq.com)。",
+      "published_at": "2026-11-06",
+      "event_date": null,
+      "fetched_at": "2026-11-08 07:30",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "info",
+        "ident": "city",
+        "objects": "横沥镇墨园村、芦洲镇岚派村",
+        "direction": "中性",
+        "assumption": "草案公示阶段，非最终批复"
+      }
+    },
+    {
+      "title": "聚力雨污分流整治　做实源头截污管控-金山河流域管网错混接整治培训",
+      "cat": "city",
+      "emoji": "🏙️",
+      "tier": "中",
+      "srcLevel": "官方发布",
+      "live": false,
+      "source": "惠城区政府·区住房城乡建设局·工作动态",
+      "url": "http://www.hcq.gov.cn/hzhczjj/gkmlpt/content/5/5889/post_5889186.html",
+      "summary": "为有效规范金山河流域管网接驳及污水排放行为，改善金山河水生态环境。我局组织开展管网错混接整治专项业务培训，市水务集团、各相关区直单位及街道的领导及工作人员参训。",
+      "published_at": "2026-11-06",
+      "event_date": null,
+      "fetched_at": "2026-11-08 07:30",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "info",
+        "ident": "city",
+        "objects": "金山河流域管网",
+        "direction": "利好",
+        "assumption": "培训与整治同步推进，效果以官方通报为准"
+      }
+    }
+  ]
+}
