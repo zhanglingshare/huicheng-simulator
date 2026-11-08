@@ -11,7 +11,7 @@
 一套以惠城区为观察样本、基于公开信息的区域经济关系观察与情景推演工具。
 
 [![在线体验](https://img.shields.io/badge/在线体验-从第一页开始-2563eb?style=for-the-badge)](https://zhanglingshare.github.io/huicheng-simulator/)
-[![License](https://img.shields.io/badge/License-保留所有权利-red?style=for-the-badge)](./LICENSE)
+[![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-red?style=for-the-badge)](./LICENSE)
 
 </div>
 
