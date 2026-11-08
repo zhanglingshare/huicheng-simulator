@@ -56,19 +56,25 @@
 
 ## 页面顺序
 
-| 顺序 | 页面 | 入口 |
-|:---:|---|---|
-| 01 | 序章 | [进入](https://zhanglingshare.github.io/huicheng-simulator/) |
-| 02 | 全息关系 | [打开](https://zhanglingshare.github.io/huicheng-simulator/holo.html) |
-| 03 | 全息工作区 | [打开](https://zhanglingshare.github.io/huicheng-simulator/holo-workspace.html) |
-| 04 | 钱去哪了 | [打开](https://zhanglingshare.github.io/huicheng-simulator/today.html) |
-| 05 | 风向标 | [打开](https://zhanglingshare.github.io/huicheng-simulator/fun.html) |
-| 06 | 路径 | [打开](https://zhanglingshare.github.io/huicheng-simulator/choices.html) |
-| 07 | 未来 | [打开](https://zhanglingshare.github.io/huicheng-simulator/future.html) |
-| 08 | 风洞测试 | [打开](https://zhanglingshare.github.io/huicheng-simulator/windtunnel.html) |
-| 09 | 忽略了什么 | [打开](https://zhanglingshare.github.io/huicheng-simulator/blindspot.html) |
-| 10 | 报告 | [打开](https://zhanglingshare.github.io/huicheng-simulator/report.html) |
-| 11 | 结语 | [打开](https://zhanglingshare.github.io/huicheng-simulator/ending.html) |
+| 顺序 | 页面 |
+|:---:|---|
+| 01 | [序章](https://zhanglingshare.github.io/huicheng-simulator/index.html) |
+| 02 | [全息关系](https://zhanglingshare.github.io/huicheng-simulator/holo.html) |
+| 03 | [全息工作区](https://zhanglingshare.github.io/huicheng-simulator/holo-workspace.html) |
+| 04 | [钱去哪了](https://zhanglingshare.github.io/huicheng-simulator/today.html) |
+| 05 | [风向标](https://zhanglingshare.github.io/huicheng-simulator/fun.html) |
+| 06 | [路径](https://zhanglingshare.github.io/huicheng-simulator/choices.html) |
+| 07 | [未来](https://zhanglingshare.github.io/huicheng-simulator/future.html) |
+| 08 | [风洞测试](https://zhanglingshare.github.io/huicheng-simulator/windtunnel.html) |
+| 09 | [通勤案例](https://zhanglingshare.github.io/huicheng-simulator/commute.html) |
+| 10 | [忽略了什么](https://zhanglingshare.github.io/huicheng-simulator/blindspot.html) |
+| 11 | [报告](https://zhanglingshare.github.io/huicheng-simulator/report.html) |
+| 12 | [未来实验室](https://zhanglingshare.github.io/huicheng-simulator/future-lab.html) |
+| 13 | [模拟沙盘](https://zhanglingshare.github.io/huicheng-simulator/sandbox.html) |
+| 14 | [入夜人气](https://zhanglingshare.github.io/huicheng-simulator/vibe.html) |
+| 15 | [结语](https://zhanglingshare.github.io/huicheng-simulator/ending.html) |
+
+另有四组深入页，从对应章节进入：角色（你在网里）、求解（钱怎么走）、风洞实验三版、掂量。
 
 ## 使用边界
 
