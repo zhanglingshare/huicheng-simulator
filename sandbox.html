@@ -450,7 +450,7 @@ if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded"
         <svg id="net" viewBox="0 0 860 600" preserveAspectRatio="xMidYMid meet"></svg>
         <div id="netLbl"></div>
         <!-- 大白话解说字幕 -->
-        <div class="net-cap" id="netCap"><span class="beat"></span><span id="netCapTxt">3 颗心脏，给全区 26 个主体供血 —— 点心脏，看它停跳</span></div>
+        <div class="net-cap" id="netCap"><span class="beat"></span><span id="netCapTxt">3 颗心脏，给全区主要主体供血 —— 点心脏，看它停跳</span></div>
         <div class="net-legend">
           <span><i class="lg-hb"></i>跳动的心脏（枢纽）</span>
           <span><span class="lg-bl"></span>血液＝产业与通勤能量</span>
@@ -706,7 +706,7 @@ if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded"
     var deadList=HEARTS.filter(function(h){return dead[h]});
     var cap=document.getElementById("netCapTxt");
     if(deadList.length===0){
-      cap.textContent="3 颗心脏，给全区 26 个主体供血 —— 点心脏，看它停跳";
+      cap.textContent="3 颗心脏，给全区主要主体供血 —— 点心脏，看它停跳";
     }else{
       cap.textContent=deadList.join("、")+" 停跳，约 "+lost+" 个主体失去供血 —— 再点心脏恢复";
     }

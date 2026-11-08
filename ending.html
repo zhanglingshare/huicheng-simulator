@@ -391,7 +391,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
         <div class="dist-box"><canvas id="cDist"></canvas></div>
       </div>
     </div>
-    <details class="ds-fold" style="margin:8px 0 0"><summary>口径与边界说明</summary><div class="ds-fold-inner exp-meta" id="expMeta">口径 v1.0 · 单次 2 万次情景推演 · BASE 632.7 亿（2025 惠城高新区规上工业产值实测，非全区 GDP）· TARGET 1500 亿（外延参考刻度，非官方目标）；压力叠加采用累计口径，与第⑥风洞页、第⑧报告页完全一致。<br>本结果为压力测试叙事，<b>不是预测，不构成投资建议</b>。</div></details>
+    <details class="ds-fold" style="margin:8px 0 0"><summary>口径与边界说明</summary><div class="ds-fold-inner exp-meta" id="expMeta">基准 632.7 亿（2025 惠城高新区规上工业产值实测，非全区 GDP）· 参考线 1500 亿（不是官方目标）；几重压力同时发生时按叠加处理。<br>本结果为压力测试叙事，<b>不是预测，不构成投资建议</b>。</div></details>
   </div>
 
   <!-- ③ 继续你的实验 -->
@@ -464,73 +464,21 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
     </div>
   </details>
 
-  <!-- 数据怎么来：双轨 -->
+  >
+
+  >
+
+    <!-- 数据可靠吗 -->
   <details class="dcard">
-    <summary>这台风洞的数据可靠吗？（数据双轨更新）</summary>
+    <summary>这台风洞的数据可靠吗？</summary>
     <div class="dbody">
-      <div class="flows">
-        <div class="flow-branch daily">
-          <div class="bh"> 每日热点数据 · 每天自动刷新</div>
-          <div class="bf">喂给首页「今日话题」「今夜人气」，追踪的是大家在关注什么；每条都带真实来源链接。</div>
-          <div class="flow-rail"><span class="pulse-dot"></span></div>
-          <div class="flow-steps">
-            <div class="fs"><div class="fc"></div><div class="ft">公开采集</div><div class="fd">政府公报·权威媒体·社交平台</div></div>
-            <div class="fs"><div class="fc"></div><div class="ft">声量分档</div><div class="fd">只排高低，非平台后台统计</div></div>
-            <div class="fs"><div class="fc"></div><div class="ft">结构校验</div><div class="fd">字段校验通过才放行</div></div>
-            <div class="fs"><div class="fc"></div><div class="ft">每日上线</div><div class="fd">hot.json · life.json</div></div>
-          </div>
-        </div>
-        <div class="flow-branch model">
-          <div class="bh"> 情景设定 · 不随每日热点改变</div>
-          <div class="bf">喂给「产业风洞」推演；只有官方新锚点、经过证据审核才会调整，绝不拿传闻直接改推演设定。</div>
-          <div class="flow-rail"><span class="pulse-dot"></span></div>
-          <div class="flow-steps">
-            <div class="fs"><div class="fc"></div><div class="ft">官方实测锚点</div><div class="fd">统计公报·政府工作报告</div></div>
-            <div class="fs"><div class="fc"></div><div class="ft">证据审核</div><div class="fd">须权威来源·人工核对</div></div>
-            <div class="fs"><div class="fc">️</div><div class="ft">前提修订</div><div class="fd">出现新证据就修订口径并写明依据</div></div>
-            <div class="fs"><div class="fc"></div><div class="ft">进入推演</div><div class="fd">路径的均值与波动才更新</div></div>
-          </div>
-        </div>
-      </div>
-      <div style="text-align:center;font-size:11.5px;color:#fcd34d;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25);border-radius:10px;padding:9px 12px;margin:0 0 14px;line-height:1.7">️ 每天更新的是「大家在看什么」，<b>不代表推演前提每天在变</b>；涉及前提的事件，必须先通过证据审核。</div>
       <div class="grid6">
         <div class="feat"><div class="ic"></div><b>来源公开</b><span>政府公开公报、官方发布、主流媒体，以及公开社交平台上的本地事，每条都能点回去看原文。</span></div>
-        <div class="feat"><div class="ic">️</div><b>每天更新一次</b><span>统计最近24小时的公开讨论，读的是今天这一份，不是随时在变。</span></div>
-        <div class="feat"><div class="ic"></div><b>数字是合理估算</b><span>按公开热度估的，不是平台后台真实统计，只用来排先后、看冷热。</span></div>
-        <div class="feat"><div class="ic"></div><b>能回头核对</b><span>“推演”是把公开条件换着组合、重复跑很多遍看区间，不是预测，更不是官方结论。</span></div>
+        <div class="feat"><div class="ic"></div><b>每天更新一次</b><span>读的是今天这一份，不是随时在变；每天变的只是「大家在关注什么」。</span></div>
+        <div class="feat"><div class="ic"></div><b>数字是合理估算</b><span>不是平台后台真实统计，只用来分先后、看冷热。</span></div>
+        <div class="feat"><div class="ic"></div><b>能回头核对</b><span>每个结论都能回到公开资料核对；条件不同，结论也会不同。</span></div>
         <div class="feat"><div class="ic"></div><b>补充一个视角</b><span>在官方规划和已有成绩基础上多给一个看问题的角度，不是说谁对谁错。</span></div>
-        <div class="feat"><div class="ic"></div><b>独立、开源</b><span>张凌博士个人业余时间所做，没有课题、没有赞助，过程与结论都摆出来，欢迎挑错。</span></div>
-      </div>
-    </div>
-  </details>
-
-  <!-- 六项能力真实状态 + 升级阶梯 -->
-  <details class="dcard">
-    <summary>六项能力的真实开发状态（不打主观分）</summary>
-    <div class="dbody">
-      <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 4px">不画主观分数，只按真实开发状态，把六个方向已做了什么、待验证什么、还要补什么逐条摆出来。</p>
-      <div class="cap-list">
-        <div class="cap-row"><div class="ch"><span class="ic">️</span><span class="nm">更全 · 压力测试广度</span><span class="st wip">进行中</span></div>
-          <div class="cap-lines"><div class="li yes"><span class="mk"></span><span>已做：投产延期、通勤堵塞、外需走弱，以及“延期+通勤”叠加情景。</span></div><div class="li no"><span class="mk">○</span><span>待补：极端天气、产业链断点、政策突变等多重压力同时发生的组合。</span></div></div></div>
-        <div class="cap-row"><div class="ch"><span class="ic"></span><span class="nm">更准 · 找“命门”的精度</span><span class="st wip">进行中</span></div>
-          <div class="cap-lines"><div class="li yes"><span class="mk"></span><span>已做：五条路径各自的带动强弱、26 个主体的连接枢纽作用、5 条路径之间的关联强弱。</span></div><div class="li no"><span class="mk">○</span><span>待补：从“路径级”下沉到“单个项目/地块级”，需要企业与地块粒度数据。</span></div></div></div>
-        <div class="cap-row"><div class="ch"><span class="ic"></span><span class="nm">更稳 · 上万次推演的稳健性</span><span class="st done">已具备</span></div>
-          <div class="cap-lines"><div class="li yes"><span class="mk"></span><span>已做：单次 2 万次推演，给出偏悲观、中位、偏乐观三个区间与达标率，而非一个数字。</span></div><div class="li now"><span class="mk">◐</span><span>待验证：换一批随机起点重跑，结论是否同样稳定。</span></div></div></div>
-        <div class="cap-row"><div class="ch"><span class="ic"></span><span class="nm">更实 · 数据真实程度</span><span class="st wip">进行中</span></div>
-          <div class="cap-lines"><div class="li yes"><span class="mk"></span><span>已做：GDP、规上工业、高新区、固投、社消零等均用统计公报/政府工作报告实测锚点。</span></div><div class="li now"><span class="mk">◐</span><span>待验证：五条路径的均值与波动幅度目前是专家设定的假设，不是实测分布。</span></div><div class="li no"><span class="mk">○</span><span>待补：通勤 OD、就业、教育、交通等真实数据源。</span></div></div></div>
-        <div class="cap-row"><div class="ch"><span class="ic">️</span><span class="nm">更开 · 可交互、可核对</span><span class="st done">已具备</span></div>
-          <div class="cap-lines"><div class="li yes"><span class="mk"></span><span>已做：可以自己设情景、切换条件、复制结论，依据都摆在明处，每条话题带真实来源链接。</span></div></div></div>
-        <div class="cap-row"><div class="ch"><span class="ic"></span><span class="nm">更远 · 从“看见”到“怎么走”</span><span class="st todo">待做</span></div>
-          <div class="cap-lines"><div class="li yes"><span class="mk"></span><span>已做：指出脆弱点、给出优先方向。</span></div><div class="li no"><span class="mk">○</span><span>待补：与一线一起共创，推演具体行动怎么走、先后如何排、效果如何回测。</span></div></div></div>
-      </div>
-      <p style="font-size:11px;color:#8fa3bf;text-align:center;margin:12px 0 0;line-height:1.8">以上为 Demo 真实开发状态，<b style="color:#fbbf24">不是主观打分，也不代表任何机构测评</b>； 已做到　◐ 待验证　○ 待补数据。</p>
-      <div class="stair" style="margin-top:18px">
-        <div class="step-card"><div class="ic">️</div><div class="tx"><div class="lv">更全</div><h4>更多压力测试</h4><p>极端天气、产业链断点、外部冲击、政策变化等组合情景。</p></div></div>
-        <div class="step-card"><div class="ic"></div><div class="tx"><div class="lv">更准</div><h4>更细找“命门”</h4><p>把每个项目、每条关系、每个条件逐一调整，精确找出最不能出错的位置。</p></div></div>
-        <div class="step-card"><div class="ic"></div><div class="tx"><div class="lv">更稳</div><h4>上万次推演</h4><p>让未来在不同条件下反复演化，给出更稳健的可能性分布。</p></div></div>
-        <div class="step-card"><div class="ic"></div><div class="tx"><div class="lv">更实</div><h4>更真实数据</h4><p>对接统计、交通、就业、教育等真实数据源，逐步减少假设。</p></div></div>
-        <div class="step-card"><div class="ic">️</div><div class="tx"><div class="lv">更开</div><h4>可交互可核对</h4><p>决策者自己改条件、提问题、现场推演，每一步都能回到公开资料。</p></div></div>
-        <div class="step-card"><div class="ic"></div><div class="tx"><div class="lv">更远</div><h4>从看见到怎么走</h4><p>和一线一起，推演具体行动怎么走、先后如何排。</p></div></div>
+        <div class="feat"><div class="ic"></div><b>独立</b><span>张凌博士个人业余时间所做，没有课题、没有赞助，欢迎挑错。</span></div>
       </div>
     </div>
   </details>

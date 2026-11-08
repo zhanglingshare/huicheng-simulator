@@ -486,7 +486,7 @@ svg{max-width:100%;height:auto}
   <!-- 情景对比四卡 -->
   <div class="card">
     <h2>③ 情景对比 · 四种压力的影响</h2>
-    <p style="font-size:12.5px;color:var(--ink2);margin:0 0 4px">不同压力情景下的结果对比，帮助理解风险来源。同一套假设、同样跑 2 万次。</p>
+    <p style="font-size:12.5px;color:var(--ink2);margin:0 0 4px">不同压力情景下的结果对比，帮助理解风险来源。同一套前提、同样的条件反复跑。</p>
     <div class="cmp-tabs2" id="cmpTabs2">
       <button class="on" data-m="hit">达标率</button>
       <button data-m="p">中位产值</button>
@@ -526,7 +526,7 @@ svg{max-width:100%;height:auto}
   <!-- ④ 关键因素 -->
   <div class="card">
     <h2>④ 关键因素 · 影响大小排序 <span class="itag sim">逐个条件调 · 其他不动</span></h2>
-    <p style="font-size:12.5px;color:var(--ink2);margin:0 0 8px;line-height:1.8">其他四条都不动，只把一条路的上调或下调 20%，用同一套假设跑 2 万次。条长＝2030 达标率的摆动幅度，越长越要紧。</p>
+    <p style="font-size:12.5px;color:var(--ink2);margin:0 0 8px;line-height:1.8">其他四条都不动，只把一条路的上调或下调 20%，用同一套前提反复跑。条长＝2030 达标率的摆动幅度，越长越要紧。</p>
     <div style="height:236px"><canvas id="tornado"></canvas></div>
     <p style="font-size:10.5px;color:#6b7280;margin:8px 0 0;line-height:1.7">试算结果：新投产项目在四成到八成多之间摆动，幅度最大；三大集群居中；AI 机器人、生产性服务业次之；融深融湾影响最小。<b>受影响大不等于更重要</b>；上下两成是否贴近现实波动，还需真实数据核对。</p>
   </div>
@@ -1086,7 +1086,7 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
     const gapTxt=p>=HT.TARGET?'<span class="pos">中位高于目标 '+gapP+' 亿</span>':'<span class="neg">中位低于目标 '+(-gapP)+' 亿</span>';
     const miss=100-hit;let warn='';
     if(i>0){warn=(miss>=50?'<span class="neg">️ 每两次推演就有一次以上不达标。</span>':'约每 '+Math.max(2,Math.round(100/miss))+' 次推演有 1 次不达标。');}
-    document.getElementById('conclBody').innerHTML='<b>当前情景：</b>'+s.name+'；2030 达标率 <b>'+hit+'%</b>'+(i>0?' <span class="'+(dHit<0?'neg':'pos')+'">（基准 '+baseHit+'%，'+(dHit>0?'+':'−')+Math.abs(dHit)+'pp）</span>':'')+'，中位产值 <b>'+p+' 亿</b>，p10–p90 区间 '+fmt(r.p10)+'–'+fmt(r.p90)+' 亿。'+gapTxt+(warn?'<br>'+warn:'')+'<br><span style="font-size:11px;color:#6b7280">口径：同一套假设 · '+_SIM.N.toLocaleString()+' 次推演；基准 632.7 亿（2025 惠城高新区规上工业产值实测，非全区 GDP）、TARGET 1500 亿（外延参考刻度，非刚性）；压力叠加采用累计口径（与⑥风洞页一致）。此为压力测试叙事，非预测，不构成投资建议。</span>';
+    document.getElementById('conclBody').innerHTML='<b>当前情景：</b>'+s.name+'；2030 达标率 <b>'+hit+'%</b>'+(i>0?' <span class="'+(dHit<0?'neg':'pos')+'">（基准 '+baseHit+'%，'+(dHit>0?'+':'−')+Math.abs(dHit)+'pp）</span>':'')+'，中位产值 <b>'+p+' 亿</b>，从偏悲观到偏乐观的区间 '+fmt(r.p10)+'–'+fmt(r.p90)+' 亿。'+gapTxt+(warn?'<br>'+warn:'')+'<br><span style="font-size:11px;color:#6b7280">口径：同一套前提 · 同样的条件反复推算；基准 632.7 亿（2025 惠城高新区规上工业产值实测，非全区 GDP）、参考线 1500 亿（不是刚性目标）；几重压力同时发生时按叠加处理。此为压力测试叙事，非预测，不构成投资建议。</span>';
     history.replaceState(null,'','#d='+s.delay+'&c='+s.commute);
     try{localStorage.setItem('huicheng_experiment',JSON.stringify({v:'1.0',seed:_SIM.SEED,N:_SIM.N,delay:s.delay,commute:s.commute}));}catch(e){}
   }
@@ -1162,7 +1162,7 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
   // 复制结论 / 分享可恢复链接
   document.getElementById('copyConcl').addEventListener('click',function(){
     const r=res[cur];
-    const txt='【惠城产业风洞 · 我的实验结论】情景：'+SC[cur].name+'\n2030达标率：'+Math.round(r.hit)+'%（基准'+baseHit+'%），中位产值：'+Math.round(r.p50)+'亿（参考刻度1500），区间'+fmt(r.p10)+'–'+fmt(r.p90)+'亿。\n口径：同一套假设、'+_SIM.N+' 次推演，基准 632.7 亿为 2025 高新区规上工业产值。压力测试非预测，不构成投资建议。';
+    const txt='【惠城产业风洞 · 我的实验结论】情景：'+SC[cur].name+'\n2030达标率：'+Math.round(r.hit)+'%（基准'+baseHit+'%），中位产值：'+Math.round(r.p50)+'亿（参考线1500），区间'+fmt(r.p10)+'–'+fmt(r.p90)+'亿。\n口径：同一套前提、同样的条件反复推算，基准 632.7 亿为 2025 高新区规上工业产值。压力测试非预测，不构成投资建议。';
     navigator.clipboard&&navigator.clipboard.writeText(txt);
     const old=this.textContent;this.textContent=' 已复制';setTimeout(()=>this.textContent=old,1500);
   });
