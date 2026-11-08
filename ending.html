@@ -161,7 +161,7 @@ body{margin:0;background:linear-gradient(180deg,#0A0B10 0%,#11131D 30%,#12161F 1
 .cap-lines .li .mk{flex:none}
 .cap-lines .li.yes{color:#90E5AF}.cap-lines .li.now{color:#DDC66C}.cap-lines .li.no{color:#EAA4B8}
 
-/* ============ 第⑨页 沉浸式终章（新增） ============ */
+/* ============ 结语页 沉浸式终章（新增） ============ */
 .e-hero{position:relative;border-radius:20px;overflow:hidden;margin-bottom:16px;min-height:300px;display:flex;flex-direction:column;justify-content:center;padding:48px 44px;border:1px solid rgba(56,189,248,.28);box-shadow:0 10px 40px rgba(0,0,0,.4)}
 .e-hero .hero-bg{position:absolute;inset:0;background:url('assets/huicheng-night.jpg') center/cover;opacity:.6}
 .e-hero .hero-mask{position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,6,15,.94) 0%,rgba(4,6,15,.6) 55%,rgba(4,6,15,.3) 100%)}
@@ -298,7 +298,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
     <div class="hero-in">
       <div class="kick">10 · 结 语</div>
       <h1>一场变化，如何影响一座城市，<br>以及<b>每一个普通人</b>的生活。</h1>
-      <p>基于同一套推演和你第⑧页的连接，我们把数据变化放回真实的城市场景，看看它可能带来的连锁影响。交通、工作、消费、居住，最终都会抵达某个人的日子。</p>
+      <p>基于同一套推演和你报告页的连接，我们把数据变化放回真实的城市场景，看看它可能带来的连锁影响。交通、工作、消费、居住，最终都会抵达某个人的日子。</p>
     </div>
     <div class="hero-pills">
       <span class="hpill"> 承接你刚才的实验设置</span>
@@ -359,13 +359,13 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
     <div class="stage-note">画面为关系假设的视觉叙事，用于帮助理解“牵一发而动全身”，<b>不是根据 OD 出行或产业投入产出数据计算出的真实空间传播强度</b>；具体数值以下方推演结果为准。</div>
   </div>
 
-  <!-- ② 这是你刚刚亲手改变的惠城（真实模型结果，承接第⑧页） -->
+  <!-- ② 这是你刚刚亲手改变的惠城（真实模型结果，承接报告页） -->
   <div class="card">
     <h2> 这是你刚刚亲手改变的惠城</h2>
     <div class="exp-bar">
       <span class="cur-tag" id="curTag">你的情景：基准情景</span>
-      <span style="font-size:11px;color:var(--muted)">基于你在第⑧页（或风洞页）的设置，用同一套推演重新计算</span>
-      <a class="back-link" href="report.html">️ 回到第⑧页改条件</a>
+      <span style="font-size:11px;color:var(--muted)">基于你在报告页（或风洞页）的设置，用同一套推演重新计算</span>
+      <a class="back-link" href="report.html">️ 回到报告页改条件</a>
     </div>
     <div class="exp-grid">
       <div class="exp-side base">
@@ -399,7 +399,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
     <h2>️ 继续你的实验</h2>
     <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 14px">以上是你当前条件下的推演结果。可以回到报告页调整压力档位，或换一组情景再跑一次——这组结果只在本机本页查看，不向外导出。</p>
     <div class="share-grid">
-      <a class="share-btn pri" href="report.html#d=0&c=0">️ 回到第⑧页改条件</a>
+      <a class="share-btn pri" href="report.html#d=0&c=0">️ 回到报告页改条件</a>
       <a class="share-btn sec" href="windtunnel.html"> 再次挑战不同情景</a>
     </div>
   </div>
@@ -555,7 +555,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
   });
 })();
 
-/* ============ 承接第⑧页真实实验：同一套假设、同样跑法 ============ */
+/* ============ 承接报告页真实实验：同一套假设、同样跑法 ============ */
 (function(){
   if(typeof HT==='undefined')return;
   const SEED=42,N=20000;
@@ -573,7 +573,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
   const BASE=RES[0];
   const fmt=v=>Math.round(v).toLocaleString('zh-CN');
 
-  // 读取第⑧页共享状态（hash 优先，其次 localStorage）
+  // 读取报告页共享状态（hash 优先，其次 localStorage）
   function readState(){
     let d=0,c=0;
     const m=location.hash.match(/d=(\d+).*c=(\d+)/);
