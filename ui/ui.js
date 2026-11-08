@@ -6,19 +6,20 @@
 
   var PAGES = [
     { url: 'index.html',            n: '01', group: '开篇', label: '序章',      desc: '看见产业关系，理解城市变化' },
-    { url: 'holo-workspace.html',   n: '02', group: '看见世界', label: '全息工作区', desc: '关系网络、情报流与变化详情' },
-    { url: 'today.html',            n: '03', group: '看见世界', label: '钱去哪了',   desc: '追问资金去向与消费路径' },
-    { url: 'fun.html',              n: '04', group: '看见世界', label: '风向标',     desc: '今晚，谁能把你留在惠城' },
-    { url: 'choices.html',          n: '05', group: '推演未来', label: '路径',       desc: '先选方向，再看可能' },
-    { url: 'future.html',           n: '06', group: '推演未来', label: '未来',       desc: '把未来反复扔进模型' },
-    { url: 'windtunnel.html',       n: '07', group: '推演未来', label: '风洞测试',   desc: '给假设持续加压' },
-    { url: 'commute.html',        n: '08', group: '推演未来', label: '通勤案例',   desc: '通勤可能带来的影响' },
-    { url: 'blindspot.html',        n: '09', group: '推演未来', label: '忽略了什么', desc: '城市承载与居民生活的盲点' },
-    { url: 'report.html',           n: '10', group: '汇总与实验', label: '报告',       desc: '把观察整理成可讨论的材料' },
-    { url: 'future-lab.html',     n: '11', group: '汇总与实验', label: '未来实验室', desc: '动手调参，做多实验舱挑战' },
-    { url: 'sandbox.html',          n: '12', group: '回看', label: '模拟沙盘',   desc: '今日动态落进沙盘，消费与产业两条心脏' },
-    { url: 'vibe.html',             n: '13', group: '回看', label: '入夜人气',   desc: '今晚惠城哪里最亮，去处人气与人流' },
-    { url: 'ending.html',           n: '14', group: '收尾', label: '结语',       desc: '回到人、城市与决策责任' }
+    { url: 'holo.html',             n: '02', group: '看见世界', label: '全息关系', desc: '一张网看清惠城，变化在哪条线上' },
+    { url: 'holo-workspace.html',   n: '03', group: '看见世界', label: '全息工作区', desc: '关系网络、情报流与变化详情' },
+    { url: 'today.html',            n: '04', group: '看见世界', label: '钱去哪了',   desc: '追问资金去向与消费路径' },
+    { url: 'fun.html',              n: '05', group: '看见世界', label: '风向标',     desc: '今晚，谁能把你留在惠城' },
+    { url: 'choices.html',          n: '06', group: '推演未来', label: '路径',       desc: '先选方向，再看可能' },
+    { url: 'future.html',           n: '07', group: '推演未来', label: '未来',       desc: '把未来反复扔进模型' },
+    { url: 'windtunnel.html',       n: '08', group: '推演未来', label: '风洞测试',   desc: '给假设持续加压' },
+    { url: 'commute.html',          n: '09', group: '推演未来', label: '通勤案例',   desc: '通勤可能带来的影响' },
+    { url: 'blindspot.html',        n: '10', group: '推演未来', label: '忽略了什么', desc: '城市承载与居民生活的盲点' },
+    { url: 'report.html',           n: '11', group: '汇总与实验', label: '报告',       desc: '把观察整理成可讨论的材料' },
+    { url: 'future-lab.html',       n: '12', group: '汇总与实验', label: '未来实验室', desc: '动手调参，做多实验舱挑战' },
+    { url: 'sandbox.html',          n: '13', group: '回看', label: '模拟沙盘',   desc: '今日动态落进沙盘，消费与产业两条心脏' },
+    { url: 'vibe.html',             n: '14', group: '回看', label: '入夜人气',   desc: '今晚惠城哪里最亮，去处人气与人流' },
+    { url: 'ending.html',           n: '15', group: '收尾', label: '结语',       desc: '回到人、城市与决策责任' }
   ];
 
   var SVG = {
