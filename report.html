@@ -931,7 +931,7 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
       y:{ticks:{color:tc,callback:v=>v+'亿'},grid:{color:gc},min:1300,suggestedMax:1660}}}
 });
 
-// 单向条形：各路径上下调 20% 时达标率的摆动幅度（同一套假设 2 万次，从大到小）
+// 单向条形：各路径上下调 20% 时达标率的摆动幅度（同一套前提反复推算，从大到小）
 (function(){
   const el=document.getElementById('tornado');
   if(!el)return;
