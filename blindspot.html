@@ -40,14 +40,6 @@ body{overflow-x:hidden}
   h1{font-size:19px}
   .chart-grid{grid-template-columns:1fr!important}
 }
-/* ui-mobile-patch 2026-11-07 */
-@media (max-width:520px){
-  strong,h1,h2,h3,h4,th,td,label,.cap,.title,summary,.ka{word-break:keep-all;overflow-wrap:anywhere}
-  body{line-break:strict}
-  .nav a,footer a,footer button,button,.btn,.kg-footer summary{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
-  input[type=range]{min-height:44px}
-  .slider-row{min-height:44px}
-}
 </style>
 <link rel="stylesheet" href="ui/ui.css">
 <link rel="stylesheet" href="ui/ui-pages.css">
@@ -145,7 +137,7 @@ body{overflow-x:hidden}
     <svg viewBox="0 0 700 250">
       <!-- 大目标 -->
       <rect x="250" y="15" width="200" height="44" fill="#1d4ed8" opacity="0.85" rx="6"/>
-      <text x="350" y="43" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">高新区2030年1500亿（模型参考刻度）</text>
+      <text x="350" y="43" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">高新区2030年1500亿（参考线）</text>
 
       <!-- 四块地基 -->
       <rect x="60" y="150" width="130" height="70" fill="#0a0f1a" stroke="#f97316" stroke-width="1.5" rx="6"/>
@@ -214,7 +206,7 @@ body{overflow-x:hidden}
       人对了，数字，自然会跟上。
     </div>
     <div style="font-size:11px;color:var(--muted);margin-top:16px;line-height:1.7;padding-top:14px;border-top:1px solid rgba(255,255,255,.08)">
-      数字均来自惠城区统计公报、政府工作报告、民生实事等公开渠道；只说"关联/连着"，不说"导致"。通勤流向缺真实OD数据，为D级假设。
+      数字均来自惠城区统计公报、政府工作报告、民生实事等公开渠道；只说"关联/连着"，不说"导致"。通勤流向缺真实数据，本页相关判断基于公开线索推演。
     </div>
   </div>
 
@@ -226,8 +218,8 @@ body{overflow-x:hidden}
 const pops=[
   '<b style="font-size:14px;display:block;margin-bottom:6px">通勤 ↔ 高新区招工</b>'+
   '过江通道早晚高峰排队，已经在发生。多堵十分钟，迟到的是工人，受损的是企业。<br><br>'+
-  '高新区规上工业产值要从 632.7 亿走向模型参考刻度 1500 亿（非官方目标，官方公开目标为 2027 年破千亿），要的不是多一条路，是<b>人能不能每天按时站到岗位上</b>。通勤路上耽误的每一分钟，最后都会变成企业账上的成本、园区失去的产值。'+
-  '<span class="src">来源：直通车投诉、高新区公开信息；1500 为模型参考刻度</span>',
+  '高新区规上工业产值要从 632.7 亿走向参考线 1500 亿（非官方目标，官方公开目标为 2027 年破千亿），要的不是多一条路，是<b>人能不能每天按时站到岗位上</b>。通勤路上耽误的每一分钟，最后都会变成企业账上的成本、园区失去的产值。'+
+  '<span class="src">来源：直通车投诉、高新区公开信息；1500 为参考线</span>',
   '<b style="font-size:14px;display:block;margin-bottom:6px">学位 ↔ 家庭留存</b>'+
   '一个家庭决定留在哪座城，往往不是看工资单，是看孩子能不能进一所好学校。<br><br>'+
   '十五五规划新增5万个公办学位、37所学校新建改扩建，追的正是这件事。<b>学位不只是教育问题，它是一座城能不能留住一个家庭的钥匙。</b>学位松一松，人就留一留。'+

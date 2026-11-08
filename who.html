@@ -251,14 +251,6 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
   .bet-step .qbig{font-size:26px}
   .f-front .fv{font-size:30px}
 }
-/* ui-mobile-patch 2026-11-07 */
-@media (max-width:520px){
-  strong,h1,h2,h3,h4,th,td,label,.cap,.title,summary,.ka{word-break:keep-all;overflow-wrap:anywhere}
-  body{line-break:strict}
-  .nav a,footer a,footer button,button,.btn,.kg-footer summary{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
-  input[type=range]{min-height:44px}
-  .slider-row{min-height:44px}
-}
 </style></head>
 <body>
 
@@ -315,14 +307,14 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
   <div class="dsec">
     <h3>高新区园区工业产值 · 生长曲线</h3>
     <svg class="growth" viewBox="0 0 700 180" id="growth"></svg>
-    <div class="dtip">高新区规上工业产值口径。2025 为实测（632.7 亿）；2026（820）、2027（1000）为官方公开目标；2030 的 1500 亿为<b>模型参考刻度，非官方规划目标</b>，图中以浅色标示。</div>
+    <div class="dtip">高新区规上工业产值口径。2025 为实测（632.7 亿）；2026（820）、2027（1000）为官方公开目标；2030 的 1500 亿为<b>参考线，非官方规划目标</b>，图中以浅色标示。</div>
   </div>
   <div class="dsec">
     <h3>数据来源</h3>
     <div class="dtip" style="line-height:1.9">
-      惠城区2025年统计公报、2026年政府工作报告、2026年1-9月经济运行简况（2026-11-03 发布）、1-9月重点项目进度、高新区高质量发展大会公开信息（均为政府官网公开数据）。<br>
-      规上工业产值统一采用统计公报初步核算口径 937.92 亿（另有经普修订口径 973.9 亿，本页不混用）；带「2026 1-9月」的为当期累计快报，与「2025 全年」口径分层，两者增速不可直接比较。<br>
-      高新区前三季度数据尚未单独公布，涉及园区的牌只到 2025 全年，已在牌面注明。<br>
+      数据来自惠城区统计公报、政府工作报告、经济运行简况与高新区公开信息等政府官网渠道，统一按同一口径引用，不与不同年份的累计数直接比较。<br>
+      窗口期尚未单独公布的部分，只引用已公布的完整年度数据，并在牌面注明。<br>
+      完整来源清单（含发布日期与版本）可向作者索取。<br>
       本页只摆事实与目标，不替你下结论。
     </div>
   </div>
@@ -393,7 +385,7 @@ var QUESTIONS={
         {k:"2026 1-9月增加值",v:"+0.8%",c:"b",fd:"全市+7.1%"},
         {k:"1-8月 → 1-9月",v:"+1.4% → +0.8%",c:"b",fd:"9月单月转弱"}
       ],
-      bp:{k:"官方目标",v:"2026冲820 · 2027破千亿（2030的1500为模型刻度）"},
+      bp:{k:"官方目标",v:"2026冲820 · 2027破千亿（2030的1500为参考线）"},
       ask:"全市在 7.1 上跑，惠城停在 0.8。是爬坡没爬完，还是根本没踩上油门？"},
     {id:"i3",ico:"invest",q:"投资，止得住跌吗？",
       facts:[
@@ -409,7 +401,7 @@ var QUESTIONS={
         {k:"占全区工业",v:"67.4%",c:"n",fd:"2025口径"},
         {k:"园区规上企业",v:"343家",c:"n",fd:"2025年1-7月"}
       ],
-      bp:{k:"官方目标",v:"2026冲820 · 2027破千亿 · 2030的1500为模型刻度"},
+      bp:{k:"官方目标",v:"2026冲820 · 2027破千亿 · 2030的1500为参考线"},
       ask:"园区前三季度数据尚未单独公布，这题只能看到 2025 的底。632 到 820，一年要跑 30%——你觉得呢？"},
     {id:"i5",ico:"globe",q:"外贸，这口气受得住吗？",
       facts:[
@@ -641,7 +633,7 @@ renderList();
 
 // ========== 高新区生长曲线 ==========
 function renderGrowth(){
-  var data=[{y:632.7,l:"2025实测"},{y:820,l:"2026官方目标"},{y:1000,l:"2027官方目标"},{y:1500,l:"2030模型刻度"}];
+  var data=[{y:632.7,l:"2025实测"},{y:820,l:"2026官方目标"},{y:1000,l:"2027官方目标"},{y:1500,l:"2030参考线"}];
   var max=1500,base=140,xs=[120,280,440,600],h0='<line x1="80" y1="140" x2="650" y2="140" stroke="rgba(255,255,255,.15)" stroke-width="1"/>';
   data.forEach(function(d,i){
     var h=d.y/max*120;

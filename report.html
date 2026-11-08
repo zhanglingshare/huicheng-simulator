@@ -112,7 +112,7 @@ svg{max-width:100%;height:auto}
 .conc-a{height:100%;background:linear-gradient(90deg,#D9A85E,#CF9031);border-radius:6px}
 .conc-leg{display:flex;gap:14px;font-size:10.5px;color:var(--muted);margin-top:4px;flex-wrap:wrap}
 .conc-leg i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px}
-/* 两本账 */
+/* 两类问题分开 */
 .ledgers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
 @media(max-width:680px){.ledgers{grid-template-columns:1fr}}
 .ledger{border-radius:12px;padding:14px;background:rgba(10,15,26,.55);border:1px solid var(--glass-b)}
@@ -455,7 +455,7 @@ svg{max-width:100%;height:auto}
     </div>
     <div class="future-flex">
       <div>
-        <div class="cap" style="margin-bottom:6px">产值（亿元，高新区规上工业口径）· 白点＝2025 实测锚点（高新区 632.7 亿），灰虚线＝线性参考（非逐年预测），彩色扇形＝2028→2030 <b>区间带</b>（仅 2030 端点的上下限是推演结果，2028–2029 为视觉引导、不代表逐年结果），黄线＝中位 P50，金虚线＝1500 亿模型参考刻度（非官方目标）</div>
+        <div class="cap" style="margin-bottom:6px">产值（亿元，高新区规上工业口径）· 白点＝2025 实测锚点（高新区 632.7 亿），灰虚线＝线性参考（非逐年预测），彩色扇形＝2028→2030 <b>区间带</b>（仅 2030 端点的上下限是推演结果，2028–2029 为视觉引导、不代表逐年结果），黄线＝中位 P50，金虚线＝1500 亿参考线（非官方目标）</div>
         <div style="height:320px"><canvas id="futureMain"></canvas></div>
       </div>
       <div class="future-panel">
@@ -611,7 +611,7 @@ svg{max-width:100%;height:auto}
   <div class="card" style="border-color:#7f1d1d">
     <h2>八、决策者最该重视的三件事</h2>
     <h3>1. 命门可能不在"招不到商"，在"投产与通勤"</h3>
-    <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 4px">这里要分两本账，不能混在一起排名——一把尺子答“常规波动”，一把尺子答“万一发生”。</p>
+    <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 4px">这里要分开看，不能混在一起比——一个问题答“日常波动”，一个问题答“万一发生”。</p>
     <div class="ledgers">
       <div class="ledger l1">
         <div class="lh"> 账本一 · 逐个条件调</div>
@@ -766,13 +766,14 @@ svg{max-width:100%;height:auto}
   <div class="ds-fold-inner">
   <div class="card" id="sources-card">
     <h3>十二、数据来源与分级</h3>
-    <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 4px">越靠塔底越硬、越可核对；越靠塔顶假设成分越多。这台模型把每类数据放在哪一层，全部公开。</p>
+    <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 10px">报告中的数字按可核实程度分层标注：越靠下越接近公开原文，越靠上越依赖推断。分层只为说明哪些能直接核对，不代表精度承诺。</p>
     <div class="pyramid">
-      <div class="pyra"><div class="bar" style="background:#7f1d1d;width:130px">D · 假设</div><div class="lab"><b>网络边权重、路径贡献区间、通勤强度</b>——缺真实通勤OD数据，假设最多</div></div>
-      <div class="pyra"><div class="bar" style="background:#713f12;width:185px">C · 代理</div><div class="lab"><b>镇街级供给代理</b>（人口密度、是否点名、项目位置），非逐镇街实查</div></div>
-      <div class="pyra"><div class="bar" style="background:#1e40af;width:240px">B · 推估</div><div class="lab">部分历史序列<b>按公开增速回推</b>，非直接公布</div></div>
-      <div class="pyra"><div class="bar" style="background:#14532d;width:300px">A · 实测</div><div class="lab">统计公报、政府工作报告、计划执行报告、民生实事中<b>直接给出的数字</b></div></div>
+      <div class="pyra"><div class="bar" style="background:#7f1d1d;width:130px">D · 假设</div><div class="lab">基于前提的推演，随条件变化</div></div>
+      <div class="pyra"><div class="bar" style="background:#713f12;width:185px">C · 代理</div><div class="lab">公开信息尚不足以直接对应的部分</div></div>
+      <div class="pyra"><div class="bar" style="background:#1e40af;width:240px">B · 推估</div><div class="lab">依据公开信息推算，非直接公布</div></div>
+      <div class="pyra"><div class="bar" style="background:#14532d;width:300px">A · 实测</div><div class="lab">公开文件中直接给出的数字</div></div>
     </div>
+    <p style="font-size:11.5px;color:#8fa3c4;margin:8px 0 0">完整来源清单（含日期与版本）可向作者索取，便于逐条核对。</p>
     <h3>主要公开来源</h3>
     <div class="src-badges">
       <span class="src-badge"> 惠州市 / 惠城区政府门户</span>
@@ -789,10 +790,7 @@ svg{max-width:100%;height:auto}
     <div class="disc-grid">
       <div class="disc-item"><div class="di"></div><div><div class="dt">不是预测器</div><div class="dd">不预测具体产值或招商成败，只在公开数据与明确假设下给出叙事分布与结构提示。</div></div></div>
       <div class="disc-item"><div class="di"></div><div><div class="dt">不做因果断言</div><div class="dd">统一用“关联、同步、结构提示”，不用“因为A所以B”；系数均为模型内部关联强度，不代表现实因果。</div></div></div>
-      <div class="disc-item"><div class="di"></div><div><div class="dt">反事实不可验证，参数可核对</div><div class="dd">每个参数都能回到公开资料逐一核对。</div></div></div>
-      <div class="disc-item"><div class="di"></div><div><div class="dt">不是真涌现</div><div class="dd">为可复现的弱涌现模拟，未达到真实经济涌现的量级。</div></div></div>
-      <div class="disc-item"><div class="di"></div><div><div class="dt">可复现</div><div class="dd">同样的假设输入，每次跑出来结果一致，可复现；节点的影响力按真实连接实时算，不是预先写死的。</div></div></div>
-      <div class="disc-item"><div class="di"></div><div><div class="dt">两本账分开</div><div class="dd">逐个条件调（上下 20%）与整件事放进来（事件冲击）分开计算、分开解读，不混排同一排序。</div></div></div>
+      <div class="disc-item"><div class="di"></div><div><div class="dt">条件不同，结论不同</div><div class="dd">前提一变，结果随之变化，不把某一次结果当作定论。</div></div></div>
       <div class="disc-item" style="grid-column:1/-1;border-color:rgba(251,113,133,.35)"><div class="di" style="background:rgba(251,113,133,.14);border-color:rgba(251,113,133,.35)">️</div><div><div class="dt">不构成投资建议，亦不替代官方决策</div><div class="dd">结论随假设改变而改变。</div></div></div>
     </div>
   </div>
@@ -1042,7 +1040,7 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
         borderColor:(ctx)=>ctx.dataIndex>=3?SC[0].color:'transparent',borderWidth:1.6,pointRadius:0,pointHoverRadius:0,fill:false,order:6,tension:0},
       {type:'line',label:'中位轨迹',data:coneData(res[0],'p50'),borderColor:(ctx)=>ctx.dataIndex>=3?'#fbbf24':'transparent',borderWidth:2.2,pointRadius:0,pointHoverRadius:0,fill:false,order:5,spanGaps:true},
       {type:'line',label:'线性参考（非逐年预测）',data:refLine.slice(),borderColor:'#94a3b8',borderDash:[6,5],pointRadius:0,pointHoverRadius:0,borderWidth:1.6,order:4,spanGaps:true},
-      {type:'line',label:'1500亿参考刻度（非官方目标）',data:YRS.map(()=>1500),borderColor:'#fbbf24',borderDash:[2,4],pointRadius:0,borderWidth:1.4,order:3},
+      {type:'line',label:'1500亿参考线（非官方目标）',data:YRS.map(()=>1500),borderColor:'#fbbf24',borderDash:[2,4],pointRadius:0,borderWidth:1.4,order:3},
       {type:'scatter',label:'2025实测锚点',data:[HT.BASE,null,null,null,null,null],backgroundColor:'#fff',pointRadius:6,borderColor:'#38bdf8',borderWidth:2,order:2}
     ]},
     options:{responsive:true,maintainAspectRatio:false,
