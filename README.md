@@ -11,7 +11,7 @@
 一套以惠城区为观察样本、基于公开信息的区域经济关系观察与情景推演工具。
 
 [![在线体验](https://img.shields.io/badge/在线体验-从第一页开始-2563eb?style=for-the-badge)](https://zhanglingshare.github.io/huicheng-simulator/)
-[![MIT License](https://img.shields.io/badge/License-MIT-orange?style=for-the-badge)](./LICENSE)
+[![License](https://img.shields.io/badge/License-保留所有权利-red?style=for-the-badge)](./LICENSE)
 
 </div>
 
@@ -26,7 +26,7 @@
 - **第三页 · 钱去哪了：** https://zhanglingshare.github.io/huicheng-simulator/today.html
 - **项目介绍页：** https://zhanglingshare.github.io/huicheng-simulator/home.html
 - **代码仓库：** https://github.com/zhanglingshare/huicheng-simulator
-- **许可协议：** MIT License
+- **许可协议：** 保留所有权利（未经许可不得复制、转载、商用）
 
 ---
 
@@ -215,7 +215,7 @@
 
 Copyright © 2026 张凌（Zhang Ling）。
 
-本项目采用 [MIT License](./LICENSE)。使用、修改和分发时，请保留原有版权与许可声明。软件按“现状”提供，使用者需自行判断其适用性并承担相应风险。
+本项目采用 [保留所有权利](./LICENSE) 声明。允许个人浏览、分享链接与少量引用（须署名并附来源）；未经书面许可，不得复制、转载、镜像、商用、改编，亦不得用于训练人工智能模型。如需转载、合作或商业使用，请联系作者。
 
 ---
 
