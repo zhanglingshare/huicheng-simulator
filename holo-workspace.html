@@ -637,7 +637,7 @@ footer{margin:0 20px;background:#1C1D1E;border:1px solid var(--line);border-radi
     </div>
 
     <div class="card">
-      <div class="card-h"><h3>证据分级</h3></div>
+      <div class="card-h"><h3>依据分层</h3></div>
       <div class="legend"><span class="ln" style="border-top-style:solid;border-color:#3b4b60"></span>A 已证实</div>
       <div class="legend"><span class="ln" style="border-top-style:dashed;border-color:#8a99ad"></span>B 证据推断</div>
       <div class="legend"><span class="ln" style="border-top-style:dotted;border-color:#a9b8c9"></span>C 待验证</div>
@@ -1483,7 +1483,7 @@ function renderDetail(kind, data){
       '</div>'+
       '<div class="sec"><span class="n">3</span>需要留意</div>'+
       '<span class="grade">'+esc(gradeLabel(data.grade))+'</span>'+
-      '<div class="limit"><b>限制 / 反证：</b>'+esc(data.limit)+'</div>'+ 
+      '<div class="limit"><b>公开记录未覆盖的部分：</b>'+esc(data.limit)+'</div>'+ 
       '<div class="d-note">关系图展示公开信息中的关联线索，不单独证明因果关系。</div>';
   }else{
     const ev=data;

@@ -170,11 +170,11 @@ tr.sel{background:rgba(90,200,250,.08)}
   <div class="hero">
     <span class="tag">案例1 · 惠城通勤交互模拟器</span>
     <h1>你每天在桥上堵40分钟，<br>一个月<em>少陪了孩子多少小时？</em></h1>
-    <p>下面的参数你都能拖动——城市损失、个人账单、错过的晚饭，全部实时重算。先拉一拉滑块，看看你的假设会让这座城市付出多少。</p>
+    <p>下面这几项你都能拖动——城市损失、个人账单、错过的晚饭，全部实时重算。先拉一拉滑块，看看你的假设会让这座城市付出多少。</p>
   </div>
 
   <div class="console">
-    <div class="ct"><i></i>参数控制台 · 拖动即算</div>
+    <div class="ct"><i></i>设定台 · 拖动即算</div>
     <div class="cs">白色为真实锚点（人口基数/票价/租金），可调项均为情景假设，页面底部统一标注口径。</div>
     <div class="slider-grid">
       <div class="slider-row">
@@ -215,7 +215,7 @@ tr.sel{background:rgba(90,200,250,.08)}
       <button type="button" class="preset-btn" onclick="preset('base')">基准情景</button>
       <button type="button" class="preset-btn" onclick="preset('bad')">悲观情景</button>
       <button type="button" class="preset-btn" onclick="preset('extreme')">极端风暴</button>
-      <button type="button" class="preset-btn reset" onclick="preset('reset')">重置参数</button>
+      <button type="button" class="preset-btn reset" onclick="preset('reset')">恢复默认</button>
     </div>
   </div>
 
@@ -399,7 +399,7 @@ tr.sel{background:rgba(90,200,250,.08)}
     <p style="font-size:12px;color:var(--ink2);line-height:1.7">第一根柱子是时间成本，第二根是消费外溢，第三根是合计。拖动滑块，三根柱子的高度和数字会一起变。</p>
   </div>
 
-  <div class="section-title">公式一步步拆给你看（数字随参数实时更新）</div>
+  <div class="section-title">这笔账怎么算的（数字随设定实时更新）</div>
   <div class="card">
     <h2><span class="num">11</span>两笔成本的完整计算</h2>
     <div class="vote-title">第一本账：时间成本</div>
@@ -417,7 +417,7 @@ tr.sel{background:rgba(90,200,250,.08)}
 　　　　　 = <span class="res" id="fSpillRes">1.8亿元/年</span><br><br>
 合计隐性损失 = <span class="res" id="fTimeRes2">4.2亿</span> + <span class="res" id="fSpillRes2">1.8亿</span> = <span class="res" id="fTotalRes">6.0亿元/年</span>
     </div>
-    <p style="font-size:11px;color:var(--mut);margin-top:12px;line-height:1.6">跨江比例、小时工资、外溢消费与系数均为情景假设，不是普查硬数据。本页展示测算方法和量级，真实数字需要 OD（起终点）通勤调查才能精确。</p>
+    <p style="font-size:11px;color:var(--mut);margin-top:12px;line-height:1.6">跨江比例、小时工资、外溢消费按情景设定，不是普查数据。本页只给量级示意，真实数字需要 OD（起终点）通勤调查才能精确。</p>
   </div>
 
   <div class="section-title">碰上台风暴雨，通勤是什么体验？</div>
@@ -510,7 +510,7 @@ tr.sel{background:rgba(90,200,250,.08)}
 
   <div class="section-title">你的通勤账本，一年到底花多少？</div>
   <div class="card">
-    <h2><span class="num">16</span>个人年度账单（随方式与参数实时变化）</h2>
+    <h2><span class="num">16</span>个人年度账单（随方式与设定实时变化）</h2>
     <div class="ledger" id="myLedger"></div>
     <p style="font-size:11px;color:var(--mut);margin-top:10px;line-height:1.6">还没算少逛的街、少喝的咖啡、少陪的孩子——那些才是真正贵的。</p>
   </div>
@@ -521,7 +521,7 @@ tr.sel{background:rgba(90,200,250,.08)}
     <p style="font-size:13px;color:#c8d2e4;line-height:1.9">
       <b style="color:var(--ink)">风洞测试：</b>通勤压力单独施加，达标率从 66.4% 掉到 64%；和投产延期叠加，掉到 <b style="color:var(--red)">51%</b>。<br><br>
       <b style="color:var(--ink)">盲点页：</b>"一条每天要走的路"和孩子的学位、楼下的小店一样，是城市的小地基。<br><br>
-      <b style="color:var(--ink)">本页测算（当前参数）：</b>每年约 <b id="echoTotal" style="color:var(--amber)">6.0亿</b>隐性损失，<b id="echoPeople" style="color:var(--ink)">9.6万人</b>每天在桥上消耗生命。<br><br>
+      <b style="color:var(--ink)">本页测算（当前设定）：</b>每年约 <b id="echoTotal" style="color:var(--amber)">6.0亿</b>隐性损失，<b id="echoPeople" style="color:var(--ink)">9.6万人</b>每天在桥上消耗生命。<br><br>
       通勤不是"要不要再建桥"的问题。是 <b style="color:var(--ink)">几万个家庭的晚饭、几百小时的等待、校门口的孩子</b>——这些数字加在一起，才是真实的城市。
     </p>
   </div>

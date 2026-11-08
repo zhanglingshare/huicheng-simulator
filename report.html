@@ -445,8 +445,8 @@ svg{max-width:100%;height:auto}
 
   <!-- 2030未来轨迹（驾驶舱：4情景tab + 主图 + 右结果面板） -->
   <div class="card">
-    <h2>② 2030 未来轨迹 · 规划节点与模拟结果<span class="itag sim">模型推演 · 非预测</span></h2>
-    <p style="font-size:12.5px;color:var(--ink2);margin:0 0 10px;line-height:1.8">从 2025 实测锚点（惠城高新区规上工业产值 632.7 亿，非全区 GDP）到 2030 模拟区间，看懂惠城的可能路径。灰虚线为线性参考（非逐年预测），模型只在 2030 给出结果分布。</p>
+    <h2>② 2030 未来轨迹 · 规划节点与模拟结果<span class="itag sim">推演结果 · 非预测</span></h2>
+    <p style="font-size:12.5px;color:var(--ink2);margin:0 0 10px;line-height:1.8">从 2025 实测锚点（惠城高新区规上工业产值 632.7 亿，非全区 GDP）到 2030 模拟区间，看懂惠城的可能路径。灰虚线为线性参考（非逐年预测），这套推演只在 2030 给出结果分布。</p>
     <div class="scene-tabs" id="sceneTabs">
       <button class="on" data-s="0">基准情景</button>
       <button data-s="1">项目延期</button>
@@ -528,12 +528,12 @@ svg{max-width:100%;height:auto}
     <h2>④ 关键因素 · 影响大小排序 <span class="itag sim">逐个条件调 · 其他不动</span></h2>
     <p style="font-size:12.5px;color:var(--ink2);margin:0 0 8px;line-height:1.8">其他四条都不动，只把一条路的上调或下调 20%，用同一套假设跑 2 万次。条长＝2030 达标率的摆动幅度，越长越要紧。</p>
     <div style="height:236px"><canvas id="tornado"></canvas></div>
-    <p style="font-size:10.5px;color:#6b7280;margin:8px 0 0;line-height:1.7">真实结果：新投产项目在 45%↔83% 之间摆动 ±38pp，最敏感；三大集群 ±16pp；AI 机器人、生产性服务业各 ±8pp；融深融湾 ±3pp。<b>“敏感”≠“重要”</b>，且 ±20% 是否对应现实合理波动仍需用真实数据校准。</p>
+    <p style="font-size:10.5px;color:#6b7280;margin:8px 0 0;line-height:1.7">试算结果：新投产项目在四成到八成多之间摆动，幅度最大；三大集群居中；AI 机器人、生产性服务业次之；融深融湾影响最小。<b>受影响大不等于更重要</b>；上下两成是否贴近现实波动，还需真实数据核对。</p>
   </div>
 
   <!-- ⑤ 结果分布 · 不确定性区间 -->
   <div class="card">
-    <h2>⑤ 结果分布 · 不确定性区间 <span class="itag sim">模型推演 · 非预测</span></h2>
+    <h2>⑤ 结果分布 · 不确定性区间 <span class="itag sim">推演结果 · 非预测</span></h2>
     <p style="font-size:12.5px;color:var(--ink2);margin:0 0 8px">基准（蓝）与<b id="distCurName">当前情景</b>（红）的 2030 产值结果叠加；阴影越宽代表不确定性越大，竖线为偏悲观 / 中位 / 偏乐观。</p>
     <div style="height:268px"><canvas id="cmpDist"></canvas></div>
     <div class="dist-stats" id="distStats"></div>
@@ -576,7 +576,7 @@ svg{max-width:100%;height:auto}
         <div class="no">04</div>
         <div class="fct">
           <div class="tt">时间是被忽视的变量 <span class="chip">⏳ 隐藏变量</span></div>
-          <div class="ds">同一个项目，<b>2028 投产 vs 2030 投产</b>，放进系统结果大不一样；“晚一点”在有明确节点的系统里是敏感参数。</div>
+          <div class="ds">同一个项目，<b>2028 投产 vs 2030 投产</b>，放进系统结果大不一样；“晚一点”在有明确节点的系统里，是最要紧的一环。</div>
         </div>
       </div>
       <div class="f5 c-do">
@@ -629,7 +629,7 @@ svg{max-width:100%;height:auto}
         <ul>
           <li><b>关键项目投产延期</b></li>
           <li><b>过江通勤堵塞</b></li>
-          <li>不在常规四参数排序里</li>
+          <li>不在常规四项排序里</li>
           <li>一旦发生，比“招不到商”更直接、更难补救</li>
         </ul>
       </div>
@@ -646,24 +646,24 @@ svg{max-width:100%;height:auto}
   <!-- 各因素影响 -->
   <div class="card">
     <h2>九、哪些因素最牵动结果</h2>
-    <div class="subh"><span class="num">1</span>尺子一 · 关联紧密度 <span class="itag sim">模型推演 · 关联强度</span></div>
-    <div style="font-size:11.5px;color:#94a3b8;margin:0 0 6px">五条路各自与总产值的关联紧密度（0–1，越大绑得越紧）。这是模型内部的“关联”，<b>不是现实因果</b>，也不与下方事件冲击比柱长。</div>
+    <div class="subh"><span class="num">1</span>尺子一 · 关联紧密度 <span class="itag sim">推演结果 · 关联强度</span></div>
+    <div style="font-size:11.5px;color:#94a3b8;margin:0 0 6px">五条路各自与总产值的关联紧密度（0–1，越大绑得越紧）。这是推演内部的“关联”，<b>不是现实因果</b>，也不与下方事件冲击比柱长。</div>
     <div style="height:185px"><canvas id="coef"></canvas></div>
     <div class="plain">“新投产项目”这条路和结果绑得最紧，集群、AI、服务业依次靠后，融深最松。但关联紧密度只回答“谁和结果绑得紧”，回答不了“万一某件事真发生会怎样”——那是尺子二。</div>
 
-    <div class="subh"><span class="num">2</span>尺子二 · 受控事件冲击 <span class="itag sim">模型推演 · 事件注入</span></div>
+    <div class="subh"><span class="num">2</span>尺子二 · 受控事件冲击 <span class="itag sim">推演结果 · 事件注入</span></div>
     <div style="font-size:11.5px;color:#94a3b8;margin:0 0 6px">同一基准、同一套假设，把“关键项目投产延期”“过江通勤堵塞”分别单独注入，看达标率和中位产值各掉多少。</div>
     <div class="shock-grid">
       <div class="shock-box"><div class="cap">2030 达标率 <b>（≥1500亿概率）</b></div><div style="height:168px"><canvas id="shockHit"></canvas></div></div>
       <div class="shock-box"><div class="cap">中位产值 <b>（亿元）</b></div><div style="height:168px"><canvas id="shockP"></canvas></div></div>
     </div>
-    <div class="plain">真把“项目延期”压一遍，达标率从 66% 掉到 48%（−19 个百分点）；“通勤堵塞”掉到 51%（−16 个点）。这两件事不在常规参数排序里，却比“招不到商”更直接、更难补救——这正是惠城的命门。</div>
+    <div class="plain">真把“项目延期”压一遍，达标率从 66% 掉到 48%（−19 个百分点）；“通勤堵塞”掉到 51%（−16 个点）。这两件事不在常规排序里，却比“招不到商”更直接、更难补救——这正是惠城的命门。</div>
     <div style="margin-top:16px;padding-top:14px;border-top:1px solid #1c2739">
       
       <div class="rulers">
         <div class="ruler a">
           <div class="rk">尺子一 · 逐个条件调</div>
-          <div class="qt">回答“哪个参数最敏感”</div>
+          <div class="qt">回答“哪一环最受影响”</div>
           <div class="how">其他条件都不动，只把某一条上调或下调 20%，看达标可能摆动多大。</div>
         </div>
         <div class="ruler b">
@@ -672,7 +672,7 @@ svg{max-width:100%;height:auto}
           <div class="how">现实中的<b>情景</b>：投产延期、通勤堵塞等具体事件单独注入（见⑥风洞页）。</div>
         </div>
       </div>
-      <div class="ledger-divider">️ “敏感” ≠ “重要”：敏感只说明在模型里绑得紧；现实中先做哪条，还要看可控性、成本、见效速度。</div>
+      <div class="ledger-divider">️ “受影响大”不等于“更重要”：受影响大只说明在这套设定里连得紧；现实中先做哪条，还要看可控性、成本、见效速度。</div>
     </div>
   </div>
 
@@ -757,12 +757,12 @@ svg{max-width:100%;height:auto}
         </div>
       </div>
     </div>
-    <p style="font-size:11px;color:#6b7280;margin:12px 0 0">建议方向均对应官方"高新区引领、产业协同、城市承载、民生保障、开放融深"等战略表述，为模拟推演的优先级提示，非替代官方决策。</p>
+    <p style="font-size:11px;color:#6b7280;margin:12px 0 0">建议方向均对应官方"高新区引领、产业协同、城市承载、民生保障、开放融深"等战略表述，为推演结果的优先级提示，非替代官方决策。</p>
   </div>
 
-  <!-- 数据来源与模型边界：退到第二层折叠 -->
+  <!-- 数据来源与边界：退到第二层折叠 -->
   <details class="ds-fold" id="sources">
-  <summary>数据来源、分级与模型边界说明</summary>
+  <summary>数据来源、分层与边界说明</summary>
   <div class="ds-fold-inner">
   <div class="card" id="sources-card">
     <h3>十二、数据来源与分级</h3>
@@ -784,12 +784,12 @@ svg{max-width:100%;height:auto}
     </div>
   </div>
 
-  <!-- 模型边界 -->
+  <!-- 边界与免责 -->
   <div class="card">
-    <h3>十三、模型边界与免责声明</h3>
+    <h3>十三、推演边界与免责声明</h3>
     <div class="disc-grid">
       <div class="disc-item"><div class="di"></div><div><div class="dt">不是预测器</div><div class="dd">不预测具体产值或招商成败，只在公开数据与明确假设下给出叙事分布与结构提示。</div></div></div>
-      <div class="disc-item"><div class="di"></div><div><div class="dt">不做因果断言</div><div class="dd">统一用“关联、同步、结构提示”，不用“因为A所以B”；系数均为模型内部关联强度，不代表现实因果。</div></div></div>
+      <div class="disc-item"><div class="di"></div><div><div class="dt">不做因果断言</div><div class="dd">统一用“关联、同步、结构提示”，不用“因为A所以B”；各项关系强度只是情境内的关联程度，不代表现实因果。</div></div></div>
       <div class="disc-item"><div class="di"></div><div><div class="dt">条件不同，结论不同</div><div class="dd">前提一变，结果随之变化，不把某一次结果当作定论。</div></div></div>
       <div class="disc-item" style="grid-column:1/-1;border-color:rgba(251,113,133,.35)"><div class="di" style="background:rgba(251,113,133,.14);border-color:rgba(251,113,133,.35)">️</div><div><div class="dt">不构成投资建议，亦不替代官方决策</div><div class="dd">结论随假设改变而改变。</div></div></div>
     </div>
@@ -818,7 +818,7 @@ svg{max-width:100%;height:auto}
 
   <div class="card">
     <p class="bigquote" style="margin:4px 0">大数字会被记住一时，<br>但只有<b style="color:#fbbf24">人愿意把下一个五年留在这里</b>，这座城才有未来。</p>
-    <details class="ds-fold" style="margin-top:14px"><summary>数据时效与免责说明</summary><div class="ds-fold-inner disc" style="font-size:12.5px;color:#9fb3cc;line-height:1.8">本报告为Demo演示版本。<b>数据时效性：</b>2025年GDP、固投、一般公共预算收入等为计划执行快报数，非最终统计公报定数；规上工业、社零、外贸等来自统计公报或政府工作报告。2026年统计公报发布后部分数字可能微调。模拟结果仅代表当前数据、参数与规则下的压力测试，不代表对未来的精确预测，亦不构成投资建议。</div></details>
+    <details class="ds-fold" style="margin-top:14px"><summary>数据时效与免责说明</summary><div class="ds-fold-inner disc" style="font-size:12.5px;color:#9fb3cc;line-height:1.8">本报告为Demo演示版本。<b>数据时效性：</b>2025年GDP、固投、一般公共预算收入等为计划执行快报数，非最终统计公报定数；规上工业、社零、外贸等来自统计公报或政府工作报告。2026年统计公报发布后部分数字可能微调。推演结果仅代表当前数据、设定与规则下的压力测试，不代表对未来的精确预测，亦不构成投资建议。</div></details>
   </div>
 
   <div style="text-align:center;margin:22px 0"><a class="btn" href="index.html">回到首页</a></div>
@@ -897,7 +897,7 @@ new Chart(document.getElementById('coef').getContext('2d'),{
     data:_base.coefs.map(v=>+v.toFixed(2)),
     backgroundColor:['#3b82f6','#8b5cf6','#06b6d4','#fbbf24','#94a3b8'],borderRadius:4}]},
   options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>'关联紧密度 '+it.parsed.x.toFixed(2)+'（模型内部关联，非实测因果）'}}},
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>'关联紧密度 '+it.parsed.x.toFixed(2)+'（推演内部关联，非实测因果）'}}},
     scales:{x:{ticks:{color:tc},grid:{color:gc},max:1},y:{ticks:{color:axc},grid:{display:false}}}}
 });
 

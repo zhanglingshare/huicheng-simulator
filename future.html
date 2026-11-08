@@ -363,7 +363,7 @@ input[type=range]:disabled{opacity:.4;cursor:not-allowed}
   <div class="collapsible" id="assumeBox">
     <div class="body assume-body">
       · 现实锚点：2025 年高新区规上工业总产值 632.7 亿元（公开实测）。<br>
-      · 参考目标：1500 亿元为模型外延参考目标，非政府刚性指标。<br>
+      · 参考目标：1500 亿元为参考线，非政府刚性指标。<br>
       · 五条路径的产值贡献，为情景假设，可在左侧调节；模拟结果叠加外部冲击与随机因素，呈现可能区间。
     </div>
   </div>
@@ -475,7 +475,7 @@ function updatePathDisplay(){
     $('fill-'+m.id).style.width=((vals[i]-m.min)/(m.max-m.min)*100)+'%';
   });
 }
-/* ===== 路径→模型输入：用户调情景值 mu，内部波动参数 sd 沿用模型默认（不展示） ===== */
+/* ===== 情景值 → 推演输入 ===== */
 function pathsFromVals(vals){
   return PATHS_META.map(function(m,i){
     return {mu:vals[i],sd:HT.DEFAULT_PATHS[i].sd,name:m.name,color:m.color};
