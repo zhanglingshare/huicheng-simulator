@@ -54,20 +54,21 @@
 
 红色滑块、情景按钮都能拖，拖动后数字实时变。所有结果只在你自己的浏览器里算，不向外发。
 
-## 十页
+## 页面顺序
 
 | 顺序 | 页面 | 入口 |
 |:---:|---|---|
 | 01 | 序章 | [进入](https://zhanglingshare.github.io/huicheng-simulator/) |
-| 02 | 全息工作区 | [打开](https://zhanglingshare.github.io/huicheng-simulator/holo-workspace.html) |
-| 03 | 钱去哪了 | [打开](https://zhanglingshare.github.io/huicheng-simulator/today.html) |
-| 04 | 风向标 | [打开](https://zhanglingshare.github.io/huicheng-simulator/fun.html) |
-| 05 | 路径 | [打开](https://zhanglingshare.github.io/huicheng-simulator/choices.html) |
-| 06 | 未来 | [打开](https://zhanglingshare.github.io/huicheng-simulator/future.html) |
-| 07 | 风洞测试 | [打开](https://zhanglingshare.github.io/huicheng-simulator/windtunnel.html) |
-| 08 | 忽略了什么 | [打开](https://zhanglingshare.github.io/huicheng-simulator/blindspot.html) |
-| 09 | 报告 | [打开](https://zhanglingshare.github.io/huicheng-simulator/report.html) |
-| 10 | 结语 | [打开](https://zhanglingshare.github.io/huicheng-simulator/ending.html) |
+| 02 | 全息关系 | [打开](https://zhanglingshare.github.io/huicheng-simulator/holo.html) |
+| 03 | 全息工作区 | [打开](https://zhanglingshare.github.io/huicheng-simulator/holo-workspace.html) |
+| 04 | 钱去哪了 | [打开](https://zhanglingshare.github.io/huicheng-simulator/today.html) |
+| 05 | 风向标 | [打开](https://zhanglingshare.github.io/huicheng-simulator/fun.html) |
+| 06 | 路径 | [打开](https://zhanglingshare.github.io/huicheng-simulator/choices.html) |
+| 07 | 未来 | [打开](https://zhanglingshare.github.io/huicheng-simulator/future.html) |
+| 08 | 风洞测试 | [打开](https://zhanglingshare.github.io/huicheng-simulator/windtunnel.html) |
+| 09 | 忽略了什么 | [打开](https://zhanglingshare.github.io/huicheng-simulator/blindspot.html) |
+| 10 | 报告 | [打开](https://zhanglingshare.github.io/huicheng-simulator/report.html) |
+| 11 | 结语 | [打开](https://zhanglingshare.github.io/huicheng-simulator/ending.html) |
 
 ## 使用边界
 

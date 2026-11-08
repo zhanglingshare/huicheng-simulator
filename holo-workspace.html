@@ -577,7 +577,7 @@ footer{margin:0 20px;background:#1C1D1E;border:1px solid var(--line);border-radi
       <button id="modePlain" type="button" class="on" aria-pressed="true">通俗</button>
       <button id="modePro" type="button" aria-pressed="false">专业</button>
     </div>
-    <div class="status" id="dataStatus" title="公开关系数据状态"><i></i>正在读取公开数据</div>
+    <div class="status" id="dataStatus" title="关系数据状态"><i></i>正在读取公开数据</div>
     <div class="avatar" title="张凌">张</div>
   </div>
 </header>
@@ -1814,7 +1814,7 @@ async function boot(){
     document.getElementById('nEdge').textContent=EDGES.length;
     document.getElementById('gradeCount').innerHTML='<b style="color:#0f7a44">A 级</b> '+EDGES.filter(function(e){return e.grade==='A';}).length+' 条';
     document.getElementById('layerCount').textContent=EDGES.length+' 条';
-    const date=payload[0].generated_at||payload[1].generated_at||'公开数据';
+    const date=payload[0].generated_at||payload[1].generated_at||'最新';
     document.getElementById('dataStatus').innerHTML='<i></i>'+esc(date)+' 已更新';
     document.getElementById('kpiNodes').textContent=NODES.length;
     document.getElementById('kpiEdges').textContent=EDGES.length;

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>看见惠城 · 全息关系版</title>
-<meta name="description" content="把惠城的产业、企业、投资、交通、文旅、人居与区域协作铺在一张图上；点开任何一个节点，能看到它连着谁、这条线从哪里来，以及今年哪些线变了。">
+<meta name="description" content="用关系网络看惠城：产业、企业、投资、交通、文旅、人居与区域协作之间的有证据关系及其变化；已证实/推断/假设分层呈现，变化由动画与高亮凸显。">
 <style>
   :root{
     --ink:#0f1c2e; --ink2:#1e2b3a; --sub:#64748b; --faint:#94a3b8;
@@ -216,11 +216,19 @@
 
   <div id="stageWrap">
     <canvas id="net"></canvas>
-    <div id="netHint">拖拽节点可重新布局 · 点击节点看它连着谁 · 点击连线看这条线的来处</div>
+    <div id="netHint">拖拽节点可重新布局 · 点击节点看关系 · 点击连线看证据</div>
   </div>
 
   <!-- 左栏 -->
   <div class="side left">
+    <div class="card" style="padding:12px 14px 14px">
+      <h3><span class="dot" style="background:#2563eb"></span>接着看</h3>
+      <div style="display:flex;flex-direction:column;gap:9px;font-size:12.5px;line-height:1.5">
+        <a href="index.html" style="color:#5b6b82;text-decoration:none">← 回到序章</a>
+        <a href="holo-workspace.html" style="color:#1e2b3a;text-decoration:none;font-weight:600">全息工作区（自己动手） →</a>
+        <a href="today.html" style="color:#1e2b3a;text-decoration:none">钱去哪了 →</a>
+      </div>
+    </div>
     <div class="card filter" id="filter">
       <h3><span class="dot"></span>关系图层</h3>
       <button data-f="all" class="active"><span class="swatch" style="background:#1e2b3a"></span>全部关系</button>
@@ -231,10 +239,10 @@
       <button data-f="tourism_consumption"><span class="swatch" style="background:#d97706"></span>消费文旅</button>
     </div>
     <div class="card legend">
-      <h3><span class="dot" style="background:#16a34a"></span>资料来源</h3>
-      <div class="row"><span class="ln" style="border-top:2.5px solid #1e2b3a"></span>有公开原文</div>
-      <div class="row"><span class="ln" style="border-top:2.5px dashed #64748b"></span>多方转述</div>
-      <div class="row"><span class="ln" style="border-top:2.5px dotted #94a3b8"></span>尚未确认</div>
+      <h3><span class="dot" style="background:#16a34a"></span>依据分层</h3>
+      <div class="row"><span class="ln" style="border-top:2.5px solid #1e2b3a"></span>A 已证实</div>
+      <div class="row"><span class="ln" style="border-top:2.5px dashed #64748b"></span>B 证据推断</div>
+      <div class="row"><span class="ln" style="border-top:2.5px dotted #94a3b8"></span>C 待验证</div>
       <div class="toggle-row"><span>显示连线标签</span><span class="switch" id="swLab"><i></i></span></div>
       <div class="toggle-row"><span>只看近期变化</span><span class="switch off" id="swChg"><i></i></span></div>
     </div>
@@ -258,7 +266,7 @@
     <div class="tl-wrap">
       <div class="tl-head">
         <div class="t"><span class="dot"></span>关系变化时间线 · 2026</div>
-        <div class="s">只记有公开来源的变化 · 签约与投产分开看</div>
+        <div class="s">只收录会改变网络结构的事件 · 签约≠投产</div>
       </div>
       <div class="tl-track" id="tlTrack"><div class="tl-line"></div></div>
     </div>
@@ -635,7 +643,7 @@ function clearSelection(){
 const pop=document.getElementById("pop");
 const popMask=document.getElementById("popMask");
 function gradeChip(g){
-  const m={A:["#16a34a","有公开原文"],B:["#d97706","多方转述"],C:["#94a3b8","尚未确认"]};
+  const m={A:["#16a34a","A 已证实事实"],B:["#d97706","B 证据推断"],C:["#94a3b8","C 待验证假设"]};
   return '<span class="grade-chip" style="background:'+m[g][0]+'22;color:'+m[g][0]+'">'+m[g][1]+'</span>';
 }
 function showNodePop(n){
@@ -870,7 +878,7 @@ boot();
     }).join('');
   }
   if(line&&typeof HC_ASOF!=='undefined'){
-    line.innerHTML='指标期次：<b>'+HC_ASOF.officialLabel+'终值</b> · '+HC_ASOF.currentLabel+'为当期快报，两期口径不同，分开看';
+    line.innerHTML='指标期次：<b>'+HC_ASOF.officialLabel+'终值</b> · '+HC_ASOF.currentLabel+'为当期快报，不可混读';
     line.title=HC_ASOF.note+' 来源：惠城区统计公报（'+HC_ASOF.official+'）。最近核验 '+HC_ASOF.checked+'。';
   }
 })();
