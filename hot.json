@@ -1,10 +1,10 @@
 {
   "schema_version": 2,
   "region": "huicheng",
-  "updated": "2026-11-09 21:28",
-  "fetched_at": "2026-11-09 21:28",
+  "updated": "2026-11-10 07:30",
+  "fetched_at": "2026-11-10 07:30",
   "frequency": "每日更新一次",
-  "count": 7,
+  "count": 8,
   "stats": [
     {
       "n": "今日话题",
@@ -13,7 +13,7 @@
       "warm": true
     }
   ],
-  "note": "话题按编辑关注程度排序，标注关注档（高/较高/中）与来源级别；每条显示原报道时间、最近抓取与核验状态（官方原文或≥2独立来源=已核验，单源媒体/本地=待核实），缺失标「待核实」。本页不展示平台后台真实阅读、转发、点赞数据。今晚窗口（近24小时）内可溯源的惠城本地条目 7 条，已剔除不在窗口内的早前旧稿与纯审批公示类；周末本地发布节奏偏慢，条目偏少，按实收录，未用旧稿填充。话题均来自公开渠道，每日更新。",
+  "note": "话题按编辑关注程度排序，标注关注档（高/较高/中）与来源级别；每条显示原报道时间、最近抓取与核验状态（官方原文或≥2独立来源=已核验，单源媒体/本地=待核实），缺失标「待核实」。本页不展示平台后台真实阅读、转发、点赞数据。本窗口内可溯源的惠城本地条目 8 条，已剔除不在窗口内的早前旧稿与纯审批公示类；工作日早晨新增发布尚少，按实收录，未用旧稿填充。话题均来自公开渠道，每日更新。",
   "items": [
     {
       "title": "惠城高新区 300 套保障性租赁住房启动配租，12 月起对外出租",
@@ -29,11 +29,17 @@
       "event_date": null,
       "fetched_at": "2026-11-09 21:28",
       "verified_status": "已核验",
-      "fate": null
+      "fate": {
+        "kind": "info",
+        "ident": "livelihood",
+        "objects": "高新区新市民、青年职工住房",
+        "direction": "利好",
+        "assumption": "具体进展以官方发布为准"
+      }
     },
     {
       "title": "河南岸学苑社区办邻里生活节：包饺子、长桌宴、客家粄味 DIY",
-      "cat": "warm",
+      "cat": "gossip",
       "emoji": "🤝",
       "tier": "高",
       "srcLevel": "官方发布",
@@ -45,7 +51,13 @@
       "event_date": "2026-11-07~2026-11-08",
       "fetched_at": "2026-11-09 21:28",
       "verified_status": "已核验",
-      "fate": null
+      "fate": {
+        "kind": "life",
+        "ident": "gossip",
+        "objects": "河南岸学苑社区居民生活",
+        "direction": "中性",
+        "assumption": "具体进展以官方发布为准"
+      }
     },
     {
       "title": "农工党惠州市委会“农工诊室”在三栋镇卫生院揭牌",
@@ -61,7 +73,13 @@
       "event_date": "2026-11-07",
       "fetched_at": "2026-11-09 21:28",
       "verified_status": "已核验",
-      "fate": null
+      "fate": {
+        "kind": "info",
+        "ident": "livelihood",
+        "objects": "三栋镇基层医疗服务",
+        "direction": "中性",
+        "assumption": "具体进展以官方发布为准"
+      }
     },
     {
       "title": "惠城区 2026 年官方兽医动物防疫检疫技能培训班举办",
@@ -77,7 +95,13 @@
       "event_date": null,
       "fetched_at": "2026-11-09 21:28",
       "verified_status": "已核验",
-      "fate": null
+      "fate": {
+        "kind": "info",
+        "ident": "city",
+        "objects": "区动物防疫检疫工作",
+        "direction": "中性",
+        "assumption": "具体进展以官方发布为准"
+      }
     },
     {
       "title": "江北街道召开专题会议传达学习党的二十届五中全会精神",
@@ -93,11 +117,17 @@
       "event_date": "2026-11-05",
       "fetched_at": "2026-11-09 21:28",
       "verified_status": "已核验",
-      "fate": null
+      "fate": {
+        "kind": "info",
+        "ident": "city",
+        "objects": "江北街道基层工作",
+        "direction": "中性",
+        "assumption": "具体进展以官方发布为准"
+      }
     },
     {
       "title": "江南街道祝屋巷社区入选全国示范性老年友好型社区",
-      "cat": "warm",
+      "cat": "gossip",
       "emoji": "🤝",
       "tier": "较高",
       "srcLevel": "媒体报道",
@@ -109,7 +139,13 @@
       "event_date": "2026-11-06",
       "fetched_at": "2026-11-09 21:28",
       "verified_status": "待核实",
-      "fate": null
+      "fate": {
+        "kind": "info",
+        "ident": "gossip",
+        "objects": "老年友好社区建设",
+        "direction": "中性",
+        "assumption": "具体进展以官方发布为准"
+      }
     },
     {
       "title": "小金口组团赴汝湖“取经”，学乡村运营与业态培育",
@@ -125,7 +161,35 @@
       "event_date": null,
       "fetched_at": "2026-11-09 21:28",
       "verified_status": "待核实",
-      "fate": null
+      "fate": {
+        "kind": "info",
+        "ident": "city",
+        "objects": "小金口乡村运营学习",
+        "direction": "中性",
+        "assumption": "具体进展以官方发布为准"
+      }
+    },
+    {
+      "title": "小金口“未诉先办”：柏岗村500米乡间路路灯提前点亮，村民不用再摸黑",
+      "cat": "livelihood",
+      "emoji": "🏛️",
+      "tier": "中",
+      "srcLevel": "官方发布",
+      "live": false,
+      "source": "惠城区政府·镇办动态",
+      "url": "http://www.hcq.gov.cn/zwgk/zbdt/xjkjdbsc/content/post_5889071.html",
+      "summary": "小金口街道柏岗村新屋至惠州大道段约500米道路此前缺少照明，楼栋长日常走访时记下这条“夜里有些暗”的小线索，村里主动把亮化列入民生实事，如今路灯全部点亮，全程没有等到群众正式投诉。今年以来该街道已主动办理这类“未诉先办”民生微实事47件，涉及巷道照明、路面修补、休闲设施等，惠及近2万名群众。",
+      "published_at": "2026-11-06",
+      "event_date": null,
+      "fetched_at": "2026-11-10 07:30",
+      "verified_status": "已核验",
+      "fate": {
+        "kind": "info",
+        "ident": "livelihood",
+        "objects": "柏岗村道路照明",
+        "direction": "中性",
+        "assumption": "具体进展以官方发布为准"
+      }
     }
   ]
 }
