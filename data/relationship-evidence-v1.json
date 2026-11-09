@@ -2,7 +2,7 @@
   "schema_version": "relationship-evidence-v1",
   "region": "huicheng",
   "name": "惠城全息关系世界 · 公开证据关系底座",
-  "generated_at": "2026-11-09 17:25",
+  "generated_at": "2026-10-29",
   "evidence_grade_legend": {
     "A": "官方统计/政府文件/主体公告直接证实，带 URL",
     "B": "多源间接证据推断，给区间/定性，不冒充精确值",
@@ -17,9 +17,9 @@
     "eco_constraint": "生态约束",
     "regional": "区域协作"
   },
-  "node_count": 20,
-  "edge_count": 23,
-  "note": "关系强度不编造：有公开量化数据才显示 metric，否则只给 strength_basis；C 级为待验证假设，前端须显式标注。2026-11-09 17:25 核验：新增节点 ls（惠州雷士光电）、新增边 E022（市一院三期·A级）、E023（雷士跨国总部·B级）；复核 E004/E010/E011/E012/E013 五条，均无状态变化，last_verified_at 保持原值；E001/E002/E006/E007 未复核，保留原值。",
+  "node_count": 17,
+  "edge_count": 19,
+  "note": "关系强度不编造：有公开量化数据才显示 metric，否则只给 strength_basis；C 级为待验证假设，前端须显式标注。",
   "nodes": [
     {
       "node_id": "hc",
@@ -28,13 +28,12 @@
       "layer": "城市核心",
       "town": "主城区全域",
       "description": "惠州市中心城区，行政/商务/服务核心",
-      "stat": "GDP 2025全年1203.33亿/+4.3%｜2026前三季度883.46亿/+1.1%·常住159.78万",
+      "stat": "GDP 1203.33亿/+4.3%·常住159.78万",
       "node_status": "active",
       "change_status": "无显著变化",
       "evidence_grade": "A",
       "source_ids": [
-        "S001",
-        "S020"
+        "S001"
       ]
     },
     {
@@ -44,14 +43,13 @@
       "layer": "产业引擎",
       "town": "水口/马安/三栋",
       "description": "省级高新区·1核4组团",
-      "stat": "2025产值632.7亿｜2026目标820亿·2027冲千亿",
+      "stat": "2025产值632.7亿→2026目标800亿",
       "node_status": "active",
       "change_status": "增强",
       "evidence_grade": "A",
       "source_ids": [
         "S001",
-        "S004",
-        "S025"
+        "S004"
       ]
     },
     {
@@ -61,7 +59,7 @@
       "layer": "三大集群",
       "town": "水口/马安/三栋",
       "description": "规上工业总产值主体",
-      "stat": "胜宏/润众/沃尔核材集聚｜2026前三季度规上工业+0.8%",
+      "stat": "胜宏/润众/沃尔核材集聚",
       "node_status": "active",
       "change_status": "增强",
       "evidence_grade": "A",
@@ -131,8 +129,7 @@
       "change_status": "增强",
       "evidence_grade": "A",
       "source_ids": [
-        "S005",
-        "S027"
+        "S005"
       ]
     },
     {
@@ -147,8 +144,7 @@
       "change_status": "增强",
       "evidence_grade": "A",
       "source_ids": [
-        "S016",
-        "S024"
+        "S016"
       ]
     },
     {
@@ -158,15 +154,12 @@
       "layer": "城市功能",
       "town": "江北/水口等",
       "description": "中心城区人居环境",
-      "stat": "人才社区300套投用·荔枝城890套封顶｜2026-11-09 市一院三期进入用地预审（325床·50900㎡）",
+      "stat": "人才社区300套投用·荔枝城890套封顶",
       "node_status": "active",
       "change_status": "增强",
       "evidence_grade": "A",
       "source_ids": [
-        "S012",
-        "S026",
-        "S031",
-        "S032"
+        "S012"
       ]
     },
     {
@@ -290,53 +283,6 @@
       "source_ids": [
         "S001"
       ]
-    },
-    {
-      "node_id": "fz",
-      "name": "环西湖丰渚园商区综合体",
-      "node_type": "infrastructure",
-      "layer": "城市功能·文旅载体",
-      "town": "下角/丰渚园",
-      "description": "原君豪酒店旧址更新项目，商业+精品酒店，环西湖西侧文旅载体",
-      "stat": "施工中标2.373亿·工期480天·350车位/70间客房",
-      "node_status": "pending",
-      "change_status": "新增",
-      "evidence_grade": "A",
-      "source_ids": [
-        "S018",
-        "S019",
-        "S024"
-      ]
-    },
-    {
-      "node_id": "bx",
-      "name": "博鑫智能驾舱",
-      "node_type": "enterprise",
-      "layer": "产业引擎",
-      "town": "水口",
-      "description": "博鑫立业科技智能驾舱研发制造项目，位于高新科技产业园鹿岗片区02单元（东江湾千亿产业园内），2025年6月动工",
-      "node_status": "pending",
-      "change_status": "新增",
-      "evidence_grade": "A",
-      "source_ids": [
-        "S021",
-        "S023"
-      ]
-    },
-    {
-      "node_id": "ls",
-      "name": "惠州雷士光电",
-      "node_type": "enterprise",
-      "layer": "卫星·电子信息",
-      "town": "汝湖",
-      "description": "雷士照明集团境内集团总部·旗下规模最大制造中心之一",
-      "stat": "汝湖雷士工业园·累计专利超2000项｜2026-11 拟认定广东省跨国公司地区总部（公示中）",
-      "node_status": "pending",
-      "change_status": "新增",
-      "evidence_grade": "B",
-      "source_ids": [
-        "S034"
-      ]
     }
   ],
   "edges": [
@@ -361,8 +307,8 @@
       "source_ids": [
         "S006"
       ],
-      "counter_evidence": "未动工，实际投资完成额未公开；2026年1-9月全区工业投资-46.1%，项目开工节点与投资完成额均未公开",
-      "last_verified_at": "2026-11-07",
+      "counter_evidence": "未动工，实际投资完成额未公开",
+      "last_verified_at": "2026-10-29",
       "change_status": "新增"
     },
     {
@@ -429,16 +375,14 @@
         "metric_unit": "亿元"
       },
       "comparison_period": "2026",
-      "strength_basis": "投资促进局摘牌公告+南方+；2026-11-03 惠城区自然资源局挂出《建设用地规划许可证》批前公示（索引 11441302MB2D297651/2026-00935）",
+      "strength_basis": "投资促进局摘牌公告+南方+",
       "source_ids": [
         "S009",
-        "S010",
-        "S020",
-        "S029"
+        "S010"
       ],
-      "counter_evidence": "投产时间未公开；仅建设用地规划许可批前公示阶段，建设工程规划许可与开工节点均未公开；2026年1-9月全区固投-40.7%、工业投资-46.1%",
-      "last_verified_at": "2026-11-08",
-      "change_status": "增强"
+      "counter_evidence": "投产时间未公开",
+      "last_verified_at": "2026-10-29",
+      "change_status": "新增"
     },
     {
       "edge_id": "E005",
@@ -463,7 +407,7 @@
         "S010"
       ],
       "counter_evidence": "达产产值未公开",
-      "last_verified_at": "2026-11-06",
+      "last_verified_at": "2026-10-29",
       "change_status": "新增"
     },
     {
@@ -487,8 +431,8 @@
       "source_ids": [
         "S011"
       ],
-      "counter_evidence": "存量技改，非新增产能主体；设备投资约0.43亿规模小，对全区工业投资（1-9月-46.1%）拉动有限",
-      "last_verified_at": "2026-11-07",
+      "counter_evidence": "存量技改，非新增产能主体",
+      "last_verified_at": "2026-10-29",
       "change_status": "新增"
     },
     {
@@ -561,7 +505,7 @@
       "source_node_id": "gxq",
       "target_node_id": "hc",
       "relation_type": "investment",
-      "relation_description": "惠城高新区是惠城工业核心引擎：2025产值632.7亿，2026年目标820亿、2027年冲千亿，138宗重点项目支撑",
+      "relation_description": "惠城高新区是惠城工业核心引擎：2025产值632.7亿→2026目标800亿，138宗重点项目支撑",
       "direction": "有方向",
       "valid_period": "2026",
       "evidence_type": "已证实事实",
@@ -572,16 +516,14 @@
         "metric_value": 632.7,
         "metric_unit": "亿元"
       },
-      "comparison_period": "2025",
+      "comparison_period": "2026",
       "strength_basis": "政府工作报告+重点项目清单",
       "source_ids": [
         "S001",
-        "S004",
-        "S020",
-        "S025"
+        "S004"
       ],
-      "counter_evidence": "820亿为年度目标；2026年1-9月全区固投-40.7%、工业投资-46.1%，园区实际产值进度未公开；产业类重点项目完成率60.83%，为三类中最慢",
-      "last_verified_at": "2026-11-07",
+      "counter_evidence": "800亿为年度目标",
+      "last_verified_at": "2026-10-29",
       "change_status": "无显著变化"
     },
     {
@@ -599,11 +541,10 @@
       "comparison_period": "2026",
       "strength_basis": "省交通运输厅公告",
       "source_ids": [
-        "S005",
-        "S027"
+        "S005"
       ],
-      "counter_evidence": "年内通车为目标；截至2026-11-07未见惠霞高速通车公告，仍处桥面系及附属设施施工；济广高速惠城段改扩建仍处征地阶段（公告期至2026-11-12），征收不等于通车",
-      "last_verified_at": "2026-11-07",
+      "counter_evidence": "年内通车为目标",
+      "last_verified_at": "2026-10-29",
       "change_status": "新增"
     },
     {
@@ -619,16 +560,12 @@
       "confidence": "高",
       "metric": null,
       "comparison_period": "2026",
-      "strength_basis": "文旅活动官方发布；2026-11-03 丰山片区提升项目（惠州西湖及周边区域更新优化工程一期）进入市政工程规划许可受理",
+      "strength_basis": "文旅活动官方发布",
       "source_ids": [
-        "S016",
-        "S019",
-        "S020",
-        "S024",
-        "S028"
+        "S016"
       ],
-      "counter_evidence": "客流/消费额未细分；2026年1-9月社消零+2.0%，文旅对消费的贡献未单独统计；西湖更新一期丰山片区（11-03 市政工程获受理）与丰渚园商区综合体为两个子项，勿合并计数",
-      "last_verified_at": "2026-11-08",
+      "counter_evidence": "客流/消费额未细分",
+      "last_verified_at": "2026-10-29",
       "change_status": "增强"
     },
     {
@@ -636,7 +573,7 @@
       "source_node_id": "rj",
       "target_node_id": "hc",
       "relation_type": "regional",
-      "relation_description": "下良人才社区300套投用、荔枝城890套封顶；城投安居两宗配售型保障房（金龙大道东南片区JBD57-07-01、水口西区JD68-02-04）2026-11-03 同日受理规划许可申请，中心城区安居供给扩面",
+      "relation_description": "下良人才社区300套投用、荔枝城890套封顶，中心城区人才安居支撑",
       "direction": "有方向",
       "valid_period": "2026",
       "evidence_type": "已证实事实",
@@ -650,13 +587,11 @@
       "comparison_period": "2026",
       "strength_basis": "南方+报道",
       "source_ids": [
-        "S012",
-        "S026",
-        "S028"
+        "S012"
       ],
-      "counter_evidence": "民生配套，非产业直接贡献；金龙大道JBD57-07-01（2026-11-05 批前公示）与水口西区JD68-02-04（2026-11-03 受理）为配售型保障房子项，套数与投资额均未公开，与荔枝城890套、下良300套属不同项目，严禁合并计数；均处规划许可阶段，未开工",
-      "last_verified_at": "2026-11-08",
-      "change_status": "增强"
+      "counter_evidence": "民生配套，非产业直接贡献",
+      "last_verified_at": "2026-10-29",
+      "change_status": "新增"
     },
     {
       "edge_id": "E014",
@@ -763,14 +698,13 @@
         "metric_value": 937.92,
         "metric_unit": "亿元"
       },
-      "comparison_period": "2025",
+      "comparison_period": "2026",
       "strength_basis": "政府工作报告",
       "source_ids": [
-        "S001",
-        "S020"
+        "S001"
       ],
-      "counter_evidence": "集群内部结构未细分；2026年1-9月规上工业增加值仅+0.8%、二产增加值-1.6%，工业基本盘增速明显放缓",
-      "last_verified_at": "2026-11-07",
+      "counter_evidence": "集群内部结构未细分",
+      "last_verified_at": "2026-10-29",
       "change_status": "无显著变化"
     },
     {
@@ -793,102 +727,6 @@
       "counter_evidence": "链属企业数量与协同规模未公开",
       "last_verified_at": "2026-10-29",
       "change_status": "增强"
-    },
-    {
-      "edge_id": "E020",
-      "source_node_id": "wh",
-      "target_node_id": "fz",
-      "relation_type": "investment",
-      "relation_description": "环西湖丰渚园商区综合体施工中标2.373亿元，补齐西湖西侧文旅商业配套，串联丰渚园、菱湖、元妙观动线",
-      "direction": "有方向",
-      "valid_period": "2026-2027",
-      "evidence_type": "已证实事实",
-      "evidence_grade": "A",
-      "confidence": "高",
-      "metric": {
-        "metric_name": "施工中标价",
-        "metric_value": 2.373,
-        "metric_unit": "亿元"
-      },
-      "comparison_period": "2026",
-      "strength_basis": "广东省公共资源交易平台中标公告+自然资源局受理公示",
-      "source_ids": [
-        "S018",
-        "S019",
-        "S024"
-      ],
-      "counter_evidence": "中标未开工，工期480日历天，开业运营效果未知",
-      "last_verified_at": "2026-11-07",
-      "change_status": "新增"
-    },
-    {
-      "edge_id": "E021",
-      "source_node_id": "gxq",
-      "target_node_id": "bx",
-      "relation_type": "investment",
-      "relation_description": "博鑫智能驾舱研发制造项目落地惠城高新区鹿岗片区，2025年6月动工，2026-11-04 取得建设工程规划条件核实合格证",
-      "direction": "有方向",
-      "valid_period": "2025-06 至 2026-11",
-      "evidence_type": "已证实事实",
-      "evidence_grade": "A",
-      "confidence": "高",
-      "metric": null,
-      "comparison_period": "2026-11-04",
-      "strength_basis": "区自然资源局受理公示载明规划条件核实合格；2025年7月区政府报道确认6月动工",
-      "source_ids": [
-        "S021",
-        "S023"
-      ],
-      "counter_evidence": "单体投资额未公开，15亿元为同批5宗合计；规划核实合格不等于投产",
-      "last_verified_at": "2026-11-06",
-      "change_status": "新增"
-    },
-    {
-      "edge_id": "E022",
-      "source_node_id": "rj",
-      "target_node_id": "hc",
-      "relation_type": "regional",
-      "relation_description": "惠州市第一人民医院三期建设工程 2026-11-09 进入用地预审（选址意见书）批前公示：选址江北街道，拟建综合外科楼（325床，地上12层/地下2层）与感染楼，总建筑面积 50900 ㎡；江北 JB22 地块控规调整已经市政府批准实施，两地块合并后用地 47289 ㎡，中心城区优质医疗资源扩容",
-      "direction": "有方向",
-      "valid_period": "2026-11",
-      "evidence_type": "已证实事实",
-      "evidence_grade": "A",
-      "confidence": "中",
-      "metric": {
-        "metric_name": "规划床位",
-        "metric_value": 325,
-        "metric_unit": "床"
-      },
-      "comparison_period": "2026-11（规划阶段）",
-      "strength_basis": "区自然资源局用地预审批前公示（11-09 成文并发布，公示期至 11-19）与南方+（11-08）互为佐证；控规调整经市政府批准",
-      "source_ids": [
-        "S031",
-        "S032"
-      ],
-      "counter_evidence": "仅至用地预审（选址意见书）批前公示，未核发许可、未开工，开工与竣工时间、投资额均未公开；公示页所述 3154 ㎡ 为三期工程用地中的一部分，非全部用地；325 床为规划床位，非现状开放床位；属公共服务扩容，不直接计入产业与投资指标",
-      "last_verified_at": "2026-11-09",
-      "change_status": "新增"
-    },
-    {
-      "edge_id": "E023",
-      "source_node_id": "hc",
-      "target_node_id": "ls",
-      "relation_type": "regional",
-      "relation_description": "惠州雷士光电（汝湖雷士工业园）被广东省商务厅列入第五批跨国公司地区总部拟认定名单：作为雷士照明集团境内集团总部，承担集团在国内的资金管理、研发、采购、销售、物流、结算等跨区域营运职能，惠城由此承接跨国集团境内总部职能",
-      "direction": "有方向",
-      "valid_period": "2026-11",
-      "evidence_type": "证据推断",
-      "evidence_grade": "B",
-      "confidence": "中",
-      "metric": null,
-      "comparison_period": "2026-11（公示阶段）",
-      "strength_basis": "省商务厅第五批认定名单公示（惠州日报 11-08 报道）；雷士照明集团境内总部与最大制造中心之一在汝湖雷士工业园，属惠城行政边界内",
-      "source_ids": [
-        "S034"
-      ],
-      "counter_evidence": "公示名单为「拟认定」，公示期5个工作日内无异议方转正式认定；同批惠州另 3 家（伯恩光学在惠阳、茂佳科技与罗格朗在仲恺）不在惠城边界内，不得并入惠城计；总部认定后资金结算、研发投入的实际落量未公开，不能据此推定惠城外资或产值增量",
-      "last_verified_at": "2026-11-09",
-      "change_status": "新增"
     }
   ]
 }

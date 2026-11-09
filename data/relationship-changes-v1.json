@@ -1,8 +1,8 @@
 {
   "schema_version": "relationship-changes-v1",
   "region": "huicheng",
-  "generated_at": "2026-11-09 17:25",
-  "count": 13,
+  "generated_at": "2026-10-29",
+  "count": 7,
   "change_type_legend": {
     "new_entity": "新主体接入",
     "new_edge": "新连接形成",
@@ -12,7 +12,7 @@
     "break": "连接失效",
     "alternative": "替代路径"
   },
-  "note": "仅收录会改变网络结构或连接状态的事件；签约≠投产，规划/在建均标注不确定性。2026-11-09 17:25 核验：新增 C012（市一院三期用地预审）、C013（雷士拟认定跨国总部）；横沥石场生态修复方案评审属存量矿山例行评审，未改变结构，不入 changes。",
+  "note": "仅收录会改变网络结构或连接状态的事件；签约≠投产，规划/在建均标注不确定性。",
   "changes": [
     {
       "change_id": "C001",
@@ -107,11 +107,10 @@
       ],
       "before_after": "此前：跨江通道未贯通；此后：南北大动脉关键节点打通",
       "source_ids": [
-        "S005",
-        "S027"
+        "S005"
       ],
       "uncertainty": "年内通车为目标",
-      "last_verified_at": "2026-11-07"
+      "last_verified_at": "2026-10-29"
     },
     {
       "change_id": "C006",
@@ -152,125 +151,6 @@
       ],
       "uncertainty": "方向指引，落地待政策细化",
       "last_verified_at": "2026-10-29"
-    },
-    {
-      "change_id": "C008",
-      "change_type": "new_entity",
-      "title": "环西湖丰渚园商区综合体施工中标2.373亿元（原君豪酒店旧址）",
-      "event_date": "2026-11-02",
-      "involved_node_ids": [
-        "wh",
-        "fz"
-      ],
-      "involved_edge_ids": [
-        "E020"
-      ],
-      "before_after": "此前：旧址拆除后空置；此后：商业+精品酒店项目定标进入施工准备",
-      "source_ids": [
-        "S018",
-        "S019",
-        "S024"
-      ],
-      "uncertainty": "尚未开工，工期480日历天，开业运营待观察",
-      "last_verified_at": "2026-11-07"
-    },
-    {
-      "change_id": "C009",
-      "change_type": "new_entity",
-      "title": "博鑫智能驾舱研发制造项目完成规划条件核实（鹿岗片区）",
-      "event_date": "2026-11-04",
-      "involved_node_ids": [
-        "gxq",
-        "bx"
-      ],
-      "involved_edge_ids": [
-        "E021"
-      ],
-      "before_after": "此前：2025年6月动工、在建；此后：规划条件核实合格，转入投产准备",
-      "source_ids": [
-        "S021",
-        "S023"
-      ],
-      "uncertainty": "投产时间与达产产值未公开；同批5宗项目单体投资额未拆分",
-      "last_verified_at": "2026-11-06"
-    },
-    {
-      "change_id": "C010",
-      "change_type": "strengthen",
-      "title": "胜宏AI智造产业园进入建设用地规划许可批前公示",
-      "event_date": "2026-11-03",
-      "involved_node_ids": [
-        "gxq",
-        "sh"
-      ],
-      "involved_edge_ids": [
-        "E004"
-      ],
-      "before_after": "此前：2026年摘牌落户（签约/摘牌阶段）；此后：建设用地规划许可批前公示，进入用地许可程序",
-      "source_ids": [
-        "S029"
-      ],
-      "uncertainty": "仅批前公示，未核发许可、未开工；投产时间与投资完成额未公开",
-      "last_verified_at": "2026-11-08"
-    },
-    {
-      "change_id": "C011",
-      "change_type": "strengthen",
-      "title": "城投安居两宗配售型保障房同日受理规划许可（金龙大道/水口西区）",
-      "event_date": "2026-11-03",
-      "involved_node_ids": [
-        "rj",
-        "hc"
-      ],
-      "involved_edge_ids": [
-        "E013"
-      ],
-      "before_after": "此前：中心城区安居供给以下良人才社区300套、荔枝城890套为主；此后：新增金龙大道JBD57-07-01、水口西区JD68-02-04两宗配售型保障房进入规划许可程序",
-      "source_ids": [
-        "S026",
-        "S028"
-      ],
-      "uncertainty": "仅受理与批前公示，未核发许可、未开工；套数、投资额与竣工时间未公开",
-      "last_verified_at": "2026-11-08"
-    },
-    {
-      "change_id": "C012",
-      "change_type": "new_entity",
-      "title": "惠州市第一人民医院三期进入用地预审（规划325床·总建筑面积50900㎡）",
-      "event_date": "2026-11-09",
-      "involved_node_ids": [
-        "rj",
-        "hc"
-      ],
-      "involved_edge_ids": [
-        "E022"
-      ],
-      "before_after": "此前：市中心血站原址空置、院区受限于既有地块；此后：血站旧址与医院地块合并（控规调整经市政府批准），三期进入用地预审，规划新增综合外科楼与感染楼",
-      "source_ids": [
-        "S031",
-        "S032"
-      ],
-      "uncertainty": "仅用地预审批前公示（公示期至 11-19），未核发许可、未开工；投资额与开工/竣工时间未公开；325 床为规划床位",
-      "last_verified_at": "2026-11-09"
-    },
-    {
-      "change_id": "C013",
-      "change_type": "new_entity",
-      "title": "惠州雷士光电拟认定为广东省跨国公司地区总部（雷士照明集团境内总部）",
-      "event_date": "2026-11-08",
-      "involved_node_ids": [
-        "ls",
-        "hc"
-      ],
-      "involved_edge_ids": [
-        "E023"
-      ],
-      "before_after": "此前：雷士照明以制造基地身份存在于惠城产业体系；此后：其境内集团总部被列入省第五批跨国公司地区总部拟认定名单，总部职能（资金/研发/采购/结算）与惠城的连接显性化",
-      "source_ids": [
-        "S034"
-      ],
-      "uncertainty": "「拟认定」公示阶段，公示期无异议方转正式认定；总部职能落地后的实际营运规模未公开；同批另 3 家惠州企业不在惠城边界内，不得合并计数",
-      "last_verified_at": "2026-11-09"
     }
   ]
 }

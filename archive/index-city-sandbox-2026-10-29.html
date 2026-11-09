@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='slateblue'/><circle cx='16' cy='16' r='6' fill='none' stroke='white' stroke-width='2.5'/><circle cx='16' cy='16' r='2' fill='white'/></svg>">
-<title>惠城产业风洞 · 12 模拟沙盘</title>
+<title>惠城产业风洞 · 模拟沙盘首页</title>
 <style>
 :root{
   --sky1:#0b1026; --sky2:#1e1b4b; --sky3:#7c2d12; --horizon:#fbbf24;
@@ -153,7 +153,7 @@ body.moff #net .heart .core{transform:none}
 .vote .qt{font-size:14px;font-weight:800;margin:0 0 3px}
 .vote .sub{font-size:11px;color:var(--muted);margin:0 0 10px}
 .gauge{height:8px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;position:relative;margin:8px 0 4px}
-.gauge i{display:block;height:100%;width:67%;background:linear-gradient(90deg,#38bdf8,#818cf8);border-radius:99px}
+.gauge i{display:block;height:100%;width:66%;background:linear-gradient(90deg,#38bdf8,#818cf8);border-radius:99px}
 .gstat{display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);margin-bottom:10px}
 .gstat b{color:var(--ink2);font-variant-numeric:tabular-nums}
 .vbtns{display:flex;gap:6px}
@@ -238,74 +238,9 @@ body.moff #net .heart .core{transform:none}
   .viewswitch{margin-top:7px}
   .viewswitch button{padding:5px 14px;font-size:11px}
 }
-
-/* ===== 今日动态：事件空投沙盘 ===== */
-.news-h{display:flex;gap:7px;flex-wrap:wrap;align-items:center;padding:6px 16px 0}
-.news-h .chip{font-size:10.5px;font-weight:700;padding:4px 11px;border-radius:99px;background:rgba(255,255,255,.07);border:1px solid var(--glass-b);color:var(--muted);cursor:pointer;white-space:nowrap;transition:.15s}
-.news-h .chip.on{background:rgba(56,189,248,.18);border-color:rgba(56,189,248,.5);color:#7dd3fc}
-.news-body{overflow:hidden;background:linear-gradient(180deg,rgba(8,12,28,.08),rgba(8,12,28,.34))}
-.beam-field{position:absolute;left:0;right:0;top:9%;bottom:23%;display:flex;align-items:flex-end;justify-content:space-between;gap:6px;padding:0 22px;z-index:3}
-.beam{position:relative;flex:1;min-width:0;height:60%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;cursor:pointer;transition:opacity .25s,filter .25s}
-.beam.dim{opacity:.15;filter:saturate(.35)}
-.beam-light{position:relative;flex:1;width:3px;border-radius:3px;overflow:hidden;background:linear-gradient(to top,var(--bc),rgba(255,255,255,0));box-shadow:0 0 9px var(--bc),0 0 20px var(--bc);animation:beamPulse 3.2s ease-in-out infinite}
-.beam-light::before{content:"";position:absolute;left:50%;width:2px;height:20px;transform:translateX(-50%);background:linear-gradient(to top,transparent,rgba(255,255,255,.95),transparent);animation:beamUp 2.6s linear infinite}
-@keyframes beamUp{0%{bottom:-12%;opacity:0}25%{opacity:1}100%{bottom:112%;opacity:0}}
-.beam-head{width:9px;height:9px;border-radius:50%;background:var(--bc);box-shadow:0 0 9px var(--bc),0 0 18px var(--bc);margin-top:-3px;animation:beamPulse 3.2s ease-in-out infinite}
-.beam-cap{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:7px;white-space:nowrap;font-size:10px;font-weight:700;color:var(--ink2);background:rgba(13,20,38,.78);border:1px solid rgba(255,255,255,.1);padding:2px 7px;border-radius:6px;line-height:1.3;max-width:112px;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 2px #000}
-.beam-cap .ar{font-size:9px;margin-right:2px}
-.ar.dir-good{color:var(--ok)}.ar.dir-mid{color:#7dd3fc}.ar.dir-bad{color:var(--bad)}
-.beam-num{position:absolute;bottom:calc(100% + 24px);left:50%;transform:translateX(-50%);font-size:25px;font-weight:900;color:var(--warm);text-shadow:0 0 18px rgba(251,191,36,.85),0 2px 6px #000;white-space:nowrap;font-variant-numeric:tabular-nums}
-.beam.hero .beam-light{width:9px;background:linear-gradient(to top,var(--bc),rgba(251,191,36,.05));box-shadow:0 0 16px var(--bc),0 0 44px rgba(251,191,36,.5)}
-.beam.hero .beam-head{width:16px;height:16px;margin-top:-6px}
-.beam.hero .beam-cap{font-size:11px;color:#fff;max-width:170px;border-color:rgba(251,191,36,.55)}
-@keyframes beamPulse{0%,100%{opacity:.68}50%{opacity:1}}
-.news-base{position:absolute;left:0;right:0;bottom:0;height:23%;display:flex;align-items:flex-end;gap:2px;padding:0 12px;z-index:2;pointer-events:none}
-.news-base i{flex:1;min-width:0;background:linear-gradient(180deg,#1a2238,#0a0f1f);border-radius:2px 2px 0 0;position:relative}
-.news-base i::after{content:"";position:absolute;inset:6px 3px 3px;background-image:radial-gradient(circle,rgba(251,191,36,.72) 1px,transparent 1.4px);background-size:8px 10px;opacity:.55}
-.ev .dir-good{color:var(--ok)}.ev .dir-mid{color:#7dd3fc}.ev .dir-bad{color:var(--bad)}
-.ev.sel{background:rgba(255,255,255,.07);border-radius:8px}
-#view-news .side{min-height:0}
-#newsListPanel{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}
-#newsListPanel #newsList{flex:1;min-height:0;overflow-y:auto;scrollbar-width:thin}
-#newsListPanel #newsList .ev:last-child{border-bottom:0}
-@media(max-width:767px){
-  #view-news{grid-template-rows:1fr;overflow:hidden}
-  #view-news .side{position:fixed;left:8px;right:8px;bottom:0;z-index:40;max-height:66vh;overflow-y:auto;border-radius:18px 18px 0 0;background:rgba(9,14,28,.97);border:1px solid rgba(255,255,255,.14);border-bottom:0;box-shadow:0 -10px 34px rgba(0,0,0,.5);transform:translateY(110%);transition:transform .28s ease;padding:12px 14px calc(env(safe-area-inset-bottom,0px) + 14px);scrollbar-width:none}
-  #view-news .side.open{transform:translateY(0)}
-  #view-news .stage-h{flex-wrap:wrap;gap:6px 8px}
-  #view-news .stage-h .sub,#view-news .stage-h .live{display:none}
-  #view-news .stage-h .side-tab:first-of-type{margin-left:auto}
-  #newsListPanel{flex:none;overflow:visible}
-  #newsListPanel #newsList{overflow:visible}
-  .news-h{padding:5px 12px 0;gap:5px}
-  .news-h .chip{padding:3px 9px;font-size:10px}
-  .beam-field{padding:0 22px;gap:2px;top:9%}
-  .beam-cap{font-size:9px;max-width:80px;padding:1px 5px}
-  .beam.hero .beam-cap{font-size:10px;max-width:120px}
-  .beam-num{font-size:19px}
-}
 </style>
-<link rel="stylesheet" href="ui/ui.css">
 </head>
 <body>
-<script src="hc-viz/data.js"></script>
-<script src="hc-viz/dataset.js"></script>
-<script>
-/* 接入全站真源：顶栏四项指标不再写死，读 hc-viz/data.js（DOM 就绪后填充） */
-function hcFillStats(){
-  function set(id,txt){var n=document.getElementById(id);if(n&&txt!=null)n.textContent=txt;}
-  if(!window.HC_OFFICIAL||!window.HC_POP){
-    set("hsGdp","—");set("hsPop","—");set("hsYoy","—");set("hsAsOf","数据未加载");return;
-  }
-  var gdp=(HC_OFFICIAL.metrics||[]).filter(function(m){return m.id==="gdp";})[0];
-  set("hsGdp", gdp?gdp.total+"亿":"—");
-  set("hsPop", HC_POP.pop+"万");
-  set("hsYoy", gdp?gdp.v:"—");
-  if(window.HC_ASOF)set("hsAsOf", HC_ASOF.checked.slice(5,10));
-}
-if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",hcFillStats);}else{hcFillStats();}
-</script>
-
 
 <!-- ===== 场景 ===== -->
 <div class="scene">
@@ -324,79 +259,28 @@ if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded"
 
   <!-- 顶部资源条 -->
   <div class="topbar">
-    <a class="brand" href="index.html" title="返回目录 · 序章" style="text-decoration:none;color:inherit"><span class="logo"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="white"/></svg></span>惠城产业风洞</a>
+    <div class="brand"><span class="logo"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="white"/></svg></span>惠城产业风洞</div>
     <div class="res">
-      <div class="r"><span class="v blue" id="hsGdp">—</span><span class="l">GDP · 2025</span></div>
-      <div class="r"><span class="v" id="hsPop">—</span><span class="l">常住人口</span></div>
-      <div class="r"><span class="v green" id="hsYoy">—</span><span class="l">2025增速</span></div>
-      <div class="r"><span class="v" id="hsAsOf">—</span><span class="l">最近核验</span></div>
+      <div class="r"><span class="v blue">1203亿</span><span class="l">GDP · 2025</span></div>
+      <div class="r"><span class="v">159.78万</span><span class="l">常住人口 · 2025</span></div>
+      <div class="r"><span class="v green">4.3%</span><span class="l">2025增速</span></div>
+      <div class="r"><span class="v">66%</span><span class="l">2030达标概率(模型)</span></div>
     </div>
-    <a class="clock" href="index.html" style="text-decoration:none;color:inherit"><b>目录</b><br>返回目录</a>
+    <div class="clock" title="每日07:27只刷新今日话题与热度，模型参数不随新闻自动更新"><b>第 1 轮</b><br>每日 07:27 刷话题</div>
   </div>
 
   <!-- 视角切换 -->
   <div class="viewswitch">
     <div class="seg">
-      <button class="on" id="seg-news" onclick="setView('news')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2"/><path d="M8 8a5.5 5.5 0 000 8M16 8a5.5 5.5 0 010 8M5 5a10 10 0 000 14M19 5a10 10 0 010 14"/></svg>今日动态</button>
-      <button id="seg-consume" onclick="setView('consume')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>消费关系</button>
+      <button class="on" id="seg-consume" onclick="setView('consume')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>消费关系</button>
       <button id="seg-industry" onclick="setView('industry')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 7.5l3 8m6-8l-3 8m-6-9h9"/></svg>产业关系</button>
     </div>
   </div>
 
   <!-- 中央 -->
   <div class="mid">
-    <!-- ===== 今日动态视图（默认） ===== -->
-    <div class="view" id="view-news">
-      <div class="stage">
-        <div class="stage-h">
-          <h2>今日惠城动态</h2>
-          <span class="sub">扫公开渠道 · 按关注程度排 · 点光柱看详情</span>
-          <span class="live">每日更新</span>
-          <span class="side-tab" onclick="openDrawer('view-news','list')">事件列表</span>
-          <span class="side-tab" onclick="openDrawer('view-news','vote')">市民公投</span>
-        </div>
-        <div class="news-h" id="newsChips">
-          <button class="chip on" data-c="all">全部</button>
-          <button class="chip" data-c="industry">产业</button>
-          <button class="chip" data-c="city">城市</button>
-          <button class="chip" data-c="livelihood">民生</button>
-          <button class="chip" data-c="gossip">暖闻</button>
-          <button class="chip" data-c="fun">趣事</button>
-        </div>
-        <div class="stage-body news-body">
-          <div class="beam-field" id="beamField"></div>
-          <div class="news-base" id="newsBase"></div>
-          <div class="net-cap"><span class="beat" style="background:var(--warm);box-shadow:0 0 7px var(--warm)"></span><span id="newsCap">今日公开动态加载中…</span></div>
-        </div>
-        <div class="stage-foot">
-          <span>来源：政府公开 · 南方+/惠州日报 · 公开平台</span>
-          <span>不展示平台后台真实阅读/转发，改用关注档（高/较高/中）</span>
-        </div>
-      </div>
-      <div class="side-mask" id="view-newsMask" onclick="closeDrawer()"></div>
-      <div class="side">
-        <div class="panel" id="newsListPanel">
-          <h3><span class="dot"></span>今日事件<span id="newsCount" style="margin-left:auto;font-weight:400;color:var(--muted);letter-spacing:0"></span></h3>
-          <div id="newsList"></div>
-        </div>
-        <div class="panel vote">
-          <h3><span class="dot" style="background:var(--pink)"></span>市民公投</h3>
-          <p class="qt">2030年，惠城能到1500亿吗？</p>
-          <p class="sub">反复推演下来：过线概率约三分之二，中位数约 1579 亿</p>
-          <div class="gauge"><i></i></div>
-          <div class="gstat"><span>推演结果 <b>67%</b></span><span>中位数 <b>1579亿</b></span></div>
-          <div class="vbtns">
-            <button class="vb-ok" onclick="judge('ok')">我看稳了</button>
-            <button class="vb-bad" onclick="judge('bad')">有点悬</button>
-            <button class="vb-mid" onclick="judge('mid')">不好说</button>
-          </div>
-          <div class="vout" id="vout"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== 消费关系视图 ===== -->
-    <div class="view" id="view-consume" style="display:none">
+    <!-- ===== 消费关系视图（默认） ===== -->
+    <div class="view" id="view-consume">
       <div class="stage">
         <div class="stage-h">
           <h2>惠城人的钱，去了哪里？</h2>
@@ -410,7 +294,7 @@ if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded"
           <div id="cnetNodes"></div>
         </div>
         <div class="stage-foot">
-          <span><b>惠城 823.69 亿</b>为官方口径（2024 社消零，全市第1）</span>
+          <span><b>惠城 805.68 亿</b>为官方口径（2025 社消零，+3.7%）</span>
           <span>外流结构 128 亿 / 52 / 34 / 42 亿均为<b>合理估算</b></span>
         </div>
       </div>
@@ -445,13 +329,14 @@ if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded"
         <h2>惠城产业关系网络</h2>
         <span class="sub">精选 13 主体：枢纽、桥、人、链主配套；完整 26 主体见 network</span>
         <span class="live">实时</span>
-        <span class="side-tab" onclick="openDrawer('view-industry','ev')">产业要闻</span>
+        <span class="side-tab" onclick="openDrawer('view-industry','ev')">今日播报</span>
+        <span class="side-tab" onclick="openDrawer('view-industry','vote')">市民公投</span>
       </div>
       <div class="stage-body">
         <svg id="net" viewBox="0 0 860 600" preserveAspectRatio="xMidYMid meet"></svg>
         <div id="netLbl"></div>
         <!-- 大白话解说字幕 -->
-        <div class="net-cap" id="netCap"><span class="beat"></span><span id="netCapTxt">3 颗心脏，给全区主要主体供血 —— 点心脏，看它停跳</span></div>
+        <div class="net-cap" id="netCap"><span class="beat"></span><span id="netCapTxt">3 颗心脏，给全区 26 个主体供血 —— 点心脏，看它停跳</span></div>
         <div class="net-legend">
           <span><i class="lg-hb"></i>跳动的心脏（枢纽）</span>
           <span><span class="lg-bl"></span>血液＝产业与通勤能量</span>
@@ -460,17 +345,17 @@ if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded"
       </div>
       <div class="stage-foot">
         <button class="nf-btn" onclick="replayNet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 109-9 9 9 0 00-6.7 3M3 3v6h6"/></svg>重播供血动画</button>
-        <span><b>园区规上工业</b> 543.4亿 · +8.1%</span>
-        <span><b>固定资产投资</b> 564.95亿 · 全市第一</span>
+        <span><b>高新区规上工业</b> 632.7亿 · 占全区约67%（2025）</span>
+        <span><b>固定资产投资</b> 2025年 −37.1% · 调整期</span>
         <span><b>完整 26 主体</b>见 network</span>
       </div>
       </div>
 
-    <div class="side-mask" id="view-industryMask" onclick="closeDrawer()"></div>
+    <div class="side-mask" id="indMask" onclick="closeDrawer()"></div>
     <div class="side">
       <!-- 事件播报 -->
       <div class="panel">
-        <h3><span class="dot"></span>产业要闻</h3>
+        <h3><span class="dot"></span>今日事件播报</h3>
         <div class="ev industry" onclick="toast('金澜新材料 · 官方发布 · 关注度较高')">
           <p class="ttl"><span class="cd"></span>金澜新材料落子惠城高新区，总投资10.5亿</p>
           <div class="meta"><span class="src">官方发布</span><span>产业</span><span>关注度：较高</span></div>
@@ -489,11 +374,19 @@ if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded"
         </div>
       </div>
 
-      <!-- 公投引导 -->
-      <div class="panel">
+      <!-- 市民公投 -->
+      <div class="panel vote">
         <h3><span class="dot" style="background:var(--pink)"></span>市民公投</h3>
-        <div style="font-size:11.5px;color:var(--ink2);line-height:1.65">「2030 惠城能到 1500 亿吗？」反复推演下来：过线概率 <b style="color:var(--warm)">67%</b>，中位数 <b style="color:var(--warm)">1579 亿</b>。<br>投票在「今日动态」页，一年后回来验证。</div>
-        <div class="cta2" style="margin-top:10px"><button class="nf-btn" onclick="setView('news')">去今日动态投一票 →</button></div>
+        <p class="qt">2030年，惠城能到模型参考刻度1500亿吗？</p>
+        <p class="sub">模型跑了很多遍：过线约66%，中位数1579亿（1500为模型参考刻度，非官方目标）</p>
+        <div class="gauge"><i></i></div>
+        <div class="gstat"><span>模型估算 <b>66%</b></span><span>中位数 <b>1579亿</b></span></div>
+        <div class="vbtns">
+          <button class="vb-ok" onclick="judge('ok')">我看稳了</button>
+          <button class="vb-bad" onclick="judge('bad')">有点悬</button>
+          <button class="vb-mid" onclick="judge('mid')">不好说</button>
+        </div>
+        <div class="vout" id="vout"></div>
       </div>
     </div>
     </div><!-- /产业关系视图 -->
@@ -501,14 +394,14 @@ if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded"
 
   <!-- 底部操作栏 -->
   <div class="dock">
-    <a class="on" href="sandbox.html">
+    <a class="on" href="index.html">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg></span>今日话题
     </a>
-    <a href="vibe.html">
+    <a href="fun.html">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6m0 0l-3-3m3 3l3-3"/><path d="M5 12a7 7 0 0114 0c0 4-3 7-7 10-4-3-7-6-7-10z"/></svg></span>风向标
     </a>
-    <a href="holo.html">
-      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 7.5l3 8m6-8l-3 8m-6-9h9"/></svg></span>关系全貌
+    <a href="network.html">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 7.5l3 8m6-8l-3 8m-6-9h9"/></svg></span>产业链
     </a>
     <a href="choices.html">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20l4-10 4 6 4-8 4 4"/></svg></span>五条路
@@ -521,9 +414,6 @@ if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded"
     </a>
     <a href="report.html">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12v18H6z"/><path d="M9 8h6m-6 4h6m-6 4h4"/></svg></span>报告
-    </a>
-    <a href="ending.html">
-      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h14v16l-7-4-7 4z"/></svg></span>结语
     </a>
   </div>
 </div>
@@ -707,7 +597,7 @@ if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded"
     var deadList=HEARTS.filter(function(h){return dead[h]});
     var cap=document.getElementById("netCapTxt");
     if(deadList.length===0){
-      cap.textContent="3 颗心脏，给全区主要主体供血 —— 点心脏，看它停跳";
+      cap.textContent="3 颗心脏，给全区 26 个主体供血 —— 点心脏，看它停跳";
     }else{
       cap.textContent=deadList.join("、")+" 停跳，约 "+lost+" 个主体失去供血 —— 再点心脏恢复";
     }
@@ -736,7 +626,7 @@ if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded"
   if(!svg)return;
   var NS="http://www.w3.org/2000/svg",VW=1000,VH=700;
   var NODES={
-    hero:{x:500,y:380,nm:"惠城",am:"823.69亿",color:"#38bdf8"},
+    hero:{x:500,y:380,nm:"惠城",am:"805.68亿",color:"#38bdf8"},
     sz:{x:175,y:175,nm:"深圳",am:"52亿",color:"#38bdf8"},
     dg:{x:825,y:175,nm:"东莞",am:"34亿",color:"#38bdf8"},
     ec:{x:830,y:520,nm:"电商",am:"42亿",color:"#fbbf24"}
@@ -785,127 +675,22 @@ if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded"
       ? "<div class='dot'></div><div class='nm'>"+n.nm+"</div><div class='am'>"+n.am+"</div>"
       : "<div class='dot' style='background:currentColor'></div><div class='nm'>"+n.nm+"</div><div class='am'>"+n.am+"</div>";
     d.onclick=function(){
-      if(k==="hero")toast("惠城 · 2024 社消零 823.69 亿（官方口径，全市第1）");
+      if(k==="hero")toast("惠城 · 2025 社消零 805.68 亿（+3.7%，官方口径）");
       else toast(n.nm+" · 消费外流约 "+n.am+"（合理估算，非官方统计）");
     };
     document.getElementById("cnetNodes").appendChild(d);
   });
   document.head.insertAdjacentHTML("beforeend","<style>@keyframes cnflow{from{stroke-dashoffset:0}to{stroke-dashoffset:-40}}</style>");
 })();
-// 今日动态：读 hot.json，渲染事件光柱与事件流
-(function(){
-  var CAT={
-    industry:{label:"产业",color:"#fbbf24"},
-    city:{label:"城市",color:"#38bdf8"},
-    livelihood:{label:"民生",color:"#34d399"},
-    gossip:{label:"暖闻",color:"#f472b6"},
-    fun:{label:"趣事",color:"#f472b6"},
-    food:{label:"美食",color:"#fb923c"}
-  };
-  var DIR={"利好":{cls:"dir-good",ar:"▲"},"中性":{cls:"dir-mid",ar:"•"},"利空":{cls:"dir-bad",ar:"▼"}};
-  var items=[];
-  function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
-  function moneyOf(t){var m=String(t).match(/([\d.]+)\s*亿/);return m?m[1]+"亿":"";}
-  function shortT(t){
-    var s=String(t).split(/[，,、:：（(]/)[0].replace(/^惠州市?/,"").replace(/^惠城区?/,"");
-    if(s.length>11)s=s.slice(0,11);
-    return s;
-  }
-  function beamH(it,i){
-    if(i===0)return 97;
-    if(it.tier==="高")return 84;
-    if(it.tier==="较高")return 50+((i*17)%26);
-    return 32+((i*11)%14);
-  }
-  // 城市基座
-  var base=document.getElementById("newsBase");
-  [40,66,52,80,58,92,46,70,84,50,74,60,88,44,64,78,54,68,82,48,60,72,56,86].forEach(function(h){
-    var b=document.createElement("i");b.style.height=h+"%";base.appendChild(b);
-  });
-  function renderBeams(cat){
-    var field=document.getElementById("beamField");field.innerHTML="";
-    items.forEach(function(it,i){
-      var ci=CAT[it.cat]||CAT.city;
-      var di=DIR[(it.fate&&it.fate.direction)||"中性"]||DIR.中性;
-      var hero=i===0;
-      var dim=(cat!=="all"&&it.cat!==cat);
-      var money=hero?moneyOf(it.title):"";
-      var label=hero?shortT(it.title).replace(/(落子|投资|落地|进驻|开工|投产|项目).*$/,""):shortT(it.title);
-      var b=document.createElement("div");
-      b.className="beam"+(hero?" hero":"")+(dim?" dim":"");
-      b.style.setProperty("--bc",ci.color);
-      b.style.height=beamH(it,i)+"%";
-      b.innerHTML='<div class="beam-cap"><span class="ar '+di.cls+'">'+di.ar+'</span>'+esc(label)+'</div>'
-        +(money?'<div class="beam-num">'+money+'</div>':'')
-        +'<div class="beam-head"></div><div class="beam-light"></div>';
-      b.onclick=function(){selectNews(i);};
-      field.appendChild(b);
-    });
-  }
-  function renderList(cat){
-    var list=document.getElementById("newsList");
-    list.innerHTML=items.map(function(it,i){
-      var ci=CAT[it.cat]||CAT.city;
-      var di=DIR[(it.fate&&it.fate.direction)||"中性"]||DIR.中性;
-      var dim=(cat!=="all"&&it.cat!==cat);
-      var ver=it.verified_status==="已核验"?'<span style="color:var(--ok)">✓ 已核验</span>':'<span style="color:var(--muted)">待核实</span>';
-      return '<div class="ev" data-i="'+i+'" style="'+(dim?'opacity:.3':'')+'">'
-        +'<p class="ttl"><span class="cd" style="background:'+ci.color+'"></span>'+esc(it.title)+'</p>'
-        +'<div class="meta"><span class="src">'+esc(it.srcLevel)+'</span><span>'+ci.label+'</span><span>关注 '+esc(it.tier)+'</span>'
-        +'<span class="'+di.cls+'">'+di.ar+' '+esc((it.fate&&it.fate.direction)||"中性")+'</span>'+ver+'</div>'
-        +'</div>';
-    }).join("");
-    list.querySelectorAll(".ev").forEach(function(el){
-      el.onclick=function(){selectNews(+el.getAttribute("data-i"));};
-    });
-    var c=document.getElementById("newsCount");if(c)c.textContent="共 "+items.length+" 条";
-  }
-  window.selectNews=function(i){
-    var it=items[i];if(!it)return;
-    if(window.innerWidth<768){openDrawer("view-news","list");}
-    var els=document.querySelectorAll("#newsList .ev");
-    els.forEach(function(e){e.classList.remove("sel");});
-    if(els[i]){els[i].classList.add("sel");els[i].scrollIntoView({behavior:"smooth",block:"nearest"});}
-    var d=(it.fate&&it.fate.direction)||"中性";
-    toast(shortT(it.title)+" · "+d+" · "+(it.source||""));
-  };
-  window.filterNews=function(cat){
-    document.querySelectorAll("#newsChips .chip").forEach(function(c){
-      c.classList.toggle("on",c.getAttribute("data-c")===cat);
-    });
-    renderBeams(cat);renderList(cat);
-  };
-  document.querySelectorAll("#newsChips .chip").forEach(function(c){
-    c.onclick=function(){filterNews(c.getAttribute("data-c"));};
-  });
-  async function load(){
-    var d;
-    try{
-      var pack=await HCData.intel();
-      d=pack.hot;
-    }catch(e){d={items:[]};}
-    items=(d&&d.items)||[];
-    var cap=document.getElementById("newsCap");
-    var top=items[0]?moneyOf(items[0].title):"";
-    if(cap){
-      cap.textContent="今日 "+items.length+" 条公开动态"+(top?" · 头条 "+top+" 落子高新区":"")+(d.updated?" · "+d.updated.slice(5,10):"");
-    }
-    renderBeams("all");renderList("all");
-  }
-  load();
-})();
-
 // 视角切换
 window.setView=function(v){
-  ["news","consume","industry"].forEach(function(x){
-    document.getElementById("view-"+x).style.display=v===x?"grid":"none";
-  });
-  ["news","consume","industry"].forEach(function(x){
-    document.getElementById("seg-"+x).classList.toggle("on",v===x);
-  });
-  closeDrawer();
+  document.getElementById("view-consume").style.display=v==="consume"?"grid":"none";
+  document.getElementById("view-industry").style.display=v==="industry"?"grid":"none";
+  document.getElementById("seg-consume").classList.toggle("on",v==="consume");
+  document.getElementById("seg-industry").classList.toggle("on",v==="industry");
+  if(v!=="industry")closeDrawer();
 };
-// 手机端：列表/公投/留存/断点底部抽屉
+// 手机端：播报/公投/留存/断点底部抽屉
 window.openDrawer=function(viewId,k){
   var sd=document.querySelector("#"+viewId+" .side");
   var mk=document.getElementById(viewId+"Mask");
@@ -917,10 +702,10 @@ window.openDrawer=function(viewId,k){
     else if(k==="brk")target=sd.querySelectorAll(".panel")[1];
     else target=sd.querySelector(".panel");
   }
-  if(target){target.scrollIntoView({behavior:"smooth",block:"nearest"});}
+  if(target)target.scrollIntoView({behavior:"smooth",block:"nearest"});
 };
 window.closeDrawer=function(){
-  ["view-news","view-consume","view-industry"].forEach(function(v){
+  ["view-consume","view-industry"].forEach(function(v){
     var sd=document.querySelector("#"+v+" .side");
     var mk=document.getElementById(v+"Mask");
     if(sd)sd.classList.remove("open");
@@ -962,6 +747,5 @@ function toast(txt){
   setTimeout(function(){t.remove()},1800);
 }
 </script>
-<script src="ui/ui.js?v=20261109" defer></script>
 </body>
 </html>

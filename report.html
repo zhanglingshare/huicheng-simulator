@@ -4,17 +4,16 @@
 <title>惠城区产业分析报告（Demo版）· 张凌</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="model.js"></script>
-<script src="hc-viz/data.js"></script>
 <style>
 :root{
-  --sky1:#0A0B10; --sky2:#11131D; --sky3:#191D29;
+  --sky1:#04060f; --sky2:#0a0f24; --sky3:#121a30;
   --glass:rgba(255,255,255,.06); --glass-b:rgba(255,255,255,.12);
-  --ink:#B0BFDD; --ink2:#B8C1D6; --muted:#949FB8;
-  --neon:#58BAD8; --warm:#D5B94A; --ok:#37D0A5; --bad:#E389A2;
-  --orange:#D9A85E; --purple:#7574DE;
+  --ink:#f1f5f9; --ink2:#cbd5e1; --muted:#94a3b8;
+  --neon:#38bdf8; --warm:#fbbf24; --ok:#34d399; --bad:#fb7185;
+  --orange:#fb923c; --purple:#8b5cf6;
 }
 *{box-sizing:border-box}
-body{margin:0;background:linear-gradient(180deg,#0A0B10 0%,#11131D 30%,#12161F 100%);color:var(--ink);font:14px/1.7 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh}
+body{margin:0;background:linear-gradient(180deg,#04060f 0%,#0a0f24 30%,#0b1226 100%);color:var(--ink);font:14px/1.7 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh}
 body{overflow-x:hidden}
 .nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:10px 14px;background:rgba(6,10,24,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--glass-b);overflow-x:auto}
 .nav b{font-size:14px;margin-right:6px;flex:none;color:var(--ink)}
@@ -26,17 +25,17 @@ body{overflow-x:hidden}
 .cover .hero-mask{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,12,26,.62) 0%,rgba(8,12,26,.28) 38%,rgba(8,12,26,.94) 100%),linear-gradient(90deg,rgba(6,10,22,.78) 0%,rgba(6,10,22,.28) 62%,transparent 100%)}
 .cover .hero-in{position:relative;z-index:2;padding:30px 34px 26px;width:100%}
 .cover .hero-pills{position:absolute;top:20px;right:22px;z-index:3;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-.cover .hero-pill{font-size:11px;color:#A4BAEA;background:rgba(10,18,38,.55);border:1px solid rgba(125,211,252,.35);backdrop-filter:blur(8px);border-radius:20px;padding:6px 13px;text-decoration:none}
-.cover .kick{font-size:12px;letter-spacing:3px;color:#93D2E6;margin-bottom:10px;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+.cover .hero-pill{font-size:11px;color:#dbeafe;background:rgba(10,18,38,.55);border:1px solid rgba(125,211,252,.35);backdrop-filter:blur(8px);border-radius:20px;padding:6px 13px;text-decoration:none}
+.cover .kick{font-size:12px;letter-spacing:3px;color:#7dd3fc;margin-bottom:10px;text-shadow:0 2px 12px rgba(0,0,0,.6)}
 .cover h1{font-size:40px;line-height:1.12;margin:0 0 10px;font-weight:900;text-shadow:0 4px 24px rgba(0,0,0,.7)}
-.cover h1 .h-sub{display:block;font-size:20px;font-weight:800;margin-top:6px;background:linear-gradient(90deg,#93D2E6 0%,#A4D9EA 45%,#D5B94A 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.cover .hero-desc{font-size:13px;color:#B8C1D6;margin:0 0 4px;text-shadow:0 2px 10px rgba(0,0,0,.6)}
-.cover .meta{font-size:12px;color:#949FB8;margin-top:14px;text-shadow:0 1px 8px rgba(0,0,0,.7)}
+.cover h1 .h-sub{display:block;font-size:20px;font-weight:800;margin-top:6px;background:linear-gradient(90deg,#7dd3fc 0%,#a5f3fc 45%,#fbbf24 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cover .hero-desc{font-size:13px;color:#cbd5e1;margin:0 0 4px;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.cover .meta{font-size:12px;color:#94a3b8;margin-top:14px;text-shadow:0 1px 8px rgba(0,0,0,.7)}
 @media(max-width:700px){.cover{min-height:236px}.cover h1{font-size:28px}.cover h1 .h-sub{font-size:16px}.cover .hero-in{padding:22px 20px 20px}.cover .hero-pills{position:static;justify-content:flex-start;margin-bottom:10px}.cover .hero-pills{display:none}}
 .card{background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 4px 24px rgba(0,0,0,.25)}
 .card h2{font-size:16px;margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.08)}
-.card h3{font-size:13.5px;color:#7A9AE0;margin:18px 0 6px}
-.deep-divider{display:flex;align-items:center;gap:14px;justify-content:center;margin:26px 4px 18px;color:#D5B94A;font-size:13px;font-weight:700;letter-spacing:1px}
+.card h3{font-size:13.5px;color:#60a5fa;margin:18px 0 6px}
+.deep-divider{display:flex;align-items:center;gap:14px;justify-content:center;margin:26px 4px 18px;color:#fbbf24;font-size:13px;font-weight:700;letter-spacing:1px}
 .deep-divider .dd-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(251,191,36,.45),transparent)}
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
 @media(max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
@@ -47,21 +46,21 @@ body{overflow-x:hidden}
 @media(max-width:700px){.lights{grid-template-columns:1fr 1fr}}
 .light{border-radius:10px;padding:11px 12px;font-size:12px;border:1px solid;backdrop-filter:blur(6px)}
 .light .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
-.g{background:rgba(20,83,45,.18);border-color:rgba(34,197,94,.4)}.g .dot{background:#2CBB60;box-shadow:0 0 8px #2CBB60}
-.y{background:rgba(113,63,18,.18);border-color:rgba(234,179,8,.4)}.y .dot{background:#C4A62E;box-shadow:0 0 8px #C4A62E}
-.r{background:rgba(127,29,29,.18);border-color:rgba(239,68,68,.4)}.r .dot{background:#D8635B;box-shadow:0 0 8px #D8635B}
+.g{background:rgba(20,83,45,.18);border-color:rgba(34,197,94,.4)}.g .dot{background:#22c55e;box-shadow:0 0 8px #22c55e}
+.y{background:rgba(113,63,18,.18);border-color:rgba(234,179,8,.4)}.y .dot{background:#eab308;box-shadow:0 0 8px #eab308}
+.r{background:rgba(127,29,29,.18);border-color:rgba(239,68,68,.4)}.r .dot{background:#ef4444;box-shadow:0 0 8px #ef4444}
 ol.find{margin:0;padding-left:20px}
 ol.find li{margin-bottom:10px;line-height:1.8}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:700px){.two{grid-template-columns:1fr}}
 .people{background:linear-gradient(160deg,rgba(26,14,8,.5),rgba(14,21,35,.4));border:1px solid rgba(251,146,60,.3)}
-.people .q{font-size:14px;font-weight:700;color:#D9A85E;margin-bottom:8px}
+.people .q{font-size:14px;font-weight:700;color:#fb923c;margin-bottom:8px}
 .people .a{font-size:12.5px;color:var(--ink2);line-height:1.85}
 .action{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start}
-.action .pri{flex:none;width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#F2F2F2}
+.action .pri{flex:none;width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
 .action .body{flex:1}
 .action .body b{font-size:13.5px}
-.action .body p{font-size:12px;color:#9AA5BD;margin:3px 0 0}
+.action .body p{font-size:12px;color:#9aa9bd;margin:3px 0 0}
 .kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:760px){.kanban{grid-template-columns:1fr}}
 .kan-col{display:flex;flex-direction:column;gap:10px}
@@ -69,13 +68,13 @@ ol.find li{margin-bottom:10px;line-height:1.8}
 .kan-item{background:rgba(10,15,26,.6);border:1px solid var(--glass-b);border-radius:10px;padding:12px 13px;flex:1}
 .kan-item b{font-size:13px;color:var(--ink);line-height:1.5}
 .kan-item p{font-size:11.5px;color:var(--muted);line-height:1.7;margin:6px 0 0}
-.kan-col:nth-child(1) .kan-item{border-left:3px solid #E38C86}
-.kan-col:nth-child(2) .kan-item{border-left:3px solid #D9A85E}
-.kan-col:nth-child(3) .kan-item{border-left:3px solid #5981D8}
+.kan-col:nth-child(1) .kan-item{border-left:3px solid #f87171}
+.kan-col:nth-child(2) .kan-item{border-left:3px solid #fb923c}
+.kan-col:nth-child(3) .kan-item{border-left:3px solid #3b82f6}
 /* 数据可信度金字塔 */
 .pyramid{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
 .pyra{display:flex;align-items:center;gap:12px}
-.pyra .bar{height:44px;border-radius:8px;display:flex;align-items:center;padding:0 16px;font-size:12px;font-weight:700;color:#F2F2F2}
+.pyra .bar{height:44px;border-radius:8px;display:flex;align-items:center;padding:0 16px;font-size:12px;font-weight:700;color:#fff}
 .pyra .lab{font-size:11.5px;color:var(--ink2);max-width:340px;line-height:1.6}
 .pyra .lab b{color:var(--ink)}
 @media(max-width:560px){.pyra{flex-direction:column;align-items:flex-start;gap:4px}.pyra .lab{max-width:none;margin-bottom:6px}}
@@ -83,14 +82,14 @@ ol.find li{margin-bottom:10px;line-height:1.8}
 .src-list .grade{display:inline-block;width:22px;height:22px;line-height:22px;text-align:center;border-radius:50%;font-size:10px;font-weight:700;margin-right:6px}
 .bound{font-size:12.5px;line-height:1.9;color:var(--ink2)}
 .author{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
-.author .badge{width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#2F5FC6,#298FAE);display:flex;align-items:center;justify-content:center;font-size:28px;flex:none;color:#F2F2F2;font-weight:700}
+.author .badge{width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#1d4ed8,#0e7490);display:flex;align-items:center;justify-content:center;font-size:28px;flex:none;color:#fff;font-weight:700}
 .author .roles{font-size:12.5px;line-height:2;color:var(--ink2)}
 .tagline{font-size:12px;color:var(--muted);font-style:italic;margin-top:8px}
 .disc{font-size:11.5px;color:var(--muted);line-height:1.8;text-align:center}
-.btn{background:linear-gradient(135deg,#2F5FC6,#5981D8);color:#F2F2F2;border:0;padding:12px 26px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 4px 16px rgba(59,130,246,.35)}
+.btn{background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:#fff;border:0;padding:12px 26px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 4px 16px rgba(59,130,246,.35)}
 .bigquote{font-size:15px;line-height:2;text-align:center;color:var(--ink)}
-.plain{margin-top:10px;background:rgba(22,18,7,.5);border:1px solid rgba(245,158,11,.3);border-left:3px solid #CF9031;border-radius:10px;padding:10px 12px;font-size:12.3px;line-height:1.85;color:#E4D8AA}
-.plain .lab{display:block;font-size:10.5px;font-weight:800;color:#CF9031;letter-spacing:1px;margin-bottom:3px}
+.plain{margin-top:10px;background:rgba(22,18,7,.5);border:1px solid rgba(245,158,11,.3);border-left:3px solid #f59e0b;border-radius:10px;padding:10px 12px;font-size:12.3px;line-height:1.85;color:#e8dcb8}
+.plain .lab{display:block;font-size:10.5px;font-weight:800;color:#f59e0b;letter-spacing:1px;margin-bottom:3px}
 svg{max-width:100%;height:auto}
 /* 五条发现卡 */
 .find5{display:flex;flex-direction:column;gap:10px}
@@ -101,30 +100,30 @@ svg{max-width:100%;height:auto}
 .f5 .chip{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;border:1px solid;letter-spacing:.5px}
 .f5 .ds{font-size:11.8px;color:var(--muted);line-height:1.8}
 .f5 .ds b{color:var(--warm)}
-.f5.c-str{border-left-color:#58BAD8}.f5.c-str .no{color:#58BAD8}.f5.c-str .chip{color:#93D2E6;border-color:rgba(56,189,248,.4);background:rgba(56,189,248,.1)}
-.f5.c-risk{border-left-color:#E389A2}.f5.c-risk .no{color:#E389A2}.f5.c-risk .chip{color:#EAA4B8;border-color:rgba(251,113,133,.4);background:rgba(251,113,133,.1)}
-.f5.c-key{border-left-color:#D9A85E}.f5.c-key .no{color:#D9A85E}.f5.c-key .chip{color:#E4C18D;border-color:rgba(251,146,60,.4);background:rgba(251,146,60,.1)}
-.f5.c-time{border-left-color:#7574DE}.f5.c-time .no{color:#7574DE}.f5.c-time .chip{color:#A5A4EA;border-color:rgba(139,92,246,.4);background:rgba(139,92,246,.1)}
-.f5.c-do{border-left-color:#37D0A5}.f5.c-do .no{color:#37D0A5}.f5.c-do .chip{color:#76DFC1;border-color:rgba(52,211,153,.4);background:rgba(52,211,153,.1)}
+.f5.c-str{border-left-color:#38bdf8}.f5.c-str .no{color:#38bdf8}.f5.c-str .chip{color:#7dd3fc;border-color:rgba(56,189,248,.4);background:rgba(56,189,248,.1)}
+.f5.c-risk{border-left-color:#fb7185}.f5.c-risk .no{color:#fb7185}.f5.c-risk .chip{color:#fda4af;border-color:rgba(251,113,133,.4);background:rgba(251,113,133,.1)}
+.f5.c-key{border-left-color:#fb923c}.f5.c-key .no{color:#fb923c}.f5.c-key .chip{color:#fdba74;border-color:rgba(251,146,60,.4);background:rgba(251,146,60,.1)}
+.f5.c-time{border-left-color:#8b5cf6}.f5.c-time .no{color:#8b5cf6}.f5.c-time .chip{color:#c4b5fd;border-color:rgba(139,92,246,.4);background:rgba(139,92,246,.1)}
+.f5.c-do{border-left-color:#34d399}.f5.c-do .no{color:#34d399}.f5.c-do .chip{color:#6ee7b7;border-color:rgba(52,211,153,.4);background:rgba(52,211,153,.1)}
 /* 集中度条 */
 .conc{margin-top:8px}
 .conc-track{height:9px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;display:flex}
-.conc-a{height:100%;background:linear-gradient(90deg,#D9A85E,#CF9031);border-radius:6px}
+.conc-a{height:100%;background:linear-gradient(90deg,#fb923c,#f59e0b);border-radius:6px}
 .conc-leg{display:flex;gap:14px;font-size:10.5px;color:var(--muted);margin-top:4px;flex-wrap:wrap}
 .conc-leg i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px}
-/* 两类问题分开 */
+/* 两本账 */
 .ledgers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
 @media(max-width:680px){.ledgers{grid-template-columns:1fr}}
 .ledger{border-radius:12px;padding:14px;background:rgba(10,15,26,.55);border:1px solid var(--glass-b)}
-.ledger.l1{border-top:3px solid #5981D8}
-.ledger.l2{border-top:3px solid #E38C86}
+.ledger.l1{border-top:3px solid #3b82f6}
+.ledger.l2{border-top:3px solid #f87171}
 .ledger .lh{font-size:12.5px;font-weight:800;margin-bottom:3px;display:flex;align-items:center;gap:7px}
-.ledger.l1 .lh{color:#A4BAEA}.ledger.l2 .lh{color:#EAA9A4}
+.ledger.l1 .lh{color:#93c5fd}.ledger.l2 .lh{color:#fca5a5}
 .ledger .lhq{font-size:11px;color:var(--muted);margin-bottom:9px}
 .ledger ul{margin:0;padding:0;list-style:none}
 .ledger li{font-size:11.5px;color:var(--ink2);line-height:1.7;padding:4px 0 4px 18px;position:relative}
 .ledger li::before{content:"";position:absolute;left:2px;top:11px;width:7px;height:7px;border-radius:50%}
-.ledger.l1 li::before{background:#5981D8}.ledger.l2 li::before{background:#E38C86}
+.ledger.l1 li::before{background:#3b82f6}.ledger.l2 li::before{background:#f87171}
 .ledger li b{color:var(--ink)}
 .ledger-divider{text-align:center;font-size:11px;font-weight:700;color:var(--warm);background:rgba(127,60,10,.18);border:1px solid rgba(251,191,36,.3);border-radius:20px;padding:5px 12px;margin:8px 0}
 /* 敏感度横条（定性） */
@@ -132,17 +131,17 @@ svg{max-width:100%;height:auto}
 .sens-row{display:grid;grid-template-columns:84px 1fr 58px;gap:10px;align-items:center;font-size:12px}
 .sens-row .nm{color:var(--ink2);font-weight:600}
 .sens-track{height:12px;border-radius:7px;background:rgba(255,255,255,.06);overflow:hidden}
-.sens-fill{height:100%;border-radius:7px;background:linear-gradient(90deg,#E38C86,#D9A85E)}
-.sens-fill.low{background:linear-gradient(90deg,#566480,#64708B)}
-.sens-fill.mid{background:linear-gradient(90deg,#AE7829,#CF9031)}
+.sens-fill{height:100%;border-radius:7px;background:linear-gradient(90deg,#f87171,#fb923c)}
+.sens-fill.low{background:linear-gradient(90deg,#475569,#64748b)}
+.sens-fill.mid{background:linear-gradient(90deg,#b45309,#f59e0b)}
 .sens-row .rk{font-size:11px;color:var(--muted);text-align:right}
 /* 两本尺子（微分 vs 注入） */
 .rulers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
 @media(max-width:680px){.rulers{grid-template-columns:1fr}}
 .ruler{border-radius:12px;padding:13px 15px;background:rgba(10,15,26,.55);border:1px solid var(--glass-b)}
-.ruler.a{border-left:3px solid #5981D8}.ruler.b{border-left:3px solid #E38C86}
+.ruler.a{border-left:3px solid #3b82f6}.ruler.b{border-left:3px solid #f87171}
 .ruler .rk{font-size:10.5px;font-weight:800;letter-spacing:.5px;margin-bottom:4px}
-.ruler.a .rk{color:#A4BAEA}.ruler.b .rk{color:#EAA9A4}
+.ruler.a .rk{color:#93c5fd}.ruler.b .rk{color:#fca5a5}
 .ruler .qt{font-size:12.5px;font-weight:700;color:var(--ink);margin-bottom:5px}
 .ruler .how{font-size:11.3px;color:var(--muted);line-height:1.75}
 .ruler .how b{color:var(--ink2)}
@@ -150,11 +149,11 @@ svg{max-width:100%;height:auto}
 .chains{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:680px){.chains{grid-template-columns:1fr}}
 .chain{background:rgba(10,15,26,.5);border:1px solid rgba(251,146,60,.28);border-radius:12px;padding:14px}
-.chain .q{font-size:12.5px;font-weight:700;color:#D9A85E;margin-bottom:10px}
+.chain .q{font-size:12.5px;font-weight:700;color:#fb923c;margin-bottom:10px}
 .chain .flow{display:flex;flex-direction:column;gap:6px}
 .cnode{font-size:11.5px;color:var(--ink2);background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.25);border-radius:9px;padding:7px 11px;line-height:1.5}
-.cnode.good{background:rgba(52,211,153,.12);border-color:rgba(52,211,153,.3);color:#A4EABE}
-.cnode.bad{background:rgba(251,113,133,.1);border-color:rgba(251,113,133,.3);color:#EAA4B8}
+.cnode.good{background:rgba(52,211,153,.12);border-color:rgba(52,211,153,.3);color:#a7f3d0}
+.cnode.bad{background:rgba(251,113,133,.1);border-color:rgba(251,113,133,.3);color:#fecdd3}
 .carr{color:var(--warm);font-size:13px;text-align:center;line-height:1}
 /* 免责徽章 */
 .disc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -167,15 +166,15 @@ svg{max-width:100%;height:auto}
 .src-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .src-badge{font-size:11.5px;color:var(--ink2);background:rgba(56,189,248,.08);border:1px solid rgba(56,189,246,.22);border-radius:20px;padding:6px 12px;display:flex;align-items:center;gap:6px}
 .role-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-.role-badge{font-size:12px;color:#E8DA9F;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);border-radius:20px;padding:6px 13px}
+.role-badge{font-size:12px;color:#fde68a;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);border-radius:20px;padding:6px 13px}
 /* 口径标签 */
 .itag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;padding:2px 9px;border-radius:20px;margin-left:8px;vertical-align:middle}
-.itag.real{color:#76DFC1;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.35)}
-.itag.est{color:#A4BAEA;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.35)}
-.itag.sim{color:#E4C18D;background:rgba(251,146,60,.12);border:1px solid rgba(251,146,60,.35)}
-.itag.plan{color:#D6A4EA;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.35)}
-.subh{font-size:13px;font-weight:700;color:#7A9AE0;margin:18px 0 8px;display:flex;align-items:center;flex-wrap:wrap;gap:2px}
-.subh .num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(56,189,248,.18);border:1px solid rgba(56,189,248,.4);font-size:11px;color:#93D2E6;margin-right:7px}
+.itag.real{color:#6ee7b7;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.35)}
+.itag.est{color:#93c5fd;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.35)}
+.itag.sim{color:#fdba74;background:rgba(251,146,60,.12);border:1px solid rgba(251,146,60,.35)}
+.itag.plan{color:#d8b4fe;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.35)}
+.subh{font-size:13px;font-weight:700;color:#60a5fa;margin:18px 0 8px;display:flex;align-items:center;flex-wrap:wrap;gap:2px}
+.subh .num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(56,189,248,.18);border:1px solid rgba(56,189,248,.4);font-size:11px;color:#7dd3fc;margin-right:7px}
 /* 事件冲击双图 */
 .shock-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .shock-grid>*,.lab-grid>*{min-width:0}
@@ -200,15 +199,15 @@ svg{max-width:100%;height:auto}
 @keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 /* 实验台 */
 .lab-card{background:linear-gradient(160deg,rgba(14,26,50,.6),rgba(10,15,26,.5));border:1px solid rgba(56,189,248,.3);border-radius:14px;padding:16px;margin-top:18px}
-.lab-head{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:800;color:#93D2E6;margin-bottom:4px}
+.lab-head{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:800;color:#7dd3fc;margin-bottom:4px}
 .lab-sub{font-size:11.5px;color:var(--muted);margin-bottom:12px}
 .toggles{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
 .tgl{flex:1;min-width:150px;text-align:left;background:rgba(10,15,26,.6);border:1px solid var(--glass-b);border-radius:11px;padding:11px 14px;color:var(--ink2);font-size:12.5px;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:9px}
-.tgl .box{flex:none;width:20px;height:20px;border-radius:6px;border:2px solid #566480;display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent}
+.tgl .box{flex:none;width:20px;height:20px;border-radius:6px;border:2px solid #475569;display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent}
 .tgl .tt b{display:block;color:var(--ink);font-size:12.5px}
 .tgl .tt span{font-size:10.5px;color:var(--muted)}
-.tgl.on{border-color:#E38C86;background:rgba(127,29,29,.18)}
-.tgl.on .box{background:#E38C86;border-color:#E38C86;color:#F2F2F2}
+.tgl.on{border-color:#f87171;background:rgba(127,29,29,.18)}
+.tgl.on .box{background:#f87171;border-color:#f87171;color:#fff}
 .lab-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
 @media(max-width:720px){.lab-grid{grid-template-columns:1fr}}
 .traj-box{background:rgba(10,15,26,.5);border:1px solid var(--glass-b);border-radius:12px;padding:12px 14px 4px}
@@ -220,17 +219,17 @@ svg{max-width:100%;height:auto}
 .bigstat .cur{font-size:26px;font-weight:900;line-height:1}
 .bigstat .base{font-size:11.5px;color:var(--muted)}
 .bigstat .delta{font-size:11.5px;font-weight:700;margin-left:auto}
-.delta.down{color:#E38C86}.delta.flat{color:#37D0A5}
+.delta.down{color:#f87171}.delta.flat{color:#34d399}
 .gap-note{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.7}
 .gap-note b{color:var(--warm)}
 /* 实验结论 */
 .concl{margin-top:14px;background:rgba(20,14,30,.55);border:1px solid rgba(251,191,36,.3);border-radius:12px;padding:14px 16px}
-.concl .ch{font-size:12.5px;font-weight:800;color:#D5B94A;margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.concl .ch{font-size:12.5px;font-weight:800;color:#fbbf24;margin-bottom:8px;display:flex;align-items:center;gap:7px}
 .concl .cb{font-size:12px;line-height:1.95;color:var(--ink2)}
 .concl .cb b{color:var(--ink)}
-.concl .cb .neg{color:#EAA9A4}.concl .cb .pos{color:#90E5AF}
+.concl .cb .neg{color:#fca5a5}.concl .cb .pos{color:#86efac}
 .concl-btns{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
-.cbtn{background:rgba(56,189,248,.14);border:1px solid rgba(56,189,248,.4);color:#A4D9EA;border-radius:10px;padding:8px 15px;font-size:12px;font-weight:700;cursor:pointer;transition:.2s}
+.cbtn{background:rgba(56,189,248,.14);border:1px solid rgba(56,189,248,.4);color:#bae6fd;border-radius:10px;padding:8px 15px;font-size:12px;font-weight:700;cursor:pointer;transition:.2s}
 .cbtn:hover{background:rgba(56,189,248,.26)}
 .cbtn.ghost{background:transparent;border-color:var(--glass-b);color:var(--muted)}
 /* ===== 8指标经济CT体检卡 ===== */
@@ -251,31 +250,31 @@ svg{max-width:100%;height:auto}
 .metric .m-sub{font-size:9px;color:var(--muted);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .spark{height:24px;width:100%;margin:4px 0 7px}
 .spark svg{width:100%;height:100%;display:block}
-.metric.good .spark{color:#37D0A5}.metric.warn .spark{color:#D5B94A}.metric.bad .spark{color:#E389A2}.metric.flat .spark{color:#7A9AE0}
+.metric.good .spark{color:#34d399}.metric.warn .spark{color:#fbbf24}.metric.bad .spark{color:#fb7185}.metric.flat .spark{color:#60a5fa}
 .metric .m-tag{font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:20px;display:inline-block;white-space:nowrap;align-self:flex-start;margin-top:auto}
-.metric.good{border-top-color:#37D0A5}.metric.good .m-val{color:#90E5AF}.metric.good .m-tag{color:#76DFC1;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.3)}
-.metric.warn{border-top-color:#D5B94A}.metric.warn .m-val{color:#DDC66C}.metric.warn .m-tag{color:#DDC66C;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.3)}
-.metric.bad{border-top-color:#E389A2}.metric.bad .m-val{color:#EAA9A4}.metric.bad .m-tag{color:#EAA4B8;background:rgba(251,113,133,.12);border:1px solid rgba(251,113,133,.3)}
-.metric.flat{border-top-color:#7A9AE0}.metric.flat .m-val{color:#A4BAEA}.metric.flat .m-tag{color:#A4BAEA;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3)}
+.metric.good{border-top-color:#34d399}.metric.good .m-val{color:#86efac}.metric.good .m-tag{color:#6ee7b7;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.3)}
+.metric.warn{border-top-color:#fbbf24}.metric.warn .m-val{color:#fcd34d}.metric.warn .m-tag{color:#fcd34d;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.3)}
+.metric.bad{border-top-color:#fb7185}.metric.bad .m-val{color:#fca5a5}.metric.bad .m-tag{color:#fda4af;background:rgba(251,113,133,.12);border:1px solid rgba(251,113,133,.3)}
+.metric.flat{border-top-color:#60a5fa}.metric.flat .m-val{color:#93c5fd}.metric.flat .m-tag{color:#93c5fd;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3)}
 
-.scan-note{font-size:10.5px;color:#6B7280;margin-top:8px;line-height:1.6}
+.scan-note{font-size:10.5px;color:#6b7280;margin-top:8px;line-height:1.6}
 /* 体检结论条（无加权分） */
 .scan-verdict{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 10px}
 .sv{flex:1;min-width:90px;background:rgba(10,15,26,.55);border:1px solid var(--glass-b);border-radius:11px;padding:10px 12px;display:flex;align-items:center;gap:9px}
 .sv .dot{width:11px;height:11px;border-radius:50%;flex:none}
 .sv .n{font-size:19px;font-weight:900;line-height:1}
 .sv .t{font-size:10.5px;color:var(--muted);margin-left:3px}
-.sv.g .dot{background:#2CBB60;box-shadow:0 0 8px #2CBB60}.sv.g .n{color:#52D682}
-.sv.y .dot{background:#C4A62E;box-shadow:0 0 8px #C4A62E}.sv.y .n{color:#D2B43D}
-.sv.r .dot{background:#D8635B;box-shadow:0 0 8px #D8635B}.sv.r .n{color:#E38C86}
+.sv.g .dot{background:#22c55e;box-shadow:0 0 8px #22c55e}.sv.g .n{color:#4ade80}
+.sv.y .dot{background:#eab308;box-shadow:0 0 8px #eab308}.sv.y .n{color:#facc15}
+.sv.r .dot{background:#ef4444;box-shadow:0 0 8px #ef4444}.sv.r .n{color:#f87171}
 /* ===== 分段档位滑块 ===== */
 .seg{margin:12px 0 4px}
 .seg-label{font-size:12px;font-weight:700;color:var(--ink2);margin:0 0 6px;display:flex;justify-content:space-between;align-items:center}
 .seg-label .seg-val{font-weight:900;font-size:12.5px}
 .seg-track{display:flex;gap:4px;background:rgba(10,15,26,.55);border:1px solid var(--glass-b);border-radius:11px;padding:4px}
 .seg-btn{flex:1;background:transparent;border:1px solid transparent;color:var(--muted);border-radius:8px;padding:9px 2px;font-size:10.5px;font-weight:700;cursor:pointer;transition:.15s;line-height:1.35}
-.seg-btn.on{background:rgba(239,68,68,.18);border-color:#E38C86;color:#EAA9A4}
-.seg-btn.on.zero{background:rgba(52,211,153,.16);border-color:#37D0A5;color:#A4EABE}
+.seg-btn.on{background:rgba(239,68,68,.18);border-color:#f87171;color:#fecaca}
+.seg-btn.on.zero{background:rgba(52,211,153,.16);border-color:#34d399;color:#a7f3d0}
 .hero-main{border:1px solid rgba(56,189,248,.32);background:linear-gradient(160deg,rgba(14,26,50,.55),rgba(10,15,26,.4));border-radius:16px;padding:16px 14px 12px;margin:12px 0;box-shadow:0 10px 40px rgba(2,12,40,.5)}
 .hero-main .cap{font-size:11.5px;color:var(--muted);margin-bottom:2px}
 .cmp-tabs{display:flex;gap:6px;margin:10px 0 8px}
@@ -287,14 +286,14 @@ svg{max-width:100%;height:auto}
 .scene-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:6px 0 14px}
 .scene-tabs button{background:rgba(255,255,255,.04);border:1px solid var(--glass-b);color:var(--ink2);border-radius:11px;padding:11px 8px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s}
 .scene-tabs button:hover{border-color:rgba(56,189,248,.4)}
-.scene-tabs button.on{background:linear-gradient(135deg,rgba(56,189,248,.28),rgba(56,189,248,.08));border-color:var(--neon);color:#F2F2F2;box-shadow:0 0 20px rgba(56,189,248,.25)}
+.scene-tabs button.on{background:linear-gradient(135deg,rgba(56,189,248,.28),rgba(56,189,248,.08));border-color:var(--neon);color:#fff;box-shadow:0 0 20px rgba(56,189,248,.25)}
 @media(max-width:700px){.scene-tabs{grid-template-columns:1fr 1fr}}
 .future-flex{display:grid;grid-template-columns:1.65fr 1fr;gap:14px;align-items:stretch}
 @media(max-width:820px){.future-flex{grid-template-columns:1fr}}
 .future-panel{background:linear-gradient(160deg,rgba(56,189,248,.12),rgba(8,14,30,.5));border:1px solid rgba(56,189,248,.28);border-radius:15px;padding:15px 16px;display:flex;flex-direction:column;gap:6px}
 .fp-head{font-size:12px;font-weight:700;color:var(--neon);margin-bottom:6px;display:flex;align-items:center;gap:6px}
 .fp-lbl{font-size:11px;color:var(--muted)}
-.fp-p50{font-size:36px;font-weight:800;color:#F2F2F2;line-height:1.1}
+.fp-p50{font-size:36px;font-weight:800;color:#fff;line-height:1.1}
 .fp-p50 small{font-size:13px;color:var(--muted);font-weight:400;margin-left:4px}
 .fp-row2{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 0}
 .fp-hit{font-size:30px;font-weight:800;color:var(--neon)}
@@ -310,8 +309,8 @@ svg{max-width:100%;height:auto}
 .rcard.cur{border-color:var(--neon);background:rgba(56,189,248,.08);box-shadow:0 0 18px rgba(56,189,248,.15)}
 .rc-head{font-size:12px;color:var(--ink2);font-weight:700;margin-bottom:9px;display:flex;align-items:center;gap:7px}
 .rc-dot{width:9px;height:9px;border-radius:50%;flex:none}
-.rc-dot.base{background:#37D0A5}.rc-dot.delay{background:#E389A2}.rc-dot.commute{background:#D9A85E}.rc-dot.both{background:#E2849F}
-.rc-big{font-size:27px;font-weight:800;color:#F2F2F2;line-height:1.1}
+.rc-dot.base{background:#34d399}.rc-dot.delay{background:#fb7185}.rc-dot.commute{background:#fb923c}.rc-dot.both{background:#f472b6}
+.rc-big{font-size:27px;font-weight:800;color:#fff;line-height:1.1}
 .rc-sub{font-size:13px;color:var(--muted);margin-top:3px}
 .rc-range{font-size:11px;color:var(--muted);margin-top:7px;border-top:1px dashed var(--glass-b);padding-top:6px}
 .rc-bar{height:6px;background:rgba(255,255,255,.07);border-radius:6px;overflow:hidden;margin-top:8px}
@@ -319,10 +318,10 @@ svg{max-width:100%;height:auto}
 .dist-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
 .dist-stats .ds-cell{background:rgba(255,255,255,.035);border:1px solid var(--glass-b);border-radius:10px;padding:9px 10px;text-align:center}
 .dist-stats .ds-l{font-size:11px;color:var(--muted)}
-.dist-stats .ds-v{font-size:19px;font-weight:800;color:#F2F2F2;margin-top:2px}
+.dist-stats .ds-v{font-size:19px;font-weight:800;color:#fff;margin-top:2px}
 .dist-stats .ds-v small{font-size:11px;font-weight:500;color:var(--muted)}
 .dist-stats .ds-d{font-size:10.5px;color:var(--muted);margin-top:2px}
-.dist-stats .ds-d .neg{color:#EAA9A4}.dist-stats .ds-d .pos{color:#90E5AF}
+.dist-stats .ds-d .neg{color:#fca5a5}.dist-stats .ds-d .pos{color:#86efac}
 /* 体检卡迷你火花线（状态方向示意，非历史序列） */
 .spark{height:26px;margin:6px 0 2px}
 
@@ -332,37 +331,18 @@ svg{max-width:100%;height:auto}
 .cmp-cell .from{font-size:12px;color:var(--muted);text-decoration:line-through;opacity:.7}
 .cmp-cell .arr{color:var(--muted);font-size:10px}
 .cmp-cell .to{font-size:18px;font-weight:900}
-.cmp-cell .to.bad{color:#EAA9A4}.cmp-cell .to.good{color:#90E5AF}.cmp-cell .to.neutral{color:#B8C1D6}
+.cmp-cell .to.bad{color:#fca5a5}.cmp-cell .to.good{color:#86efac}.cmp-cell .to.neutral{color:#cbd5e1}
 .cmp-cell .delta{font-size:10px;font-weight:700;margin-top:3px}
-.cmp-cell .delta.down{color:#EAA9A4}.cmp-cell .delta.flat{color:#76DFC1}
+.cmp-cell .delta.down{color:#fca5a5}.cmp-cell .delta.flat{color:#6ee7b7}
 .cmp-cell.wide{grid-column:1/-1}
 .inject{font-size:11px;line-height:1.75;color:var(--ink2)}
-.inject code{background:rgba(239,68,68,.14);color:#EAA9A4;border-radius:5px;padding:1px 6px;font-size:10.5px;margin:0 2px;white-space:nowrap}
+.inject code{background:rgba(239,68,68,.14);color:#fca5a5;border-radius:5px;padding:1px 6px;font-size:10.5px;margin:0 2px;white-space:nowrap}
 .dist-box{display:none}
 .dist-box.show{display:block}
-
-.scan-fail{padding:22px 20px;border-radius:12px;border:1px solid rgba(248,113,113,.35);background:rgba(248,113,113,.08);display:flex;flex-direction:column;gap:6px}
-.scan-fail b{font-size:14px;color:#EAA9A4}
-.scan-fail span{font-size:12px;color:#949FB8;line-height:1.6}
-.nowbar{margin:14px 0 12px;padding:14px 16px;border-radius:14px;border:1px solid rgba(229,192,106,.28);
-  background:linear-gradient(180deg,rgba(229,192,106,.09),rgba(229,192,106,.02))}
-.nb-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
-.nb-tag{font-size:11px;font-weight:700;letter-spacing:.05em;color:#10141B;background:#DEB271;padding:3px 9px;border-radius:999px}
-.nb-sub{font-size:11.5px;color:#9CA2AF}
-.nb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
-.nb-item{padding:9px 11px;border-radius:10px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}
-.nb-k{font-size:11px;color:#949FB8;margin-bottom:3px}
-.nb-v{font:600 17px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace}
-.nb-v.pos{color:#37D0A5}
-.nb-v.mid{color:#D5B94A}
-.nb-v.neg{color:#E38C86}
-.nb-n{font-size:10.5px;color:#949FB8;margin-top:3px;line-height:1.55}
-@media(max-width:640px){.nb-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 <link rel="stylesheet" href="ui/ui.css">
 <link rel="stylesheet" href="ui/ui-pages.css">
-<link rel="stylesheet" href="ui/skin.css?v=20261106">
-</head><body class="sk-report">
+</head><body>
 
 
 
@@ -373,7 +353,7 @@ svg{max-width:100%;height:auto}
     <img class="hero-bg" src="assets/huicheng-night.jpg" alt="惠城滨江夜景">
     <div class="hero-mask"></div>
     <div class="hero-pills">
-      <span class="hero-pill"> 数据更新：2025 全年公报 + 2026 1-9 月快报</span>
+      <span class="hero-pill"> 数据更新：2025 年统计公报</span>
       <a class="hero-pill" href="#sources">数据来源说明 ↓</a>
     </div>
     <div class="hero-in">
@@ -388,65 +368,86 @@ svg{max-width:100%;height:auto}
   <div class="card">
     <h2>① 惠城经济CT · 八项体检指标 <span class="itag real">官方实测 · 2025</span></h2>
     <div class="scan-verdict">
-      <div class="sv g"><span class="dot"></span><span class="n" id="svGood">3</span><span class="t">项跑得快<br>（工业·利润·外贸）</span></div>
-      <div class="sv y"><span class="n" id="svWarn">4</span><span class="t">项温和承压<br>（GDP·消费·财力·收入）</span></div>
-      <div class="sv r"><span class="dot"></span><span class="n" id="svBad">1</span><span class="t">项明显下滑<br>（固定资产投资）</span></div>
+      <div class="sv g"><span class="dot"></span><span class="n">3</span><span class="t">项跑得快<br>（工业·利润·外贸）</span></div>
+      <div class="sv y"><span class="n">4</span><span class="t">项温和承压<br>（GDP·消费·财力·收入）</span></div>
+      <div class="sv r"><span class="dot"></span><span class="n">1</span><span class="t">项明显下滑<br>（固定资产投资）</span></div>
     </div>
     <div style="font-size:10.5px;color:#6b7280;margin:-2px 0 2px">最新数据（同比）· 点任一指标卡，查看<b>口径、目标差距与来源</b>；迷你折线仅表示状态方向，不代表逐年数值。</div>
-    <div class="scan-grid" id="scanGrid"></div>
+    <div class="scan-grid" id="scanGrid">
+      <div class="metric good" data-t="规上工业增加值 · +10.8%（超目标）" data-d="规上工业<b>增加值</b>增速 10.8%，高于年初约 9% 的目标；规上工业<b>总产值</b>937.92 亿元（现价，+9.6%）、销售产值 899.44 亿元（+7.8%）。注意：<b>增加值与总产值是两个口径</b>。来源：惠城区2025年统计公报（区统计局，初步核算数）。">
+        <div class="m-icon"></div>
+        <div class="m-name">规上工业增加值</div>
+        <div class="m-val">+10.8%</div>
+        <div class="m-sub">总产值 937.9 亿</div>
+        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,21 L15,18 L27,20 L39,13 L51,15 L63,8 L76,10 L88,4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,21 L15,18 L27,20 L39,13 L51,15 L63,8 L76,10 L88,4 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
+        <div class="m-tag">超目标 9%</div>
+      </div>
+      <div class="metric good" data-t="规上工业利润 · +49.7%（42.51 亿元）" data-d="规上工业企业实现利润总额 <b>42.51 亿元、+49.7%</b>；高技术制造业增加值 +15.6%（占比 37%）、先进制造业 +13.9%（占比 50.3%）。盈利大幅改善，是工业这条腿的亮点。来源：2025年统计公报。">
+        <div class="m-icon"></div>
+        <div class="m-name">规上工业利润</div>
+        <div class="m-val">+49.7%</div>
+        <div class="m-sub">42.51 亿元</div>
+        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,22 L15,20 L27,17 L39,15 L51,11 L63,10 L76,6 L88,3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,22 L15,20 L27,17 L39,15 L51,11 L63,10 L76,6 L88,3 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
+        <div class="m-tag">盈利高增长</div>
+      </div>
+      <div class="metric good" data-t="外贸进出口 · +7.1%（383.6 亿元）" data-d="货物进出口 383.6 亿元、+7.1%；其中<b>出口 239.0 亿元、+17.6%</b>，进口 144.6 亿元、-6.8%。实际利用外资 13.84 亿元、+27.3%。外需增长但受全球环境影响，钥匙不完全在本地。来源：2025年统计公报。">
+        <div class="m-icon"></div>
+        <div class="m-name">外贸进出口</div>
+        <div class="m-val">+7.1%</div>
+        <div class="m-sub">383.6 亿 · 出口+17.6%</div>
+        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,21 L15,18 L27,19 L39,15 L51,13 L63,10 L76,7 L88,4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,21 L15,18 L27,19 L39,15 L51,13 L63,10 L76,7 L88,4 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
+        <div class="m-tag">出口拉动</div>
+      </div>
+      <div class="metric flat" data-t="居民人均可支配收入 · +4.5%（63776 元）" data-d="全体居民人均可支配收入 63776 元、+4.5%；城镇 68547 元（+4.2%）、农村 35998 元（+6.5%）。常住人口 159.78 万、城镇化率 85.74%。来源：2025年统计公报。">
+        <div class="m-icon"></div>
+        <div class="m-name">居民人均可支配收入</div>
+        <div class="m-val">+4.5%</div>
+        <div class="m-sub">63776 元</div>
+        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,18 L15,17 L27,18 L39,16 L51,16 L63,14 L76,14 L88,12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,18 L15,17 L27,18 L39,16 L51,16 L63,14 L76,14 L88,12 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
+        <div class="m-tag">平稳增长</div>
+      </div>
+      <div class="metric warn" data-t="GDP · 1203.33 亿元（+4.3%）" data-d="地区生产总值 1203.33 亿元、+4.3%，年初增长目标约 6%，<b>差约 1.7 个百分点</b>。三产结构 3.4:27.6:69.0（一产 +2.9%、二产 +2.3%、三产 +5.2%）；人均 GDP 75309 元（+3.0%）。来源：2025年统计公报（初步核算数）。">
+        <div class="m-icon"></div>
+        <div class="m-name">GDP 增速</div>
+        <div class="m-val">+4.3%</div>
+        <div class="m-sub">1203.33 亿 · 三产69%</div>
+        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,19 L15,17 L27,18 L39,16 L51,15 L63,14 L76,13 L88,11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,19 L15,17 L27,18 L39,16 L51,15 L63,14 L76,13 L88,11 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
+        <div class="m-tag">低于目标 6%</div>
+      </div>
+      <div class="metric warn" data-t="社消零 · 805.68 亿元（+3.7%）" data-d="社会消费品零售总额 805.68 亿元、+3.7%，年初目标约 6%，<b>差约 2.3 个百分点</b>；限上消费品零售额 525.26 亿元、+4.2%（统计公报正文未列限上总额，该数出自经济运行简况/政府公报）。消费偏温，与人口、人气直接相关。来源：2025年统计公报、2025年经济运行简况。">
+        <div class="m-icon"></div>
+        <div class="m-name">社会消费品零售</div>
+        <div class="m-val">+3.7%</div>
+        <div class="m-sub">805.68 亿 · 限上+4.2%</div>
+        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,19 L15,18 L27,18 L39,16 L51,16 L63,14 L76,13 L88,12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,19 L15,18 L27,18 L39,16 L51,16 L63,14 L76,13 L88,12 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
+        <div class="m-tag">低于目标 6%</div>
+      </div>
+      <div class="metric flat" data-t="区本级一般公共预算 · 64.60 亿元（+3.5%）" data-d="区本级一般公共预算收入 <b>64.60 亿元、+3.5%</b>；全区（含市直）一般公共预算收入 195.86 亿元、+5.1%。政府可支配财力平稳，为公共服务与配套投入提供空间。来源：2025年统计公报。">
+        <div class="m-icon">️</div>
+        <div class="m-name">一般公共预算收入</div>
+        <div class="m-val">+3.5%</div>
+        <div class="m-sub">区本级 64.60 亿</div>
+        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,18 L15,17 L27,17 L39,16 L51,15 L63,15 L76,13 L88,13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,18 L15,17 L27,17 L39,16 L51,15 L63,15 L76,13 L88,13 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
+        <div class="m-tag">基本平稳</div>
+      </div>
+      <div class="metric bad" data-t="固定资产投资 · −37.1%" data-d="8 项指标中<b>唯一明显下滑</b>：工业投资 -34.4%、基建投资 -20.0%、房地产开发投资 -47.3%；商品房销售面积 -47%、销售金额 -54%。年初目标约 1%，投资这条腿明显收缩，对后续投产节点形成压力。来源：2025年统计公报。">
+        <div class="m-icon">️</div>
+        <div class="m-name">固定资产投资</div>
+        <div class="m-val">-37.1%</div>
+        <div class="m-sub">房地产开发 -47.3%</div>
+        <div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="M2,7 L15,9 L27,8 L39,12 L51,11 L63,17 L76,16 L88,22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2,7 L15,9 L27,8 L39,12 L51,11 L63,17 L76,16 L88,22 L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>
+        <div class="m-tag">明显下滑</div>
+      </div>
     </div>
-    <div class="nowbar" id="nowBar"></div>
-<script>
-(function(){
-  if(typeof HC_OFFICIAL==='undefined'||typeof HC_CURRENT==='undefined'){
-    var g0=document.getElementById('scanGrid');
-    if(g0)g0.innerHTML='<div class="scan-fail"><b>指标数据未能加载</b><span>hc-viz/data.js 读取失败；本页不使用任何旧数字替代，请刷新重试。</span></div>';
-    var b0=document.getElementById('nowBar'); if(b0)b0.innerHTML='';
-    document.addEventListener('DOMContentLoaded',function(){
-      var n0=document.getElementById('scanNote'); if(n0)n0.textContent='指标数据未加载，本节口径说明与结论暂不可用。';
-      var l0=document.getElementById('scanLine'); if(l0)l0.textContent='';
-    });
-    return;
-  }
-  var O=HC_OFFICIAL,C=HC_CURRENT,P=HC_POP;
-  var grid=document.getElementById('scanGrid'),stat={good:0,warn:0,flat:0,bad:0};
-  if(grid){
-    grid.innerHTML=O.metrics.map(function(m){
-      stat[m.status]=(stat[m.status]||0)+1;
-      var t=m.k+' · '+m.v+'（'+m.tag+'）';
-      return '<div class="metric '+m.status+'" data-t="'+t+'" data-d="'+m.detail+'">'
-       +'<div class="m-icon"></div><div class="m-name">'+m.k+'</div>'
-       +'<div class="m-val">'+m.v+'</div><div class="m-sub">'+m.sub+'</div>'
-       +'<div class="spark"><svg viewBox="0 0 90 28" preserveAspectRatio="none"><path d="'+m.spark+'" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="'+m.spark+' L88,28 L2,28 Z" fill="currentColor" opacity="0.12"/></svg></div>'
-       +'<div class="m-tag">'+m.tag+'</div></div>';
-    }).join('');
-  }
-  var sg=document.getElementById('svGood'),sw=document.getElementById('svWarn'),sb=document.getElementById('svBad');
-  if(sg)sg.textContent=stat.good;
-  if(sw)sw.textContent=(stat.warn||0)+(stat.flat||0);
-  if(sb)sb.textContent=stat.bad;
-  var nb=document.getElementById('nowBar');
-  if(nb){nb.innerHTML='<div class="nb-h"><span class="nb-tag">'+C.period+'</span><span class="nb-sub">'+C.released_at+' 发布 · 与 2025 全年口径分层，两类增速不可直接比较</span></div><div class="nb-grid">'
-   +C.metrics.map(function(m){var cls=m.status==='b'?'neg':(m.status==='n'?'mid':'pos');return '<div class="nb-item"><div class="nb-k">'+m.k+'</div><div class="nb-v '+cls+'">'+m.yoy+'</div><div class="nb-n">'+(m.v?m.v+(m.unit||'')+' · ':'')+m.note+'</div></div>';}).join('')
-   +'</div>';}
-  document.addEventListener('DOMContentLoaded',function(){
-  var note=document.getElementById('scanNote');
-  if(note){note.innerHTML='利润、外贸、财力、收入以实际增速与定性方向呈现，不设主观目标线。<b>上述 8 项均为 2025 年统计公报初步核算数，未做加权综合评分。</b>人口背景：'+P.year+' 年常住人口 <b>'+P.pop+' 万人</b>、城镇化率 '+P.urban+'，人均 GDP <b>'+P.per_gdp_wan+' 万元</b>（'+P.per_gdp_yoy+'），不与上述增速指标同标尺评分。';}
-  var line=document.getElementById('scanLine');
-  if(line){var fai=O.metrics.filter(function(m){return m.id==="fai";})[0],cur=C.metrics.filter(function(m){return m.id==="fai";})[0];
-   line.innerHTML='一句话：<b style="color:#fbbf24">2025 年产业这条腿在快跑（工业、利润、外贸都是绿的），但固定资产投资 '+fai.v+' 明显拖后腿；到 '+C.period+'，全区 GDP 只有 <b style="color:#fca5a5">+1.1%</b>、规上工业 +0.8%，投资仍在 <b style="color:#fca5a5;white-space:nowrap">'+cur.yoy+'</b>。</b>跑得越快，越要看脚下的路稳不稳。';}
-  });
-})();
-</script>
     <div class="metric-detail" id="metricDetail"><div class="md-t">点任一指标，查看口径、目标差距与来源</div></div>
-    <div class="scan-note" id="scanNote"></div>
-    <p id="scanLine" style="font-size:13px;color:#cbd5e1;margin:10px 0 0"></p>
+    <div class="scan-note">利润、外贸、财力、收入以实际增速与定性方向呈现，不设主观目标线。<b>所有数字均为 2025 年统计公报初步核算数，未做加权综合评分。</b>人口背景：2025 年常住人口 <b>159.78 万人</b>、城镇化率 85.74%，人均 GDP <b>7.53 万元</b>（+3.0%），不与上述增速指标同标尺评分。</div>
+    <p style="font-size:13px;color:#cbd5e1;margin:10px 0 0">一句话：<b style="color:#fbbf24">产业这条腿在快跑（工业、利润、外贸都是绿的），但固定资产投资 −37.1% 明显拖后腿，GDP、消费离年初目标也还有距离。</b>跑得越快，越要看脚下的路稳不稳。</p>
   </div>
 
   <!-- 2030未来轨迹（驾驶舱：4情景tab + 主图 + 右结果面板） -->
   <div class="card">
-    <h2>② 2030 未来轨迹 · 规划节点与模拟结果<span class="itag sim">推演结果 · 非预测</span></h2>
-    <p style="font-size:12.5px;color:var(--ink2);margin:0 0 10px;line-height:1.8">从 2025 实测锚点（惠城高新区规上工业产值 632.7 亿，非全区 GDP）到 2030 模拟区间，看懂惠城的可能路径。灰虚线为线性参考（非逐年预测），这套推演只在 2030 给出结果分布。</p>
+    <h2>② 2030 未来轨迹 · 规划节点与模拟结果<span class="itag sim">模型推演 · 非预测</span></h2>
+    <p style="font-size:12.5px;color:var(--ink2);margin:0 0 10px;line-height:1.8">从 2025 实测锚点（惠城高新区规上工业产值 632.7 亿，非全区 GDP）到 2030 模拟区间，看懂惠城的可能路径。灰虚线为线性参考（非逐年预测），模型只在 2030 给出结果分布。</p>
     <div class="scene-tabs" id="sceneTabs">
       <button class="on" data-s="0">基准情景</button>
       <button data-s="1">项目延期</button>
@@ -455,12 +456,12 @@ svg{max-width:100%;height:auto}
     </div>
     <div class="future-flex">
       <div>
-        <div class="cap" style="margin-bottom:6px">产值（亿元，高新区规上工业口径）· 白点＝2025 实测锚点（高新区 632.7 亿），灰虚线＝线性参考（非逐年预测），彩色扇形＝2028→2030 <b>区间带</b>（仅 2030 端点的上下限是推演结果，2028–2029 为视觉引导、不代表逐年结果），黄线＝中位 P50，金虚线＝1500 亿参考线（非官方目标）</div>
+        <div class="cap" style="margin-bottom:6px">产值（亿元，高新区规上工业口径）· 白点＝2025 实测锚点（高新区 632.7 亿），灰虚线＝线性参考（非逐年预测），彩色扇形＝2028→2030 <b>概率锥</b>（仅 2030 端点 P10/P90 为模型真实分布，2028–2029 为视觉引导、不代表逐年概率），黄线＝中位 P50，金虚线＝1500 亿模型参考刻度（非官方目标）</div>
         <div style="height:320px"><canvas id="futureMain"></canvas></div>
       </div>
       <div class="future-panel">
         <div class="fp-head"> 2030 模拟结果（当前情景）</div>
-        <div class="fp-lbl">中位结果</div>
+        <div class="fp-lbl">中位数（P50）</div>
         <div class="fp-p50"><b id="fpP">1,579</b><small>亿元</small></div>
         <div class="fp-row2">
           <div>
@@ -469,7 +470,7 @@ svg{max-width:100%;height:auto}
           </div>
           <div class="donut-wrap"><canvas id="hitDonut"></canvas></div>
         </div>
-        <div class="fp-lbl">可能区间（偏悲观–偏乐观）</div>
+        <div class="fp-lbl">不确定性区间（P10–P90）</div>
         <div class="fp-range"><b id="fpRange">1,349–1,822</b><small> 亿元</small></div>
       </div>
     </div>
@@ -486,7 +487,7 @@ svg{max-width:100%;height:auto}
   <!-- 情景对比四卡 -->
   <div class="card">
     <h2>③ 情景对比 · 四种压力的影响</h2>
-    <p style="font-size:12.5px;color:var(--ink2);margin:0 0 4px">不同压力情景下的结果对比，帮助理解风险来源。同一套前提、同样的条件反复跑。</p>
+    <p style="font-size:12.5px;color:var(--ink2);margin:0 0 4px">不同压力情景下的结果对比，帮助理解风险来源。同一模型、同一随机种子（42，2 万次）。</p>
     <div class="cmp-tabs2" id="cmpTabs2">
       <button class="on" data-m="hit">达标率</button>
       <button data-m="p">中位产值</button>
@@ -523,18 +524,18 @@ svg{max-width:100%;height:auto}
     </div>
   </div>
 
-  <!-- ④ 关键因素 -->
+  <!-- ④ 关键因子敏感性 -->
   <div class="card">
-    <h2>④ 关键因素 · 影响大小排序 <span class="itag sim">逐个条件调 · 其他不动</span></h2>
-    <p style="font-size:12.5px;color:var(--ink2);margin:0 0 8px;line-height:1.8">其他四条都不动，只把一条路的上调或下调 20%，用同一套前提反复跑。条长＝2030 达标率的摆动幅度，越长越要紧。</p>
+    <h2>④ 关键因子 · 敏感性分析（影响从大到小） <span class="itag sim">参数微分 · 控制变量</span></h2>
+    <p style="font-size:12.5px;color:var(--ink2);margin:0 0 8px;line-height:1.8">控制变量法：只调一条路均值 ±20%，其余四条不动，同一随机种子（42 · 2 万次）重跑。条长＝2030 达标率的摆动幅度，越长越敏感。</p>
     <div style="height:236px"><canvas id="tornado"></canvas></div>
-    <p style="font-size:10.5px;color:#6b7280;margin:8px 0 0;line-height:1.7">试算结果：新投产项目在四成到八成多之间摆动，幅度最大；三大集群居中；AI 机器人、生产性服务业次之；融深融湾影响最小。<b>受影响大不等于更重要</b>；上下两成是否贴近现实波动，还需真实数据核对。</p>
+    <p style="font-size:10.5px;color:#6b7280;margin:8px 0 0;line-height:1.7">真实结果：新投产项目在 45%↔83% 之间摆动 ±38pp，最敏感；三大集群 ±16pp；AI 机器人、生产性服务业各 ±8pp；融深融湾 ±3pp。<b>“敏感”≠“重要”</b>，且 ±20% 是否对应现实合理波动仍需用真实数据校准。</p>
   </div>
 
   <!-- ⑤ 结果分布 · 不确定性区间 -->
   <div class="card">
-    <h2>⑤ 结果分布 · 不确定性区间 <span class="itag sim">推演结果 · 非预测</span></h2>
-    <p style="font-size:12.5px;color:var(--ink2);margin:0 0 8px">基准（蓝）与<b id="distCurName">当前情景</b>（红）的 2030 产值结果叠加；阴影越宽代表不确定性越大，竖线为偏悲观 / 中位 / 偏乐观。</p>
+    <h2>⑤ 结果分布 · 不确定性区间 <span class="itag sim">模型推演 · 非预测</span></h2>
+    <p style="font-size:12.5px;color:var(--ink2);margin:0 0 8px">基准（蓝）与<b id="distCurName">当前情景</b>（红）的 2030 产值概率密度叠加；阴影越宽代表不确定性越大，竖线为 P10 / P50 / P90。</p>
     <div style="height:268px"><canvas id="cmpDist"></canvas></div>
     <div class="dist-stats" id="distStats"></div>
   </div>
@@ -551,7 +552,7 @@ svg{max-width:100%;height:auto}
         <div class="no">01</div>
         <div class="fct">
           <div class="tt">一座三产占 <b style="color:#fbbf24">69%</b> 的中心城区，高新区是主引擎 <span class="chip">结构事实</span></div>
-          <div class="ds" id="structDs"></div>
+          <div class="ds">2025年 GDP <b>1203.33亿</b>（全区口径），规上工业<b>总产值 937.9亿</b>（公报初步核算口径，现价，增加值 +10.8%）；高新区规上工业产值 <b>632.7亿</b>，约占全区规上工业三分之二（67.4%）。注意：632.7 与 1203.33 不是同一基数，不能直接相减。</div>
           <div class="conc">
             <div class="conc-track"><div class="conc-a" style="width:67.4%"></div></div>
             <div class="conc-leg"><span><i style="background:#f59e0b"></i>高新区 67.4%</span><span><i style="background:rgba(255,255,255,.15)"></i>其他规上 32.6%</span></div>
@@ -576,7 +577,7 @@ svg{max-width:100%;height:auto}
         <div class="no">04</div>
         <div class="fct">
           <div class="tt">时间是被忽视的变量 <span class="chip">⏳ 隐藏变量</span></div>
-          <div class="ds">同一个项目，<b>2028 投产 vs 2030 投产</b>，放进系统结果大不一样；“晚一点”在有明确节点的系统里，是最要紧的一环。</div>
+          <div class="ds">同一个项目，<b>2028 投产 vs 2030 投产</b>，放进系统结果大不一样；“晚一点”在有明确节点的系统里是敏感参数。</div>
         </div>
       </div>
       <div class="f5 c-do">
@@ -611,11 +612,11 @@ svg{max-width:100%;height:auto}
   <div class="card" style="border-color:#7f1d1d">
     <h2>八、决策者最该重视的三件事</h2>
     <h3>1. 命门可能不在"招不到商"，在"投产与通勤"</h3>
-    <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 4px">这里要分开看，不能混在一起比——一个问题答“日常波动”，一个问题答“万一发生”。</p>
+    <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 4px">这里要分两本账，不能混在一起排名——一把尺子答“常规波动”，一把尺子答“万一发生”。</p>
     <div class="ledgers">
       <div class="ledger l1">
-        <div class="lh"> 账本一 · 逐个条件调</div>
-        <div class="lhq">四个条件分别调，看谁影响靠前</div>
+        <div class="lh"> 账本一 · 常规敏感性</div>
+        <div class="lhq">四个参数各自扰动，看谁影响靠前</div>
         <ul>
           <li><b>投资</b>（影响靠前）</li>
           <li><b>外需</b>（影响靠前）</li>
@@ -629,7 +630,7 @@ svg{max-width:100%;height:auto}
         <ul>
           <li><b>关键项目投产延期</b></li>
           <li><b>过江通勤堵塞</b></li>
-          <li>不在常规四项排序里</li>
+          <li>不在常规四参数排序里</li>
           <li>一旦发生，比“招不到商”更直接、更难补救</li>
         </ul>
       </div>
@@ -637,7 +638,7 @@ svg{max-width:100%;height:auto}
     <div class="ledger-divider"> 两把尺子、两个问题，不放在同一个排序里比 · 下面影响系数图画的是账本二</div>
     <h3>2. 抓手优先级：先做"影响大、自己可控"的 <span class="itag est">专家示意判断 · 可拖动</span></h3>
     <div style="height:210px"><canvas id="matrix"></canvas></div>
-    <div style="font-size:10.5px;color:#94a3b8;margin:2px 0 6px">️ 图中各点坐标（如通勤改善 8.5/8.5、学位 7.5/8）<b>为专家主观示意，非统计计算结果</b>，不与上面的关联紧密度、压测数字放在同一语境；<b>可直接拖动圆点</b>调整位置，作为讨论工具。</div>
+    <div style="font-size:10.5px;color:#94a3b8;margin:2px 0 6px">️ 图中各点坐标（如通勤改善 8.5/8.5、学位 7.5/8）<b>为专家主观示意，非统计计算结果</b>，不与上面的相关系数、压测数字放在同一语境；<b>可直接拖动圆点</b>调整位置，作为讨论工具。</div>
     <div class="plain">这张图教咱们把钱花在刀刃上：越靠右上角，越是“自己说了算、又管用”的事——修通勤路、办学位、留住人，都在这一片；而外贸、全球航运虽然热闹，钥匙却攥在别人手里。聪明的做法，是先把自己能掌控、又见效快的事办好，心里才踏实。</div>
     <h3>3. 时间窗口不等人</h3>
     <p style="font-size:13px;color:#cbd5e1;margin:0">"再等等、稳一点、明年再做"听起来轻，但在有明确投产节点的系统里，晚一点会显著拉低达标可能。<b style="color:#f87171">该上的项目、该通的路、该供的地，窗口就这几年。</b></p>
@@ -646,25 +647,25 @@ svg{max-width:100%;height:auto}
   <!-- 各因素影响 -->
   <div class="card">
     <h2>九、哪些因素最牵动结果</h2>
-    <div class="subh"><span class="num">1</span>尺子一 · 关联紧密度 <span class="itag sim">推演结果 · 关联强度</span></div>
-    <div style="font-size:11.5px;color:#94a3b8;margin:0 0 6px">五条路各自与总产值的关联紧密度（0–1，越大绑得越紧）。这是推演内部的“关联”，<b>不是现实因果</b>，也不与下方事件冲击比柱长。</div>
+    <div class="subh"><span class="num">1</span>尺子一 · 路径相关系数 <span class="itag sim">模型推演 · 关联强度</span></div>
+    <div style="font-size:11.5px;color:#94a3b8;margin:0 0 6px">五条路各自贡献与总产值的相关系数 |corr|（0–1，越大绑得越紧）。这是模型内部的“关联”，<b>不是现实因果</b>，也不与下方事件冲击比柱长。</div>
     <div style="height:185px"><canvas id="coef"></canvas></div>
-    <div class="plain">“新投产项目”这条路和结果绑得最紧，集群、AI、服务业依次靠后，融深最松。但关联紧密度只回答“谁和结果绑得紧”，回答不了“万一某件事真发生会怎样”——那是尺子二。</div>
+    <div class="plain">“新投产项目”这条路和结果绑得最紧，集群、AI、服务业依次靠后，融深最松。但相关系数只回答“谁和结果绑得紧”，回答不了“万一某件事真发生会怎样”——那是尺子二。</div>
 
-    <div class="subh"><span class="num">2</span>尺子二 · 受控事件冲击 <span class="itag sim">推演结果 · 事件注入</span></div>
-    <div style="font-size:11.5px;color:#94a3b8;margin:0 0 6px">同一基准、同一套假设，把“关键项目投产延期”“过江通勤堵塞”分别单独注入，看达标率和中位产值各掉多少。</div>
+    <div class="subh"><span class="num">2</span>尺子二 · 受控事件冲击 <span class="itag sim">模型推演 · 事件注入</span></div>
+    <div style="font-size:11.5px;color:#94a3b8;margin:0 0 6px">同一基准、同一随机种子，把“关键项目投产延期”“过江通勤堵塞”分别单独注入，看达标率和中位产值各掉多少。</div>
     <div class="shock-grid">
       <div class="shock-box"><div class="cap">2030 达标率 <b>（≥1500亿概率）</b></div><div style="height:168px"><canvas id="shockHit"></canvas></div></div>
       <div class="shock-box"><div class="cap">中位产值 <b>（亿元）</b></div><div style="height:168px"><canvas id="shockP"></canvas></div></div>
     </div>
-    <div class="plain">真把“项目延期”压一遍，达标率从 66% 掉到 48%（−19 个百分点）；“通勤堵塞”掉到 51%（−16 个点）。这两件事不在常规排序里，却比“招不到商”更直接、更难补救——这正是惠城的命门。</div>
+    <div class="plain">真把“项目延期”压一遍，达标率从 66% 掉到 48%（−19 个百分点）；“通勤堵塞”掉到 51%（−16 个点）。这两件事不在常规参数排序里，却比“招不到商”更直接、更难补救——这正是惠城的命门。</div>
     <div style="margin-top:16px;padding-top:14px;border-top:1px solid #1c2739">
       
       <div class="rulers">
         <div class="ruler a">
-          <div class="rk">尺子一 · 逐个条件调</div>
-          <div class="qt">回答“哪一环最受影响”</div>
-          <div class="how">其他条件都不动，只把某一条上调或下调 20%，看达标可能摆动多大。</div>
+          <div class="rk">尺子一 · 参数微分</div>
+          <div class="qt">回答“哪个参数最敏感”</div>
+          <div class="how">数学上的<b>偏导</b>：逐个参数 ±20% 扰动，看达标概率摆动多大。</div>
         </div>
         <div class="ruler b">
           <div class="rk">尺子二 · 事件注入</div>
@@ -672,7 +673,7 @@ svg{max-width:100%;height:auto}
           <div class="how">现实中的<b>情景</b>：投产延期、通勤堵塞等具体事件单独注入（见⑥风洞页）。</div>
         </div>
       </div>
-      <div class="ledger-divider">️ “受影响大”不等于“更重要”：受影响大只说明在这套设定里连得紧；现实中先做哪条，还要看可控性、成本、见效速度。</div>
+      <div class="ledger-divider">️ “敏感” ≠ “重要”：敏感只说明在模型里绑得紧；现实中先做哪条，还要看可控性、成本、见效速度。</div>
     </div>
   </div>
 
@@ -757,23 +758,22 @@ svg{max-width:100%;height:auto}
         </div>
       </div>
     </div>
-    <p style="font-size:11px;color:#6b7280;margin:12px 0 0">建议方向均对应官方"高新区引领、产业协同、城市承载、民生保障、开放融深"等战略表述，为推演结果的优先级提示，非替代官方决策。</p>
+    <p style="font-size:11px;color:#6b7280;margin:12px 0 0">建议方向均对应官方"高新区引领、产业协同、城市承载、民生保障、开放融深"等战略表述，为模拟推演的优先级提示，非替代官方决策。</p>
   </div>
 
-  <!-- 数据来源与边界：退到第二层折叠 -->
+  <!-- 数据来源与模型边界：退到第二层折叠 -->
   <details class="ds-fold" id="sources">
-  <summary>数据来源、分层与边界说明</summary>
+  <summary>数据来源、分级与模型边界说明</summary>
   <div class="ds-fold-inner">
   <div class="card" id="sources-card">
     <h3>十二、数据来源与分级</h3>
-    <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 10px">报告中的数字按可核实程度分层标注：越靠下越接近公开原文，越靠上越依赖推断。分层只为说明哪些能直接核对，不代表精度承诺。</p>
+    <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 4px">越靠塔底越硬、越可核对；越靠塔顶假设成分越多。这台模型把每类数据放在哪一层，全部公开。</p>
     <div class="pyramid">
-      <div class="pyra"><div class="bar" style="background:#7f1d1d;width:130px">D · 假设</div><div class="lab">基于前提的推演，随条件变化</div></div>
-      <div class="pyra"><div class="bar" style="background:#713f12;width:185px">C · 代理</div><div class="lab">公开信息尚不足以直接对应的部分</div></div>
-      <div class="pyra"><div class="bar" style="background:#1e40af;width:240px">B · 推估</div><div class="lab">依据公开信息推算，非直接公布</div></div>
-      <div class="pyra"><div class="bar" style="background:#14532d;width:300px">A · 实测</div><div class="lab">公开文件中直接给出的数字</div></div>
+      <div class="pyra"><div class="bar" style="background:#7f1d1d;width:130px">D · 假设</div><div class="lab"><b>网络边权重、路径贡献区间、通勤强度</b>——缺真实通勤OD数据，假设最多</div></div>
+      <div class="pyra"><div class="bar" style="background:#713f12;width:185px">C · 代理</div><div class="lab"><b>镇街级供给代理</b>（人口密度、是否点名、项目位置），非逐镇街实查</div></div>
+      <div class="pyra"><div class="bar" style="background:#1e40af;width:240px">B · 推估</div><div class="lab">部分历史序列<b>按公开增速回推</b>，非直接公布</div></div>
+      <div class="pyra"><div class="bar" style="background:#14532d;width:300px">A · 实测</div><div class="lab">统计公报、政府工作报告、计划执行报告、民生实事中<b>直接给出的数字</b></div></div>
     </div>
-    <p style="font-size:11.5px;color:#8fa3c4;margin:8px 0 0">完整来源清单（含日期与版本）可向作者索取，便于逐条核对。</p>
     <h3>主要公开来源</h3>
     <div class="src-badges">
       <span class="src-badge"> 惠州市 / 惠城区政府门户</span>
@@ -784,13 +784,16 @@ svg{max-width:100%;height:auto}
     </div>
   </div>
 
-  <!-- 边界与免责 -->
+  <!-- 模型边界 -->
   <div class="card">
-    <h3>十三、推演边界与免责声明</h3>
+    <h3>十三、模型边界与免责声明</h3>
     <div class="disc-grid">
       <div class="disc-item"><div class="di"></div><div><div class="dt">不是预测器</div><div class="dd">不预测具体产值或招商成败，只在公开数据与明确假设下给出叙事分布与结构提示。</div></div></div>
-      <div class="disc-item"><div class="di"></div><div><div class="dt">不做因果断言</div><div class="dd">统一用“关联、同步、结构提示”，不用“因为A所以B”；各项关系强度只是情境内的关联程度，不代表现实因果。</div></div></div>
-      <div class="disc-item"><div class="di"></div><div><div class="dt">条件不同，结论不同</div><div class="dd">前提一变，结果随之变化，不把某一次结果当作定论。</div></div></div>
+      <div class="disc-item"><div class="di"></div><div><div class="dt">不做因果断言</div><div class="dd">统一用“关联、同步、结构提示”，不用“因为A所以B”；系数均为模型内部关联强度，不代表现实因果。</div></div></div>
+      <div class="disc-item"><div class="di"></div><div><div class="dt">反事实不可验证，参数可核对</div><div class="dd">每个参数都能回到公开资料逐一核对。</div></div></div>
+      <div class="disc-item"><div class="di"></div><div><div class="dt">不是真涌现</div><div class="dd">为可复现的弱涌现模拟，未达到真实经济涌现的量级。</div></div></div>
+      <div class="disc-item"><div class="di"></div><div><div class="dt">可复现</div><div class="dd">蒙特卡洛用 mulberry32 伪随机数，固定种子必同结果；网络中心性用 Brandes 介数算法实时计算，非硬编码。</div></div></div>
+      <div class="disc-item"><div class="di"></div><div><div class="dt">两本账分开</div><div class="dd">参数微分（±20%扰动）与受控场景（事件注入）分开计算、分开解读，不混排同一排序。</div></div></div>
       <div class="disc-item" style="grid-column:1/-1;border-color:rgba(251,113,133,.35)"><div class="di" style="background:rgba(251,113,133,.14);border-color:rgba(251,113,133,.35)">️</div><div><div class="dt">不构成投资建议，亦不替代官方决策</div><div class="dd">结论随假设改变而改变。</div></div></div>
     </div>
   </div>
@@ -818,7 +821,7 @@ svg{max-width:100%;height:auto}
 
   <div class="card">
     <p class="bigquote" style="margin:4px 0">大数字会被记住一时，<br>但只有<b style="color:#fbbf24">人愿意把下一个五年留在这里</b>，这座城才有未来。</p>
-    <details class="ds-fold" style="margin-top:14px"><summary>数据时效与免责说明</summary><div class="ds-fold-inner disc" style="font-size:12.5px;color:#9fb3cc;line-height:1.8">本报告为Demo演示版本。<b>数据时效性：</b>2025年GDP、固投、一般公共预算收入等为计划执行快报数，非最终统计公报定数；规上工业、社零、外贸等来自统计公报或政府工作报告。2026年统计公报发布后部分数字可能微调。推演结果仅代表当前数据、设定与规则下的压力测试，不代表对未来的精确预测，亦不构成投资建议。</div></details>
+    <details class="ds-fold" style="margin-top:14px"><summary>数据时效与免责说明</summary><div class="ds-fold-inner disc" style="font-size:12.5px;color:#9fb3cc;line-height:1.8">本报告为Demo演示版本。<b>数据时效性：</b>2025年GDP、固投、一般公共预算收入等为计划执行快报数，非最终统计公报定数；规上工业、社零、外贸等来自统计公报或政府工作报告。2026年统计公报发布后部分数字可能微调。模拟结果仅代表当前数据、参数与规则下的压力测试，不代表对未来的精确预测，亦不构成投资建议。</div></details>
   </div>
 
   <div style="text-align:center;margin:22px 0"><a class="btn" href="index.html">回到首页</a></div>
@@ -881,7 +884,7 @@ new Chart(document.getElementById('vstarget').getContext('2d'),{
   cv.addEventListener('mousedown',down);window.addEventListener('mousemove',move);window.addEventListener('mouseup',up);
   cv.addEventListener('touchstart',down,{passive:false});window.addEventListener('touchmove',move,{passive:false});window.addEventListener('touchend',up);
 })();
-// ===== 统一基准：同一套推演设置，供报告页所有"推演"图共用 =====
+// ===== 统一基准：同一模型内核、同一随机种子，供报告页所有"推演"图共用 =====
 const _SEED=42, _N=20000;
 function _cloneP(){return JSON.parse(JSON.stringify(HT.DEFAULT_PATHS));}
 function _runSim(over){const p=_cloneP(); if(over)over(p); return HT.run(_SEED,_N,p);}
@@ -890,14 +893,14 @@ const _delay=_runSim(p=>{p[0].mu=Math.max(0,p[0].mu-90);});
 const _commute=_runSim(p=>{p[3].mu=Math.max(0,p[3].mu-60); p[0].mu=Math.max(0,p[0].mu-18);});
 window._SIM={SEED:_SEED,N:_N,base:_base,delay:_delay,commute:_commute,run:_runSim,cloneP:_cloneP};
 
-// 图A：关联紧密度（仅5条路径，纯关联 0–1，不混入任何事件量）
+// 图A：路径相关系数（仅5条路径的 |corr|，纯关联 0–1，不混入任何事件量）
 new Chart(document.getElementById('coef').getContext('2d'),{
   type:'bar',
   data:{labels:['新投产项目','三大集群','AI机器人','服务业带动','融深融湾'],datasets:[{
     data:_base.coefs.map(v=>+v.toFixed(2)),
     backgroundColor:['#3b82f6','#8b5cf6','#06b6d4','#fbbf24','#94a3b8'],borderRadius:4}]},
   options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>'关联紧密度 '+it.parsed.x.toFixed(2)+'（推演内部关联，非实测因果）'}}},
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>'相关系数 '+it.parsed.x.toFixed(2)+'（模型内部关联，非实测因果）'}}},
     scales:{x:{ticks:{color:tc},grid:{color:gc},max:1},y:{ticks:{color:axc},grid:{display:false}}}}
 });
 
@@ -931,7 +934,7 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
       y:{ticks:{color:tc,callback:v=>v+'亿'},grid:{color:gc},min:1300,suggestedMax:1660}}}
 });
 
-// 单向条形：各路径上下调 20% 时达标率的摆动幅度（同一套前提反复推算，从大到小）
+// 敏感性单向条形：各路径 μ±20% 时达标率的摆动幅度（真实 seed42·2万次，从大到小）
 (function(){
   const el=document.getElementById('tornado');
   if(!el)return;
@@ -949,18 +952,18 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
   new Chart(el.getContext('2d'),{
     type:'bar',
     data:{labels:rows.map(r=>r[0]),datasets:[
-      {label:'达标率摆动幅度（上下调20%）',data:rows.map(r=>r[1]),
+      {label:'达标率摆动幅度（μ±20%，pp）',data:rows.map(r=>r[1]),
        backgroundColor:colors,borderRadius:5,barPercentage:.62,categoryPercentage:.8}
     ]},
     options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:false},
         tooltip:{callbacks:{label:it=>{
           const r=rows[it.dataIndex];
-          return '调20%后达标率 '+r[2]+'（摆动 ±'+r[1]+'）';
+          return 'μ±20% 达标率 '+r[2]+'（摆动 ±'+r[1]+'pp）';
         }}}},
       scales:{
         x:{min:0,max:46,ticks:{color:tc,callback:v=>v+'pp'},grid:{color:gc},
-           title:{display:true,text:'某个条件上下调 20% 时，2030 达标率的摆动幅度（越长越要紧）',color:axc,font:{size:10}}},
+           title:{display:true,text:'参数 μ±20% 时，2030 达标率的摆动幅度（pp，越长越敏感）',color:axc,font:{size:10}}},
         y:{ticks:{color:axc,font:{size:11}},grid:{display:false}}}},
     plugins:[lbl]
   });
@@ -1013,7 +1016,7 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
   const baseHit=Math.round(_base.hit);
   let cur=0;
   const fmt=n=>Math.round(n).toLocaleString();
-  // 主图：线性参考 + 2028→2030 区间带（仅2030端点为推演结果；2028→2029为视觉引导）
+  // 主图：线性参考 + 2028→2030 概率锥（仅2030端点为模型真实分布；2028→2029为视觉引导）
   const YRS=['2025','2026','2027','2028','2029','2030'];
   const refLine=YRS.map((_,i)=>HT.BASE+(HT.TARGET-HT.BASE)*i/(YRS.length-1));
   const ref2028=refLine[3];
@@ -1027,27 +1030,27 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
     const x=c.scales.x.getPixelForValue(5),y=c.scales.y;
     const col=mainL.stress?'#fca5a5':'#7dd3fc';
     c.ctx.save();c.ctx.font='600 11px sans-serif';c.ctx.textAlign='left';c.ctx.textBaseline='middle';
-    c.ctx.fillStyle=col;c.ctx.fillText('乐观 '+Math.round(mainL.p90),x+12,y.getPixelForValue(mainL.p90));
-    c.ctx.fillStyle='#fbbf24';c.ctx.fillText('中位 '+Math.round(mainL.p50),x+12,y.getPixelForValue(mainL.p50));
-    c.ctx.fillStyle=col;c.ctx.fillText('悲观 '+Math.round(mainL.p10),x+12,y.getPixelForValue(mainL.p10));
+    c.ctx.fillStyle=col;c.ctx.fillText('P90 '+Math.round(mainL.p90),x+12,y.getPixelForValue(mainL.p90));
+    c.ctx.fillStyle='#fbbf24';c.ctx.fillText('P50 '+Math.round(mainL.p50),x+12,y.getPixelForValue(mainL.p50));
+    c.ctx.fillStyle=col;c.ctx.fillText('P10 '+Math.round(mainL.p10),x+12,y.getPixelForValue(mainL.p10));
     c.ctx.restore();
   }};
   const main=new Chart(mainEl.getContext('2d'),{
     data:{labels:YRS,datasets:[
-      {type:'line',id:'coneHi',label:'可能区间（仅 2030 为推演结果）',data:coneData(res[0],'p90'),
+      {type:'line',id:'coneHi',label:'概率锥区间 P10–P90（仅2030为模型真实分布）',data:coneData(res[0],'p90'),
         borderColor:(ctx)=>ctx.dataIndex>=3?SC[0].color:'transparent',borderWidth:1.6,pointRadius:0,pointHoverRadius:0,fill:1,backgroundColor:SC[0].alpha,order:6,tension:0},
       {type:'line',id:'coneLo',label:'__hide_coneLo__',data:coneData(res[0],'p10'),
         borderColor:(ctx)=>ctx.dataIndex>=3?SC[0].color:'transparent',borderWidth:1.6,pointRadius:0,pointHoverRadius:0,fill:false,order:6,tension:0},
-      {type:'line',label:'中位轨迹',data:coneData(res[0],'p50'),borderColor:(ctx)=>ctx.dataIndex>=3?'#fbbf24':'transparent',borderWidth:2.2,pointRadius:0,pointHoverRadius:0,fill:false,order:5,spanGaps:true},
+      {type:'line',label:'中位轨迹 P50',data:coneData(res[0],'p50'),borderColor:(ctx)=>ctx.dataIndex>=3?'#fbbf24':'transparent',borderWidth:2.2,pointRadius:0,pointHoverRadius:0,fill:false,order:5,spanGaps:true},
       {type:'line',label:'线性参考（非逐年预测）',data:refLine.slice(),borderColor:'#94a3b8',borderDash:[6,5],pointRadius:0,pointHoverRadius:0,borderWidth:1.6,order:4,spanGaps:true},
-      {type:'line',label:'1500亿参考线（非官方目标）',data:YRS.map(()=>1500),borderColor:'#fbbf24',borderDash:[2,4],pointRadius:0,borderWidth:1.4,order:3},
+      {type:'line',label:'1500亿参考刻度（非官方目标）',data:YRS.map(()=>1500),borderColor:'#fbbf24',borderDash:[2,4],pointRadius:0,borderWidth:1.4,order:3},
       {type:'scatter',label:'2025实测锚点',data:[HT.BASE,null,null,null,null,null],backgroundColor:'#fff',pointRadius:6,borderColor:'#38bdf8',borderWidth:2,order:2}
     ]},
     options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{position:'top',align:'start',labels:{color:axc,font:{size:window.innerWidth<600?9:10},boxWidth:14,padding:window.innerWidth<600?6:10,filter:(it)=>it.text!=='__hide_coneLo__'}},
         tooltip:{callbacks:{label:it=>{
-          if(it.dataset.label&&it.dataset.label.indexOf('可能区间')===0&&it.raw!=null&&it.dataIndex>=5)return it.dataset.label.replace(/（.*$/,'')+' '+Math.round(it.raw)+' 亿';
-          if(it.dataset.label&&it.dataset.label.indexOf('中位轨迹')===0&&it.raw!=null&&it.dataIndex===5)return '中位 '+Math.round(it.raw)+' 亿';
+          if(it.dataset.label&&it.dataset.label.indexOf('概率锥')===0&&it.raw!=null&&it.dataIndex>=5)return it.dataset.label.replace(/（.*$/,'')+' '+Math.round(it.raw)+' 亿';
+          if(it.dataset.label&&it.dataset.label.indexOf('中位轨迹')===0&&it.raw!=null&&it.dataIndex===5)return '中位 P50 '+Math.round(it.raw)+' 亿';
           if(it.dataIndex>=3&&it.dataIndex<5)return null; // 2028/2029 为视觉引导，不提示具体值
           if(it.raw==null)return null;
           return it.dataset.label+' '+Math.round(it.raw)+' 亿';
@@ -1086,7 +1089,7 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
     const gapTxt=p>=HT.TARGET?'<span class="pos">中位高于目标 '+gapP+' 亿</span>':'<span class="neg">中位低于目标 '+(-gapP)+' 亿</span>';
     const miss=100-hit;let warn='';
     if(i>0){warn=(miss>=50?'<span class="neg">️ 每两次推演就有一次以上不达标。</span>':'约每 '+Math.max(2,Math.round(100/miss))+' 次推演有 1 次不达标。');}
-    document.getElementById('conclBody').innerHTML='<b>当前情景：</b>'+s.name+'；2030 达标率 <b>'+hit+'%</b>'+(i>0?' <span class="'+(dHit<0?'neg':'pos')+'">（基准 '+baseHit+'%，'+(dHit>0?'+':'−')+Math.abs(dHit)+'pp）</span>':'')+'，中位产值 <b>'+p+' 亿</b>，从偏悲观到偏乐观的区间 '+fmt(r.p10)+'–'+fmt(r.p90)+' 亿。'+gapTxt+(warn?'<br>'+warn:'')+'<br><span style="font-size:11px;color:#6b7280">口径：同一套前提 · 同样的条件反复推算；基准 632.7 亿（2025 惠城高新区规上工业产值实测，非全区 GDP）、参考线 1500 亿（不是刚性目标）；几重压力同时发生时按叠加处理。此为压力测试叙事，非预测，不构成投资建议。</span>';
+    document.getElementById('conclBody').innerHTML='<b>当前情景：</b>'+s.name+'；2030 达标率 <b>'+hit+'%</b>'+(i>0?' <span class="'+(dHit<0?'neg':'pos')+'">（基准 '+baseHit+'%，'+(dHit>0?'+':'−')+Math.abs(dHit)+'pp）</span>':'')+'，中位产值 <b>'+p+' 亿</b>，p10–p90 区间 '+fmt(r.p10)+'–'+fmt(r.p90)+' 亿。'+gapTxt+(warn?'<br>'+warn:'')+'<br><span style="font-size:11px;color:#6b7280">模型版本：种子 '+_SIM.SEED+' · '+_SIM.N.toLocaleString()+' 次蒙特卡洛；BASE 632.7 亿（2025 惠城高新区规上工业产值实测，非全区 GDP）、TARGET 1500 亿（外延参考刻度，非刚性）；压力叠加采用累计口径（与⑥风洞页一致）。此为压力测试叙事，非预测，不构成投资建议。</span>';
     history.replaceState(null,'','#d='+s.delay+'&c='+s.commute);
     try{localStorage.setItem('huicheng_experiment',JSON.stringify({v:'1.0',seed:_SIM.SEED,N:_SIM.N,delay:s.delay,commute:s.commute}));}catch(e){}
   }
@@ -1106,7 +1109,7 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
   const distLinePlugin={id:'distLine',afterDatasetsDraw(c){
     const x=c.scales.x,y=c.scales.y;
     c.ctx.save();c.ctx.font='600 10.5px sans-serif';c.ctx.textAlign='center';c.ctx.textBaseline='bottom';
-    [['悲观',distL.p10,.65],['中位',distL.p50,1],['乐观',distL.p90,.65]].forEach(([t,v,a])=>{
+    [['P10',distL.p10,.65],['P50',distL.p50,1],['P90',distL.p90,.65]].forEach(([t,v,a])=>{
       const px=x.getPixelForValue(v);
       c.ctx.strokeStyle=distL.color;c.ctx.globalAlpha=a;c.ctx.lineWidth=1.2;c.ctx.setLineDash([3,3]);
       c.ctx.beginPath();c.ctx.moveTo(px,y.top);c.ctx.lineTo(px,y.bottom);c.ctx.stroke();
@@ -1145,7 +1148,7 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
     const nm=document.getElementById('distCurName');if(nm)nm.textContent='「'+s.name+'」';
     const cell=(lab,v,bv)=>{const d=Math.round(v-bv);return '<div class="ds-cell"><div class="ds-l">'+lab+'</div><div class="ds-v">'+fmt(v)+'<small> 亿</small></div><div class="ds-d">基准 '+fmt(bv)+' · <span class="'+(d<0?'neg':'pos')+'">'+(d>0?'+':'−')+Math.abs(d)+'</span></div></div>';};
     const box=document.getElementById('distStats');
-    if(box)box.innerHTML=cell('偏悲观',r.p10,_base.p10)+cell('中位',r.p50,_base.p50)+cell('偏乐观',r.p90,_base.p90);
+    if(box)box.innerHTML=cell('P10（偏悲观）',r.p10,_base.p10)+cell('P50（中位）',r.p50,_base.p50)+cell('P90（偏乐观）',r.p90,_base.p90);
   }
   // 四卡指标切换（达标率 / 中位产值）
   document.querySelectorAll('#cmpTabs2 button').forEach(b=>b.addEventListener('click',()=>{
@@ -1162,7 +1165,7 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
   // 复制结论 / 分享可恢复链接
   document.getElementById('copyConcl').addEventListener('click',function(){
     const r=res[cur];
-    const txt='【惠城产业风洞 · 我的实验结论】情景：'+SC[cur].name+'\n2030达标率：'+Math.round(r.hit)+'%（基准'+baseHit+'%），中位产值：'+Math.round(r.p50)+'亿（参考线1500），区间'+fmt(r.p10)+'–'+fmt(r.p90)+'亿。\n口径：同一套前提、同样的条件反复推算，基准 632.7 亿为 2025 高新区规上工业产值。压力测试非预测，不构成投资建议。';
+    const txt='【惠城产业风洞 · 我的实验结论】情景：'+SC[cur].name+'\n2030达标率：'+Math.round(r.hit)+'%（基准'+baseHit+'%），中位产值：'+Math.round(r.p50)+'亿（参考刻度1500），区间'+fmt(r.p10)+'–'+fmt(r.p90)+'亿。\n模型：种子'+_SIM.SEED+'，'+_SIM.N+'次蒙特卡洛，BASE 632.7为2025高新区规上工业产值。压力测试非预测，不构成投资建议。';
     navigator.clipboard&&navigator.clipboard.writeText(txt);
     const old=this.textContent;this.textContent=' 已复制';setTimeout(()=>this.textContent=old,1500);
   });
@@ -1242,13 +1245,5 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-<script>
-(function(){
-  var el=document.getElementById('structDs'); if(!el) return;
-  function byId(id){return HC_OFFICIAL.metrics.filter(function(m){return m.id===id;})[0];}
-  var g=byId('gdp'), ind=byId('ind_va'), base=(window.HT&&HT.BASE)?HT.BASE:'632.7';
-  el.innerHTML='2025年 GDP <b>'+g.total+'亿</b>（全区口径），规上工业<b>总产值 '+ind.output+'亿</b>（公报初步核算口径，现价，增加值 '+ind.v+'）；高新区规上工业产值 <b>'+base+'亿</b>，约占全区规上工业三分之二（67.4%）。注意：'+base+' 与 '+g.total+' 不是同一基数，不能直接相减。';
-})();
-</script>
-<script src="ui/ui.js?v=20261109" defer></script>
+<script src="ui/ui.js" defer></script>
 </body></html>

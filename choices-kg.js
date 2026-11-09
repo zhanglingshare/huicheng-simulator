@@ -233,7 +233,8 @@ function explanation(){
   if(e.type==="guide")return '<div class="section">这条虚线的含义</div><div class="bullet">'+h(e.desc)+'</div><div class="warning">这是体验用的方向关联，不是经济因果或已核实的企业交易关系。</div>';
   const r=e.raw;
   return '<div class="section">公开记录中的关系</div><div class="bullet">'+h(r.relation_description)+'</div>'+
-   (r.metric?'<div class="fact"><b>'+h(r.metric.metric_name)+"："+h(r.metric.metric_value)+h(r.metric.metric_unit)+'</b><small>数字为原有公开证据字段，应核对原文口径。</small></div>':"");
+   (r.metric?'<div class="fact"><b>'+h(r.metric.metric_name)+"："+h(r.metric.metric_value)+h(r.metric.metric_unit)+'</b><small>数字为原有公开证据字段，应核对原文口径。</small></div>':"")+
+   (r.counter_evidence?'<div class="warning">待核实：'+h(r.counter_evidence)+'</div>':"");
  }
  if(n.type==="question")return '<div class="section">从你关心的事情开始</div><div class="bullet">'+h(PEOPLE[persona].intro)+'</div><div class="muted">点规划路径，真实主体会逐步出现；再点实体或连线，就能查看证据。</div>';
  if(n.type==="path")return '<div class="section">政府发展方向</div><div class="bullet">'+h(PATHS[+n.id.slice(2)].lead)+'</div><div class="warning">路径和主体的归类是理解性示意，不是官方主体名录。</div>';
@@ -245,7 +246,8 @@ function provenance(){
  const o=selectedItem(),n=o.node,e=o.edge;
  if(e){
   if(e.type==="guide")return '<div class="warning">解释性虚线没有独立的事实关系来源。不能把它当成政府认可的供应链或真实因果。</div>';
-  return '<div class="section">关系记录 · 证据'+h(e.raw.evidence_grade)+'级</div><div class="muted">'+h(e.raw.edge_id)+' · '+h(e.raw.evidence_type)+'</div>'+sourceCards(e.raw.source_ids)
+  return '<div class="section">关系记录 · 证据'+h(e.raw.evidence_grade)+'级</div><div class="muted">'+h(e.raw.edge_id)+' · '+h(e.raw.evidence_type)+'</div>'+sourceCards(e.raw.source_ids)+
+   (e.raw.strength_basis?'<div class="warning">资料依据：'+h(e.raw.strength_basis)+'</div>':"");
  }
  if(n.type==="question")return '<div class="warning">生活问题仅用于进入规划图谱，不是政府规划的正式因果关系。</div>';
  if(n.type==="path")return '<div class="section">规划方向的相关公开来源</div>'+sourceCards(PATHS[+n.id.slice(2)].sources)+'<div class="muted">只作为公开资料入口，不代表规划文件的完整内容。</div>';

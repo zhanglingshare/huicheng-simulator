@@ -125,16 +125,6 @@ body::before{content:'';position:fixed;top:-10%;left:50%;transform:translateX(-5
   background:linear-gradient(135deg,rgba(34,211,238,.16),rgba(139,92,246,.16))}
 .cta .arrow{font-size:20px;color:var(--cyan);transition:.2s;animation:arrowNudge 2s ease 4s infinite}
 @keyframes arrowNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
-/* 两个并排入口：浅色看全貌 / 深色做探索 */
-.cta-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.cta-pair .cta{flex-direction:column;align-items:flex-start;gap:8px;padding:16px 18px;min-height:132px}
-.cta-pair .cta .hd{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.4px;color:var(--faint,#8fa3c4)}
-.cta-pair .cta .big{font-size:15.5px;font-weight:800;line-height:1.3}
-.cta-pair .cta .sub{display:block;margin:0;font-size:11px;font-weight:400;color:var(--ink2,#9fb0c9);line-height:1.55}
-.cta-pair .cta .go{margin-top:auto;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--cyan)}
-.cta-pair .cta.look{background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-color:rgba(255,255,255,.16)}
-.cta-pair .cta.look:hover{border-color:rgba(255,255,255,.34);background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.03))}
-@media (max-width:680px){.cta-pair{grid-template-columns:1fr}}
 .cta:hover .arrow{transform:translateX(5px)}
 .cta .sub{display:block;font-size:11px;font-weight:400;color:var(--ink2);margin-top:3px}
 .foot{animation:fadeIn .5s ease 3.5s both;display:flex;justify-content:space-between;align-items:center;
@@ -188,7 +178,7 @@ body::before{content:'';position:fixed;top:-10%;left:50%;transform:translateX(-5
     <div class="foot">
       <span class="disc">基于公开信息的观察工具 · 非官方统计平台</span>
       <div class="links">
-        <a href="index.html">01 首页</a><a href="holo.html">02 全息关系</a><a href="today.html">03 钱去哪了</a>
+        <a href="index.html">01 首页</a><a href="holo-workspace.html">02 全息</a><a href="today.html">03 钱去哪了</a>
       </div>
     </div>
   </div>
@@ -295,20 +285,13 @@ body::before{content:'';position:fixed;top:-10%;left:50%;transform:translateX(-5
         <div class="d">公开资料不完整时，区分已知、推断与待核实事项；不替代决策，而是引出问题、支撑判断。</div>
       </div>
     </div>
-    <div class="cta-pair">
-      <a href="holo.html" class="cta look">
-        <div class="hd">① 先看全貌</div>
-        <div class="big">惠城这张关系网，长什么样</div>
-        <div class="sub">一张图看全：主体、连线、每条线的来由。读完再进门。</div>
-        <div class="go">看关系全貌 <span class="arrow">→</span></div>
-      </a>
-      <a href="holo-workspace.html" class="cta">
-        <div class="hd">② 再做探索</div>
-        <div class="big">拖一拖，自己找线索</div>
-        <div class="sub">拖节点重排 · 点节点看关系 · 点连线看证据与公开来源。</div>
-        <div class="go">进入全息工作区 <span class="arrow">→</span></div>
-      </a>
-    </div>
+    <a href="holo-workspace.html" class="cta">
+      <div>
+        进入全息工作区，开始探索
+        <span class="sub">浏览关系网络 · 查看情报变化 · 追溯公开来源</span>
+      </div>
+      <span class="arrow">→</span>
+    </a>
   </div>
 </div>
 </body>

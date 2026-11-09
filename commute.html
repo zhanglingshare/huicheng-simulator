@@ -4,8 +4,8 @@
 <title>你每天在桥上，错过了什么？· 惠城通勤模拟器</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0E1016;--ink:#A4BAEA;--ink2:#939FB8;--mut:#5C657A;--cyan:#75C6DF;--blue:#3969D0;--purple:#BE6FDD;--green:#32CF6C;--amber:#CF8F30;--red:#DA685F}
-body{background:radial-gradient(circle at 85% 8%,rgba(191,90,242,.12),transparent 38%),radial-gradient(circle at 8% 92%,rgba(90,200,250,.09),transparent 42%),radial-gradient(120% 100% at 50% 0%,#1A1F2C 0%,#11151D 55%,#0A0C10 100%);color:var(--ink);font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh}
+:root{--bg:#0c1018;--ink:#eef2fb;--ink2:#93a0b8;--mut:#5a6678;--cyan:#5ac8fa;--blue:#0a84ff;--purple:#bf5af2;--green:#30d158;--amber:#ff9500;--red:#ff453a}
+body{background:radial-gradient(circle at 85% 8%,rgba(191,90,242,.12),transparent 38%),radial-gradient(circle at 8% 92%,rgba(90,200,250,.09),transparent 42%),radial-gradient(120% 100% at 50% 0%,#161d30 0%,#0e1420 55%,#080b12 100%);color:var(--ink);font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh}
 .nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:10px 16px;background:rgba(12,16,24,.9);border-bottom:1px solid rgba(255,255,255,.08);overflow-x:auto;backdrop-filter:blur(12px)}
 .nav b{font-size:13px;margin-right:8px;flex:none}
 .nav a{background:rgba(255,255,255,.04);color:var(--ink2);border:1px solid rgba(255,255,255,.1);padding:5px 11px;border-radius:20px;font-size:12px;text-decoration:none;white-space:nowrap;flex:none}
@@ -14,7 +14,7 @@ body{background:radial-gradient(circle at 85% 8%,rgba(191,90,242,.12),transparen
 .hero{text-align:center;margin-bottom:30px}
 .hero .tag{display:inline-block;font-size:11px;color:var(--cyan);letter-spacing:2px;border:1px solid rgba(90,200,250,.3);padding:4px 12px;border-radius:20px;margin-bottom:16px}
 .hero h1{font-size:30px;font-weight:800;line-height:1.35;margin-bottom:12px}
-
+.hero h1 em{font-style:normal;color:var(--amber)}
 .hero p{font-size:14px;color:var(--ink2);max-width:640px;margin:0 auto}
 .card{background:linear-gradient(160deg,rgba(40,52,76,.5),rgba(20,28,44,.45));border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:22px;margin-bottom:16px;backdrop-filter:blur(16px);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
 .card h2{font-size:17px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
@@ -30,14 +30,14 @@ body{background:radial-gradient(circle at 85% 8%,rgba(191,90,242,.12),transparen
 .slider-row .lab .k{color:var(--ink2);font-weight:600}
 .slider-row .lab .v{color:var(--cyan);font-weight:800;font-variant-numeric:tabular-nums}
 input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:3px;background:linear-gradient(90deg,rgba(10,132,255,.5),rgba(90,200,250,.2));outline:none}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F2F2F2,#75C6DF 60%,#3969D0);cursor:pointer;box-shadow:0 2px 10px rgba(90,200,250,.5);border:2px solid rgba(255,255,255,.4)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#5ac8fa 60%,#0a84ff);cursor:pointer;box-shadow:0 2px 10px rgba(90,200,250,.5);border:2px solid rgba(255,255,255,.4)}
 .seg{display:flex;background:rgba(10,16,28,.6);border-radius:12px;padding:4px;gap:4px;margin:6px 0}
 .seg button{flex:1;background:transparent;border:0;color:var(--ink2);padding:10px 6px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;transition:.15s}
 .seg button.on{background:linear-gradient(160deg,rgba(10,132,255,.35),rgba(90,200,250,.2));color:var(--ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.15)}
 .preset-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
 .preset-btn{flex:1;min-width:100px;padding:11px 8px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:var(--ink2);font-size:12px;font-weight:700;cursor:pointer;transition:.15s}
 .preset-btn:hover{border-color:var(--cyan);color:var(--ink)}
-.preset-btn.reset{border-color:rgba(255,69,58,.4);color:#E69993}
+.preset-btn.reset{border-color:rgba(255,69,58,.4);color:#ff8a7a}
 /* 结果长条 */
 .result-strip{display:flex;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:linear-gradient(160deg,rgba(40,52,76,.55),rgba(20,28,44,.5));margin-bottom:18px;backdrop-filter:blur(16px)}
 .result-strip .cell{flex:1;padding:18px 12px;text-align:center;border-right:1px solid rgba(255,255,255,.08)}
@@ -51,7 +51,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 .gauge-center{font-size:26px;font-weight:800;fill:var(--red);font-variant-numeric:tabular-nums}
 .gauge-sub{font-size:10px;fill:var(--mut)}
 .donut{width:150px;height:150px;border-radius:50%;margin:6px auto 12px;display:grid;place-items:center;position:relative}
-.donut::after{content:'';position:absolute;width:92px;height:92px;border-radius:50%;background:#10141C}
+.donut::after{content:'';position:absolute;width:92px;height:92px;border-radius:50%;background:#0c1220}
 .donut .dc{position:relative;z-index:2;text-align:center}
 .donut .dc .big{font-size:20px;font-weight:800;color:var(--ink)}
 .donut .dc .sm{font-size:9px;color:var(--mut)}
@@ -79,17 +79,17 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 /* 表格 */
 table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}
 th{background:rgba(10,132,255,.12);padding:10px 8px;text-align:left;font-weight:700;font-size:11px}
-td{padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.06);color:#B4C0DA}
+td{padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.06);color:#c8d2e4}
 tr.sel{background:rgba(90,200,250,.08)}
 .tag-pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700}
-.tag-pill.red{background:rgba(255,69,58,.15);color:#E0837D}
+.tag-pill.red{background:rgba(255,69,58,.15);color:#ff6b5e}
 .tag-pill.green{background:rgba(48,209,88,.15);color:var(--green)}
 .tag-pill.amber{background:rgba(255,149,0,.15);color:var(--amber)}
 /* 时间线 */
 .timeline{position:relative;padding-left:28px;margin:14px 0}
 .timeline::before{content:'';position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:rgba(255,255,255,.1)}
 .tl-item{position:relative;padding-bottom:18px}
-.tl-item::before{content:'';position:absolute;left:-26px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--blue);border:2px solid #0E1016}
+.tl-item::before{content:'';position:absolute;left:-26px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--blue);border:2px solid #0c1018}
 .tl-item.old::before{background:var(--ink2)}.tl-item.new::before{background:var(--green)}
 .tl-item .yr{font-size:13px;font-weight:800}.tl-item .ev{font-size:12px;color:var(--ink2);margin-top:2px}
 /* 雷达 */
@@ -104,18 +104,18 @@ tr.sel{background:rgba(90,200,250,.08)}
 .wf-col .bar{width:70%;border-radius:7px 7px 0 0;display:flex;align-items:flex-start;justify-content:center;padding-top:8px;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;transition:height .4s}
 .wf-col .lab{font-size:11px;color:var(--ink2);margin-top:8px;text-align:center}
 /* 公式 */
-.formula{background:rgba(10,16,28,.6);border:1px solid rgba(90,200,250,.15);border-radius:10px;padding:16px;font-family:monospace;font-size:12px;line-height:2;color:#B4C0DA;overflow-x:auto}
+.formula{background:rgba(10,16,28,.6);border:1px solid rgba(90,200,250,.15);border-radius:10px;padding:16px;font-family:monospace;font-size:12px;line-height:2;color:#c8d2e4;overflow-x:auto}
 .formula b{color:var(--amber)}.formula .res{color:var(--red);font-weight:700}
 /* 天气 */
 .weather-box{background:linear-gradient(160deg,rgba(255,69,58,.1),rgba(10,16,28,.4));border:1px solid rgba(255,69,58,.2);border-radius:10px;padding:16px;margin:10px 0}
-.weather-box .t{font-size:13px;font-weight:700;color:#E0837D;margin-bottom:6px}
+.weather-box .t{font-size:13px;font-weight:700;color:#ff6b5e;margin-bottom:6px}
 .weather-box .d{font-size:12px;color:var(--ink2);line-height:1.7}
 /* 投票 */
 .vote-title{font-size:13px;font-weight:700;margin-bottom:12px}
 .vote-opt{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;margin-bottom:8px;cursor:pointer;transition:.15s}
 .vote-opt:hover{background:rgba(90,200,250,.1);border-color:rgba(90,200,250,.3)}
 .vote-opt .bar{flex:1;height:8px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden}
-.vote-opt .fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#3969D0,#75C6DF)}
+.vote-opt .fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#0a84ff,#5ac8fa)}
 .vote-opt .pct{font-size:13px;font-weight:700;color:var(--cyan);min-width:50px;text-align:right;font-variant-numeric:tabular-nums}
 .vote-opt .label{font-size:12px;min-width:110px}
 /* 站队 */
@@ -131,9 +131,9 @@ tr.sel{background:rgba(90,200,250,.08)}
 /* 评论 */
 .comment{background:rgba(10,16,28,.4);border-radius:10px;padding:14px;margin-bottom:10px}
 .comment .head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
-.avatar{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;color:#F2F2F2}
+.avatar{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;color:#fff}
 .comment .name{font-size:12px;font-weight:700}.comment .time{font-size:10px;color:var(--mut)}
-.comment .text{font-size:13px;color:#B4C0DA;line-height:1.6;padding-left:36px}
+.comment .text{font-size:13px;color:#c8d2e4;line-height:1.6;padding-left:36px}
 .comment .likes{font-size:11px;color:var(--mut);margin-top:6px;padding-left:36px}
 /* 账本 */
 .ledger{background:rgba(10,16,28,.5);border-radius:10px;padding:16px}
@@ -157,8 +157,7 @@ tr.sel{background:rgba(90,200,250,.08)}
 </style>
 <link rel="stylesheet" href="ui/ui.css">
 <link rel="stylesheet" href="ui/ui-pages.css">
-<link rel="stylesheet" href="ui/skin.css?v=20261106">
-</head><body class="sk-commute">
+</head><body>
 <nav class="nav">
   <b>惠城产业风洞</b>
   <a href="index.html">序章</a><a href="holo-workspace.html">全息</a><a href="today.html">钱去哪</a>
@@ -170,11 +169,11 @@ tr.sel{background:rgba(90,200,250,.08)}
   <div class="hero">
     <span class="tag">案例1 · 惠城通勤交互模拟器</span>
     <h1>你每天在桥上堵40分钟，<br>一个月<em>少陪了孩子多少小时？</em></h1>
-    <p>下面这几项你都能拖动——城市损失、个人账单、错过的晚饭，全部实时重算。先拉一拉滑块，看看你的假设会让这座城市付出多少。</p>
+    <p>下面的参数你都能拖动——城市损失、个人账单、错过的晚饭，全部实时重算。先拉一拉滑块，看看你的假设会让这座城市付出多少。</p>
   </div>
 
   <div class="console">
-    <div class="ct"><i></i>设定台 · 拖动即算</div>
+    <div class="ct"><i></i>参数控制台 · 拖动即算</div>
     <div class="cs">白色为真实锚点（人口基数/票价/租金），可调项均为情景假设，页面底部统一标注口径。</div>
     <div class="slider-grid">
       <div class="slider-row">
@@ -215,7 +214,7 @@ tr.sel{background:rgba(90,200,250,.08)}
       <button type="button" class="preset-btn" onclick="preset('base')">基准情景</button>
       <button type="button" class="preset-btn" onclick="preset('bad')">悲观情景</button>
       <button type="button" class="preset-btn" onclick="preset('extreme')">极端风暴</button>
-      <button type="button" class="preset-btn reset" onclick="preset('reset')">恢复默认</button>
+      <button type="button" class="preset-btn reset" onclick="preset('reset')">重置参数</button>
     </div>
   </div>
 
@@ -389,7 +388,7 @@ tr.sel{background:rgba(90,200,250,.08)}
       <div class="ledger-row total"><span class="name">省下的房租 - 通勤成本</span><span class="val" id="rentNet">可能所剩无几</span></div>
     </div>
     <p style="font-size:12px;color:var(--ink2);line-height:1.7;margin-top:12px">水口房租便宜，但加上油费、时间、迟到扣款，差价被通勤吃掉。更别说无法量化的——孩子等你的那20分钟。</p>
-    <div class="src">租金取自公开的在租房源信息与政府公开报道，为本页估算锚点</div>
+    <div class="src">租金来源：58同城水口在租房源（2026年11月）；惠州市政府毕业季租房报道</div>
   </div>
 
   <div class="section-title">6亿是怎么一层层堆起来的？</div>
@@ -399,9 +398,9 @@ tr.sel{background:rgba(90,200,250,.08)}
     <p style="font-size:12px;color:var(--ink2);line-height:1.7">第一根柱子是时间成本，第二根是消费外溢，第三根是合计。拖动滑块，三根柱子的高度和数字会一起变。</p>
   </div>
 
-  <div class="section-title">这笔账怎么算的（数字随设定实时更新）</div>
+  <div class="section-title">公式一步步拆给你看（数字随参数实时更新）</div>
   <div class="card">
-    <h2><span class="num">11</span>两笔成本的完整计算</h2>
+    <h2><span class="num">11</span>两本账的完整计算</h2>
     <div class="vote-title">第一本账：时间成本</div>
     <div class="formula">
 跨江人口基数 = 水口22.15万 + 马安约10万 = <b>32万人</b>（真实锚点）<br>
@@ -417,7 +416,7 @@ tr.sel{background:rgba(90,200,250,.08)}
 　　　　　 = <span class="res" id="fSpillRes">1.8亿元/年</span><br><br>
 合计隐性损失 = <span class="res" id="fTimeRes2">4.2亿</span> + <span class="res" id="fSpillRes2">1.8亿</span> = <span class="res" id="fTotalRes">6.0亿元/年</span>
     </div>
-    <p style="font-size:11px;color:var(--mut);margin-top:12px;line-height:1.6">跨江比例、小时工资、外溢消费按情景设定，不是普查数据。本页只给量级示意，真实数字需要 OD（起终点）通勤调查才能精确。</p>
+    <p style="font-size:11px;color:var(--mut);margin-top:12px;line-height:1.6">跨江比例、小时工资、外溢消费与系数均为情景假设，不是普查硬数据。本页展示测算方法和量级，真实数字需要 OD（起终点）通勤调查才能精确。</p>
   </div>
 
   <div class="section-title">碰上台风暴雨，通勤是什么体验？</div>
@@ -510,7 +509,7 @@ tr.sel{background:rgba(90,200,250,.08)}
 
   <div class="section-title">你的通勤账本，一年到底花多少？</div>
   <div class="card">
-    <h2><span class="num">16</span>个人年度账单（随方式与设定实时变化）</h2>
+    <h2><span class="num">16</span>个人年度账单（随方式与参数实时变化）</h2>
     <div class="ledger" id="myLedger"></div>
     <p style="font-size:11px;color:var(--mut);margin-top:10px;line-height:1.6">还没算少逛的街、少喝的咖啡、少陪的孩子——那些才是真正贵的。</p>
   </div>
@@ -521,7 +520,7 @@ tr.sel{background:rgba(90,200,250,.08)}
     <p style="font-size:13px;color:#c8d2e4;line-height:1.9">
       <b style="color:var(--ink)">风洞测试：</b>通勤压力单独施加，达标率从 66.4% 掉到 64%；和投产延期叠加，掉到 <b style="color:var(--red)">51%</b>。<br><br>
       <b style="color:var(--ink)">盲点页：</b>"一条每天要走的路"和孩子的学位、楼下的小店一样，是城市的小地基。<br><br>
-      <b style="color:var(--ink)">本页测算（当前设定）：</b>每年约 <b id="echoTotal" style="color:var(--amber)">6.0亿</b>隐性损失，<b id="echoPeople" style="color:var(--ink)">9.6万人</b>每天在桥上消耗生命。<br><br>
+      <b style="color:var(--ink)">本页测算（当前参数）：</b>每年约 <b id="echoTotal" style="color:var(--amber)">6.0亿</b>隐性损失，<b id="echoPeople" style="color:var(--ink)">9.6万人</b>每天在桥上消耗生命。<br><br>
       通勤不是"要不要再建桥"的问题。是 <b style="color:var(--ink)">几万个家庭的晚饭、几百小时的等待、校门口的孩子</b>——这些数字加在一起，才是真实的城市。
     </p>
   </div>
@@ -531,8 +530,7 @@ tr.sel{background:rgba(90,200,250,.08)}
   </div>
 
   <div class="src" style="padding:0 4px 24px">
-    数据来自公开的通勤监测报告、人口普查、政府与部门公开信息、媒体报道等渠道；人口基数、票价、租金为真实锚点，可调项均为情景设定，不是普查数据。真实 OD 数据缺失，本页展示的是量级与方法示意，不构成统计结论。<br>
-    完整来源清单（含发布机构与日期）可向作者索取。
+    数据来源：中规院《2025年中国主要城市通勤监测报告》；惠城区第七次全国人口普查；惠州市政府《细数惠州桥之最》《鹅城大桥》；惠州人大电动车调研；惠州交警通告；58同城租金；南方+通勤专线报道。投票/评论为模拟社交数据；跨江比例、小时工资、外溢消费与系数、三方式五维评分为情景假设/定性评分，真实 OD 数据缺失，不构成统计结论。
   </div>
 </div>
 
@@ -712,6 +710,5 @@ function pick(el){el.style.transform='scale(1.03)';setTimeout(function(){el.styl
 buildHeat();
 render();
 </script>
-<script src="hc-viz/data.js"></script>
-<script src="ui/ui.js?v=20261109" defer></script>
+<script src="ui/ui.js" defer></script>
 </body></html>

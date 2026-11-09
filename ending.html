@@ -5,25 +5,25 @@
 <style>
 :root{
   --glass:rgba(255,255,255,.06); --glass-b:rgba(255,255,255,.12);
-  --ink:#B0BFDD; --ink2:#B8C1D6; --muted:#949FB8;
-  --neon:#58BAD8; --warm:#D5B94A; --ok:#37D0A5; --bad:#E389A2; --orange:#D9A85E;
+  --ink:#f1f5f9; --ink2:#cbd5e1; --muted:#94a3b8;
+  --neon:#38bdf8; --warm:#fbbf24; --ok:#34d399; --bad:#fb7185; --orange:#fb923c;
 }
 *{box-sizing:border-box}
-body{margin:0;background:linear-gradient(180deg,#0A0B10 0%,#11131D 30%,#12161F 100%);color:var(--ink);font:14px/1.7 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh;overflow-x:hidden}
+body{margin:0;background:linear-gradient(180deg,#04060f 0%,#0a0f24 30%,#0b1226 100%);color:var(--ink);font:14px/1.7 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh;overflow-x:hidden}
 .nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:10px 14px;background:rgba(6,10,24,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--glass-b);overflow-x:auto}
 .nav b{font-size:14px;margin-right:6px;flex:none;color:var(--ink)}
 .nav a{background:var(--glass);color:var(--muted);border:1px solid var(--glass-b);padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none;transition:.2s}
 .nav a.on{background:rgba(56,189,248,.22);border-color:var(--neon);color:var(--neon);font-weight:700}
 .wrap{max-width:1180px;margin:auto;padding:20px 16px 40px}
 .hero{text-align:center;padding:46px 22px;background:radial-gradient(ellipse at top,rgba(16,35,74,.7) 0%,rgba(10,15,26,.4) 70%);backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:18px;margin-bottom:16px}
-.hero .kick{font-size:12px;letter-spacing:3px;color:#7A9AE0;margin-bottom:14px}
+.hero .kick{font-size:12px;letter-spacing:3px;color:#60a5fa;margin-bottom:14px}
 .hero h1{font-size:25px;line-height:1.5;margin:0}
 .hero p{font-size:13px;color:var(--muted);margin:14px 0 0}
 .card{background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--glass-b);border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 4px 24px rgba(0,0,0,.25)}
 .card h2{font-size:16px;margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.08)}
 .policy{background:linear-gradient(160deg,rgba(10,20,40,.5),rgba(14,21,35,.4));border-color:rgba(59,130,246,.25)}
-.policy .quote{border-left:3px solid #7A9AE0;background:rgba(10,15,26,.55);border-radius:0 8px 8px 0;padding:10px 13px;margin:10px 0;font-size:12.5px;color:#A7BBE7;line-height:1.85}
-.policy .quote b{color:#A4BAEA}
+.policy .quote{border-left:3px solid #60a5fa;background:rgba(10,15,26,.55);border-radius:0 8px 8px 0;padding:10px 13px;margin:10px 0;font-size:12.5px;color:#dbe7f5;line-height:1.85}
+.policy .quote b{color:#93c5fd}
 .policy .src{font-size:11px;color:var(--muted);margin-top:6px}
 .world .row{display:flex;gap:12px;align-items:flex-start;background:rgba(10,15,26,.55);border:1px solid var(--glass-b);border-radius:10px;padding:12px 14px;margin-bottom:10px}
 .world .flag{flex:none;width:56px;font-size:12px;font-weight:800;color:var(--warm)}
@@ -42,7 +42,7 @@ body{margin:0;background:linear-gradient(180deg,#0A0B10 0%,#11131D 30%,#12161F 1
 .why .step{background:rgba(10,15,26,.55);border:1px solid var(--glass-b);border-radius:12px;padding:16px}
 .why .step .n{font-size:11px;font-weight:800;color:var(--orange);letter-spacing:1px}
 .why .step h3{font-size:13.5px;margin:6px 0;color:var(--warm)}
-.why .step p{font-size:12px;color:#A9B3C9;margin:0;line-height:1.85}
+.why .step p{font-size:12px;color:#a9b6c9;margin:0;line-height:1.85}
 .grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
 @media(max-width:700px){.grid6{grid-template-columns:1fr 1fr}}
 .feat{background:rgba(10,15,26,.55);border:1px solid var(--glass-b);border-radius:12px;padding:14px}
@@ -54,16 +54,16 @@ body{margin:0;background:linear-gradient(180deg,#0A0B10 0%,#11131D 30%,#12161F 1
 .closing .big b{color:var(--warm)}
 .sign{font-size:12px;color:var(--muted);margin-top:18px}
 .sign b{color:var(--warm)}
-.btn{background:linear-gradient(135deg,#2F5FC6,#5981D8);color:#F2F2F2;border:0;padding:11px 24px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 4px 16px rgba(59,130,246,.35)}
+.btn{background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:#fff;border:0;padding:11px 24px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 4px 16px rgba(59,130,246,.35)}
 .btn.ghost{background:transparent;border:1px solid var(--glass-b);color:var(--ink2);box-shadow:none}
 /* 政策时间轴 */
 .tl{position:relative;margin:18px 0 6px}
-.tl-line{position:absolute;left:12%;right:12%;top:18px;height:2px;background:linear-gradient(90deg,#7A9AE0,#5981D8,#CF9031)}
+.tl-line{position:absolute;left:12%;right:12%;top:18px;height:2px;background:linear-gradient(90deg,#60a5fa,#3b82f6,#f59e0b)}
 .tl-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;position:relative}
 .tl-node{text-align:center}
-.tl-node .dot{width:36px;height:36px;border-radius:50%;margin:0 auto 9px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;background:#0E1016;border:2px solid var(--neon);color:var(--neon);z-index:2;position:relative}
-.tl-node:nth-child(2) .dot{border-color:#5981D8;color:#A4BAEA}
-.tl-node:nth-child(3) .dot{border-color:#CF9031;color:#DDC66C}
+.tl-node .dot{width:36px;height:36px;border-radius:50%;margin:0 auto 9px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;background:#0a0f1a;border:2px solid var(--neon);color:var(--neon);z-index:2;position:relative}
+.tl-node:nth-child(2) .dot{border-color:#3b82f6;color:#93c5fd}
+.tl-node:nth-child(3) .dot{border-color:#f59e0b;color:#fcd34d}
 .tl-node .yr{font-size:13px;font-weight:800;color:var(--warm);margin-bottom:3px}
 .tl-node .ev{font-size:11.8px;font-weight:700;color:var(--ink);margin-bottom:4px;line-height:1.5}
 .tl-node .ds{font-size:10.5px;color:var(--muted);line-height:1.65}
@@ -75,14 +75,14 @@ body{margin:0;background:linear-gradient(180deg,#0A0B10 0%,#11131D 30%,#12161F 1
 .dcn-body{flex:1;background:rgba(10,15,26,.55);border:1px solid var(--glass-b);border-radius:11px;padding:9px 13px}
 .dcn-body .lab{font-size:11.8px;font-weight:800;margin-bottom:6px}
 .dcn-chip{display:inline-block;font-size:10.5px;padding:2.5px 9px;border-radius:20px;background:rgba(255,255,255,.07);border:1px solid var(--glass-b);color:var(--ink2);margin:0 5px 5px 0}
-.dcn-row.b1 .dcn-num{background:rgba(59,130,246,.18);border:1px solid rgba(59,130,246,.45);color:#7A9AE0}
-.dcn-row.b1 .lab{color:#A4BAEA}
-.dcn-row.b5 .dcn-num{background:rgba(245,158,11,.18);border:1px solid rgba(245,158,11,.45);color:#D5B94A}
-.dcn-row.b5 .lab{color:#DDC66C}
-.dcn-row.b2 .dcn-num{background:rgba(52,211,153,.16);border:1px solid rgba(52,211,153,.4);color:#37D0A5}
-.dcn-row.b2 .lab{color:#76DFC1}
-.dcn-row.b2b .dcn-num{background:rgba(167,139,250,.18);border:1px solid rgba(167,139,250,.4);color:#9E9DE8}
-.dcn-row.b2b .lab{color:#A5A4EA}
+.dcn-row.b1 .dcn-num{background:rgba(59,130,246,.18);border:1px solid rgba(59,130,246,.45);color:#60a5fa}
+.dcn-row.b1 .lab{color:#93c5fd}
+.dcn-row.b5 .dcn-num{background:rgba(245,158,11,.18);border:1px solid rgba(245,158,11,.45);color:#fbbf24}
+.dcn-row.b5 .lab{color:#fcd34d}
+.dcn-row.b2 .dcn-num{background:rgba(52,211,153,.16);border:1px solid rgba(52,211,153,.4);color:#34d399}
+.dcn-row.b2 .lab{color:#6ee7b7}
+.dcn-row.b2b .dcn-num{background:rgba(167,139,250,.18);border:1px solid rgba(167,139,250,.4);color:#a78bfa}
+.dcn-row.b2b .lab{color:#c4b5fd}
 /* 能力升级阶梯 */
 .stair{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:16px 0 6px;align-items:end}
 .step-card{background:rgba(10,15,26,.55);border:1px solid var(--glass-b);border-radius:12px;padding:12px 8px;text-align:center}
@@ -97,7 +97,7 @@ body{margin:0;background:linear-gradient(180deg,#0A0B10 0%,#11131D 30%,#12161F 1
 .worldmap svg{width:100%;height:auto;display:block}
 .wdot{cursor:pointer;transition:.2s}
 .wdot:hover circle{filter:brightness(1.3)}
-.wdot.on circle{stroke:#F2F2F2;stroke-width:2}
+.wdot.on circle{stroke:#fff;stroke-width:2}
 .world-detail{display:none;margin-top:12px;background:rgba(10,15,26,.6);border:1px solid rgba(56,189,248,.3);border-radius:12px;padding:14px 16px;animation:fadein .3s}
 .world-detail.show{display:block}
 .world-detail .wh{display:flex;align-items:center;gap:9px;margin-bottom:7px}
@@ -105,18 +105,18 @@ body{margin:0;background:linear-gradient(180deg,#0A0B10 0%,#11131D 30%,#12161F 1
 .world-detail .wh .cn{font-size:14px;font-weight:800;color:var(--ink)}
 .world-detail .wh .pj{font-size:11px;color:var(--neon);background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.25);border-radius:6px;padding:2px 9px;margin-left:auto}
 .world-detail .dl{font-size:11.8px;color:var(--ink2);line-height:1.8;margin:0 0 6px}
-.world-detail .diff{font-size:11.3px;color:#DDC66C;line-height:1.7;border-top:1px dashed rgba(251,191,36,.25);padding-top:7px}
+.world-detail .diff{font-size:11.3px;color:#fcd34d;line-height:1.7;border-top:1px dashed rgba(251,191,36,.25);padding-top:7px}
 .wm-hint{text-align:center;font-size:11px;color:var(--muted);margin:6px 0 0}
 .wlink{fill:none;stroke:rgba(56,189,248,.28);stroke-width:1.3;stroke-dasharray:4 5;transition:stroke .3s,stroke-width .3s}
-.wdot circle.core{fill:var(--neon);stroke:#0E1016;stroke-width:1.5;transition:.25s}
+.wdot circle.core{fill:var(--neon);stroke:#0a0f1a;stroke-width:1.5;transition:.25s}
 .wdot circle.halo{fill:rgba(56,189,248,.15)}
 .wdot text{fill:var(--ink);font-size:13px;font-weight:700;text-anchor:middle}
 .wdot text.sub{fill:var(--muted);font-size:9px;font-weight:400}
-.wdot.on circle.core{fill:#D5B94A}
-.wdot.on .wlink{stroke:#D5B94A}
-.whub circle.core{fill:#D5B94A}
+.wdot.on circle.core{fill:#fbbf24}
+.wdot.on .wlink{stroke:#fbbf24}
+.whub circle.core{fill:#fbbf24}
 .whub circle.halo{fill:rgba(251,191,36,.18)}
-.whub text{fill:#DDC66C;font-size:13px;font-weight:800;text-anchor:middle}
+.whub text{fill:#fcd34d;font-size:13px;font-weight:800;text-anchor:middle}
 @media (prefers-reduced-motion:no-preference){.whub circle.halo{animation:hubp 2.4s ease-in-out infinite}@keyframes hubp{0%,100%{opacity:.5}50%{opacity:.95}}}
 /* 数据流双分支 */
 .flows{display:flex;flex-direction:column;gap:0;margin:12px 0}
@@ -124,23 +124,23 @@ body{margin:0;background:linear-gradient(180deg,#0A0B10 0%,#11131D 30%,#12161F 1
 .flow-branch.daily{background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.28)}
 .flow-branch.model{background:rgba(251,146,60,.07);border:1px solid rgba(251,146,60,.28)}
 .flow-branch .bh{font-size:12.5px;font-weight:800;margin-bottom:3px;display:flex;align-items:center;gap:7px}
-.flow-branch.daily .bh{color:#76DFC1}
-.flow-branch.model .bh{color:#E4C18D}
+.flow-branch.daily .bh{color:#6ee7b7}
+.flow-branch.model .bh{color:#fdba74}
 .flow-branch .bf{font-size:11px;color:var(--muted);margin-bottom:11px}
 .flow-steps{display:flex;align-items:center;gap:0;flex-wrap:wrap}
 .fs{flex:1;min-width:120px;text-align:center;position:relative;padding:0 4px}
 .fs .fc{width:38px;height:38px;border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:16px;position:relative;z-index:2}
-.daily .fs .fc{background:rgba(52,211,153,.14);border:1.5px solid #37D0A5;box-shadow:0 0 12px rgba(52,211,153,.2)}
-.model .fs .fc{background:rgba(251,146,60,.14);border:1.5px solid #D9A85E;box-shadow:0 0 12px rgba(251,146,60,.2)}
+.daily .fs .fc{background:rgba(52,211,153,.14);border:1.5px solid #34d399;box-shadow:0 0 12px rgba(52,211,153,.2)}
+.model .fs .fc{background:rgba(251,146,60,.14);border:1.5px solid #fb923c;box-shadow:0 0 12px rgba(251,146,60,.2)}
 .fs .ft{font-size:11.5px;font-weight:700;color:var(--ink)}
 .fs .fd{font-size:10px;color:var(--muted);margin-top:2px}
 .fs:not(:last-child)::after{content:"→";position:absolute;right:-5px;top:9px;font-size:15px;z-index:1}
-.daily .fs:not(:last-child)::after{color:#37D0A5}
-.model .fs:not(:last-child)::after{color:#D9A85E}
+.daily .fs:not(:last-child)::after{color:#34d399}
+.model .fs:not(:last-child)::after{color:#fb923c}
 @media(max-width:560px){.fs{min-width:44%;margin-bottom:12px}.fs:nth-child(2)::after{display:none}}
 .pulse-dot{position:absolute;top:50%;left:0;width:7px;height:7px;border-radius:50%;pointer-events:none}
-.daily .pulse-dot{background:#37D0A5;box-shadow:0 0 8px #37D0A5;animation:flowmove 2.6s linear infinite}
-.model .pulse-dot{background:#D9A85E;box-shadow:0 0 8px #D9A85E;animation:flowmove 3.8s linear infinite}
+.daily .pulse-dot{background:#34d399;box-shadow:0 0 8px #34d399;animation:flowmove 2.6s linear infinite}
+.model .pulse-dot{background:#fb923c;box-shadow:0 0 8px #fb923c;animation:flowmove 3.8s linear infinite}
 @keyframes flowmove{0%{left:6%;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:94%;opacity:0}}
 .flow-rail{position:relative;height:2px;margin:0 8% 8px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden}
 .daily .flow-rail{background:linear-gradient(90deg,rgba(52,211,153,.25),rgba(52,211,153,.05))}
@@ -153,25 +153,25 @@ body{margin:0;background:linear-gradient(180deg,#0A0B10 0%,#11131D 30%,#12161F 1
 .cap-row .ic{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.3);flex:none}
 .cap-row .nm{font-size:12.8px;font-weight:800;color:var(--ink)}
 .cap-row .st{margin-left:auto;font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:20px;flex:none}
-.st.done{color:#76DFC1;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.35)}
-.st.wip{color:#E4C18D;background:rgba(251,146,60,.12);border:1px solid rgba(251,146,60,.35)}
-.st.todo{color:#EAA9A4;background:rgba(251,113,133,.12);border:1px solid rgba(251,113,133,.35)}
+.st.done{color:#6ee7b7;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.35)}
+.st.wip{color:#fdba74;background:rgba(251,146,60,.12);border:1px solid rgba(251,146,60,.35)}
+.st.todo{color:#fca5a5;background:rgba(251,113,133,.12);border:1px solid rgba(251,113,133,.35)}
 .cap-lines{display:flex;flex-direction:column;gap:4px;font-size:11.3px;line-height:1.7}
 .cap-lines .li{display:flex;gap:7px;align-items:flex-start}
 .cap-lines .li .mk{flex:none}
-.cap-lines .li.yes{color:#90E5AF}.cap-lines .li.now{color:#DDC66C}.cap-lines .li.no{color:#EAA4B8}
+.cap-lines .li.yes{color:#86efac}.cap-lines .li.now{color:#fcd34d}.cap-lines .li.no{color:#fda4af}
 
-/* ============ 结语页 沉浸式终章（新增） ============ */
+/* ============ 第⑨页 沉浸式终章（新增） ============ */
 .e-hero{position:relative;border-radius:20px;overflow:hidden;margin-bottom:16px;min-height:300px;display:flex;flex-direction:column;justify-content:center;padding:48px 44px;border:1px solid rgba(56,189,248,.28);box-shadow:0 10px 40px rgba(0,0,0,.4)}
 .e-hero .hero-bg{position:absolute;inset:0;background:url('assets/huicheng-night.jpg') center/cover;opacity:.6}
 .e-hero .hero-mask{position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,6,15,.94) 0%,rgba(4,6,15,.6) 55%,rgba(4,6,15,.3) 100%)}
 .e-hero .hero-in{position:relative;z-index:2;max-width:760px}
-.e-hero .kick{font-size:12px;letter-spacing:4px;color:#93D2E6;margin-bottom:14px;font-weight:700}
+.e-hero .kick{font-size:12px;letter-spacing:4px;color:#7dd3fc;margin-bottom:14px;font-weight:700}
 .e-hero h1{font-size:30px;line-height:1.45;margin:0;font-weight:900}
 .e-hero h1 b{color:var(--warm)}
 .e-hero p{font-size:13.5px;color:var(--ink2);margin:16px 0 0;line-height:1.9;max-width:680px}
 .e-hero .hero-pills{position:relative;z-index:2;display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
-.e-hero .hpill{font-size:11.5px;color:#A4BAEA;background:rgba(10,20,40,.55);border:1px solid rgba(125,211,252,.3);border-radius:20px;padding:5px 14px;backdrop-filter:blur(6px)}
+.e-hero .hpill{font-size:11.5px;color:#cfe4ff;background:rgba(10,20,40,.55);border:1px solid rgba(125,211,252,.3);border-radius:20px;padding:5px 14px;backdrop-filter:blur(6px)}
 @media(max-width:700px){.e-hero{min-height:280px;padding:34px 22px}.e-hero h1{font-size:23px}}
 /* 城市舞台 */
 .stage-card{border-radius:20px;overflow:hidden;border:1px solid rgba(56,189,248,.28);margin-bottom:16px;background:var(--glass);box-shadow:0 10px 40px rgba(0,0,0,.4)}
@@ -185,20 +185,20 @@ body{margin:0;background:linear-gradient(180deg,#0A0B10 0%,#11131D 30%,#12161F 1
 .city-stage.shock .cs-mask{background:radial-gradient(ellipse at 50% 40%,rgba(40,10,18,.5),rgba(8,4,10,.86))}
 .cs-svg{position:absolute;inset:0;width:100%;height:100%;z-index:2}
 .cs-svg .cs-link{fill:none;stroke:rgba(125,211,252,.35);stroke-width:1.6;stroke-dasharray:2 0;transition:stroke .8s,opacity .8s}
-.cs-svg .flow{fill:#93D2E6}
+.cs-svg .flow{fill:#7dd3fc}
 .city-stage.shock .cs-svg .cs-link{stroke:rgba(251,113,133,.22)}
-.city-stage.shock .cs-svg .flow{fill:#E389A2;opacity:.25}
+.city-stage.shock .cs-svg .flow{fill:#fb7185;opacity:.25}
 .scene{position:absolute;z-index:3;transform:translate(-50%,-50%);transition:opacity .7s,filter .7s;max-width:230px}
 .scene .s-dot{width:16px;height:16px;border-radius:50%;margin:0 auto 8px;box-shadow:0 0 0 6px rgba(255,255,255,.05),0 0 18px currentColor;animation:spulse 2.6s ease-in-out infinite}
 @keyframes spulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.25);opacity:.7}}
 .scene .s-bubble{background:rgba(8,14,28,.72);backdrop-filter:blur(10px);border:1px solid var(--glass-b);border-radius:13px;padding:10px 13px;text-align:center}
 .scene .s-name{font-size:13px;font-weight:800;margin-bottom:4px;display:flex;align-items:center;justify-content:center;gap:6px}
-.scene .s-ok{font-size:11px;color:#A4EABE;line-height:1.5}
-.scene .s-bad{display:none;font-size:11px;color:#EAA9A4;line-height:1.5}
-.scene[data-t="t"]{color:#58BAD8}.scene[data-t="t"] .s-name{color:#93D2E6}.scene[data-t="t"] .s-dot{background:#58BAD8}
-.scene[data-t="w"]{color:#9E9DE8}.scene[data-t="w"] .s-name{color:#A5A4EA}.scene[data-t="w"] .s-dot{background:#9E9DE8}
-.scene[data-t="c"]{color:#D5B94A}.scene[data-t="c"] .s-name{color:#E8DA9F}.scene[data-t="c"] .s-dot{background:#D5B94A}
-.scene[data-t="h"]{color:#37D0A5}.scene[data-t="h"] .s-name{color:#A4EABE}.scene[data-t="h"] .s-dot{background:#37D0A5}
+.scene .s-ok{font-size:11px;color:#a7f3d0;line-height:1.5}
+.scene .s-bad{display:none;font-size:11px;color:#fecaca;line-height:1.5}
+.scene[data-t="t"]{color:#38bdf8}.scene[data-t="t"] .s-name{color:#7dd3fc}.scene[data-t="t"] .s-dot{background:#38bdf8}
+.scene[data-t="w"]{color:#a78bfa}.scene[data-t="w"] .s-name{color:#c4b5fd}.scene[data-t="w"] .s-dot{background:#a78bfa}
+.scene[data-t="c"]{color:#fbbf24}.scene[data-t="c"] .s-name{color:#fde68a}.scene[data-t="c"] .s-dot{background:#fbbf24}
+.scene[data-t="h"]{color:#34d399}.scene[data-t="h"] .s-name{color:#a7f3d0}.scene[data-t="h"] .s-dot{background:#34d399}
 .city-stage.shock .scene{opacity:.45;filter:grayscale(.55) saturate(.7)}
 .city-stage.shock .scene .s-dot{animation:none}
 .city-stage.shock .scene .s-bubble{border-color:rgba(251,113,133,.35)}
@@ -210,28 +210,28 @@ body{margin:0;background:linear-gradient(180deg,#0A0B10 0%,#11131D 30%,#12161F 1
 .cs-cap{position:absolute;left:0;right:0;bottom:0;z-index:5;padding:16px 20px 18px;background:linear-gradient(180deg,transparent,rgba(4,6,15,.92) 45%);text-align:center}
 .cs-cap .q{font-size:14.5px;font-weight:800;line-height:1.6;text-shadow:0 2px 12px rgba(0,0,0,.8);margin-bottom:10px}
 .cs-cap .q .em{color:var(--warm)}
-.cs-btn{background:linear-gradient(135deg,#AE3229,#D8635B);color:#F2F2F2;border:0;padding:10px 24px;border-radius:24px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 4px 18px rgba(239,68,68,.4);transition:.25s}
-.cs-btn.on{background:linear-gradient(135deg,#2F5FC6,#5981D8);box-shadow:0 4px 18px rgba(59,130,246,.4)}
-.stage-note{padding:9px 18px;font-size:10.5px;color:#8F9EBF;background:rgba(10,15,26,.6);line-height:1.6;text-align:center;border-top:1px solid rgba(255,255,255,.06)}
+.cs-btn{background:linear-gradient(135deg,#b91c1c,#ef4444);color:#fff;border:0;padding:10px 24px;border-radius:24px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 4px 18px rgba(239,68,68,.4);transition:.25s}
+.cs-btn.on{background:linear-gradient(135deg,#1d4ed8,#3b82f6);box-shadow:0 4px 18px rgba(59,130,246,.4)}
+.stage-note{padding:9px 18px;font-size:10.5px;color:#8fa3bf;background:rgba(10,15,26,.6);line-height:1.6;text-align:center;border-top:1px solid rgba(255,255,255,.06)}
 @media(max-width:700px){.city-stage{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:center;padding:20px 12px 150px}.cs-svg{display:none}.scene{position:static!important;left:auto!important;top:auto!important;transform:none!important;max-width:none;align-self:center}.scene .s-dot{margin:0 auto 6px}.scene .s-bubble{padding:9px 10px}.scene .s-name{font-size:12px}.scene .s-ok,.scene .s-bad{font-size:10.5px}.cs-cap{padding:14px 16px 16px}.cs-cap .q{font-size:13px}}
 @media (prefers-reduced-motion:reduce){.scene .s-dot{animation:none}}
 /* 实验对比卡 */
 .exp-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 16px}
-.exp-bar .cur-tag{font-size:13px;font-weight:800;padding:6px 16px;border-radius:20px;background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.4);color:#93D2E6}
-.exp-bar .cur-tag.warn{background:rgba(251,113,133,.15);border-color:rgba(251,113,133,.45);color:#EAA9A4}
-.exp-bar .back-link{margin-left:auto;font-size:12px;color:#93D2E6;text-decoration:none;border:1px solid rgba(125,211,252,.35);border-radius:20px;padding:6px 14px}
+.exp-bar .cur-tag{font-size:13px;font-weight:800;padding:6px 16px;border-radius:20px;background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.4);color:#7dd3fc}
+.exp-bar .cur-tag.warn{background:rgba(251,113,133,.15);border-color:rgba(251,113,133,.45);color:#fca5a5}
+.exp-bar .back-link{margin-left:auto;font-size:12px;color:#7dd3fc;text-decoration:none;border:1px solid rgba(125,211,252,.35);border-radius:20px;padding:6px 14px}
 .exp-grid{display:grid;grid-template-columns:1fr 120px 1fr;gap:0;align-items:stretch}
 @media(max-width:820px){.exp-grid{grid-template-columns:1fr;gap:12px}.exp-mid{order:2}}
 .exp-side{border-radius:16px;padding:18px;position:relative;overflow:hidden}
 .exp-side.base{background:linear-gradient(160deg,rgba(29,78,150,.28),rgba(10,15,26,.55));border:1.5px solid rgba(56,189,248,.45)}
 .exp-side.cur{background:linear-gradient(160deg,rgba(150,30,50,.26),rgba(10,15,26,.55));border:1.5px solid rgba(251,113,133,.5)}
 .exp-side .es-tag{font-size:12px;font-weight:800;letter-spacing:.5px;margin-bottom:12px;display:flex;align-items:center;gap:7px}
-.exp-side.base .es-tag{color:#93D2E6}.exp-side.cur .es-tag{color:#EAA9A4}
+.exp-side.base .es-tag{color:#7dd3fc}.exp-side.cur .es-tag{color:#fca5a5}
 .exp-side .es-row{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;border-bottom:1px dashed rgba(255,255,255,.08)}
 .exp-side .es-row .k{font-size:11.5px;color:var(--muted)}
 .exp-side .es-row .v{font-size:22px;font-weight:900;line-height:1}
 .exp-side .es-row .v small{font-size:11px;font-weight:600;color:var(--muted)}
-.exp-side.base .v{color:#A4D9EA}.exp-side.cur .v{color:#EAA4B8}
+.exp-side.base .v{color:#bae6fd}.exp-side.cur .v{color:#fecdd3}
 .exp-side .es-range{font-size:10.5px;color:var(--muted);margin:8px 0 2px}
 .exp-side .dist-box{height:110px;margin-top:6px}
 .exp-mid{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:0 10px}
@@ -240,19 +240,19 @@ body{margin:0;background:linear-gradient(180deg,#0A0B10 0%,#11131D 30%,#12161F 1
 .dchip{background:rgba(10,15,26,.6);border:1px solid var(--glass-b);border-radius:10px;padding:8px 6px;text-align:center}
 .dchip .dk{font-size:9.5px;color:var(--muted)}
 .dchip .dv{font-size:15px;font-weight:900;margin-top:2px}
-.dchip .dv.neg{color:#EAA9A4}.dchip .dv.pos{color:#90E5AF}.dchip .dv.flat{color:#949FB8}
+.dchip .dv.neg{color:#fca5a5}.dchip .dv.pos{color:#86efac}.dchip .dv.flat{color:#94a3b8}
 @media(max-width:820px){.exp-mid{flex-direction:row}.exp-mid .vs{display:none}.exp-mid .dchips{flex-direction:row;flex:1}.dchip{flex:1}}
-.exp-meta{margin-top:14px;font-size:10.5px;color:#8F9EBF;line-height:1.7;text-align:center;background:rgba(10,15,26,.5);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:9px 13px}
+.exp-meta{margin-top:14px;font-size:10.5px;color:#8fa3bf;line-height:1.7;text-align:center;background:rgba(10,15,26,.5);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:9px 13px}
 /* 分享 */
 .share-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:4px 0 14px}
 .share-btn{display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:13px 16px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;transition:.2s}
-.share-btn.pri{background:linear-gradient(135deg,#CF9031,#D5B94A);color:#14110C;box-shadow:0 4px 16px rgba(245,158,11,.35)}
-.share-btn.sec{background:rgba(56,189,248,.16);border:1px solid rgba(56,189,248,.4);color:#93D2E6}
+.share-btn.pri{background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#1a1206;box-shadow:0 4px 16px rgba(245,158,11,.35)}
+.share-btn.sec{background:rgba(56,189,248,.16);border:1px solid rgba(56,189,248,.4);color:#7dd3fc}
 .share-btn.ghost{background:rgba(255,255,255,.06);border:1px solid var(--glass-b);color:var(--ink2)}
 .share-qr{display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:rgba(10,15,26,.5);border:1px dashed rgba(125,211,252,.3);border-radius:12px;padding:14px 16px}
-.share-qr img{width:118px;height:118px;background:#F2F2F2;padding:7px;border-radius:10px;flex:none}
+.share-qr img{width:118px;height:118px;background:#fff;padding:7px;border-radius:10px;flex:none}
 .share-qr .qr-t{font-size:12px;color:var(--ink2);line-height:1.8;flex:1;min-width:200px}
-.share-qr .qr-link{font-size:10.5px;color:#93D2E6;word-break:break-all;margin-top:6px}
+.share-qr .qr-link{font-size:10.5px;color:#7dd3fc;word-break:break-all;margin-top:6px}
 /* 深度阅读 details */
 .deep-divider{display:flex;align-items:center;gap:14px;justify-content:center;margin:28px 4px 16px;color:var(--warm);font-size:13px;font-weight:700;letter-spacing:1px}
 .deep-divider .dd-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(251,191,36,.45),transparent)}
@@ -284,8 +284,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <link rel="stylesheet" href="ui/ui.css">
 <link rel="stylesheet" href="ui/ui-pages.css">
-<link rel="stylesheet" href="ui/skin.css?v=20261106">
-</head><body class="sk-ending">
+</head><body>
 
 
 
@@ -298,11 +297,11 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
     <div class="hero-in">
       <div class="kick">10 · 结 语</div>
       <h1>一场变化，如何影响一座城市，<br>以及<b>每一个普通人</b>的生活。</h1>
-      <p>基于同一套推演和你报告页的连接，我们把数据变化放回真实的城市场景，看看它可能带来的连锁影响。交通、工作、消费、居住，最终都会抵达某个人的日子。</p>
+      <p>基于同一模型和你在第⑧页的连接，我们把数据变化放回真实的城市场景，看看它可能带来的连锁影响。交通、工作、消费、居住，最终都会抵达某个人的日子。</p>
     </div>
     <div class="hero-pills">
       <span class="hpill"> 承接你刚才的实验设置</span>
-      <span class="hpill"> 同一套假设 · 同样跑法</span>
+      <span class="hpill"> 同一模型 · 同一随机种子</span>
       <span class="hpill">️ 压力测试叙事 · 非预测</span>
     </div>
   </div>
@@ -356,23 +355,23 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
         <button class="cs-btn" id="csBtn">⏳ 让关键项目晚一年</button>
       </div>
     </div>
-    <div class="stage-note">画面为关系假设的视觉叙事，用于帮助理解“牵一发而动全身”，<b>不是根据 OD 出行或产业投入产出数据计算出的真实空间传播强度</b>；具体数值以下方推演结果为准。</div>
+    <div class="stage-note">画面为关系假设的视觉叙事，用于帮助理解“牵一发而动全身”，<b>不是根据 OD 出行或产业投入产出数据计算出的真实空间传播强度</b>；具体数值以下方模型结果为准。</div>
   </div>
 
-  <!-- ② 这是你刚刚亲手改变的惠城（真实模型结果，承接报告页） -->
+  <!-- ② 这是你刚刚亲手改变的惠城（真实模型结果，承接第⑧页） -->
   <div class="card">
     <h2> 这是你刚刚亲手改变的惠城</h2>
     <div class="exp-bar">
       <span class="cur-tag" id="curTag">你的情景：基准情景</span>
-      <span style="font-size:11px;color:var(--muted)">基于你在报告页（或风洞页）的设置，用同一套推演重新计算</span>
-      <a class="back-link" href="report.html">️ 回到报告页改条件</a>
+      <span style="font-size:11px;color:var(--muted)">基于你在第⑧页（或风洞页）的设置，用同一模型重新计算</span>
+      <a class="back-link" href="report.html">️ 回到第⑧页改条件</a>
     </div>
     <div class="exp-grid">
       <div class="exp-side base">
         <div class="es-tag">🅰 基准情景（按当前规划推进）</div>
         <div class="es-row"><span class="k">2030 达标率（≥1500亿）</span><span class="v" id="bHit">—</span></div>
-        <div class="es-row"><span class="k">中位产值</span><span class="v" id="bP">—</span></div>
-        <div class="es-range">可能区间 偏悲观–偏乐观：<b id="bR">—</b></div>
+        <div class="es-row"><span class="k">中位产值 P50</span><span class="v" id="bP">—</span></div>
+        <div class="es-range">不确定性区间 P10–P90：<b id="bR">—</b></div>
         <div class="dist-box"><canvas id="bDist"></canvas></div>
       </div>
       <div class="exp-mid">
@@ -386,20 +385,20 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
       <div class="exp-side cur">
         <div class="es-tag" id="cTag">🅱 你的情景</div>
         <div class="es-row"><span class="k">2030 达标率（≥1500亿）</span><span class="v" id="cHit">—</span></div>
-        <div class="es-row"><span class="k">中位产值</span><span class="v" id="cP">—</span></div>
-        <div class="es-range">可能区间 偏悲观–偏乐观：<b id="cR">—</b></div>
+        <div class="es-row"><span class="k">中位产值 P50</span><span class="v" id="cP">—</span></div>
+        <div class="es-range">不确定性区间 P10–P90：<b id="cR">—</b></div>
         <div class="dist-box"><canvas id="cDist"></canvas></div>
       </div>
     </div>
-    <details class="ds-fold" style="margin:8px 0 0"><summary>口径与边界说明</summary><div class="ds-fold-inner exp-meta" id="expMeta">基准 632.7 亿（2025 惠城高新区规上工业产值实测，非全区 GDP）· 参考线 1500 亿（不是官方目标）；几重压力同时发生时按叠加处理。<br>本结果为压力测试叙事，<b>不是预测，不构成投资建议</b>。</div></details>
+    <details class="ds-fold" style="margin:8px 0 0"><summary>模型口径与边界说明</summary><div class="ds-fold-inner exp-meta" id="expMeta">模型版本 v1.0 · 随机种子 42 · 单次 2 万次蒙特卡洛 · BASE 632.7 亿（2025 惠城高新区规上工业产值实测，非全区 GDP）· TARGET 1500 亿（外延参考刻度，非官方目标）；压力叠加采用累计口径，与第⑥风洞页、第⑧报告页完全一致。<br>本结果为压力测试叙事，<b>不是预测，不构成投资建议</b>。</div></details>
   </div>
 
   <!-- ③ 继续你的实验 -->
   <div class="card">
     <h2>️ 继续你的实验</h2>
-    <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 14px">以上是你当前条件下的推演结果。可以回到报告页调整压力档位，或换一组情景再跑一次——这组结果只在本机本页查看，不向外导出。</p>
+    <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 14px">以上是你当前条件下的模型结果。可以回到报告页调整压力档位，或换一组情景再跑一次——这组结果只在本机本页查看，不向外导出。</p>
     <div class="share-grid">
-      <a class="share-btn pri" href="report.html#d=0&c=0">️ 回到报告页改条件</a>
+      <a class="share-btn pri" href="report.html#d=0&c=0">️ 回到第⑧页改条件</a>
       <a class="share-btn sec" href="windtunnel.html"> 再次挑战不同情景</a>
     </div>
   </div>
@@ -460,25 +459,77 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
       </div>
       <div class="world-detail" id="worldDetail"></div>
       <div class="wm-hint">点亮一个光点 · 看它的实际用途、数据特点，以及与惠城模拟器的区别</div>
-      <div class="note" style="margin-top:14px">这些地方并非比我们更聪明，而是更早懂得——<b style="color:#fbbf24">决策前多花一分“算”的功夫，决策后就能少交十分“试错”的学费。</b><br>它们分属数字孪生、区域经济推演、三维数据底座、证据评估等不同技术路线，并非同一种东西；惠城做的是其中“产业经济推演”的轻量一角。</div>
+      <div class="note" style="margin-top:14px">这些地方并非比我们更聪明，而是更早懂得——<b style="color:#fbbf24">决策前多花一分“算”的功夫，决策后就能少交十分“试错”的学费。</b><br>它们分属数字孪生、区域经济模型、三维数据底座、证据评估等不同技术路线，并非同一种东西；惠城做的是其中“产业经济推演”的轻量一角。</div>
     </div>
   </details>
 
-  >
-
-  >
-
-    <!-- 数据可靠吗 -->
+  <!-- 数据怎么来：双轨 -->
   <details class="dcard">
-    <summary>这台风洞的数据可靠吗？</summary>
+    <summary>这台风洞的数据可靠吗？（数据双轨更新）</summary>
     <div class="dbody">
+      <div class="flows">
+        <div class="flow-branch daily">
+          <div class="bh"> 每日热点数据 · 每天自动刷新</div>
+          <div class="bf">喂给首页「今日话题」「今夜人气」，追踪的是大家在关注什么；每条都带真实来源链接。</div>
+          <div class="flow-rail"><span class="pulse-dot"></span></div>
+          <div class="flow-steps">
+            <div class="fs"><div class="fc"></div><div class="ft">公开采集</div><div class="fd">政府公报·权威媒体·社交平台</div></div>
+            <div class="fs"><div class="fc"></div><div class="ft">声量分档</div><div class="fd">只排高低，非平台后台统计</div></div>
+            <div class="fs"><div class="fc"></div><div class="ft">结构校验</div><div class="fd">字段校验通过才放行</div></div>
+            <div class="fs"><div class="fc"></div><div class="ft">每日上线</div><div class="fd">hot.json · life.json</div></div>
+          </div>
+        </div>
+        <div class="flow-branch model">
+          <div class="bh"> 模型参数 · 不随每日热点自动改变</div>
+          <div class="bf">喂给「产业风洞」推演；只有官方新锚点、经过证据审核才会调整，绝不拿传闻直接改模型。</div>
+          <div class="flow-rail"><span class="pulse-dot"></span></div>
+          <div class="flow-steps">
+            <div class="fs"><div class="fc"></div><div class="ft">官方实测锚点</div><div class="fd">统计公报·政府工作报告</div></div>
+            <div class="fs"><div class="fc"></div><div class="ft">证据审核</div><div class="fd">须权威来源·人工核对</div></div>
+            <div class="fs"><div class="fc">️</div><div class="ft">参数修订</div><div class="fd">改 model.js 并写明依据</div></div>
+            <div class="fs"><div class="fc"></div><div class="ft">进入推演</div><div class="fd">路径 μ/σ 才更新</div></div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;font-size:11.5px;color:#fcd34d;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25);border-radius:10px;padding:9px 12px;margin:0 0 14px;line-height:1.7">️ 每天更新的是「大家在看什么」，<b>不代表模型参数每天在变</b>；涉及模型参数的事件，必须先通过证据审核。</div>
       <div class="grid6">
-        <div class="feat"><div class="ic"></div><b>每条可回原文</b><span>公报、官方发布、主流媒体、本地事，都能点回去看原文。</span></div>
-        <div class="feat"><div class="ic"></div><b>每天更新一次</b><span>读的是今天这一份，不是随时在变；每天变的只是「大家在关注什么」。</span></div>
-        <div class="feat"><div class="ic"></div><b>数字是合理估算</b><span>不是平台后台真实统计，只用来分先后、看冷热。</span></div>
-        <div class="feat"><div class="ic"></div><b>能回头核对</b><span>每个结论都能回到公开资料核对；条件不同，结论也会不同。</span></div>
+        <div class="feat"><div class="ic"></div><b>来源公开</b><span>政府公开公报、官方发布、主流媒体，以及公开社交平台上的本地事，每条都能点回去看原文。</span></div>
+        <div class="feat"><div class="ic">️</div><b>每天更新一次</b><span>统计最近24小时的公开讨论，读的是今天这一份，不是随时在变。</span></div>
+        <div class="feat"><div class="ic"></div><b>数字是合理估算</b><span>按公开热度估的，不是平台后台真实统计，只用来排先后、看冷热。</span></div>
+        <div class="feat"><div class="ic"></div><b>能回头核对</b><span>“推演”是把公开条件换着组合、重复跑很多遍看区间，不是预测，更不是官方结论。</span></div>
         <div class="feat"><div class="ic"></div><b>补充一个视角</b><span>在官方规划和已有成绩基础上多给一个看问题的角度，不是说谁对谁错。</span></div>
-        <div class="feat"><div class="ic"></div><b>独立</b><span>张凌博士个人业余时间所做，没有课题、没有赞助，欢迎挑错。</span></div>
+        <div class="feat"><div class="ic"></div><b>独立、开源</b><span>张凌博士个人业余时间所做，没有课题、没有赞助，代码与参数全部公开，欢迎挑错。</span></div>
+      </div>
+    </div>
+  </details>
+
+  <!-- 六项能力真实状态 + 升级阶梯 -->
+  <details class="dcard">
+    <summary>六项能力的真实开发状态（不打主观分）</summary>
+    <div class="dbody">
+      <p style="font-size:12.5px;color:#cbd5e1;margin:0 0 4px">不画主观分数，只按真实开发状态，把六个方向已做了什么、待验证什么、还要补什么逐条摆出来。</p>
+      <div class="cap-list">
+        <div class="cap-row"><div class="ch"><span class="ic">️</span><span class="nm">更全 · 压力测试广度</span><span class="st wip">进行中</span></div>
+          <div class="cap-lines"><div class="li yes"><span class="mk"></span><span>已做：投产延期、通勤堵塞、外需走弱，以及“延期+通勤”叠加情景。</span></div><div class="li no"><span class="mk">○</span><span>待补：极端天气、产业链断点、政策突变等多重压力同时发生的组合。</span></div></div></div>
+        <div class="cap-row"><div class="ch"><span class="ic"></span><span class="nm">更准 · 找“命门”的精度</span><span class="st wip">进行中</span></div>
+          <div class="cap-lines"><div class="li yes"><span class="mk"></span><span>已做：五条路径参数微分（敏感性）、26主体介数中心性、5路相关系数。</span></div><div class="li no"><span class="mk">○</span><span>待补：从“路径级”下沉到“单个项目/地块级”，需要企业与地块粒度数据。</span></div></div></div>
+        <div class="cap-row"><div class="ch"><span class="ic"></span><span class="nm">更稳 · 上万次推演的稳健性</span><span class="st done">已具备</span></div>
+          <div class="cap-lines"><div class="li yes"><span class="mk"></span><span>已做：单次 2 万次蒙特卡洛，给出 p10/p50/p90 区间与达标率，而非一个数字。</span></div><div class="li now"><span class="mk">◐</span><span>待验证：不同随机种子下结论是否同样稳定。</span></div></div></div>
+        <div class="cap-row"><div class="ch"><span class="ic"></span><span class="nm">更实 · 数据真实程度</span><span class="st wip">进行中</span></div>
+          <div class="cap-lines"><div class="li yes"><span class="mk"></span><span>已做：GDP、规上工业、高新区、固投、社消零等均用统计公报/政府工作报告实测锚点。</span></div><div class="li now"><span class="mk">◐</span><span>待验证：五条路径 μ/σ 目前是专家设定的假设，不是实测分布。</span></div><div class="li no"><span class="mk">○</span><span>待补：通勤 OD、就业、教育、交通等真实数据源。</span></div></div></div>
+        <div class="cap-row"><div class="ch"><span class="ic">️</span><span class="nm">更开 · 可交互、可核对</span><span class="st done">已具备</span></div>
+          <div class="cap-lines"><div class="li yes"><span class="mk"></span><span>已做：参数可改、情景开关、结论可复制，代码与参数全部开源，每条话题带真实来源链接。</span></div></div></div>
+        <div class="cap-row"><div class="ch"><span class="ic"></span><span class="nm">更远 · 从“看见”到“怎么走”</span><span class="st todo">待做</span></div>
+          <div class="cap-lines"><div class="li yes"><span class="mk"></span><span>已做：指出脆弱点、给出优先方向。</span></div><div class="li no"><span class="mk">○</span><span>待补：与一线一起共创，推演具体行动怎么走、先后如何排、效果如何回测。</span></div></div></div>
+      </div>
+      <p style="font-size:11px;color:#8fa3bf;text-align:center;margin:12px 0 0;line-height:1.8">以上为 Demo 真实开发状态，<b style="color:#fbbf24">不是主观打分，也不代表任何机构测评</b>； 已做到　◐ 待验证　○ 待补数据。</p>
+      <div class="stair" style="margin-top:18px">
+        <div class="step-card"><div class="ic">️</div><div class="tx"><div class="lv">更全</div><h4>更多压力测试</h4><p>极端天气、产业链断点、外部冲击、政策变化等组合情景。</p></div></div>
+        <div class="step-card"><div class="ic"></div><div class="tx"><div class="lv">更准</div><h4>更细找“命门”</h4><p>把每个项目、每条关系、每个参数逐一扰动，精确找出最不能出错的位置。</p></div></div>
+        <div class="step-card"><div class="ic"></div><div class="tx"><div class="lv">更稳</div><h4>上万次推演</h4><p>让未来在不同条件下反复演化，给出更稳健的可能性分布。</p></div></div>
+        <div class="step-card"><div class="ic"></div><div class="tx"><div class="lv">更实</div><h4>更真实数据</h4><p>对接统计、交通、就业、教育等真实数据源，逐步减少假设。</p></div></div>
+        <div class="step-card"><div class="ic">️</div><div class="tx"><div class="lv">更开</div><h4>可交互可核对</h4><p>决策者自己改参数、提问题、现场推演，每一步都能回到公开资料。</p></div></div>
+        <div class="step-card"><div class="ic"></div><div class="tx"><div class="lv">更远</div><h4>从看见到怎么走</h4><p>和一线一起，推演具体行动怎么走、先后如何排。</p></div></div>
       </div>
     </div>
   </details>
@@ -527,7 +578,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
       diff:'它本质是“证据评估机构”，重在评判政策有没有效；惠城不是评级机构，而是一个可交互的产业经济推演工具。'},
     us:{fl:'🇺🇸',cn:'美国',pj:'REMI / IMPLAN 区域经济模型',
       dl:'州和地方政府常用，加税、修路、建房、能源政策出台前，先算清会带来多少就业、多少收入。',
-      diff:'属于成熟的区域经济计量模型（投入产出）；惠城用反复推演，更侧重路径之间的关联与可能区间。'},
+      diff:'属于成熟的区域经济计量模型（投入产出）；惠城用蒙特卡洛网络推演，更侧重路径关联与不确定性区间。'},
     jp:{fl:'🇯🇵',cn:'日本',pj:'Project PLATEAU',
       dl:'国土交通省主导，为约250个城市建成三维城市模型并开放数据，城市规划、防洪防灾都先在上面模拟。',
       diff:'它是“三维空间数据底座”，对象是城市空间；惠城是“产业经济层”的推演，不做空间三维建模。'},
@@ -555,7 +606,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
   });
 })();
 
-/* ============ 承接报告页真实实验：同一套假设、同样跑法 ============ */
+/* ============ 承接第⑧页真实实验：同一模型、同一随机种子 ============ */
 (function(){
   if(typeof HT==='undefined')return;
   const SEED=42,N=20000;
@@ -573,7 +624,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
   const BASE=RES[0];
   const fmt=v=>Math.round(v).toLocaleString('zh-CN');
 
-  // 读取报告页共享状态（hash 优先，其次 localStorage）
+  // 读取第⑧页共享状态（hash 优先，其次 localStorage）
   function readState(){
     let d=0,c=0;
     const m=location.hash.match(/d=(\d+).*c=(\d+)/);
@@ -628,7 +679,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
       else{el.textContent=(v>0?'+':'−')+Math.abs(v)+unit;el.className='dv '+((rev?v>0:v<0)?'neg':'pos');}};
     setD('dHit',dHit,' pp',true);
     setD('dP',dP,' 亿',true);
-    $('dR').textContent=ci===0?'—':(dP10>0?'+':'−')+Math.abs(dP10)+' 亿（偏悲观）';
+    $('dR').textContent=ci===0?'—':(dP10>0?'+':'−')+Math.abs(dP10)+' 亿（P10）';
     $('dR').className='dv '+(ci===0?'flat':(dP10<0?'neg':'pos'));
     // 重绘当前分布
     const bins=hist(r.rawResults||r.results);
@@ -679,6 +730,5 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-<script src="hc-viz/data.js"></script>
-<script src="ui/ui.js?v=20261109" defer></script>
+<script src="ui/ui.js" defer></script>
 </body></html>
