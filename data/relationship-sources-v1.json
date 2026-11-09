@@ -1,1 +1,595 @@
-{"schema_version":"relationship-sources-v1","region":"huicheng","generated_at":"2026-11-06 21:40","count":23,"note":"数据按公开来源整理；同一事件的不同转载不重复计数。","sources":[{"source_id":"S001","title":"2026年惠城区政府工作报告（GDP1203.33亿/工业937.92亿/固投-37.1%等基线）","publisher":"惠城区人民政府","source_type":"政府文件","url":"http://www.hcq.gov.cn/zfxxgkml/hzshcqzf/zfgzbg/content/mpost_5732355.html","published_at":"2026-03-17","collected_at":"2026-10-29","region":"huicheng","period":"2026","summary":"2026年惠城区政府工作报告（GDP1203.33亿/工业937.92亿/固投-37.1%等基线）"},{"source_id":"S002","title":"2026年1-8月惠城区经济运行简况（工业+1.4%/固投-45.4%/外贸+10.5%/社消+1.0%）","publisher":"惠城区统计局","source_type":"官方统计","url":"https://www.hcq.gov.cn/zwgk/sjfb/tjfx/content/post_5864155.html","published_at":"2026-10-08","collected_at":"2026-10-29","region":"huicheng","period":"2026","summary":"2026年1-8月惠城区经济运行简况（工业+1.4%/固投-45.4%/外贸+10.5%/社消+1.0%）"},{"source_id":"S003","title":"惠城区第十次党代会：三地五城、南部AI产业经济带","publisher":"南方+","source_type":"媒体报道","url":"https://www.nfnews.com/content/K3BDZ141oY.html","published_at":"2026-10-27","collected_at":"2026-10-29","region":"huicheng","period":"2026","summary":"惠城区第十次党代会：三地五城、南部AI产业经济带"},{"source_id":"S004","title":"2026年1-9月惠城138宗重点项目完成投资103.05亿元","publisher":"惠城区政府·重点建设项目","source_type":"政府文件","url":"http://www.hcq.gov.cn/hcqzdlyxxgk/zdjsxm/ssqk/content/post_5872769.html","published_at":"2026-10-16","collected_at":"2026-10-29","region":"huicheng","period":"2026","summary":"2026年1-9月惠城138宗重点项目完成投资103.05亿元"},{"source_id":"S005","title":"惠州第一高桥东江特大桥全桥合龙，惠霞高速冲刺年内通车","publisher":"广东省交通运输厅","source_type":"政府文件","url":"https://td.gd.gov.cn/gkmlpt/content/4/4963/mpost_4963897.html","published_at":"2026-10-21","collected_at":"2026-10-29","region":"huicheng","period":"2026","summary":"惠州第一高桥东江特大桥全桥合龙，惠霞高速冲刺年内通车"},{"source_id":"S006","title":"金澜新材料竞地落子惠城高新区（10.5亿）","publisher":"惠州市人民政府/惠州日报","source_type":"媒体报道","url":"https://www.huizhou.gov.cn/zwgk/hzsz/zwyw/content/mpost_5870128.html","published_at":"2026-10-13","collected_at":"2026-10-29","region":"huicheng","period":"2026","summary":"金澜新材料竞地落子惠城高新区（10.5亿）"},{"source_id":"S007","title":"天濠新材料半固态镁合金项目在惠城高新区奠基开工（4.84亿）","publisher":"惠城高新区管委会","source_type":"政府文件","url":"http://www.hcq.gov.cn/hzhckjyglw/gkmlpt/content/5/5785/post_5785894.html","published_at":"2026-06-09","collected_at":"2026-10-29","region":"huicheng","period":"2026","summary":"天濠新材料半固态镁合金项目在惠城高新区奠基开工（4.84亿）"},{"source_id":"S008","title":"天濠新材料与海天智胜签署战略合作（镁合金成型装备）","publisher":"贤集网/压铸行业","source_type":"媒体报道","url":"https://wtt.xianjichina.com/forum/details_642661","published_at":"2026-09-14","collected_at":"2026-10-29","region":"huicheng","period":"2026","summary":"天濠新材料与海天智胜签署战略合作（镁合金成型装备）"},{"source_id":"S009","title":"胜宏AI高端智造产业园项目落户惠城区（摘牌）","publisher":"惠城区政府·投资促进","source_type":"政府文件","url":"http://www.hcq.gov.cn/hzhctczx/gkmlpt/content/5/5831/mpost_5831203.html","published_at":"2026-08-13","collected_at":"2026-10-29","region":"huicheng","period":"2026","summary":"胜宏AI高端智造产业园项目落户惠城区（摘牌）"},{"source_id":"S010","title":"惠城五年经济之变：胜宏30亿AI高端电路智造摘牌、沃尔核材大湾区制造中心落户","publisher":"南方+","source_type":"媒体报道","url":"http://m.toutiao.com/group/7698303822905360934/","published_at":"2026-10-19","collected_at":"2026-10-29","region":"huicheng","period":"2026","summary":"惠城五年经济之变：胜宏30亿AI高端电路智造摘牌、沃尔核材大湾区制造中心落户"},{"source_id":"S011","title":"润众高精密度线路板智能化技术改造项目节能审查意见（4256.6万，12月投产）","publisher":"惠城区发改局","source_type":"项目公示","url":"http://www.hcq.gov.cn/zfxxgkml/hcqfzggj/bmwj/content/post_5840202.html","published_at":"2026-08-27","collected_at":"2026-10-29","region":"huicheng","period":"2026","summary":"润众高精密度线路板智能化技术改造项目节能审查意见（4256.6万，12月投产）"},{"source_id":"S012","title":"下良人才社区300套投用、荔枝城邻里中心890套保障房封顶","publisher":"南方+","source_type":"媒体报道","url":"https://www.nfnews.com/content/1y0lxOAMyB.html","published_at":"2026-10-24","collected_at":"2026-10-29","region":"huicheng","period":"2026","summary":"下良人才社区300套投用、荔枝城邻里中心890套保障房封顶"},{"source_id":"S013","title":"惠城企业会客厅揭牌启用（首批约300家重点企业）","publisher":"惠州市人民政府","source_type":"政府文件","url":"https://www.huizhou.gov.cn/zwgk/hzsz/xqyw/content/post_5880050.html","published_at":"2026-10-27","collected_at":"2026-10-29","region":"huicheng","period":"2026","summary":"惠城企业会客厅揭牌启用（首批约300家重点企业）"},{"source_id":"S014","title":"惠州市人工智能与机器人产业创新发展实施方案（2026-2030）已印发","publisher":"惠州市人民政府（提案答复引用）","source_type":"政府文件","url":"https://www.huizhou.gov.cn/zfxxgkml/hzsnyhzdxmj/jytagk/content/mpost_5834858.html","published_at":"2026-08-19","collected_at":"2026-10-29","region":"huicheng","period":"2026","summary":"惠州市人工智能与机器人产业创新发展实施方案（2026-2030）已印发"},{"source_id":"S015","title":"惠城区人工智能与机器人产业创新发展实施方案（2026-2030）制定中（提案答复）","publisher":"惠城区发改局","source_type":"政府文件","url":"http://www.hcq.gov.cn/hzhcfgj/gkmlpt/content/5/5878/post_5878490.html","published_at":"2026-10-23","collected_at":"2026-10-29","region":"huicheng","period":"2026","summary":"惠城区人工智能与机器人产业创新发展实施方案（2026-2030）制定中（提案答复）"},{"source_id":"S016","title":"第六届粤港澳大湾区文化艺术节10/31开幕，惠州承办吉他展演","publisher":"惠州文明网/惠州日报","source_type":"媒体报道","url":"http://hz.wenming.cn/ecjj/202610/t20261014_9379785.htm","published_at":"2026-10-14","collected_at":"2026-10-29","region":"huicheng","period":"2026","summary":"第六届粤港澳大湾区文化艺术节10/31开幕，惠州承办吉他展演"},{"source_id":"S017","title":"惠城区第十次党代会报告：以利元亨为龙头培育AI/机器人链属","publisher":"惠州日报","source_type":"媒体报道","url":"http://e.hznews.com/hzrb/pc/content/202610/28/content_1134303.html","published_at":"2026-10-28","collected_at":"2026-10-29","region":"huicheng","period":"2026","summary":"惠城区第十次党代会报告：以利元亨为龙头培育AI/机器人链属"},{"source_id":"S018","title":"环西湖丰渚园商区综合体项目施工中标（2.373亿元，工期480日历天）","publisher":"惠城发布（引广东省公共资源交易平台）","source_type":"媒体报道","url":"http://m.toutiao.com/group/7703862474830791231/","published_at":"2026-11-03","collected_at":"2026-11-06","region":"huicheng","period":"2026","summary":"原君豪酒店旧址地块，用地约17737㎡、总建面33594㎡，商业+精品酒店，350车位/70间客房，2026年8月以13290万元底价成交"},{"source_id":"S019","title":"20261103受理公示：西湖及周边区域更新优化工程（一期）丰山片区提升项目获受理","publisher":"惠州市惠城区自然资源局","source_type":"政府文件","url":"http://www.hcq.gov.cn/hzhczrzyj/gkmlpt/content/5/5886/post_5886347.html","published_at":"2026-11-04","collected_at":"2026-11-06","region":"huicheng","period":"2026","summary":"11月3日受理下角南路慈云路至丰山路段市政工程规划许可，同时受理马安南园基础设施一期设计审查、两宗配售型保障房报建"},{"source_id":"S020","title":"2026年1-9月惠城区经济运行简况（GDP883.46亿/+1.1%，工业+0.8%，固投-40.7%）","publisher":"惠城区统计局","source_type":"官方统计","url":"http://www.hcq.gov.cn/zfxxgkml/hcqtjj/ywgz/content/post_5886184.html","published_at":"2026-11-03","collected_at":"2026-11-06","region":"huicheng","period":"2026","summary":"前三季度GDP883.46亿+1.1%；二产237.92亿-1.6%；规上工业+0.8%；固投-40.7%；社消零622.07亿+2.0%；进出口337.0亿+11.4%"},{"source_id":"S021","title":"20261104受理公示：博鑫智能驾舱规划条件核实、乐朗(上良)110千伏输变电用地许可、群鑫达厂房核验","publisher":"惠州市惠城区自然资源局","source_type":"政府文件","url":"http://www.hcq.gov.cn/hzhczrzyj/gkmlpt/content/5/5887/post_5887764.html","published_at":"2026-11-05","collected_at":"2026-11-06","region":"huicheng","period":"2026","summary":"11月4日受理14宗：博鑫智能驾舱研发制造项目（鹿岗片区LG02-01-06-03）规划条件核实合格；110千伏乐朗（上良）输变电工程（马安LG02-02-11-01）建设用地规划许可；群鑫达生产厂房规划核实；河南岸HNAHJL-01保障性租赁住房规划许可"},{"source_id":"S022","title":"惠城区资源交易中心建设工程公告：政府控制资源光伏发电项目（一期）EPC中标、马安南园土方回填评标","publisher":"惠城区资源交易中心","source_type":"政府文件","url":"http://www.hcq.gov.cn/zfxxgkml/hcqzyjyzx/ywgz/jsgc/index.html","published_at":"2026-11-05","collected_at":"2026-11-06","region":"huicheng","period":"2026","summary":"11月5日政府控制资源光伏发电项目（一期）EPC中标公告、高新园区马安南园MAN01-05-15地块土方回填（一标段）评标公示、高标准农田新建250亩招标；11月2日丰渚园商区综合体施工中标"},{"source_id":"S023","title":"惠城5宗产业类重点项目密集动工：博鑫智能驾舱、群鑫达等在列（总用地12万㎡、总投资15亿）","publisher":"惠城区人民政府","source_type":"政府文件","url":"http://www.hcq.gov.cn/hzhczdjsxmbgs/gkmlpt/content/5/5560/post_5560754.html","published_at":"2025-07-07","collected_at":"2026-11-06","region":"huicheng","period":"2025","summary":"2025年6月以来乐庭智联二期、辉翰储能、群鑫达智能制造、博鑫智能驾舱、立得微电子5宗产业项目密集动工，总用地12万㎡、总投资15亿元"}]}
+{
+  "schema_version": "relationship-sources-v1",
+  "region": "huicheng",
+  "generated_at": "2026-11-09 17:25",
+  "count": 33,
+  "note": "转载不视为独立来源；可信度按发布机构与可核验性评定。2026-11-09 17:25 核验：新增 S031（市一院三期用地预审批前公示，11-09）、S032（南方+ 市一院扩建，11-08）、S033（横沥盐径村石场生态修复方案评审，11-09，存量在采矿山例行评审，不建边）、S034（4家惠企拟认定跨国总部，11-08）；修正上期 S030 断号回填为 S029。",
+  "sources": [
+    {
+      "source_id": "S001",
+      "title": "2026年惠城区政府工作报告（GDP1203.33亿/工业937.92亿/固投-37.1%等基线）",
+      "publisher": "惠城区人民政府",
+      "source_type": "政府文件",
+      "url": "http://www.hcq.gov.cn/zfxxgkml/hzshcqzf/zfgzbg/content/mpost_5732355.html",
+      "published_at": "2026-03-17",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "hc",
+        "dz",
+        "gxq"
+      ],
+      "summary": "2026年惠城区政府工作报告（GDP1203.33亿/工业937.92亿/固投-37.1%等基线）",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S002",
+      "title": "2026年1-8月惠城区经济运行简况（工业+1.4%/固投-45.4%/外贸+10.5%/社消+1.0%）",
+      "publisher": "惠城区统计局",
+      "source_type": "官方统计",
+      "url": "https://www.hcq.gov.cn/zwgk/sjfb/tjfx/content/post_5864155.html",
+      "published_at": "2026-10-08",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "hc",
+        "dz"
+      ],
+      "summary": "2026年1-8月惠城区经济运行简况（工业+1.4%/固投-45.4%/外贸+10.5%/社消+1.0%）",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S003",
+      "title": "惠城区第十次党代会：三地五城、南部AI产业经济带",
+      "publisher": "南方+",
+      "source_type": "媒体报道",
+      "url": "https://www.nfnews.com/content/K3BDZ141oY.html",
+      "published_at": "2026-10-27",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "hc",
+        "ai"
+      ],
+      "summary": "惠城区第十次党代会：三地五城、南部AI产业经济带",
+      "credibility": "媒体报道，中高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S004",
+      "title": "2026年1-9月惠城138宗重点项目完成投资103.05亿元",
+      "publisher": "惠城区政府·重点建设项目",
+      "source_type": "政府文件",
+      "url": "http://www.hcq.gov.cn/hcqzdlyxxgk/zdjsxm/ssqk/content/post_5872769.html",
+      "published_at": "2026-10-16",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "gxq"
+      ],
+      "summary": "2026年1-9月惠城138宗重点项目完成投资103.05亿元",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S005",
+      "title": "惠州第一高桥东江特大桥全桥合龙，惠霞高速冲刺年内通车",
+      "publisher": "广东省交通运输厅",
+      "source_type": "政府文件",
+      "url": "https://td.gd.gov.cn/gkmlpt/content/4/4963/mpost_4963897.html",
+      "published_at": "2026-10-21",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "jt"
+      ],
+      "summary": "惠州第一高桥东江特大桥全桥合龙，惠霞高速冲刺年内通车",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S006",
+      "title": "金澜新材料竞地落子惠城高新区（10.5亿）",
+      "publisher": "惠州市人民政府/惠州日报",
+      "source_type": "媒体报道",
+      "url": "https://www.huizhou.gov.cn/zwgk/hzsz/zwyw/content/mpost_5870128.html",
+      "published_at": "2026-10-13",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "jl",
+        "gxq"
+      ],
+      "summary": "金澜新材料竞地落子惠城高新区（10.5亿）",
+      "credibility": "媒体报道，中高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S007",
+      "title": "天濠新材料半固态镁合金项目在惠城高新区奠基开工（4.84亿）",
+      "publisher": "惠城高新区管委会",
+      "source_type": "政府文件",
+      "url": "http://www.hcq.gov.cn/hzhckjyglw/gkmlpt/content/5/5785/post_5785894.html",
+      "published_at": "2026-06-09",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "th",
+        "gxq"
+      ],
+      "summary": "天濠新材料半固态镁合金项目在惠城高新区奠基开工（4.84亿）",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S008",
+      "title": "天濠新材料与海天智胜签署战略合作（镁合金成型装备）",
+      "publisher": "贤集网/压铸行业",
+      "source_type": "媒体报道",
+      "url": "https://wtt.xianjichina.com/forum/details_642661",
+      "published_at": "2026-09-14",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "th"
+      ],
+      "summary": "天濠新材料与海天智胜签署战略合作（镁合金成型装备）",
+      "credibility": "媒体报道，单源",
+      "corroborated": false
+    },
+    {
+      "source_id": "S009",
+      "title": "胜宏AI高端智造产业园项目落户惠城区（摘牌）",
+      "publisher": "惠城区政府·投资促进",
+      "source_type": "政府文件",
+      "url": "http://www.hcq.gov.cn/hzhctczx/gkmlpt/content/5/5831/mpost_5831203.html",
+      "published_at": "2026-08-13",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "sh",
+        "gxq"
+      ],
+      "summary": "胜宏AI高端智造产业园项目落户惠城区（摘牌）",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S010",
+      "title": "惠城五年经济之变：胜宏30亿AI高端电路智造摘牌、沃尔核材大湾区制造中心落户",
+      "publisher": "南方+",
+      "source_type": "媒体报道",
+      "url": "http://m.toutiao.com/group/7698303822905360934/",
+      "published_at": "2026-10-19",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "sh",
+        "wr",
+        "dz"
+      ],
+      "summary": "惠城五年经济之变：胜宏30亿AI高端电路智造摘牌、沃尔核材大湾区制造中心落户",
+      "credibility": "媒体报道，中高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S011",
+      "title": "润众高精密度线路板智能化技术改造项目节能审查意见（4256.6万，12月投产）",
+      "publisher": "惠城区发改局",
+      "source_type": "项目公示",
+      "url": "http://www.hcq.gov.cn/zfxxgkml/hcqfzggj/bmwj/content/post_5840202.html",
+      "published_at": "2026-08-27",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "rz",
+        "dz"
+      ],
+      "summary": "润众高精密度线路板智能化技术改造项目节能审查意见（4256.6万，12月投产）",
+      "credibility": "媒体报道，中高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S012",
+      "title": "下良人才社区300套投用、荔枝城邻里中心890套保障房封顶",
+      "publisher": "南方+",
+      "source_type": "媒体报道",
+      "url": "https://www.nfnews.com/content/1y0lxOAMyB.html",
+      "published_at": "2026-10-24",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "rj"
+      ],
+      "summary": "下良人才社区300套投用、荔枝城邻里中心890套保障房封顶",
+      "credibility": "媒体报道，单源",
+      "corroborated": false
+    },
+    {
+      "source_id": "S013",
+      "title": "惠城企业会客厅揭牌启用（首批约300家重点企业）",
+      "publisher": "惠州市人民政府",
+      "source_type": "政府文件",
+      "url": "https://www.huizhou.gov.cn/zwgk/hzsz/xqyw/content/post_5880050.html",
+      "published_at": "2026-10-27",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "fw"
+      ],
+      "summary": "惠城企业会客厅揭牌启用（首批约300家重点企业）",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S014",
+      "title": "惠州市人工智能与机器人产业创新发展实施方案（2026-2030）已印发",
+      "publisher": "惠州市人民政府（提案答复引用）",
+      "source_type": "政府文件",
+      "url": "https://www.huizhou.gov.cn/zfxxgkml/hzsnyhzdxmj/jytagk/content/mpost_5834858.html",
+      "published_at": "2026-08-19",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "ai"
+      ],
+      "summary": "惠州市人工智能与机器人产业创新发展实施方案（2026-2030）已印发",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S015",
+      "title": "惠城区人工智能与机器人产业创新发展实施方案（2026-2030）制定中（提案答复）",
+      "publisher": "惠城区发改局",
+      "source_type": "政府文件",
+      "url": "http://www.hcq.gov.cn/hzhcfgj/gkmlpt/content/5/5878/post_5878490.html",
+      "published_at": "2026-10-23",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "ai"
+      ],
+      "summary": "惠城区人工智能与机器人产业创新发展实施方案（2026-2030）制定中（提案答复）",
+      "credibility": "官方发布，高",
+      "corroborated": false
+    },
+    {
+      "source_id": "S016",
+      "title": "第六届粤港澳大湾区文化艺术节10/31开幕，惠州承办吉他展演",
+      "publisher": "惠州文明网/惠州日报",
+      "source_type": "媒体报道",
+      "url": "http://hz.wenming.cn/ecjj/202610/t20261014_9379785.htm",
+      "published_at": "2026-10-14",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "wh"
+      ],
+      "summary": "第六届粤港澳大湾区文化艺术节10/31开幕，惠州承办吉他展演",
+      "credibility": "媒体报道，单源",
+      "corroborated": false
+    },
+    {
+      "source_id": "S017",
+      "title": "惠城区第十次党代会报告：以利元亨为龙头培育AI/机器人链属",
+      "publisher": "惠州日报",
+      "source_type": "媒体报道",
+      "url": "http://e.hznews.com/hzrb/pc/content/202610/28/content_1134303.html",
+      "published_at": "2026-10-28",
+      "collected_at": "2026-10-29",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "ai",
+        "lyh"
+      ],
+      "summary": "惠城区第十次党代会报告：以利元亨为龙头培育AI/机器人链属",
+      "credibility": "媒体报道，中高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S018",
+      "title": "环西湖丰渚园商区综合体项目施工中标（2.373亿元，工期480日历天）",
+      "publisher": "惠城发布（引广东省公共资源交易平台）",
+      "source_type": "媒体报道",
+      "url": "http://m.toutiao.com/group/7703862474830791231/",
+      "published_at": "2026-11-03",
+      "collected_at": "2026-11-06",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "fz",
+        "wh"
+      ],
+      "summary": "原君豪酒店旧址地块，用地约17737㎡、总建面33594㎡，商业+精品酒店，350车位/70间客房，2026年8月以13290万元底价成交",
+      "credibility": "媒体报道，中高（交易平台公告可核）",
+      "corroborated": false
+    },
+    {
+      "source_id": "S019",
+      "title": "20261103受理公示：西湖及周边区域更新优化工程（一期）丰山片区提升项目获受理",
+      "publisher": "惠州市惠城区自然资源局",
+      "source_type": "政府文件",
+      "url": "http://www.hcq.gov.cn/hzhczrzyj/gkmlpt/content/5/5886/post_5886347.html",
+      "published_at": "2026-11-04",
+      "collected_at": "2026-11-06",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "fz",
+        "wh"
+      ],
+      "summary": "11月3日受理下角南路慈云路至丰山路段市政工程规划许可，同时受理马安南园基础设施一期设计审查、两宗配售型保障房报建",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S020",
+      "title": "2026年1-9月惠城区经济运行简况（GDP883.46亿/+1.1%，工业+0.8%，固投-40.7%）",
+      "publisher": "惠城区统计局",
+      "source_type": "官方统计",
+      "url": "http://www.hcq.gov.cn/zfxxgkml/hcqtjj/ywgz/content/post_5886184.html",
+      "published_at": "2026-11-03",
+      "collected_at": "2026-11-06",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "hc",
+        "dz",
+        "gxq"
+      ],
+      "summary": "前三季度GDP883.46亿+1.1%；二产237.92亿-1.6%；规上工业+0.8%；固投-40.7%；社消零622.07亿+2.0%；进出口337.0亿+11.4%",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S021",
+      "title": "20261104受理公示：博鑫智能驾舱规划条件核实、乐朗(上良)110千伏输变电用地许可、群鑫达厂房核验",
+      "publisher": "惠州市惠城区自然资源局",
+      "source_type": "政府文件",
+      "url": "http://www.hcq.gov.cn/hzhczrzyj/gkmlpt/content/5/5887/post_5887764.html",
+      "published_at": "2026-11-05",
+      "collected_at": "2026-11-06",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "bx",
+        "gxq"
+      ],
+      "summary": "11月4日受理14宗：博鑫智能驾舱研发制造项目（鹿岗片区LG02-01-06-03）规划条件核实合格；110千伏乐朗（上良）输变电工程（马安LG02-02-11-01）建设用地规划许可；群鑫达生产厂房规划核实；河南岸HNAHJL-01保障性租赁住房规划许可",
+      "credibility": "官方发布，高",
+      "corroborated": false
+    },
+    {
+      "source_id": "S022",
+      "title": "惠城区资源交易中心建设工程公告：政府控制资源光伏发电项目（一期）EPC中标、马安南园土方回填评标",
+      "publisher": "惠城区资源交易中心",
+      "source_type": "政府文件",
+      "url": "http://www.hcq.gov.cn/zfxxgkml/hcqzyjyzx/ywgz/jsgc/index.html",
+      "published_at": "2026-11-05",
+      "collected_at": "2026-11-06",
+      "region": "huicheng",
+      "period": "2026",
+      "supports": [
+        "gxq"
+      ],
+      "summary": "11月5日政府控制资源光伏发电项目（一期）EPC中标公告、高新园区马安南园MAN01-05-15地块土方回填（一标段）评标公示、高标准农田新建250亩招标；11月2日丰渚园商区综合体施工中标",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S023",
+      "title": "惠城5宗产业类重点项目密集动工：博鑫智能驾舱、群鑫达等在列（总用地12万㎡、总投资15亿）",
+      "publisher": "惠城区人民政府",
+      "source_type": "政府文件",
+      "url": "http://www.hcq.gov.cn/hzhczdjsxmbgs/gkmlpt/content/5/5560/post_5560754.html",
+      "published_at": "2025-07-07",
+      "collected_at": "2026-11-06",
+      "region": "huicheng",
+      "period": "2025",
+      "supports": [
+        "bx"
+      ],
+      "summary": "2025年6月以来乐庭智联二期、辉翰储能、群鑫达智能制造、博鑫智能驾舱、立得微电子5宗产业项目密集动工，总用地12万㎡、总投资15亿元",
+      "credibility": "官方发布，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S024",
+      "title": "惠州市环西湖丰渚园商区综合体项目施工中标公告（中标价约2.373亿元，工期480日历天）",
+      "publisher": "惠州市公共资源交易中心",
+      "source_type": "项目公示",
+      "url": "https://www.huizhou.gov.cn/hzzyjy/gkmlpt/content/5/5884/post_5884139.html",
+      "published_at": "2026-11-02",
+      "collected_at": "2026-11-07",
+      "region": "惠城区",
+      "period": "2026-2027",
+      "supports": [
+        "E020",
+        "E012",
+        "C008",
+        "wh",
+        "fz"
+      ],
+      "summary": "项目代码2602-441302-04-01-978466；中标人广东省第四建筑工程有限公司[惠州市骏跃建工有限公司]，中标下浮率0.50%；招标人惠州市惠城区惠智投资发展有限公司。属西湖西侧文旅商业配套，建设起止2026年9月至2027年12月。",
+      "credibility": "官方公告，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S025",
+      "title": "GP2026-40挂牌结果公告：惠城区高新科技产业园鹿岗片区04单元LG04-01-11-01地块成交（24206㎡）",
+      "publisher": "惠州市公共资源交易中心",
+      "source_type": "项目公示",
+      "url": "https://www.huizhou.gov.cn/hzzyjy/gkmlpt/content/5/5885/post_5885475.html",
+      "published_at": "2026-11-03",
+      "collected_at": "2026-11-07",
+      "region": "惠城区",
+      "period": "2026",
+      "supports": [
+        "E010",
+        "gxq"
+      ],
+      "summary": "一类工业用地，计算指标用地面积24206㎡，规划建筑面积38730~60515㎡，容积率1.6~2.5，使用年限50年；起始价2430万元，2026-11-02成交，竞得人惠州市鑫慧城投资有限公司（园区平台公司）。属产业载体空间供给，非具体企业投产。",
+      "credibility": "官方公告，高",
+      "corroborated": false
+    },
+    {
+      "source_id": "S026",
+      "title": "惠州市城投安居发展有限公司项目规划许可批前公示（金龙大道东南片区JBD57-07-01地块配售型保障房项目）",
+      "publisher": "惠州市惠城区自然资源局",
+      "source_type": "规划方案",
+      "url": "http://www.hcq.gov.cn/hzhczrzyj/gkmlpt/content/5/5887/post_5887598.html",
+      "published_at": "2026-11-05",
+      "collected_at": "2026-11-07",
+      "region": "惠城区",
+      "period": "2026",
+      "supports": [
+        "E013",
+        "rj"
+      ],
+      "summary": "公示期为2026年11月5日至11月14日，许可编号HCJLGS2026（建设工程规划类）。项目为金龙大道东南片区JBD57-07-01地块配售型保障房，属中心城区安居供给的新子项；总套数未在公示文本中列明。",
+      "credibility": "官方公示，高",
+      "corroborated": false
+    },
+    {
+      "source_id": "S027",
+      "title": "惠城区人民政府关于济广高速公路惠州小金口至广州萝岗段改扩建工程（惠城段）征收土地公告",
+      "publisher": "惠城区人民政府",
+      "source_type": "政府文件",
+      "url": "http://www.hcq.gov.cn/gkmlpt/content/5/5881/post_5881829.html",
+      "published_at": "2026-10-29",
+      "collected_at": "2026-11-07",
+      "region": "惠城区",
+      "period": "2026",
+      "supports": [
+        "E011",
+        "C005",
+        "jt"
+      ],
+      "summary": "征收小金口街道白石村汤一、汤二、汤三村民小组，小铁村小铁、山子村民小组属下集体土地1.7543公顷；公告期限2026年10月29日至11月12日。属工程征地实施阶段，不等于建成通车。",
+      "credibility": "官方文件，高",
+      "corroborated": false
+    },
+    {
+      "source_id": "S028",
+      "title": "20261103受理公示（含金龙大道JBD57-07-01、水口西区JD68-02-04两宗配售型保障房、马安南园基础设施一期、丰山片区提升项目）",
+      "publisher": "惠州市惠城区自然资源局",
+      "source_type": "规划方案",
+      "url": "http://www.hcq.gov.cn/hzhczrzyj/gkmlpt/content/5/5886/post_5886347.html",
+      "published_at": "2026-11-04",
+      "collected_at": "2026-11-08",
+      "region": "惠城区",
+      "period": "2026-11",
+      "supports": [
+        "E013",
+        "E012"
+      ],
+      "summary": "2026年11月3日受理 6 项申请：丰山片区提升项目（西湖及周边区域更新优化工程一期，市政园林事务中心，下角南路）、中韩（惠州）产业园马安南园基础设施工程一期（鑫慧城投资，马安南园01单元）、金龙大道东南片区JBD57-07-01 与 水口西区JD68-02-04 两宗配售型保障房（城投安居，案卷 HCGJ20260139/HCGJ20260140）、立来得照明厂房扩建（群乐路6号）、三角岭公安新村A栋增设电梯。受理公示仅载明申请单位、项目名称与地点，未列投资额、规模与套数。",
+      "credibility": "官方公示，高",
+      "corroborated": false
+    },
+    {
+      "source_id": "S029",
+      "title": "胜宏科技（惠州）股份有限公司《建设用地规划许可证》批前公示",
+      "publisher": "惠州市惠城区自然资源局",
+      "source_type": "规划方案",
+      "url": "http://www.hcq.gov.cn/zfxxgkml/hcqzrzyj/ghgs/pqgs/jsydghxkz/content/post_5885541.html",
+      "published_at": "2026-11-03",
+      "collected_at": "2026-11-08",
+      "region": "惠城区",
+      "period": "2026-11",
+      "supports": [
+        "E004",
+        "sh"
+      ],
+      "summary": "索引号 11441302MB2D297651/2026-00935，成文与发布均为 2026-11-03。属建设用地规划许可批前公示阶段，公示正文未列用地面积、建设规模与投资完成额。",
+      "credibility": "官方公示，高",
+      "corroborated": false
+    },
+    {
+      "source_id": "S031",
+      "title": "惠州市第一人民医院三期建设工程用地预审（选址意见书）批前公示",
+      "publisher": "惠州市惠城区自然资源局",
+      "source_type": "规划方案",
+      "url": "http://www.hcq.gov.cn/hzhczrzyj/gkmlpt/content/5/5890/post_5890084.html",
+      "published_at": "2026-11-09",
+      "collected_at": "2026-11-09",
+      "region": "惠城区",
+      "period": "2026-11",
+      "supports": [
+        "E022"
+      ],
+      "summary": "成文与发布均为 2026-11-09，公示期 2026-11-09 至 2026-11-19。项目单位惠州市第一人民医院，拟选址惠城区江北街道，拟选址用地面积 0.3154 公顷（3154 ㎡）。为综合医院建设项目，拆除原有市中心血站及院内现有发热门诊、液氧站，新建一栋综合外科楼（与院内现状 1、2 号楼连廊连接）及一栋感染楼，总建筑面积 50900 ㎡。该 3154 ㎡ 为三期工程用地中的一部分。正文未列投资额与开工时间。",
+      "credibility": "官方公示，高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S032",
+      "title": "惠州市第一人民医院将扩建（江北JB22地块控规调整经市政府批准实施）",
+      "publisher": "南方+",
+      "source_type": "媒体报道",
+      "url": "https://www.nfnews.com/content/A6EB5mq7oK.html",
+      "published_at": "2026-11-08",
+      "collected_at": "2026-11-09",
+      "region": "惠城区",
+      "period": "2026-11",
+      "supports": [
+        "E022"
+      ],
+      "summary": "江北 JB22 地块部分用地控制性详细规划（调整）已经市政府批准实施并公示，该地块即市一院三期工程项目用地，市中心血站旧址纳入调整范围，两地块合并后计算指标用地面积 47289 ㎡，用地性质为医院用地。新建不少于 123 个地下停车位，配套 1 处配电网开关站、2 处 5G 通信基站机房。项目拟拆除血站及发热门诊共 4945 ㎡，新建含 325 张床位的综合外科大楼与感染楼，地上 12 层、地下 2 层，总建筑面积 50900 ㎡（地上 39500 ㎡、地下 11400 ㎡）。市中心血站已于 2026 年 1 月整体搬迁至金山湖奥体板块。",
+      "credibility": "主流媒体，较高",
+      "corroborated": true
+    },
+    {
+      "source_id": "S033",
+      "title": "惠州交投横沥绿色现代石场有限公司广东省惠州市惠城区横沥镇盐径村建筑用花岗岩采矿权矿区生态修复方案评审结果公示",
+      "publisher": "惠州市惠城区自然资源局",
+      "source_type": "项目公示",
+      "url": "http://www.hcq.gov.cn/hzhczrzyj/gkmlpt/mindex",
+      "published_at": "2026-11-09",
+      "collected_at": "2026-11-09",
+      "region": "惠城区",
+      "period": "2026-11",
+      "supports": [],
+      "summary": "成文 2026-11-05、发布 2026-11-09，为横沥镇盐径村建筑用花岗岩采矿权矿区生态修复方案评审结果公示。该矿采矿许可证号 C4413022021117100152929，有效期 2021-11-23 至 2029-11-23，矿区面积 0.404 平方公里，生产规模 130 万立方米/年。本次为存量在采矿山按「边开采、边治理」要求提交生态修复方案的例行评审，未改变既有主体与连接，本期不建边，仅登记备查。",
+      "credibility": "官方公示，高",
+      "corroborated": false
+    },
+    {
+      "source_id": "S034",
+      "title": "4家惠企拟认定为跨国公司地区总部（广东省第五批认定名单公示）",
+      "publisher": "惠州市人民政府（来源：惠州日报）",
+      "source_type": "媒体报道",
+      "url": "https://www.huizhou.gov.cn/zwgk/hzsz/zwyw/content/post_5889316.html",
+      "published_at": "2026-11-08",
+      "collected_at": "2026-11-09",
+      "region": "惠城区",
+      "period": "2026-11",
+      "supports": [
+        "E023",
+        "ls"
+      ],
+      "summary": "广东省商务厅公示第五批跨国公司地区总部（总部型机构）认定名单，拟认定 8 家地区总部，惠州占 4 家：伯恩光学（惠州）、茂佳科技（广东）、惠州雷士光电、罗格朗智能电气（惠州）。其中惠州雷士光电科技有限公司为雷士照明集团境内集团总部，也是旗下规模最大的制造中心之一，累计申请专利超 2000 项，办公与厂区位于惠城区汝湖镇雷士工业园。另 3 家：伯恩光学主体在惠阳秋长、茂佳科技厂区在仲恺潼湖、罗格朗智能电气注册地为仲恺高新区和畅六路，均不在惠城行政边界内，按边界纪律不并入惠城节点。公示期无异议后方转正式认定。",
+      "credibility": "官方发布转载，高",
+      "corroborated": true
+    }
+  ]
+}
