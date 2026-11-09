@@ -4,22 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>惠城能力底盘 · 结构透镜</title>
-<meta name="description" content="看惠城攒了哪些可复用的产业能力：六块能力各标在长、持平还是在缩，产业链条卡在哪一环，以及还能相邻长出什么。">
+<meta name="description" content="用图表看惠城的产业能力：当期同比、惠城与全市对比、离年初目标的差距，以及产业链环节与能力状态。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230A84FF'/%3E%3Ccircle cx='8' cy='12' r='2.4' fill='white'/%3E%3Ccircle cx='16' cy='8' r='2.4' fill='white' opacity='.85'/%3E%3Ccircle cx='16' cy='16' r='2.4' fill='white' opacity='.7'/%3E%3Cpath d='M8 12 L16 8 M8 12 L16 16' stroke='white' stroke-width='1.4'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="lens.css">
 </head>
 <body>
 
-<!-- ===== 顶部 ===== -->
 <div class="topbar">
   <div class="topbar-in">
     <a class="back" href="../index.html" aria-label="返回主站">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
     </a>
-    <div class="brand">
-      <b>惠城结构透镜</b>
-      <span>STRUCTURE LENS</span>
-    </div>
+    <div class="brand"><b>惠城结构透镜</b><span>STRUCTURE LENS</span></div>
     <div class="spacer"></div>
     <div class="tabs">
       <a class="on" href="capability.html">能力底盘</a>
@@ -30,92 +26,127 @@
 
 <div class="wrap">
 
-  <!-- ===== 页头 ===== -->
   <header class="hero">
-    <h1>惠城攒了哪些<br>真正用得上的能力</h1>
-    <p>不比谁的产业规模大、不做排名。每块能力标一盏灯——在长、持平还是在缩，再看整条产业链卡在哪一环、相邻还能长出什么。</p>
+    <h1>惠城能力底盘</h1>
     <div class="meta">
       <span class="chip" id="chip-asof"></span>
       <span class="chip" id="chip-released"></span>
-      <span class="chip" id="chip-checked"></span>
     </div>
   </header>
 
-  <!-- ===== 01 能力分块 ===== -->
+  <!-- 图1 同比发散 -->
   <section class="section">
-    <div class="sec-head"><span class="sec-no">01</span><h2>六块能力，各有状态</h2></div>
-    <p class="sec-sub">状态灯由当期官方同比驱动；在建未投产的项目单独标注，不与已投产数据混算。</p>
-    <div class="cap-grid" id="capGrid"></div>
+    <div class="chart">
+      <h3>当期同比：在缩与在长</h3>
+      <div class="chart-box tall" id="cYoy"></div>
+    </div>
   </section>
 
-  <!-- ===== 02 产业链环节 ===== -->
+  <!-- 图2/3 对比与差距 -->
   <section class="section">
-    <div class="sec-head"><span class="sec-no">02</span><h2>产业链卡在哪一环</h2></div>
-    <p class="sec-sub">从原料到出货四个环节，逐环看当前状态。</p>
+    <div class="chart-grid">
+      <div class="chart">
+        <h3>惠城 vs 全市</h3>
+        <div class="chart-box" id="cCity"></div>
+      </div>
+      <div class="chart">
+        <h3>年初目标 vs 实际</h3>
+        <div class="chart-box" id="cTarget"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 产业链环节 -->
+  <section class="section">
+    <div class="sec-head"><span class="sec-no">01</span><h2>产业链环节</h2></div>
     <div class="chain" id="chain"></div>
-    <p class="chain-note" id="chainNote"></p>
   </section>
 
-  <!-- ===== 来源 ===== -->
+  <!-- 能力状态灯 -->
+  <section class="section">
+    <div class="sec-head"><span class="sec-no">02</span><h2>能力状态与相邻可能</h2></div>
+    <div class="light-grid" id="lightGrid"></div>
+  </section>
+
   <section class="src">
-    <h3>公开来源（点击可核对原文）</h3>
+    <h3>公开来源</h3>
     <ul id="srcList"></ul>
     <p class="disclaim" id="disclaim"></p>
   </section>
 
 </div>
 
+<script src="../echarts.min.js"></script>
 <script src="lens-data.js"></script>
 <script>
 (function(){
 'use strict';
 const $=s=>document.querySelector(s);
+const AXIS='#828A96';
+const charts=[];
+function mk(id,opt){const c=echarts.init(document.getElementById(id));
+  c.setOption(opt);charts.push(c);return c;}
 
-/* 页头 meta */
-$('#chip-asof').textContent='数据期次：'+LENS_META.asof;
-$('#chip-released').textContent='发布：'+LENS_META.released;
-$('#chip-checked').textContent='核验：'+LENS_META.checked;
+$('#chip-asof').textContent=LENS_META.asof;
+$('#chip-released').textContent='发布 '+LENS_META.released;
 
-/* 01 能力卡 */
-const capGrid=$('#capGrid');
-CAPABILITIES.forEach(c=>{
-  const anchors=c.anchor.map(a=>`<em>${a.k}</em> ${a.v}`).join('　');
-  const adj=c.adjacent.length
-    ? `<div class="adj"><span class="adj-label">相邻可能</span>`+
-      c.adjacent.map(t=>`<span class="tag">${t}</span>`).join('')+`</div>`
-    : '';
-  capGrid.insertAdjacentHTML('beforeend',`
-  <article class="cap">
-    <div class="cap-top">
-      <span class="dot ${c.state}"></span>
-      <span class="cap-name">${c.name}</span>
-      <span class="cap-state">${c.stateLabel}</span>
-    </div>
-    <div class="cap-anchor">${anchors}</div>
-    <p class="cap-note">${c.note}</p>
-    ${adj}
-  </article>`);
+/* 图1 同比发散（横向） */
+const yoyCat=YOY_BARS.map(d=>d.name).reverse();
+const yoyVal=YOY_BARS.map(d=>d.v).reverse();
+mk('cYoy',{
+  grid:{left:96,right:52,top:10,bottom:14},
+  xAxis:{type:'value',show:false},
+  yAxis:{type:'category',data:yoyCat,axisLine:{show:false},axisTick:{show:false},
+    axisLabel:{color:AXIS,fontSize:11.5}},
+  series:[{type:'bar',barWidth:15,
+    data:yoyVal.map(v=>({value:v,
+      itemStyle:{color:v<0?'#FF6961':'#30D158',borderRadius:v<0?[4,0,0,4]:[0,4,4,0]}})),
+    label:{show:true,fontSize:11,color:'#F2F4F7',
+      formatter:p=>(p.value>0?'+':'')+p.value+'%',
+      position:p=>p.value<0?'left':'right'}}]
 });
 
-/* 02 环节条 */
-const chain=$('#chain');
-CHAIN.forEach(l=>{
-  chain.insertAdjacentHTML('beforeend',`
-  <div class="link">
-    <b>${l.name}</b>
-    <small>${l.detail}</small>
-    <span class="st ${l.state}">${l.stateLabel}</span>
-  </div>`);
+/* 图2 惠城 vs 全市 */
+mk('cCity',{
+  grid:{left:86,right:18,top:26,bottom:8},
+  legend:{data:['惠城','全市'],top:0,right:0,textStyle:{color:AXIS,fontSize:11},itemWidth:11,itemHeight:11},
+  xAxis:{type:'value',show:false},
+  yAxis:{type:'category',data:CITY_COMPARE.map(d=>d.name),axisLine:{show:false},axisTick:{show:false},
+    axisLabel:{color:AXIS,fontSize:11}},
+  series:[
+   {name:'惠城',type:'bar',data:CITY_COMPARE.map(d=>d.hc),barWidth:9,itemStyle:{color:'#0A84FF',borderRadius:3}},
+   {name:'全市',type:'bar',data:CITY_COMPARE.map(d=>d.city),barWidth:9,itemStyle:{color:'#5A6573',borderRadius:3}}]
 });
-$('#chainNote').textContent=CHAIN_NOTE;
+
+/* 图3 目标 vs 实际 */
+mk('cTarget',{
+  grid:{left:86,right:18,top:26,bottom:8},
+  legend:{data:['目标','实际'],top:0,right:0,textStyle:{color:AXIS,fontSize:11},itemWidth:11,itemHeight:11},
+  xAxis:{type:'value',show:false},
+  yAxis:{type:'category',data:TARGET_GAP.map(d=>d.name),axisLine:{show:false},axisTick:{show:false},
+    axisLabel:{color:AXIS,fontSize:11}},
+  series:[
+   {name:'目标',type:'bar',data:TARGET_GAP.map(d=>d.goal),barWidth:9,itemStyle:{color:'#FF9F0A',borderRadius:3}},
+   {name:'实际',type:'bar',data:TARGET_GAP.map(d=>d.actual),barWidth:9,itemStyle:{color:'#0A84FF',borderRadius:3}}]
+});
+
+/* 产业链环节 */
+$('#chain').insertAdjacentHTML('beforeend',CHAIN.map(l=>
+  `<div class="link"><b>${l.name}</b><small>${l.detail}</small><span class="st ${l.state}">${l.state==='bad'?'卡住':l.state==='warn'?'放缓':'在转'}</span></div>`).join(''));
+
+/* 能力状态灯 */
+$('#lightGrid').insertAdjacentHTML('beforeend',CAP_LIGHTS.map(c=>`
+  <div class="light">
+    <div class="ln"><span class="dot ${c.state}"></span>${c.name}</div>
+    ${c.adj.length?`<div class="adj">${c.adj.map(t=>`<span class="tag">${t}</span>`).join('')}</div>`:''}
+  </div>`).join(''));
 
 /* 来源 */
-const srcList=$('#srcList');
-LENS_SOURCES.forEach(s=>{
-  srcList.insertAdjacentHTML('beforeend',
-    `<li><a href="${s.url}" target="_blank" rel="noopener"><i>${s.id}</i><span>${s.label}</span></a></li>`);
-});
-$('#disclaim').textContent=LENS_META.note+' 结构透镜是帮人看清结构的工具，不替代人的判断，也不输出唯一答案。';
+$('#srcList').insertAdjacentHTML('beforeend',LENS_SOURCES.map(s=>
+  `<li><a href="${s.url}" target="_blank" rel="noopener"><i>${s.id}</i><span>${s.label}</span></a></li>`).join(''));
+$('#disclaim').textContent=LENS_META.note+' 图表只呈现可核对的事实，不替代人的判断。';
+
+window.addEventListener('resize',()=>charts.forEach(c=>c.resize()));
 })();
 </script>
 </body>
