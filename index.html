@@ -177,7 +177,7 @@ body.obs-on .obs-panels{display:flex}
 }
 </style>
 </head>
-<body>
+<body data-sn-theme="dark">
 <div class="bgimg"></div><div class="bgmask"></div>
 
 <header class="bar">
@@ -546,5 +546,6 @@ document.getElementById('obsLogout').addEventListener('click',logout);
 try{if(sessionStorage.getItem(KEY)==='1'){login();}}catch(e){}
 })();
 </script>
+<script src="ui/site-nav.js"></script>
 </body>
 </html>
