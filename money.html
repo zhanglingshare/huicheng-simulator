@@ -18,7 +18,7 @@ svg .edge{stroke:#466b8d;stroke-width:2.5;fill:none;stroke-dasharray:7 7;transit
 <header class="top"><div class="brand">惠城产业风洞 <small>公开信息 · 关联线索 · 问题探索</small></div><nav class="nav" aria-label="项目导航">
 <a href="today.html">01 今日话题</a><a href="index.html">02 全息工作区</a><a href="money.html" class="on" aria-current="page">03 钱去哪了</a><a href="fun.html">04 风向标</a><a href="choices.html">五条路</a><a href="windtunnel.html">风洞测试</a>
 </nav></header>
-<div class="hero"><div class="eyebrow">第三页 · 全息工作区之后 · FOLLOW THE MONEY</div>
+<div class="hero"><div class="eyebrow">全息工作区之后 · FOLLOW THE MONEY</div>
 <h1>钱，<em>去哪了？</em></h1>
 <p>一座城市消费繁荣、企业经营、项目投资，究竟意味着什么？钱可能留在本地、进入供应链，也可能通过跨城消费与线上交易流向外部。<strong>我们先看可能的连接，再问证据在哪里。</strong></p></div>
 <div class="grid"><section class="card">
@@ -57,4 +57,5 @@ function select(id){const v=views[id];if(!v)return;document.querySelectorAll('[d
 document.querySelectorAll('button[data-id]').forEach(x=>x.addEventListener('click',()=>select(x.dataset.id)));
 document.querySelectorAll('.node[data-node]').forEach(x=>{x.addEventListener('click',()=>select(x.dataset.node));x.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(x.dataset.node)}})});
 select('local');
-</script></body></html>
+</script><script src="ui/site-nav.js"></script>
+</body></html>
