@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠城产业风洞 · 网络的演变</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1100px 560px at 45% -10%,rgba(10,132,255,.16),transparent 62%),radial-gradient(700px 460px at 90% 110%,rgba(48,209,88,.08),transparent 60%),#070d16;color:#eef2fb;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;padding:18px 16px 40px}
+body:before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(10,132,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(10,132,255,.05) 1px,transparent 1px);background-size:54px 54px;pointer-events:none;z-index:0}
+.wrap{max-width:1120px;margin:0 auto;position:relative;z-index:1}
+.top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.k{font-size:10.5px;letter-spacing:.22em;color:#4b9cff;opacity:.9}
+h1{font-size:26px;font-weight:800;margin:6px 0 4px}
+h1 em{font-style:normal;color:#30d158}
+.sub{font-size:12.5px;color:#8fa3bf;line-height:1.7}
+.back{display:flex;gap:8px}
+.back a{font-size:12px;color:#93a0b8;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);padding:6px 12px;border-radius:20px;text-decoration:none;white-space:nowrap}
+.back a:hover{color:#eef2fb;border-color:rgba(10,132,255,.45)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:#8fa3bf;margin:14px 0 8px}
+.legend i{display:inline-block;width:16px;height:2px;margin-right:6px;vertical-align:2px}
+.legend .ring{display:inline-block;width:10px;height:10px;border-radius:50%;border:1px dashed #ffd60a;margin-right:6px;vertical-align:1px}
+.stage{border:1px solid rgba(255,255,255,.09);border-radius:14px;background:linear-gradient(180deg,rgba(20,30,48,.6),rgba(8,13,22,.45));padding:6px}
+.stage svg{width:100%;height:auto;display:block}
+.panel{margin-top:14px;border:1px solid rgba(255,255,255,.09);border-radius:14px;background:rgba(18,26,42,.6);padding:14px}
+.ph{display:flex;justify-content:space-between;font-size:11px;color:#6b7d96;letter-spacing:.06em}
+.list{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+@media(max-width:760px){.list{grid-template-columns:1fr}}
+.row{display:flex;gap:9px;padding:9px 11px;border:1px solid rgba(255,255,255,.07);border-radius:10px;background:linear-gradient(160deg,rgba(40,52,76,.45),rgba(18,26,42,.45))}
+.d{font-size:10.5px;color:#6b7d96;width:36px;flex:none;padding-top:2px}
+.ti{font-size:12px;line-height:1.55;color:#cbd8e6}
+.ty{font-size:9.5px;padding:1px 6px;border-radius:999px;border:1px solid;margin-right:6px;letter-spacing:.05em;white-space:nowrap}
+.nd{font-size:10.5px;color:#6b7d96;margin-top:3px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:11.5px;color:#6b7d96;margin-top:14px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px}
+.foot b{color:#30d158}
+.ph2{font-size:12px;color:#8fa3bf;padding:8px}
+</style></head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <div class="k">NETWORK / 网络的演变</div>
+      <h1>网络不是每天重画，<em>是等它真变了</em></h1>
+      <div class="sub">一条事件要进这张图，得同时过三关：涉及两个已登记主体 · 有一条能点开的原文 · 改变的是结构或连接状态。签约不等于投产，规划/在建都标不确定。</div>
+    </div>
+    <div class="back"><a href="network.html">← 建构世界</a><a href="index.html">首页</a></div>
+  </div>
+
+  <div class="legend">
+    <span><i style="background:#30d158"></i>本窗口新增连接</span>
+    <span><i style="background:#4b7bff;opacity:.85"></i>既有连接</span>
+    <span><i style="background:#4b7bff;opacity:.45"></i>证据推断（虚线）</span>
+    <span><span class="ring"></span>待落地主体</span>
+  </div>
+
+  <div class="stage" id="stage"><div class="ph2">正在读取关系台账…</div></div>
+
+  <div class="panel">
+    <div class="ph"><span id="pcount">变更清单 · —</span><span id="pwin">窗口 —</span></div>
+    <div class="list" id="list"><div class="ph2">正在读取…</div></div>
+    <div class="foot">
+      <span id="stat">节点 — · 边 — · 变更 —</span>
+      <span id="diff">本次更新 —</span>
+    </div>
+  </div>
+</div>
+
+<script>
+var W=980,H=690;
+var FIX={hc:[470,355],gxq:[470,170],dz:[700,228],ai:[285,225],xcl:[795,350],fw:[735,468],jt:[585,545],
+ wh:[330,530],rj:[188,362],sz:[108,212],dg:[882,142],jl:[318,108],th:[408,78],sh:[585,82],rz:[700,108],
+ wr:[520,66],bx:[762,178],lyh:[252,296],fz:[246,626],yy:[642,652]};
+var R={core:26,anchor:21,cluster:15,infrastructure:13,enterprise:10,external:12};
+var TY={new_entity:['新主体','#ffd60a'],new_edge:['新连接','#30d158'],strengthen:['增强','#4b9bff'],
+ weaken:['减弱','#ff9500'],exit:['退出','#ff453a'],break:['失效','#ff453a'],alternative:['替代路径','#9aa6b8']};
+var WIN='2026-10-29';
+
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+
+function draw(ev,recentEdges,recentNodes){
+  var svg=['<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg"><defs><filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><radialGradient id="core"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#30d158"/><stop offset="1" stop-color="#0d6f68"/></radialGradient></defs>'];
+  ev.edges.forEach(function(e){
+    var a=FIX[e.source_node_id]||[W/2,H/2],b=FIX[e.target_node_id]||[W/2,H/2];
+    var fresh=recentEdges.indexOf(e.edge_id)>=0, inf=e.evidence_type==='证据推断';
+    var col=fresh?'#30d158':'#4b7bff',wd=fresh?2.6:1.5,op=fresh?.95:(inf?.35:.62),dash=inf?'stroke-dasharray="5,5"':'';
+    svg.push('<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="'+col+'" stroke-width="'+wd+'" '+dash+' opacity="'+op+'"'+(fresh?' filter="url(#glow)"':'')+'/>');
+    if(fresh) svg.push('<circle cx="'+((a[0]+b[0])/2)+'" cy="'+((a[1]+b[1])/2)+'" r="3.4" fill="#ffd60a" opacity=".9" filter="url(#glow)"/>');
+  });
+  ev.nodes.forEach(function(n){
+    var p=FIX[n.node_id]||[W/2,H/2],r=R[n.node_type]||11,pend=n.node_status==='pending';
+    var fill=n.node_id==='hc'?'url(#core)':(pend?'rgba(255,214,10,.18)':'rgba(75,123,255,.16)');
+    var st=n.node_id==='hc'?'#ffffff':(pend?'#ffd60a':'#4b7bff');
+    svg.push('<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+r+'" fill="'+fill+'" stroke="'+st+'" stroke-width="1.4" '+(pend?'stroke-dasharray="4,4"':'')+'/>');
+    if(n.node_id==='hc') svg.push('<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+(r+12)+'" fill="none" stroke="#30d158" stroke-width="1" opacity=".35"/>');
+    var lx=Math.min(W-64,Math.max(64,p[0]));
+    var label=n.node_type==='core'?'惠城':n.name;
+    svg.push('<text x="'+lx+'" y="'+(p[1]+r+15)+'" text-anchor="middle" font-size="'+(n.node_type==='core'||n.node_type==='anchor'?12:(n.name.length>8?9.2:10.5))+'" fill="'+(n.node_type==='core'||n.node_type==='anchor'?'#eef2fb':'#9fc0c8')+'" font-family="PingFang SC,Microsoft Yahei,sans-serif" font-weight="'+(n.node_type==='core'?'700':'500')+'">'+esc(label)+'</text>');
+  });
+  svg.push('</svg>');
+  document.getElementById('stage').innerHTML=svg.join('');
+}
+
+Promise.all([
+  fetch('data/relationship-changes-v1.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}),
+  fetch('data/relationship-evidence-v1.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;})
+]).then(function(a){
+  var ch=a[0],ev=a[1];
+  if(!ch||!ev){document.getElementById('stage').innerHTML='<div class="ph2">关系台账未取到（离线打开时属正常，请用站点地址访问）。</div>';return;}
+  var items=(ch.changes||[]).slice().sort(function(x,y){return y.event_date.localeCompare(x.event_date);});
+  var inWin=items.filter(function(c){return c.event_date>=WIN;});
+  var re=[];inWin.forEach(function(c){(c.involved_edge_ids||[]).forEach(function(i){re.push(i);});});
+  draw(ev,re);
+  var names={};ev.nodes.forEach(function(n){names[n.node_id]=n.name;});
+  document.getElementById('pcount').textContent='变更清单 · '+items.length+' 条';
+  document.getElementById('pwin').textContent='窗口 '+WIN+' → '+(items[0]?items[0].event_date.slice(5):'—');
+  document.getElementById('list').innerHTML=items.map(function(c){
+    var t=TY[c.change_type]||['变更','#9aa6b8'];
+    var dn=(c.involved_node_ids||[]).map(function(i){return names[i]||i;}).join(' · ');
+    var d=c.event_date.length>=10?c.event_date.slice(5):c.event_date.slice(5,7)+'月';
+    return '<div class="row"><div class="d">'+d+'</div><div><div class="ti"><span class="ty" style="color:'+t[1]+';border-color:'+t[1]+'55;background:'+t[1]+'14">'+t[0]+'</span>'+esc(c.title)+'</div>'+(dn?'<div class="nd">涉及：'+esc(dn)+'</div>':'')+'</div></div>';
+  }).join('');
+  document.getElementById('stat').textContent='节点 '+ev.nodes.length+' · 边 '+ev.edges.length+' · 变更 '+items.length+' · 本窗口 '+inWin.length+' 条';
+  document.getElementById('diff').textContent='本次更新：新增 '+inWin.length+' 条（最晚 '+(inWin[0]?inWin[0].event_date.slice(5):'—')+'）· 其余 '+(items.length-inWin.length)+' 条为此前窗口';
+}).catch(function(){
+  document.getElementById('stage').innerHTML='<div class="ph2">关系台账读取失败（离线打开时属正常）。</div>';
+});
+</script>
+<script src="ui/site-nav.js"></script>
+</body></html>
