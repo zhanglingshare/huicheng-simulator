@@ -1,0 +1,75 @@
+{
+  "schema_version": "model-verify-v1",
+  "region": "huicheng",
+  "generated_at": "2026-11-10T22:40:00+08:00",
+  "model": {
+    "name": "惠城情景内核",
+    "file": "model.js",
+    "version": "v1.0",
+    "as_of": "2026-11-10",
+    "seed": null,
+    "input_hash": null,
+    "output_hash": null,
+    "status": "待接入"
+  },
+  "inputs": [
+    {
+      "k": "GDP 2025 全年",
+      "v": 1203.33,
+      "unit": "亿元",
+      "src": "惠城区2025年统计公报（初步核算数）"
+    },
+    {
+      "k": "GDP 增速 2025",
+      "v": 4.3,
+      "unit": "%（不变价）",
+      "src": "惠城区2025年统计公报（初步核算数）"
+    },
+    {
+      "k": "规上工业增加值 2025",
+      "v": 10.8,
+      "unit": "%（同比）",
+      "src": "惠城区2025年统计公报（初步核算数）"
+    },
+    {
+      "k": "地区生产总值 2026 前三季度",
+      "v": 883.46,
+      "unit": "亿元",
+      "src": "惠城区2026年前三季度经济运行数据"
+    }
+  ],
+  "outputs": [],
+  "outputs_note": "情景输出、蒙特卡洛分位与网络结构指标待接入。接入前页面上的推演数一律标『数学参照』，不进事实卡。",
+  "backtest": [
+    {
+      "period": "2025",
+      "metric": "GDP 增速",
+      "actual": 4.3,
+      "actual_src": "惠城区2025年统计公报（初步核算数）",
+      "modeled": null,
+      "abs_err": null,
+      "rel_err": null,
+      "threshold_pct": 5,
+      "status": "待接入",
+      "note": "内核尚未记录 2025 年初的预测值，无法回测；接入后此项必须补齐 modeled 与误差。"
+    },
+    {
+      "period": "2025",
+      "metric": "规上工业增加值增速",
+      "actual": 10.8,
+      "actual_src": "惠城区2025年统计公报（初步核算数）",
+      "modeled": null,
+      "abs_err": null,
+      "rel_err": null,
+      "threshold_pct": 5,
+      "status": "待接入",
+      "note": "同上，缺预测基线。"
+    }
+  ],
+  "frequency": {
+    "fact": "季度·年度，跟随公报",
+    "relation": "每日巡检，事件驱动",
+    "model": "输入变化重跑 + 季度回测"
+  },
+  "note": "本文件只放三类数：输入（带官方来源）、输出（带参数/假设/not_forecast 标记）、回测（实际值与误差）。事实数不进本文件，模型数不进事实卡。判据与阈值见 docs/change-rubric.md。"
+}
