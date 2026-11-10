@@ -18,6 +18,7 @@
     { url: 'commute.html',        n: '09', group: '推演未来',   label: '通勤案例',   desc: '通勤可能带来的影响' },
     { url: 'blindspot.html',      n: '10', group: '推演未来',   label: '忽略了什么', desc: '城市承载与居民生活的盲点' },
     { url: 'network.html',        n: '11', group: '关系视角',   label: '建构世界',   desc: '把关系一层层搭起来' },
+    { url: 'evolution.html',      n: '11·2', group: '关系视角', label: '网络的演变', desc: '等它真变了才更新' },
     { url: 'role.html',           n: '12', group: '关系视角',   label: '你在哪',     desc: '你在网里哪个位置' },
     { url: 'who.html',            n: '13', group: '关系视角',   label: '掂量',       desc: '换几个角度再掂一掂' },
     { url: 'report.html',         n: '14', group: '汇总与实验', label: '报告',       desc: '把观察整理成可讨论的材料' },
