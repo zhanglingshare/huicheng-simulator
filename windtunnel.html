@@ -54,6 +54,28 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
   border:1px solid rgba(255,255,255,.08)!important;
   border-radius:14px!important;
   backdrop-filter:blur(16px)}
+/* ===== 验模三门（新增区段） ===== */
+.wt-gates{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:10px 0 4px}
+@media(max-width:760px){.wt-gates{grid-template-columns:1fr}}
+.wg{position:relative;border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:14px 14px 12px;background:linear-gradient(160deg,rgba(40,52,76,.5),rgba(18,26,42,.5));overflow:hidden}
+.wg:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c);box-shadow:0 0 16px var(--c)}
+.wg .no{font-size:10px;letter-spacing:.18em;color:#6b7d96}
+.wg .nm{font-size:17px;font-weight:700;margin-top:4px}
+.wg .ru{font-size:11.5px;color:#8fa3bf;margin-top:6px;line-height:1.6}
+.wg .st{position:absolute;right:12px;top:12px;font-size:11px;padding:3px 9px;border-radius:999px;border:1px solid;letter-spacing:.04em}
+.wg .rd{font-size:26px;font-weight:800;margin-top:14px;letter-spacing:-.01em}
+.wg .rd i{font-style:normal;font-size:11.5px;font-weight:600;color:#8fa3bf;margin-left:5px}
+.wg .ds{font-size:11.5px;color:#a8bccd;line-height:1.7;margin-top:8px;word-break:normal}
+.wg .ds b{color:#eef2fb;white-space:nowrap}
+.wt-ruler{margin-top:14px;border-top:1px solid rgba(255,255,255,.07);padding-top:12px}
+.wt-rl{display:flex;justify-content:space-between;font-size:10.5px;color:#6b7d96;margin-bottom:8px}
+.wt-bar{height:32px;border-radius:6px;background:linear-gradient(90deg,rgba(48,209,88,.10),rgba(255,149,0,.12),rgba(255,69,58,.14));position:relative;border:1px solid rgba(255,255,255,.05)}
+.wt-tick{position:absolute;top:-5px;bottom:-5px;width:2px;background:#ffd60a;box-shadow:0 0 12px rgba(255,214,10,.7)}
+.wt-tick:after{content:"5% 阈值";position:absolute;top:-17px;left:-16px;font-size:9.5px;color:#ffd60a;white-space:nowrap}
+.wt-dot{position:absolute;top:50%;transform:translate(-50%,-50%);width:9px;height:9px;border-radius:50%;background:#ff9500;box-shadow:0 0 12px #ff9500}
+.wt-dot:after{content:"示意 4.6%";position:absolute;top:13px;left:-16px;font-size:9.5px;color:#ff9500;white-space:nowrap}
+.wt-asof{margin-top:12px;font-size:11px;color:#5b6b82;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.wt-asof .g{color:#ffd60a}
 </style>
 <link rel="stylesheet" href="ui/ui.css">
 <link rel="stylesheet" href="ui/ui-pages.css">
@@ -70,6 +92,53 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
       <b>① 参数敏感性（见⑤未来页）</b>：逐个参数 ±20% 扰动，其他不变，看达标概率和中位产值变多少。回答的是"哪个参数最敏感"。<br>
       <b>② 受控场景压测（本页）</b>：注入具体现实事件（投产延期、招商不及预期、通勤堵塞等），看系统怎么反应。回答的是"如果这件事发生，会怎样"。<br>
       前者是参数微分，后者是事件注入。两把尺子，两个问题，不放在同一个排序里比。
+    </div>
+  </div>
+
+  <div class="section-title" style="border-color:#30d158">第零段 · 模型跑完，先过三门</div>
+
+  <div class="card" style="border-left:3px solid rgba(48,209,88,.45)">
+    <div style="font-size:12px;color:#93a4bd;line-height:1.75;margin-bottom:6px">
+      下面的所有数字都来自同一个内核 <b style="color:#eef2fb">model.js</b>。但"跑出来了"不等于"能上页面"——先过三道门，过不了就标"待校准"，不许静默改参数。三门对应 <b style="color:#eef2fb">data/model-verify-v1.json</b> 的三组字段，改数必须同时改契约。
+    </div>
+
+    <div class="wt-gates">
+      <div class="wg" style="--c:#ff453a">
+        <div class="no">GATE 01</div><div class="nm">误差门</div>
+        <span class="st" style="color:#ff8f88;border-color:rgba(255,69,58,.45);background:rgba(255,69,58,.1)">未过</span>
+        <div class="ru">判据：回测相对误差 ≤ 5%<br>现状：内核未留存 2025 年初预测值</div>
+        <div class="rd" style="color:#ff453a">缺基线<i>无法回测</i></div>
+        <div class="ds">回测两项（GDP 增速、规上工业增加值）状态均为 <b>待接入</b>。补齐前，本页出现的任何数只能叫"情景设定"，不能叫"预测"。</div>
+      </div>
+
+      <div class="wg" style="--c:#ff9500">
+        <div class="no">GATE 02</div><div class="nm">覆盖门</div>
+        <span class="st" style="color:#ffc07a;border-color:rgba(255,149,0,.45);background:rgba(255,149,0,.1)">待测算</span>
+        <div class="ru">判据：P10–P90 覆盖实测值 ≥ 80%<br>现状：分布尚未接入本页</div>
+        <div class="rd" style="color:#ff9500">—<i>区间待跑</i></div>
+        <div class="ds">区间过窄会把"不确定"说成"确定"，过宽又失去意义。接入后这一格显示覆盖率，低于 <b>80%</b> 直接判"区间过窄"。</div>
+      </div>
+
+      <div class="wg" style="--c:#30d158">
+        <div class="no">GATE 03</div><div class="nm">指纹门</div>
+        <span class="st" style="color:#8ef0b0;border-color:rgba(48,209,88,.45);background:rgba(48,209,88,.1)">通过</span>
+        <div class="ru">判据：input_hash 未变则不重跑<br>现状：输入与上一版一致（种子 42 / 2 万次）</div>
+        <div class="rd" style="color:#30d158">未变<i>不重跑</i></div>
+        <div class="ds">参数、数据版本、种子都没动 → 输出应保持上一版，<b>连页面时间戳都不动</b>。跑了一次 ≠ 更新了一次。</div>
+      </div>
+    </div>
+
+    <div class="wt-ruler">
+      <div class="wt-rl"><span>误差刻度</span><span>0% · 3% · 6% · 9% · 12%</span></div>
+      <div class="wt-bar">
+        <div class="wt-tick" style="left:41.6%"></div>
+        <div class="wt-dot" style="left:38.3%"></div>
+      </div>
+    </div>
+
+    <div class="wt-asof">
+      <span id="wt-asof">as-of —</span>
+      <span class="g">判据与阈值见 docs/change-rubric.md</span>
     </div>
   </div>
 
@@ -353,5 +422,15 @@ var _hmt = _hmt || [];
 })();
 </script>
 <script src="ui/ui.js" defer></script>
+<script>
+(function(){
+  fetch('data/model-verify-v1.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{
+    if(!d)return;
+    var el=document.getElementById('wt-asof'); if(!el)return;
+    var t=(d.generated_at||'').replace('T',' ').slice(0,16);
+    el.textContent='as-of '+(t||'—')+' ｜ 模型 '+(d.model&&d.model.version||'—')+' ｜ 回测 '+((d.backtest||[]).length)+' 项待接入 ｜ 本次更新 0 项（no-op）';
+  }).catch(()=>{});
+})();
+</script>
 <script src="ui/site-nav.js"></script>
 </body></html>
