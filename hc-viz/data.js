@@ -54,7 +54,7 @@ const HC_CURRENT={period:'2026年1-9月',periodShort:'1-9月',released_at:'2026-
 // 2025 人口背景（统计公报口径），供报告页说明使用
 // 全站期次汇总：官方口径截止 / 当期快报截止 / 最近核验
 const HC_ASOF={official:'2025-12-31',officialLabel:'2025 全年',current:'2026-09-30',
- currentLabel:'2026 年 1-9 月',checked:'2026-11-10 21:24',
+ currentLabel:'2026 年 1-9 月',checked:'2026-11-11 07:35',
  note:'官方年度口径为 2025 全年终值；2026 年 1-9 月为当期累计快报，两类增速不可直接比较。'};
 
 const HC_POP={year:2025,pop:'159.78',urban:'85.74%',per_gdp:'75309',per_gdp_wan:'7.53',per_gdp_yoy:'+3.0%'};
