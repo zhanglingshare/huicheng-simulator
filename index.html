@@ -497,7 +497,7 @@ function renderPanels(){
                fetch('life.json').then(function(r){return r.json();})])
   .then(function(res){
     var hot=res[0],life=res[1];
-    document.getElementById('oTopicTag').textContent=hot.updated+' · '+hot.count+' 条';
+    document.getElementById('oTopicTag').textContent=hot.updated+' · '+hot.count+' 条'+((hot.note||'').indexOf('今日条目偏少')>=0?' · 今日条目偏少':'');
     var tl=document.getElementById('oTopicList');tl.innerHTML='';
     hot.items.forEach(function(x){
       var d=document.createElement('div');d.className='o-topic';
