@@ -98,9 +98,20 @@ function draw(ev,recentEdges,recentNodes){
   document.getElementById('stage').innerHTML=svg.join('');
 }
 
+function j(u,n){
+  n=n||0;
+  return fetch(u,{cache:'no-store'}).then(function(r){
+    if(r.ok)return r.json();
+    if(n<2)return new Promise(function(z){setTimeout(z,700);}).then(function(){return j(u,n+1);});
+    return null;
+  }).catch(function(){
+    if(n<2)return new Promise(function(z){setTimeout(z,700);}).then(function(){return j(u,n+1);});
+    return null;
+  });
+}
 Promise.all([
-  fetch('data/relationship-changes-v1.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}),
-  fetch('data/relationship-evidence-v1.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;})
+  j('data/relationship-changes-v1.json'),
+  j('data/relationship-evidence-v1.json')
 ]).then(function(a){
   var ch=a[0],ev=a[1];
   if(!ch||!ev){document.getElementById('stage').innerHTML='<div class="ph2">关系台账未取到（离线打开时属正常，请用站点地址访问）。</div>';return;}
