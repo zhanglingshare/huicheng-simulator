@@ -1,25 +1,18 @@
 {
   "schema_version": 2,
   "region": "huicheng",
-  "updated": "2026-11-10 07:30",
-  "fetched_at": "2026-11-10 07:30",
+  "updated": "2026-11-10 21:25",
+  "fetched_at": "2026-11-10 21:25",
   "frequency": "每日更新一次",
-  "count": 8,
-  "stats": [
-    {
-      "n": "今日话题",
-      "cap": "按关注程度排序 · 近1天",
-      "scope": "官方发布/媒体报道/市民讨论",
-      "warm": true
-    }
-  ],
-  "note": "话题按编辑关注程度排序，标注关注档（高/较高/中）与来源级别；每条显示原报道时间、最近抓取与核验状态（官方原文或≥2独立来源=已核验，单源媒体/本地=待核实），缺失标「待核实」。本页不展示平台后台真实阅读、转发、点赞数据。本窗口内可溯源的惠城本地条目 8 条，已剔除不在窗口内的早前旧稿与纯审批公示类；工作日早晨新增发布尚少，按实收录，未用旧稿填充。话题均来自公开渠道，每日更新。",
+  "count": 12,
+  "stats": [],
+  "note": "话题按编辑关注程度排序，标注关注档（高/较高/中）与来源级别；每条显示原报道时间、最近抓取与核验状态（官方原文或≥2独立来源=已核验，单源媒体/本地=待核实），缺失标「待核实」。本页不展示平台后台真实阅读、转发、点赞数据。本窗口（近 24 小时）内可溯源惠城本地条目 12 条；已剔除纯审批公示类（如用地规划许可公示、受理公示），未用旧稿填充。今日「好吃好玩」栏无独立信源，未另行填充，河南岸邻里节按社区活动归入暖闻。话题均来自公开渠道，每日更新。",
   "items": [
     {
       "title": "惠城高新区 300 套保障性租赁住房启动配租，12 月起对外出租",
       "cat": "livelihood",
       "emoji": "🏛️",
-      "tier": "高",
+      "tier": "较高",
       "srcLevel": "官方发布",
       "live": false,
       "source": "惠城区政府·住房保障信息公开",
@@ -27,7 +20,7 @@
       "summary": "项目位于马安镇下良村魏邓路1号，共 300 套，户型以单间、两房一厅为主，计划 2026 年 12 月正式对外出租，优先面向高新区企业青年职工、新市民、产业务工人员。申请人须年满 18 周岁、在申请辖区无自有产权住房或人均建筑面积低于 15 平方米、未享受其他住房保障政策。",
       "published_at": "2026-11-09",
       "event_date": null,
-      "fetched_at": "2026-11-09 21:28",
+      "fetched_at": "2026-11-10 21:25",
       "verified_status": "已核验",
       "fate": {
         "kind": "info",
@@ -41,15 +34,15 @@
       "title": "河南岸学苑社区办邻里生活节：包饺子、长桌宴、客家粄味 DIY",
       "cat": "gossip",
       "emoji": "🤝",
-      "tier": "高",
+      "tier": "较高",
       "srcLevel": "官方发布",
       "live": false,
       "source": "惠城区政府·镇办动态",
       "url": "http://www.hcq.gov.cn/zwgk/zbdt/hnajdbsc/content/post_5889783.html",
       "summary": "11月7日至8日，学苑社区党委联合惠州印象城党支部开展“印象‘邻’距离·暖冬一抹红”邻里生活节。立冬当天办包饺子比拼，30 名居民参赛；随后开长桌宴，6 家爱心商户推出 50 道菜；8 日办客家粄味 DIY 与辣鸡爪挑战赛。现场设暖新补给站，为外卖骑手、快递员、网约车司机和环卫工人提供物资。",
       "published_at": "2026-11-09",
-      "event_date": "2026-11-07~2026-11-08",
-      "fetched_at": "2026-11-09 21:28",
+      "event_date": null,
+      "fetched_at": "2026-11-10 21:25",
       "verified_status": "已核验",
       "fate": {
         "kind": "life",
@@ -60,69 +53,91 @@
       }
     },
     {
-      "title": "农工党惠州市委会“农工诊室”在三栋镇卫生院揭牌",
-      "cat": "livelihood",
-      "emoji": "🏛️",
-      "tier": "较高",
-      "srcLevel": "官方发布",
-      "live": false,
-      "source": "惠城区政府·政务要闻",
-      "url": "http://www.hcq.gov.cn/zwgk/zwyw/content/post_5889356.html",
-      "summary": "11月7日，同心圆工程“银龄健康”义诊（惠州站）暨农工党惠州市委会“农工诊室”揭牌仪式在演达医院（三栋镇卫生院）举行。市第三人民医院、南方医院支部的老年病科、心血管科、神经内科、内分泌科专家现场坐诊，惠州卫生职业技术学院同步为基层医务人员开展老年病筛查与康养培训。",
-      "published_at": "2026-11-09",
-      "event_date": "2026-11-07",
-      "fetched_at": "2026-11-09 21:28",
-      "verified_status": "已核验",
-      "fate": {
-        "kind": "info",
-        "ident": "livelihood",
-        "objects": "三栋镇基层医疗服务",
-        "direction": "中性",
-        "assumption": "具体进展以官方发布为准"
-      }
-    },
-    {
-      "title": "惠城区 2026 年官方兽医动物防疫检疫技能培训班举办",
+      "title": "长征胜利90周年，惠城区退役军人事务局把党课搬进军营",
       "cat": "city",
       "emoji": "🏙️",
       "tier": "较高",
       "srcLevel": "官方发布",
       "live": false,
       "source": "惠城区政府·部门动态",
-      "url": "http://www.hcq.gov.cn/bmdt/content/post_5890353.html",
-      "summary": "培训采取“理论授课＋实操教学”，上午讲产地检疫、屠宰检疫规程判定要点与风险识别，下午进屠宰场实操。2026 年治理假劣肉制品问题整治被中央纪委国家监委列为全国重大民生实事，区畜牧兽医与渔业事务中心称将常态化开展培训与技能练兵。",
-      "published_at": "2026-11-09",
+      "url": "http://www.hcq.gov.cn/bmdt/content/post_5890690.html",
+      "summary": "在中国工农红军长征胜利90周年之际，惠城区退役军人事务局党支部全体党员走进驻惠某部开展主题党日：参观旅史馆与连队荣誉室、观看长征历史纪录片，结合退役军人服务与双拥共建交流研讨。",
+      "published_at": "2026-11-10",
       "event_date": null,
-      "fetched_at": "2026-11-09 21:28",
+      "fetched_at": "2026-11-10 21:25",
       "verified_status": "已核验",
       "fate": {
         "kind": "info",
         "ident": "city",
-        "objects": "区动物防疫检疫工作",
+        "objects": "退役军人服务与双拥共建",
         "direction": "中性",
-        "assumption": "具体进展以官方发布为准"
+        "assumption": "具体安排以部门发布为准"
       }
     },
     {
-      "title": "江北街道召开专题会议传达学习党的二十届五中全会精神",
+      "title": "本月12日—15日，惠城进入两会时间：区十届人大一次会议13日开幕",
       "cat": "city",
       "emoji": "🏙️",
       "tier": "较高",
-      "srcLevel": "官方发布",
+      "srcLevel": "媒体报道",
       "live": false,
-      "source": "惠城区政府·镇办动态",
-      "url": "http://www.hcq.gov.cn/zwgk/zbdt/jbjdbsc/content/post_5890511.html",
-      "summary": "11月5日，江北街道召开专题会议传达学习党的二十届五中全会精神，同步贯彻上级安全稳定工作部署，街道班子成员、各村（社区）、各部门负责人参会。会议提出把基层治理、民生服务、安全稳定作为全会精神落地载体，对标年底收官找短板。",
-      "published_at": "2026-11-09",
-      "event_date": "2026-11-05",
-      "fetched_at": "2026-11-09 21:28",
-      "verified_status": "已核验",
+      "source": "南方+",
+      "url": "https://www.nfnews.com/content/16VLnJVkyr.html",
+      "summary": "本月12日—15日惠城进入两会时间：区十届人大一次会议11月13日至15日举行（12日下午预备会），政协区十届一次会议11月12日至14日召开。人大建议议程包括审议区政府、区人大常委会、区法院、区检察院工作报告，选举区十届人大常委会组成人员和区长、副区长等。",
+      "published_at": "2026-11-10",
+      "event_date": "2026-11-12 至 2026-11-15",
+      "fetched_at": "2026-11-10 21:25",
+      "verified_status": "待核实",
       "fate": {
         "kind": "info",
         "ident": "city",
-        "objects": "江北街道基层工作",
+        "objects": "惠城区两会与换届",
         "direction": "中性",
-        "assumption": "具体进展以官方发布为准"
+        "assumption": "具体议程以大会公布为准"
+      }
+    },
+    {
+      "title": "市第一人民医院将扩建：原市中心血站旧址纳入三期院区",
+      "cat": "livelihood",
+      "emoji": "🏛️",
+      "tier": "较高",
+      "srcLevel": "媒体报道",
+      "live": false,
+      "source": "南方都市报",
+      "url": "https://www.nfnews.com/content/ky9vPx7g3G.html",
+      "summary": "惠城区江北JB22地块部分用地控规调整经市政府批复生效并完成公示，原市中心血站旧址纳入市第一人民医院三期建设用地：两地块整合为JB22-07医院用地，总用地47289平方米；要求新建地下停车位不少于123个，同步配建1处配电网开关站、2处5G通信基站机房。",
+      "published_at": "2026-11-09",
+      "event_date": null,
+      "fetched_at": "2026-11-10 21:25",
+      "verified_status": "待核实",
+      "fate": {
+        "kind": "info",
+        "ident": "livelihood",
+        "objects": "江北片区就医与停车",
+        "direction": "利好",
+        "assumption": "具体建设时序以官方发布为准"
+      }
+    },
+    {
+      "title": "惠泽大道改造围蔽叠加放学车流，水口片区居民出行添堵",
+      "cat": "city",
+      "emoji": "🏙️",
+      "tier": "较高",
+      "srcLevel": "媒体报道",
+      "live": false,
+      "source": "南方都市报",
+      "url": "https://www.nfnews.com/content/R6gNgLwN3p.html",
+      "summary": "惠泽大道快速化改造围蔽持续影响水口片区出行：三环东路下穿通道基坑施工占用部分车道，高峰期拥堵属实，有市民因新老路基约10厘米高差摔伤。市园林事务中心回应正加快施工，力争2027年春节前基本完成通道建设并开放通行，同时加装临时照明、推进新路灯布设。",
+      "published_at": "2026-11-10",
+      "event_date": null,
+      "fetched_at": "2026-11-10 21:25",
+      "verified_status": "待核实",
+      "fate": {
+        "kind": "info",
+        "ident": "city",
+        "objects": "水口片区通勤与施工安全",
+        "direction": "承压",
+        "assumption": "建设时序以主管部门发布为准"
       }
     },
     {
@@ -136,8 +151,8 @@
       "url": "https://www.nfnews.com/content/96qKNJQEyM.html",
       "summary": "11月6日民政部官网公布《全国老龄工作委员会办公室关于命名2025—2026年全国示范性老年友好型社区的通知》，全国 1992 个社区（村）入选。惠州 5 个社区（村）上榜，惠城区江南街道祝屋巷社区在列。",
       "published_at": "2026-11-09",
-      "event_date": "2026-11-06",
-      "fetched_at": "2026-11-09 21:28",
+      "event_date": null,
+      "fetched_at": "2026-11-10 21:25",
       "verified_status": "待核实",
       "fate": {
         "kind": "info",
@@ -159,7 +174,7 @@
       "summary": "小金口街道组织班子成员、各部门负责人、各村（社区）党组织书记赴汝湖镇调研，走访星光穗园、自然里咖啡、七女湖体育公园，了解汝湖依托生态与特色农业资源做农文旅体融合、以市场化模式盘活闲置空间的做法。座谈围绕乡村产业培育、村容长效管护、基层治理与可持续运营展开。",
       "published_at": "2026-11-09",
       "event_date": null,
-      "fetched_at": "2026-11-09 21:28",
+      "fetched_at": "2026-11-10 21:25",
       "verified_status": "待核实",
       "fate": {
         "kind": "info",
@@ -170,25 +185,82 @@
       }
     },
     {
-      "title": "小金口“未诉先办”：柏岗村500米乡间路路灯提前点亮，村民不用再摸黑",
-      "cat": "livelihood",
-      "emoji": "🏛️",
+      "title": "江北“惠邻”今年办900多场活动，惠及2.3万人次",
+      "cat": "gossip",
+      "emoji": "🤝",
       "tier": "中",
-      "srcLevel": "官方发布",
+      "srcLevel": "媒体报道",
       "live": false,
-      "source": "惠城区政府·镇办动态",
-      "url": "http://www.hcq.gov.cn/zwgk/zbdt/xjkjdbsc/content/post_5889071.html",
-      "summary": "小金口街道柏岗村新屋至惠州大道段约500米道路此前缺少照明，楼栋长日常走访时记下这条“夜里有些暗”的小线索，村里主动把亮化列入民生实事，如今路灯全部点亮，全程没有等到群众正式投诉。今年以来该街道已主动办理这类“未诉先办”民生微实事47件，涉及巷道照明、路面修补、休闲设施等，惠及近2万名群众。",
-      "published_at": "2026-11-06",
+      "source": "今日惠州网",
+      "url": "http://www.huizhou.cn/news/newsc_counties/newsc_chc/202611/t20261110_1666602.htm",
+      "summary": "惠城区江北街道今年以来开展“惠邻”活动900余场次、惠及群众2.3万余人次。望江村敬老宴已连办27年，金世界花园邻里晚会连办7年、由业主自演，“邻BA”篮球赛连办3年，惠新社区篮球公开赛吸引16支队伍。",
+      "published_at": "2026-11-10",
       "event_date": null,
-      "fetched_at": "2026-11-10 07:30",
-      "verified_status": "已核验",
+      "fetched_at": "2026-11-10 21:25",
+      "verified_status": "待核实",
+      "fate": {
+        "kind": "life",
+        "ident": "gossip"
+      }
+    },
+    {
+      "title": "桥东把东升一路做成示范路段，“门前三包”周末不断档",
+      "cat": "city",
+      "emoji": "🏙️",
+      "tier": "中",
+      "srcLevel": "媒体报道",
+      "live": false,
+      "source": "今日惠州网",
+      "url": "http://www.huizhou.cn/news/newsc_counties/newsc_chc/202611/t20261110_1666601.htm",
+      "summary": "惠城区桥东街道以东升一路为示范路段推进“门前三包”：执法队员、社区工作人员与志愿者错时上岗、逐户走访，劝导跨店经营、占道堆放、乱贴乱挂，协助商户搬移桌椅、清除小广告，周末节假日保持巡查。",
+      "published_at": "2026-11-10",
+      "event_date": null,
+      "fetched_at": "2026-11-10 21:25",
+      "verified_status": "待核实",
       "fate": {
         "kind": "info",
-        "ident": "livelihood",
-        "objects": "柏岗村道路照明",
+        "ident": "city",
+        "objects": "东升一路市容与商户经营",
         "direction": "中性",
-        "assumption": "具体进展以官方发布为准"
+        "assumption": "具体成效以街道发布为准"
+      }
+    },
+    {
+      "title": "柏岗村干群协力，2小时帮梅州七旬老人找回失联11年的儿子",
+      "cat": "gossip",
+      "emoji": "🤝",
+      "tier": "中",
+      "srcLevel": "媒体报道",
+      "live": false,
+      "source": "今日惠州网",
+      "url": "http://www.huizhou.cn/news/newsc_counties/newsc_chc/202611/t20261110_1666603.htm",
+      "summary": "小金口街道柏岗村接到梅州71岁张老伯求助后，依托网格化治理与居民群发动，10月23日下午仅用2小时就在村内小巷找到其2015年到惠州务工后失联的儿子；老人随后寄来“情暖人间 助人为乐”锦旗。",
+      "published_at": "2026-11-10",
+      "event_date": "2026-10-23",
+      "fetched_at": "2026-11-10 21:25",
+      "verified_status": "待核实",
+      "fate": {
+        "kind": "life",
+        "ident": "gossip"
+      }
+    },
+    {
+      "title": "为好人家里换灯：惠城联合爱心企业开展“礼遇好人”送灯活动",
+      "cat": "gossip",
+      "emoji": "🤝",
+      "tier": "中",
+      "srcLevel": "媒体报道",
+      "live": false,
+      "source": "惠城文明网",
+      "url": "http://hc.hznews.com/2026/news_1109/27956.html",
+      "summary": "惠城区文明办联合爱心企业雷士照明开展礼遇好人送灯活动：前期摸排好人家庭照明设备老化、损坏情况，确定更换名单，免费赠送并更换灯具；桥西、横沥等镇街文明办上门安装调试。",
+      "published_at": "2026-11-09",
+      "event_date": null,
+      "fetched_at": "2026-11-10 21:25",
+      "verified_status": "待核实",
+      "fate": {
+        "kind": "life",
+        "ident": "gossip"
       }
     }
   ]
