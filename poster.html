@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070D18">
+<title>惠城冲击力海报：在建的钱，一年少了</title>
+<style>
+:root{
+  --bg:#070D18;--ink:#E8F1FB;--ink2:#A9C0D8;--ink3:#6E88A3;
+  --line:rgba(150,190,235,.16);
+  --cyan:#4FC3FF;--blue:#2E7DEB;--amber:#F0B35E;--red:#FF6B60;--green:#54D6A0;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Roboto Mono",monospace;
+  --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;min-width:0}
+html,body{overflow:hidden}
+body{font-family:var(--font);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;background:var(--bg)}
+
+/* 画布：540×720，2x 导出即 1080×1440 */
+.poster{width:540px;height:720px;position:relative;overflow:hidden;background:
+  radial-gradient(560px 420px at 18% -6%,rgba(46,125,235,.28),transparent 60%),
+  radial-gradient(520px 400px at 105% 78%,rgba(255,107,96,.16),transparent 62%),
+  radial-gradient(460px 380px at 88% 12%,rgba(84,214,160,.10),transparent 60%),
+  linear-gradient(168deg,#060B16 0%,#0A1322 52%,#05080F 100%)}
+.grid{position:absolute;inset:0;background-image:
+  linear-gradient(rgba(120,170,230,.05) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(120,170,230,.05) 1px,transparent 1px);
+  background-size:44px 44px;-webkit-mask-image:radial-gradient(600px 480px at 50% 42%,#000 30%,transparent 88%);
+  mask-image:radial-gradient(600px 480px at 50% 42%,#000 30%,transparent 88%)}
+.grain{position:absolute;inset:0;opacity:.05;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E")}
+.in{position:relative;z-index:2;padding:34px 38px 0;height:100%;display:flex;flex-direction:column}
+
+.top{display:flex;align-items:center;gap:10px}
+.mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:14px;
+  background:linear-gradient(150deg,#4FC3FF,#0D47A1);box-shadow:0 4px 18px -2px rgba(46,125,235,.65)}
+.top b{font-size:15px;letter-spacing:.02em}
+.top .tag{font-size:10px;color:var(--ink3);font-weight:700;letter-spacing:.1em}
+.top .period{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--ink2);
+  border:1px solid var(--line);border-radius:999px;padding:4px 10px;background:rgba(255,255,255,.04)}
+
+.kick{margin-top:26px;font-size:11px;font-weight:800;letter-spacing:.24em;color:var(--cyan)}
+
+h1{margin-top:12px;font-size:40px;font-weight:800;line-height:1.14;letter-spacing:-.015em}
+h1 .r{color:var(--red);text-shadow:0 0 34px rgba(255,107,96,.45)}
+
+.bignum{display:flex;align-items:baseline;gap:14px;margin-top:8px}
+.bignum .n{font-family:var(--mono);font-size:118px;font-weight:800;line-height:.95;letter-spacing:-.04em;
+  color:var(--red);text-shadow:0 0 60px rgba(255,107,96,.55),0 8px 40px rgba(0,0,0,.5)}
+.bignum .n::before{content:"−"}
+.bignum .u{font-size:15px;color:var(--ink2);font-weight:700}
+
+.sub{margin-top:14px;font-size:13.5px;color:var(--ink2);line-height:1.7}
+.sub b{color:var(--red);font-weight:800}
+.sub .mono{font-family:var(--mono)}
+
+/* 断崖图 */
+.cliff{margin-top:18px;position:relative;height:118px}
+.cliff svg{width:100%;height:100%;display:block;overflow:visible}
+.cliff .tagline{position:absolute;right:4px;top:-6px;font-size:10px;color:var(--ink3);font-family:var(--mono)}
+
+/* 没塌反转 */
+.flip{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fc{border:1px solid rgba(84,214,160,.32);border-radius:14px;padding:12px 14px;background:rgba(84,214,160,.07)}
+.fc .h{font-size:10px;font-weight:800;letter-spacing:.12em;color:var(--green)}
+.fc .n{font-family:var(--mono);font-size:26px;font-weight:800;color:var(--green);display:block;margin:4px 0 1px}
+.fc .d{font-size:10.5px;color:var(--ink2)}
+
+/* 三个动作 */
+.acts{margin-top:auto;padding:14px 0 12px}
+.acts .t{font-size:13px;font-weight:800}
+.acts .t b{color:var(--amber)}
+.acts .row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.act{border:1px solid var(--line);border-radius:11px;padding:9px 10px;background:rgba(14,26,42,.6)}
+.act .k{font-family:var(--mono);font-size:9px;color:var(--cyan);font-weight:800;letter-spacing:.08em}
+.act .d{font-size:11.5px;font-weight:700;margin-top:3px}
+.act .s{font-size:9px;color:var(--ink3);margin-top:2px}
+
+.foot{margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  border-top:1px solid var(--line);padding-top:11px}
+.foot .url{font-family:var(--mono);font-size:10.5px;color:var(--cyan);font-weight:700;
+  border:1px solid rgba(79,195,255,.35);border-radius:999px;padding:5px 12px;background:rgba(79,195,255,.08)}
+.foot .meta{font-size:9px;color:var(--ink3);text-align:right;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="grid"></div>
+  <div class="grain"></div>
+  <div class="in">
+    <div class="top">
+      <span class="mark">惠</span><b>惠城决策风洞</b><span class="tag">公众版</span>
+      <span class="period" id="pPeriod">—</span>
+    </div>
+
+    <div class="kick">惠城人都在转的三个数字 · 先猜后揭</div>
+    <h1>在建的钱，<br>一年少了<span class="r">快一半</span></h1>
+    <div class="bignum"><span class="n" id="pFai">—</span><span class="u">固定资产投资同比</span></div>
+    <div class="sub">其中工业投资 <b class="mono" id="pIndFai">—</b> · 后续新开工、新投产的节奏在放缓。<b>钱变少了，不是没了。</b></div>
+
+    <div class="cliff">
+      <div class="tagline">2025 → 2026 · 1-9 月</div>
+      <svg viewBox="0 0 464 118" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#FF6B60" stop-opacity=".5"/>
+            <stop offset="1" stop-color="#FF6B60" stop-opacity=".04"/>
+          </linearGradient>
+          <filter id="glow"><feGaussianBlur stdDeviation="3.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <path d="M8 34 L96 30 L150 33 L208 28 L262 30 L300 88 L346 96 L392 102 L456 106 L456 118 L8 118 Z" fill="url(#lg)"/>
+        <path d="M8 34 L96 30 L150 33 L208 28 L262 30 L300 88 L346 96 L392 102 L456 106" fill="none" stroke="#FF6B60" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round" filter="url(#glow)"/>
+        <circle cx="300" cy="88" r="6" fill="#FF6B60" filter="url(#glow)"/>
+        <circle cx="300" cy="88" r="12" fill="none" stroke="#FF6B60" stroke-opacity=".35" stroke-width="2"/>
+        <text x="308" y="82" font-size="12" font-family="Menlo,monospace" fill="#FF6B60" font-weight="800">−40.7%</text>
+      </svg>
+    </div>
+
+    <div class="flip">
+      <div class="fc"><span class="h">没塌 · 外贸</span><span class="n" id="pTrade">—</span><span class="d">进出口同比 · 外需还在拉</span></div>
+      <div class="fc"><span class="h">底子 · 工业利润</span><span class="n" id="pProfit">—</span><span class="d">2025 全年 · 盈利基本盘在</span></div>
+    </div>
+
+    <div class="acts">
+      <div class="t">三个可核验动作，<b>能把节奏翻回来</b></div>
+      <div class="row">
+        <div class="act"><span class="k">信号 1</span><div class="d">1-10 月简况</div><span class="s">盯规上是否回升</span></div>
+        <div class="act"><span class="k">信号 2</span><div class="d">重点项目进度</div><span class="s">产业类仅 60.83%</span></div>
+        <div class="act"><span class="k">信号 3</span><div class="d">金澜动工</div><span class="s">10.5 亿项目落地</span></div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <span class="url">huicheng-simulator/spotlight</span>
+      <span class="meta">开源社区项目 · 全部数字来自官方公开数据<br>可逐条核对 · 不做预测 · 不做定性</span>
+    </div>
+  </div>
+</div>
+
+<script src="hc-viz/data.js"></script>
+<script>
+(function(){
+  if(!window.HC_ASOF) return;
+  function off(id){return HC_OFFICIAL.metrics.find(function(m){return m.id===id;})||{};}
+  function cur(id){return HC_CURRENT.metrics.find(function(m){return m.id===id;})||{};}
+  function txt(id,s){var e=document.getElementById(id);if(e)e.textContent=s;}
+  txt('pPeriod',HC_ASOF.currentLabel+' · 官方口径');
+  txt('pFai',(cur('fai').yoy||'').replace(/^[+\-]/,''));
+  var indM=(cur('fai').note||'').match(/-?\d+\.?\d*%/g);
+  txt('pIndFai','−'+(indM?indM[indM.length-1].replace(/^[+\-]/,''):'46.1%'));
+  txt('pTrade',cur('trade').yoy);
+  txt('pProfit',off('ind_profit').v);
+})();
+</script>
+</body>
+</html>

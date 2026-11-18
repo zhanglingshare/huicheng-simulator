@@ -20,69 +20,114 @@ body{font-family:var(--font);color:var(--ink);line-height:1.65;-webkit-font-smoo
     linear-gradient(180deg,#070D18 0%,#0A1322 100%);min-height:100vh}
 a{color:inherit;text-decoration:none}
 
-.bar{display:flex;align-items:center;gap:10px;padding:10px 16px;position:sticky;top:0;z-index:40;
+.grain{position:fixed;inset:0;opacity:.04;pointer-events:none;z-index:70;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E")}
+
+.bar{display:flex;align-items:center;gap:10px;padding:10px 16px;position:sticky;top:0;z-index:60;
   background:rgba(7,13,24,.8);border-bottom:1px solid var(--line);
-  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
 .mark{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:12px;
-  background:linear-gradient(150deg,#4FC3FF,#0D47A1)}
+  background:linear-gradient(150deg,#4FC3FF,#0D47A1);box-shadow:0 3px 14px -2px rgba(46,125,235,.6)}
 .bar b{font-size:12.5px}
 .bar .sub{font-size:9.5px;color:var(--ink3);margin-left:2px}
 .stamp{margin-left:auto;font-family:var(--mono);font-size:9.5px;color:var(--ink3)}
 
 .wrap{max-width:640px;margin:0 auto;padding:24px 16px 30px}
 
-/* 钩子屏 */
-.hero{padding:18px 4px 8px}
+/* ===== 钩子 ===== */
+.hero{padding:18px 4px 6px}
 .kick{font-size:10.5px;font-weight:800;letter-spacing:.2em;color:var(--cyan);margin-bottom:12px}
-h1{font-size:clamp(28px,7.5vw,40px);font-weight:800;line-height:1.15;letter-spacing:-.02em}
-h1 em{font-style:normal;color:var(--amber)}
+h1{font-size:clamp(29px,7.8vw,42px);font-weight:800;line-height:1.15;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--amber);text-shadow:0 0 30px rgba(240,179,94,.4)}
 .hero p{margin-top:14px;font-size:14px;color:var(--ink2)}
 .hero .tip{margin-top:16px;display:inline-block;font-size:12px;font-weight:700;color:var(--cyan);
   border:1px solid rgba(79,195,255,.35);border-radius:999px;padding:7px 14px;background:rgba(79,195,255,.08)}
+.scrollcue{margin-top:22px;text-align:center;font-size:10px;color:var(--ink3);letter-spacing:.2em}
+.scrollcue::after{content:"";display:block;width:1px;height:26px;margin:8px auto 0;
+  background:linear-gradient(180deg,var(--cyan),transparent);animation:cue 1.8s ease-in-out infinite}
+@keyframes cue{0%,100%{opacity:.2}50%{opacity:1}}
 
-/* 先猜后揭卡 */
-.guess{margin-top:22px;background:rgba(14,26,42,.7);border:1px solid var(--line);border-radius:20px;
-  padding:22px 20px;display:flex;flex-direction:column;gap:14px;min-height:300px;justify-content:center}
+/* ===== 先猜后揭卡 ===== */
+.guess{margin-top:20px;background:rgba(14,26,42,.7);border:1px solid var(--line);border-radius:22px;
+  padding:22px 20px;display:flex;flex-direction:column;gap:12px;min-height:290px;justify-content:center;
+  position:relative;overflow:hidden;
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.guess::before{content:"";position:absolute;inset:-1px;border-radius:22px;padding:1px;pointer-events:none;
+  background:linear-gradient(150deg,rgba(79,195,255,.35),transparent 40%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:.5s}
+.guess.open::before{opacity:1}
 .guess .no{font-family:var(--mono);font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.1em}
 .guess .q{font-size:19px;font-weight:800;line-height:1.45}
 .guess .ask{font-size:13.5px;color:var(--ink2)}
-.guess .btn{align-self:flex-start;border:0;border-radius:999px;padding:12px 24px;font-size:14px;font-weight:800;
+.guess .btn{align-self:flex-start;border:0;border-radius:999px;padding:12px 26px;font-size:14px;font-weight:800;
   cursor:pointer;background:linear-gradient(150deg,#4FC3FF,#2E7DEB);color:#04101f;
-  box-shadow:0 6px 20px -6px rgba(46,125,235,.6)}
+  box-shadow:0 6px 20px -6px rgba(46,125,235,.6);transition:transform .15s}
+.guess .btn:active{transform:scale(.96)}
 .guess .ans{display:none;flex-direction:column;gap:8px}
-.guess.open .ans{display:flex;animation:pop .4s cubic-bezier(.16,1,.3,1)}
+.guess.open .ans{display:flex;animation:pop .45s cubic-bezier(.16,1,.3,1)}
 .guess.open .ask,.guess.open .btn{display:none}
-@keyframes pop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.big{font-family:var(--mono);font-size:clamp(40px,12vw,60px);font-weight:800;line-height:1.05}
-.big.r{color:var(--red)}.big.a{color:var(--amber)}.big.g{color:var(--green)}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+.big{font-family:var(--mono);font-size:clamp(44px,13vw,64px);font-weight:800;line-height:1.02;letter-spacing:-.03em}
+.big.r{color:var(--red);text-shadow:0 0 46px rgba(255,107,96,.5)}
+.big.a{color:var(--amber);text-shadow:0 0 46px rgba(240,179,94,.4)}
+.big.g{color:var(--green);text-shadow:0 0 46px rgba(84,214,160,.4)}
+.big .from{font-size:.45em;color:var(--ink3);text-decoration:line-through;margin-right:10px;letter-spacing:0}
+.big .arrow{font-size:.4em;color:var(--ink3);margin:0 10px}
+.shake{animation:shake .5s cubic-bezier(.36,.07,.19,.97)}
+@keyframes shake{10%,90%{transform:translateX(-3px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-7px)}40%,60%{transform:translateX(7px)}}
+
 .ans .explain{font-size:13px;color:var(--ink2);line-height:1.7}
+.ans .explain b{color:var(--red)}
 .ans .src{font-family:var(--mono);font-size:10px;color:var(--ink3);border-top:1px solid var(--line);padding-top:10px}
 
-/* 反差对照 */
-.vs{margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.vsc{border:1px solid var(--line);border-radius:16px;padding:16px 14px;text-align:center}
-.vsc .h{font-size:11px;font-weight:800;letter-spacing:.08em;margin-bottom:10px}
+/* 小对比条 */
+.mini{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.minib{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:rgba(7,13,24,.5)}
+.minib .k{font-size:10px;color:var(--ink3)}
+.minib .v{font-family:var(--mono);font-size:19px;font-weight:800;margin-top:2px}
+.minib .v.r{color:var(--red)}.minib .v.g{color:var(--green)}.minib .v.a{color:var(--amber)}
+
+/* ===== 反差对照 ===== */
+.vs{margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.vsc{border:1px solid var(--line);border-radius:18px;padding:18px 14px;position:relative;overflow:hidden;
+  background:rgba(14,26,42,.55)}
+.vsc .h{font-size:11px;font-weight:800;letter-spacing:.08em;margin-bottom:14px;text-align:center}
 .vsc.old .h{color:var(--green)}.vsc.now .h{color:var(--amber)}
-.vsc .n{font-family:var(--mono);font-size:22px;font-weight:800;display:block;margin:6px 0}
-.vsc.old .n{color:var(--green)}.vsc.now .n{color:var(--amber)}
-.vsc .d{font-size:11px;color:var(--ink3)}
+.baritem{margin-bottom:14px}
+.baritem .k{font-size:10.5px;color:var(--ink2)}
+.baritem .v{font-family:var(--mono);font-size:20px;font-weight:800;margin:3px 0 6px;display:block}
+.vsc.old .v{color:var(--green)}.vsc.now .v{color:var(--amber)}
+.vsc.now .v.r{color:var(--red)}
+.track{height:8px;border-radius:999px;background:rgba(255,255,255,.05);overflow:hidden}
+.fill{height:100%;width:0;border-radius:999px;transition:width 1.1s cubic-bezier(.16,1,.3,1)}
+.vsc.old .fill{background:linear-gradient(90deg,rgba(84,214,160,.6),var(--green))}
+.vsc.now .fill{background:linear-gradient(90deg,rgba(240,179,94,.5),var(--amber))}
+.vsc.now .fill.r{background:linear-gradient(90deg,rgba(255,107,96,.5),var(--red))}
+.vsc.in .fill{width:var(--w)}
+.vs-note{margin-top:10px;font-size:10.5px;color:var(--ink3);text-align:center}
 
-/* 平衡：不贩卖焦虑 */
-.calm{margin-top:22px;background:rgba(84,214,160,.08);border:1px solid rgba(84,214,160,.3);
-  border-radius:18px;padding:18px 18px}
-.calm h3{font-size:15px;font-weight:800;color:var(--green);margin-bottom:10px}
-.calm p{font-size:13px;color:var(--ink2);line-height:1.8}
-.calm b{color:var(--green)}
+/* ===== 希望弧线 ===== */
+.hope{margin-top:26px;background:linear-gradient(160deg,rgba(84,214,160,.10),rgba(14,26,42,.7));
+  border:1px solid rgba(84,214,160,.3);border-radius:20px;padding:20px 18px}
+.hope .t{font-size:15px;font-weight:800;color:var(--green);margin-bottom:6px}
+.hope .lead{font-size:13px;color:var(--ink2);line-height:1.8}
+.hope .lead b{color:var(--green)}
+.hope .acts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.act{border:1px solid var(--line);border-radius:12px;padding:10px;background:rgba(7,13,24,.55)}
+.act .k{font-family:var(--mono);font-size:9px;color:var(--cyan);font-weight:800;letter-spacing:.08em}
+.act .d{font-size:11.5px;font-weight:700;margin-top:3px}
+.act .s{font-size:9px;color:var(--ink3);margin-top:2px}
 
-/* 引流到简报 */
+/* ===== 引流 ===== */
 .cta{margin-top:26px;background:linear-gradient(160deg,rgba(46,125,235,.25),rgba(14,26,42,.8));
-  border:1px solid rgba(79,195,255,.35);border-radius:20px;padding:22px 20px;text-align:center}
-.cta h3{font-size:18px;font-weight:800;line-height:1.5;margin-bottom:8px}
-.cta p{font-size:13px;color:var(--ink2);margin-bottom:16px}
-.cta .go{display:inline-block;border-radius:12px;padding:13px 26px;font-size:14px;font-weight:800;
-  background:linear-gradient(150deg,#4FC3FF,#2E7DEB);color:#04101f}
-.share{margin-top:14px;width:100%;border:1px solid rgba(240,179,94,.5);background:transparent;color:var(--amber);
-  border-radius:12px;padding:13px;font-size:14px;font-weight:800;cursor:pointer}
+  border:1px solid rgba(79,195,255,.35);border-radius:22px;padding:24px 20px;text-align:center}
+.cta h3{font-size:19px;font-weight:800;line-height:1.5;margin-bottom:8px}
+.cta p{font-size:13px;color:var(--ink2);margin-bottom:18px}
+.cta .go{display:inline-block;border-radius:13px;padding:14px 30px;font-size:14px;font-weight:800;
+  background:linear-gradient(150deg,#4FC3FF,#2E7DEB);color:#04101f;box-shadow:0 8px 26px -6px rgba(46,125,235,.65)}
+.cta .poster{margin-top:12px;display:inline-block;width:100%;border:1px solid rgba(240,179,94,.5);
+  background:transparent;color:var(--amber);border-radius:13px;padding:13px;font-size:14px;font-weight:800;cursor:pointer}
 
 .foot{margin-top:26px;padding-top:16px;border-top:1px solid var(--line);font-size:10.5px;color:var(--ink3);
   text-align:center;line-height:1.8}
@@ -92,12 +137,15 @@ h1 em{font-style:normal;color:var(--amber)}
   transition:.3s;z-index:99;border:1px solid var(--line)}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-@media(min-width:820px){
-  .guess{min-height:0}
-}
+/* 滚动进入 */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media(min-width:820px){.guess{min-height:0}}
 </style>
 </head>
 <body data-sn-theme="dark">
+<div class="grain"></div>
 
 <header class="bar">
   <span class="mark">惠</span><b>惠城决策风洞</b><span class="sub">公众版</span>
@@ -110,79 +158,94 @@ h1 em{font-style:normal;color:var(--amber)}
   <section class="hero">
     <div class="kick">先猜后揭 · 不绕弯子</div>
     <h1>惠城人先看这<em>三个数字</em>，没有一个是 GDP，全和你有关</h1>
-    <p>在建的项目、开工的厂子、明年的工作节奏——下面三个数字，都来自官方公开数据。先凭感觉猜，再点揭晓。</p>
+    <p>在建的工地、开工的厂子、明年的工作节奏——三个数字，都来自官方公开数据。先凭感觉猜，再点揭晓。</p>
     <span class="tip">每屏都可以单独截图，转给关心惠城的人</span>
+    <div class="scrollcue">往下滑 · 先猜后揭</div>
   </section>
 
   <!-- 猜 1 -->
-  <div class="guess">
+  <div class="guess reveal">
     <span class="no">数字 01</span>
-    <div class="q">今年在建项目的投资，变化有多大？</div>
+    <div class="q">在建的钱，变化有多大？</div>
     <div class="ask">先猜个方向：是小涨、持平，还是下滑？点下面揭晓。</div>
     <button class="btn" type="button">点我揭晓</button>
     <div class="ans">
       <span class="big r" id="g1">—</span>
-      <div class="explain">1-9 月固定资产投资同比深跌，其中工业投资 <b id="g1b">—</b>。这意味着后续新开工、新投产的节奏在放缓。</div>
+      <div class="explain">1-9 月固定资产投资同比<b>深度下滑</b>，其中工业投资 <b id="g1b">—</b>。这意味着后续新开工、新投产的节奏在放缓——不是钱没了，是钱变慢了。</div>
+      <div class="mini">
+        <div class="minib"><span class="k">整体固投</span><span class="v r" id="g1c">—</span></div>
+        <div class="minib"><span class="k">工业投资</span><span class="v r" id="g1d">—</span></div>
+      </div>
       <div class="src">2026 年 1-9 月快报 · 官方口径</div>
     </div>
   </div>
 
   <!-- 猜 2 -->
-  <div class="guess">
+  <div class="guess reveal">
     <span class="no">数字 02</span>
-    <div class="q">规上厂子的增加值，还能保持去年的两位数吗？</div>
+    <div class="q">厂子的产出，还能保持去年的两位数吗？</div>
     <div class="ask">去年是 +10.8%，你猜今年前九个月是多少？</div>
     <button class="btn" type="button">点我揭晓</button>
     <div class="ans">
-      <span class="big a" id="g2">—</span>
-      <div class="explain">1-9 月规上工业增加值仅个位数低增长，去年同期是两位数。第二产业增加值 <b id="g2b">—</b>，为全市唯一负增长。</div>
+      <span class="big a"><span class="from">+10.8%</span><span class="arrow">→</span><span id="g2">—</span></span>
+      <div class="explain">1-9 月规上工业增加值回落到 <b id="g2b">—</b>，第二产业 <b id="g2c">—</b>，为全市唯一负增长。厂子的产出还在，只是势头比去年缓了。</div>
       <div class="src">2026 年 1-9 月快报 · 全市对照</div>
     </div>
   </div>
 
   <!-- 猜 3 -->
-  <div class="guess">
+  <div class="guess reveal">
     <span class="no">数字 03</span>
     <div class="q">138 个重点项目，产业类的进度到哪了？</div>
     <div class="ask">整体进度 71.27%，那真正和产业有关的部分呢？</div>
     <button class="btn" type="button">点我揭晓</button>
     <div class="ans">
       <span class="big g" id="g3">60.83%</span>
-      <div class="explain">产业类项目完成率只有 60.83%，低于整体进度。项目落地，才是后面就业和产值的来源。</div>
+      <div class="explain">产业类项目完成率只有 <b>60.83%</b>，低于整体进度。项目落地，才是后面就业和产值的来源——这也是最可以被动作改变的一个。</div>
+      <div class="mini">
+        <div class="minib"><span class="k">整体进度</span><span class="v a">71.27%</span></div>
+        <div class="minib"><span class="k">产业类</span><span class="v g">60.83%</span></div>
+      </div>
       <div class="src">区重点项目 1-9 月进展 · 官方口径</div>
     </div>
   </div>
 
   <!-- 反差 -->
-  <section class="vs">
+  <section class="vs reveal">
     <div class="vsc old">
       <div class="h">2025 全年</div>
-      <span class="n" id="oldVa">—</span>
-      <div class="d">规上工业增加值</div>
-      <span class="n" id="oldProfit" style="font-size:18px">—</span>
-      <div class="d">工业利润</div>
+      <div class="baritem"><span class="k">规上工业增加值</span><span class="v" id="oldVa">—</span>
+        <div class="track"><div class="fill" style="--w:100%"></div></div></div>
+      <div class="baritem"><span class="k">工业利润</span><span class="v" id="oldProfit">—</span>
+        <div class="track"><div class="fill" style="--w:100%"></div></div></div>
     </div>
     <div class="vsc now">
       <div class="h">2026 年 1-9 月</div>
-      <span class="n" id="nowVa">—</span>
-      <div class="d">规上工业增加值</div>
-      <span class="n" id="nowGdp2" style="font-size:18px">—</span>
-      <div class="d">第二产业</div>
+      <div class="baritem"><span class="k">规上工业增加值</span><span class="v" id="nowVa">—</span>
+        <div class="track"><div class="fill" style="--w:8%"></div></div></div>
+      <div class="baritem"><span class="k">第二产业</span><span class="v r" id="nowGdp2">—</span>
+        <div class="track"><div class="fill r" style="--w:10%"></div></div></div>
+    </div>
+  </section>
+  <div class="vs-note">同一个人，同一批厂子，节奏从两位数回到了个位数</div>
+
+  <!-- 希望 -->
+  <section class="hope reveal">
+    <div class="t">但也别只看焦虑</div>
+    <div class="lead">1-9 月外贸进出口同比 <b id="calmTrade">—</b>，外需还在拉；去年打下的工业利润底子还在。基本盘没有塌，问题集中在“增量”和“投资”——<b>这是可以靠动作扭转的</b>。</div>
+    <div class="acts">
+      <div class="act"><span class="k">信号 1</span><div class="d">1-10 月简况</div><span class="s">盯规上是否回升</span></div>
+      <div class="act"><span class="k">信号 2</span><div class="d">重点项目进度</div><span class="s">产业类仅 60.83%</span></div>
+      <div class="act"><span class="k">信号 3</span><div class="d">金澜动工</div><span class="s">10.5 亿项目落地</span></div>
     </div>
   </section>
 
-  <!-- 平衡 -->
-  <section class="calm">
-    <h3>但也别只看焦虑</h3>
-    <p>1-9 月外贸进出口同比 <b id="calmTrade">—</b>，外需还在拉；去年打下的工业利润底子还在。基本盘没有塌，问题集中在“增量”和“投资”——这正是可以靠动作去扭转的部分。</p>
-  </section>
-
   <!-- 引流 -->
-  <section class="cta">
+  <section class="cta reveal">
     <h3>热闹看完了，门道在这里</h3>
     <p>真正决定明年的，是三个可核验的正式动作。我们把结论、触发信号和决策规则整理成了一页纸。</p>
     <a class="go" href="briefing.html">进决策简报，看盯什么 →</a>
-    <button class="share" type="button" id="shareBtn">转给关心惠城的人</button>
+    <button class="poster" type="button" id="posterBtn">把冲击力海报转出去</button>
   </section>
 
   <div class="foot">
@@ -202,34 +265,89 @@ h1 em{font-style:normal;color:var(--amber)}
   function txt(id,s){var e=document.getElementById(id);if(e)e.textContent=s;}
 
   txt('barStamp',HC_ASOF.checked);
-  txt('g1',cur('fai').yoy);
-  txt('g1b','-46.1%');
-  txt('g2',cur('ind_va').yoy);
-  txt('g2b',cur('gdp2').yoy);
+  txt('g1c',cur('fai').yoy);
+  var faiM=(cur('fai').note||'').match(/-?\d+\.?\d*%/g);
+  txt('g1d',faiM?faiM[faiM.length-1]:'-46.1%');
+  txt('g1b','−46.1%');
+  txt('g2b',cur('ind_va').yoy);
+  txt('g2c',cur('gdp2').yoy);
   txt('oldVa',off('ind_va').v);
   txt('oldProfit',off('ind_profit').v);
   txt('nowVa',cur('ind_va').yoy);
   txt('nowGdp2',cur('gdp2').yoy);
   txt('calmTrade',cur('trade').yoy);
 
-  // 先猜后揭
-  document.querySelectorAll('.guess').forEach(function(card){
+  /* 数字滚动：从起点滚到目标，负数落地时震屏 */
+  function roll(el, from, to, suffix, dur, colorClass){
+    if(!el) return;
+    var neg=parseFloat(String(to).replace(/[^0-9.\-]/g,''))<0;
+    var t0=null;
+    function step(ts){
+      if(!t0)t0=ts;
+      var k=Math.min((ts-t0)/dur,1);
+      var e=1-Math.pow(1-k,3);
+      var val=from+(to-from)*e;
+      el.textContent=(val>=0?'+':'')+val.toFixed(1)+suffix;
+      if(k<1)requestAnimationFrame(step);
+      else{
+        el.textContent=(to>=0?'+':'')+to.toFixed(1)+suffix;
+        if(neg){el.parentElement.classList.add('shake');}
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* 先猜后揭 */
+  var cards=document.querySelectorAll('.guess');
+  cards.forEach(function(card){
     var btn=card.querySelector('.btn');
-    btn.addEventListener('click',function(){card.classList.add('open');});
+    btn.addEventListener('click',function(){
+      card.classList.add('open');
+      var big=card.querySelector('.big');
+      var no=card.querySelector('.no').textContent;
+      if(no.indexOf('01')>=0){
+        big.textContent='0.0%';
+        roll(big,0,-40.7,'%',1100);
+      } else if(no.indexOf('02')>=0){
+        var n=big.querySelector('#g2');
+        n.textContent='+10.8%';
+        roll(n,10.8,0.8,'%',1400);
+      } else {
+        big.textContent='0%';
+        roll(big,0,60.83,'%',1100);
+      }
+    });
   });
 
-  // 分享
+  /* 滚动进入 */
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}
+    });
+  },{threshold:.18});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+  /* 分享 */
   function toast(msg){
     var t=document.getElementById('toast');
     t.textContent=msg;t.classList.add('show');
     setTimeout(function(){t.classList.remove('show');},2200);
   }
-  document.getElementById('shareBtn').addEventListener('click',function(){
+  function shareLink(){
     var data={title:document.title,text:'惠城人先看这三个数字，全和你有关',url:location.href};
     if(navigator.share){navigator.share(data).catch(function(){});}
     else if(navigator.clipboard){navigator.clipboard.writeText(location.href).then(function(){toast('链接已复制，去转发吧');});}
     else{toast('请用浏览器菜单转发本页');}
+  }
+  document.getElementById('posterBtn').addEventListener('click',function(){
+    location.href='poster.html';
   });
+  var shareBtn=document.createElement('button');
+  shareBtn.type='button';shareBtn.className='poster';
+  shareBtn.style.cssText='margin-top:10px;border-color:rgba(79,195,255,.5);color:var(--cyan)';
+  shareBtn.textContent='转给关心惠城的人';
+  shareBtn.addEventListener('click',shareLink);
+  document.querySelector('.cta').appendChild(shareBtn);
 })();
 </script>
 <script src="ui/site-nav.js"></script>
