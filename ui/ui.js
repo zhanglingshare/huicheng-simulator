@@ -5,6 +5,8 @@
   'use strict';
 
   var PAGES = [
+    { url: 'briefing.html',       n: '00', group: '决策简报', label: '决策简报',   desc: '一页看清盯什么' },
+    { url: 'spotlight.html',      n: '00·2', group: '决策简报', label: '公众传播',   desc: '先看三个和你有关的数字' },
     { url: 'index.html',          n: '01', group: '开篇',     label: '风洞',       desc: '产业决策，先过风洞' },
     { url: 'holo.html',           n: '02', group: '看见世界', label: '全息关系',   desc: '钱和关系连在谁身上' },
     { url: 'holo-workspace.html', n: '03', group: '看见世界', label: '全息工作区', desc: '关系网络、情报流与变化详情' },
