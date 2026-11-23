@@ -3,6 +3,35 @@
 <meta name="description" content="独立的惠城产业经营沙盒概念版；季度推进、产业与通勤决策、冲击事件、可复现实验和反事实对比。">
 <style>
 :root{--bg:#08111b;--panel:#101e2b;--panel2:#162738;--line:#304455;--ink:#ecf6fa;--muted:#91aebd;--a:#59dcd3;--gold:#ffce75;--red:#ff837b;--green:#8be7b6}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"PingFang SC",sans-serif}button,input{font:inherit}button{cursor:pointer}button:disabled{opacity:.35;cursor:not-allowed}a{color:var(--a)}.wrap{max-width:1500px;margin:auto;padding:17px}.top{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}.eyebrow{color:var(--a);letter-spacing:.19em;font-size:11px;font-weight:800}.top h1{margin:4px 0;font-size:clamp(21px,3vw,36px);letter-spacing:-.04em}.muted{color:var(--muted)}.small{font-size:12px}.links{display:flex;gap:12px;flex-wrap:wrap;font-size:13px}.pill{display:inline-block;border:1px solid #466070;padding:4px 10px;border-radius:50px;color:#b8d2dc;font-size:11px}.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px;margin:18px 0}.kpi{background:var(--panel);border:1px solid var(--line);padding:13px;border-radius:12px}.kpi span{display:block;font-size:11px;color:var(--muted)}.kpi strong{display:block;font-size:clamp(17px,2vw,25px);margin:5px 0;white-space:nowrap}.kpi em{font-size:10px;font-style:normal;color:var(--muted)}.layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(305px,.85fr);gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}.cardhead{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:13px 15px;border-bottom:1px solid var(--line)}h2{font-size:15px;margin:0}.stage{position:relative;background:radial-gradient(ellipse at 55% 43%,#1b3b4d 0,#0b2030 65%,#081721 100%);height:min(62vw,520px);min-height:350px;overflow:hidden}.city{width:100%;height:100%;display:block;touch-action:pan-y}.plot{cursor:pointer}.plot:hover .surface{stroke:#fff;stroke-width:3;filter:brightness(1.18)}.plot.selected .surface{stroke:#ffce75;stroke-width:3}.road{stroke:#425969;stroke-width:18;stroke-linecap:round;fill:none}.lane{stroke:#93b1b5;stroke-width:1.5;stroke-dasharray:6 9;fill:none}.car{fill:#ffe59d;filter:drop-shadow(0 0 5px #fccc75)}.legend{display:flex;gap:10px;flex-wrap:wrap;padding:11px 15px;font-size:11px;color:var(--muted)}.dot{display:inline-block;width:8px;height:8px;border-radius:3px;margin-right:4px}.console{padding:15px}.console p{margin:7px 0;font-size:13px;line-height:1.65}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}.action{color:var(--ink);background:var(--panel2);border:1px solid #385063;border-radius:10px;padding:12px 8px;text-align:left;min-height:90px;transition:.15s}.action:hover{border-color:var(--a);background:#203b49}.action strong{display:block;font-size:13px}.action span{display:block;font-size:11px;color:#a5bdcb;margin-top:5px}.action small{display:block;font-size:11px;color:var(--gold);margin-top:4px}.primary{background:var(--a);color:#06232d;border:0;border-radius:10px;font-weight:800;padding:12px 15px}.secondary{background:#193043;color:var(--ink);border:1px solid #395668;border-radius:10px;padding:10px 14px}.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}.event{border:1px solid #665842;background:#32291f;border-radius:12px;padding:12px;margin-top:10px;font-size:13px}.event b{color:var(--gold)}.event p{line-height:1.6;margin:6px 0}.statline{display:flex;justify-content:space-between;gap:10px;font-size:12px;margin:12px 0 5px}.track{height:7px;background:#293c4b;border-radius:6px;overflow:hidden}.fill{height:100%;border-radius:6px;background:var(--a);transition:width .3s}.feed{max-height:230px;overflow:auto;margin-top:13px}.entry{border-top:1px solid var(--line);padding:10px 1px;font-size:12px;line-height:1.5}.entry time{color:var(--gold);margin-right:8px}.lower{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.pad{padding:14px}.bars{display:flex;align-items:flex-end;gap:3px;height:130px;border-bottom:1px solid #466070;padding-top:6px}.bar{flex:1;min-width:3px;background:#43b5b0;border-radius:2px 2px 0 0;position:relative}.bar:hover{background:#ffce75}.bar:last-child{background:var(--gold)}.foot{margin:20px 0;color:#83a2b2;font-size:11px;line-height:1.7}.modalcover{position:fixed;inset:0;background:#000a;display:none;align-items:center;justify-content:center;z-index:10;padding:12px}.modal{background:#142737;max-width:470px;border:1px solid #63838b;border-radius:16px;padding:22px}.modal h2{font-size:21px}.modal p{line-height:1.8;font-size:14px}.mode{display:flex;gap:6px;align-items:center;color:#a9bdc7;font-size:11px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#205b57;border:1px solid #6ce1c5;padding:12px 20px;border-radius:10px;display:none;font-size:13px;z-index:30;max-width:90vw}.wave{position:absolute;top:12px;left:14px;color:#b8d8e5;background:#091b29cc;border:1px solid #3d5a67;border-radius:9px;padding:7px 10px;font-size:11px;pointer-events:none}.note{background:#0d2530;border-left:3px solid var(--a);padding:10px;margin-top:11px;font-size:12px;line-height:1.6}@media(max-width:1050px){.layout{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(3,1fr)}.stage{height:440px}}@media(max-width:620px){.wrap{padding:10px}.kpis{grid-template-columns:repeat(3,1fr);gap:5px}.kpi{padding:9px}.kpi strong{font-size:17px}.three{grid-template-columns:1fr}.action{min-height:0}.lower{grid-template-columns:1fr}.stage{height:360px;min-height:320px}.top h1{font-size:23px}}
+</style>
+<style id="premium-ui-v2">
+:root{--bg:#07111b;--panel:#0b1b29;--panel2:#112c3a;--line:#284250;--ink:#f4f8fc;--muted:#9fb7c4;--a:#78edd6;--gold:#f8cd86}
+body{background:radial-gradient(ellipse at 38% -15%,#173748 0,transparent 48%),#06101a!important;letter-spacing:.005em}
+.wrap{max-width:1640px!important;padding:24px clamp(12px,2.6vw,40px)!important}
+.top{padding:4px 0 10px;align-items:center}.top h1{font-size:clamp(29px,3.6vw,52px)!important;font-weight:850;letter-spacing:-.055em!important;line-height:1.05;margin:9px 0 12px!important}.top h1 span{color:#8ee9d3!important}
+.eyebrow{font-size:10px!important;letter-spacing:.3em!important;color:#9ab9c6!important}
+.top .muted{font-size:13px;color:#b1c7d0}.links{align-items:center;gap:8px!important}.links a{border:1px solid #38525d;background:#0c2330a8;padding:10px 13px;border-radius:999px;color:#d8f2f5;text-decoration:none;transition:.2s}.links a:hover{background:#214553}.links .pill{border-color:#2d776a;color:#8ce8d5}
+.kpis{gap:12px!important;margin:22px 0!important}.kpi{background:linear-gradient(145deg,#173342,#0c1f2b 70%)!important;border:1px solid #345461!important;border-radius:18px!important;padding:17px 17px 15px!important;min-height:111px;position:relative;overflow:hidden;box-shadow:inset 0 1px #ffffff0a,0 12px 32px #0002}
+.kpi:before{content:"";position:absolute;left:0;top:17px;bottom:17px;width:3px;background:#61cbb6;border-radius:5px}.kpi:nth-child(2):before{background:#e6b86f}.kpi:nth-child(4):before{background:#df9983}.kpi strong{font-size:clamp(22px,2.25vw,32px)!important;font-weight:850;letter-spacing:-.035em}.kpi span{font-size:12px!important;color:#adc2ca!important}.kpi em{font-size:10px!important}
+.layout{grid-template-columns:minmax(0,1.73fr) minmax(340px,.78fr)!important;gap:17px!important}.card{background:linear-gradient(155deg,#112735,#0b1c29 65%)!important;border:1px solid #31505c!important;border-radius:23px!important;box-shadow:0 25px 80px #0003,inset 0 1px #ffffff0b}
+.cardhead{padding:20px 22px!important;min-height:64px}.cardhead h2{font-weight:780;font-size:17px!important;letter-spacing:-.015em}.pill{font-size:10px!important}
+.stage{height:clamp(440px,39vw,640px)!important;min-height:0!important;background:radial-gradient(ellipse at 50% 20%,#355366 0,#162f40 53%,#0a1e2c 100%)!important;box-shadow:inset 0 0 80px #051827;position:relative;overflow:hidden}
+.stage:after{content:"";pointer-events:none;position:absolute;inset:0;background:linear-gradient(0deg,#06172477,transparent 20%,transparent 80%,#a7ddef0b),radial-gradient(ellipse at center,transparent 45%,#05142188 100%)}
+.city{display:none!important}
+#cityCanvas{display:block;width:100%;height:100%;touch-action:manipulation}
+.sceneBadge{position:absolute;top:18px;right:18px;background:#081824d9;border:1px solid #8dd5ce55;color:#d4eff0;padding:10px 12px;border-radius:12px;font-size:11px;z-index:2;backdrop-filter:blur(12px)}
+.sceneNav{position:absolute;left:16px;bottom:15px;display:flex;gap:7px;flex-wrap:wrap;z-index:3}
+.sceneNav button{background:#09202ce8;border:1px solid #5c889299;border-radius:999px;color:#ecf8fa;padding:9px 12px;font-size:11px;font-weight:700;box-shadow:0 5px 20px #0007;backdrop-filter:blur(8px)}
+.sceneNav button:hover,.sceneNav button.active{color:#092530;background:#8ce9d3;border-color:#9cfce1}
+.wave{z-index:2;top:18px;left:18px;padding:10px 13px!important;background:#091e2bbd!important;color:#c3e6e9!important;border-radius:12px!important}
+.legend{padding:14px 19px!important;border-bottom:1px solid #ffffff12;background:#091b28;color:#c1d6db!important}
+.console{padding:20px!important}.console>strong{font-size:17px;letter-spacing:-.02em}.console>p{font-size:12px!important}.note{background:#153644!important;border-radius:10px;border-left-color:#8ee9d3!important;font-size:12px!important;padding:12px 15px!important}
+.three{grid-template-columns:1fr!important;gap:9px!important}.action{display:grid;grid-template-columns:1fr auto;align-items:center;background:linear-gradient(110deg,#1b3644,#122b38)!important;min-height:76px!important;padding:13px 16px!important;border:1px solid #395765!important;border-radius:13px!important;box-shadow:inset 0 1px #ffffff0c}.action strong{font-size:14px!important;letter-spacing:-.01em}.action span{grid-column:1;font-size:11px!important;margin-top:4px}.action small{grid-column:2;grid-row:1 / span 2;font-size:12px!important;background:#f1c77e16;border:1px solid #f1c77e44;padding:7px 9px;border-radius:8px}
+.action:hover{transform:translateY(-1px);border-color:#9ce6d8!important;box-shadow:0 5px 20px #0004}.controls .primary{font-size:14px;padding:14px 18px;border-radius:12px;background:linear-gradient(105deg,#91f4d5,#58c8c2)!important;color:#052b31!important;box-shadow:0 7px 25px #2bbba72a}
+.secondary{border-radius:10px!important}.event{border-radius:13px!important}.statline{font-size:12px}.feed{max-height:180px!important}.lower{gap:17px!important;margin-top:17px!important}.bars{height:160px!important;gap:5px!important}.bar{background:linear-gradient(0deg,#198980,#6adbd0)!important;border-radius:4px 4px 0 0!important}.bar:last-child{background:linear-gradient(0deg,#ad8b4c,#fce0a1)!important}
+.foot{font-size:11px!important}
+@media(max-width:1080px){.layout{grid-template-columns:1fr!important}.stage{height:500px!important}.three{grid-template-columns:repeat(3,1fr)!important}.action{display:block;min-height:120px!important}.action small{display:inline-block;margin-top:7px}}
+@media(max-width:680px){.top h1{font-size:30px!important}.kpis{grid-template-columns:repeat(3,1fr)!important;gap:7px!important}.kpi{padding:12px 10px!important;min-height:97px}.kpi strong{font-size:21px!important}.stage{height:390px!important}.three{grid-template-columns:1fr!important}.action{min-height:72px!important}.sceneNav{bottom:11px;left:9px;right:9px;gap:5px}.sceneNav button{font-size:10px;padding:8px 9px}.sceneBadge{font-size:9px;right:8px;top:10px}.wave{font-size:9px;top:10px;left:9px}.cardhead{padding:15px!important}.kpi:nth-child(5),.kpi:nth-child(6){display:block}}
 </style></head><body><main class="wrap">
 <header class="top"><div><div class="eyebrow">H U I C H E N G · C I T Y L A B / DEMO 01</div><h1>惠城 2030 <span style="color:var(--a)">· 产业经营实验场</span></h1><div class="muted small">把城市当作一个会回应你的世界。四年、十六个季度、一次次不可预知的抉择。</div></div><div class="links"><a href="../index.html">返回惠城原站</a><a href="../holo-workspace.html">全息工作区</a><a href="../windtunnel.html">原版风洞</a><span class="pill">独立沙盒 · 不影响原站</span></div></header>
 <section class="kpis"><div class="kpi"><span>时间</span><strong id="time">2026 Q1</strong><em>逐季度推进</em></div><div class="kpi"><span>财政余量 · 演示</span><strong id="money">120</strong><em>亿元 · 虚拟预算</em></div><div class="kpi"><span>工业产能指数</span><strong id="industry">100</strong><em>2026初始值=100</em></div><div class="kpi"><span>通勤压力</span><strong id="traffic">50</strong><em>指数越低越好</em></div><div class="kpi"><span>就业匹配度</span><strong id="jobs">70%</strong><em>演示代理指标</em></div><div class="kpi"><span>民生满意度</span><strong id="happy">68%</strong><em>演示代理指标</em></div></section>
@@ -100,5 +129,97 @@ $('compare').onclick=function(){baseline=JSON.parse(JSON.stringify(state));try{l
 $('restartEnd').onclick=function(){$('compare').click()};$('closeModal').onclick=function(){$('modal').style.display='none'};
 document.querySelectorAll('.plot').forEach(function(p){var choose=function(){document.querySelectorAll('.plot').forEach(function(k){k.classList.remove('selected')});p.classList.add('selected');var d=defs[p.dataset.id];$('placeName').textContent=d[0];$('placeDesc').textContent=d[1];$('selected').textContent='当前焦点：'+d[0].split(' · ')[0]};p.addEventListener('click',choose);p.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();choose()}})});
 render();
+})();
+</script>
+<script id="premium-city-scene">
+(function(){
+const stage=document.querySelector('.stage');if(!stage)return;
+const svg=stage.querySelector('svg');const canvas=document.createElement('canvas');canvas.id='cityCanvas';canvas.setAttribute('aria-label','惠城产业经营动态等距城市视图');
+stage.insertBefore(canvas,svg);
+const badge=document.createElement('div');badge.className='sceneBadge';badge.textContent='● 城市动态运行中';stage.appendChild(badge);
+const nav=document.createElement('div');nav.className='sceneNav';stage.appendChild(nav);
+const zones=[['park','🏭 产业园'],['bridge','🌉 通勤'],['business','🏙 商业'],['housing','🏘 居住'],['services','🌳 民生']];
+const names={park:'东部产业园 · 扩产与兑现',bridge:'跨江通道 · 交通瓶颈',business:'商业服务区 · 本地消费',housing:'居住片区 · 就业和生活',services:'公共服务 · 城市韧性'};
+const desc={park:'厂房会逐步增加，但产能兑现还取决于用工、交通、订单和项目进度。',bridge:'车辆流动不是装饰。通勤压力指数越高，这里的交通拥堵提示越明显。',business:'产业与居民需要服务配套。商业发展并不完全依赖建筑数量。',housing:'城市不仅有厂房，还有每天奔波的生活与就业。',services:'公共空间和公共服务决定居民是否愿意留在这座城市。'};
+let selected='park';
+zones.forEach(([id,label])=>{let b=document.createElement('button');b.textContent=label;b.dataset.zone=id;b.onclick=()=>{selected=id;nav.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x.dataset.zone===id));document.getElementById('placeName').textContent=names[id];document.getElementById('placeDesc').textContent=desc[id];document.getElementById('selected').textContent='当前焦点：'+label.replace(/^.. /,'');};nav.appendChild(b)});nav.firstChild.classList.add('active');
+const ctx=canvas.getContext('2d');if(!ctx)return;
+let W=1000,H=590,t=0,seed=937;
+function rnd(a,b,c){let n=Math.sin(a*127.1+b*311.7+c*74.7+seed)*43758.5453;return n-Math.floor(n)}
+function project(x,y,z=0){return [500+(x-y)*37,75+(x+y)*19-z]}
+function poly(points,fill,stroke){ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.closePath();ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=.8;ctx.stroke()}}
+function ellipse(x,y,rx,ry,color){ctx.fillStyle=color;ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);ctx.fill()}
+function prism(x,y,w,d,h,wall='#345e65',roof='#7ba5a2',shade='#203f4d'){
+ const a=project(x,y,0),b=project(x+w,y,0),c=project(x+w,y+d,0),d0=project(x,y+d,0);
+ const u=a.map((v,i)=>i===1?v-h:v),v=b.map((k,i)=>i===1?k-h:k),q=c.map((k,i)=>i===1?k-h:k),s=d0.map((k,i)=>i===1?k-h:k);
+ poly([a,b,v,u],wall);poly([b,c,q,v],shade);poly([u,v,q,s],roof,'#ffffff20');
+ let floors=Math.max(1,Math.floor(h/13));for(let f=0;f<floors;f++){let k=(f+1)/(floors+1);for(let j=1;j<4;j++){let r=j/4;let p1=[a[0]+(b[0]-a[0])*r,a[1]+(b[1]-a[1])*r-h*k];ctx.fillStyle=rnd(x+j,y+f,2)>.35?'#b0dbe0a8':'#172d38';ctx.fillRect(p1[0]-2,p1[1],4,4)}}}
+function tile(x,y,col,edge){const p=[project(x,y),project(x+1,y),project(x+1,y+1),project(x,y+1)];poly(p,col,edge)}
+function line(a,b,color,width){ctx.strokeStyle=color;ctx.lineWidth=width;ctx.beginPath();ctx.moveTo(...a);ctx.lineTo(...b);ctx.stroke()}
+function tree(x,y,size=1){const p=project(x,y);ellipse(p[0],p[1]+1,6*size,3*size,'#071e2499');line([p[0],p[1]],[p[0],p[1]-11*size],'#6d6145',2);ellipse(p[0]-4*size,p[1]-12*size,8*size,6*size,'#346f61');ellipse(p[0]+3*size,p[1]-16*size,9*size,7*size,'#55a082');ellipse(p[0]-3*size,p[1]-20*size,6*size,5*size,'#7fc1a0')}
+function label(x,y,text,color='#dff7f2'){const p=project(x,y,20);ctx.font='bold 14px system-ui';let tw=ctx.measureText(text).width;ctx.fillStyle='#04131ee5';ctx.beginPath();ctx.roundRect(p[0]-tw/2-13,p[1]-24,tw+26,31,9);ctx.fill();ctx.strokeStyle='#9bbcb848';ctx.stroke();ctx.fillStyle=color;ctx.textAlign='center';ctx.fillText(text,p[0],p[1]-4)}
+function n(id){return parseFloat(document.getElementById(id).textContent)||0}
+function render(ms){
+ const dpr=Math.min(2,window.devicePixelRatio||1),rect=canvas.getBoundingClientRect();if(rect.width&&rect.height&&(canvas.width!==Math.round(rect.width*dpr)||canvas.height!==Math.round(rect.height*dpr))){canvas.width=Math.round(rect.width*dpr);canvas.height=Math.round(rect.height*dpr)}
+ ctx.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);ctx.clearRect(0,0,W,H);
+ const gr=ctx.createLinearGradient(0,0,0,590);gr.addColorStop(0,'#23475a');gr.addColorStop(.5,'#153647');gr.addColorStop(1,'#092537');ctx.fillStyle=gr;ctx.fillRect(0,0,W,H);
+ // Subtle atmospheric grid
+ ctx.strokeStyle='#b3d5d50a';ctx.lineWidth=1;for(let i=0;i<1000;i+=35){line([i,0],[i-110,590],'#83bdc20b',1)}
+ ellipse(500,360,340,180,'#05162544');
+ // Land surface - raised coastal isometric platform
+ const corners=[project(0,0),project(13,0),project(13,11),project(0,11)];
+ poly(corners.map(p=>[p[0],p[1]+17]),'#183744');poly(corners,'#1b4551','#4f8184');
+ // Ground tiles
+ for(let y=0;y<11;y++)for(let x=0;x<13;x++){
+  let base=(x+y)%2?'#244d50':'#285658';
+  let river=y===8||y===9&&x<10;
+  if(river)base=(x+y)%2?'#176078':'#1c6980';
+  if(x>=8&&y<7)base=(x+y)%2?'#2d5054':'#34585a';
+  if(x<4&&y<6)base=(x+y)%2?'#31594d':'#365f50';
+  tile(x,y,base,'#ffffff08');
+  if(river){let p=project(x+.5,y+.6);line([p[0]-10,p[1]],[p[0]+12,p[1]],'#86d6d72a',1)}
+ }
+ // Roads and bridge painted on tile planes
+ for(let x=0;x<13;x++)for(let y of [3,6]){tile(x,y,'#4d6670','#78919a33');let a=project(x+.1,y+.5),b=project(x+.9,y+.5);line(a,b,'#d9d9b67a',1)}
+ for(let y=0;y<11;y++)for(let x of [4,7]){tile(x,y,'#506972','#81939e33');let a=project(x+.5,y+.1),b=project(x+.5,y+.9);line(a,b,'#d9d9b67a',1)}
+ // Buildings drawn back to front in depth order
+ const ind=n('industry'),traffic=n('traffic'),happy=n('happy'),jobs=n('jobs');
+ let buildings=[];
+ for(let x=0;x<13;x++)for(let y=0;y<11;y++){
+  if([3,6,8].includes(y)||[4,7].includes(x)||y===9||y===10)continue;
+  let type=x>=8?'industrial':x<=3?'residential':'commercial';
+  if(x<=3&&y>=7)type='park';
+  let r=rnd(x,y,7);if(type==='park'){buildings.push({x,y,type});continue}
+  if(r<.23)continue;
+  if(type==='industrial'&&x>10&&ind<112)continue;
+  let h=type==='industrial'?19+Math.floor(r*25):type==='residential'?22+Math.floor(r*65):35+Math.floor(r*80);
+  buildings.push({x,y,type,h});
+ }
+ buildings.sort((a,b)=>a.x+a.y-b.x-b.y);
+ buildings.forEach(b=>{let x=b.x,y=b.y;
+ if(b.type==='park'){for(let k=0;k<3;k++)tree(x+.22+k*.24,y+.25+(k%2)*.31,.7);return}
+ if(b.type==='industrial'){prism(x+.09,y+.08,.78,.78,b.h,'#567b83','#91aab2','#304e5f');let p=project(x+.65,y+.25,b.h);line([p[0],p[1]],[p[0],p[1]-18],'#bdccd0',5);ellipse(p[0],p[1]-23,9,4,'#a8d6de35')}
+ else if(b.type==='residential')prism(x+.15,y+.13,.66,.68,b.h,'#5d9186','#9ecbc2','#345c62');
+ else prism(x+.12,y+.08,.7,.72,b.h,'#60889b','#a0c8ce','#335973');
+ });
+ // Elevated bridge crossing river
+ for(let y=7;y<11;y++){let a=project(7.4,y,18),b=project(8.4,y,18),c=project(8.4,y+1,18),d=project(7.4,y+1,18);poly([a,b,c,d],'#9eaead','#e8d9b352');line(project(7.9,y,18),project(7.9,y+1,18),'#ebdaaa88',1)}
+ // Animated vehicles (visually represent traffic pressure)
+ let time=ms*.00018;
+ for(let k=0;k<11+Math.round(traffic/11);k++){let z=(time*(.7+rnd(k,1,0)) +rnd(k,2,0))%1;let lane=k%2===0?3.5:6.5;let p=project(z*12.5,lane,3);ellipse(p[0],p[1],3.3,2.2,k%4?'#f7daa4':'#9fecdf')}
+ let t=(time*.75)%1,p=project(7.9,7+t*3.8,21);ellipse(p[0],p[1],3.5,2.4,traffic>68?'#ff9688':'#ffe7ad');
+ // Urban trees and public space
+ for(let k=0;k<28;k++){let x=rnd(k,4,2)*12.8,y=rnd(k,5,1)*10.8;if([3,6,8,9].includes(Math.floor(y))||[4,7].includes(Math.floor(x)))continue;if(x>8&&y<6)continue;tree(x,y,.42+rnd(k,6,3)*.33)}
+ label(10,1.2,'产业园  · '+Math.round(ind),'#b4f4e1');
+ label(2.1,1.5,'居住片区');
+ label(5.7,1.3,'商务区');
+ label(8.4,8.9,'跨江通道  · '+Math.round(traffic),'#f4d8a1');
+ label(2.1,7.4,'公共绿地');
+ if(traffic>70){ctx.fillStyle='#ff8d7e';ctx.beginPath();ctx.arc(885,475,6+2*Math.sin(ms/240),0,Math.PI*2);ctx.fill()}
+ badge.textContent=traffic>72?'● 通勤压力预警':ind>125?'● 产业持续扩张':'● 城市动态运行中';
+ badge.style.color=traffic>72?'#ffb7a8':'#d4eff0';
+ requestAnimationFrame(render);
+}
+requestAnimationFrame(render);
 })();
 </script></body></html>
