@@ -1,0 +1,93 @@
+/* 自动生成：briefing.html 浅色映射 */
+:root{
+  --ink:#12161c;
+  --ink2:#5f6773;
+  --cyan:#0a84ff;
+  --blue:#0a84ff;
+  --amber:#f0b35e;
+  --red:#ff6b60;
+  --green:#54d6a0;
+}
+html body{
+  background:radial-gradient(1200px 600px at 80% -10%,rgba(255,255,255,0.18),transparent 60%),
+    linear-gradient(180deg,#ffffff 0%,#ffffff 100%);
+}
+html body .bar{
+  background:rgba(255,255,255,0.96);
+}
+html body .mark{
+  color:#12161c;
+  background:linear-gradient(150deg,rgba(255,255,255,0.10),#0D47A1);
+  box-shadow:0 3px 14px -2px rgba(255,255,255,0.60);
+}
+html body .nav a.on{
+  color:#12161c;
+}
+html body .stamp{
+  background:rgba(255,255,255,0.05);
+}
+html body .ingress{
+  border:1px dashed rgba(240,179,94,0.45);
+  background:rgba(255,255,255,0.05);
+}
+html body .meta{
+  background:rgba(255,255,255,0.78);
+}
+html body .vcell{
+  background:linear-gradient(160deg,rgba(255,255,255,0.96),rgba(255,255,255,0.96));
+}
+html body .vcell::after{
+  background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,0.05) 50%,transparent 60%);
+}
+html body .card{
+  background:rgba(255,255,255,0.94);
+}
+html body .card .tag.a{
+  border-color:rgba(84,214,160,0.4);
+}
+html body .card .tag.b{
+  border-color:rgba(240,179,94,0.4);
+}
+html body .card .tag.c{
+  border-color:rgba(255,107,96,0.4);
+}
+html body .panel{
+  background:rgba(255,255,255,0.94);
+}
+html body .btr{
+  background:rgba(255,255,255,0.04);
+}
+html body .bfil{
+  background:linear-gradient(90deg,rgba(255,255,255,0.55),var(--red));
+}
+html body .bval{
+  color:#12161c;
+}
+html body .dcol{
+  background:rgba(255,255,255,0.78);
+}
+html body .dcol.did .dh::before{
+  box-shadow:0 0 10px rgba(255,255,255,0.50);
+}
+html body .dcol.not .dh::before{
+  box-shadow:0 0 10px rgba(255,255,255,0.60);
+}
+html body .dcol.not li::before{
+  background:rgba(255,255,255,0.60);
+}
+html body .diff-foot{
+  background:rgba(255,255,255,0.78);
+  border:1px solid rgba(79,195,255,0.3);
+}
+html body .rule{
+  background:rgba(255,255,255,0.94);
+}
+html body .rule:hover{
+  border-color:rgba(240,179,94,0.45);
+}
+html body .gcell{
+  background:rgba(255,255,255,0.78);
+}
+html body .bound{
+  background:rgba(255,255,255,0.78);
+}

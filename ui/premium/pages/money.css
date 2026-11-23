@@ -1,0 +1,56 @@
+/* 自动生成：money.html 浅色映射 */
+:root{
+  --ink:#12161c;
+  --blue:#0a84ff;
+  --green:#40e0b0;
+  --orange:#ffc06d;
+}
+html body .nav a{
+  background:#ffffff;
+}
+html body .eyebrow{
+  color:#0a7f95;
+}
+html body .hero p{
+  color:#5f6773;
+}
+html body .card{
+  background:linear-gradient(160deg,rgba(255,255,255,0.96),rgba(255,255,255,0.96));
+  box-shadow:0 16px 36px rgba(255,255,255,0.43);
+}
+html body .step-bar button{
+  background:#ffffff;
+  color:#5f6773;
+}
+html body .step-bar button.active{
+  color:#12161c;
+}
+html body .content p{
+  color:#5f6773;
+}
+html body .fact{
+  background:rgba(255,255,255,0.07);
+  color:#b25b00;
+}
+html body .prompt b{
+  color:#0a7f95;
+}
+html body .ask{
+  background:rgba(23,80,112,0.3);
+  color:#0a7f95;
+}
+html body .foot{
+  color:#5f6773;
+}
+html body .foot strong{
+  color:#12161c;
+}
+html body .node circle{
+  stroke:#0a7f95;
+}
+html body .node.active circle{
+  stroke:#0a7f95;
+}
+html body .node text{
+  fill:#12161c;
+}

@@ -1,0 +1,64 @@
+/* auto: lens/lens.css */
+html body :root{
+  --accent:#0a84ff;
+  --green:#30d158;
+}
+html body body{
+  background-image:radial-gradient(1100px 420px at 85% -10%, rgba(255,255,255,0.10), transparent 60%),
+    radial-gradient(900px 380px at -10% 0%, rgba(255,255,255,0.06), transparent 55%);
+}
+html body .topbar{
+  background:rgba(255,255,255,0.96);
+}
+html body .tabs a.on{
+  color:#12161c;
+}
+html body .dot{
+  box-shadow:0 0 0 4px rgba(255,255,255,0.04);
+}
+html body .dot.grow{
+  box-shadow:0 0 12px rgba(48,209,88,0.55);
+}
+html body .dot.flat{
+  box-shadow:0 0 12px rgba(255,255,255,0.50);
+}
+html body .dot.shrink{
+  box-shadow:0 0 12px rgba(255,255,255,0.55);
+}
+html body .tag{
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(99,230,190,0.22);
+}
+html body .st.ok{
+  background:rgba(48,209,88,0.1);
+}
+html body .st.warn{
+  background:rgba(255,255,255,0.10);
+}
+html body .st.bad{
+  background:rgba(255,255,255,0.10);
+}
+html body .found-state.live{
+  border-color:rgba(48,209,88,0.3);
+  background:rgba(48,209,88,0.08);
+}
+html body .found-state.build{
+  border-color:rgba(255,159,10,0.3);
+  background:rgba(255,255,255,0.08);
+}
+html body .found-state.plan{
+  border-color:rgba(10,132,255,0.3);
+  background:rgba(255,255,255,0.08);
+}
+html body .badge.live{
+  background:rgba(48,209,88,0.1);
+  border:1px solid rgba(48,209,88,0.3);
+}
+html body .badge.build{
+  background:rgba(255,255,255,0.10);
+  border:1px solid rgba(255,159,10,0.3);
+}
+html body .badge.plan{
+  background:rgba(255,255,255,0.10);
+  border:1px solid rgba(10,132,255,0.3);
+}

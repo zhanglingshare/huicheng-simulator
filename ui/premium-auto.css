@@ -1,0 +1,522 @@
+/* 自动生成：深色样式 → 浅色高级版映射。人工打磨见 premium.css */
+:root{
+  --ds-text:#12161c;
+  --ds-accent:#0a84ff;
+  --ds-ok:#30d158;
+  --ds-danger:#ff453a;
+  --ds-info:#0a84ff;
+  --ds-shadow-1:0 1px 2px rgba(255,255,255,0.73);
+  --ds-shadow-2:0 10px 28px -10px rgba(255,255,255,0.93);
+  --ds-shadow-3:0 28px 70px -20px rgba(255,255,255,0.96);
+  --gold:#ffd60a;
+  --violet:#bf5af2;
+  --purple:#bf5af2;
+  --shadow:var(--ds-shadow-2);
+  --sh-1:var(--ds-shadow-1);
+  --sh-2:var(--ds-shadow-2);
+  --sh-3:var(--ds-shadow-3);
+}
+html body{
+  background:radial-gradient(1100px 520px at 50% -8%,rgba(255,255,255,0.07),transparent 62%),
+    linear-gradient(180deg,#ffffff 0%,#ffffff 46%,#ffffff 100%) !important;
+}
+html ::selection{
+  background:rgba(255,255,255,0.40);
+  color:#12161c;
+}
+html input:focus, html textarea:focus, html select:focus{
+  border-color:rgba(10,132,255,0.7);
+  box-shadow:0 0 0 3px rgba(255,255,255,0.22);
+  background:rgba(255,255,255,0.06);
+}
+html input[type=range]::-webkit-slider-runnable-track{
+  background:rgba(255,255,255,0.14);
+}
+html input[type=range]::-webkit-slider-thumb{
+  background:#ffffff;
+  box-shadow:0 1px 4px rgba(255,255,255,0.78),0 0 0 .5px rgba(255,255,255,0.43);
+}
+html input[type=range]:focus-visible::-webkit-slider-thumb{
+  box-shadow:0 0 0 6px rgba(255,255,255,0.28),0 1px 4px rgba(255,255,255,0.78);
+}
+html input[type=range]::-moz-range-track{
+  background:rgba(255,255,255,0.14);
+}
+html input[type=range]::-moz-range-thumb{
+  background:#ffffff;
+}
+html ::-webkit-scrollbar-thumb{
+  background:rgba(255,255,255,0.14);
+}
+html ::-webkit-scrollbar-thumb:hover{
+  background:rgba(255,255,255,0.24);
+}
+*{
+  scrollbar-color:#12161c transparent;
+}
+html .ds-bar{
+  background:rgba(255,255,255,0.96);
+}
+html .ds-bar[data-scrolled="true"]{
+  background:rgba(255,255,255,0.96);
+  box-shadow:0 12px 30px -18px rgba(255,255,255,0.96);
+}
+html .ds-brand:hover .ds-brand-name{
+  color:#12161c;
+}
+html .ds-mark{
+  color:#12161c;
+  background:linear-gradient(160deg,#3d9bff 0%,rgba(255,255,255,0.10) 45%,#0062cc 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.38),0 1px 3px rgba(255,255,255,0.73);
+}
+html .ds-chapter-num{
+  background:rgba(255,255,255,0.14);
+}
+html .ds-scrim{
+  background:rgba(255,255,255,0.80);
+}
+html .ds-panel{
+  background:rgba(255,255,255,0.96);
+}
+html .ds-panel-close:hover{
+  color:#12161c;
+}
+html .ds-step[aria-current="page"] .ds-step-l{
+  color:#12161c;
+}
+html .ds-panel-foot a:hover{
+  color:#12161c;
+}
+html .ds-fold{
+  border:1px solid rgba(148,170,200,0.18);
+  background:rgba(148,170,200,0.04);
+}
+html .ds-fold>summary{
+  color:#78818f;
+}
+html .ds-fold>summary::after{
+  color:#98a1ad;
+  border:1px solid rgba(148,170,200,0.25);
+}
+html .ds-fold[open]>summary{
+  color:#5f6773;
+}
+html body[data-page="holo-workspace"]{
+  --sh-1:0 1px 2px rgba(255,255,255,0.63);
+}
+html body[data-page="holo-workspace"] header{
+  background:rgba(255,255,255,0.94);
+}
+html body[data-page="holo-workspace"] .brand .logo{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.32),0 1px 3px rgba(255,255,255,0.68);
+}
+html body[data-page="holo-workspace"] .brand .logo svg{
+  stroke:#12161c;
+}
+html body[data-page="holo-workspace"] nav.main button.on{
+  color:#12161c;
+  box-shadow:0 1px 2px rgba(255,255,255,0.63),inset 0 1px 0 rgba(255,255,255,0.08);
+}
+html body[data-page="holo-workspace"] .search:focus-within{
+  border-color:rgba(10,132,255,0.6);
+  box-shadow:0 0 0 3px rgba(255,255,255,0.18);
+}
+html body[data-page="holo-workspace"] .mode-switch button.on{
+  color:#12161c;
+}
+html body[data-page="holo-workspace"] .avatar{
+  color:#12161c;
+  background:linear-gradient(160deg,#4a5058,#ffffff);
+}
+html body[data-page="holo-workspace"] .brief{
+  background:linear-gradient(100deg,rgba(255,255,255,0.16),rgba(255,255,255,0.05) 55%,rgba(255,255,255,0.03));
+  border:1px solid rgba(10,132,255,0.24);
+}
+html body[data-page="holo-workspace"] .brief-icon{
+  color:#0a7f95;
+  background:rgba(255,255,255,0.20);
+  border:1px solid rgba(10,132,255,0.28);
+}
+html body[data-page="holo-workspace"] .brief-meta .brief-grade{
+  background:rgba(255,255,255,0.18);
+  color:#0a7f95;
+}
+html body[data-page="holo-workspace"] .brief-action{
+  color:#12161c;
+}
+html body[data-page="holo-workspace"] .layer.on{
+  border-color:rgba(10,132,255,0.28);
+  color:#12161c;
+}
+html body[data-page="holo-workspace"] .layer.on .num{
+  color:#0a7f95;
+}
+html body[data-page="holo-workspace"] .layer .ck{
+  border-color:rgba(255,255,255,0.28);
+}
+html body[data-page="holo-workspace"] .layer.on .ck::after{
+  border-color:rgba(17,24,39,0.12);
+}
+html body[data-page="holo-workspace"] .switch{
+  background:rgba(255,255,255,0.16);
+}
+html body[data-page="holo-workspace"] .switch i{
+  background:#ffffff;
+  box-shadow:0 1px 3px rgba(255,255,255,0.68);
+}
+html body[data-page="holo-workspace"] .stage{
+  background:radial-gradient(90% 70% at 50% 0%,rgba(255,255,255,0.07),transparent 62%),
+    #ffffff;
+}
+html body[data-page="holo-workspace"] .stage::before{
+  background-image:radial-gradient(rgba(255,255,255,0.09) .7px,transparent .7px);
+}
+html body[data-page="holo-workspace"] .chipbar, html body[data-page="holo-workspace"] .zoomer, html body[data-page="holo-workspace"] .hint, html body[data-page="holo-workspace"] .selbar{
+  background:rgba(255,255,255,0.96);
+  box-shadow:0 4px 16px rgba(255,255,255,0.63);
+}
+html body[data-page="holo-workspace"] .zoomer button:hover{
+  color:#12161c;
+}
+html body[data-page="holo-workspace"] .node .lab{
+  fill:#5f6773;
+}
+html body[data-page="holo-workspace"] .edge .elab{
+  fill:#78818f;
+  stroke:#12161c;
+}
+html body[data-page="holo-workspace"] .panel{
+  background:rgba(255,255,255,0.96);
+}
+html body[data-page="holo-workspace"] .p-h .av svg{
+  stroke:#12161c;
+}
+html body[data-page="holo-workspace"] .timeline{
+  background:rgba(255,255,255,0.96);
+}
+html body[data-page="holo-workspace"] .d-hero{
+  background:linear-gradient(160deg,rgba(255,255,255,0.18),rgba(255,255,255,0.06) 60%,rgba(255,255,255,0.03));
+}
+html body[data-page="holo-workspace"] .d-hero .eyebrow{
+  color:#0a7f95;
+}
+html body[data-page="holo-workspace"] .dh-stats{
+  background:rgba(255,255,255,0.09);
+}
+html body[data-page="holo-workspace"] .dh-stats>div{
+  background:rgba(255,255,255,0.96);
+}
+html body[data-page="holo-workspace"] .kind{
+  background:rgba(48,209,88,0.14);
+  color:#2f9e44;
+}
+html body[data-page="holo-workspace"] .sec .n{
+  background:rgba(255,255,255,0.16);
+  color:#0a7f95;
+}
+html body[data-page="holo-workspace"] .goto .ic{
+  color:#12161c;
+}
+html body[data-page="holo-workspace"] .goto .tx{
+  color:#0a7f95;
+}
+html body[data-page="holo-workspace"] .tab.on{
+  color:#12161c;
+}
+html body[data-page="holo-workspace"] .tab .badge{
+  color:#0a7f95;
+}
+html body[data-page="holo-workspace"] .why{
+  background:rgba(255,255,255,0.09);
+}
+html body[data-page="holo-workspace"] .mn-center{
+  border-color:rgba(10,132,255,0.5);
+  color:#12161c;
+}
+html body[data-page="holo-workspace"] .mn-center .mn-role{
+  color:#12161c;
+}
+html body[data-page="holo-workspace"] .mn-node .mn-tag{
+  background:rgba(255,255,255,0.06);
+}
+html body[data-page="today"] .mast h1 em{
+  color:#c93b3b;
+}
+html body[data-page="today"] .hero{
+  background:radial-gradient(120% 120% at 8% 0%,rgba(255,255,255,0.14),transparent 55%),
+    linear-gradient(180deg,#ffffff,#ffffff);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.05);
+}
+html body[data-page="today"] .hero:before{
+  background-image:radial-gradient(rgba(255,255,255,0.14) .7px,transparent .7px);
+}
+html body[data-page="today"] .hero:after{
+  border-color:rgba(255,255,255,0.08);
+  box-shadow:0 0 0 32px rgba(255,255,255,0.02),0 0 0 88px rgba(255,255,255,0.01);
+}
+html body[data-page="today"] .pulse{
+  box-shadow:0 0 0 4px rgba(48,209,88,0.16);
+}
+html body[data-page="today"] .amount .yen{
+  color:#0a7f95;
+}
+html body[data-page="today"] .live-stats .green strong{
+  color:#2f9e44;
+}
+html body[data-page="today"] .control{
+  background:rgba(255,255,255,0.04);
+}
+html body[data-page="today"] .mini.active{
+  background:#ffffff;
+  color:#12161c;
+  border-color:rgba(17,24,39,0.12);
+}
+html body[data-page="today"] .metric-num.red{
+  color:#c93b3b;
+}
+html body[data-page="today"] .metric-num.green, html body[data-page="today"] .metric:nth-child(3) .metric-num{
+  color:#2f9e44;
+}
+html body[data-page="today"] .ghost.active{
+  background:rgba(255,255,255,0.16);
+  border-color:rgba(10,132,255,0.35);
+  color:#0a7f95;
+}
+html body[data-page="today"] .map{
+  background-color:#ffffff;
+  background-image:radial-gradient(rgba(255,255,255,0.09) .7px,transparent .7px);
+}
+html body[data-page="today"] .graph-tooltip{
+  background:rgba(255,255,255,0.96);
+  box-shadow:0 10px 30px rgba(255,255,255,0.78);
+}
+html body[data-page="today"] .focus-amt{
+  color:#c93b3b;
+}
+html body[data-page="today"] .focus-dot{
+  box-shadow:0 0 0 4px rgba(255,255,255,0.14);
+}
+html body[data-page="today"] .evidence span{
+  background:rgba(255,255,255,0.13);
+  color:#0a7f95;
+}
+html body[data-page="today"] .evidence span.c{
+  background:rgba(255,255,255,0.14);
+  color:#b25b00;
+}
+html body[data-page="today"] .footlink{
+  color:#0a7f95;
+}
+html body[data-page="today"] .funnel-step:nth-child(1){
+  background:linear-gradient(100deg,rgba(255,255,255,0.10),rgba(255,255,255,0.10));
+}
+html body[data-page="today"] .funnel-step:nth-child(2){
+  background:linear-gradient(100deg,rgba(255,255,255,0.13),rgba(255,255,255,0.13));
+}
+html body[data-page="today"] .funnel-step:nth-child(3){
+  background:linear-gradient(100deg,rgba(175,82,222,0.12),#6d5ac4);
+}
+html body[data-page="today"] .experiment{
+  background:linear-gradient(160deg,rgba(48,209,88,0.12),rgba(48,209,88,0.04));
+  border:1px solid rgba(48,209,88,0.24);
+}
+html body[data-page="today"] .experiment .side-title h3{
+  color:#2f9e44;
+}
+html body[data-page="today"] .exp-result{
+  color:#2f9e44;
+}
+html body[data-page="today"] .exp-btn{
+  background:rgba(48,209,88,0.9);
+  color:#12161c;
+}
+html body[data-page="today"] .personal-result{
+  background:rgba(255,255,255,0.10);
+  border:1px solid rgba(10,132,255,0.22);
+}
+html body[data-page="today"] .personal-result strong{
+  color:#0a7f95;
+}
+html body[data-page="today"] .toast{
+  background:rgba(255,255,255,0.96);
+}
+html body[data-page="fun"] .v3-app{
+  background:radial-gradient(90% 55% at 62% 0%,rgba(255,255,255,0.10),transparent 62%),
+    linear-gradient(180deg,#ffffff,#ffffff 60%,#ffffff);
+}
+html body[data-page="fun"] .city-lens{
+  background:rgba(255,255,255,0.96);
+  box-shadow:0 8px 24px -12px rgba(255,255,255,0.96);
+}
+html body[data-page="fun"] .city-lens .chips button.on, html body[data-page="fun"] .city-lens .chips button[aria-pressed="true"], html body[data-page="fun"] .lens-time button.on, html body[data-page="fun"] .time-buttons button.on{
+  color:#12161c;
+}
+html body[data-page="fun"] .map-stage, html body[data-page="fun"] .map-body{
+  background:radial-gradient(70% 60% at 40% 45%,rgba(255,255,255,0.10),transparent 70%),
+    #ffffff;
+}
+html body[data-page="fun"] .map-stage:before{
+  background:linear-gradient(180deg,rgba(255,255,255,0.83),transparent 30%,rgba(255,255,255,0.78));
+}
+html body[data-page="fun"] .map-stage:after{
+  background-image:linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px);
+}
+html body[data-page="fun"] .focus-pane{
+  background:rgba(255,255,255,0.96);
+  box-shadow:0 24px 60px -20px rgba(255,255,255,0.96);
+}
+html body[data-page="fun"] .bottom-link a{
+  color:#0a7f95;
+}
+html body[data-page="fun"] .sheet{
+  background:rgba(255,255,255,0.96);
+}
+html body[data-page="fun"] .overlay-backdrop{
+  background:rgba(255,255,255,0.83);
+}
+html body[data-page="fun"] .toast{
+  background:rgba(255,255,255,0.96);
+}
+html body[data-page="choices"] .kg-heading h1 em{
+  color:#0a7f95;
+}
+html body[data-page="choices"] .kg-personas button[aria-pressed="true"]{
+  background:#ffffff;
+  color:#12161c;
+  border-color:rgba(17,24,39,0.12);
+}
+html body[data-page="choices"] .kg-personas button[aria-pressed="true"] span{
+  color:#12161c;
+}
+html body[data-page="choices"] .kg-stage, html body[data-page="choices"] .kg-inspector{
+  background:radial-gradient(70% 60% at 20% 15%,rgba(255,255,255,0.08),transparent 60%),
+    rgba(255,255,255,0.94);
+}
+html body[data-page="choices"] .kg-stage:before{
+  background:linear-gradient(180deg,rgba(255,255,255,0.88),transparent 18%,transparent 76%,rgba(255,255,255,0.96));
+}
+html body[data-page="choices"] .kg-inspector{
+  background:rgba(255,255,255,0.96);
+}
+html body[data-page="choices"] .kg-zoom{
+  background:rgba(255,255,255,0.96);
+}
+html body[data-page="choices"] .kg-aside-tabs button[aria-selected="true"], html body[data-page="choices"] .kg-aside-tabs button.on{
+  color:#12161c;
+}
+html body[data-page="choices"] .kg-event-card{
+  background:rgba(255,255,255,0.04);
+}
+html body[data-page="choices"] .kg-event-foot em{
+  color:#0a7f95;
+}
+html body[data-page="future"] .hero::before{
+  background:linear-gradient(100deg,rgba(255,255,255,0.96) 0%,rgba(255,255,255,0.94) 50%,rgba(255,255,255,0.96) 100%),
+             linear-gradient(180deg,rgba(255,255,255,0.63),rgba(255,255,255,0.96));
+}
+html body[data-page="future"] .hero .num{
+  color:#0a7f95;
+}
+html body[data-page="future"] .seg button.on{
+  color:#12161c;
+}
+html body[data-page="future"] .btn.primary{
+  color:#12161c;
+}
+html body[data-page="future"] .modal .box{
+  background:rgba(255,255,255,0.96);
+}
+html body[data-page="windtunnel"] .press button.sel{
+  background:#ffffff;
+  color:#12161c;
+  border-color:rgba(17,24,39,0.12);
+}
+html body[data-page="windtunnel"] .readout{
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(10,132,255,0.2);
+}
+html body[data-page="blindspot"] .pop{
+  background:rgba(255,255,255,0.96);
+}
+html body[data-page="report"] .hero-pills .hero-pill, html body[data-page="report"] .role-badge{
+  background:rgba(255,255,255,0.96);
+}
+html body[data-page="report"] .scan-item, html body[data-page="report"] .metric{
+  background:rgba(255,255,255,0.04);
+}
+html body[data-page="report"] .scene-tabs button.on{
+  background:#ffffff;
+  color:#12161c;
+  border-color:rgba(17,24,39,0.12);
+}
+html body[data-page="ending"] .hero-pills .hpill{
+  background:rgba(255,255,255,0.96);
+}
+html body[data-page="today"] .experiment{
+  background:linear-gradient(160deg,rgba(48,209,88,0.09),rgba(48,209,88,0.03));
+}
+html body[data-page="today"] .exp-btn{
+  color:#12161c;
+}
+html body[data-page="fun"] #mapRollBtn, html body[data-page="fun"] .map-roll{
+  background:#ffffff;
+  color:#12161c;
+  border:1px solid rgba(17,24,39,0.12);
+  box-shadow:0 4px 14px rgba(255,255,255,0.63);
+}
+html body[data-page="fun"] .map-roll:hover{
+  background:#ffffff;
+}
+html body[data-page="fun"] .stage-actions button{
+  background:rgba(255,255,255,0.96);
+}
+html body[data-page="fun"] .stage-actions button:hover{
+  background:rgba(255,255,255,0.96);
+  color:#12161c;
+}
+html body[data-page="fun"] .action.primary{
+  background:#ffffff;
+  color:#12161c;
+  border-color:rgba(17,24,39,0.12);
+}
+html body[data-page="fun"] .action.primary:hover{
+  background:#ffffff;
+}
+html body[data-page="fun"] .map-status .pill{
+  background:rgba(255,255,255,0.94);
+}
+@media (max-width:900px){
+html body[data-page="fun"] .explorer{
+  background:rgba(255,255,255,0.96);
+}
+}
+html body[data-page="choices"] .kg-heading h1 em{
+  color:#0a7f95 !important;
+  -webkit-text-fill-color:#0a7f95 !important;
+}
+html body[data-page="ending"] .back-link, html body[data-page="ending"] .share-btn.pri, html body[data-page="ending"] .btn, html body[data-page="ending"] .cs-btn.on{
+  color:#12161c !important;
+  box-shadow:0 2px 10px rgba(255,255,255,0.30) !important;
+}
+html body[data-page="ending"] .cs-btn{
+  background:rgba(255,255,255,0.92) !important;
+  color:#12161c !important;
+}
+html body[data-page="holo-workspace"] footer{
+  background:rgba(255,255,255,0.96);
+}
+html body[data-page="holo-workspace"] .tl-h i{
+  box-shadow:0 0 0 3px rgba(48,209,88,0.14);
+}
+html body[data-page="holo-workspace"] .tl-line{
+  background:rgba(255,255,255,0.10);
+}
+html body[data-page="holo-workspace"] .tl-ev .l{
+  color:#5f6773;
+}
+html body[data-page="holo-workspace"] .tl-ev .n{
+  border-color:rgba(17,24,39,0.12);
+}
+html body[data-page="holo-workspace"] .tl-ev{
+  background:rgba(255,255,255,0.04);
+}

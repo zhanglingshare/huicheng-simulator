@@ -1,0 +1,211 @@
+/* 自动生成：future.html 浅色映射 */
+:root{
+  --txt:#12161c;
+  --muted:#78818f;
+  --cyan:#0a84ff;
+  --blue:#0a84ff;
+  --red:#ff453a;
+  --green:#30d158;
+  --purple:#bf5af2;
+}
+html body .bg{
+  background:radial-gradient(circle at 85% 10%,rgba(255,255,255,0.08),transparent 35%),
+  radial-gradient(circle at 10% 90%,rgba(255,255,255,0.06),transparent 40%),
+  radial-gradient(120% 100% at 50% 0%,#ffffff 0%,#ffffff 55%,#ffffff 100%);
+}
+html body .bg .gridline{
+  background-image:linear-gradient(rgba(255,255,255,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.06) 1px,transparent 1px);
+}
+html body .stars span{
+  background:rgba(255,255,255,0.10);
+}
+html body .nav{
+  background:rgba(255,255,255,0.96);
+}
+html body .nav a{
+  background:rgba(255,255,255,0.96);
+  color:#5f6773;
+  border:1px solid rgba(34,48,74,0.8);
+}
+html body .nav a.on{
+  background:linear-gradient(135deg,#1d4ed8,rgba(255,255,255,0.10));
+  border-color:rgba(10,132,255,0.3);
+  color:#12161c;
+  box-shadow:0 0 14px rgba(255,255,255,0.40);
+}
+html body .glass{
+  background:linear-gradient(160deg,rgba(28,46,86,0.72),rgba(255,255,255,0.94));
+  border:1px solid rgba(96,165,250,0.32);
+  box-shadow:0 10px 36px rgba(255,255,255,0.73),0 0 24px rgba(255,255,255,0.14),inset 0 1px 0 rgba(255,255,255,0.08);
+}
+html body .hero::before{
+  background:linear-gradient(100deg,rgba(255,255,255,0.96) 0%,rgba(255,255,255,0.73) 48%,rgba(255,255,255,0.96) 100%),
+  linear-gradient(180deg,rgba(255,255,255,0.68),rgba(255,255,255,0.96) 100%);
+}
+html body .hero .tt{
+  color:#12161c;
+  text-shadow:none;
+}
+html body .hero .sub{
+  color:#12161c;
+  text-shadow:none;
+}
+html body .hero-quote{
+  color:#12161c;
+  text-shadow:none;
+}
+html body .hero-quote .hqa{
+  color:#b25b00;
+}
+html body .seg button.on{
+  background:linear-gradient(135deg,#1d4ed8,rgba(255,255,255,0.10));
+  color:#12161c;
+  box-shadow:0 0 12px rgba(255,255,255,0.50);
+}
+html body .tgl{
+  background:rgba(255,255,255,0.96);
+}
+html body .tgl i{
+  border:1px solid rgba(34,211,238,0.5);
+}
+html body .tgl.on i{
+  background:linear-gradient(135deg,#1d4ed8,rgba(255,255,255,0.10));
+}
+html body .tgl.on i::after{
+  border:solid rgba(17,24,39,0.12);
+}
+html body .stat .lab .sico{
+  background:linear-gradient(135deg,rgba(255,255,255,0.30),rgba(255,255,255,0.12));
+  border:1px solid rgba(34,211,238,0.3);
+}
+html body .stat .lab .sico svg{
+  stroke:#0a7f95;
+}
+html body .stat .ring .rb{
+  stroke:#12161c;
+}
+html body .path{
+  background:rgba(255,255,255,0.88);
+  border:1px solid rgba(64,130,255,0.18);
+}
+html body .pico{
+  background:linear-gradient(135deg,rgba(255,255,255,0.25),rgba(255,255,255,0.12));
+  border:1px solid rgba(34,211,238,0.3);
+}
+html body .pico svg{
+  stroke:#0a7f95;
+}
+html body .pbar{
+  background:rgba(255,255,255,0.07);
+}
+html body .pfill{
+  background:linear-gradient(90deg,#1d6fe0,rgba(255,255,255,0.10));
+  box-shadow:0 0 10px rgba(255,255,255,0.60);
+}
+html body input[type=range]::-webkit-slider-runnable-track{
+  background:rgba(255,255,255,0.12);
+}
+html body input[type=range]::-webkit-slider-thumb{
+  border:1px solid rgba(10,132,255,0.3);
+  box-shadow:0 0 12px rgba(255,255,255,0.80);
+}
+html body input[type=range]::-moz-range-track{
+  background:rgba(255,255,255,0.12);
+}
+html body input[type=range]::-moz-range-thumb{
+  border:1px solid rgba(10,132,255,0.3);
+}
+html body .btn{
+  background:rgba(255,255,255,0.04);
+}
+html body .btn.primary{
+  background:linear-gradient(135deg,#1d4ed8,rgba(255,255,255,0.10));
+  border-color:rgba(10,132,255,0.3);
+  color:#12161c;
+  box-shadow:0 0 18px rgba(255,255,255,0.45);
+}
+html body .mini-note{
+  color:#5f6773;
+}
+html body .analysis-block h3{
+  color:#5f6773;
+}
+html body .notice{
+  background:rgba(255,255,255,0.96);
+  border:1px solid rgba(64,130,255,0.3);
+}
+html body .notice svg{
+  stroke:#0a7f95;
+}
+html body .assume-btn{
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(125,211,252,0.55);
+  color:#12161c;
+}
+html body .assume-btn:hover{
+  background:rgba(255,255,255,0.18);
+}
+html body .assume-body{
+  background:rgba(255,255,255,0.96);
+  border:1px solid rgba(64,130,255,0.25);
+  color:#5f6773;
+}
+html body .night-foot::before{
+  background:linear-gradient(180deg,rgba(255,255,255,0.96) 0%,rgba(255,255,255,0.70) 42%,rgba(255,255,255,0.96) 100%);
+}
+html body .slogan .l1{
+  color:#12161c;
+  text-shadow:none;
+}
+html body .open-future{
+  color:#12161c;
+}
+html body .open-future .en{
+  color:#5f6773;
+}
+html body .saved-item{
+  background:rgba(255,255,255,0.88);
+  border:1px solid rgba(64,130,255,0.16);
+}
+html body .modal{
+  background:rgba(255,255,255,0.96);
+}
+html body .modal .box{
+  background:#ffffff;
+}
+html body .likebar{
+  background:rgba(255,255,255,0.96);
+  border:1px solid rgba(10,132,255,0.3);
+  box-shadow:0 6px 24px rgba(255,255,255,0.88);
+}
+html body .likebar button{
+  color:#12161c;
+}
+html body .plain-note{
+  border:1px solid rgba(96,165,250,0.28);
+  background:linear-gradient(90deg,rgba(30,58,138,0.18),rgba(30,58,138,0.04));
+  color:#12161c;
+}
+html body .plain-note b{
+  color:#b25b00;
+}
+html body .chart-guide{
+  border:1px dashed rgba(148,163,184,0.35);
+  color:#5f6773;
+}
+html body .guide-btn{
+  color:#0a7f95;
+  border:1px solid rgba(147,197,253,0.35);
+  background:rgba(30,58,138,0.15);
+}
+html body .guide-btn:hover{
+  background:rgba(255,255,255,0.25);
+}
+html body .sens-verdict{
+  border:1px solid rgba(251,191,36,0.35);
+  background:linear-gradient(90deg,rgba(120,53,15,0.22),rgba(120,53,15,0.05));
+  color:#b25b00;
+}
+html body .sens-verdict .vh{
+  color:#b25b00;
+}

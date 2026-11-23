@@ -1,0 +1,105 @@
+/* 自动生成：network.html 浅色映射 */
+:root{
+  --ink:#12161c;
+  --ink2:#5f6773;
+  --muted:#78818f;
+  --neon:#0a84ff;
+  --warm:#fbbf24;
+  --ok:#34d399;
+  --bad:#fb7185;
+  --pink:#f472b6;
+  --ind:#0a84ff;
+  --spa:#78818f;
+}
+html body .scene{
+  background:radial-gradient(ellipse at 50% 28%, #ffffff 0%, #ffffff 55%, #ffffff 100%);
+}
+html body .scene::before{
+  background-image:linear-gradient(rgba(148,163,184,0.055) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(148,163,184,0.055) 1px,transparent 1px);
+}
+html body .scene::after{
+  background:radial-gradient(circle,rgba(255,255,255,0.10),transparent 65%);
+}
+html body .lab-btn:hover{
+  color:#12161c;
+}
+html body .f:hover{
+  color:#12161c;
+}
+html body .f.on{
+  background:linear-gradient(135deg,rgba(255,255,255,0.10),rgba(175,82,222,0.12));
+  color:#12161c;
+  box-shadow:0 0 14px rgba(255,255,255,0.40);
+}
+html body .stage{
+  background:radial-gradient(ellipse at 50% 40%,rgba(255,255,255,0.96),rgba(255,255,255,0.83));
+  box-shadow:inset 0 0 60px rgba(255,255,255,0.96);
+}
+html body .cap{
+  background:rgba(255,255,255,0.96);
+}
+html body .rc-row.rc-q .rc-qtext{
+  color:#b25b00;
+}
+html body .cbtn{
+  background:linear-gradient(135deg,rgba(255,255,255,0.10),rgba(175,82,222,0.12));
+  color:#12161c;
+  box-shadow:0 0 14px rgba(255,255,255,0.40);
+}
+html body .seek{
+  background:linear-gradient(90deg,var(--neon) 0%,var(--neon) var(--p,0%),rgba(148,163,184,0.2) var(--p,0%));
+}
+html body .seek::-webkit-slider-thumb{
+  background:#ffffff;
+}
+html body .seek::-moz-range-thumb{
+  background:#ffffff;
+}
+html body .spd:hover{
+  color:#12161c;
+}
+html body .stepnav a.primary{
+  background:linear-gradient(135deg,rgba(255,255,255,0.10),rgba(175,82,222,0.12));
+  color:#12161c;
+}
+html body .mask{
+  background:rgba(255,255,255,0.90);
+}
+html body .drawer{
+  background:linear-gradient(180deg,#ffffff,#ffffff);
+}
+html body .dtab.on{
+  background:linear-gradient(135deg,rgba(255,255,255,0.10),rgba(175,82,222,0.12));
+  color:#12161c;
+}
+html body .rank-row .bg{
+  background:rgba(255,255,255,0.78);
+}
+html body .blood-A{
+  background:rgba(48,209,88,0.12);
+  color:#2f9e44;
+}
+html body .blood-B{
+  background:#ffffff;
+  color:#0a7f95;
+}
+html body .blood-C{
+  color:#b25b00;
+}
+html body .blood-D{
+  background:#ffffff;
+  color:#c93b3b;
+}
+html body .dbtn:hover{
+  color:#12161c;
+}
+@media(min-width:1024px){
+  html body .stage{
+    box-shadow:inset 0 0 80px rgba(255,255,255,0.96),0 0 0 1px rgba(255,255,255,0.06);
+  }
+  html body .readcard{
+    background:rgba(255,255,255,0.96);
+    box-shadow:0 8px 32px rgba(255,255,255,0.73);
+  }
+}

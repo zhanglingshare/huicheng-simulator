@@ -1,0 +1,174 @@
+/* 自动生成：holo.html 浅色映射 */
+:root{
+  --faint:#78818f;
+  --blue:#0a84ff;
+  --red:#e11d48;
+  --purple:#7c3aed;
+  --green:#16a34a;
+  --amber:#d97706;
+  --sh-sm:0 1px 2px rgba(255,255,255,0.33),0 2px 8px rgba(255,255,255,0.33);
+  --sh-md:0 1px 3px rgba(255,255,255,0.32),0 10px 28px rgba(255,255,255,0.37);
+  --sh-lg:0 6px 16px rgba(255,255,255,0.38),0 28px 64px rgba(255,255,255,0.52);
+}
+html body .burger{
+  background:#ffffff;
+}
+html body .overlay{
+  background:rgba(255,255,255,0.68);
+}
+html body nav.top{
+  background:rgba(255,255,255,0.60);
+  border:1px solid rgba(255,255,255,0.7);
+}
+html body nav.top button{
+  color:#98a1ad;
+}
+html body nav.top button.active{
+  color:#12161c;
+  box-shadow:0 4px 12px rgba(255,255,255,0.53);
+}
+html body .search{
+  background:rgba(255,255,255,0.90);
+}
+html body .search:focus-within{
+  box-shadow:0 0 0 4px rgba(255,255,255,0.08);
+}
+html body .metric{
+  background:rgba(255,255,255,0.92);
+  border:1px solid rgba(255,255,255,0.85);
+}
+html body .metric::before{
+  background:linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.10));
+}
+html body .down{
+  color:#c93b3b;
+}
+html body #netHint{
+  color:#78818f;
+  background:rgba(255,255,255,0.80);
+  border:1px solid rgba(255,255,255,0.9);
+}
+html body .card{
+  background:rgba(255,255,255,0.92);
+  border:1px solid rgba(255,255,255,0.85);
+}
+html body .filter button{
+  color:#98a1ad;
+}
+html body .filter button .swatch{
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.32);
+}
+html body .legend .row{
+  color:#98a1ad;
+}
+html body .toggle-row{
+  color:#98a1ad;
+}
+html body .switch i{
+  background:#ffffff;
+  box-shadow:0 1px 3px rgba(255,255,255,0.48);
+}
+html body .switch.off{
+  background:rgba(255,255,255,0.33);
+}
+html body .intel-head{
+  background:rgba(255,255,255,0.95);
+  border:1px solid rgba(255,255,255,0.85);
+}
+html body .ai-avatar{
+  background:linear-gradient(135deg,#ffffff,#334155);
+  box-shadow:0 4px 10px rgba(255,255,255,0.53);
+}
+html body .intel-head .s{
+  color:#2f9e44;
+}
+html body .intel-head .s .pulse-dot{
+  background:rgba(48,209,88,0.12);
+  box-shadow:0 0 0 0 rgba(22,163,74,0.5);
+}
+html body #intelBody{
+  background:rgba(255,255,255,0.85);
+  border:1px solid rgba(255,255,255,0.85);
+}
+html body .msg .ma{
+  background:linear-gradient(135deg,#ffffff,#334155);
+  box-shadow:0 2px 6px rgba(255,255,255,0.48);
+}
+html body .msg .bubble{
+  background:#ffffff;
+}
+html body .msg:hover .bubble{
+  border-color:rgba(17,24,39,0.12);
+}
+html body .tl-wrap{
+  background:rgba(255,255,255,0.92);
+  border:1px solid rgba(255,255,255,0.85);
+}
+html body .tl-node .n{
+  background:#ffffff;
+}
+html body .tl-node .l{
+  background:rgba(255,255,255,0.94);
+}
+html body .tl-node.active .n{
+  box-shadow:0 0 0 5px rgba(255,255,255,0.16);
+}
+html body #popMask{
+  background:rgba(255,255,255,0.66);
+}
+html body #pop{
+  background:#ffffff;
+}
+html body #pop .ph{
+  border-bottom:1px solid rgba(17,24,39,0.12);
+}
+html body #pop .ph .ic{
+  box-shadow:0 4px 10px rgba(255,255,255,0.46);
+}
+html body #pop .close{
+  color:#98a1ad;
+}
+html body #pop .facts .sec-t{
+  color:#98a1ad;
+}
+html body #pop .fact{
+  border:1px solid rgba(17,24,39,0.12);
+}
+html body #pop .kpi{
+  border:1px solid rgba(17,24,39,0.12);
+}
+html body #pop .src{
+  border-top:1px solid rgba(17,24,39,0.12);
+}
+html body #intelFab{
+  background:linear-gradient(135deg,#ffffff,#2b3c52);
+  color:#12161c;
+  box-shadow:0 8px 20px rgba(255,255,255,0.60);
+}
+html body #intelFab:hover{
+  box-shadow:0 12px 28px rgba(255,255,255,0.68);
+}
+html body #intelFab .n{
+  box-shadow:0 0 0 3px rgba(74,222,128,0.2);
+}
+html body #intelClose{
+  background:#ffffff;
+  color:#98a1ad;
+}
+@media (max-width:900px){
+  html body .side.right{
+    background:#ffffff;
+  }
+  html body .intel-head{
+    border-bottom:1px solid rgba(17,24,39,0.12);
+  }
+  html body .side.left{
+    background:#ffffff;
+  }
+}
+html body .sitenav .sngrid a{
+  color:#12161c;
+}
+html body .sitenav .sngrid a:hover{
+  background:#ffffff;
+}

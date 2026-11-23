@@ -1,0 +1,44 @@
+/* 自动生成：blindspot.html 浅色映射 */
+:root{
+  --ink:#12161c;
+  --ink2:#5f6773;
+  --muted:#78818f;
+  --neon:#0a84ff;
+  --warm:#fbbf24;
+  --ok:#34d399;
+  --bad:#fb7185;
+  --pink:#f472b6;
+}
+html body{
+  background:linear-gradient(180deg,#ffffff 0%,#ffffff 30%,#ffffff 100%);
+}
+html body .nav{
+  background:rgba(255,255,255,0.96);
+}
+html body .nav a.on{
+  background:rgba(255,255,255,0.22);
+}
+html body .card{
+  box-shadow:0 4px 24px rgba(255,255,255,0.53);
+}
+html body .btn{
+  background:linear-gradient(135deg,#1d4ed8,rgba(255,255,255,0.10));
+  color:#12161c;
+  box-shadow:0 4px 16px rgba(255,255,255,0.35);
+}
+html body .pop{
+  background:rgba(255,255,255,0.96);
+}
+html body .likebar{
+  background:rgba(255,255,255,0.96);
+  box-shadow:0 6px 24px rgba(255,255,255,0.68);
+}
+html body::before{
+  background:radial-gradient(circle at 15% 20%,rgba(255,255,255,0.07),transparent 35%),
+    radial-gradient(circle at 85% 75%,rgba(255,255,255,0.06),transparent 40%),
+    radial-gradient(circle at 70% 15%,rgba(48,209,88,0.04),transparent 30%);
+}
+html body .card, html body .box, html body .panel{
+  background:linear-gradient(160deg,rgba(255,255,255,0.78),rgba(255,255,255,0.73))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06),0 4px 24px rgba(255,255,255,0.53)!important;
+}

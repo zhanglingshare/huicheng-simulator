@@ -1,0 +1,146 @@
+/* auto: hc-lab/studio.css */
+html body :root{
+  --ink:#12161c;
+  --ink2:#5f6773;
+  --cyan:#0a84ff;
+  --blue:#0a84ff;
+  --amber:#f0b35e;
+  --red:#ff6b60;
+  --green:#54d6a0;
+  --violet:#8b5cf6;
+}
+html body .hc-lab{
+  background:radial-gradient(1200px 600px at 85% -10%,rgba(255,255,255,0.14),transparent 60%),
+    radial-gradient(900px 500px at 10% 90%,rgba(255,255,255,0.06),transparent 45%),
+    linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);
+}
+html body .hl-masthead{
+  background:rgba(255,255,255,0.96);
+}
+html body .hl-brand-mark{
+  color:#12161c;
+}
+html body .hl-mode-pill{
+  background:rgba(255,255,255,0.08);
+}
+html body .hl-head-action{
+  background:rgba(255,255,255,0.04);
+}
+html body .hl-mobile-menu{
+  background:rgba(255,255,255,0.05);
+}
+html body .hl-caveat{
+  border-bottom:1px solid rgba(240,179,94,0.22);
+  background:rgba(255,255,255,0.08);
+}
+html body .hl-caveat-dot{
+  box-shadow:0 0 0 4px rgba(255,255,255,0.18);
+}
+html body .hl-sidebar{
+  background:rgba(255,255,255,0.83);
+}
+html body .hl-nav-link:hover{
+  background:rgba(255,255,255,0.05);
+}
+html body .hl-nav-link.selected{
+  background:rgba(255,255,255,0.16);
+  border-color:rgba(46,125,235,0.35);
+}
+html body .hl-ev-A{
+  background:rgba(84,214,160,0.12);
+  border:1px solid rgba(84,214,160,0.3);
+}
+html body .hl-ev-B{
+  background:rgba(255,255,255,0.10);
+  border:1px solid rgba(79,195,255,0.28);
+}
+html body .hl-ev-C{
+  background:rgba(255,255,255,0.10);
+  border:1px solid rgba(240,179,94,0.28);
+}
+html body .hl-ev-na{
+  background:rgba(255,255,255,0.04);
+}
+html body .hl-vb-pending{
+  background:rgba(255,255,255,0.04);
+}
+html body .hl-vb-verifying{
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(46,125,235,0.3);
+}
+html body .hl-vb-verified{
+  background:rgba(84,214,160,0.1);
+  border:1px solid rgba(84,214,160,0.28);
+}
+html body .hl-vb-conflict{
+  background:rgba(255,255,255,0.10);
+  border:1px solid rgba(255,107,96,0.32);
+}
+html body .hl-vb-superseded{
+  background:rgba(255,255,255,0.03);
+}
+html body .hl-trig-armed.hl-trig-status{
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,107,96,0.3);
+}
+html body .hl-trig-watching.hl-trig-status{
+  background:rgba(255,255,255,0.10);
+  border:1px solid rgba(240,179,94,0.3);
+}
+html body .hl-trig-pending.hl-trig-status{
+  background:rgba(255,255,255,0.04);
+}
+html body .hl-sig-calm{
+  background:rgba(84,214,160,0.1);
+  border:1px solid rgba(84,214,160,0.28);
+}
+html body .hl-sig-watch{
+  background:rgba(255,255,255,0.10);
+  border:1px solid rgba(240,179,94,0.3);
+}
+html body .hl-sig-pressure{
+  background:rgba(255,255,255,0.10);
+  border:1px solid rgba(255,107,96,0.32);
+}
+html body .hl-feedback-options label{
+  background:rgba(255,255,255,0.03);
+}
+html body .hl-feedback textarea, html body .hl-feedback input[type=text], html body .hl-feedback select, html body .hl-form textarea, html body .hl-form input[type=text], html body .hl-form select{
+  background:rgba(255,255,255,0.88);
+}
+html body .hl-btn{
+  background:rgba(255,255,255,0.22);
+  border:1px solid rgba(46,125,235,0.45);
+}
+html body .hl-btn:hover{
+  background:rgba(255,255,255,0.32);
+}
+html body .hl-btn.ghost{
+  background:rgba(255,255,255,0.04);
+}
+html body .hl-btn.danger{
+  background:rgba(255,255,255,0.10);
+  border-color:rgba(255,107,96,0.35);
+}
+html body .hl-callout{
+  border:1px solid rgba(79,195,255,0.25);
+  background:rgba(255,255,255,0.06);
+}
+html body .hl-callout.warn{
+  border-color:rgba(240,179,94,0.3);
+  background:rgba(255,255,255,0.07);
+}
+html body .hl-list-item{
+  background:rgba(255,255,255,0.02);
+}
+html body .hl-entry:hover{
+  border-color:rgba(79,195,255,0.35);
+}
+html body .hl-toast{
+  box-shadow:0 12px 32px rgba(255,255,255,0.68);
+}
+@media (max-width:860px){
+  html body .hl-backdrop{
+    background:rgba(255,255,255,0.88);
+  }
+}

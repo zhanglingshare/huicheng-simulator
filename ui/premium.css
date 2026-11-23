@@ -1,0 +1,829 @@
+/* =========================================================================
+   惠城产业风洞 · PREMIUM LIGHT 高级版设计系统
+   -------------------------------------------------------------------------
+   语言：Apple / HarmonyOS —— 浅色、通透玻璃、连续圆角、精密排版
+   原则：留白优先、发丝级分隔线、柔和环境阴影、无霓虹、无黑光
+   落位：全站最后加载，只覆盖表现层；模型、数据与交互逻辑一概不动。
+   ========================================================================= */
+
+/* ---------------------------------------------------------------- tokens */
+:root{
+  color-scheme:light;
+
+  /* 设计系统令牌（浅色） */
+  --ds-bg:#f6f7f9;
+  --ds-bg-2:#ffffff;
+  --ds-surface-1:rgba(255,255,255,.72);
+  --ds-surface-2:rgba(17,24,39,.045);
+  --ds-surface-3:rgba(17,24,39,.08);
+  --ds-material:rgba(255,255,255,.74);
+  --ds-material-solid:#ffffff;
+  --ds-hairline:rgba(17,24,39,.075);
+  --ds-hairline-strong:rgba(17,24,39,.14);
+
+  --ds-text:#12161c;
+  --ds-text-2:#5f6773;
+  --ds-text-3:#78818f;
+  --ds-text-4:#98a1ad;
+
+  --ds-accent:#0a84ff;
+  --ds-accent-hi:#0a84ff;
+  --ds-accent-soft:rgba(10,132,255,.10);
+  --ds-ok:#2f9e44;
+  --ds-warn:#b25b00;
+  --ds-danger:#c93b3b;
+  --ds-info:#0a7f95;
+
+  --ds-shadow-1:0 1px 2px rgba(16,24,40,.05),0 10px 28px -14px rgba(16,24,40,.16);
+  --ds-shadow-2:0 2px 6px rgba(16,24,40,.06),0 26px 60px -26px rgba(16,24,40,.22);
+  --ds-shadow-3:0 30px 80px -28px rgba(16,24,40,.30);
+
+  /* 兼容旧页面变量名：一处改色，全站生效 */
+  --bg:#f6f7f9;
+  --bg2:#f1f3f7;
+  --deep:#f6f7f9;
+  --paper:#ffffff;
+  --panel:#ffffff;
+  --panel2:#f8f9fb;
+  --surface:#ffffff;
+  --card:linear-gradient(160deg,#ffffff,#fafbfd);
+  --card2:#ffffff;
+  --ink:#12161c;
+  --ink2:#5f6773;
+  --ink3:#78818f;
+  --ink4:#98a1ad;
+  --txt:#12161c;
+  --muted:#6f7c8c;
+  --weak:#78818f;
+  --faint:#98a1ad;
+  --sub:#5f6773;
+  --line:rgba(17,24,39,.075);
+  --line2:rgba(17,24,39,.14);
+  --stroke:rgba(17,24,39,.075);
+  --edge:rgba(17,24,39,.075);
+  --glass:rgba(255,255,255,.72);
+  --glass-b:rgba(17,24,39,.075);
+  --glass-2:rgba(255,255,255,.56);
+
+  --blue:#0a84ff;
+  --cyan:#0a7f95;
+  --sky1:#0a84ff;
+  --sky2:#0a7f95;
+  --sky3:#0a7f95;
+  --teal:#0a7f95;
+  --green:#2f9e44;
+  --ok:#2f9e44;
+  --amber:#b25b00;
+  --orange:#e25700;
+  --gold:#b25b00;
+  --warm:#b25b00;
+  --red:#c93b3b;
+  --bad:#c93b3b;
+  --violet:#7c3aed;
+  --purple:#7c3aed;
+  --indigo:#4f46e5;
+  --neon:#0a84ff;
+  --pink:#c2185b;
+
+  /* 半径 / 阴影 / 字体 */
+  --r-xs:6px;--r-sm:10px;--r:14px;--r-lg:20px;--r-xl:26px;
+  --shadow:0 2px 6px rgba(16,24,40,.06),0 26px 60px -26px rgba(16,24,40,.22);
+  --sh-1:0 1px 2px rgba(16,24,40,.05),0 8px 24px -14px rgba(16,24,40,.16);
+  --sh-2:0 2px 6px rgba(16,24,40,.06),0 22px 54px -24px rgba(16,24,40,.22);
+  --sh-3:0 30px 80px -30px rgba(16,24,40,.30);
+  --hair:rgba(17,24,39,.075);
+  --hair-2:rgba(17,24,39,.14);
+
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","HarmonyOS Sans SC",
+    "PingFang SC","Noto Sans SC","Source Han Sans SC","Microsoft YaHei",system-ui,sans-serif;
+  --sans:var(--font);
+  --num:"SF Pro Display","Helvetica Neue",var(--font);
+  --mono:"SF Mono",ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace;
+  --ease:cubic-bezier(.22,1,.36,1);
+
+  /* 图表统一色（浅底可读） */
+  --chart-1:#0a84ff;
+  --chart-2:#0a7f95;
+  --chart-3:#e25700;
+  --chart-4:#7c3aed;
+  --chart-5:#2f9e44;
+  --chart-6:#c93b3b;
+  --chart-grid:rgba(17,24,39,.09);
+}
+
+/* ------------------------------------------------------------------ base */
+html{
+  background:#f6f7f9 !important;
+  scroll-padding-top:calc(var(--ds-bar-h,52px) + 10px);
+}
+html body{
+  font-family:var(--font) !important;
+  color:var(--ink) !important;
+  font-size:15px;
+  line-height:1.72;
+  letter-spacing:.01em;
+  background:
+    radial-gradient(1180px 720px at 6% -12%, #e6f2ff 0%, rgba(230,242,255,0) 58%),
+    radial-gradient(1020px 660px at 97% 0%, #f2ecff 0%, rgba(242,236,255,0) 56%),
+    radial-gradient(980px 720px at 52% 118%, #e9fbf1 0%, rgba(233,251,241,0) 60%),
+    linear-gradient(180deg,#fcfcfe 0%,#f5f7fa 38%,#f7f8fa 100%) !important;
+  background-attachment:fixed !important;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+::selection{background:rgba(10,132,255,.18);color:var(--ink)}
+:focus-visible{outline:2px solid rgba(10,132,255,.55);outline-offset:2px;border-radius:6px}
+
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(17,24,39,.16);border:3px solid transparent;background-clip:content-box;border-radius:999px}
+::-webkit-scrollbar-thumb:hover{background:rgba(17,24,39,.26);background-clip:content-box}
+*{scrollbar-width:thin;scrollbar-color:rgba(17,24,39,.2) transparent}
+
+/* 深色噪点 / 网格底纹一律关掉 */
+.grain,.bgimg,.noise,.stars,.aurora{display:none !important}
+html body::before,html body::after{content:none !important;display:none !important}
+
+h1,h2,h3,h4,h5,h6{
+  color:var(--ink);
+  text-shadow:none !important;
+  font-weight:650;
+  letter-spacing:-.015em;
+}
+h1{letter-spacing:-.028em}
+
+/* ================================================ 顶栏：白玻璃悬浮条 */
+.ds-bar{
+  background:rgba(255,255,255,.70) !important;
+  -webkit-backdrop-filter:blur(26px) saturate(180%) !important;
+  backdrop-filter:blur(26px) saturate(180%) !important;
+  border-bottom:1px solid var(--hair) !important;
+  box-shadow:0 1px 0 rgba(255,255,255,.7),0 10px 26px -24px rgba(16,24,40,.4) !important;
+  color:var(--ink) !important;
+}
+.ds-bar[data-scrolled="true"]{
+  background:rgba(255,255,255,.84) !important;
+  box-shadow:0 1px 0 rgba(255,255,255,.8),0 16px 36px -26px rgba(16,24,40,.5) !important;
+}
+.ds-brand:hover .ds-brand-name{color:var(--ink)}
+.ds-brand-name{color:var(--ink)}
+.ds-brand-sub{color:var(--ink3)}
+.ds-mark{
+  background:linear-gradient(160deg,#4da3ff 0%,#0a84ff 52%,#0068d1 100%) !important;
+  color:#fff !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 2px 6px -2px rgba(10,132,255,.55) !important;
+}
+.ds-chapter{
+  background:rgba(255,255,255,.62) !important;
+  border:1px solid var(--hair) !important;
+  color:var(--ink2) !important;
+  box-shadow:0 1px 2px rgba(16,24,40,.04);
+}
+.ds-chapter:hover{background:#fff !important;border-color:var(--hair-2) !important;color:var(--ink) !important}
+.ds-chapter-num{color:#0a63c9 !important;background:rgba(10,132,255,.10) !important}
+.ds-iconbtn{color:var(--ink3) !important}
+.ds-iconbtn:hover{background:rgba(17,24,39,.05) !important;color:var(--ink) !important}
+.ds-iconbtn:active{background:rgba(17,24,39,.09) !important}
+.ds-iconbtn svg{opacity:.8}
+
+/* 章节抽屉 */
+.ds-scrim{background:rgba(16,24,40,.28) !important;-webkit-backdrop-filter:blur(10px) !important;backdrop-filter:blur(10px) !important}
+.ds-panel{
+  background:rgba(255,255,255,.92) !important;
+  -webkit-backdrop-filter:blur(40px) saturate(180%) !important;
+  backdrop-filter:blur(40px) saturate(180%) !important;
+  border:1px solid rgba(17,24,39,.10) !important;
+  color:var(--ink) !important;
+  box-shadow:0 40px 90px -36px rgba(16,24,40,.45) !important;
+}
+.ds-panel-head{border-bottom:1px solid var(--hair) !important}
+.ds-panel-sub,.ds-panel-foot{color:var(--ink3) !important}
+.ds-panel-close{background:rgba(17,24,39,.05) !important;color:var(--ink2) !important}
+.ds-panel-close:hover{background:rgba(17,24,39,.09) !important;color:var(--ink) !important}
+.ds-step-group{color:var(--ink4) !important}
+.ds-step{color:var(--ink2) !important}
+.ds-step:hover{background:rgba(17,24,39,.045) !important;color:var(--ink) !important}
+.ds-step-n{color:var(--ink4) !important}
+.ds-step-l{color:var(--ink) !important}
+.ds-step-d{color:var(--ink3) !important}
+.ds-step[aria-current="page"]{background:rgba(10,132,255,.10) !important}
+.ds-step[aria-current="page"] .ds-step-n{color:#0a63c9 !important}
+.ds-step[aria-current="page"] .ds-step-l{color:#0a63c9 !important}
+.ds-panel-foot{border-top:1px solid var(--hair) !important}
+.ds-panel-foot a{color:var(--ink2) !important}
+.ds-panel-foot a:hover{color:var(--ink) !important}
+.ds-panel-foot .ds-dot{background:var(--ink4) !important}
+
+/* 折叠块 */
+.ds-fold{
+  border:1px solid var(--hair) !important;
+  background:rgba(255,255,255,.66) !important;
+  box-shadow:0 1px 2px rgba(16,24,40,.04);
+}
+.ds-fold>summary{color:var(--ink) !important}
+.ds-fold>summary::after{color:var(--ink3) !important;border:1px solid var(--hair-2) !important}
+.ds-fold[open]>summary{color:var(--ink) !important}
+.ds-fold>.ds-fold-inner{color:var(--ink2)}
+
+/* 输入与滑块 */
+input,textarea,select{
+  color:var(--ink) !important;
+  background:rgba(255,255,255,.9) !important;
+  border:1px solid var(--hair) !important;
+  box-shadow:inset 0 1px 2px rgba(16,24,40,.04);
+}
+input::placeholder,textarea::placeholder{color:var(--ink4) !important}
+input:focus,textarea:focus,select:focus{
+  border-color:rgba(10,132,255,.55) !important;
+  box-shadow:0 0 0 4px rgba(10,132,255,.12) !important;
+  background:#fff !important;
+}
+input[type=range]::-webkit-slider-runnable-track{background:rgba(17,24,39,.12) !important}
+input[type=range]::-webkit-slider-thumb{
+  background:#fff !important;
+  box-shadow:0 1px 4px rgba(16,24,40,.25),0 0 0 1px rgba(17,24,39,.10) !important;
+}
+input[type=range]::-moz-range-track{background:rgba(17,24,39,.12) !important}
+input[type=range]::-moz-range-thumb{background:#fff !important;border:1px solid rgba(17,24,39,.15) !important}
+
+/* 悬浮目录胶囊（site-nav） */
+#sn-btn{
+  --sn-chip:rgba(255,255,255,.86);
+  --sn-ink:#12161c;
+  --sn-line:rgba(17,24,39,.10);
+  --sn-accent:#0a84ff;
+  box-shadow:0 10px 26px -14px rgba(16,24,40,.45) !important;
+  border-color:rgba(17,24,39,.10) !important;
+}
+#sn-panel,.ds-panel{--sn-panel:#fff}
+#sn-sheet .sn-scrim{background:rgba(16,24,40,.28) !important}
+#sn-btn .sn-dot{background:linear-gradient(160deg,#4da3ff,#0a84ff) !important}
+
+/* ================================================ 卡片与面板：白玻璃 */
+html body .card,
+html body .panel,
+html body .dcol,
+html body .gcell,
+html body .minib,
+html body .diff,
+html body .act,
+html body .s,
+html body .box,
+html body .sec,
+html body .block,
+html body .pane,
+html body .tile,
+html body .ctile,
+html body .stat,
+html body .module,
+html body .paper,
+html body .surface,
+html body .ds-card{
+  background:rgba(255,255,255,.74) !important;
+  -webkit-backdrop-filter:blur(20px) saturate(170%);
+  backdrop-filter:blur(20px) saturate(170%);
+  border:1px solid var(--hair) !important;
+  border-radius:var(--r-lg);
+  box-shadow:0 1px 2px rgba(16,24,40,.04),0 18px 44px -26px rgba(16,24,40,.22);
+  color:var(--ink);
+}
+html body .stat,html body .minib{box-shadow:0 1px 2px rgba(16,24,40,.04)}
+
+/* 柔和分隔线，替代深色描边 */
+html body hr{border:0;border-top:1px solid var(--hair)}
+
+/* ================================================ 通用控件 */
+body button:not(.ds-iconbtn):not(.ds-chapter):not(.ds-panel-close){
+  border-radius:10px;
+}
+html body .btn-ghost{
+  background:rgba(255,255,255,.8) !important;
+  border:1px solid var(--hair-2) !important;
+  color:var(--ink) !important;
+}
+html body .btn-primary{
+  background:linear-gradient(160deg,#3d9bff,#0a84ff) !important;
+  border:1px solid transparent !important;
+  color:#fff !important;
+  box-shadow:0 8px 20px -10px rgba(10,132,255,.6);
+}
+
+/* 徽标 / 药丸 */
+html body .pill,html body .tag,html body .chip,html body .badge,html body .lv,html body .tagx{
+  border-radius:999px;
+}
+html body .tag{
+  background:rgba(10,132,255,.10) !important;
+  color:#0a63c9 !important;
+  border:1px solid rgba(10,132,255,.18) !important;
+}
+
+/* 表格 */
+html body table{border-color:var(--hair) !important}
+html body th{
+  background:rgba(10,132,255,.06) !important;
+  color:var(--ink) !important;
+  border-color:var(--hair) !important;
+  font-weight:650 !important;
+}
+html body td{border-color:var(--hair) !important;color:var(--ink)}
+html body tr:hover td{background:rgba(10,132,255,.035)}
+
+/* 提示气泡 */
+html body #tip{
+  background:rgba(255,255,255,.96) !important;
+  border:1px solid var(--hair-2) !important;
+  color:var(--ink) !important;
+  box-shadow:0 18px 40px -18px rgba(16,24,40,.4) !important;
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+}
+html body #tip b{color:#0a63c9 !important}
+
+/* ==================================================================
+   P2 · 逐页精修
+   ================================================================== */
+
+/* -------- 通用：选中态统一成「浅蓝底 + 蓝字 + 细边」 -------- */
+html body button.on,
+html body button.active,
+html body button.sel,
+html body button.is-on,
+html body .mini.active,
+html body .seg button.sel,
+html body .seg button.on,
+html body .chip.on,
+html body .chip.active,
+html body .tab.on,
+html body .tab.active{
+  background:rgba(10,132,255,.10) !important;
+  border-color:rgba(10,132,255,.26) !important;
+  color:#0a63c9 !important;
+  box-shadow:inset 0 0 0 1px rgba(10,132,255,.14) !important;
+  font-weight:650 !important;
+}
+html body button.on:hover,
+html body button.active:hover,
+html body button.sel:hover{background:rgba(10,132,255,.15) !important}
+
+/* 次要按钮 / 幽灵按钮 */
+html body button:not(.on):not(.active):not(.sel):not(.exp-btn):not(.mcrun):not(.primary){
+  border:1px solid var(--hair);
+  background:rgba(255,255,255,.78);
+  color:var(--ink2);
+}
+html body button:not(.on):not(.active):not(.sel):not(.exp-btn):not(.mcrun):not(.primary):hover{
+  background:#fff;color:var(--ink);border-color:var(--hair-2);
+}
+html body button.primary,
+html body .mcrun,
+html body .exp-btn{
+  background:linear-gradient(160deg,#3d9bff,#0a84ff) !important;
+  color:#fff !important;
+  border:1px solid transparent !important;
+  box-shadow:0 10px 24px -14px rgba(10,132,255,.75) !important;
+  font-weight:650 !important;
+}
+html body button.primary:hover,
+html body .mcrun:hover,
+html body .exp-btn:hover{filter:brightness(1.05)}
+
+/* -------- 02 · 全息关系（holo） -------- */
+html body .brand .logo{
+  background:linear-gradient(160deg,#4da3ff,#0a84ff 55%,#0068d1) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 6px 16px -8px rgba(10,132,255,.6) !important;
+}
+html body nav.top{background:rgba(255,255,255,.7) !important;border:1px solid rgba(255,255,255,.85) !important;box-shadow:0 1px 2px rgba(16,24,40,.05)}
+html body nav.top button{color:var(--ink2) !important}
+html body nav.top button.active{
+  background:#0a84ff !important;color:#fff !important;border-color:transparent !important;
+  box-shadow:0 6px 16px -8px rgba(10,132,255,.7) !important;
+}
+html body .search{background:rgba(255,255,255,.92) !important;border-color:var(--hair) !important}
+html body .metric{background:rgba(255,255,255,.92) !important;border-color:rgba(17,24,39,.08) !important}
+html body .msg .bubble{background:#fff !important;border-color:rgba(17,24,39,.08) !important;color:var(--ink) !important}
+html body #pop{background:#fff !important;border-color:rgba(17,24,39,.10) !important;color:var(--ink) !important}
+html body .switch.off{background:rgba(17,24,39,.16) !important}
+html body .switch.on{background:linear-gradient(160deg,#4da3ff,#0a84ff) !important}
+
+/* -------- 03 · 全息工作区 -------- */
+html body .event-viz{
+  background:linear-gradient(180deg,#f8fbff,#f1f6fc) !important;
+  border:1px solid var(--hair) !important;
+}
+html body .ev-count{background:#fff !important;border:1px solid var(--hair) !important;color:var(--ink3) !important}
+html body .limit{background:rgba(255,159,10,.10) !important;border-left-color:#e25700 !important;color:var(--ink2) !important}
+html body .blob{opacity:.10 !important}
+html body header{background:rgba(255,255,255,.72) !important;border-bottom:1px solid var(--hair) !important}
+html body nav.main{background:rgba(255,255,255,.72) !important;border:1px solid var(--hair) !important}
+html body nav.main button.on{background:#0a84ff !important;color:#fff !important}
+html body .dh-stats>div{background:rgba(255,255,255,.8) !important}
+
+/* -------- 05 · 风向标（fun） -------- */
+html body .explorer{
+  background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(248,251,255,.92)) !important;
+  border:1px solid var(--hair) !important;
+  box-shadow:0 1px 2px rgba(16,24,40,.05),0 22px 60px -34px rgba(16,24,40,.35) !important;
+  color:var(--ink) !important;
+}
+html body .map-mode{
+  background:rgba(255,255,255,.86) !important;color:var(--ink2) !important;
+  border:1px solid var(--hair) !important;box-shadow:0 6px 18px -12px rgba(16,24,40,.4) !important;
+}
+html body .pin-label{
+  background:rgba(255,255,255,.92) !important;color:#0a63c9 !important;
+  border:1px solid rgba(10,132,255,.22) !important;box-shadow:0 6px 16px -10px rgba(16,24,40,.4) !important;
+}
+html body #mapRollBtn{background:rgba(255,255,255,.9) !important;color:var(--ink) !important;border:1px solid var(--hair) !important}
+html body #inviteBtn.action.primary{background:linear-gradient(160deg,#3d9bff,#0a84ff) !important;color:#fff !important}
+html body .map-wrap,html body .map-stage{background:#eef4fa !important}
+html body .toast{background:rgba(255,255,255,.96) !important;color:var(--ink) !important;border:1px solid var(--hair) !important;box-shadow:0 20px 50px -24px rgba(16,24,40,.35) !important}
+
+/* -------- 04 · 钱去哪了（today） -------- */
+html body .mini{background:#fff !important;border:1px solid var(--hair) !important;color:var(--ink2) !important}
+html body .mini.active{background:rgba(10,132,255,.10) !important;color:#0a63c9 !important;border-color:rgba(10,132,255,.26) !important}
+html body .funnel-step{
+  background:rgba(255,255,255,.86) !important;color:var(--ink) !important;
+  border:1px solid var(--hair) !important;box-shadow:0 1px 2px rgba(16,24,40,.04) !important;
+}
+html body .funnel-step.on,html body .funnel-step.active{
+  background:rgba(10,132,255,.10) !important;border-color:rgba(10,132,255,.26) !important;color:#0a63c9 !important;
+}
+html body .toast{background:rgba(255,255,255,.96) !important;color:var(--ink) !important;border:1px solid var(--hair) !important}
+
+/* -------- 14 · 报告（report） -------- */
+html body button.on{background:rgba(10,132,255,.10) !important;border-color:rgba(10,132,255,.26) !important;color:#0a63c9 !important;box-shadow:none !important}
+html body .badge{background:linear-gradient(140deg,#3d9bff,#0a84ff 60%,#0a7f95) !important;box-shadow:0 12px 28px -16px rgba(10,132,255,.7) !important}
+html body .bar{box-shadow:0 4px 12px -8px rgba(16,24,40,.4)}
+
+/* -------- 08 · 风洞测试 -------- */
+html body button.sel{background:rgba(10,132,255,.10) !important;border-color:rgba(10,132,255,.26) !important;color:#0a63c9 !important}
+
+/* -------- 06 · 路径（choices） -------- */
+html body #kgFocusMeta{background:rgba(255,255,255,.9) !important;border:1px solid var(--hair) !important;color:var(--ink2) !important}
+html body .kg-zoom{background:rgba(255,255,255,.9) !important;border:1px solid var(--hair) !important;color:var(--ink) !important}
+
+/* -------- 09 · 通勤（commute） -------- */
+html body .b{background:rgba(17,24,39,.10) !important}
+
+/* -------- 12 · 你在哪（role） -------- */
+html body a.on{background:rgba(10,132,255,.10) !important;color:#0a63c9 !important;border-color:rgba(10,132,255,.26) !important}
+
+/* -------- 03·钱（money） -------- */
+html body .nav a.on{background:#0a84ff !important;border-color:#0a84ff !important;color:#fff !important}
+html body .nav a{background:#fff !important;border:1px solid var(--hair) !important;color:var(--ink2) !important}
+html body .step-bar button{background:#fff !important;border:1px solid var(--hair) !important;color:var(--ink2) !important}
+html body .step-bar button.active{background:rgba(10,132,255,.10) !important;border-color:rgba(10,132,255,.26) !important;color:#0a63c9 !important}
+html body .fact{background:rgba(255,159,10,.09) !important;border-left-color:#e25700 !important;color:var(--ink) !important}
+html body .ask{background:rgba(10,132,255,.06) !important;border:1px solid rgba(10,132,255,.18) !important;color:var(--ink2) !important}
+
+/* -------- 占位/骨架一律走中性浅灰 -------- */
+html body .skeleton,html body .ph{background:rgba(17,24,39,.05) !important}
+
+/* -------- 03 · 全息工作区：时间轴标签与柔光 -------- */
+html body .tl-ev .l{
+  background:rgba(255,255,255,.94) !important;color:var(--ink3) !important;
+  border:1px solid rgba(17,24,39,.10) !important;border-radius:6px !important;
+  box-shadow:0 4px 12px -8px rgba(16,24,40,.5) !important;
+}
+html body .tl-ev.sel .l{background:#fff !important;color:var(--ink) !important;border-color:rgba(10,132,255,.30) !important}
+html body .tl-ev .n{border-color:#fff !important;box-shadow:0 0 0 1px rgba(17,24,39,.12),0 1px 4px rgba(17,24,39,.14) !important}
+html body .stage .ambient .blob{opacity:.055 !important;filter:blur(74px) !important}
+
+/* -------- 05 · 风向标地图：SVG 渐变与构图转浅 -------- */
+html body .map-stage{
+  background:linear-gradient(180deg,#fbfdff,#eef5fc 62%,#e7eff9) !important;
+  border:1px solid var(--hair) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 1px 2px rgba(16,24,40,.05) !important;
+}
+html body #v3sky stop{stop-color:#0a84ff !important;stop-opacity:.10 !important}
+html body #v3sky stop:last-child{stop-opacity:0 !important}
+html body #v3river stop:nth-child(1){stop-color:#7fb8e8 !important}
+html body #v3river stop:nth-child(2){stop-color:#0a84ff !important}
+html body #v3river stop:nth-child(3){stop-color:#7fb8e8 !important}
+html body #v3grid path{stroke:#0a84ff !important;stroke-opacity:.10 !important}
+html body .map-art .district{fill:#ffffff !important;fill-opacity:.86 !important;stroke:#cfe0f0 !important}
+html body .map-art .zone{opacity:.18 !important;mix-blend-mode:multiply !important}
+html body .map-art text{fill:#5f6773 !important;font-weight:700 !important;letter-spacing:.14em !important}
+html body .map-art > g[stroke]{stroke-opacity:.10 !important}
+html body .map-art .river-border{stroke:#cfe3f2 !important}
+html body .map-art .river{stroke:#0a84ff !important;stroke-opacity:.55 !important}
+html body .map-art .river-core{stroke:#7cc4ff !important;stroke-opacity:.8 !important}
+html body .map-art .river-wave{stroke:#ffffff !important}
+html body .map-overlay{color:#12161c !important;text-shadow:none !important}
+html body .map-overlay .overline{color:#0a63c9 !important;opacity:.85 !important}
+html body .map-overlay .subtitle{color:#5f6773 !important}
+html body .map-scenario-label{background:rgba(255,255,255,.9) !important;color:var(--ink2) !important;border:1px solid var(--hair) !important}
+html body .map-status{background:rgba(255,255,255,.9) !important;color:var(--ink2) !important;border:1px solid var(--hair) !important}
+html body .map-foot{color:var(--ink4) !important}
+html body .map-foot .rule{background:rgba(17,24,39,.14) !important}
+
+/* ==================================================================
+   P3 · 文字可读性（浅底上不允许出现浅色字）
+   ================================================================== */
+
+/* 局部浅色文本令牌统一压深 */
+html body{
+  --t2:#5f6773;
+  --t3:#6b7280;
+  --t4:#4b5563;
+  --accent2:#0a63c9;
+  --spa:#5f6773;
+  --muted:#6b7280;
+  --sub:#5f6773;
+  --dim:#6b7280;
+  --faint:#6b7280;
+}
+
+/* 站点标记 / 悬浮目录点：恢复品牌底 */
+html body .ds-mark,
+html body .sn-dot{
+  background:linear-gradient(160deg,#4da3ff,#0a84ff 62%,#0068d1) !important;
+  color:#fff !important;
+  border:1px solid rgba(255,255,255,.6) !important;
+  box-shadow:0 6px 16px -10px rgba(10,132,255,.8) !important;
+}
+
+/* 主按钮：确保有实底 */
+html body .exp-btn,
+html body .bay-btn.primary,
+html body .bay-btn.primary:hover,
+html body .action.primary,
+html body .btn.primary,
+html body .btn.primary:hover{
+  background:linear-gradient(160deg,#3d9bff,#0a84ff) !important;
+  color:#fff !important;
+  border:1px solid transparent !important;
+}
+
+/* 各页轻色说明文字 / 标签 */
+html body .control-note,
+html body .deep-divider,
+html body .close,
+html body .kicker,
+html body #kgFocusMeta,
+html body .why{color:#5f6773 !important}
+
+html body .ev-title,
+html body .holo-detail2 strong,
+html body .cmd-brief2 h3{color:#12161c !important}
+html body .ev-title{font-weight:800 !important}
+
+html body .chip,
+html body .badge.plan,
+html body .sec-no,
+html body .rc-tag,
+html body .kg-heroicon,
+html body .sn-link,
+html body .plan-badge{color:#0a63c9 !important}
+
+html body .ty{color:#0f7b3f !important}
+html body .ty.new{color:#0a63c9 !important}
+html body .rd{color:#c2410c !important}
+html body .st{color:#c2410c !important}
+html body .big{color:#b45309 !important}
+html body .big.good{color:#0f7b3f !important}
+
+/* SVG 生成文字 */
+html body .scene text,
+html body .net text,
+html body svg .lbl{fill:#5f6773 !important}
+html body svg .lbl-strong{fill:#12161c !important}
+
+/* 英雄封面上的浅字 + 深投影 → 去掉投影 */
+html body .cover .hero-desc,
+html body .hero-desc{color:#4b5563 !important;text-shadow:none !important}
+html body [style*="text-shadow"]{text-shadow:none !important}
+
+/* 行内浅色字统一压深（背景色不受影响） */
+html body [style*="color:#cbd5e1"],html body [style*="color: #cbd5e1"],
+html body [style*="color:#e3edff"],html body [style*="color: #e3edff"],
+html body [style*="color:#d0dcec"],html body [style*="color: #d0dcec"],
+html body [style*="color:#b0bccf"],html body [style*="color: #b0bccf"],
+html body [style*="color:#b3c2dd"],html body [style*="color: #b3c2dd"],
+html body [style*="color:#9fb3cc"],html body [style*="color: #9fb3cc"]{color:#4b5563 !important}
+
+html body [style*="color:#fbbf24"],html body [style*="color: #fbbf24"],
+html body [style*="color:#fcd34d"],html body [style*="color: #fcd34d"],
+html body [style*="color:#ffd60a"],html body [style*="color: #ffd60a"],
+html body [style*="color:#ff9500"],html body [style*="color: #ff9500"],
+html body [style*="color:#f59e0b"],html body [style*="color: #f59e0b"]{color:#b45309 !important}
+
+html body [style*="color:#34d399"],html body [style*="color: #34d399"],
+html body [style*="color:#30d158"],html body [style*="color: #30d158"],
+html body [style*="color:#a3e635"],html body [style*="color: #a3e635"],
+html body [style*="color:#8ef0b0"],html body [style*="color: #8ef0b0"]{color:#0f7b3f !important}
+
+html body [style*="color:#ff8f88"],html body [style*="color: #ff8f88"],
+html body [style*="color:#ffc07a"],html body [style*="color: #ffc07a"]{color:#c2410c !important}
+
+html body [style*="color:#8bd5ff"],html body [style*="color: #8bd5ff"],
+html body [style*="color:#6fb2ff"],html body [style*="color: #6fb2ff"],
+html body [style*="color:#38bdf8"],html body [style*="color: #38bdf8"],
+html body [style*="color:#83e6df"],html body [style*="color: #83e6df"],
+html body [style*="color:#93c5fd"],html body [style*="color: #93c5fd"]{color:#0a63c9 !important}
+
+html body [style*="color:#f0f6ff"],html body [style*="color: #f0f6ff"],
+html body [style*="color:#eef2fb"],html body [style*="color: #eef2fb"],
+html body [style*="color:#d1d5db"],html body [style*="color: #d1d5db"],
+html body [style*="color:#9aa6b8"],html body [style*="color: #9aa6b8"],
+html body [style*="color:#a8afbb"],html body [style*="color: #a8afbb"],
+html body [style*="color:#98a1ad"],html body [style*="color: #98a1ad"]{color:#5f6773 !important}
+
+/* network 证据等级标签：#4a3a12/#4a1a1a 深底 → 浅琥珀 / 浅红 */
+html body .blood-C{background:rgba(255,159,10,.12) !important;color:#a8500a !important;border:1px solid rgba(226,87,0,.20) !important}
+html body .blood-D{background:rgba(255,69,58,.10) !important;color:#b3261e !important;border:1px solid rgba(255,69,58,.22) !important}
+html body .blood-A{background:rgba(48,209,88,.12) !important;color:#0f7b3f !important;border:1px solid rgba(48,209,88,.24) !important}
+html body .blood-B{background:rgba(10,132,255,.10) !important;color:#0a63c9 !important;border:1px solid rgba(10,132,255,.22) !important}
+
+/* ==================================================================
+   P4 · SVG 绘制层（attribute 绘制的深底圆/标签 → 浅底）
+   ================================================================== */
+html body [fill="#1a0e08"],
+html body [fill="#081018"],
+html body [fill="#0a0f1a"],
+html body [fill="#0a1426"],
+html body [fill="#0b1018"],
+html body [fill="#1e2b3a"],
+html body [fill="#334b66"],
+html body [fill="#3d4a66"]{fill:#ffffff !important;fill-opacity:1 !important}
+
+html body [fill="#7e8ba4"],
+html body [fill="#6e7580"],
+html body [fill="#6b6b76"],
+html body [fill="#8fa3bf"]{fill:#5f6773 !important}
+
+html body [fill="#e2fdfa"]{fill:#0a84ff !important}
+html body [fill="#3af3ce"]{fill:#0a84ff !important;fill-opacity:.16 !important}
+html body [fill="#eaf2fb"],html body [fill="#f5f5f7"]{fill:#12161c !important}
+
+/* 深色描边圈 → 品牌浅描边 */
+html body [stroke="#334155"]{stroke:rgba(17,24,39,.16) !important}
+html body [stroke="#5c7d9d"]{stroke:rgba(10,132,255,.28) !important}
+html body [fill="#7c3aed"]{fill:#af52de !important}
+
+/* choices 节点标签卡投影与圆点 */
+html body #kgSvg .kg-node rect{rx:9}
+html body #kgSvg .kg-node .kg-node-circle{filter:drop-shadow(0 6px 14px rgba(16,24,40,.18))}
+html body #kgSvg .kg-node .kg-node-label{font-weight:750}
+
+/* ==================================================================
+   P5 · 封面照片：白色渐隐遮罩（文字侧够白，右侧保留照片）
+   ================================================================== */
+html body .cover .hero-mask,
+html body .e-hero .hero-mask,
+html body .hero-mask{
+  background:linear-gradient(100deg,rgba(255,255,255,.97) 0%,rgba(255,255,255,.92) 38%,rgba(255,255,255,.62) 68%,rgba(255,255,255,.34) 100%) !important;
+}
+html body .cover,
+html body .e-hero{border:1px solid rgba(255,255,255,.9) !important;box-shadow:0 1px 2px rgba(16,24,40,.05),0 40px 90px -60px rgba(16,24,40,.4) !important}
+
+/* 报告封面英雄条：去掉横向彩虹渐变 */
+html body .cover .hero-band,
+html body .cover::after{background:none !important}
+
+/* 统计卡里的小图标底板：白底细边，避免出现空绿块 */
+html body .kpi-ic,
+html body .stat-ic,
+html body .icon-tile{background:rgba(10,132,255,.07) !important;border:1px solid rgba(10,132,255,.14) !important}
+
+/* 空图标底板不显示；渐变标题字改深色渐变 */
+html body .m-icon:empty{display:none !important}
+html body .cover h1 .h-sub{
+  background:linear-gradient(90deg,#0a63c9 0%,#0a84ff 45%,#c2410c 100%) !important;
+  -webkit-background-clip:text !important;background-clip:text !important;color:transparent !important;
+}
+
+/* 聚焦：暗玻璃卡片/气泡/遮罩统一为白玻璃 */
+html body .guess{
+  background:rgba(255,255,255,.94) !important;
+  border:1px solid rgba(17,24,39,.08) !important;
+  box-shadow:0 1px 2px rgba(16,24,40,.05),0 24px 60px -40px rgba(16,24,40,.35) !important;
+  -webkit-backdrop-filter:blur(14px) saturate(1.1) !important;backdrop-filter:blur(14px) saturate(1.1) !important;
+}
+html body .guess .btn{
+  background:rgba(10,132,255,.10) !important;color:#0a63c9 !important;
+  border:1px solid rgba(10,132,255,.24) !important;box-shadow:none !important;
+}
+html body .s-bubble{
+  background:rgba(255,255,255,.94) !important;color:#12161c !important;
+  border:1px solid rgba(17,24,39,.10) !important;
+  box-shadow:0 10px 30px -18px rgba(16,24,40,.5) !important;
+}
+html body .mask{
+  background:rgba(246,247,249,.74) !important;
+  -webkit-backdrop-filter:blur(8px) !important;backdrop-filter:blur(8px) !important;
+}
+
+/* decision-lab 演示遮罩：保留"演示态"提示，但内容可读 */
+html body .hl-backdrop{
+  background:rgba(255,255,255,.34) !important;
+  -webkit-backdrop-filter:none !important;backdrop-filter:none !important;
+}
+
+/* spotlight 追问条：去掉表单感 */
+html body .guess .ask{
+  background:rgba(10,132,255,.05) !important;border:0 !important;border-radius:12px !important;
+  color:#3f4753 !important;box-shadow:none !important;
+}
+/* 粘性顶栏不做毛玻璃，避免出现灰带 */
+html body .hl-masthead{-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+
+/* 页面级横向溢出收口（内部横向滚动条不受影响） */
+html,body{overflow-x:clip !important}
+html body .tl-wrap{overflow-x:auto !important;overflow-y:hidden !important}
+html body .tl-track{max-width:100%}
+
+/* choices 图例浮条 / role 选中卡 */
+html body .kg-legend{
+  background:rgba(255,255,255,.92) !important;
+  border:1px solid rgba(17,24,39,.08) !important;
+  border-radius:12px !important;
+  color:#3f4753 !important;
+  box-shadow:0 1px 2px rgba(16,24,40,.05),0 14px 40px -30px rgba(16,24,40,.4) !important;
+  -webkit-backdrop-filter:blur(14px) !important;backdrop-filter:blur(14px) !important;
+}
+html body .kg-legend span,
+html body .kg-legend i + span{color:#3f4753 !important}
+html body .rc.on{
+  background:rgba(48,209,88,.07) !important;
+  border-color:rgba(48,209,88,.40) !important;
+  box-shadow:0 10px 30px -22px rgba(15,123,63,.55),inset 0 0 0 1px rgba(48,209,88,.10) !important;
+}
+html body .rc.on .t{color:#0f7b3f !important}
+
+/* P6 · 第二批浅字压深（语义色阶） */
+html body .pos,html body .good,html body .up,
+html body [style*="color:#86efac"],html body [style*="color: #86efac"],
+html body [style*="color:#6ee7b7"],html body [style*="color: #6ee7b7"],
+html body [style*="color:#4ade80"],html body [style*="color: #4ade80"]{color:#0f7b3f !important}
+
+html body .neg,html body .bad,html body .down,
+html body [style*="color:#fda4af"],html body [style*="color: #fda4af"],
+html body [style*="color:#fca5a5"],html body [style*="color: #fca5a5"]{color:#b3261e !important}
+
+html body .m-val,html body .m-tag,
+html body [style*="color:#93c5fd"],html body [style*="color: #93c5fd"],
+html body [style*="color:#7dd3fc"],html body [style*="color: #7dd3fc"],
+html body [style*="color:#5ac8fa"],html body [style*="color: #5ac8fa"],
+html body [style*="color:#82dcff"],html body [style*="color: #82dcff"]{color:#0a63c9 !important}
+
+html body .mk,
+html body [style*="color:#fcd34d"],html body [style*="color: #fcd34d"]{color:#b45309 !important}
+
+html body .cmp .r.cy,html body .r.cy{color:#a8500a !important}
+html body .cmp .r.g,html body .r.g{color:#0f7b3f !important}
+html body .cmp .r.b,html body .r.b{color:#0a63c9 !important}
+html body .kg-overline,html body .section{color:#0a63c9 !important}
+
+html body [style*="color:#bfd1e2"],html body [style*="color: #bfd1e2"]{color:#4b5563 !important}
+html body [style*="color:#eef2fb"],html body [style*="color: #eef2fb"]{color:#12161c !important}
+
+/* 目录抽屉：即使页面声明 dark 主题，也按浅色面板渲染 */
+html body[data-sn-theme="dark"]{
+  --sn-chip:rgba(255,255,255,.92);
+  --sn-panel:#ffffff;
+  --sn-ink:#12161c;
+  --sn-line:rgba(17,24,39,.12);
+  --sn-hair:rgba(17,24,39,.08);
+  --sn-accent:#0a84ff;
+  --sn-scrim:rgba(16,24,40,.28);
+}
+html body #sn-panel{box-shadow:0 -24px 60px -30px rgba(16,24,40,.45) !important}
+html body #sn-panel .sn-sub,html body #sn-panel .sn-group,html body #sn-panel .sn-n{opacity:.55 !important}
+html body .sn-scrim{background:rgba(16,24,40,.28) !important}
+
+/* 场景气泡与旁侧指标 */
+html body .s-bubble .s-name{color:#12161c !important}
+html body .s-bubble .s-sub,html body .s-bubble .s-desc{color:#5f6773 !important}
+html body .es-row .v{color:#12161c !important}
+html body .es-row .k{color:#5f6773 !important}
+
+/* choices 顶部与底部说明 */
+html body .kg-live{color:#5f6773 !important}
+html body .kg-scene-label strong,html body .kg-scene-label{color:#12161c !important}
+html body .kg-stats strong{color:#12161c !important}
+html body .kg-next a{background:rgba(10,132,255,.10) !important;color:#0a63c9 !important;border:1px solid rgba(10,132,255,.24) !important}
+html body .foot strong{color:#12161c !important}
+
+/* choices 共享节点渐变 → 珍珠白球 */
+html body #kgNodeGrad stop:first-child{stop-color:#ffffff !important}
+html body #kgNodeGrad stop:last-child{stop-color:#dbe7f5 !important}
+
+/* choices SVG 文字：去掉为深底准备的白描边，避免文字糊成团 */
+html body .kg-node .kg-node-label,
+html body .kg-node .kg-node-sub,
+html body .kg-node .kg-node-icon,
+html body .kg-node .kg-node-state,
+html body #kgSvg text{
+  stroke:none !important;stroke-width:0 !important;paint-order:fill !important;
+}
+
+/* 全站 SVG 文字统一无描边（原为深底可读性加的白描边） */
+html body svg text{stroke:none !important;stroke-width:0 !important}
+
+/* money 概念关系图：深底节点 → 白底彩边 */
+html body .node circle{fill:#ffffff !important;stroke:#9db9d4 !important;stroke-width:1.6px !important}
+html body .node.active circle{fill:#eaf4ff !important;stroke:#0a84ff !important;stroke-width:2.4px !important;filter:drop-shadow(0 10px 20px rgba(10,132,255,.30)) !important}
+html body svg .edge{stroke:#a8bccf !important}
+html body .edge.active{stroke:#e25700 !important}
+html body .node text{fill:#12161c !important}

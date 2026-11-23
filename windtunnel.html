@@ -79,6 +79,11 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
 </style>
 <link rel="stylesheet" href="ui/ui.css">
 <link rel="stylesheet" href="ui/ui-pages.css">
+<!-- premium light ui -->
+<link rel="stylesheet" href="ui/premium-auto.css">
+<link rel="stylesheet" href="ui/premium/pages/windtunnel.css">
+<link rel="stylesheet" href="ui/premium.css">
+<!-- /premium light ui -->
 </head><body>
 
 
@@ -86,7 +91,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
 <div class="wrap">
   <h1>风洞测试</h1>
   <p class="sub">点档位，图会跟着变。先看常规压力，再看一个容易忽略的地方。</p>
-  <div class="card" style="background:#0a0f1a;border-color:#2b3a55;margin-bottom:14px">
+  <div class="card" style="background:#ffffff;border-color:#e6ebf2;margin-bottom:14px">
     <div style="font-size:12px;color:#93a4bd;line-height:1.8">
       <b style="color:#ff9500">两本账，别混：</b><br>
       <b>① 参数敏感性（见⑤未来页）</b>：逐个参数 ±20% 扰动，其他不变，看达标概率和中位产值变多少。回答的是"哪个参数最敏感"。<br>
@@ -404,7 +409,7 @@ try{drawRank();}catch(e){window.__rankErr=e.message;}
     m.id="shareModal";
     m.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px";
     m.onclick=function(){m.remove();};
-    m.innerHTML='<div style="background:#0f172a;padding:20px;border-radius:14px;text-align:center" onclick="event.stopPropagation()"><div style="color:#fff;font-size:14px;margin-bottom:12px">截图二维码，发给朋友/群</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(location.href)+'" style="width:200px;height:200px;background:#fff;padding:8px;border-radius:8px"><div style="color:#94a3b8;font-size:12px;margin-top:12px">扫码打开</div></div>';
+    m.innerHTML='<div style="background:#ffffff;border:1px solid #e6ebf2;padding:20px;border-radius:14px;text-align:center;box-shadow:0 18px 50px -28px rgba(16,24,40,.5)" onclick="event.stopPropagation()"><div style="color:#12161c;font-size:14px;margin-bottom:12px">截图二维码，发给朋友/群</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(location.href)+'" style="width:200px;height:200px;background:#fff;padding:8px;border-radius:8px"><div style="color:#94a3b8;font-size:12px;margin-top:12px">扫码打开</div></div>';
     document.body.appendChild(m);
   }
   navigator.clipboard && navigator.clipboard.writeText(location.href);

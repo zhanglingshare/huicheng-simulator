@@ -1,0 +1,108 @@
+/* 自动生成：who.html 浅色映射 */
+:root{
+  --ink:#12161c;
+  --ink2:#5f6773;
+  --green:#22c55e;
+  --red:#ef4444;
+  --gold:#f0c75e;
+  --blue:#0a84ff;
+  --cit:#f59e0b;
+  --ind:#0a84ff;
+}
+html body{
+  background:linear-gradient(180deg,#ffffff 0%,#ffffff 45%,#ffffff 100%);
+}
+html body::before{
+  background:radial-gradient(800px 400px at 50% 0%,rgba(255,255,255,0.18),transparent 60%),
+             radial-gradient(600px 300px at 50% 100%,rgba(255,255,255,0.06),transparent 60%);
+}
+html body .lab-btn:hover{
+  color:#12161c;
+}
+html body .main::-webkit-scrollbar-thumb{
+  background:rgba(255,255,255,0.10);
+}
+html body .seg button.on{
+  color:#12161c;
+}
+html body .qcard{
+  background:rgba(255,255,255,0.06);
+}
+html body .qcard:hover{
+  background:rgba(255,255,255,0.10);
+}
+html body .qcard .qico{
+  background:rgba(255,255,255,0.08);
+}
+html body .play-body::-webkit-scrollbar-thumb{
+  background:rgba(255,255,255,0.10);
+}
+html body .bet-btn{
+  background:rgba(255,255,255,0.06);
+}
+html body .bet-btn:hover{
+  background:rgba(255,255,255,0.12);
+}
+html body .bet-btn.b-up:hover{
+  box-shadow:0 4px 20px rgba(34,197,94,0.2);
+}
+html body .bet-btn.b-down:hover{
+  box-shadow:0 4px 20px rgba(255,255,255,0.20);
+}
+html body .scale-wrap{
+  background:rgba(255,255,255,0.05);
+}
+html body .f-back{
+  background:linear-gradient(145deg,#ffffff,#ffffff);
+  border:1.5px solid rgba(240,199,94,0.35);
+}
+html body .f-front{
+  color:#12161c;
+}
+html body .f-front.g{
+  border-color:rgba(47,158,68,0.3);
+  box-shadow:0 4px 20px rgba(34,197,94,0.15);
+}
+html body .f-front.b{
+  border-color:rgba(201,59,59,0.3);
+  box-shadow:0 4px 20px rgba(255,255,255,0.15);
+}
+html body .f-front.n{
+  border-color:#78818f;
+}
+html body .f-front::after{
+  background:linear-gradient(135deg,transparent 50%,rgba(255,255,255,0.38) 50%);
+}
+html body .f-front.g::after{
+  background:linear-gradient(135deg,transparent 50%,rgba(34,197,94,0.3) 50%);
+}
+html body .f-front.b::after{
+  background:linear-gradient(135deg,transparent 50%,rgba(255,255,255,0.30) 50%);
+}
+html body .f-front .fk{
+  color:#98a1ad;
+}
+html body .f-front .fv{
+  color:#12161c;
+}
+html body .bp-divider::before, html body .bp-divider::after{
+  background:rgba(255,255,255,0.25);
+}
+html body .bp-card .f-face{
+  border-color:rgba(229,192,106,0.45);
+}
+html body .result{
+  background:rgba(255,255,255,0.06);
+}
+html body .btn-primary{
+  color:#12161c;
+}
+html body .btn-primary:hover{
+  background:rgba(255,255,255,0.10);
+}
+html body .stepnav a.primary{
+  color:#12161c;
+}
+html body .mask{
+  background:rgba(255,255,255,0.88);
+}

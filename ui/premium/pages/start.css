@@ -1,0 +1,41 @@
+/* 自动生成：start.html 浅色映射 */
+html body .star{
+  fill:#12161c;
+}
+html body .dot{
+  box-shadow:0 0 0 3px rgba(255,255,255,0.16);
+}
+html body .crack{
+  color:#c93b3b;
+}
+html body .crack::after{
+  background:rgba(255,255,255,0.50);
+}
+html body .rel-card{
+  background:rgba(255,255,255,0.83);
+  box-shadow:var(--ds-shadow-1),inset 0 1px 0 rgba(255,255,255,0.04);
+}
+html body .rel-svg{
+  background:radial-gradient(80% 70% at 42% 42%,rgba(255,255,255,0.08),transparent 70%),
+    #ffffff;
+  border:1px solid rgba(255,255,255,0.05);
+}
+html body .rel-svg .lb{
+  fill:#12161c;
+}
+html body .local-line{
+  stroke:#0a7f95;
+}
+html body .cta{
+  background:linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0.09));
+  border:1px solid rgba(10,132,255,0.32);
+}
+html body .cta:hover{
+  background:linear-gradient(180deg,rgba(255,255,255,0.24),rgba(255,255,255,0.14));
+  border-color:rgba(10,132,255,0.5);
+}
+html body .cta .arrow{
+  background:rgba(255,255,255,0.90);
+  color:#12161c;
+  box-shadow:0 2px 8px rgba(255,255,255,0.35);
+}

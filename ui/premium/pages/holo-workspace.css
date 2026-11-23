@@ -1,0 +1,517 @@
+/* 自动生成：holo-workspace.html 浅色映射 */
+:root{
+  --ink:#12161c;
+  --blue:#0a84ff;
+  --cyan:#0a84ff;
+  --violet:#bf5af2;
+  --green:#30d158;
+  --sh-1:0 1px 3px rgba(255,255,255,0.58);
+  --sh-2:0 4px 16px rgba(255,255,255,0.63);
+  --sh-3:0 8px 32px rgba(255,255,255,0.78);
+}
+html body{
+  background:radial-gradient(ellipse at 50% 0%,#ffffff 0%,#ffffff 55%,#ffffff 100%);
+}
+html body header{
+  background:rgba(255,255,255,0.96);
+}
+html body .brand .logo{
+  box-shadow:0 2px 8px rgba(255,255,255,0.50);
+}
+html body nav.main{
+  background:#ffffff;
+}
+html body nav.main button:hover{
+  background:#ffffff;
+}
+html body nav.main button.on{
+  color:#12161c;
+  box-shadow:0 2px 8px rgba(255,255,255,0.53);
+}
+html body .search{
+  background:#ffffff;
+}
+html body .search:focus-within{
+  background:#ffffff;
+  box-shadow:0 0 0 3px rgba(255,255,255,0.08);
+}
+html body .status{
+  background:#ffffff;
+}
+html body .status i{
+  background:rgba(48,209,88,0.12);
+  box-shadow:0 0 0 3px rgba(34,197,94,0.15);
+}
+html body .avatar{
+  border:2px solid rgba(17,24,39,0.12);
+}
+html body .mode-switch{
+  background:#ffffff;
+  border:1px solid #12161c;
+}
+html body .mode-switch button.on{
+  background:#ffffff;
+  color:#0a7f95;
+  box-shadow:0 1px 4px rgba(255,255,255,0.38);
+}
+html body .brief:after{
+  background:radial-gradient(ellipse at 65% 75%,rgba(255,255,255,0.22),transparent 58%),linear-gradient(155deg,transparent 48%,rgba(255,255,255,0.06) 49%,transparent 51%);
+}
+html body .brief-icon{
+  color:#12161c;
+  box-shadow:0 5px 14px rgba(255,255,255,0.22);
+}
+html body .brief-meta .brief-grade{
+  background:#ffffff;
+  color:#0a7f95;
+}
+html body .brief h2{
+  color:#12161c;
+}
+html body .brief-action{
+  background:rgba(255,255,255,0.10);
+  color:#12161c;
+  box-shadow:0 4px 12px rgba(23,74,156,0.16);
+}
+html body .kpi{
+  background:rgba(255,255,255,0.88);
+}
+html body .kpi:hover{
+  background:rgba(255,255,255,0.96);
+}
+html body .kpi .kn .u{
+  color:#5f6773;
+}
+html body .kpi .delta.up{
+  color:#2f9e44;
+  background:#ffffff;
+}
+html body .kpi .delta.dn{
+  color:#c93b3b;
+  background:#ffffff;
+}
+html body .kpi .delta.flat{
+  background:#ffffff;
+}
+html body .card{
+  background:#ffffff;
+}
+html body .card-h .cnt{
+  background:#ffffff;
+}
+html body .layer{
+  color:#5f6773;
+}
+html body .layer:hover{
+  background:#ffffff;
+}
+html body .layer.on{
+  background:#ffffff;
+  border-color:#12161c;
+}
+html body .layer.on .ck::after{
+  border:solid rgba(17,24,39,0.12);
+}
+html body .legend{
+  color:#5f6773;
+}
+html body .tog{
+  color:#5f6773;
+}
+html body .switch i{
+  background:#ffffff;
+  box-shadow:0 1px 3px rgba(255,255,255,0.53);
+}
+html body .stage{
+  background:radial-gradient(120% 100% at 50% 0%,#ffffff 0%,#ffffff 55%,#ffffff 100%);
+}
+html body .stage::before{
+  background-image:radial-gradient(#ffffff 1px,transparent 1px);
+}
+html body .chipbar{
+  background:rgba(255,255,255,0.96);
+}
+html body .zoomer{
+  background:rgba(255,255,255,0.96);
+}
+html body .zoomer button{
+  color:#5f6773;
+}
+html body .zoomer button:hover{
+  background:#ffffff;
+}
+html body .hint{
+  background:rgba(255,255,255,0.96);
+}
+html body .selbar{
+  background:rgba(255,255,255,0.96);
+  color:#5f6773;
+}
+html body .edge .elab{
+  fill:#5f6773;
+  stroke:#12161c;
+}
+html body .node .dot{
+  stroke:#12161c;
+}
+html body .node .lab{
+  fill:#5f6773;
+  stroke:#12161c;
+}
+html body .node .num{
+  fill:#12161c;
+}
+html body .node.focus .ring{
+  stroke:#12161c;
+}
+html body .panel{
+  background:#ffffff;
+}
+html body .p-h .s i{
+  background:rgba(48,209,88,0.12);
+}
+html body .p-h .more:hover{
+  background:#ffffff;
+}
+html body .tabs{
+  background:#ffffff;
+}
+html body .tab:hover{
+  background:#ffffff;
+}
+html body .tab.on{
+  background:#ffffff;
+}
+html body .tab .badge{
+  background:#ffffff;
+  color:#5f6773;
+}
+html body .prob-card{
+  background:rgba(255,255,255,0.73);
+  border:1px solid rgba(255,255,255,0.1);
+}
+html body .prob-card .pc-bar{
+  background:rgba(255,255,255,0.10);
+}
+html body .prob-card .pc-val{
+  color:#c93b3b;
+}
+html body .prob-card .pc-note{
+  color:#5f6773;
+  border-top:1px solid rgba(255,255,255,0.07);
+}
+html body .prob-card .pc-note b{
+  color:#5f6773;
+}
+html body .star{
+  fill:#12161c;
+}
+html body .p-body::-webkit-scrollbar-thumb{
+  background:#ffffff;
+}
+html body .kind{
+  background:#ffffff;
+  color:#2f9e44;
+}
+html body .goto{
+  background:#ffffff;
+}
+html body .goto:hover{
+  background:#ffffff;
+}
+html body .goto .ic{
+  color:#12161c;
+}
+html body .goto .tx{
+  color:#5f6773;
+}
+html body .sec .n{
+  background:#ffffff;
+  color:#5f6773;
+}
+html body .txt{
+  color:#5f6773;
+}
+html body .mini-net{
+  background:linear-gradient(180deg,#ffffff,#ffffff);
+}
+html body .mn-mark i{
+  background:rgba(255,255,255,0.10);
+  box-shadow:0 0 0 3px #ffffff;
+}
+html body .mn-center{
+  color:#12161c;
+  box-shadow:0 7px 18px rgba(255,255,255,0.48);
+}
+html body .mn-center .mn-role{
+  color:#5f6773;
+}
+html body .mn-node{
+  background:#ffffff;
+  border:1px solid #12161c;
+  box-shadow:0 3px 9px rgba(255,255,255,0.35);
+}
+html body .mn-node:hover{
+  box-shadow:0 6px 15px rgba(255,255,255,0.14);
+}
+html body .mn-node .mn-name{
+  color:#5f6773;
+}
+html body .mn-node .mn-tag{
+  background:#ffffff;
+  color:#5f6773;
+}
+html body .mn-rel{
+  background:#ffffff;
+  color:#5f6773;
+}
+html body .mkc{
+  background:linear-gradient(165deg,#fdfefe,#ffffff);
+}
+html body .mkc .bar{
+  background:#ffffff;
+}
+html body .mkc .bar i{
+  background:linear-gradient(90deg,rgba(48,209,88,0.12),#20b0a0);
+}
+html body .grade{
+  background:#ffffff;
+  color:#2f9e44;
+}
+html body .src{
+  background:#ffffff;
+}
+html body .src .sn{
+  color:#5f6773;
+}
+html body .limit{
+  border:1px solid #12161c;
+  background:#ffffff;
+  color:#5f6773;
+}
+html body .limit b{
+  color:#c93b3b;
+}
+html body .deb{
+  background:linear-gradient(165deg,#1c1c1eaf0,#ffffff);
+}
+html body .deb .dh{
+  color:#5f6773;
+}
+html body .deb .dq{
+  color:#5f6773;
+}
+html body .opt{
+  background:#ffffff;
+  color:#5f6773;
+}
+html body .opt.on{
+  color:#12161c;
+}
+html body .fh{
+  color:#5f6773;
+  background:linear-gradient(155deg,#ffffff 0%,#ffffff 55%,#ffffff 100%);
+  box-shadow:0 12px 26px rgba(255,255,255,0.54);
+}
+html body .fh::before{
+  background:radial-gradient(circle,rgba(255,255,255,0.34),transparent 66%);
+}
+html body .fh-tag{
+  color:#5f6773;
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(125,211,252,0.26);
+}
+html body .fh-tag i{
+  background:rgba(255,255,255,0.10);
+  box-shadow:0 0 0 3px rgba(255,255,255,0.18);
+}
+html body .fh-big span{
+  color:#5f6773;
+}
+html body .fh h3{
+  color:#12161c;
+}
+html body .fh p{
+  color:#5f6773;
+}
+html body .fh-stats{
+  background:rgba(255,255,255,0.11);
+}
+html body .fh-stats>div{
+  background:rgba(255,255,255,0.86);
+}
+html body .fh-stats b{
+  color:#12161c;
+}
+html body .fh-stats span{
+  color:#5f6773;
+}
+html body .fh-net{
+  color:#5f6773;
+}
+html body .fh-net b{
+  color:#5f6773;
+}
+html body .fh-net b.up{
+  color:#5f6773;
+}
+html body .fh-net .gain{
+  color:#5f6773;
+  background:rgba(74,222,128,0.14);
+  border:1px solid rgba(74,222,128,0.3);
+}
+html body .fh-btn{
+  background:linear-gradient(135deg,rgba(255,255,255,0.10),rgba(255,255,255,0.10));
+  color:#12161c;
+  box-shadow:0 8px 18px rgba(255,255,255,0.40);
+}
+html body .fh-btn:hover{
+  box-shadow:0 10px 22px rgba(255,255,255,0.50);
+}
+html body .ff{
+  background:#ffffff;
+}
+html body .ff.on{
+  color:#12161c;
+}
+html body .frow:hover{
+  background:#ffffff;
+}
+html body .frow .bar{
+  background:#ffffff;
+}
+html body .frow .bar i{
+  background:linear-gradient(90deg,rgba(255,255,255,0.10),rgba(48,209,88,0.12));
+}
+html body .d-hero{
+  color:#5f6773;
+  background:linear-gradient(155deg,#ffffff 0%,#ffffff 58%,#2e3a50 100%);
+}
+html body .d-hero::before{
+  background:radial-gradient(circle,rgba(255,255,255,0.30),transparent 66%);
+}
+html body .d-hero .eyebrow{
+  color:#5f6773;
+}
+html body .d-hero h2{
+  color:#12161c;
+}
+html body .dh-stats{
+  background:rgba(255,255,255,0.11);
+}
+html body .dh-stats>div{
+  background:rgba(255,255,255,0.78);
+}
+html body .dh-stats .val{
+  color:#12161c;
+}
+html body .dh-stats .unit{
+  color:#5f6773;
+}
+html body .dh-stats .lab{
+  color:#5f6773;
+}
+html body .ba-c{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.14);
+}
+html body .ba-c .cap{
+  color:#5f6773;
+}
+html body .ba-arrow{
+  color:#5f6773;
+}
+html body .ba-arrow .dl{
+  color:#5f6773;
+  background:rgba(74,222,128,0.14);
+  border:1px solid rgba(74,222,128,0.32);
+}
+html body .why{
+  color:#5f6773;
+  background:linear-gradient(135deg,#ffffff,#ffffff);
+}
+html body .why b{
+  color:#5f6773;
+}
+html body .vote-h .bar{
+  background:#ffffff;
+}
+html body .event-viz{
+  border:1px solid #12161c;
+  background:linear-gradient(180deg,#ffffff,#ffffff);
+}
+html body .ev-head{
+  border-bottom:1px solid #12161c;
+}
+html body .ev-title{
+  color:#5f6773;
+}
+html body .ev-title i{
+  background:rgba(255,255,255,0.10);
+  box-shadow:0 0 0 4px #ffffff;
+}
+html body .ev-count{
+  background:#ffffff;
+  border:1px solid #12161c;
+}
+html body .ev-bar-row{
+  color:#5f6773;
+}
+html body .ev-bar-track{
+  background:#ffffff;
+}
+html body .ev-bar-row b{
+  color:#5f6773;
+}
+html body .frow .fvisual{
+  color:#0a7f95;
+}
+html body .feed-mix{
+  background:#ffffff;
+  border:1px solid #12161c;
+}
+html body .feed-mix-track{
+  background:#ffffff;
+}
+html body .composer{
+  background:#ffffff;
+}
+html body .inp{
+  background:#ffffff;
+}
+html body .inp:focus-within{
+  box-shadow:0 0 0 3px rgba(255,255,255,0.08);
+}
+html body .inp .ib:hover{
+  box-shadow:0 4px 10px rgba(255,255,255,0.53);
+}
+html body footer{
+  background:#ffffff;
+}
+html body .tl-h i{
+  box-shadow:0 0 0 3px rgba(22,163,74,0.12);
+}
+html body .tl-line{
+  background:linear-gradient(90deg,#ffffff,#ffffff);
+}
+html body .tl-ev .l{
+  color:#5f6773;
+  background:#ffffff;
+}
+html body .tl-ev .n{
+  border:2.5px solid rgba(17,24,39,0.12);
+  box-shadow:0 0 0 1px rgba(255,255,255,0.38),0 1px 4px rgba(255,255,255,0.40);
+}
+html body .toast{
+  background:rgba(255,255,255,0.96);
+  border:1px solid rgba(255,255,255,0.12);
+  color:#12161c;
+}
+html body .tl-ev.sel .n{
+  box-shadow:0 0 0 1px var(--ink),0 2px 8px rgba(255,255,255,0.48);
+}
+html body .project-links a{
+  background:#ffffff;
+  color:#0a7f95;
+  box-shadow:0 2px 6px rgba(16,65,130,0.06);
+}

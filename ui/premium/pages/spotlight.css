@@ -1,0 +1,96 @@
+/* 自动生成：spotlight.html 浅色映射 */
+:root{
+  --ink:#12161c;
+  --ink2:#5f6773;
+  --cyan:#0a84ff;
+  --blue:#0a84ff;
+  --amber:#f0b35e;
+  --red:#ff6b60;
+  --green:#54d6a0;
+}
+html body{
+  background:radial-gradient(900px 500px at 50% -10%,rgba(255,255,255,0.22),transparent 60%),
+    linear-gradient(180deg,#ffffff 0%,#ffffff 100%);
+}
+html body .bar{
+  background:rgba(255,255,255,0.96);
+}
+html body .mark{
+  color:#12161c;
+  background:linear-gradient(150deg,rgba(255,255,255,0.10),#0D47A1);
+  box-shadow:0 3px 14px -2px rgba(255,255,255,0.60);
+}
+html body h1 em{
+  text-shadow:none;
+}
+html body .hero .tip{
+  border:1px solid rgba(79,195,255,0.35);
+  background:rgba(255,255,255,0.08);
+}
+html body .guess{
+  background:rgba(255,255,255,0.96);
+}
+html body .guess::before{
+  background:linear-gradient(150deg,rgba(255,255,255,0.35),transparent 40%);
+}
+html body .guess .btn{
+  background:linear-gradient(150deg,rgba(255,255,255,0.10),rgba(255,255,255,0.10));
+  color:#12161c;
+  box-shadow:0 6px 20px -6px rgba(255,255,255,0.60);
+}
+html body .big.r{
+  text-shadow:none;
+}
+html body .big.a{
+  text-shadow:none;
+}
+html body .big.g{
+  text-shadow:none;
+}
+html body .minib{
+  background:rgba(255,255,255,0.78);
+}
+html body .vsc{
+  background:rgba(255,255,255,0.83);
+}
+html body .track{
+  background:rgba(255,255,255,0.05);
+}
+html body .vsc.old .fill{
+  background:linear-gradient(90deg,rgba(84,214,160,0.6),var(--green));
+}
+html body .vsc.now .fill{
+  background:linear-gradient(90deg,rgba(255,255,255,0.50),var(--amber));
+}
+html body .vsc.now .fill.r{
+  background:linear-gradient(90deg,rgba(255,255,255,0.50),var(--red));
+}
+html body .hope{
+  background:linear-gradient(160deg,rgba(84,214,160,0.1),rgba(255,255,255,0.96));
+  border:1px solid rgba(84,214,160,0.3);
+}
+html body .act{
+  background:rgba(255,255,255,0.83);
+}
+html body .diff{
+  background:rgba(255,255,255,0.88);
+}
+html body .ditem{
+  background:rgba(255,255,255,0.78);
+}
+html body .cta{
+  background:linear-gradient(160deg,rgba(255,255,255,0.25),rgba(255,255,255,0.96));
+  border:1px solid rgba(79,195,255,0.35);
+}
+html body .cta .go{
+  background:linear-gradient(150deg,rgba(255,255,255,0.10),rgba(255,255,255,0.10));
+  color:#12161c;
+  box-shadow:0 8px 26px -6px rgba(255,255,255,0.65);
+}
+html body .cta .poster{
+  border:1px solid rgba(240,179,94,0.5);
+}
+html body #toast{
+  background:rgba(255,255,255,0.96);
+  color:#12161c;
+}

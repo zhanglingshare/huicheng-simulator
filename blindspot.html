@@ -43,6 +43,11 @@ body{overflow-x:hidden}
 </style>
 <link rel="stylesheet" href="ui/ui.css">
 <link rel="stylesheet" href="ui/ui-pages.css">
+<!-- premium light ui -->
+<link rel="stylesheet" href="ui/premium-auto.css">
+<link rel="stylesheet" href="ui/premium/pages/blindspot.css">
+<link rel="stylesheet" href="ui/premium.css">
+<!-- /premium light ui -->
 </head><body>
 
 
@@ -179,7 +184,7 @@ body{overflow-x:hidden}
 
   <!-- 体感投票 -->
   <div class="card" style="margin-top:12px">
-    <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:4px">️ 惠城人体感小调查</div>
+    <div style="font-size:15px;font-weight:800;color:#12161c;margin-bottom:4px">️ 惠城人体感小调查</div>
     <div style="font-size:12.5px;color:#94a3b8;margin-bottom:12px">你早上从家到单位，路上大概要多久？（本地累计，非全网统计）</div>
     <div id="voteOpts" style="display:flex;gap:8px;flex-wrap:wrap"></div>
     <div id="voteResult" style="margin-top:12px;font-size:12.5px;color:#cbd5e1"></div>
@@ -187,7 +192,7 @@ body{overflow-x:hidden}
 
   <!-- 众包：最希望先办什么 -->
   <div class="card" style="margin-top:12px">
-    <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:4px"> 惠城人最希望先把哪件事办好？</div>
+    <div style="font-size:15px;font-weight:800;color:#12161c;margin-bottom:4px"> 惠城人最希望先把哪件事办好？</div>
     <div style="font-size:12.5px;color:#94a3b8;margin-bottom:12px">这不是随便选——你选的，就是这座城最该先补的那块短板。（本地累计）</div>
     <div id="wantOpts" style="display:flex;gap:8px;flex-wrap:wrap"></div>
     <div id="wantResult" style="margin-top:12px;font-size:12.5px;color:#cbd5e1"></div>
@@ -345,7 +350,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
     m.id="shareModal";
     m.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px";
     m.onclick=function(){m.remove();};
-    m.innerHTML='<div style="background:#0f172a;padding:20px;border-radius:14px;text-align:center" onclick="event.stopPropagation()"><div style="color:#fff;font-size:14px;margin-bottom:12px">截图二维码，发给朋友/群</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(location.href)+'" style="width:200px;height:200px;background:#fff;padding:8px;border-radius:8px"><div style="color:#94a3b8;font-size:12px;margin-top:12px">扫码打开</div></div>';
+    m.innerHTML='<div style="background:#ffffff;border:1px solid #e6ebf2;padding:20px;border-radius:14px;text-align:center;box-shadow:0 18px 50px -28px rgba(16,24,40,.5)" onclick="event.stopPropagation()"><div style="color:#12161c;font-size:14px;margin-bottom:12px">截图二维码，发给朋友/群</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(location.href)+'" style="width:200px;height:200px;background:#fff;padding:8px;border-radius:8px"><div style="color:#94a3b8;font-size:12px;margin-top:12px">扫码打开</div></div>';
     document.body.appendChild(m);
   }
   navigator.clipboard && navigator.clipboard.writeText(location.href);

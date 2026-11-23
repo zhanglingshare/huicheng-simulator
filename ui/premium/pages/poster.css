@@ -1,0 +1,45 @@
+/* 自动生成：poster.html 浅色映射 */
+:root{
+  --ink:#12161c;
+  --ink2:#5f6773;
+  --cyan:#0a84ff;
+  --blue:#0a84ff;
+  --amber:#f0b35e;
+  --red:#ff6b60;
+  --green:#54d6a0;
+}
+html body .poster{
+  background:radial-gradient(560px 420px at 18% -6%,rgba(255,255,255,0.28),transparent 60%),
+  radial-gradient(520px 400px at 105% 78%,rgba(255,255,255,0.16),transparent 62%),
+  radial-gradient(460px 380px at 88% 12%,rgba(84,214,160,0.1),transparent 60%),
+  linear-gradient(168deg,#ffffff 0%,#ffffff 52%,#ffffff 100%);
+}
+html body .grid{
+  background-image:linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px);
+}
+html body .mark{
+  color:#12161c;
+  background:linear-gradient(150deg,rgba(255,255,255,0.10),#0D47A1);
+  box-shadow:0 4px 18px -2px rgba(255,255,255,0.65);
+}
+html body .top .period{
+  background:rgba(255,255,255,0.04);
+}
+html body h1 .r{
+  text-shadow:none;
+}
+html body .bignum .n{
+  text-shadow:none;
+}
+html body .fc{
+  border:1px solid rgba(84,214,160,0.32);
+  background:rgba(84,214,160,0.07);
+}
+html body .act{
+  background:rgba(255,255,255,0.88);
+}
+html body .foot .url{
+  border:1px solid rgba(79,195,255,0.35);
+  background:rgba(255,255,255,0.08);
+}

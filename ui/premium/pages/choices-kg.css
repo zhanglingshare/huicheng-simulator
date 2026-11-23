@@ -1,0 +1,359 @@
+/* auto: choices-kg.css */
+html body :root{
+  --cyan:#0a84ff;
+  --muted:#78818f;
+  --txt:#12161c;
+}
+html body body{
+  background:radial-gradient(circle at 85% 10%,rgba(255,255,255,0.08),transparent 35%),radial-gradient(circle at 10% 80%,rgba(255,255,255,0.06),transparent 40%),radial-gradient(120% 100% at 50% 0%,#ffffff 0%,#ffffff 55%,#ffffff 100%);
+}
+html body .kg-top{
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+html body .kg-brandmark{
+  color:#0a7f95;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06);
+}
+html body .kg-brand small{
+  color:#5f6773;
+}
+html body .kg-headnav a{
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.04);
+  color:#78818f;
+}
+html body .kg-headnav a:hover{
+  background:rgba(255,255,255,0.12);
+  color:#12161c;
+}
+html body .kg-page{
+  color:#0a7f95;
+}
+html body .kg-overline{
+  color:#0a7f95;
+}
+html body .kg-overline i{
+  background:rgba(255,255,255,0.10);
+}
+html body .kg-heading h1 em{
+  color:#0a7f95;
+}
+html body .kg-heading p{
+  color:#78818f;
+}
+html body .kg-live{
+  color:#5f6773;
+}
+html body .kg-live>span{
+  background:rgba(48,209,88,0.12);
+}
+html body .kg-live small{
+  color:#98a1ad;
+}
+html body .kg-personas button{
+  border:1px solid rgba(255,255,255,0.1);
+  color:#78818f;
+  background:rgba(255,255,255,0.04);
+}
+html body .kg-personas button span{
+  color:#0a7f95;
+}
+html body .kg-personas button[aria-pressed=true]{
+  background:rgba(255,255,255,0.15);
+  color:#12161c;
+  border-color:rgba(90,200,250,0.4);
+}
+html body .kg-personas button[aria-pressed=true] span{
+  color:#0a7f95;
+}
+html body .kg-stage{
+  background:radial-gradient(circle at 15% 20%,rgba(255,255,255,0.12),transparent 35%),radial-gradient(circle at 85% 75%,rgba(255,255,255,0.10),transparent 40%),radial-gradient(circle at 70% 15%,rgba(48,209,88,0.08),transparent 30%),rgba(255,255,255,0.88);
+  border:1px solid rgba(255,255,255,0.09);
+}
+html body .kg-stage:after{
+  background:repeating-linear-gradient(180deg,transparent 0,transparent 4px,#ffffff 5px);
+}
+html body .kg-scene-label span{
+  color:#0a7f95;
+}
+html body .kg-scene-label small{
+  color:#98a1ad;
+}
+html body .kg-toolbar button{
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.05);
+  color:#78818f;
+}
+html body .kg-toolbar button:hover{
+  background:rgba(255,255,255,0.12);
+  border-color:rgba(90,200,250,0.3);
+  color:#12161c;
+}
+html body .kg-node text{
+  stroke:#12161c;
+}
+html body .kg-node .kg-node-icon{
+  stroke:#12161c;
+}
+html body .kg-node .kg-node-label{
+  fill:#12161c;
+}
+html body .kg-node .kg-node-sub{
+  fill:#78818f;
+}
+html body .kg-node .kg-node-state{
+  fill:#5f6773;
+}
+html body .kg-node circle.kg-pin{
+  stroke:#12161c;
+}
+html body .kg-legend{
+  background:rgba(255,255,255,0.96);
+  border:1px solid rgba(255,255,255,0.08);
+}
+html body .kg-legend span{
+  color:#78818f;
+}
+html body .kg-mark.aqua{
+  background:rgba(255,255,255,0.10);
+}
+html body .kg-zoom{
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.96);
+}
+html body .kg-zoom button{
+  color:#12161c;
+}
+html body .kg-zoom output{
+  color:#78818f;
+}
+html body .kg-zoom button:hover{
+  color:#0a7f95;
+}
+html body .kg-hint{
+  border:1px solid rgba(90,200,250,0.3);
+  background:rgba(255,255,255,0.96);
+  color:#12161c;
+}
+html body .kg-empty{
+  background:rgba(255,255,255,0.96);
+  border:1px solid rgba(255,255,255,0.1);
+}
+html body .kg-empty span{
+  color:#78818f;
+}
+html body .kg-empty button{
+  background:rgba(255,255,255,0.15);
+  color:#12161c;
+  border:1px solid rgba(90,200,250,0.3);
+}
+html body .kg-inspector{
+  background:linear-gradient(165deg,rgba(255,255,255,0.88),rgba(255,255,255,0.83) 55%,rgba(255,255,255,0.78));
+  border:1px solid rgba(255,255,255,0.09);
+}
+html body .kg-aside-head{
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  color:#0a7f95;
+}
+html body .kg-aside-head span:last-child{
+  color:#78818f;
+}
+html body .kg-heroicon{
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(90,200,250,0.15);
+  color:#0a7f95;
+}
+html body .kg-aside-main>p{
+  color:#78818f;
+}
+html body .kg-meta span{
+  border:1px solid rgba(255,255,255,0.1);
+  color:#0a7f95;
+  background:rgba(255,255,255,0.08);
+}
+html body .kg-aside-tabs{
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.03);
+}
+html body .kg-aside-tabs button{
+  color:#78818f;
+}
+html body .kg-aside-tabs button[aria-selected=true]{
+  background:rgba(255,255,255,0.15);
+  color:#12161c;
+}
+html body .kg-detail-body{
+  color:#12161c;
+}
+html body .kg-detail-body .section{
+  color:#0a7f95;
+}
+html body .kg-detail-body .bullet{
+  border-left:2px solid rgba(10,132,255,0.3);
+}
+html body .kg-detail-body .muted{
+  color:#98a1ad;
+}
+html body .kg-detail-body .fact{
+  border-bottom:1px solid rgba(255,255,255,0.07);
+}
+html body .kg-detail-body .fact b{
+  color:#12161c;
+}
+html body .kg-detail-body .fact small{
+  color:#98a1ad;
+}
+html body .kg-detail-body .fact a{
+  color:#0a7f95;
+}
+html body .kg-detail-body .link-btn{
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.04);
+  color:#12161c;
+}
+html body .kg-detail-body .link-btn span{
+  color:#98a1ad;
+}
+html body .kg-detail-body .link-btn:hover{
+  background:rgba(255,255,255,0.10);
+}
+html body .kg-detail-body .small-badge{
+  color:#0a7f95;
+  background:rgba(255,255,255,0.10);
+}
+html body .kg-detail-body .warning{
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,149,0,0.2);
+  color:#5f6773;
+}
+html body .kg-aside-foot{
+  border-top:1px solid rgba(255,255,255,0.07);
+}
+html body .kg-expand{
+  background:rgba(255,255,255,0.15);
+  border:1px solid rgba(90,200,250,0.3);
+  color:#12161c;
+}
+html body .kg-source-hint{
+  color:#98a1ad;
+}
+html body .kg-controls{
+  background:rgba(255,255,255,0.78);
+  border:1px solid rgba(255,255,255,0.09);
+}
+html body .kg-control-caption, html body .kg-time label{
+  color:#12161c;
+}
+html body .kg-pills button{
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.04);
+  color:#78818f;
+}
+html body .kg-pills button[aria-pressed=true]{
+  color:#12161c;
+  border-color:rgba(90,200,250,0.3);
+  background:rgba(255,255,255,0.12);
+}
+html body .kg-pills button:hover{
+  color:#12161c;
+}
+html body .kg-time label span{
+  color:#0a7f95;
+}
+html body #kgDate{
+  accent-color:#0a7f95;
+}
+html body .kg-ticks{
+  color:#98a1ad;
+}
+html body .kg-stats>span{
+  color:#78818f;
+}
+html body .kg-stats strong{
+  color:#12161c;
+}
+html body .kg-stats small{
+  color:#98a1ad;
+}
+html body .kg-discover{
+  border:1px solid rgba(255,255,255,0.09);
+  background:rgba(255,255,255,0.78);
+}
+html body .kg-discover p{
+  color:#78818f;
+}
+html body .kg-next>*{
+  border:1px solid rgba(255,255,255,0.12);
+}
+html body .kg-next button{
+  background:rgba(255,255,255,0.05);
+  color:#12161c;
+}
+html body .kg-next a{
+  background:rgba(255,255,255,0.15);
+  color:#12161c;
+  border-color:rgba(90,200,250,0.3);
+}
+html body .kg-footer{
+  color:#98a1ad;
+  border-top:1px solid rgba(255,255,255,0.07);
+}
+html body .kg-toast{
+  background:rgba(255,255,255,0.96);
+  color:#12161c;
+  border:1px solid rgba(255,255,255,0.1);
+}
+@media(max-width:620px){
+  html body .kg-mobile-nodes button{
+    color:#5f6773;
+  }
+  html body .kg-mobile-nodes button[aria-pressed=true]{
+    color:#12161c;
+  }
+}
+html body .kg-focus-meta{
+  color:#12161c;
+}
+html body .kg-events{
+  background:linear-gradient(135deg,#ffffff,#ffffff 66%);
+}
+html body .kg-events-head p{
+  color:#5f6773;
+}
+html body .kg-events-count{
+  color:#5f6773;
+}
+html body .kg-events-count strong{
+  color:#12161c;
+}
+html body .kg-event-card{
+  background:linear-gradient(145deg,#ffffff,#ffffff);
+  color:#12161c;
+}
+html body .kg-event-card .kg-event-date{
+  color:#5f6773;
+}
+html body .kg-event-card .kg-event-foot{
+  color:#5f6773;
+}
+html body .kg-event-card .kg-event-foot em{
+  color:#5f6773;
+}
+html body .kg-event-story h4{
+  color:#12161c;
+}
+html body .kg-event-story .kg-event-step{
+  background:#ffffff;
+}
+html body .kg-event-step b{
+  color:#5f6773;
+}
+html body .kg-event-step p{
+  color:#5f6773;
+}
+html body .kg-event-story-actions button, html body .kg-event-story-actions a{
+  background:#ffffff;
+  color:#12161c;
+}

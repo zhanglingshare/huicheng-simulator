@@ -1,0 +1,94 @@
+/* 自动生成：role.html 浅色映射 */
+html body{
+  background:#ffffff;
+  color:#12161c;
+}
+html body .nav{
+  background:rgba(255,255,255,0.96);
+  border-bottom:1px solid #12161c;
+}
+html body .nav a{
+  background:#ffffff;
+  color:#5f6773;
+  border:1px solid #12161c;
+}
+html body .nav a.on{
+  border-color:rgba(47,158,68,0.3);
+  color:#12161c;
+}
+html body .sub{
+  color:#78818f;
+}
+html body .rc{
+  background:#ffffff;
+  border:1px solid #12161c;
+}
+html body .rc:hover{
+  border-color:rgba(47,158,68,0.3);
+}
+html body .rc.on{
+  border-color:rgba(47,158,68,0.3);
+  background:#ffffff;
+}
+html body .rc .s{
+  color:#5f6773;
+}
+html body .card{
+  background:#ffffff;
+  border:1px solid #12161c;
+}
+html body .card b{
+  color:#5f6773;
+}
+html body .mut{
+  color:#98a1ad;
+}
+html body .worry{
+  background:#ffffff;
+  border-left:3px solid rgba(201,59,59,0.3);
+  color:#c93b3b;
+}
+html body .chk{
+  border:1px solid #12161c;
+}
+html body .chk:hover{
+  border-color:rgba(47,158,68,0.3);
+}
+html body .chk.on{
+  border-color:rgba(47,158,68,0.3);
+  background:#ffffff;
+}
+html body .chk .d{
+  color:#78818f;
+}
+html body .chk .g{
+  color:#5f6773;
+}
+html body .cmp{
+  border-bottom:1px solid #12161c;
+}
+html body .cmp .l{
+  color:#78818f;
+}
+html body .cmp .r.cy{
+  color:#b25b00;
+}
+html body .met{
+  border-bottom:1px solid #12161c;
+}
+html body .met .n{
+  color:#78818f;
+}
+html body .met .a{
+  color:#78818f;
+}
+html body .met .b{
+  color:#5f6773;
+}
+html body svg{
+  background:radial-gradient(ellipse at 50% 45%,#ffffff,#ffffff);
+}
+html body .disc{
+  color:#98a1ad;
+  background:#ffffff;
+}

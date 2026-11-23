@@ -1,0 +1,72 @@
+/* 自动生成：index.html 浅色映射 */
+:root{
+  --ink:#12161c;
+  --ink2:#5f6773;
+  --cyan:#0a84ff;
+  --blue:#0a84ff;
+  --amber:#f0b35e;
+  --red:#ff6b60;
+}
+html body .bgmask{
+  background:linear-gradient(180deg,rgba(255,255,255,0.96) 0%,rgba(255,255,255,0.94) 38%,rgba(255,255,255,0.96) 100%),
+    linear-gradient(90deg,rgba(255,255,255,0.96) 0%,rgba(255,255,255,0.73) 50%,rgba(255,255,255,0.96) 100%);
+}
+html body .bar{
+  background:rgba(255,255,255,0.96);
+}
+html body .mark{
+  color:#12161c;
+  background:linear-gradient(150deg,rgba(255,255,255,0.10),#0D47A1);
+}
+html body .nav a.on{
+  color:#12161c;
+}
+html body .stamp{
+  background:rgba(255,255,255,0.05);
+}
+html body h1{
+  text-shadow:none;
+}
+html body .credit{
+  background:rgba(255,255,255,0.78);
+}
+html body .chip{
+  background:rgba(255,255,255,0.96);
+}
+html body .chip.r{
+  border-color:rgba(255,107,96,0.3);
+}
+html body .readout{
+  background:rgba(255,255,255,0.83);
+}
+html body .mchips span{
+  background:rgba(255,255,255,0.96);
+}
+html body .obs{
+  background:rgba(255,255,255,0.96);
+}
+html body .obs-fields input{
+  background:rgba(255,255,255,0.96);
+}
+html body .obs-fields button{
+  background:linear-gradient(150deg,rgba(255,255,255,0.10),rgba(255,255,255,0.10));
+  color:#12161c;
+}
+html body .obs-demo button{
+  border:1px solid rgba(240,179,94,0.5);
+}
+html body .obs-welcome button{
+  border:1px solid rgba(255,107,96,0.5);
+}
+html body .op-card{
+  background:rgba(255,255,255,0.78);
+}
+html body .pill.ok{
+  border-color:rgba(84,214,160,0.4);
+}
+html body .pill.pend{
+  border-color:rgba(240,179,94,0.4);
+}
+html body .o-spot{
+  background:rgba(255,255,255,0.88);
+}

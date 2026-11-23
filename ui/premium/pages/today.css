@@ -1,0 +1,639 @@
+/* 自动生成：today.html 浅色映射 */
+:root{
+  --paper:#12161c;
+  --shadow:0 16px 48px rgba(24,51,89,0.065),0 1px 3px rgba(29,50,80,0.04);
+}
+html body .mark{
+  color:#12161c;
+}
+html body .nav a{
+  background:#ffffff;
+}
+html body .hero{
+  background:radial-gradient(circle at 71% 8%,#245584 0,transparent 43%),radial-gradient(circle at 12% 120%,#ffffff 0,transparent 48%),linear-gradient(105deg,#ffffff,#ffffff);
+  color:#12161c;
+}
+html body .live-label{
+  color:#5f6773;
+}
+html body .pill{
+  color:#5f6773;
+}
+html body .amount .yen{
+  color:#5f6773;
+}
+html body .hero-caption{
+  color:#5f6773;
+}
+html body .hero-caption b{
+  color:#12161c;
+}
+html body .live-stats{
+  color:#5f6773;
+}
+html body .live-stats strong{
+  color:#5f6773;
+}
+html body .live-stats .green strong{
+  color:#5f6773;
+}
+html body .ctl-head{
+  color:#12161c;
+}
+html body .ctl-head strong{
+  color:#5f6773;
+}
+html body .control input[type=range]{
+  accent-color:#5f6773;
+}
+html body .scale{
+  color:#5f6773;
+}
+html body .mini{
+  color:#12161c;
+}
+html body .mini:hover, html body .mini.active{
+  color:#12161c;
+}
+html body .control-note{
+  color:#5f6773;
+}
+html body .metric{
+  background:#ffffff;
+}
+html body .metric-foot{
+  color:#5f6773;
+}
+html body .board, html body .panel{
+  background:#ffffff;
+}
+html body .ghost:hover{
+  background:#ffffff;
+}
+html body .map{
+  background-color:#12161c;
+}
+html body .graph-tooltip b{
+  color:#12161c;
+}
+html body .map-caption{
+  color:#5f6773;
+}
+html body .board-bottom{
+  background:#ffffff;
+}
+html body .side-title span{
+  color:#5f6773;
+}
+html body .qgroup strong{
+  color:#12161c;
+}
+html body .funnel-step:nth-child(1){
+  background:linear-gradient(100deg,rgba(255,255,255,0.10),#c52e50);
+}
+html body .funnel-note{
+  color:#5f6773;
+}
+html body .exp-btn{
+  color:#12161c;
+}
+html body .exp-btn.reset{
+  background:#ffffff;
+}
+html body .personal{
+  background:#ffffff;
+}
+html body .personal-result{
+  background:#ffffff;
+}
+html body .personal-result small{
+  color:#5f6773;
+}
+html body .tail{
+  color:#5f6773;
+}
+html body .tail-actions button, html body .tail-actions a{
+  background:#ffffff;
+}
+html body .toast{
+  background:#ffffff;
+  color:#12161c;
+}
+:root{
+  --paper:#12161c;
+  --shadow:0 16px 48px rgba(38,60,95,0.045),0 2px 7px rgba(25,51,93,0.035);
+}
+html body .mark{
+  box-shadow:0 7px 22px rgba(30,114,214,0.18);
+}
+html body .nav a{
+  background:#ffffff;
+}
+html body .hero{
+  background:radial-gradient(ellipse at 53% -20%,#244b74 0,transparent 53%),radial-gradient(ellipse at 94% 92%,#154457 0,transparent 55%),linear-gradient(110deg,#ffffff,#ffffff 80%);
+  box-shadow:0 23px 51px rgba(16,42,83,0.14);
+}
+html body .live-label{
+  color:#5f6773;
+}
+html body .pulse{
+  box-shadow:0 0 0 5px rgba(255,255,255,0.18),0 0 14px rgba(255,255,255,0.40);
+}
+html body .pill{
+  background:rgba(92,220,192,0.09);
+  border-color:rgba(92,220,192,0.25);
+  color:#5f6773;
+}
+html body .amount{
+  text-shadow:none;
+}
+html body .amount .yen{
+  color:#5f6773;
+}
+html body .hero-caption{
+  color:#5f6773;
+}
+html body .hero-caption b{
+  color:#12161c;
+}
+html body .live-stats{
+  color:#5f6773;
+}
+html body .live-stats strong{
+  color:#5f6773;
+}
+html body .control{
+  border:1px solid rgba(146,191,230,0.18);
+  background:rgba(255,255,255,0.07);
+  box-shadow:inset 0 1px rgba(255,255,255,0.05);
+}
+html body .ctl-head{
+  color:#12161c;
+}
+html body .ctl-head strong{
+  color:#5f6773;
+}
+html body .control input[type=range]{
+  accent-color:#5f6773;
+}
+html body .scale{
+  color:#5f6773;
+}
+html body .mini{
+  background:rgba(255,255,255,0.09);
+  border-color:rgba(169,210,255,0.22);
+}
+html body .mini.active{
+  color:#12161c;
+  box-shadow:0 6px 15px rgba(255,255,255,0.13);
+}
+html body .control-note{
+  color:#5f6773;
+}
+html body .metric{
+  background:#ffffff;
+  box-shadow:0 7px 23px rgba(33,65,107,0.035);
+}
+html body .metric-foot{
+  color:#5f6773;
+}
+html body .board, html body .panel{
+  box-shadow:0 12px 36px rgba(28,58,91,0.045);
+}
+html body .map{
+  background-color:#12161c;
+}
+html body .graph-tooltip{
+  background:rgba(255,255,255,0.95);
+  box-shadow:0 9px 28px rgba(49,84,123,0.12);
+}
+html body .funnel-step{
+  box-shadow:inset 0 1px rgba(255,255,255,0.18);
+}
+@media(max-width:560px){
+  html body .hero{
+    box-shadow:0 18px 38px rgba(255,255,255,0.43);
+  }
+  html body .control-drawer{
+    border-top:1px solid rgba(172,215,253,0.17);
+  }
+  html body .control-toggle{
+    color:#12161c;
+  }
+  html body .control-toggle .toggle-end{
+    color:#5f6773;
+  }
+  html body .control-drawer[open] .toggle-end{
+    color:#5f6773;
+  }
+  html body .control{
+    background:rgba(255,255,255,0.07);
+  }
+}
+:root{
+  --shadow:0 8px 28px rgba(255,255,255,0.33);
+}
+html body{
+  background:radial-gradient(circle at 93% 17%,rgba(136,194,190,0.13),transparent 24%),
+  linear-gradient(100deg,#f7f6f2 0%,#f2f4f2 62%,#f8f6f0 100%);
+}
+html body .mark{
+  background:#ffffff;
+  color:#12161c;
+}
+html body .brand b{
+  color:#12161c;
+}
+html body .nav .current{
+  color:#12161c;
+}
+html body .mast h1{
+  color:#12161c;
+}
+html body .mast h1 em:after{
+  background:linear-gradient(90deg,rgba(207,84,75,0.65),rgba(207,84,75,0.0));
+}
+html body .mast .flag{
+  background:rgba(255,255,255,0.75);
+}
+html body .hero{
+  border:1px solid #12161c;
+  background:#ffffff;
+  box-shadow:0 18px 48px rgba(255,255,255,0.44),inset 0 1px rgba(255,255,255,0.07);
+}
+html body .hero:before{
+  background:radial-gradient(ellipse at 31% 53%,rgba(26,108,113,0.17),transparent 45%),
+   repeating-radial-gradient(circle at 31% 57%,transparent 0 63px,rgba(121,216,202,0.06) 64px 65px,transparent 66px 94px),
+   linear-gradient(90deg,rgba(108,195,187,0.07) 1px,transparent 1px);
+}
+html body .hero:after{
+  border:1px solid rgba(96,214,190,0.16);
+  box-shadow:0 0 0 27px rgba(96,214,190,0.035),0 0 0 70px rgba(96,214,190,0.022),0 0 0 115px rgba(96,214,190,0.014);
+}
+html body .live-label{
+  color:#5f6773;
+}
+html body .live-label .pill{
+  background:#ffffff;
+  color:#5f6773;
+}
+html body .amount{
+  color:#12161c;
+  text-shadow:none;
+}
+html body .amount .yen{
+  color:#5f6773;
+}
+html body .hero-caption{
+  color:#5f6773;
+}
+html body .hero-caption b, html body .hero-caption strong{
+  color:#12161c;
+}
+html body .live-stats{
+  color:#5f6773;
+}
+html body .live-stats strong{
+  color:#12161c;
+}
+html body .live-stats .green strong{
+  color:#5f6773;
+}
+html body .control{
+  border-left:1px solid rgba(146,200,199,0.23);
+}
+html body .ctl-head{
+  color:#5f6773;
+}
+html body .ctl-head strong{
+  color:#5f6773;
+}
+html body .control input[type=range]{
+  accent-color:#5f6773;
+}
+html body .scale{
+  color:#5f6773;
+}
+html body .mini{
+  color:#5f6773;
+  background:rgba(76,137,138,0.13);
+}
+html body .mini:hover{
+  background:rgba(106,183,161,0.25);
+}
+html body .mini.active{
+  color:#12161c;
+}
+html body .control-note{
+  color:#5f6773;
+}
+html body .metrics{
+  background:rgba(255,255,255,0.35);
+}
+html body .metric-num{
+  color:#12161c;
+}
+html body .metric-foot{
+  color:#5f6773;
+}
+html body .board{
+  background:#ffffff;
+  box-shadow:0 9px 28px rgba(255,255,255,0.33);
+}
+html body .map{
+  background-color:#12161c;
+  background-image:radial-gradient(circle at 23% 50%,rgba(164,218,200,0.26),transparent 37%),radial-gradient(#83a9a04a .75px,transparent .75px);
+}
+html body .map:before{
+  background:linear-gradient(90deg,transparent 49.92%,rgba(58,119,117,0.07) 50%,transparent 50.08%),linear-gradient(180deg,transparent 49.92%,rgba(58,119,117,0.05) 50%,transparent 50.08%);
+}
+html body .graph-tooltip{
+  background:rgba(255,255,255,0.92);
+}
+html body .panel{
+  box-shadow:0 4px 18px rgba(255,255,255,0.31);
+}
+html body .side-title h3{
+  color:#12161c;
+}
+html body .focus-name{
+  color:#12161c;
+}
+html body .exp-btn{
+  color:#12161c;
+  box-shadow:0 7px 19px rgba(18,85,63,0.18);
+}
+html body .personal h3{
+  color:#12161c;
+}
+@media(max-width:560px){
+  html body .control-toggle{
+    color:#5f6773;
+  }
+  html body .control-toggle .toggle-end{
+    color:#5f6773;
+  }
+}
+:root{
+  --ink:#12161c;
+  --muted:#78818f;
+}
+html body{
+  background:radial-gradient(circle at 93% 12%,rgba(255,255,255,0.08),transparent 30%),
+  radial-gradient(120% 100% at 50% 0%,#ffffff 0%,#ffffff 55%,#ffffff 100%)!important;
+}
+html body .top{
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+html body .mark{
+  background:#ffffff;
+  color:#5f6773;
+}
+html body .brand b{
+  color:#12161c;
+}
+html body .brand small{
+  color:#98a1ad;
+}
+html body .nav a{
+  color:#78818f;
+}
+html body .nav a:hover{
+  background:rgba(255,255,255,0.06);
+  color:#12161c;
+  border-color:rgba(255,255,255,0.1);
+}
+html body .nav .current{
+  color:#5f6773;
+  background:rgba(255,255,255,0.10);
+  border-color:rgba(90,200,250,0.25);
+}
+html body .eyebrow{
+  color:#0a7f95;
+}
+html body .mast h1{
+  color:#12161c;
+}
+html body .mast h1 em{
+  color:#c93b3b;
+}
+html body .mast p{
+  color:#78818f;
+}
+html body .mast .flag{
+  background:rgba(255,255,255,0.05);
+  border-color:rgba(255,255,255,0.1);
+  color:#78818f;
+}
+html body .hero{
+  background:#ffffff;
+  border-color:rgba(255,255,255,0.08);
+}
+html body .live-stats{
+  border-top:1px solid rgba(255,255,255,0.08);
+}
+html body .metrics{
+  background:rgba(255,255,255,0.03);
+  border-top:1px solid rgba(255,255,255,0.08);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+html body .metric + .metric{
+  border-left:1px solid rgba(255,255,255,0.08);
+}
+html body .metric-label{
+  color:#78818f;
+}
+html body .metric-num{
+  color:#12161c;
+}
+html body .metric-num.red{
+  color:#c93b3b;
+}
+html body .metric-num.green, html body .metric:nth-child(3) .metric-num{
+  color:#5f6773;
+}
+html body .metric-foot{
+  color:#98a1ad;
+}
+html body .board{
+  background:rgba(255,255,255,0.78);
+  border-color:rgba(255,255,255,0.09);
+}
+html body .board-head{
+  border-bottom:1px solid rgba(255,255,255,0.07);
+}
+html body .smallcap{
+  color:#0a7f95;
+}
+html body .board-head h2{
+  color:#12161c;
+}
+html body .board-head p{
+  color:#78818f;
+}
+html body .ghost{
+  background:rgba(255,255,255,0.04);
+  border-color:rgba(255,255,255,0.1);
+  color:#78818f;
+}
+html body .ghost:hover, html body .ghost.active{
+  background:rgba(255,255,255,0.12);
+  border-color:rgba(90,200,250,0.3);
+  color:#5f6773;
+}
+html body .map{
+  background-color:#ffffff;
+  background-image:radial-gradient(circle at 23% 50%,rgba(255,255,255,0.06),transparent 40%),radial-gradient(rgba(255,255,255,0.07) .75px,transparent .75px);
+}
+html body .graph-tooltip{
+  background:rgba(255,255,255,0.96);
+  border-color:rgba(255,255,255,0.1);
+  color:#78818f;
+}
+html body .graph-tooltip b{
+  color:#12161c;
+}
+html body .map-caption{
+  background:rgba(255,255,255,0.02);
+  border-top:1px solid rgba(255,255,255,0.07);
+  color:#98a1ad;
+}
+html body .board-bottom{
+  border-top:1px solid rgba(255,255,255,0.07);
+}
+html body .guess small{
+  color:#78818f;
+}
+html body .guess-actions button{
+  background:rgba(255,255,255,0.04);
+  border-color:rgba(255,255,255,0.1);
+  color:#78818f;
+}
+html body .guess-actions button:hover{
+  background:rgba(255,255,255,0.12);
+  color:#5f6773;
+}
+html body .guess-result{
+  background:rgba(255,255,255,0.08);
+  color:#5f6773;
+}
+html body .panel{
+  background:rgba(255,255,255,0.78);
+  border-color:rgba(255,255,255,0.09);
+}
+html body .side>.panel:first-child{
+  border-top:2px solid rgba(201,59,59,0.3);
+}
+html body .side-title h3{
+  color:#12161c;
+}
+html body .side-title span{
+  background:rgba(255,255,255,0.05);
+  border-color:rgba(255,255,255,0.1);
+  color:#78818f;
+}
+html body .focus-name{
+  color:#12161c;
+}
+html body .focus-amt{
+  color:#c93b3b;
+}
+html body .subcaption{
+  color:#78818f;
+}
+html body .evidence span{
+  background:rgba(255,255,255,0.10);
+  color:#5f6773;
+}
+html body .evidence span.c{
+  background:rgba(255,255,255,0.12);
+  color:#5f6773;
+}
+html body .qgroup{
+  border-top:1px dashed rgba(255,255,255,0.1);
+}
+html body .qgroup strong{
+  color:#5f6773;
+}
+html body .qgroup p{
+  color:#78818f;
+}
+html body .footlink{
+  color:#0a7f95;
+}
+html body .funnel-note{
+  color:#98a1ad;
+}
+html body .experiment{
+  background:rgba(255,255,255,0.73);
+  border-color:rgba(94,234,212,0.2);
+}
+html body .experiment .side-title h3{
+  color:#5f6773;
+}
+html body .experiment .side-title span{
+  color:#5f6773;
+  background:rgba(255,255,255,0.05);
+  border-color:rgba(255,255,255,0.1);
+}
+html body .experiment p{
+  color:#78818f;
+}
+html body .exp-result{
+  color:#5f6773;
+}
+html body .exp-result small{
+  color:#98a1ad;
+}
+html body .exp-btn{
+  color:#12161c;
+}
+html body .exp-btn.reset{
+  color:#5f6773;
+  border-color:rgba(94,234,212,0.3);
+}
+html body .personal{
+  background:rgba(255,255,255,0.78);
+  border:1px solid rgba(255,255,255,0.09);
+}
+html body .personal h3{
+  color:#12161c;
+}
+html body .personal p{
+  color:#78818f;
+}
+html body .personal .spend-num{
+  color:#0a7f95;
+}
+html body .personal-result{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+}
+html body .personal-result strong{
+  color:#5f6773;
+}
+html body .personal-result small{
+  color:#98a1ad;
+}
+html body .tail{
+  color:#98a1ad;
+}
+html body .tail strong{
+  color:#78818f;
+}
+html body .tail-actions button, html body .tail-actions a{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  color:#5f6773;
+}
+html body .tail-actions button:hover, html body .tail-actions a:hover{
+  background:rgba(255,255,255,0.12);
+}
+html body .toast{
+  background:rgba(255,255,255,0.96);
+  color:#12161c;
+  border:1px solid rgba(255,255,255,0.1);
+}
+html body button:focus-visible, html body a:focus-visible, html body input:focus-visible{
+  outline:2px solid rgba(10,132,255,0.3);
+}

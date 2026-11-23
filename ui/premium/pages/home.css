@@ -1,0 +1,46 @@
+/* 自动生成：home.html 浅色映射 */
+:root{
+  --ink:#12161c;
+  --ink2:#78818f;
+  --cyan:#0a84ff;
+  --blue:#0a84ff;
+  --purple:#8b5cf6;
+  --green:#10b981;
+  --amber:#f59e0b;
+  --red:#ef4444;
+}
+html body::before{
+  background:radial-gradient(ellipse,rgba(255,255,255,0.07) 0%,transparent 70%);
+}
+html body .mode{
+  border:1px solid rgba(34,211,238,0.25);
+  background:rgba(255,255,255,0.05);
+}
+html body .crack{
+  text-shadow:none;
+}
+html body .crack::after{
+  box-shadow:0 0 12px rgba(255,255,255,0.60);
+}
+html body .rel-svg{
+  background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.04));
+  border:1px solid rgba(255,255,255,0.05);
+}
+html body .nd .lb{
+  fill:#12161c;
+  stroke:#12161c;
+}
+html body .nd .sub{
+  stroke:#12161c;
+}
+html body .cta{
+  background:linear-gradient(135deg,rgba(255,255,255,0.10),rgba(255,255,255,0.10));
+  border:1px solid rgba(34,211,238,0.25);
+}
+html body .cta:hover{
+  border-color:rgba(34,211,238,0.5);
+  background:linear-gradient(135deg,rgba(255,255,255,0.16),rgba(255,255,255,0.16));
+}
+html body .foot{
+  border-top:1px solid rgba(255,255,255,0.04);
+}

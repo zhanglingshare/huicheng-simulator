@@ -1,0 +1,141 @@
+/* 自动生成：windtunnel.html 浅色映射 */
+html body{
+  background:radial-gradient(circle at 85% 10%,rgba(255,255,255,0.08),transparent 35%),radial-gradient(circle at 10% 90%,rgba(255,255,255,0.06),transparent 40%),radial-gradient(120% 100% at 50% 0%,#ffffff 0%,#ffffff 55%,#ffffff 100%);
+  color:#12161c;
+}
+html body .nav{
+  background:rgba(255,255,255,0.96);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+html body .nav a{
+  background:rgba(255,255,255,0.04);
+  color:#78818f;
+  border:1px solid rgba(255,255,255,0.1);
+}
+html body .nav a.on{
+  background:rgba(255,255,255,0.20);
+  border-color:rgba(10,132,255,0.4);
+  color:#12161c;
+}
+html body .sub{
+  color:#78818f;
+}
+html body .section-title{
+  border-left:3px solid rgba(10,132,255,0.3);
+}
+html body .section-title.rev{
+  border-color:rgba(201,59,59,0.3);
+}
+html body .card{
+  background:rgba(255,255,255,0.78);
+  border:1px solid rgba(255,255,255,0.08);
+}
+html body .press button{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  color:#78818f;
+}
+html body .press button.sel{
+  background:rgba(255,255,255,0.20);
+  border-color:rgba(10,132,255,0.4);
+  color:#12161c;
+}
+html body .press button.revbtn.sel{
+  background:rgba(255,255,255,0.20);
+  border-color:rgba(255,69,58,0.4);
+  color:#c93b3b;
+}
+html body .readout{
+  background:rgba(255,255,255,0.04);
+  color:#78818f;
+}
+html body .note{
+  color:#78818f;
+}
+html body .btn{
+  background:rgba(255,255,255,0.25);
+  color:#12161c;
+  border:1px solid rgba(10,132,255,0.4);
+}
+html body::before{
+  background:radial-gradient(circle at 20% 15%,rgba(255,255,255,0.07),transparent 30%),
+    radial-gradient(circle at 80% 80%,rgba(255,255,255,0.06),transparent 35%),
+    radial-gradient(circle at 60% 40%,rgba(48,209,88,0.04),transparent 30%);
+}
+html body .card{
+  background:linear-gradient(160deg,rgba(255,255,255,0.83),rgba(255,255,255,0.73));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06),0 4px 24px rgba(255,255,255,0.53);
+}
+html body .card h2{
+  color:#12161c;
+}
+html body .section-title{
+  color:#12161c;
+}
+html body .readout{
+  background:rgba(255,255,255,0.78);
+  border:1px solid rgba(255,255,255,0.05);
+}
+html body .mini{
+  background:rgba(255,255,255,0.58);
+}
+html body .card[style*="border-color:#f87171"], html body .card[style*="border:1px solid #b91c1c"]{
+  border:1px solid rgba(255,69,58,0.2)!important;
+  border-left:3px solid rgba(255,69,58,0.5)!important;
+}
+html body .press button:hover{
+  background:rgba(255,255,255,0.08);
+  color:#12161c;
+}
+html body .btn:hover{
+  background:rgba(255,255,255,0.35);
+  box-shadow:0 0 20px rgba(255,255,255,0.20);
+}
+html body .wrap>div[style*="background:#0a0f1a"], html body .wrap>div[style*="background:#0b1426"]{
+  background:linear-gradient(160deg,rgba(255,255,255,0.78),rgba(255,255,255,0.68))!important;
+  border:1px solid rgba(255,255,255,0.08)!important;
+}
+html body .wg{
+  border:1px solid rgba(255,255,255,0.09);
+  background:linear-gradient(160deg,rgba(255,255,255,0.78),rgba(255,255,255,0.78));
+}
+html body .wg .ru{
+  color:#78818f;
+}
+html body .wg .rd i{
+  color:#78818f;
+}
+html body .wg .ds{
+  color:#5f6773;
+}
+html body .wg .ds b{
+  color:#12161c;
+}
+html body .wt-ruler{
+  border-top:1px solid rgba(255,255,255,0.07);
+}
+html body .wt-bar{
+  background:linear-gradient(90deg,rgba(48,209,88,0.1),rgba(255,255,255,0.12),rgba(255,255,255,0.14));
+  border:1px solid rgba(255,255,255,0.05);
+}
+html body .wt-tick{
+  background:rgba(255,255,255,0.13);
+  box-shadow:0 0 12px rgba(255,255,255,0.70);
+}
+html body .wt-tick:after{
+  color:#b25b00;
+}
+html body .wt-dot:after{
+  color:#5f6773;
+}
+html body .wt-asof .g{
+  color:#b25b00;
+}
+html body .likebar{
+  background:rgba(255,255,255,0.96);
+  border:1px solid rgba(10,132,255,0.3);
+  box-shadow:0 6px 24px rgba(255,255,255,0.88);
+}
+html body .likebar button{
+  color:#12161c;
+}

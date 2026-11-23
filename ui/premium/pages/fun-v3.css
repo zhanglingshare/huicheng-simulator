@@ -1,0 +1,305 @@
+/* auto: fun-v3.css */
+html body body{
+  background:#ffffff;
+}
+html body .v3-app{
+  background:radial-gradient(ellipse 70% 65% at 60% 18%,#ffffff 0%,transparent 68%),radial-gradient(circle at 1% 45%,#ffffff 0%,transparent 38%),#ffffff;
+}
+html body .brand{
+  color:#12161c;
+}
+html body .brandmark{
+  background:linear-gradient(135deg,#ffffff,#ffffff);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06);
+}
+html body .brand-sub{
+  color:#5f6773;
+}
+html body .toplinks .live{
+  color:#5f6773;
+}
+html body .toplinks a{
+  color:#5f6773;
+}
+html body .toplinks a:hover{
+  color:#12161c;
+}
+html body .kicker{
+  color:#5f6773;
+}
+html body .hero h1{
+  text-shadow:none;
+}
+html body .hero h1 em{
+  color:#12161c;
+  background:linear-gradient(135deg,#ffffff 25%,#7fdcd5 80%,#4fc7df);
+}
+html body .hero .lead{
+  color:#5f6773;
+}
+html body .stat strong{
+  color:#12161c;
+}
+html body .stat small{
+  color:#5f6773;
+}
+html body .lens-label{
+  color:#5f6773;
+}
+html body .persona-buttons button, html body .time-buttons button{
+  color:#5f6773;
+}
+html body .persona-buttons button:hover, html body .time-buttons button:hover{
+  color:#12161c;
+}
+html body .persona-buttons button[aria-pressed=true], html body .time-buttons button[aria-pressed=true]{
+  color:#12161c;
+}
+html body .map-stage{
+  background:radial-gradient(ellipse 70% 70% at 36% 46%,#ffffff,#ffffff 70%),#ffffff;
+}
+html body .map-art .district{
+  fill:#12161c;
+}
+html body .map-art .river-core{
+  stroke:#5f6773;
+}
+html body .map-art .river-wave{
+  stroke:#12161c;
+}
+html body .map-art text{
+  fill:#5f6773;
+}
+html body .map-overlay .overline{
+  color:#5f6773;
+}
+html body .map-overlay .subtitle{
+  color:#5f6773;
+}
+html body .map-status .pill{
+  color:#5f6773;
+}
+html body .map-status .pill b{
+  color:#12161c;
+}
+html body .map-scenario-label{
+  color:#5f6773;
+}
+html body .pin:after{
+  border:2px solid rgba(255,255,255,0.85);
+  background:radial-gradient(circle at 35% 30%,#ffffff,var(--cc) 60%);
+}
+html body .pin:hover:after, html body .pin.selected:after{
+  box-shadow:0 0 0 6px rgba(255,255,255,0.08),0 0 22px var(--cc);
+}
+html body .pin .pin-label{
+  color:#5f6773;
+}
+html body .map-foot strong{
+  color:#5f6773;
+}
+html body .map-roll{
+  color:#12161c;
+}
+html body .stage-actions button{
+  color:#12161c;
+}
+html body .stage-actions button:hover{
+  background:#ffffff;
+}
+html body .map-mode button{
+  color:#5f6773;
+}
+html body .map-mode button.on{
+  color:#12161c;
+}
+html body .pane-eyebrow{
+  color:#5f6773;
+}
+html body .pane-eyebrow em{
+  color:#5f6773;
+}
+html body .featured-icon{
+  color:#12161c;
+}
+html body .badge{
+  color:#5f6773;
+}
+html body .focus-reason b{
+  color:#5f6773;
+}
+html body .focus-reason p{
+  color:#12161c;
+}
+html body .focus-lens{
+  color:#5f6773;
+}
+html body .focus-info strong{
+  color:#5f6773;
+}
+html body .focus-info p{
+  color:#5f6773;
+}
+html body .focus-toggle{
+  color:#5f6773;
+}
+html body .action{
+  background:#ffffff;
+  color:#12161c;
+}
+html body .action.primary{
+  color:#12161c;
+}
+html body .my-plan{
+  background:#ffffff;
+}
+html body .my-plan-head{
+  color:#5f6773;
+}
+html body .my-plan-items span{
+  background:#ffffff;
+  color:#5f6773;
+}
+html body .my-plan button{
+  color:#12161c;
+}
+html body .chip{
+  color:#5f6773;
+}
+html body .chip.on{
+  color:#12161c;
+}
+html body .chip:hover{
+  color:#12161c;
+}
+html body .search{
+  background:#ffffff;
+}
+html body .search input{
+  color:#12161c;
+}
+html body .place-item{
+  background:#ffffff;
+  color:#12161c;
+}
+html body .place-item .meta{
+  color:#5f6773;
+}
+html body .place-item .heat{
+  color:#5f6773;
+}
+html body .empty{
+  color:#5f6773;
+}
+html body .bottom-link b{
+  color:#5f6773;
+}
+html body .bottom-link a{
+  color:#5f6773;
+}
+html body .note-inner .rank{
+  color:#5f6773;
+}
+html body .note-inner .rank .ord{
+  color:#5f6773;
+}
+html body .note-inner .rank .text span{
+  color:#5f6773;
+}
+html body .note-inner .rank .score{
+  color:#5f6773;
+}
+html body .note-inner .rank .score small{
+  color:#5f6773;
+}
+html body .story{
+  color:#5f6773;
+}
+html body .note-inner h3{
+  color:#5f6773;
+}
+html body .sheet{
+  background:radial-gradient(ellipse at 100% 0,#154660,#ffffff 50%,#ffffff);
+}
+html body .sheet-close{
+  color:#12161c;
+}
+html body .eyebrow{
+  color:#5f6773;
+}
+html body .sheet p{
+  color:#5f6773;
+}
+html body .intervention-options button{
+  color:#5f6773;
+}
+html body .intervention-options button small{
+  color:#5f6773;
+}
+html body .intervention-options button[aria-pressed=true]{
+  color:#12161c;
+}
+html body .scenario-shift{
+  background:#ffffff;
+}
+html body .scenario-shift .headline{
+  color:#5f6773;
+}
+html body .scenario-route span{
+  background:#ffffff;
+  color:#12161c;
+}
+html body .scenario-route b{
+  color:#5f6773;
+}
+html body .scenario-explain{
+  color:#5f6773;
+}
+html body .sheet-limit{
+  color:#5f6773;
+}
+html body .group-call{
+  color:#5f6773;
+}
+html body .group-actions button, html body .in-actions button{
+  background:#ffffff;
+  color:#12161c;
+}
+html body .group-actions button.primary{
+  color:#12161c;
+}
+html body .group-subcard h4{
+  color:#12161c;
+}
+html body .group-subcard label{
+  color:#5f6773;
+}
+html body .group-subcard input{
+  background:#ffffff;
+  color:#12161c;
+}
+html body .group-participants span{
+  color:#5f6773;
+}
+html body .group-result{
+  background:#ffffff;
+}
+html body .group-result strong{
+  color:#12161c;
+}
+html body .group-result ul{
+  color:#5f6773;
+}
+html body .group-limit{
+  color:#5f6773;
+}
+html body .toast{
+  background:#ffffff;
+  color:#12161c;
+}
+html body .network-route{
+  stroke:#5f6773;
+}
+html body .network-trace{
+  stroke:#5f6773;
+}
