@@ -343,27 +343,40 @@ html body #tip b{color:#0a63c9 !important}
    P2 · 逐页精修
    ================================================================== */
 
-/* -------- 通用：选中态统一成「浅蓝底 + 蓝字 + 细边」 -------- */
-html body button.on,
-html body button.active,
-html body button.sel,
-html body button.is-on,
+/* -------- 通用：选中态分两类 --------
+   ① 胶囊/分段控件 → 实心蓝，白字，一眼看出“这个被选中了”
+   ② 通栏 tab / 图层行 → 浅蓝底 + 蓝字 + 蓝下划线（整条铺蓝会糊成一块） */
 html body .mini.active,
 html body .seg button.sel,
 html body .seg button.on,
 html body .chip.on,
 html body .chip.active,
-html body .tab.on,
-html body .tab.active{
-  background:rgba(10,132,255,.10) !important;
-  border-color:rgba(10,132,255,.26) !important;
-  color:#0a63c9 !important;
-  box-shadow:inset 0 0 0 1px rgba(10,132,255,.14) !important;
-  font-weight:650 !important;
+html body button.on:not(.layer):not(.tab),
+html body button.active:not(.layer):not(.tab),
+html body button.sel:not(.layer):not(.tab),
+html body button.is-on:not(.layer):not(.tab){
+  background:linear-gradient(165deg,#2f97ff,#0a84ff) !important;
+  border-color:transparent !important;
+  color:#ffffff !important;
+  box-shadow:0 8px 20px -12px rgba(10,132,255,.9),inset 0 1px 0 rgba(255,255,255,.35) !important;
+  font-weight:700 !important;
 }
-html body button.on:hover,
-html body button.active:hover,
-html body button.sel:hover{background:rgba(10,132,255,.15) !important}
+html body button.on:not(.layer):not(.tab):hover,
+html body button.active:not(.layer):not(.tab):hover,
+html body button.sel:not(.layer):not(.tab):hover,
+html body .mini.active:hover,
+html body .seg button.sel:hover,
+html body .chip.on:hover{filter:brightness(1.06)}
+html body .tab.on,
+html body .tab.active,
+html body .layer.on{
+  background:rgba(10,132,255,.10) !important;
+  border-color:rgba(10,132,255,.22) !important;
+  color:#0a63c9 !important;
+  box-shadow:none !important;
+  font-weight:700 !important;
+}
+html body .tab.on{border-bottom:2px solid #0a84ff !important}
 
 /* 次要按钮 / 幽灵按钮 */
 html body button:not(.on):not(.active):not(.sel):not(.exp-btn):not(.mcrun):not(.primary){
@@ -451,12 +464,26 @@ html body .funnel-step.on,html body .funnel-step.active{
 html body .toast{background:rgba(255,255,255,.96) !important;color:var(--ink) !important;border:1px solid var(--hair) !important}
 
 /* -------- 14 · 报告（report） -------- */
-html body button.on{background:rgba(10,132,255,.10) !important;border-color:rgba(10,132,255,.26) !important;color:#0a63c9 !important;box-shadow:none !important}
+html body button.on{background:linear-gradient(165deg,#2f97ff,#0a84ff) !important;border-color:transparent !important;color:#fff !important;font-weight:700 !important;box-shadow:0 8px 20px -12px rgba(10,132,255,.9),inset 0 1px 0 rgba(255,255,255,.35) !important}
 html body .badge{background:linear-gradient(140deg,#3d9bff,#0a84ff 60%,#0a7f95) !important;box-shadow:0 12px 28px -16px rgba(10,132,255,.7) !important}
 html body .bar{box-shadow:0 4px 12px -8px rgba(16,24,40,.4)}
 
+/* 证据金字塔：保留 A/B/C/D 语义色，但走浅色体系（浅底 + 深字 + 左侧色条） */
+html body .pyra .bar{
+  background:linear-gradient(180deg,rgba(120,129,143,.13),rgba(120,129,143,.07)) !important;
+  border:1px solid rgba(120,129,143,.22);
+  border-left:4px solid #8a94a6;
+  color:#12161c !important;
+  font-weight:800;
+  box-shadow:0 6px 16px -12px rgba(16,24,40,.55),inset 0 1px 0 rgba(255,255,255,.85);
+}
+html body .pyra .bar.lv-a{background:linear-gradient(180deg,rgba(31,143,77,.16),rgba(31,143,77,.08)) !important;border-color:rgba(31,143,77,.26);border-left-color:#1f8f4d}
+html body .pyra .bar.lv-b{background:linear-gradient(180deg,rgba(10,99,201,.15),rgba(10,99,201,.08)) !important;border-color:rgba(10,99,201,.26);border-left-color:#0a63c9}
+html body .pyra .bar.lv-c{background:linear-gradient(180deg,rgba(194,65,12,.15),rgba(194,65,12,.08)) !important;border-color:rgba(194,65,12,.26);border-left-color:#c2410c}
+html body .pyra .bar.lv-d{background:linear-gradient(180deg,rgba(224,53,43,.14),rgba(224,53,43,.07)) !important;border-color:rgba(224,53,43,.24);border-left-color:#e0352b}
+
 /* -------- 08 · 风洞测试 -------- */
-html body button.sel{background:rgba(10,132,255,.10) !important;border-color:rgba(10,132,255,.26) !important;color:#0a63c9 !important}
+html body button.sel{background:linear-gradient(165deg,#2f97ff,#0a84ff) !important;border-color:transparent !important;color:#fff !important;font-weight:700 !important;box-shadow:0 8px 20px -12px rgba(10,132,255,.9),inset 0 1px 0 rgba(255,255,255,.35) !important}
 
 /* -------- 06 · 路径（choices） -------- */
 html body #kgFocusMeta{background:rgba(255,255,255,.9) !important;border:1px solid var(--hair) !important;color:var(--ink2) !important}
@@ -472,7 +499,7 @@ html body a.on{background:rgba(10,132,255,.10) !important;color:#0a63c9 !importa
 html body .nav a.on{background:#0a84ff !important;border-color:#0a84ff !important;color:#fff !important}
 html body .nav a{background:#fff !important;border:1px solid var(--hair) !important;color:var(--ink2) !important}
 html body .step-bar button{background:#fff !important;border:1px solid var(--hair) !important;color:var(--ink2) !important}
-html body .step-bar button.active{background:rgba(10,132,255,.10) !important;border-color:rgba(10,132,255,.26) !important;color:#0a63c9 !important}
+html body .step-bar button.active{background:linear-gradient(165deg,#2f97ff,#0a84ff) !important;border-color:transparent !important;color:#fff !important;font-weight:700 !important;box-shadow:0 8px 20px -12px rgba(10,132,255,.9)}
 html body .fact{background:rgba(255,159,10,.09) !important;border-left-color:#e25700 !important;color:var(--ink) !important}
 html body .ask{background:rgba(10,132,255,.06) !important;border:1px solid rgba(10,132,255,.18) !important;color:var(--ink2) !important}
 
@@ -634,6 +661,36 @@ html body .blood-C{background:rgba(255,159,10,.12) !important;color:#a8500a !imp
 html body .blood-D{background:rgba(255,69,58,.10) !important;color:#b3261e !important;border:1px solid rgba(255,69,58,.22) !important}
 html body .blood-A{background:rgba(48,209,88,.12) !important;color:#0f7b3f !important;border:1px solid rgba(48,209,88,.24) !important}
 html body .blood-B{background:rgba(10,132,255,.10) !important;color:#0a63c9 !important;border:1px solid rgba(10,132,255,.22) !important}
+
+/* 关系图页（network 建构世界 / evolution 网络的演变）：浅底上要让结构读得出来 */
+html body .stage .cap{
+  background:rgba(255,255,255,.94) !important;
+  color:#12161c !important;
+  font-weight:700 !important;
+  border:1px solid rgba(10,132,255,.16);
+  box-shadow:0 12px 26px -20px rgba(16,24,40,.6),inset 0 1px 0 #fff;
+  backdrop-filter:blur(10px);
+}
+html body .legend{color:#5f6773 !important}
+html body .stage .legend .dot{box-shadow:0 0 0 2px #fff,0 2px 6px rgba(16,24,40,.18)}
+html body .stage .legend i{height:3px !important;border-radius:2px}
+html body .stage{background:linear-gradient(180deg,#ffffff,#fbfdff) !important}
+html body .gnode .lbl{paint-order:stroke;stroke:#fff;stroke-width:3.2px;stroke-linejoin:round}
+html body .eline{stroke-linecap:round}
+
+/* 手机上关系图不再缩成邮票：给足画布宽度，卡内横向滑动看细节 */
+@media(max-width:600px){
+  html body #stage,
+  html body .stage:has(#net){
+    overflow-x:auto !important;overflow-y:hidden !important;
+    -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;
+  }
+  html body #stage > svg,
+  html body #net{
+    width:auto !important;height:auto !important;
+    min-width:760px !important;max-width:none !important;display:block;
+  }
+}
 
 /* ==================================================================
    P4 · SVG 绘制层（attribute 绘制的深底圆/标签 → 浅底）

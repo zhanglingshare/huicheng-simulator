@@ -17,7 +17,7 @@ h1 em{font-style:normal;color:#30d158}
 .back a:hover{color:#eef2fb;border-color:rgba(10,132,255,.45)}
 .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:#8fa3bf;margin:14px 0 8px}
 .legend i{display:inline-block;width:16px;height:2px;margin-right:6px;vertical-align:2px}
-.legend .ring{display:inline-block;width:10px;height:10px;border-radius:50%;border:1px dashed #ffd60a;margin-right:6px;vertical-align:1px}
+.legend .ring{display:inline-block;width:10px;height:10px;border-radius:50%;border:1px dashed #e08a00;margin-right:6px;vertical-align:1px}
 .stage{border:1px solid rgba(255,255,255,.09);border-radius:14px;background:linear-gradient(180deg,rgba(20,30,48,.6),rgba(8,13,22,.45));padding:6px}
 .stage svg{width:100%;height:auto;display:block}
 .panel{margin-top:14px;border:1px solid rgba(255,255,255,.09);border-radius:14px;background:rgba(18,26,42,.6);padding:14px}
@@ -50,9 +50,9 @@ h1 em{font-style:normal;color:#30d158}
   </div>
 
   <div class="legend">
-    <span><i style="background:#30d158"></i>本窗口新增连接</span>
-    <span><i style="background:#4b7bff;opacity:.85"></i>既有连接</span>
-    <span><i style="background:#4b7bff;opacity:.45"></i>证据推断（虚线）</span>
+    <span><i style="background:#0f9d58"></i>本窗口新增连接</span>
+    <span><i style="background:#0a63c9;opacity:.85"></i>既有连接</span>
+    <span><i style="background:#94a3b8;opacity:.45"></i>证据推断（虚线）</span>
     <span><span class="ring"></span>待落地主体</span>
   </div>
 
@@ -74,30 +74,48 @@ var FIX={hc:[470,355],gxq:[470,170],dz:[700,228],ai:[285,225],xcl:[795,350],fw:[
  wh:[330,530],rj:[188,362],sz:[108,212],dg:[882,142],jl:[318,108],th:[408,78],sh:[585,82],rz:[700,108],
  wr:[520,66],bx:[762,178],lyh:[252,296],fz:[246,626],yy:[642,652]};
 var R={core:26,anchor:21,cluster:15,infrastructure:13,enterprise:10,external:12};
-var TY={new_entity:['新主体','#ffd60a'],new_edge:['新连接','#30d158'],strengthen:['增强','#4b9bff'],
- weaken:['减弱','#ff9500'],exit:['退出','#ff453a'],break:['失效','#ff453a'],alternative:['替代路径','#9aa6b8']};
+var TY={new_entity:['新主体','#b06a00'],new_edge:['新连接','#0f9d58'],strengthen:['增强','#0a63c9'],
+ weaken:['减弱','#d97706'],exit:['退出','#d92d20'],break:['失效','#d92d20'],alternative:['替代路径','#64748b']};
 var WIN='2026-10-29';
 
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
 
 function draw(ev,recentEdges,recentNodes){
-  var svg=['<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg"><defs><filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><radialGradient id="core"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#30d158"/><stop offset="1" stop-color="#0d6f68"/></radialGradient></defs>'];
+  var svg=['<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg"><defs><filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#0a2a55" flood-opacity=".16"/></filter><radialGradient id="core"><stop offset="0" stop-color="#eaf4ff"/><stop offset=".42" stop-color="#0a84ff"/><stop offset="1" stop-color="#0b4fa8"/></radialGradient></defs>'];
   ev.edges.forEach(function(e){
     var a=FIX[e.source_node_id]||[W/2,H/2],b=FIX[e.target_node_id]||[W/2,H/2];
     var fresh=recentEdges.indexOf(e.edge_id)>=0, inf=e.evidence_type==='证据推断';
-    var col=fresh?'#30d158':'#4b7bff',wd=fresh?2.6:1.5,op=fresh?.95:(inf?.35:.62),dash=inf?'stroke-dasharray="5,5"':'';
-    svg.push('<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="'+col+'" stroke-width="'+wd+'" '+dash+' opacity="'+op+'"'+(fresh?' filter="url(#glow)"':'')+'/>');
-    if(fresh) svg.push('<circle cx="'+((a[0]+b[0])/2)+'" cy="'+((a[1]+b[1])/2)+'" r="3.4" fill="#ffd60a" opacity=".9" filter="url(#glow)"/>');
+    var col=fresh?'#0f9d58':'#0a63c9',wd=fresh?3.2:(inf?1.5:1.8),op=fresh?1:(inf?.5:.72),dash=inf?'stroke-dasharray="5,5"':'';
+    svg.push('<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="'+col+'" stroke-width="'+wd+'" '+dash+' opacity="'+op+'" stroke-linecap="round"'+(fresh?' filter="url(#glow)"':'')+'/>');
+    if(fresh) svg.push('<circle cx="'+((a[0]+b[0])/2)+'" cy="'+((a[1]+b[1])/2)+'" r="3.8" fill="#ff9f0a" stroke="#ffffff" stroke-width="1.4" opacity=".95" filter="url(#glow)"/>');
   });
+  // 浅色底专用节点样式：核心实心 / 锚点蓝环 / 待落地琥珀虚线 / 其余白底细环
+  var NS={
+    core:{f:'url(#core)',s:'#0a84ff',sw:2.4,lc:'#12161c',lw:800,fs:13.5},
+    anchor:{f:'#eaf3ff',s:'#0a84ff',sw:2.2,lc:'#0f2f57',lw:750,fs:12},
+    cluster:{f:'#f2f7ff',s:'#3b82f6',sw:1.9,lc:'#33404f',lw:650,fs:11},
+    infrastructure:{f:'#eef4ff',s:'#0a63c9',sw:1.9,lc:'#123a63',lw:700,fs:11},
+    enterprise:{f:'#ffffff',s:'#94a3b8',sw:1.6,lc:'#5f6773',lw:600,fs:10.5},
+    external:{f:'#ffffff',s:'#cbd5e1',sw:1.6,lc:'#78818f',lw:600,fs:10.5}
+  };
   ev.nodes.forEach(function(n){
     var p=FIX[n.node_id]||[W/2,H/2],r=R[n.node_type]||11,pend=n.node_status==='pending';
-    var fill=n.node_id==='hc'?'url(#core)':(pend?'rgba(255,214,10,.18)':'rgba(75,123,255,.16)');
-    var st=n.node_id==='hc'?'#ffffff':(pend?'#ffd60a':'#4b7bff');
-    svg.push('<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+r+'" fill="'+fill+'" stroke="'+st+'" stroke-width="1.4" '+(pend?'stroke-dasharray="4,4"':'')+'/>');
-    if(n.node_id==='hc') svg.push('<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+(r+12)+'" fill="none" stroke="#30d158" stroke-width="1" opacity=".35"/>');
-    var lx=Math.min(W-64,Math.max(64,p[0]));
-    var label=n.node_type==='core'?'惠城':n.name;
-    svg.push('<text x="'+lx+'" y="'+(p[1]+r+15)+'" text-anchor="middle" font-size="'+(n.node_type==='core'||n.node_type==='anchor'?12:(n.name.length>8?9.2:10.5))+'" fill="'+(n.node_type==='core'||n.node_type==='anchor'?'#eef2fb':'#9fc0c8')+'" font-family="PingFang SC,Microsoft Yahei,sans-serif" font-weight="'+(n.node_type==='core'?'700':'500')+'">'+esc(label)+'</text>');
+    var st=NS[n.node_type]||NS.external;
+    var isCore=n.node_id==='hc';
+    var fill=isCore?'url(#core)':(pend?'rgba(255,159,10,.16)':st.f);
+    var stroke=isCore?'#0a84ff':(pend?'#e08a00':st.s);
+    var sw=isCore?2.4:(pend?1.7:st.sw);
+    svg.push('<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+r+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="'+sw+'" '+(pend?'stroke-dasharray="5,5"':'')+(isCore?' filter="url(#soft)"':'')+'/>');
+    if(isCore){
+      svg.push('<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+(r+11)+'" fill="none" stroke="#0a84ff" stroke-width="1.2" opacity=".38"/>');
+      svg.push('<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+(r+22)+'" fill="none" stroke="#0a84ff" stroke-width="1" opacity=".14"/>');
+    }
+    var lx=Math.min(W-58,Math.max(58,p[0]));
+    var label=isCore?'惠城':n.name;
+    var lc=pend?'#8a5300':(isCore?'#12161c':st.lc);
+    var lw=isCore?800:(pend?650:st.lw);
+    var fs=isCore?13.5:(pend?10.5:st.fs);
+    svg.push('<text x="'+lx+'" y="'+(p[1]+r+16)+'" text-anchor="middle" font-size="'+fs+'" fill="'+lc+'" font-family="PingFang SC,Microsoft Yahei,sans-serif" font-weight="'+lw+'" paint-order="stroke" stroke="#ffffff" stroke-width="3.4" stroke-linejoin="round">'+esc(label)+'</text>');
   });
   svg.push('</svg>');
   document.getElementById('stage').innerHTML=svg.join('');
@@ -124,6 +142,9 @@ Promise.all([
   var inWin=items.filter(function(c){return c.event_date>=WIN;});
   var re=[];inWin.forEach(function(c){(c.involved_edge_ids||[]).forEach(function(i){re.push(i);});});
   draw(ev,re);
+  // 手机上画布可横滑，初始居中，别让核心节点开局就在屏幕外
+  var stg=document.getElementById('stage');
+  if(stg.scrollWidth>stg.clientWidth)stg.scrollLeft=(stg.scrollWidth-stg.clientWidth)/2;
   var names={};ev.nodes.forEach(function(n){names[n.node_id]=n.name;});
   document.getElementById('pcount').textContent='变更清单 · '+items.length+' 条';
   document.getElementById('pwin').textContent='窗口 '+WIN+' → '+(items[0]?items[0].event_date.slice(5):'—');
