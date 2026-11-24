@@ -109,63 +109,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
 
 <div class="wrap">
   <h1>风洞测试</h1>
-  <p class="sub">点档位，图会跟着变。先看常规压力，再看一个容易忽略的地方。</p>
-  <div class="card" style="background:#ffffff;border-color:#e6ebf2;margin-bottom:14px">
-    <div style="font-size:12px;color:#93a4bd;line-height:1.8">
-      <b style="color:#ff9500">两本账，别混：</b><br>
-      <b>① 参数敏感性（见⑤未来页）</b>：逐个参数 ±20% 扰动，其他不变，看达标概率和中位产值变多少。回答的是"哪个参数最敏感"。<br>
-      <b>② 受控场景压测（本页）</b>：注入具体现实事件（投产延期、招商不及预期、通勤堵塞等），看系统怎么反应。回答的是"如果这件事发生，会怎样"。<br>
-      前者是参数微分，后者是事件注入。两把尺子，两个问题，不放在同一个排序里比。
-    </div>
-  </div>
-
-  <div class="section-title" style="border-color:#30d158">第零段 · 模型跑完，先过三门</div>
-
-  <div class="card" style="border-left:3px solid rgba(48,209,88,.45)">
-    <div style="font-size:12px;color:#93a4bd;line-height:1.75;margin-bottom:6px">
-      下面的所有数字都来自同一个内核 <b style="color:#eef2fb">model.js</b>。但"跑出来了"不等于"能上页面"——先过三道门，过不了就标"待校准"，不许静默改参数。三门对应 <b style="color:#eef2fb">data/model-verify-v1.json</b> 的三组字段，改数必须同时改契约。
-    </div>
-
-    <div class="wt-gates">
-      <div class="wg" style="--c:#ff453a">
-        <div class="no">GATE 01</div><div class="nm">误差门</div>
-        <span class="st" style="color:#ff8f88;border-color:rgba(255,69,58,.45);background:rgba(255,69,58,.1)">未过</span>
-        <div class="ru">判据：回测相对误差 ≤ 5%<br>现状：内核未留存 2025 年初预测值</div>
-        <div class="rd" style="color:#ff453a">缺基线<i>无法回测</i></div>
-        <div class="ds">回测两项（GDP 增速、规上工业增加值）状态均为 <b>待接入</b>。补齐前，本页出现的任何数只能叫"情景设定"，不能叫"预测"。</div>
-      </div>
-
-      <div class="wg" style="--c:#ff9500">
-        <div class="no">GATE 02</div><div class="nm">覆盖门</div>
-        <span class="st" style="color:#ffc07a;border-color:rgba(255,149,0,.45);background:rgba(255,149,0,.1)">待测算</span>
-        <div class="ru">判据：P10–P90 覆盖实测值 ≥ 80%<br>现状：分布尚未接入本页</div>
-        <div class="rd" style="color:#ff9500">—<i>区间待跑</i></div>
-        <div class="ds">区间过窄会把"不确定"说成"确定"，过宽又失去意义。接入后这一格显示覆盖率，低于 <b>80%</b> 直接判"区间过窄"。</div>
-      </div>
-
-      <div class="wg" style="--c:#30d158">
-        <div class="no">GATE 03</div><div class="nm">指纹门</div>
-        <span class="st" style="color:#8ef0b0;border-color:rgba(48,209,88,.45);background:rgba(48,209,88,.1)">通过</span>
-        <div class="ru">判据：input_hash 未变则不重跑<br>现状：输入与上一版一致（种子 42 / 2 万次）</div>
-        <div class="rd" style="color:#30d158">未变<i>不重跑</i></div>
-        <div class="ds">参数、数据版本、种子都没动 → 输出应保持上一版，<b>连页面时间戳都不动</b>。跑了一次 ≠ 更新了一次。</div>
-      </div>
-    </div>
-
-    <div class="wt-ruler">
-      <div class="wt-rl"><span>误差刻度</span><span>0% · 3% · 6% · 9% · 12%</span></div>
-      <div class="wt-bar">
-        <div class="wt-tick" style="left:41.6%"></div>
-        <div class="wt-dot" style="left:38.3%"></div>
-      </div>
-    </div>
-
-    <div class="wt-asof">
-      <span id="wt-asof">as-of —</span>
-      <span class="g">判据与阈值见 docs/change-rubric.md</span>
-    </div>
-  </div>
-
+  <p class="sub">这一页只回答一个问题：如果这几件事里有一件真的发生，哪一段先撑不住——点档位，图会跟着变。</p>
   <div class="section-title">上半场 · 四个常规压力</div>
 
   <!-- ① 投产延期：阶梯爬坡 -->
@@ -271,6 +215,69 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
       边界：通勤走廊"必经性"由地理决定（就那几条过江通道），是硬的；具体通勤流量缺真实OD数据，为D级假设。不测极端黑天鹅（战争、重大疫情、金融危机）。
     </div>
   </div>
+
+  <details style="margin:30px 0 6px;border:1px solid rgba(120,140,170,.42);border-radius:12px;padding:0 16px">
+    <summary style="cursor:pointer;list-style:none;padding:14px 0;font-size:13px;font-weight:700;color:#6E88A3;letter-spacing:.03em">
+      质量与边界 · 点开看：数据分级、模型不能做什么、哪些还没做完
+      <span style="font-weight:600;font-size:11.5px;opacity:.85">（三项自检）</span>
+    </summary>
+  <div class="card" style="background:#ffffff;border-color:#e6ebf2;margin-bottom:14px">
+    <div style="font-size:12px;color:#93a4bd;line-height:1.8">
+      <b style="color:#ff9500">两本账，别混：</b><br>
+      <b>① 参数敏感性（见⑤未来页）</b>：逐个参数 ±20% 扰动，其他不变，看达标概率和中位产值变多少。回答的是"哪个参数最敏感"。<br>
+      <b>② 受控场景压测（本页）</b>：注入具体现实事件（投产延期、招商不及预期、通勤堵塞等），看系统怎么反应。回答的是"如果这件事发生，会怎样"。<br>
+      前者是参数微分，后者是事件注入。两把尺子，两个问题，不放在同一个排序里比。
+    </div>
+  </div>
+
+  <div class="section-title" style="border-color:#30d158">第零段 · 模型跑完，先过三门</div>
+
+  <div class="card" style="border-left:3px solid rgba(48,209,88,.45)">
+    <div style="font-size:12px;color:#93a4bd;line-height:1.75;margin-bottom:6px">
+      下面的所有数字都来自同一个内核 <b style="color:#eef2fb">model.js</b>。但"跑出来了"不等于"能上页面"——先过三道门，过不了就标"待校准"，不许静默改参数。三门对应 <b style="color:#eef2fb">data/model-verify-v1.json</b> 的三组字段，改数必须同时改契约。
+    </div>
+
+    <div class="wt-gates">
+      <div class="wg" style="--c:#ff453a">
+        <div class="no">GATE 01</div><div class="nm">误差门</div>
+        <span class="st" style="color:#ff8f88;border-color:rgba(255,69,58,.45);background:rgba(255,69,58,.1)">未过</span>
+        <div class="ru">判据：回测相对误差 ≤ 5%<br>现状：内核未留存 2025 年初预测值</div>
+        <div class="rd" style="color:#ff453a">缺基线<i>无法回测</i></div>
+        <div class="ds">回测两项（GDP 增速、规上工业增加值）状态均为 <b>待接入</b>。补齐前，本页出现的任何数只能叫"情景设定"，不能叫"预测"。</div>
+      </div>
+
+      <div class="wg" style="--c:#ff9500">
+        <div class="no">GATE 02</div><div class="nm">覆盖门</div>
+        <span class="st" style="color:#ffc07a;border-color:rgba(255,149,0,.45);background:rgba(255,149,0,.1)">待测算</span>
+        <div class="ru">判据：P10–P90 覆盖实测值 ≥ 80%<br>现状：分布尚未接入本页</div>
+        <div class="rd" style="color:#ff9500">—<i>区间待跑</i></div>
+        <div class="ds">区间过窄会把"不确定"说成"确定"，过宽又失去意义。接入后这一格显示覆盖率，低于 <b>80%</b> 直接判"区间过窄"。</div>
+      </div>
+
+      <div class="wg" style="--c:#30d158">
+        <div class="no">GATE 03</div><div class="nm">指纹门</div>
+        <span class="st" style="color:#8ef0b0;border-color:rgba(48,209,88,.45);background:rgba(48,209,88,.1)">通过</span>
+        <div class="ru">判据：input_hash 未变则不重跑<br>现状：输入与上一版一致（种子 42 / 2 万次）</div>
+        <div class="rd" style="color:#30d158">未变<i>不重跑</i></div>
+        <div class="ds">参数、数据版本、种子都没动 → 输出应保持上一版，<b>连页面时间戳都不动</b>。跑了一次 ≠ 更新了一次。</div>
+      </div>
+    </div>
+
+    <div class="wt-ruler">
+      <div class="wt-rl"><span>误差刻度</span><span>0% · 3% · 6% · 9% · 12%</span></div>
+      <div class="wt-bar">
+        <div class="wt-tick" style="left:41.6%"></div>
+        <div class="wt-dot" style="left:38.3%"></div>
+      </div>
+    </div>
+
+    <div class="wt-asof">
+      <span id="wt-asof">as-of —</span>
+      <span class="g">判据与阈值见 docs/change-rubric.md</span>
+    </div>
+  </div>
+
+  </details>
 
   <div style="text-align:center;margin:20px 0"><a class="btn" href="index.html">回到首页</a></div>
 </div>

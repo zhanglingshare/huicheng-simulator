@@ -5,28 +5,28 @@
   'use strict';
 
   var PAGES = [
-    { url: 'briefing.html',       n: '00', group: '决策简报', label: '决策简报',   desc: '一页看清盯什么' },
-    { url: 'spotlight.html',      n: '00·2', group: '决策简报', label: '公众传播',   desc: '先看三个和你有关的数字' },
-    { url: 'poster.html',         n: '00·3', group: '决策简报', label: '冲击海报',   desc: '一张能自己传播的图' },
-    { url: 'index.html',          n: '01', group: '开篇',     label: '风洞',       desc: '产业决策，先过风洞' },
-    { url: 'holo.html',           n: '02', group: '看见世界', label: '全息关系',   desc: '钱和关系连在谁身上' },
+    { url: 'briefing.html',       n: '00', group: '决策简报', label: '决策简报',   desc: '3 分钟读完：三句话看清惠城当下' },
+    { url: 'spotlight.html',      n: '00·2', group: '决策简报', label: '公众传播',   desc: '三个数字，没有一个是 GDP' },
+    { url: 'poster.html',         n: '00·3', group: '决策简报', label: '冲击海报',   desc: '一句话一张图，转得出去' },
+    { url: 'index.html',          n: '01', group: '开篇',     label: '风洞',       desc: '拍板之前，先在这里走一遍' },
+    { url: 'holo.html',           n: '02', group: '看见世界', label: '全息关系',   desc: '一眼看全貌，细节在下一页' },
     { url: 'holo-workspace.html', n: '03', group: '看见世界', label: '全息工作区', desc: '关系网络、情报流与变化详情' },
-    { url: 'today.html',          n: '04', group: '看见世界', label: '钱去哪了',   desc: '追问资金去向与消费路径' },
+    { url: 'today.html',          n: '04', group: '看见世界', label: '钱去哪了',   desc: '钱，可能花到哪里了' },
     { url: 'fun.html',            n: '05', group: '看见世界', label: '风向标',     desc: '今晚，谁能把你留在惠城' },
-    { url: 'choices.html',        n: '06', group: '推演未来', label: '路径',       desc: '先选方向，再看可能' },
-    { url: 'future.html',         n: '07', group: '推演未来', label: '未来',       desc: '把未来反复扔进模型' },
-    { url: 'windtunnel.html',     n: '08', group: '推演未来', label: '风洞测试',   desc: '给假设持续加压' },
-    { url: 'commute.html',        n: '09', group: '推演未来', label: '通勤案例',   desc: '通勤可能带来的影响' },
-    { url: 'blindspot.html',      n: '10', group: '推演未来', label: '忽略了什么', desc: '城市承载与居民生活的盲点' },
-    { url: 'network.html',        n: '11', group: '关系视角', label: '建构世界',   desc: '把关系一层层搭起来' },
-    { url: 'evolution.html',      n: '11·2', group: '关系视角', label: '网络的演变', desc: '等它真变了才更新' },
-    { url: 'role.html',           n: '12', group: '关系视角', label: '你在哪',     desc: '你在网里哪个位置' },
-    { url: 'who.html',            n: '13', group: '关系视角', label: '掂量',       desc: '换几个角度再掂一掂' },
-    { url: 'report.html',         n: '14', group: '汇总与实验', label: '报告',     desc: '把观察整理成可讨论的材料' },
-    { url: 'future-lab.html',     n: '15', group: '汇总与实验', label: '未来实验室', desc: '动手调参，做多实验舱挑战' },
-    { url: 'ending.html',         n: '16', group: '收尾',     label: '结语',       desc: '回到人、城市与决策责任' },
-    { url: 'home.html',           n: '17', group: '收尾',     label: '关于',       desc: '这个项目是什么' },
-    { url: 'decision-lab.html',   n: '18', group: '决策实验室', label: '决策模拟实验室', desc: '现状推演 · 压力测试 · 触发信号' }
+    { url: 'choices.html',        n: '06', group: '推演未来', label: '路径',       desc: '你关心的事，挂在哪条路上' },
+    { url: 'future.html',         n: '07', group: '推演未来', label: '未来',       desc: '同一件事，扔一百次，看它落在哪' },
+    { url: 'windtunnel.html',     n: '08', group: '推演未来', label: '风洞测试',   desc: '如果这件事真的发生，哪一段先撑不住' },
+    { url: 'commute.html',        n: '09', group: '推演未来', label: '通勤案例',   desc: '你每天堵的 40 分钟，谁在替你付' },
+    { url: 'blindspot.html',      n: '10', group: '推演未来', label: '忽略了什么', desc: '你以为最要紧的，可能排不到第一' },
+    { url: 'network.html',        n: '11', group: '关系视角', label: '建构世界',   desc: '这张网是怎么搭起来的' },
+    { url: 'evolution.html',      n: '11·2', group: '关系视角', label: '网络的演变', desc: '网络不是每天重画，是等它真变了' },
+    { url: 'role.html',           n: '12', group: '关系视角', label: '你在哪',     desc: '同一件事，你在哪一段上' },
+    { url: 'who.html',            n: '13', group: '关系视角', label: '掂量',       desc: '这一页给核对用，不是入门' },
+    { url: 'report.html',         n: '14', group: '汇总与实验', label: '报告',     desc: '完整底稿，供逐条核对' },
+    { url: 'future-lab.html',     n: '15', group: '汇总与实验', label: '未来实验室', desc: '把条件改一改，结论就变了' },
+    { url: 'ending.html',         n: '16', group: '收尾',     label: '结语',       desc: '让每一个重大决策，先跑一遍' },
+    { url: 'home.html',           n: '17', group: '收尾',     label: '关于',       desc: '这是什么、给谁用、边界在哪' },
+    { url: 'decision-lab.html',   n: '18', group: '决策实验室', label: '决策模拟实验室', desc: '内部工作台，不对外' }
   ];
 
   var SVG = {
