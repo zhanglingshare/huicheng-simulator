@@ -306,7 +306,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
     </div>
     <div class="hero-pills">
       <span class="hpill"> 承接你刚才的实验设置</span>
-      <span class="hpill"> 同一模型 · 同一随机种子</span>
+      <span class="hpill"> 同一模型 · 同一组固定随机数</span>
       <span class="hpill">️ 压力测试叙事 · 非预测</span>
     </div>
   </div>
@@ -360,7 +360,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
         <button class="cs-btn" id="csBtn">⏳ 让关键项目晚一年</button>
       </div>
     </div>
-    <div class="stage-note">画面为关系假设的视觉叙事，用于帮助理解“牵一发而动全身”，<b>不是根据 OD 出行或产业投入产出数据计算出的真实空间传播强度</b>；具体数值以下方模型结果为准。</div>
+    <div class="stage-note">画面为关系假设的视觉叙事，用于帮助理解“牵一发而动全身”，<b>不是用真实的出行起止记录或产业投入产出数据算出来的</b>；具体数值以下方模型结果为准。</div>
   </div>
 
   <!-- ② 这是你刚刚亲手改变的惠城（真实模型结果，承接第⑧页） -->
@@ -374,24 +374,24 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
     <div class="exp-grid">
       <div class="exp-side base">
         <div class="es-tag">🅰 基准情景（按当前规划推进）</div>
-        <div class="es-row"><span class="k">2030 达标率（≥1500亿）</span><span class="v" id="bHit">—</span></div>
-        <div class="es-row"><span class="k">中位产值 P50</span><span class="v" id="bP">—</span></div>
-        <div class="es-range">不确定性区间 P10–P90：<b id="bR">—</b></div>
+        <div class="es-row"><span class="k">2030 达标把握（≥1500亿）</span><span class="v" id="bHit">—</span></div>
+        <div class="es-row"><span class="k">典型产值（中间值）</span><span class="v" id="bP">—</span></div>
+        <div class="es-range">不确定范围（最差到最好的八成）：<b id="bR">—</b></div>
         <div class="dist-box"><canvas id="bDist"></canvas></div>
       </div>
       <div class="exp-mid">
         <div class="vs">差异</div>
         <div class="dchips">
-          <div class="dchip"><div class="dk">达标率</div><div class="dv flat" id="dHit">—</div></div>
-          <div class="dchip"><div class="dk">中位产值</div><div class="dv flat" id="dP">—</div></div>
+          <div class="dchip"><div class="dk">达标把握</div><div class="dv flat" id="dHit">—</div></div>
+          <div class="dchip"><div class="dk">典型产值</div><div class="dv flat" id="dP">—</div></div>
           <div class="dchip"><div class="dk">区间下移</div><div class="dv flat" id="dR">—</div></div>
         </div>
       </div>
       <div class="exp-side cur">
         <div class="es-tag" id="cTag">🅱 你的情景</div>
-        <div class="es-row"><span class="k">2030 达标率（≥1500亿）</span><span class="v" id="cHit">—</span></div>
-        <div class="es-row"><span class="k">中位产值 P50</span><span class="v" id="cP">—</span></div>
-        <div class="es-range">不确定性区间 P10–P90：<b id="cR">—</b></div>
+        <div class="es-row"><span class="k">2030 达标把握（≥1500亿）</span><span class="v" id="cHit">—</span></div>
+        <div class="es-row"><span class="k">典型产值（中间值）</span><span class="v" id="cP">—</span></div>
+        <div class="es-range">不确定范围（最差到最好的八成）：<b id="cR">—</b></div>
         <div class="dist-box"><canvas id="cDist"></canvas></div>
       </div>
     </div>

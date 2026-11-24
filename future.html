@@ -318,7 +318,7 @@ input[type=range]:disabled{opacity:.4;cursor:not-allowed}
           <button class="guide-btn" id="guideBtn" onclick="toggleGuide()">怎么读这张图</button>
         </div>
       </div>
-      <div class="chart-guide" id="chartGuide">① 柱子越高 = 这个产值区间在模拟里越常出现；<br>② 橙色虚线是 1500 亿参考目标，柱子跨过它就算“达标”；<br>③ 蓝/黄圆点标出三种典型未来：保守（P10）、中间（P50）、乐观（P90）。</div>
+      <div class="chart-guide" id="chartGuide">① 柱子越高 = 这个产值区间在模拟里越常出现；<br>② 橙色虚线是 1500 亿参考目标，柱子跨过它就算“达标”；<br>③ 蓝/黄圆点标出三种典型未来：保守、中间、乐观。</div>
       <div class="chart-wrap"><div id="mainChart"></div></div>
     </div>
 
@@ -329,7 +329,7 @@ input[type=range]:disabled{opacity:.4;cursor:not-allowed}
     <!-- ===== 高级分析（折叠） ===== -->
     <div class="glass collapsible m-analysis" id="analysisBox">
       <header onclick="toggleCollapse('analysisBox')">
-        <h2>高级分析：路径系数 · 灵敏度</h2>
+        <h2>深一层：每条路有多重、多敏感</h2>
         <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
       </header>
       <div class="body">
@@ -339,7 +339,7 @@ input[type=range]:disabled{opacity:.4;cursor:not-allowed}
           <div class="mini-note" id="pathCoefNote"></div>
         </div>
         <div class="analysis-block">
-          <h3>哪个旋钮最灵敏？每条路 ±20%，达标率会变成多少</h3>
+          <h3>哪个旋钮最灵敏？每条路 ±20%，达标把握会变成多少</h3>
           <button class="btn primary" id="sensBtn" style="margin-bottom:10px">跑一跑：哪条路径最灵敏</button>
           <span id="sensStatus" style="font-size:11px;color:var(--muted)"></span>
           <div id="sensWrap" style="display:none">
@@ -548,13 +548,13 @@ function percentileMarkPoints(run,maxDens){
           formatter:c?'1500':'1500亿目标线'}},
       {coord:[run.p10,sideY],itemStyle:{color:'#60a5fa',borderColor:'#fff',borderWidth:1},
         label:{show:true,position:'top',color:'#bfdbfe',fontSize:11.5,fontWeight:'bold',lineHeight:14,distance:4,
-          formatter:c?f10:'P10\n'+f10+'亿'}},
+          formatter:c?f10:'偏低 10%\n'+f10+'亿'}},
       {coord:[run.p50,midY],itemStyle:{color:'#fbbf24',borderColor:'#fff',borderWidth:1},
         label:{show:true,position:'top',color:'#fde68a',fontSize:11.5,fontWeight:'bold',lineHeight:14,distance:4,
-          formatter:c?f50:'P50\n'+f50+'亿'}},
+          formatter:c?f50:'中间\n'+f50+'亿'}},
       {coord:[run.p90,sideY],itemStyle:{color:'#60a5fa',borderColor:'#fff',borderWidth:1},
         label:{show:true,position:'top',color:'#bfdbfe',fontSize:11.5,fontWeight:'bold',lineHeight:14,distance:4,
-          formatter:c?f90:'P90\n'+f90+'亿'}}
+          formatter:c?f90:'偏高 10%\n'+f90+'亿'}}
     ]};
 }
 function buildOption(run, animate, baseRun){
@@ -664,17 +664,17 @@ function renderCards(run,animate){
   var cards=[
     {big:{to:run.hit,dec:1,suf:'%',color:hitColor},ring:true,
      ico:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.2" fill="'+hitColor+'" stroke="none"/>',
-     lab:'达标率（≥1500亿）',
+     lab:'达标把握（≥1500亿）',
      desc:'在 '+state.N.toLocaleString()+' 次模拟中，有 '+hitCount.toLocaleString()+' 次达到或超过 1500 亿'},
     {big:{to:run.p50,dec:0,suf:'亿',color:'#fbbf24'},
      ico:'<path d="M4 20V11M10 20V4M16 20v-8M21 20H3"/>',
-     lab:'中位产值（P50）',desc:'50% 的模拟结果低于该值，50% 高于该值'},
+     lab:'典型产值（中间）',desc:'50% 的模拟结果低于该值，50% 高于该值'},
     {big:{to:run.p10,dec:0,suf:'亿',color:'#f87171'},
      ico:'<path d="M12 4v13M7 12l5 5 5-5M5 20h14"/>',
-     lab:'P10（偏保守情景）',desc:'10% 的模拟结果低于该值，属于相对保守的可能情况'},
+     lab:'偏低 10%（保守情景）',desc:'10% 的模拟结果低于该值，属于相对保守的可能情况'},
     {big:{to:run.p90,dec:0,suf:'亿',color:'#34d399'},
      ico:'<path d="M12 20V7M7 12l5-5 5 5M5 4h14"/>',
-     lab:'P90（偏乐观情景）',desc:'10% 的模拟结果高于该值，属于相对乐观的可能情况'}
+     lab:'偏高 10%（乐观情景）',desc:'10% 的模拟结果高于该值，属于相对乐观的可能情况'}
   ];
   var html='';
   cards.forEach(function(c){
@@ -752,7 +752,7 @@ function renderPathCoef(run){
         [{offset:0,color:'#1d4ed8'},{offset:1,color:'#0e7490'}]),
       borderColor:'#60a5fa',borderWidth:2,shadowBlur:26,shadowColor:'rgba(59,130,246,.6)'},
     label:{show:true,color:'#ffffff',fontSize:mob?11:13,fontWeight:'bold',lineHeight:mob?15:18,
-      formatter:'2030年地区产值\n{small|达标率 '+run.hit.toFixed(1)+'% · 中位 '+round(run.p50).toLocaleString('en-US')+'亿}',
+      formatter:'2030年地区产值\n{small|达标把握 '+run.hit.toFixed(1)+'% · 典型水平 '+round(run.p50).toLocaleString('en-US')+'亿}',
       rich:{small:{fontSize:mob?9:11,color:'#a5d8ff',fontWeight:'normal',lineHeight:mob?14:16}}}
   });
   // 不可见边界节点：撑开左右留白，避免窄屏节点贴边被裁
@@ -814,7 +814,7 @@ function runSensitivity(){
       rows.sort(function(a,b){return (Math.abs(b.plus)+Math.abs(b.minus))-(Math.abs(a.plus)+Math.abs(a.minus));});
       if(!charts.sens)charts.sens=echarts.init($('sensChart'));
       var baseHit=round(base.hit*10)/10;
-      // 达标率尺子：直接展示 ±20% 后的“达标率结果”，而不是百分点变动
+      // 达标把握尺子：直接展示 ±20% 后的“达标把握结果”，而不是百分点变动
       var pDatas=rows.map(function(r){return {name:r.name,color:r.color,
         plus:Math.max(0,Math.min(100,round((base.hit+r.plus)*10)/10)),
         minus:Math.max(0,Math.min(100,round((base.hit+r.minus)*10)/10))};});
@@ -826,8 +826,8 @@ function runSensitivity(){
             pDatas.forEach(function(x){if(x.name===nm)r=x;});
             if(!r)return nm;
             var up=round((r.plus-base.hit)*10)/10, dn=round((r.minus-base.hit)*10)/10;
-            return nm+'<br>加码 20% 后：达标率 '+r.plus.toFixed(1)+'%（比基准 '+ (up>=0?'+':'')+up.toFixed(1)+'）'+
-              '<br>砍减 20% 后：达标率 '+r.minus.toFixed(1)+'%（比基准 '+ (dn>=0?'+':'')+dn.toFixed(1)+'）';
+            return nm+'<br>加码 20% 后：达标把握 '+r.plus.toFixed(1)+'%（比基准 '+ (up>=0?'+':'')+up.toFixed(1)+'）'+
+              '<br>砍减 20% 后：达标把握 '+r.minus.toFixed(1)+'%（比基准 '+ (dn>=0?'+':'')+dn.toFixed(1)+'）';
           }},
         legend:{top:0,textStyle:{color:'#c4d4ee',fontSize:11},itemWidth:14,itemHeight:8,
           data:['加码 20%','砍减 20%']},
@@ -835,7 +835,7 @@ function runSensitivity(){
         xAxis:{type:'value',min:0,max:100,
           axisLabel:{color:'#8fa3c4',formatter:'{value}%'},
           splitLine:{lineStyle:{color:'rgba(255,255,255,.06)'}},
-          name:'达标率（%，≥1500亿）',nameTextStyle:{color:'#7e90ad',fontSize:10.5},
+          name:'达标把握（%，≥1500亿）',nameTextStyle:{color:'#7e90ad',fontSize:10.5},
           nameLocation:'middle',nameGap:26},
         yAxis:{type:'category',data:rows.map(function(r){return r.name;}).reverse(),
           axisLabel:{color:'#c4d4ee',fontSize:12.5,fontWeight:'bold'}},
@@ -849,7 +849,7 @@ function runSensitivity(){
             animationDelay:function(idx){return idx*130;},
             markLine:{symbol:'none',silent:true,
               lineStyle:{color:'#ffffff',type:'dashed',width:1.4,opacity:.85},
-              label:{show:true,position:'insideEndTop',formatter:'基准达标率 '+baseHit+'%',color:'#e2e8f0',fontSize:11},
+              label:{show:true,position:'insideEndTop',formatter:'基准达标把握 '+baseHit+'%',color:'#e2e8f0',fontSize:11},
               data:[{xAxis:baseHit}]}},
           {name:'砍减 20%',type:'bar',barWidth:15,
             data:pDatas.map(function(r){return r.minus;}).reverse(),
@@ -865,15 +865,15 @@ function runSensitivity(){
       var tot=(mUp+mDn).toFixed(1), lTot=(Math.abs(least.plus)+Math.abs(least.minus)).toFixed(1);
       var mostP=pDatas[0], leastP=pDatas[pDatas.length-1];
       $('sensNote').innerHTML=
-        '<div class="sens-verdict">最灵的旋钮是 <b style="color:'+most.color+'">'+most.name+'</b>：加码 20%，达标率从 '+baseHit+
+        '<div class="sens-verdict">最灵的旋钮是 <b style="color:'+most.color+'">'+most.name+'</b>：加码 20%，达标把握从 '+baseHit+
         '% 涨到 <b style="color:#a5f3fc">'+mostP.plus.toFixed(1)+'%</b>；砍减 20%，掉到 <b style="color:#fecdd3">'+mostP.minus.toFixed(1)+
         '%</b>——一拧就摆动 '+tot+' 个百分点 ≈ 每 10 次模拟多/少约 '+Math.max(1,Math.round(tot/10))+' 次达标；<br>'+
-        '最沉稳的是 '+least.name+'，同样拧 20%，达标率只在 '+leastP.minus.toFixed(1)+'%～'+leastP.plus.toFixed(1)+'% 之间晃。'+
+        '最沉稳的是 '+least.name+'，同样拧 20%，达标把握只在 '+leastP.minus.toFixed(1)+'%～'+leastP.plus.toFixed(1)+'% 之间晃。'+
         '</div>'+
-        '<b>怎么看：</b>蓝条 = 加码 20% 后还能保住的达标率；红条 = 砍减 20% 后剩下的达标率。条越长、离基准线越远，这条路越值得盯着。<br>'+
+        '<b>怎么看：</b>蓝条 = 加码 20% 后还能保住的达标把握；红条 = 砍减 20% 后剩下的达标把握。条越长、离基准线越远，这条路越值得盯着。<br>'+
         '<b>注意：</b>“敏感”不等于“重要”——它说明在模拟里这条路与结果绑得紧；现实中还要看可控性、成本与见效速度。';
       var tbl='<table style="width:100%;border-collapse:collapse;font-size:11px"><tr style="color:#8fa3c4;border-bottom:1px solid rgba(255,255,255,.1)">'+
-        '<td style="padding:4px 6px;text-align:left">路径</td><td style="padding:4px 6px;text-align:right">-20% 中位</td><td style="padding:4px 6px;text-align:right">基准</td><td style="padding:4px 6px;text-align:right">+20% 中位</td></tr>';
+        '<td style="padding:4px 6px;text-align:left">路径</td><td style="padding:4px 6px;text-align:right">-20% 典型水平</td><td style="padding:4px 6px;text-align:right">基准</td><td style="padding:4px 6px;text-align:right">+20% 典型水平</td></tr>';
       rows.forEach(function(r){
         tbl+='<tr style="border-bottom:1px solid rgba(255,255,255,.06)"><td style="padding:4px 6px;color:'+r.color+'">'+r.name+'</td>'+
           '<td style="padding:4px 6px;text-align:right;color:#f87171">'+round(base.p50+r.p50minus)+'亿</td>'+
@@ -882,7 +882,7 @@ function runSensitivity(){
       });
       tbl+='</table>';
       $('sensTable').innerHTML=tbl;
-      $('sensStatus').textContent='完成（基准达标率 '+baseHit.toFixed(1)+'%，中位 '+round(base.p50).toLocaleString()+' 亿）';
+      $('sensStatus').textContent='完成（基准达标把握 '+baseHit.toFixed(1)+'%，典型水平 '+round(base.p50).toLocaleString()+' 亿）';
       $('sensWrap').style.display='block';
     }catch(e){$('sensStatus').innerHTML='<span style="color:#f87171">'+e.message+'</span>';}
   },30);
@@ -904,7 +904,7 @@ function renderSaved(){
   if(!arr.length)html='<div style="font-size:12px;color:#8fa3c4">还没有保存的实验。</div>';
   arr.forEach(function(s,i){
     html+='<div class="saved-item"><div>#'+(arr.length-i)+' '+s.t+' · '+s.N.toLocaleString()+' 次<br>'+
-      '<span style="color:#93c5fd">P10 '+s.p10+'亿</span> · <b>P50 '+s.p50+'亿</b> · <span style="color:#6ee7b7">P90 '+s.p90+'亿</span> · 达标率 '+s.hit+'%</div>'+
+      '<span style="color:#93c5fd">偏低 10% '+s.p10+'亿</span> · <b>中间 '+s.p50+'亿</b> · <span style="color:#6ee7b7">偏高 10% '+s.p90+'亿</span> · 达标把握 '+s.hit+'%</div>'+
       '<span class="del" onclick="delSave('+i+')">删除</span></div>';
   });
   $('savedList').innerHTML=html;
@@ -927,9 +927,9 @@ function guess(n){
   var p50=run.p50,hit=run.hit;
   var bucket=p50<1300?1:(p50<=1600?2:3);
   var names={1:'1300亿以下',2:'1300–1600亿',3:'1600亿以上'};
-  var verdict=(n===bucket)?'你选的「'+names[n]+'」，正是中位结果 '+round(p50)+'亿 落的位置——猜中了。'
-    :'你选了「'+names[n]+'」，中位结果 '+round(p50)+' 亿实际落在「'+names[bucket]+'」。';
-  $('guessOut').innerHTML=verdict+'<br>达标率约 '+hit.toFixed(0)+'%，这是跑了 '+state.N.toLocaleString()+' 次的结果。';
+  var verdict=(n===bucket)?'你选的「'+names[n]+'」，正是典型水平结果 '+round(p50)+'亿 落的位置——猜中了。'
+    :'你选了「'+names[n]+'」，典型水平结果 '+round(p50)+' 亿实际落在「'+names[bucket]+'」。';
+  $('guessOut').innerHTML=verdict+'<br>达标把握约 '+hit.toFixed(0)+'%，这是跑了 '+state.N.toLocaleString()+' 次的结果。';
   $('guessBox').classList.add('open');
 }
 

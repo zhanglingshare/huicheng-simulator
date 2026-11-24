@@ -170,7 +170,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
 
   <!-- 瀑布图 -->
   <div class="card">
-    <h2>四个压力叠加，达标率一层层掉</h2>
+    <h2>四个压力叠加，达标把握一层层掉</h2>
     <div style="height:220px"><canvas id="waterfall"></canvas></div>
     <div class="hint">从约66%开始，每根柱子是一个压力扣掉的部分。</div>
   </div>
@@ -212,7 +212,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
     <h2>这一测，提示了什么</h2>
     <div id="final" style="font-size:13.5px;line-height:1.9;color:#cbd5e1"></div>
     <div style="font-size:11px;color:#5b6b82;margin-top:12px;line-height:1.7">
-      边界：通勤走廊"必经性"由地理决定（就那几条过江通道），是硬的；具体通勤流量缺真实OD数据，为D级假设。不测极端黑天鹅（战争、重大疫情、金融危机）。
+      边界：通勤走廊"必经性"由地理决定（就那几条过江通道），是硬的；具体通勤流量缺真实真实出行起止数据，为第四级估算。不测极端黑天鹅（战争、重大疫情、金融危机）。
     </div>
   </div>
 
@@ -326,10 +326,10 @@ function renderRO(key){
   const drop=effects[key][state[key]];
   const el=document.getElementById('ro-'+key);
   if(!el)return;
-  if(drop<=0){el.innerHTML='无压力，达标率 <b style="color:#30d158">'+BASE_HIT.toFixed(0)+'%</b>';return;}
+  if(drop<=0){el.innerHTML='无压力，达标把握 <b style="color:#30d158">'+BASE_HIT.toFixed(0)+'%</b>';return;}
   const m=runTunnel(key);
   const color=m.hit>40?'#ff9500':'#ff453a';
-  el.innerHTML='基准中位 <b>'+Math.round(BASE_P50)+'亿</b> → 施加该压力后中位 <b style="color:'+color+'">'+Math.round(m.p50)+'亿</b>，达标率 <b style="color:'+color+'">'+m.hit.toFixed(0)+'%</b>（同一模型内核重跑）';
+  el.innerHTML='现在 <b>'+Math.round(BASE_P50)+'亿</b> → 拉下这一档后 <b style="color:'+color+'">'+Math.round(m.p50)+'亿</b>，达标把握 <b style="color:'+color+'">'+m.hit.toFixed(0)+'%</b>（同一套算法重算）';
 }
 
 function drawMini(key){
@@ -361,11 +361,11 @@ function drawMini(key){
 }
 
 function drawWaterfall(){
-  // 修复：六项压力全纳入，按相邻档算边际下降；柱子显示逐档累计达标率
+  // 修复：六项压力全纳入，按相邻档算边际下降；柱子显示逐档累计达标把握
   const order=['delay','invest','export','shen','dragon','commute'];
   const labels=['基准'].concat(order.map(k=>names[k]));
   const p=JSON.parse(JSON.stringify(HT.DEFAULT_PATHS));
-  const cumulative=[BASE_HIT];   // 逐档累计达标率
+  const cumulative=[BASE_HIT];   // 逐档累计达标把握
   const marginal=[0];            // 相邻档边际下降（百分点）
   let prev=BASE_HIT;
   order.forEach(k=>{
@@ -380,28 +380,28 @@ function drawWaterfall(){
     data:{labels:labels,datasets:[{data:cumulative.map(v=>Math.round(v*10)/10),backgroundColor:cumulative.map((v,i)=>i===0?'#30d158':'#ff453a'),borderRadius:4}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>{
       const i=it.dataIndex;
-      return (i===0?'无冲击基准达标率 ':'累计达标率 ')+cumulative[i].toFixed(1)+'%'+(i>0?'（本档较上一档下降 '+marginal[i].toFixed(1)+' 个百分点）':'');
+      return (i===0?'无冲击基准达标把握 ':'累计达标把握 ')+cumulative[i].toFixed(1)+'%'+(i>0?'（本档较上一档下降 '+marginal[i].toFixed(1)+' 个百分点）':'');
     }}}},
       scales:{x:{ticks:{color:'#93a4bd',font:{size:10}},grid:{display:false}},y:{ticks:{color:tickColor,callback:v=>v+'%'},grid:{color:gridColor}}}}});
 }
 
 function drawRank(){
   const allKeys=['delay','invest','export','shen','dragon','commute'];
-  // 每个压力单独施加后，达标率比基准下降多少
+  // 每个压力单独施加后，达标把握比基准下降多少
   const rows=allKeys.map(k=>({k,drop:BASE_HIT-runTunnel(k).hit}));
   rows.sort((a,b)=>b.drop-a.drop);
   dk('rank');
   charts.rank=new Chart(document.getElementById('rank2').getContext('2d'),{type:'bar',
     data:{labels:rows.map(r=>names[r.k]),datasets:[{data:rows.map(r=>r.drop),
       backgroundColor:rows.map(r=>r.k==='commute'?'#ff453a':r.k==='dragon'?'#ff9500':'#0a84ff'),borderRadius:4}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>'达标率下降约'+it.parsed.x.toFixed(1)+'个百分点'}}},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:it=>'达标把握下降约'+it.parsed.x.toFixed(1)+'个百分点'}}},
       scales:{x:{ticks:{color:tickColor,callback:v=>v+'%'},grid:{color:gridColor}},y:{ticks:{color:'#93a4bd',font:{size:12}},grid:{display:false}}}}});
   const cr=rows.findIndex(r=>r.k==='commute')+1, dr=rows.findIndex(r=>r.k==='dragon')+1;
-  document.getElementById('rank2-note').textContent='通勤压力单独施加时排第'+cr+'，龙头扩产落空排第'+dr+'（按达标率下降幅度）。';
+  document.getElementById('rank2-note').textContent='通勤压力单独施加时排第'+cr+'，龙头扩产落空排第'+dr+'（按达标把握下降幅度）。';
   document.getElementById('final').innerHTML=
     '上半场四个常规压力，规划里都在盯着，这很对。<br>但把"龙头扩产落空"和"通勤压力"也放进来排序，结果有点反常识：<b style="color:#ff453a">通勤压力排第'+cr+'</b>，<b style="color:#ff9500">龙头扩产落空排第'+dr+'</b>。<br>'+
     '龙头扩产落空当然疼，但集群还在；可通勤路一堵，是产业招工和城市消费两个轮子一起卡。<br>通勤在规划里叫"基础设施配套"，风洞却提示它更像传动轴。好消息是——改善通勤比招大项目便宜、见效快、自己可控；风险是一堵就双向失血。这是一个被低估、性价比很高的抓手。<br>'+
-    '<span style="color:#6b7280;font-size:11px">注：达标率由 model.js 同一内核（基准 632.7 亿＝2025 惠城高新区规上工业产值、种子42、2万次）重跑；"基准"为六项压力全为0的无冲击基准。压力损失量为模型设定，非实测。</span>';
+    '<span style="color:#6b7280;font-size:11px">注：达标把握由 model.js 同一内核（基准 632.7 亿＝2025 惠城高新区规上工业产值、种子42、2万次）重跑；"基准"为六项压力全为0的无冲击基准。压力损失量为模型设定，非实测。</span>';
 }
 
 ['delay','invest','export','shen'].forEach(k=>{drawMini(k);renderRO(k);});
