@@ -25,7 +25,8 @@
     { url: 'report.html',         n: '14', group: '汇总与实验', label: '报告',     desc: '把观察整理成可讨论的材料' },
     { url: 'future-lab.html',     n: '15', group: '汇总与实验', label: '未来实验室', desc: '动手调参，做多实验舱挑战' },
     { url: 'ending.html',         n: '16', group: '收尾',     label: '结语',       desc: '回到人、城市与决策责任' },
-    { url: 'home.html',           n: '17', group: '收尾',     label: '关于',       desc: '这个项目是什么' }
+    { url: 'home.html',           n: '17', group: '收尾',     label: '关于',       desc: '这个项目是什么' },
+    { url: 'decision-lab.html',   n: '18', group: '决策实验室', label: '决策模拟实验室', desc: '现状推演 · 压力测试 · 触发信号' }
   ];
 
   var SVG = {

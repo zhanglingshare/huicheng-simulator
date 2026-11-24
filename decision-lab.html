@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070D18">
+<title>惠城决策模拟实验室｜内部版</title>
+<meta name="description" content="惠城决策模拟实验室（内部版）：现状推演 · 压力测试 · 触发信号。条件推演，不是预测，不替代官方统计，本页不设定任何目标值。">
+<link rel="stylesheet" href="ui/ui.css">
+<link rel="stylesheet" href="ui/ui-pages.css">
+<link rel="stylesheet" href="hc-lab/studio.css">
+<script src="hc-viz/data.js"></script>
+<script src="hc-lab/core.js"></script>
+<script src="hc-lab/engine.js"></script>
+<script src="hc-lab/studio.js" defer></script>
+<script src="ui/ui.js" defer></script>
+<!-- premium light ui -->
+<link rel="stylesheet" href="ui/premium-auto.css">
+<link rel="stylesheet" href="ui/premium/pages/hc-lab-studio.css">
+<link rel="stylesheet" href="ui/premium.css">
+<!-- /premium light ui -->
+</head>
+<body>
+<div class="hc-lab" id="hcLab">
+  <header class="hl-masthead">
+    <div class="hl-brand">
+      <span class="hl-brand-mark" aria-hidden="true">惠</span>
+      <div class="hl-brand-text">
+        <b>惠城决策模拟实验室</b>
+        <small>HUI CHENG · DECISION LAB</small>
+      </div>
+    </div>
+    <div class="hl-masthead-actions">
+      <span id="hlMode" class="hl-mode-pill">DEMO 底座</span>
+      <button type="button" id="hlCalibLink" class="hl-head-action">数据校准中心</button>
+      <button type="button" id="hlMenuBtn" class="hl-mobile-menu" aria-label="打开导航" aria-expanded="false" aria-controls="hlSidebar">☰</button>
+    </div>
+  </header>
+
+  <div class="hl-caveat" role="note">
+    <span class="hl-caveat-dot" aria-hidden="true"></span>
+    <span>现状推演与压力测试均为条件推演，不是预测，不替代官方统计；本页不设定任何目标值。</span>
+  </div>
+
+  <div class="hl-body">
+    <aside class="hl-sidebar" id="hlSidebar">
+      <nav id="hlNav" aria-label="决策工作区导航"></nav>
+    </aside>
+    <div class="hl-backdrop" id="hlBackdrop" hidden></div>
+    <main class="hl-work" id="hlWork"></main>
+  </div>
+
+  <footer class="hl-footer">
+    <span>惠城决策模拟实验室 · 内部版 · 浏览器本地计算，数据不上传</span>
+    <span id="hlFootMeta"></span>
+  </footer>
+</div>
+<script src="ui/site-nav.js"></script>
+</body>
+</html>

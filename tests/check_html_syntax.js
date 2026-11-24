@@ -1,6 +1,6 @@
 // 语法检查：提取 HTML 内所有内联 <script> 块，用 new Function 做解析（不执行）
 const fs = require('fs');
-for (const f of ['briefing.html', 'spotlight.html', 'poster.html', 'windtunnel.html', 'future.html', 'fun.html', 'index.html']) {
+for (const f of ['briefing.html', 'spotlight.html', 'poster.html', 'windtunnel.html', 'future.html', 'fun.html', 'index.html', 'decision-lab.html']) {
   const html = fs.readFileSync(f, 'utf8');
   const blocks = [...html.matchAll(/<script(?![^>]*src=)[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]);
   let ok = true;
