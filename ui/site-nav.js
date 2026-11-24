@@ -1,7 +1,7 @@
 /* 惠城产业风洞 · 全站目录入口（自包含，无外部依赖）
    用途：给未接入 ui/ui.css 的整体设计页（风洞首页、浅色全息页等）提供统一目录。
    只创建自己的 DOM 与样式（全部选择器带 #sn- 前缀），不改动页面其余任何样式。
-   页目与 ui/ui.js 的 PAGES 保持一致（17 页）。
+   页目 18 条，按四条路线分组；ui/ui.js 的 PAGES 为旧版，不再与本文件同步。
 */
 (function () {
   'use strict';
@@ -18,30 +18,27 @@
   };
 
   var PAGES = [
-    { url: 'briefing.html',       n: '00',   group: '决策简报',   label: '决策简报',  badge: '一页看清', desc: '3 分钟读完：三句话看清惠城当下',        next: 'windtunnel.html' },
-    { url: 'spotlight.html',      n: '00·2', group: '决策简报',   label: '公众传播',  badge: '给公众',   desc: '三个数字，没有一个是 GDP',           next: 'fun.html' },
-    { url: 'poster.html',         n: '00·3', group: '决策简报',   label: '冲击海报',  badge: '物料',     desc: '一句话一张图，转得出去',             next: '' },
-    { url: 'start.html',          n: '01·0', group: '开篇',       label: '序章',      badge: '入口',     desc: '惠城靠什么站着：五条腿，一条都不能软', next: 'index.html' },
-    { url: 'index.html',          n: '01',   group: '开篇',       label: '风洞',      badge: '入口',     desc: '拍板之前，先在这里走一遍',           next: '' },
-    { url: 'holo.html',           n: '02',   group: '看见世界',   label: '全息关系',  badge: '底稿',     desc: '一眼看全貌，细节在下一页',           next: 'network.html' },
-    { url: 'holo-workspace.html', n: '03',   group: '看见世界',   label: '全息工作区',badge: '底稿',     desc: '关系网络、情报流与变化详情',          next: 'holo.html' },
-    { url: 'today.html',          n: '04',   group: '看见世界',   label: '钱去哪了',  badge: '给公众',   desc: '钱，可能花到哪里了',                next: 'money.html' },
-    { url: 'money.html',          n: '04·2', group: '看见世界',   label: '钱从哪来',  badge: '给公众',   desc: '钱，去哪了',                      next: 'today.html' },
-    { url: 'fun.html',            n: '05',   group: '看见世界',   label: '风向标',    badge: '给公众',   desc: '今晚，谁能把你留在惠城',             next: 'commute.html' },
-    { url: 'choices.html',        n: '06',   group: '推演未来',   label: '路径',      badge: '给公众',   desc: '你关心的事，挂在哪条路上',           next: 'role.html' },
-    { url: 'future.html',         n: '07',   group: '推演未来',   label: '未来',      badge: '自己跑一遍',desc: '同一件事，扔一百次，看它落在哪',      next: 'future-lab.html' },
-    { url: 'windtunnel.html',     n: '08',   group: '推演未来',   label: '风洞测试',  badge: '自己跑一遍',desc: '如果这件事真的发生，哪一段先撑不住',   next: 'choices.html' },
-    { url: 'commute.html',        n: '09',   group: '推演未来',   label: '通勤案例',  badge: '给公众',   desc: '你每天堵的 40 分钟，谁在替你付',      next: 'windtunnel.html' },
-    { url: 'blindspot.html',      n: '10',   group: '推演未来',   label: '忽略了什么',badge: '自己跑一遍',desc: '你以为最要紧的，可能排不到第一',      next: 'windtunnel.html' },
-    { url: 'network.html',        n: '11',   group: '关系视角',   label: '建构世界',  badge: '底稿',     desc: '这张网是怎么搭起来的',              next: 'holo.html' },
-    { url: 'evolution.html',      n: '11·2', group: '关系视角',   label: '网络的演变',badge: '底稿',     desc: '网络不是每天重画，是等它真变了',       next: 'report.html' },
-    { url: 'role.html',           n: '12',   group: '关系视角',   label: '你在哪',    badge: '给公众',   desc: '同一件事，你在哪一段上',             next: 'ending.html' },
-    { url: 'who.html',            n: '13',   group: '关系视角',   label: '掂量',      badge: '底稿',     desc: '这一页给核对用，不是入门',           next: 'report.html' },
-    { url: 'report.html',         n: '14',   group: '汇总与实验', label: '报告',      badge: '底稿',     desc: '完整底稿，供逐条核对',              next: 'windtunnel.html' },
-    { url: 'future-lab.html',     n: '15',   group: '汇总与实验', label: '未来实验室',badge: '自己跑一遍',desc: '把条件改一改，结论就变了',           next: 'windtunnel.html' },
-    { url: 'ending.html',         n: '16',   group: '收尾',       label: '结语',      badge: '收束',     desc: '让每一个重大决策，先跑一遍',         next: 'briefing.html' },
-    { url: 'home.html',           n: '17',   group: '收尾',       label: '关于',      badge: '入口',     desc: '这是什么、给谁用、边界在哪',         next: 'index.html' },
-    { url: 'decision-lab.html',   n: '18',   group: '决策实验室', label: '决策模拟实验室', badge: '内部', desc: '内部工作台，不对外',              next: '' }
+    { url: 'index.html',          n: '01', group: '开篇 · 3 分钟看清',  label: '开篇',      badge: '入口',     desc: '拍板之前，先在这里走一遍',           next: '' },
+    { url: 'briefing.html',       n: '02', group: '开篇 · 3 分钟看清',  label: '决策简报',  badge: '一页看清', desc: '3 分钟读完：三句话看清惠城当下',        next: 'windtunnel.html' },
+    { url: 'ending.html',         n: '03', group: '开篇 · 3 分钟看清',  label: '结语',      badge: '收束',     desc: '让每一个重大决策，先跑一遍',           next: 'briefing.html' },
+
+    { url: 'windtunnel.html',     n: '04', group: '自己跑一遍 · 15 分钟', label: '风洞测试',  badge: '自己跑一遍',desc: '如果这件事真的发生，哪一段先撑不住',   next: 'choices.html' },
+    { url: 'choices.html',        n: '05', group: '自己跑一遍 · 15 分钟', label: '五条路',    badge: '自己跑一遍',   desc: '你关心的事，挂在哪条路上',           next: 'role.html' },
+    { url: 'future.html',         n: '06', group: '自己跑一遍 · 15 分钟', label: '未来',      badge: '自己跑一遍',desc: '同一件事，扔一百次，看它落在哪',        next: 'future-lab.html' },
+    { url: 'future-lab.html',     n: '07', group: '自己跑一遍 · 15 分钟', label: '未来实验室',badge: '自己跑一遍',desc: '把条件改一改，结论就变了',           next: 'windtunnel.html' },
+    { url: 'blindspot.html',      n: '08', group: '自己跑一遍 · 15 分钟', label: '忽略了什么',badge: '自己跑一遍',desc: '你以为最要紧的，可能排不到第一',        next: 'windtunnel.html' },
+
+    { url: 'spotlight.html',      n: '09', group: '给公众 · 3 分钟',      label: '公众传播',  badge: '给公众',   desc: '三个数字，没有一个是 GDP',           next: 'fun.html' },
+    { url: 'fun.html',            n: '10', group: '给公众 · 3 分钟',      label: '风向标',    badge: '给公众',   desc: '今晚，谁能把你留在惠城',             next: 'commute.html' },
+    { url: 'commute.html',        n: '11', group: '给公众 · 3 分钟',      label: '通勤案例',  badge: '给公众',   desc: '你每天堵的 40 分钟，谁在替你付',       next: 'windtunnel.html' },
+    { url: 'today.html',          n: '12', group: '给公众 · 3 分钟',      label: '钱怎么流',  badge: '给公众',   desc: '挑一个方向，看钱沿着哪些关系走',        next: 'money.html' },
+    { url: 'money.html',          n: '13', group: '给公众 · 3 分钟',      label: '钱到哪一站',badge: '给公众',   desc: '一笔钱经过哪几站，四个追问入口',        next: 'today.html' },
+    { url: 'role.html',           n: '14', group: '给公众 · 3 分钟',      label: '你在哪',    badge: '给公众',   desc: '同一件事，你在哪一段上',             next: 'ending.html' },
+    { url: 'poster.html',         n: '15', group: '给公众 · 3 分钟',      label: '冲击海报',  badge: '物料',     desc: '一句话一张图，转得出去',             next: '' },
+
+    { url: 'holo.html',           n: '16', group: '底稿与全息 · 核对',     label: '全息关系',  badge: '底稿',     desc: '一眼看全貌，细节在下一页',           next: 'network.html' },
+    { url: 'network.html',        n: '17', group: '底稿与全息 · 核对',     label: '建构世界',  badge: '底稿',     desc: '这张网是怎么搭起来的',              next: 'holo.html' },
+    { url: 'report.html',         n: '18', group: '底稿与全息 · 核对',     label: '报告',      badge: '底稿',     desc: '完整底稿，供逐条核对',              next: 'windtunnel.html' }
   ];
 
   var CSS = '' +
@@ -69,6 +66,7 @@
   '#sn-panel a.sn-item[aria-current="page"]{color:var(--sn-accent,#0a84ff)}' +
   '#sn-panel a.sn-item[aria-current="page"] .sn-l::after{content:" · 当前";font-weight:600;font-size:11px;opacity:.7}' +
   '#sn-panel a.sn-item .sn-b{flex:0 0 auto;font:700 10.5px/1 inherit;letter-spacing:.05em;padding:3px 6px;border-radius:5px;margin-right:2px}' +
+  '@media(max-width:560px){#sn-panel a.sn-item .sn-d{display:none}#sn-panel a.sn-item{padding:12px 2px}}' +
   '#sn-next{max-width:1180px;margin:26px auto 110px;padding:0 20px;font:600 13px/1.8 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--sn-next-ink,#7B8BA1);letter-spacing:.02em}' +
   '#sn-next a{color:var(--sn-accent,#2E7DEB);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px}' +
   'body[data-sn-theme="dark"]{--sn-chip:rgba(20,22,26,.82);--sn-panel:#141619;--sn-ink:#f5f5f7;--sn-line:rgba(255,255,255,.16);--sn-hair:rgba(255,255,255,.09);--sn-accent:#4da3ff;--sn-dot-bg:rgba(10,132,255,.18)}';
