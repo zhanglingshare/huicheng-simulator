@@ -211,8 +211,9 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
   <div class="card">
     <h2>这一测，提示了什么</h2>
     <div id="final" style="font-size:13.5px;line-height:1.9;color:#cbd5e1"></div>
+    <div style="margin:14px 0 0;padding:12px 14px;background:rgba(255,255,255,.72);border:1px solid rgba(120,140,170,.25);border-left:3px solid #F0B35E;border-radius:10px;font-size:13px;color:#33445A;line-height:1.85">这一段要是先断，第一个被问到的是谁，你比我清楚。<span style="color:#8496A8">（这一格归谁，此处不填。）</span></div>
     <div style="font-size:11px;color:#5b6b82;margin-top:12px;line-height:1.7">
-      边界：通勤走廊"必经性"由地理决定（就那几条过江通道），是硬的；具体通勤流量缺真实真实出行起止数据，为第四级估算。不测极端黑天鹅（战争、重大疫情、金融危机）。
+      边界：通勤走廊"必经性"由地理决定（就那几条过江通道），是硬的；具体通勤流量缺真实出行起止数据，为第四级估算。不测极端黑天鹅（战争、重大疫情、金融危机）。
     </div>
   </div>
 
@@ -401,7 +402,7 @@ function drawRank(){
   document.getElementById('final').innerHTML=
     '上半场四个常规压力，规划里都在盯着，这很对。<br>但把"龙头扩产落空"和"通勤压力"也放进来排序，结果有点反常识：<b style="color:#ff453a">通勤压力排第'+cr+'</b>，<b style="color:#ff9500">龙头扩产落空排第'+dr+'</b>。<br>'+
     '龙头扩产落空当然疼，但集群还在；可通勤路一堵，是产业招工和城市消费两个轮子一起卡。<br>通勤在规划里叫"基础设施配套"，风洞却提示它更像传动轴。好消息是——改善通勤比招大项目便宜、见效快、自己可控；风险是一堵就双向失血。这是一个被低估、性价比很高的抓手。<br>'+
-    '<span style="color:#6b7280;font-size:11px">注：达标把握由 model.js 同一内核（基准 632.7 亿＝2025 惠城高新区规上工业产值、种子42、2万次）重跑；"基准"为六项压力全为0的无冲击基准。压力损失量为模型设定，非实测。</span>';
+    '<span style="color:#6b7280;font-size:11px">注：达标把握由 model.js 同一套算法（起点 632.7 亿＝2025 惠城高新区规上工业产值；固定随机数 42；跑 2 万次）重算；"基准"指六项压力都为 0、什么都不发生的情况。损失量是按设定算出来的，不是实测。</span>';
 }
 
 ['delay','invest','export','shen'].forEach(k=>{drawMini(k);renderRO(k);});
