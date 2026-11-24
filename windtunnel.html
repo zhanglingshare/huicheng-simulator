@@ -69,8 +69,8 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
 .wg .ds b{color:#eef2fb;white-space:nowrap}
 .wt-ruler{margin-top:14px;border-top:1px solid rgba(255,255,255,.07);padding-top:12px}
 .wt-rl{display:flex;justify-content:space-between;font-size:10.5px;color:#6b7d96;margin-bottom:8px}
-.wt-bar{height:32px;border-radius:6px;background:linear-gradient(90deg,rgba(48,209,88,.10),rgba(255,149,0,.12),rgba(255,69,58,.14));position:relative;border:1px solid rgba(255,255,255,.05)}
-.wt-tick{position:absolute;top:-5px;bottom:-5px;width:2px;background:#ffd60a;box-shadow:0 0 12px rgba(255,214,10,.7)}
+.wt-bar{height:32px;border-radius:6px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.22) 0 1px,transparent 1px 8.3333%),linear-gradient(90deg,rgba(48,209,88,.20),rgba(255,149,0,.22),rgba(255,69,58,.24));position:relative;border:1px solid rgba(255,255,255,.16)}
+.wt-tick{position:absolute;top:-5px;bottom:-5px;width:2px;background:#ffd60a;box-shadow:0 0 0 1px rgba(0,0,0,.6),0 0 12px rgba(255,214,10,.8)}
 .wt-tick:after{content:"5% 阈值";position:absolute;top:-17px;left:-16px;font-size:9.5px;color:#ffd60a;white-space:nowrap}
 .wt-dot{position:absolute;top:50%;transform:translate(-50%,-50%);width:9px;height:9px;border-radius:50%;background:#ff9500;box-shadow:0 0 12px #ff9500}
 .wt-dot:after{content:"示意 4.6%";position:absolute;top:13px;left:-16px;font-size:9.5px;color:#ff9500;white-space:nowrap}
@@ -84,6 +84,25 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
 <link rel="stylesheet" href="ui/premium/pages/windtunnel.css">
 <link rel="stylesheet" href="ui/premium.css">
 <!-- /premium light ui -->
+<script>
+/* premium 样式在 Pages 上偶发 503，失败会让整页退回深色底：自动重试一次 */
+(function(){
+  var retried = {};
+  Array.prototype.forEach.call(
+    document.querySelectorAll('link[rel="stylesheet"][href*="premium"]'),
+    function (l) {
+      l.addEventListener('error', function () {
+        if (retried[l.href]) return;
+        retried[l.href] = 1;
+        var s = document.createElement('link');
+        s.rel = 'stylesheet';
+        s.href = l.href.split('?')[0] + '?retry=' + Date.now();
+        document.head.appendChild(s);
+      });
+    }
+  );
+})();
+</script>
 </head><body>
 
 
