@@ -966,7 +966,7 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
     c.ctx.save();c.ctx.font='700 11px sans-serif';c.ctx.textBaseline='middle';c.ctx.textAlign='left';
     rows.forEach((r,i)=>{
       const px=x.getPixelForValue(r[1]),py=y.getPixelForValue(i);
-      c.ctx.fillStyle='#f1f5f9';c.ctx.fillText('±'+r[1]+' 个点',px+7,py);
+      c.ctx.fillStyle='#8FA3B6';c.ctx.fillText('±'+r[1]+' 个点',px+7,py);
     });
     c.ctx.restore();
   }};
@@ -1051,9 +1051,12 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
     const x=c.scales.x.getPixelForValue(5),y=c.scales.y;
     const col=mainL.stress?'#fca5a5':'#7dd3fc';
     c.ctx.save();c.ctx.font='600 11px sans-serif';c.ctx.textAlign='left';c.ctx.textBaseline='middle';
-    c.ctx.fillStyle=col;c.ctx.fillText('高 10% '+Math.round(mainL.p90),x+12,y.getPixelForValue(mainL.p90));
-    c.ctx.fillStyle='#fbbf24';c.ctx.fillText('中间 '+Math.round(mainL.p50),x+12,y.getPixelForValue(mainL.p50));
-    c.ctx.fillStyle=col;c.ctx.fillText('低 10% '+Math.round(mainL.p10),x+12,y.getPixelForValue(mainL.p10));
+    const put=(txt,val,clr)=>{const py=y.getPixelForValue(val);const w=c.ctx.measureText(txt).width;
+      if(x+12+w>c.chartArea.right-2){c.ctx.textAlign='right';c.ctx.fillStyle=clr;c.ctx.fillText(txt,x-10,py);}
+      else{c.ctx.textAlign='left';c.ctx.fillStyle=clr;c.ctx.fillText(txt,x+12,py);}};
+    put('高 10% '+Math.round(mainL.p90),mainL.p90,col);
+    put('中间 '+Math.round(mainL.p50),mainL.p50,'#fbbf24');
+    put('低 10% '+Math.round(mainL.p10),mainL.p10,col);
     c.ctx.restore();
   }};
   const main=new Chart(mainEl.getContext('2d'),{
@@ -1062,7 +1065,7 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
         borderColor:(ctx)=>ctx.dataIndex>=3?SC[0].color:'transparent',borderWidth:1.6,pointRadius:0,pointHoverRadius:0,fill:1,backgroundColor:SC[0].alpha,order:6,tension:0},
       {type:'line',id:'coneLo',label:'__hide_coneLo__',data:coneData(res[0],'p10'),
         borderColor:(ctx)=>ctx.dataIndex>=3?SC[0].color:'transparent',borderWidth:1.6,pointRadius:0,pointHoverRadius:0,fill:false,order:6,tension:0},
-      {type:'line',label:'中位轨迹 P50',data:coneData(res[0],'p50'),borderColor:(ctx)=>ctx.dataIndex>=3?'#fbbf24':'transparent',borderWidth:2.2,pointRadius:0,pointHoverRadius:0,fill:false,order:5,spanGaps:true},
+      {type:'line',label:'中间值轨迹',data:coneData(res[0],'p50'),borderColor:(ctx)=>ctx.dataIndex>=3?'#fbbf24':'transparent',borderWidth:2.2,pointRadius:0,pointHoverRadius:0,fill:false,order:5,spanGaps:true},
       {type:'line',label:'线性参考（非逐年预测）',data:refLine.slice(),borderColor:'#94a3b8',borderDash:[6,5],pointRadius:0,pointHoverRadius:0,borderWidth:1.6,order:4,spanGaps:true},
       {type:'line',label:'1500亿参考刻度（非官方目标）',data:YRS.map(()=>1500),borderColor:'#fbbf24',borderDash:[2,4],pointRadius:0,borderWidth:1.4,order:3},
       {type:'scatter',label:'2025实测锚点',data:[HT.BASE,null,null,null,null,null],backgroundColor:'#fff',pointRadius:6,borderColor:'#38bdf8',borderWidth:2,order:2}
@@ -1071,7 +1074,7 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
       plugins:{legend:{position:'top',align:'start',labels:{color:axc,font:{size:window.innerWidth<600?9:10},boxWidth:14,padding:window.innerWidth<600?6:10,filter:(it)=>it.text!=='__hide_coneLo__'}},
         tooltip:{callbacks:{label:it=>{
           if(it.dataset.label&&it.dataset.label.indexOf('可能范围')===0&&it.raw!=null&&it.dataIndex>=5)return it.dataset.label.replace(/（.*$/,'')+' '+Math.round(it.raw)+' 亿';
-          if(it.dataset.label&&it.dataset.label.indexOf('中位轨迹')===0&&it.raw!=null&&it.dataIndex===5)return '中间的典型值 '+Math.round(it.raw)+' 亿';
+          if(it.dataset.label&&it.dataset.label.indexOf('中间值轨迹')===0&&it.raw!=null&&it.dataIndex===5)return '中间的典型值 '+Math.round(it.raw)+' 亿';
           if(it.dataIndex>=3&&it.dataIndex<5)return null; // 2028/2029 为视觉引导，不提示具体值
           if(it.raw==null)return null;
           return it.dataset.label+' '+Math.round(it.raw)+' 亿';
@@ -1135,7 +1138,7 @@ new Chart(document.getElementById('shockP').getContext('2d'),{
       c.ctx.strokeStyle=distL.color;c.ctx.globalAlpha=a;c.ctx.lineWidth=1.2;c.ctx.setLineDash([3,3]);
       c.ctx.beginPath();c.ctx.moveTo(px,y.top);c.ctx.lineTo(px,y.bottom);c.ctx.stroke();
       c.ctx.globalAlpha=1;c.ctx.setLineDash([]);c.ctx.fillStyle=distL.color;
-      c.ctx.fillText(t+' '+Math.round(v),px,y.top+14);
+      const txx=Math.min(Math.max(px,x.left+42),x.right-42);c.ctx.fillText(t+' '+Math.round(v),txx,y.top+14);
     });
     c.ctx.restore();
   }};
