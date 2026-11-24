@@ -31,14 +31,19 @@
     { url: 'spotlight.html',      n: '09', group: '给公众 · 3 分钟',      label: '公众传播',  badge: '给公众',   desc: '三个数字，没有一个是 GDP',           next: 'fun.html' },
     { url: 'fun.html',            n: '10', group: '给公众 · 3 分钟',      label: '风向标',    badge: '给公众',   desc: '今晚，谁能把你留在惠城',             next: 'commute.html' },
     { url: 'commute.html',        n: '11', group: '给公众 · 3 分钟',      label: '通勤案例',  badge: '给公众',   desc: '你每天堵的 40 分钟，谁在替你付',       next: 'windtunnel.html' },
-    { url: 'today.html',          n: '12', group: '给公众 · 3 分钟',      label: '钱怎么流',  badge: '给公众',   desc: '挑一个方向，看钱沿着哪些关系走',        next: 'money.html' },
-    { url: 'money.html',          n: '13', group: '给公众 · 3 分钟',      label: '钱到哪一站',badge: '给公众',   desc: '一笔钱经过哪几站，四个追问入口',        next: 'today.html' },
-    { url: 'role.html',           n: '14', group: '给公众 · 3 分钟',      label: '你在哪',    badge: '给公众',   desc: '同一件事，你在哪一段上',             next: 'ending.html' },
-    { url: 'poster.html',         n: '15', group: '给公众 · 3 分钟',      label: '冲击海报',  badge: '物料',     desc: '一句话一张图，转得出去',             next: '' },
+    { url: 'today.html',          n: '12', group: '给公众 · 3 分钟',      label: '钱怎么流',  badge: '给公众',   desc: '挑一个方向，看钱沿着哪些关系走',        next: 'role.html' },
+    { url: 'money.html',          n: '·', sub: true, group: '给公众 · 3 分钟',      label: '钱到哪一站',badge: '给公众',   desc: '一笔钱经过哪几站，四个追问入口',        next: 'role.html' },
+    { url: 'role.html',           n: '13', group: '给公众 · 3 分钟',      label: '你在哪',    badge: '给公众',   desc: '同一件事，你在哪一段上',             next: 'ending.html' },
+    { url: 'poster.html',         n: '14', group: '给公众 · 3 分钟',      label: '冲击海报',  badge: '物料',     desc: '一句话一张图，转得出去',             next: '' },
 
-    { url: 'holo.html',           n: '16', group: '底稿与全息 · 核对',     label: '全息关系',  badge: '底稿',     desc: '一眼看全貌，细节在下一页',           next: 'network.html' },
-    { url: 'network.html',        n: '17', group: '底稿与全息 · 核对',     label: '建构世界',  badge: '底稿',     desc: '这张网是怎么搭起来的',              next: 'holo.html' },
-    { url: 'report.html',         n: '18', group: '底稿与全息 · 核对',     label: '报告',      badge: '底稿',     desc: '完整底稿，供逐条核对',              next: 'windtunnel.html' }
+    { url: 'holo.html',           n: '15', group: '底稿与全息 · 核对',     label: '全息关系',  badge: '底稿',     desc: '一眼看全貌，细节在下一页',           next: 'network.html' },
+    { url: 'network.html',        n: '16', group: '底稿与全息 · 核对',     label: '建构世界',  badge: '底稿',     desc: '这张网是怎么搭起来的',              next: 'holo.html' },
+    { url: 'report.html',         n: '17', group: '底稿与全息 · 核对',     label: '报告',      badge: '底稿',     desc: '完整底稿，供逐条核对',              next: 'windtunnel.html' },
+    { url: 'home.html',           n: '附 1', sub: true, group: '附录 · 不进目录', label: '项目介绍', badge: '底稿', desc: '这是什么、不是什么', next: 'index.html' },
+    { url: 'who.html',            n: '附 2', sub: true, group: '附录 · 不进目录', label: '谁在写', badge: '底稿', desc: '作者与边界', next: 'report.html' },
+    { url: 'decision-lab.html',   n: '附 3', sub: true, group: '附录 · 不进目录', label: '决策实验室', badge: '底稿', desc: '把条件摆上桌', next: 'windtunnel.html' },
+    { url: 'holo-workspace.html', n: '附 4', sub: true, group: '附录 · 不进目录', label: '全息工作区', badge: '底稿', desc: '全息关系的工作台', next: 'holo.html' },
+    { url: 'evolution.html',      n: '附 5', sub: true, group: '附录 · 不进目录', label: '演变', badge: '底稿', desc: '这条线什么时候真变了', next: 'network.html' },
   ];
 
   var CSS = '' +
@@ -95,6 +100,13 @@
     if (idx < 0) return;
     document.body.setAttribute('data-sn-theme', theme());
 
+    function curName() { return PAGES[idx].label + '（' + PAGES[idx].group.split(' · ')[0] + '）'; }
+    function posText() {
+      var vis = PAGES.filter(function (p) { return !p.sub; });
+      var k = -1;
+      for (var i = 0; i < vis.length; i++) { if (vis[i].url === PAGES[idx].url) { k = i; break; } }
+      return k < 0 ? '附录' : (k + 1) + '/' + vis.length;
+    }
     var style = document.createElement('style');
     style.textContent = CSS;
     document.head.appendChild(style);
@@ -106,8 +118,8 @@
     btn.type = 'button';
     btn.setAttribute('aria-haspopup', 'dialog');
     btn.setAttribute('aria-expanded', 'false');
-    btn.setAttribute('aria-label', '打开全站目录，当前第 ' + (idx + 1) + ' 页：' + PAGES[idx].label);
-    btn.innerHTML = '<span class="sn-dot" aria-hidden="true">目</span><span>' + PAGES[idx].n + '/' + PAGES.length + ' · 目录</span>';
+    btn.setAttribute('aria-label', '打开全站目录，当前：' + curName());
+    btn.innerHTML = '<span class="sn-dot" aria-hidden="true">目</span><span>' + posText() + ' · 目录</span>';
     }
 
     var sheet = document.createElement('div');
@@ -119,10 +131,11 @@
     var panel = document.createElement('div');
     panel.id = 'sn-panel';
 
+    var VIS = PAGES.filter(function (p) { return !p.sub; });
     var head = document.createElement('div');
     head.className = 'sn-head';
     head.innerHTML = '<div><div class="sn-title">惠城产业风洞 · 全站目录</div>' +
-      '<div class="sn-sub">' + PAGES.length + ' 页，可自由跳转 · 当前 ' + PAGES[idx].n + ' ' + PAGES[idx].label + '</div></div>';
+      '<div class="sn-sub">' + VIS.length + ' 页，可自由跳转 · 当前 ' + curName() + '</div></div>';
     var close = document.createElement('button');
     close.type = 'button';
     close.className = 'sn-close';
@@ -132,7 +145,7 @@
     panel.appendChild(head);
 
     var last = '';
-    PAGES.forEach(function (p, i) {
+    VIS.forEach(function (p, i) {
       if (p.group !== last) {
         var g = document.createElement('div');
         g.className = 'sn-group';
@@ -143,7 +156,7 @@
       var a = document.createElement('a');
       a.className = 'sn-item';
       a.href = p.url;
-      if (i === idx) a.setAttribute('aria-current', 'page');
+      if (p.url === PAGES[idx].url) a.setAttribute('aria-current', 'page');
       var bc = BADGE[p.badge] || '#7B8BA1';
       a.innerHTML = '<span class="sn-n">' + p.n + '</span><span class="sn-l">' + p.label + '</span>' +
         '<span class="sn-b" style="color:' + bc + ';border:1px solid ' + bc + '55">' + (p.badge || '') + '</span>' +
