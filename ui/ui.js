@@ -5,28 +5,25 @@
   'use strict';
 
   var PAGES = [
-    { url: 'briefing.html',       n: '00', group: '决策简报', label: '决策简报',   desc: '3 分钟读完：三句话看清惠城当下' },
-    { url: 'spotlight.html',      n: '00·2', group: '决策简报', label: '公众传播',   desc: '三个数字，没有一个是 GDP' },
-    { url: 'poster.html',         n: '00·3', group: '决策简报', label: '冲击海报',   desc: '一句话一张图，转得出去' },
-    { url: 'index.html',          n: '01', group: '开篇',     label: '风洞',       desc: '拍板之前，先在这里走一遍' },
-    { url: 'holo.html',           n: '02', group: '看见世界', label: '全息关系',   desc: '一眼看全貌，细节在下一页' },
-    { url: 'holo-workspace.html', n: '03', group: '看见世界', label: '全息工作区', desc: '关系网络、情报流与变化详情' },
-    { url: 'today.html',          n: '04', group: '看见世界', label: '钱去哪了',   desc: '钱，可能花到哪里了' },
-    { url: 'fun.html',            n: '05', group: '看见世界', label: '风向标',     desc: '今晚，谁能把你留在惠城' },
-    { url: 'choices.html',        n: '06', group: '推演未来', label: '路径',       desc: '你关心的事，挂在哪条路上' },
-    { url: 'future.html',         n: '07', group: '推演未来', label: '未来',       desc: '同一件事，扔一百次，看它落在哪' },
-    { url: 'windtunnel.html',     n: '08', group: '推演未来', label: '风洞测试',   desc: '如果这件事真的发生，哪一段先撑不住' },
-    { url: 'commute.html',        n: '09', group: '推演未来', label: '通勤案例',   desc: '你每天堵的 40 分钟，谁在替你付' },
-    { url: 'blindspot.html',      n: '10', group: '推演未来', label: '忽略了什么', desc: '你以为最要紧的，可能排不到第一' },
-    { url: 'network.html',        n: '11', group: '关系视角', label: '建构世界',   desc: '这张网是怎么搭起来的' },
-    { url: 'evolution.html',      n: '11·2', group: '关系视角', label: '网络的演变', desc: '网络不是每天重画，是等它真变了' },
-    { url: 'role.html',           n: '12', group: '关系视角', label: '你在哪',     desc: '同一件事，你在哪一段上' },
-    { url: 'who.html',            n: '13', group: '关系视角', label: '掂量',       desc: '这一页给核对用，不是入门' },
-    { url: 'report.html',         n: '14', group: '汇总与实验', label: '报告',     desc: '完整底稿，供逐条核对' },
-    { url: 'future-lab.html',     n: '15', group: '汇总与实验', label: '未来实验室', desc: '把条件改一改，结论就变了' },
-    { url: 'ending.html',         n: '16', group: '收尾',     label: '结语',       desc: '让每一个重大决策，先跑一遍' },
-    { url: 'home.html',           n: '17', group: '收尾',     label: '关于',       desc: '这是什么、给谁用、边界在哪' },
-    { url: 'decision-lab.html',   n: '18', group: '决策实验室', label: '决策模拟实验室', desc: '内部工作台，不对外' }
+    { url: 'index.html',          n: '01', group: '开篇 · 3 分钟看清',  label: '开篇',      desc: '拍板之前，先在这里走一遍' },
+    { url: 'briefing.html',       n: '02', group: '开篇 · 3 分钟看清',  label: '决策简报',  desc: '3 分钟读完：三句话看清惠城当下' },
+    { url: 'ending.html',         n: '03', group: '开篇 · 3 分钟看清',  label: '结语',      desc: '让每一个重大决策，先跑一遍' },
+    { url: 'windtunnel.html',     n: '04', group: '自己跑一遍 · 15 分钟', label: '风洞测试', desc: '如果这件事真的发生，哪一段先撑不住' },
+    { url: 'choices.html',        n: '05', group: '自己跑一遍 · 15 分钟', label: '五条路',   desc: '你关心的事，挂在哪条路上' },
+    { url: 'future.html',         n: '06', group: '自己跑一遍 · 15 分钟', label: '未来',     desc: '同一件事，扔一百次，看它落在哪' },
+    { url: 'future-lab.html',     n: '07', group: '自己跑一遍 · 15 分钟', label: '未来实验室', desc: '把条件改一改，结论就变了' },
+    { url: 'blindspot.html',      n: '08', group: '自己跑一遍 · 15 分钟', label: '忽略了什么', desc: '你以为最要紧的，可能排不到第一' },
+    { url: 'spotlight.html',      n: '09', group: '给公众 · 3 分钟',    label: '公众传播',  desc: '三个数字，没有一个是 GDP' },
+    { url: 'fun.html',            n: '10', group: '给公众 · 3 分钟',    label: '风向标',    desc: '今晚，谁能把你留在惠城' },
+    { url: 'commute.html',        n: '11', group: '给公众 · 3 分钟',    label: '通勤案例',  desc: '你每天堵的 40 分钟，谁在替你付' },
+    { url: 'today.html',          n: '12', group: '给公众 · 3 分钟',    label: '钱怎么流',  desc: '挑一个方向，看钱沿着哪些关系走' },
+    { url: 'role.html',           n: '13', group: '给公众 · 3 分钟',    label: '你在哪',    desc: '同一件事，你在哪一段上' },
+    { url: 'poster.html',         n: '14', group: '给公众 · 3 分钟',    label: '冲击海报',  desc: '一句话一张图，转得出去' },
+    { url: 'holo.html',           n: '15', group: '底稿与全息 · 核对',  label: '全息关系',  desc: '一眼看全貌，细节在下一页' },
+    { url: 'network.html',        n: '16', group: '底稿与全息 · 核对',  label: '建构世界',  desc: '这张网是怎么搭起来的' },
+    { url: 'report.html',         n: '17', group: '底稿与全息 · 核对',  label: '报告',      desc: '完整底稿，供逐条核对' }
+    ,{ url: 'decision-lab.html',  n: '附', group: '附录 · 不进目录',  label: '决策实验室', desc: '把条件摆上桌' }
+    ,{ url: 'holo-workspace.html',n: '附', group: '附录 · 不进目录',  label: '全息工作区', desc: '全息关系的工作台' }
   ];
 
   var SVG = {
